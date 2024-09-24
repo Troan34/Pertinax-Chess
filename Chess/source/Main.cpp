@@ -18,7 +18,7 @@
 #include "imgui/imgui_impl_opengl3.h"
 #include "tests/TestClearColor.h"
 #include "tests/TestTexture2D.h"
-
+#include "ChessThings/Board.h"
 
 int main(void)
 {
@@ -33,13 +33,12 @@ int main(void)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(960, 540, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(1280, 720, "Chess", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
         return -1;
     }
-
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
@@ -48,7 +47,7 @@ int main(void)
         std::cout << "Err" << '\n';
     }
     std::cout << glGetString(GL_VERSION) << '\n';
-    {//new scope because then we wouldve make the vb and ib heap all
+    {
 
 
         GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));

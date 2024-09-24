@@ -25,6 +25,7 @@
     <ClCompile Include="source\vendor\imgui\imgui_tables.cpp" />
     <ClCompile Include="source\vendor\imgui\imgui_widgets.cpp" />
     <ClCompile Include="source\vendor\stb_image\stb_image.cpp" />
+    <ClCompile Include="source\ChessThings\Board.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\bb.png" />
@@ -350,6 +351,8 @@
     <ClInclude Include="source\vendor\imgui\imstb_textedit.h" />
     <ClInclude Include="source\vendor\imgui\imstb_truetype.h" />
     <ClInclude Include="source\vendor\stb_image\stb_image.h" />
+    <ClInclude Include="source\ChessThings\Piece.h" />
+    <ClInclude Include="source\ChessThings\Board.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="source\vendor\glm\detail\func_common.inl" />
