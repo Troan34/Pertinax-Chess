@@ -16,17 +16,18 @@ namespace test {
 		glm::vec3 translationA(200, 200, 0);
 		glm::vec3 translationB(400, 200, 0);
 
+		
 
 		float positions[] = {
-			-350.0f, -350.0f, 0.0f, 0.0f,
-			350.0f, -350.0f, 1.0f, 0.0f,
-			350.0f, 350.0f, 1.0f, 1.0f,
-			-350.0f, 350.0f, 0.0f, 1.0f,
+			-350.0f, -350.0f, 0.0f, 0.0f, 0.0f,
+			350.0f, -350.0f, 1.0f, 0.0f, 0.0f,
+			350.0f, 350.0f, 1.0f, 1.0f, 0.0f,
+			-350.0f, 350.0f, 0.0f, 1.0f, 0.0f,
 
-			300.0f, -350.0f, 0.0f, 0.0f,
-			1000.0f, -350.0f, 1.0f, 0.0f,
-			1000.0f, 350.0f, 1.0f, 1.0f,
-			300.0f, 350.0f, 0.0f, 1.0f
+			85.5f, 262.5f, 0.0f, 0.0f, 1.0f,
+			175.0f, 262.5f, 1.0f, 0.0f, 1.0f,
+			175.0f, 350.0f, 1.0f, 1.0f, 1.0f,
+			87.5f, 350.0f, 0.0f, 1.0f, 1.0f
 		};
 
 		unsigned int indices[] = {
@@ -39,10 +40,11 @@ namespace test {
 
 		m_VAO = std::make_unique<VertexArray>();
 		
-		m_VertexBuffer = std::make_unique<VertexBuffer>(positions, 8 * 4 * sizeof(float));
+		m_VertexBuffer = std::make_unique<VertexBuffer>(positions, 8 * 5 * sizeof(float));
 		VertexBufferLayout layout;
 		layout.Push<float>(2);
 		layout.Push<float>(2);
+		layout.Push<float>(1);
 		m_VAO -> AddBuffer(*m_VertexBuffer, layout);
 		m_IndexBuffer = std::make_unique<IndexBuffer>(indices, 12);
 
@@ -51,6 +53,10 @@ namespace test {
 		m_Shader->SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
 		
 		m_Shader->SetUniform1i("u_Texture", 0);
+
+		const int samplers[2] = { 0, 1 };
+		
+		m_Shader->SetUniform1iv("u_Textures", 2, *samplers);
 
 	}
 
@@ -70,8 +76,11 @@ namespace test {
 		GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
 		Renderer renderer;
-		m_Texture = std::make_unique<Texture>("res/textures/Chessboard.png");
-		m_Texture->Bind();
+		m_TextureChessBoard = std::make_unique<Texture>("res/textures/Chessboard.png");
+		m_TextureBB = std::make_unique<Texture>("res/textures/bb.png");
+		m_TextureChessBoard->Bind(0);
+		m_TextureBB->Bind(1);
+		
 
 
 		{
