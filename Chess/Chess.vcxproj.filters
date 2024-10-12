@@ -26,6 +26,8 @@
     <ClCompile Include="source\vendor\imgui\imgui_widgets.cpp" />
     <ClCompile Include="source\vendor\stb_image\stb_image.cpp" />
     <ClCompile Include="source\ChessThings\Board.cpp" />
+    <ClCompile Include="source\CreateQuadDynamic.cpp" />
+    <ClCompile Include="source\ChessThings\RenderChesspcs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\bb.png" />
@@ -41,6 +43,7 @@
     <Image Include="res\textures\wp.png" />
     <Image Include="res\textures\wq.png" />
     <Image Include="res\textures\wr.png" />
+    <Image Include="res\textures\Empty.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\IndexBuffer.h" />
@@ -351,8 +354,9 @@
     <ClInclude Include="source\vendor\imgui\imstb_textedit.h" />
     <ClInclude Include="source\vendor\imgui\imstb_truetype.h" />
     <ClInclude Include="source\vendor\stb_image\stb_image.h" />
-    <ClInclude Include="source\ChessThings\Piece.h" />
     <ClInclude Include="source\ChessThings\Board.h" />
+    <ClInclude Include="source\CreateQuadDynamic.h" />
+    <ClInclude Include="source\ChessThings\RenderChesspcs.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="source\vendor\glm\detail\func_common.inl" />

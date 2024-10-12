@@ -1,38 +1,53 @@
 #include "Board.h"
-#include "Piece.h"
+#include <iostream>
+class Piece
+{
+public:
+	const unsigned int None = 0;
+	const unsigned int Pawn = 1;
+	const unsigned int Bishop = 2;
+	const unsigned int Knight = 3;
+	const unsigned int Rook = 4;
+	const unsigned int Queen = 5;
+	const unsigned int King = 6;
+
+	const unsigned int White = 8;
+	const unsigned int Black = 16;
+};
 Board::Board()
+	:BoardSquare()
+{
+
+}
+std::array<unsigned int, 64> Board::GetPositionFromFEN(std::string FenString)
 {
 	Piece piece;
-	BoardSquare[2] = piece.Bishop + piece.Black;
-	BoardSquare[6] = piece.Bishop + piece.Black;
-	BoardSquare[0] = piece.Rook | piece.Black;
-	BoardSquare[7] = piece.Rook | piece.Black;
-	BoardSquare[1] = piece.Knight | piece.Black;
-	BoardSquare[6] = piece.Knight | piece.Black;
-	BoardSquare[3] = piece.Queen | piece.Black;
-	BoardSquare[4] = piece.King | piece.Black;
-	BoardSquare[8] = piece.Pawn | piece.Black;
-	BoardSquare[9] = piece.Pawn | piece.Black;
-	BoardSquare[10] = piece.Pawn | piece.Black;
-	BoardSquare[11] = piece.Pawn | piece.Black;
-	BoardSquare[12] = piece.Pawn | piece.Black;
-	BoardSquare[13] = piece.Pawn | piece.Black;
-	BoardSquare[14] = piece.Pawn | piece.Black;
-	BoardSquare[15] = piece.Pawn | piece.Black;
-	BoardSquare[63] = piece.Rook | piece.White;
-	BoardSquare[56] = piece.Rook | piece.White;
-	BoardSquare[62] = piece.Knight | piece.White;
-	BoardSquare[57] = piece.Knight | piece.White;
-	BoardSquare[61] = piece.Bishop | piece.White;
-	BoardSquare[58] = piece.Bishop | piece.White;
-	BoardSquare[59] = piece.Queen | piece.White;
-	BoardSquare[60] = piece.King | piece.White;
-	BoardSquare[55] = piece.Pawn | piece.Black;
-	BoardSquare[54] = piece.Pawn | piece.Black;
-	BoardSquare[53] = piece.Pawn | piece.Black;
-	BoardSquare[52] = piece.Pawn | piece.Black;
-	BoardSquare[51] = piece.Pawn | piece.Black;
-	BoardSquare[50] = piece.Pawn | piece.Black;
-	BoardSquare[49] = piece.Pawn | piece.Black;
-	BoardSquare[48] = piece.Pawn | piece.Black;
+	std::unordered_map <char, unsigned int> PieceTypeFromChar =
+	{
+		{'k', piece.King}, {'q', piece.Queen}, {'b', piece.Bishop}, {'r', piece.Rook}, {'p', piece.Pawn}, {'n', piece.Knight}
+	};
+	std::string FenPiecePlacement = FenString.substr(0, FenString.find(' '));
+	
+	unsigned int file = 0, rank = 7;
+	for (char character : FenPiecePlacement)
+	{
+		if (character == '/')
+		{
+			file = 0;
+			rank -= 1;
+		}
+		else if(isdigit(character))
+		{
+			file += character - '0';
+		}
+		else
+		{
+			unsigned int PieceColor = isupper(character) ? piece.White : piece.Black;
+			unsigned int PieceType = PieceTypeFromChar[tolower(character)];
+			BoardSquare[static_cast<std::array<unsigned int, 64Ui64>::size_type>(rank) * 8 + file] = PieceType | PieceColor;
+			file += 1;
+
+		}
+	}
+	return BoardSquare;
 }

@@ -134,6 +134,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\ChessThings\Board.cpp" />
+    <ClCompile Include="source\ChessThings\RenderChesspcs.cpp" />
+    <ClCompile Include="source\CreateQuadDynamic.cpp" />
     <ClCompile Include="source\IndexBuffer.cpp" />
     <ClCompile Include="source\Main.cpp" />
     <ClCompile Include="source\Renderer.cpp" />
@@ -155,6 +157,7 @@
     <ClCompile Include="source\VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\textures\Empty.png" />
     <Image Include="res\textures\bb.png" />
     <Image Include="res\textures\bk.png" />
     <Image Include="res\textures\bn.png" />
@@ -171,7 +174,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\ChessThings\Board.h" />
-    <ClInclude Include="source\ChessThings\Piece.h" />
+    <ClInclude Include="source\ChessThings\RenderChesspcs.h" />
+    <ClInclude Include="source\CreateQuadDynamic.h" />
     <ClInclude Include="source\IndexBuffer.h" />
     <ClInclude Include="source\Renderer.h" />
     <ClInclude Include="source\Shader.h" />

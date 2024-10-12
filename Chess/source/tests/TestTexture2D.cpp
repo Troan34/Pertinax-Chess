@@ -5,6 +5,9 @@
 
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "CreateQuadDynamic.h"
+#include "ChessThings/Board.h"
+#include "ChessThings/RenderChesspcs.h"
 
 namespace test {
 	TestTexture2D::TestTexture2D()
@@ -14,49 +17,31 @@ namespace test {
 		
 	{
 		glm::vec3 translationA(200, 200, 0);
-		glm::vec3 translationB(400, 200, 0);
 
-		
 
-		float positions[] = {
-			-350.0f, -350.0f, 0.0f, 0.0f, 0.0f,
-			350.0f, -350.0f, 1.0f, 0.0f, 0.0f,
-			350.0f, 350.0f, 1.0f, 1.0f, 0.0f,
-			-350.0f, 350.0f, 0.0f, 1.0f, 0.0f,
-
-			85.5f, 262.5f, 0.0f, 0.0f, 1.0f,
-			175.0f, 262.5f, 1.0f, 0.0f, 1.0f,
-			175.0f, 350.0f, 1.0f, 1.0f, 1.0f,
-			87.5f, 350.0f, 0.0f, 1.0f, 1.0f
-		};
-
-		unsigned int indices[] = {
-			0,1,2,2,3,0,
-			4,5,6,6,7,4
-		};
+	
 
 		GLCall(glEnable(GL_BLEND));
 		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
 		m_VAO = std::make_unique<VertexArray>();
 		
-		m_VertexBuffer = std::make_unique<VertexBuffer>(positions, 8 * 5 * sizeof(float));
+		m_VertexBuffer = std::make_unique<VertexBuffer>(nullptr, sizeof(VertexStructure)*1000);
 		VertexBufferLayout layout;
 		layout.Push<float>(2);
 		layout.Push<float>(2);
 		layout.Push<float>(1);
 		m_VAO -> AddBuffer(*m_VertexBuffer, layout);
-		m_IndexBuffer = std::make_unique<IndexBuffer>(indices, 12);
+		m_IndexBuffer = std::make_unique<IndexBuffer>(65);
 
 		m_Shader = std::make_unique<Shader>("res/shaders/Basic.shader");
 		m_Shader->Bind();
-		m_Shader->SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
 		
-		m_Shader->SetUniform1i("u_Texture", 0);
 
-		const int samplers[2] = { 0, 1 };
-		
-		m_Shader->SetUniform1iv("u_Textures", 2, *samplers);
+		//texture sampling part
+		int samplers[14] = { 0, 1, 2, 3, 4, 5 ,6, 7, 8, 9, 10, 11, 12 ,13 };
+		m_Shader->SetUniform1iv("u_Textures", 14, *samplers);
+
 
 	}
 
@@ -74,14 +59,32 @@ namespace test {
 	{
 		GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
 		GLCall(glClear(GL_COLOR_BUFFER_BIT));
+		/*
+		float positions[] = {
+			-350.0f, -350.0f, 0.0f, 0.0f, 0.0f,
+			350.0f, -350.0f, 1.0f, 0.0f, 0.0f,
+			350.0f, 350.0f, 1.0f, 1.0f, 0.0f,
+			-350.0f, 350.0f, 0.0f, 1.0f, 0.0f,
+
+			85.5f, 262.5f, 0.0f, 0.0f, 1.0f,
+			175.0f, 262.5f, 1.0f, 0.0f, 1.0f,
+			175.0f, 350.0f, 1.0f, 1.0f, 1.0f,
+			87.5f, 350.0f, 0.0f, 1.0f, 1.0f
+		};
+		*/
+		
+		Board board;
+		RenderChessPieces renderChessPieces;
+		
+		auto position = renderChessPieces.MemcopyObjects(renderChessPieces.CreateObjects(board.GetPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")));
+		
+		
+		m_VertexBuffer->SetDynamicVB(&position, sizeof(position));
 
 		Renderer renderer;
-		m_TextureChessBoard = std::make_unique<Texture>("res/textures/Chessboard.png");
-		m_TextureBB = std::make_unique<Texture>("res/textures/bb.png");
-		m_TextureChessBoard->Bind(0);
-		m_TextureBB->Bind(1);
 		
-
+		renderChessPieces.BindEveryTexture();//this is so slow because of stbi_load_images TODO: look what is wrong
+		
 
 		{
 			glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationA);
@@ -96,7 +99,6 @@ namespace test {
 	void TestTexture2D::OnImGuiRender()
 	{
 		ImGui::SliderFloat3("Translation A", &m_TranslationA.x, 0.0f, 1280.0f);
-		ImGui::SliderFloat3("Translation B", &m_TranslationB.x, 0.0f, 1280.0f);
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	
 	}
