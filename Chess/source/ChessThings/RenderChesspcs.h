@@ -22,7 +22,6 @@ private:
 	std::unique_ptr<Texture> m_Textureq;
 	std::unique_ptr<Texture> m_Texturek;
 	std::unique_ptr<Texture> m_TextureEmpty;
-	VertexStructure m_Return;
 	std::array<unsigned int, 64> BoardSquare;
 
 public:
@@ -32,6 +31,5 @@ public:
 	std::array<std::array<VertexStructure, 4Ui64>,65> CreateObjects(std::array<unsigned int, 64> BoardSquare);
 	std::array<VertexStructure, 260> MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,65> quads);
 	void BindEveryTexture();
-	VertexStructure* ReturnPositions();
 	float GetPieceTextureID(std::array<unsigned int, 64> BoardSquare, unsigned int i);
 };

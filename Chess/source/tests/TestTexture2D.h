@@ -5,6 +5,9 @@
 #include "VertexBuffer.h"
 #include "Texture.h"
 #include <memory>
+#include "CreateQuadDynamic.h"
+#include "ChessThings/Board.h"
+#include "ChessThings/RenderChesspcs.h"
 namespace test {
 
 	class TestTexture2D : public Test

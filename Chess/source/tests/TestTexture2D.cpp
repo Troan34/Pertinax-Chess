@@ -19,14 +19,12 @@ namespace test {
 		glm::vec3 translationA(200, 200, 0);
 
 
-	
-
 		GLCall(glEnable(GL_BLEND));
 		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
 		m_VAO = std::make_unique<VertexArray>();
 		
-		m_VertexBuffer = std::make_unique<VertexBuffer>(nullptr, sizeof(VertexStructure)*1000);
+		m_VertexBuffer = std::make_unique<VertexBuffer>(nullptr, sizeof(VertexStructure)*2000);
 		VertexBufferLayout layout;
 		layout.Push<float>(2);
 		layout.Push<float>(2);
