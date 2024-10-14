@@ -82,7 +82,7 @@ namespace test {
 		Renderer renderer;
 		
 		renderChessPieces.BindEveryTexture();//this is so slow because of stbi_load_images TODO: look what is wrong
-		
+		//TODO: about the artifacts on the rendering, it's because i shouldnt use sampler2D in the shader, ill explain more there
 
 		{
 			glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationA);
