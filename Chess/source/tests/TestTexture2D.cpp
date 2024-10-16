@@ -34,7 +34,6 @@ namespace test {
 
 		m_Shader = std::make_unique<Shader>("res/shaders/Basic.shader");
 		m_Shader->Bind();
-		
 
 		//texture sampling part
 		int samplers[14] = { 0, 1, 2, 3, 4, 5 ,6, 7, 8, 9, 10, 11, 12 ,13 };
@@ -53,36 +52,23 @@ namespace test {
 
 	}
 
-	void TestTexture2D::OnRender()
+	void TestTexture2D::OnRender(GLFWwindow* window)//TODO: i have to do in some way both cursor position and Left mouse click, to drag and drop pieces
 	{
-		GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
-		GLCall(glClear(GL_COLOR_BUFFER_BIT));
-		/*
-		float positions[] = {
-			-350.0f, -350.0f, 0.0f, 0.0f, 0.0f,
-			350.0f, -350.0f, 1.0f, 0.0f, 0.0f,
-			350.0f, 350.0f, 1.0f, 1.0f, 0.0f,
-			-350.0f, 350.0f, 0.0f, 1.0f, 0.0f,
 
-			85.5f, 262.5f, 0.0f, 0.0f, 1.0f,
-			175.0f, 262.5f, 1.0f, 0.0f, 1.0f,
-			175.0f, 350.0f, 1.0f, 1.0f, 1.0f,
-			87.5f, 350.0f, 0.0f, 1.0f, 1.0f
-		};
-		*/
-		
 		Board board;
 		RenderChessPieces renderChessPieces;
 		
 		auto position = renderChessPieces.MemcopyObjects(renderChessPieces.CreateObjects(board.GetPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")));
 		
+
 		
 		m_VertexBuffer->SetDynamicVB(&position, sizeof(position));
 
 		Renderer renderer;
 		
-		renderChessPieces.BindEveryTexture();//this is so slow because of stbi_load_images TODO: look what is wrong
-		//TODO: about the artifacts on the rendering, it's because i shouldnt use sampler2D in the shader, ill explain more there
+		renderChessPieces.BindEveryTexture();//this is so slow because of stbi_load_images, it's probably because i create a tex every render, i should stop using unique_ptr
+		//but uhhh, i have an idea on how to do that, but it will take time, so i will do in later in the project when i have some good experience
+		//TODO: Actually, i have no idea how to fix the artifacts
 
 		{
 			glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationA);

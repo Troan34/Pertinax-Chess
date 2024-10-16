@@ -1,5 +1,5 @@
 #include<GL/glew.h>
-#include <GLFW/glfw3.h>//docs.gl is the documentation for OpenGl
+#include <GLFW/glfw3.h>
 #include<iostream>
 #include <fstream>
 #include <string>
@@ -20,6 +20,7 @@
 #include "tests/TestTexture2D.h"
 #include "ChessThings/Board.h"
 
+
 int main(void)
 {
     GLFWwindow* window;
@@ -28,9 +29,10 @@ int main(void)
     if (!glfwInit())
         return -1;
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 
     /* Create a windowed mode window and its OpenGL context */
     window = glfwCreateWindow(1280, 720, "Chess", NULL, NULL);
@@ -48,10 +50,6 @@ int main(void)
     }
     std::cout << glGetString(GL_VERSION) << '\n';
     {
-
-
-        GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-        GLCall(glEnable(GL_BLEND));
 
 
 
@@ -82,7 +80,7 @@ int main(void)
             if (currentTest)
             {
                 currentTest->OnUpdate(0.0f);
-                currentTest->OnRender();
+                currentTest->OnRender(window);
                 ImGui::Begin("Test");
                 if (currentTest != testMenu and ImGui::Button("<-"))
                 {

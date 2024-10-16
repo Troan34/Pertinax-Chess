@@ -25,7 +25,7 @@ layout(location = 0) out vec4 color;
 in vec2 v_TexCoord;
 in float v_TexIndex;
 
-uniform sampler2D u_Textures[14];//looks like this should be something like uniform sampler2DArray, or maybe a texture array, but it's kinda late so i will take care of it later
+uniform sampler2D u_Textures[14];
 
 
 void main()

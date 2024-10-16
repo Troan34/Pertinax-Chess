@@ -1,6 +1,7 @@
 #pragma once
 #include "Test.h"
-
+#include<GL/glew.h>
+#include <GLFW/glfw3.h>
 #include "VertexBufferLayout.h"
 #include "VertexBuffer.h"
 #include "Texture.h"
@@ -17,7 +18,7 @@ namespace test {
 		~TestTexture2D();
 
 		void OnUpdate(float deltaTime) override;
-		void OnRender() override;
+		void OnRender(GLFWwindow* window) override;
 		void OnImGuiRender() override;
 	private:
 		std::unique_ptr<VertexArray> m_VAO;

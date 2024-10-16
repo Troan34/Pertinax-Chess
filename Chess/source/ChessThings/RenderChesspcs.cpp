@@ -79,6 +79,7 @@ void RenderChessPieces::BindEveryTexture()
 	m_TextureEmpty->Bind(13);
 
 }
+
 float RenderChessPieces::GetPieceTextureID(std::array<unsigned int, 64> BoardSquare, unsigned int i)
 {
 	
