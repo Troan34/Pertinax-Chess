@@ -5,6 +5,22 @@
 #include <memory>
 #include <array>
 #include <iostream>
+#include<GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <iostream>
+
+struct MouseInput
+{
+	float xPos, yPos;
+	bool LeftButtonPressed;
+	bool WasLeftButtonPressed;
+};
+
+struct Vec2MouseInput
+{
+	float xPoss, yPoss;
+};
+
 class RenderChessPieces
 {
 private:
@@ -23,13 +39,14 @@ private:
 	std::unique_ptr<Texture> m_Texturek;
 	std::unique_ptr<Texture> m_TextureEmpty;
 	std::array<unsigned int, 64> BoardSquare;
+	
 
 public:
 	RenderChessPieces();
 	~RenderChessPieces();
-
-	std::array<std::array<VertexStructure, 4Ui64>,65> CreateObjects(std::array<unsigned int, 64> BoardSquare);
-	std::array<VertexStructure, 260> MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,65> quads);
+	std::array<std::array<VertexStructure, 4Ui64>,66> CreateObjects(std::array<unsigned int, 64> BoardSquare);
+	std::array<VertexStructure, 264> MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,66> quads);
 	void BindEveryTexture();
 	float GetPieceTextureID(std::array<unsigned int, 64> BoardSquare, unsigned int i);
+	void GetMouseInput(GLFWwindow* window);
 };

@@ -1,5 +1,6 @@
 #include "TestTexture2D.h"
 #include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #include "Renderer.h"
 #include "imgui/imgui.h"
 
@@ -30,7 +31,7 @@ namespace test {
 		layout.Push<float>(2);
 		layout.Push<float>(1);
 		m_VAO -> AddBuffer(*m_VertexBuffer, layout);
-		m_IndexBuffer = std::make_unique<IndexBuffer>(65);
+		m_IndexBuffer = std::make_unique<IndexBuffer>(66);
 
 		m_Shader = std::make_unique<Shader>("res/shaders/Basic.shader");
 		m_Shader->Bind();
@@ -55,12 +56,13 @@ namespace test {
 	void TestTexture2D::OnRender(GLFWwindow* window)//TODO: i have to do in some way both cursor position and Left mouse click, to drag and drop pieces
 	{
 
+
 		Board board;
 		RenderChessPieces renderChessPieces;
-		
+		renderChessPieces.GetMouseInput(window);
 		auto position = renderChessPieces.MemcopyObjects(renderChessPieces.CreateObjects(board.GetPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")));
 		
-
+		
 		
 		m_VertexBuffer->SetDynamicVB(&position, sizeof(position));
 
