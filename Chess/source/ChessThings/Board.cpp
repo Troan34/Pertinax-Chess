@@ -11,8 +11,8 @@ public:
 	const unsigned int Queen = 5;
 	const unsigned int King = 6;
 
-	const unsigned int White = 8;
-	const unsigned int Black = 16;
+	const unsigned int White = 16;
+	const unsigned int Black = 8;
 };
 Board::Board()
 	:BoardSquare()

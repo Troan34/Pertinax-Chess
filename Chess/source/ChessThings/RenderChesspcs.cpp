@@ -1,6 +1,6 @@
 #include "RenderChesspcs.h"
 static MouseInput g_mouseInput;
-
+static float RememberTexID;
 static void cursorPositionCallBack(GLFWwindow* window, double xPosition, double yPosition)
 {
 	g_mouseInput.xPos = (float)xPosition;
@@ -34,7 +34,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 66> RenderChessPieces::CreateObje
 	quads[0] = CreateQuad(-350.0f, -350.0f, 700.0f, 0.0f);
 	float xDifference = 0.0f;
 	float yDifference = 0.0f;
-	for (int i = 1; i < 65; i++)
+ 	for (int i = 1; i < 65; i++)
 	{
 		if (xDifference > 650.0f)
 		{
@@ -43,33 +43,37 @@ std::array<std::array<VertexStructure, 4Ui64>, 66> RenderChessPieces::CreateObje
 		}
 		float PieceTexID = GetPieceTextureID(BoardSquare, i - 1);
 		quads[i] = CreateQuad(-350.0f + xDifference, -350.0f + yDifference, 87.5f, PieceTexID);
-		xDifference += 87.5f;
+		
 
 		//drag and drop
-		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed==false)//ive been doing some debugging, 
-			//why in the FUCK is the 64th square in the MIDDLE, and the whole quads[i] might aswell be random, atleast i have an idea on how to fix this tomorrow,
-			//ong i can't do this anymore
+		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed==false and PieceTexID != 0.0f)
 		{
-			if ((g_mouseInput.xPos) < (-350.0f + xDifference) and (g_mouseInput.xPos) >(-350.0f + (xDifference - 87.5f)))
+			if ((g_mouseInput.xPos - 350.0f) > (-350.0f + xDifference) and (g_mouseInput.xPos - 350.0f) < (-350.0f + xDifference + 87.5f))
+				//TODO: some weird shit with x coords
 			{
-				if ((g_mouseInput.yPos) < (-350.0f + yDifference + 87.5f) and (g_mouseInput.yPos) > (-350.0f + yDifference))
+				if ((-g_mouseInput.yPos + 360.0f) > (-350.0f + yDifference) and (-g_mouseInput.yPos + 360.0f) < (-350.0f + yDifference+ 87.5f))
 				{
-					quads[65] = CreateQuad(g_mouseInput.xPos - 393.0f, g_mouseInput.yPos - 319.25f, 87.5f, PieceTexID);
+					quads[65] = CreateQuad(g_mouseInput.xPos, -g_mouseInput.yPos + 319.25f, 87.5f, PieceTexID);
+					RememberTexID = PieceTexID;
 				}
 			}
 		}
 		
-		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed)
+		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed and RememberTexID != 0)
 		{
-			quads[65] = CreateQuad(g_mouseInput.xPos - 393.5f, g_mouseInput.yPos - 319.25f, 87.5f, PieceTexID);
+			quads[65] = CreateQuad(g_mouseInput.xPos - 393.5f, -g_mouseInput.yPos + 319.25f, 87.5f, RememberTexID); //took way too much time,
+			//func to get the y from yPos is f(x) = -x + 360
 		}
+		if (g_mouseInput.LeftButtonPressed == true)
+		{
+			g_mouseInput.WasLeftButtonPressed = true;
+		}
+		if (g_mouseInput.LeftButtonPressed == false)
+			g_mouseInput.WasLeftButtonPressed = false;
+
+		xDifference += 87.5f;
 	}
-	if (g_mouseInput.LeftButtonPressed == true)
-	{
-		g_mouseInput.WasLeftButtonPressed = true;
-	}
-	if (g_mouseInput.LeftButtonPressed == false)
-		g_mouseInput.WasLeftButtonPressed = false;
+	
 	return quads;
 }
 std::array<VertexStructure, 264> RenderChessPieces::MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,66> quads)
@@ -137,29 +141,29 @@ float RenderChessPieces::GetPieceTextureID(std::array<unsigned int, 64> BoardSqu
 		case 0:
 			return 13.0f;//none
 		case 9:
-			return 1.0f;//P
+			return 1.0f;//p
 		case 10:
-			return 2.0f;//B
+			return 2.0f;//b
 		case 11:
-			return 3.0f;//N
+			return 3.0f;//n
 		case 12:
-			return 4.0f;//R
+			return 4.0f;//r
 		case 13:
-			return 5.0f;//Q
+			return 5.0f;//q
 		case 14:
-			return 6.0f;//K
+			return 6.0f;//k
 		case 17:
-			return 7.0f;//p
+			return 7.0f;//P
 		case 18:
-			return 8.0f;//b
+			return 8.0f;//B
 		case 19:
-			return 9.0f;//n
+			return 9.0f;//N
 		case 20:
-			return 10.0f;//r
+			return 10.0f;//R
 		case 21:
-			return 11.0f;//q
+			return 11.0f;//Q
 		case 22:
-			return 12.0f;//k
+			return 12.0f;//K
 		default:
 			ASSERT(false);
 			return -1;
@@ -170,9 +174,10 @@ void RenderChessPieces::GetMouseInput(GLFWwindow* window)
 {
 	glfwSetCursorPosCallback(window, cursorPositionCallBack);
 	glfwSetMouseButtonCallback(window, mouseButtonCallBack);
-	//std::cout << g_mouseInput.xPos << ":" << g_mouseInput.yPos << '\n';
-	std::cout << "mouseLeft pressed = " << g_mouseInput.LeftButtonPressed << '\n';
-	std::cout << "was Left pressed = " << g_mouseInput.WasLeftButtonPressed << '\n';
+	glfwSetInputMode(window, GLFW_STICKY_MOUSE_BUTTONS, 1);
+	std::cout << g_mouseInput.xPos << ":" << g_mouseInput.yPos << '\n';
+	//std::cout << "mouseLeft pressed = " << g_mouseInput.LeftButtonPressed << '\n';
+	//std::cout << "was Left pressed = " << g_mouseInput.WasLeftButtonPressed << '\n';
  
 }
 
