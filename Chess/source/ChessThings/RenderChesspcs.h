@@ -44,9 +44,12 @@ private:
 public:
 	RenderChessPieces();
 	~RenderChessPieces();
-	std::array<std::array<VertexStructure, 4Ui64>,66> CreateObjects(std::array<unsigned int, 64> BoardSquare);
+	std::array<std::array<VertexStructure, 4Ui64>,66> CreateObjects();
 	std::array<VertexStructure, 264> MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,66> quads);
 	void BindEveryTexture();
+	void WasLeftButtonPressed();
+	float GetBoardSquarefromTexID(float TexID);
 	float GetPieceTextureID(std::array<unsigned int, 64> BoardSquare, unsigned int i);
+	void SetStaticBoardSquare(std::array<unsigned int, 64> BoardSquare);
 	void GetMouseInput(GLFWwindow* window);
 };

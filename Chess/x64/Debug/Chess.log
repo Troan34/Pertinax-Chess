@@ -1,2 +1,7 @@
 ﻿  RenderChesspcs.cpp
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(76,115): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=unsigned int
+          ]
   Chess.vcxproj -> C:\Users\roanb\source\repos\Chess\x64\Debug\Chess.exe

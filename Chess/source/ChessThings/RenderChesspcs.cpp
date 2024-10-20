@@ -1,6 +1,10 @@
 #include "RenderChesspcs.h"
 static MouseInput g_mouseInput;
 static float RememberTexID;
+static int RememberBoardSquareID;
+static std::array<unsigned int, 64Ui64> static_BoardSquare;
+static bool wasStatic_BoardSquareCreated = false;
+
 static void cursorPositionCallBack(GLFWwindow* window, double xPosition, double yPosition)
 {
 	g_mouseInput.xPos = (float)xPosition;
@@ -28,7 +32,8 @@ RenderChessPieces::~RenderChessPieces()
 {
 
 }
-std::array<std::array<VertexStructure, 4Ui64>, 66> RenderChessPieces::CreateObjects(std::array<unsigned int, 64Ui64> BoardSquare)
+
+std::array<std::array<VertexStructure, 4Ui64>, 66> RenderChessPieces::CreateObjects()
 {
 	std::array<std::array<VertexStructure, 4Ui64>, 66> quads{};
 	quads[0] = CreateQuad(-350.0f, -350.0f, 700.0f, 0.0f);
@@ -41,35 +46,48 @@ std::array<std::array<VertexStructure, 4Ui64>, 66> RenderChessPieces::CreateObje
 			xDifference = 0.0f;
 			yDifference += 87.5f;
 		}
-		float PieceTexID = GetPieceTextureID(BoardSquare, i - 1);
-		quads[i] = CreateQuad(-350.0f + xDifference, -350.0f + yDifference, 87.5f, PieceTexID);
-		
+		float PieceTexID = GetPieceTextureID(static_BoardSquare, i - 1);
+		bool HasDragAndDropFunHappened = false;
 
 		//drag and drop
-		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed==false and PieceTexID != 0.0f)
+		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed == false and PieceTexID != 0.0f)
 		{
+			//next two ifs are to check which objects has to be dragged
 			if ((g_mouseInput.xPos - 350.0f) > (-350.0f + xDifference) and (g_mouseInput.xPos - 350.0f) < (-350.0f + xDifference + 87.5f))
-				//TODO: some weird shit with x coords
 			{
-				if ((-g_mouseInput.yPos + 360.0f) > (-350.0f + yDifference) and (-g_mouseInput.yPos + 360.0f) < (-350.0f + yDifference+ 87.5f))
+				if ((-g_mouseInput.yPos + 360.0f) > (-350.0f + yDifference) and (-g_mouseInput.yPos + 360.0f) < (-350.0f + yDifference + 87.5f))
 				{
-					quads[65] = CreateQuad(g_mouseInput.xPos, -g_mouseInput.yPos + 319.25f, 87.5f, PieceTexID);
+					quads[65] = CreateQuad(g_mouseInput.xPos - 393.5f, -g_mouseInput.yPos + 319.25f, 87.5f, PieceTexID);
 					RememberTexID = PieceTexID;
+					static_BoardSquare[i - 1] = (unsigned int)0;					
 				}
 			}
 		}
 		
+		//this if is to "drop" the object
+		//TODO: when we have rules this cant be just here, like if a move is illegal the piece return here from the cursor, or you cant just eat your pieces...
+		if (g_mouseInput.LeftButtonPressed == false and g_mouseInput.WasLeftButtonPressed == true)
+		{
+			if ((g_mouseInput.xPos - 350.0f) > (-350.0f + xDifference) and (g_mouseInput.xPos - 350.0f) < (-350.0f + xDifference + 87.5f))
+			{
+				if ((-g_mouseInput.yPos + 360.0f) > (-350.0f + yDifference) and (-g_mouseInput.yPos + 360.0f) < (-350.0f + yDifference + 87.5f))
+				{
+					static_BoardSquare[static_cast<std::array<unsigned int, 64Ui64>::size_type>(i) - 1] = GetBoardSquarefromTexID(RememberTexID);
+					PieceTexID = RememberTexID;
+				}
+			}
+		}
 		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed and RememberTexID != 0)
 		{
 			quads[65] = CreateQuad(g_mouseInput.xPos - 393.5f, -g_mouseInput.yPos + 319.25f, 87.5f, RememberTexID); //took way too much time,
 			//func to get the y from yPos is f(x) = -x + 360
 		}
-		if (g_mouseInput.LeftButtonPressed == true)
-		{
-			g_mouseInput.WasLeftButtonPressed = true;
-		}
-		if (g_mouseInput.LeftButtonPressed == false)
-			g_mouseInput.WasLeftButtonPressed = false;
+
+		quads[i] = CreateQuad(-350.0f + xDifference, -350.0f + yDifference, 87.5f, PieceTexID);
+		
+
+		
+		
 
 		xDifference += 87.5f;
 	}
@@ -170,15 +188,59 @@ float RenderChessPieces::GetPieceTextureID(std::array<unsigned int, 64> BoardSqu
 	}
 }
 
+float RenderChessPieces::GetBoardSquarefromTexID(float TexID)
+{
+	if (TexID == 13.0f)
+	{
+		return 0;//none
+	}
+	else if (TexID == 1.0f) { return 9; }//p
+	else if (TexID == 2.0f) { return 10; }//b
+	else if (TexID == 3.0f) { return 11; }//n
+	else if (TexID == 4.0f) { return 12; }//r
+	else if (TexID == 5.0f) { return 13; }
+	else if (TexID == 6.0f) { return 14; }
+	else if (TexID == 7.0f) { return 17; }
+	else if (TexID == 8.0f) { return 18; }
+	else if (TexID == 9.0f) { return 19; }
+	else if (TexID == 10.0f) { return 20; }
+	else if (TexID == 11.0f) { return 21; }
+	else if (TexID == 12.0f) { return 22; }
+	else
+	{
+		ASSERT(false);
+		return -1;
+	}
+}
+
+void RenderChessPieces::WasLeftButtonPressed()
+{
+	if (g_mouseInput.LeftButtonPressed == true)
+	{
+		g_mouseInput.WasLeftButtonPressed = true;
+	}
+	if (g_mouseInput.LeftButtonPressed == false)
+		g_mouseInput.WasLeftButtonPressed = false;
+}
+
 void RenderChessPieces::GetMouseInput(GLFWwindow* window)
 {
 	glfwSetCursorPosCallback(window, cursorPositionCallBack);
 	glfwSetMouseButtonCallback(window, mouseButtonCallBack);
 	glfwSetInputMode(window, GLFW_STICKY_MOUSE_BUTTONS, 1);
-	std::cout << g_mouseInput.xPos << ":" << g_mouseInput.yPos << '\n';
+	//std::cout << g_mouseInput.xPos << ":" << g_mouseInput.yPos << '\n';
 	//std::cout << "mouseLeft pressed = " << g_mouseInput.LeftButtonPressed << '\n';
 	//std::cout << "was Left pressed = " << g_mouseInput.WasLeftButtonPressed << '\n';
  
+}
+
+void RenderChessPieces::SetStaticBoardSquare(std::array<unsigned int, 64> BoardSquare)
+{
+	if (wasStatic_BoardSquareCreated == false)
+	{
+		static_BoardSquare = BoardSquare;
+		wasStatic_BoardSquareCreated = true;
+	}
 }
 
 

@@ -40,6 +40,7 @@ namespace test {
 		int samplers[14] = { 0, 1, 2, 3, 4, 5 ,6, 7, 8, 9, 10, 11, 12 ,13 };
 		m_Shader->SetUniform1iv("u_Textures", 14, *samplers);
 
+		
 
 	}
 
@@ -60,7 +61,8 @@ namespace test {
 		Board board;
 		RenderChessPieces renderChessPieces;
 		renderChessPieces.GetMouseInput(window);
-		auto position = renderChessPieces.MemcopyObjects(renderChessPieces.CreateObjects(board.GetPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")));
+		renderChessPieces.SetStaticBoardSquare(board.GetPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"));
+		auto position = renderChessPieces.MemcopyObjects(renderChessPieces.CreateObjects());
 		
 		
 		
@@ -71,6 +73,8 @@ namespace test {
 		renderChessPieces.BindEveryTexture();//this is so slow because of stbi_load_images, it's probably because i create a tex every render, i should stop using unique_ptr
 		//but uhhh, i have an idea on how to do that, but it will take time, so i will do in later in the project when i have some good experience
 		//TODO: Actually, i have no idea how to fix the artifacts
+
+		renderChessPieces.WasLeftButtonPressed();
 
 		{
 			glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationA);
