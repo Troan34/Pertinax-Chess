@@ -24,20 +24,6 @@ struct Vec2MouseInput
 class RenderChessPieces
 {
 private:
-	std::unique_ptr<Texture> m_TextureChessBoard;
-	std::unique_ptr<Texture> m_TextureP;
-	std::unique_ptr<Texture> m_TextureB;
-	std::unique_ptr<Texture> m_TextureN;
-	std::unique_ptr<Texture> m_TextureR;
-	std::unique_ptr<Texture> m_TextureQ;
-	std::unique_ptr<Texture> m_TextureK;
-	std::unique_ptr<Texture> m_Texturep;
-	std::unique_ptr<Texture> m_Textureb;
-	std::unique_ptr<Texture> m_Texturen;
-	std::unique_ptr<Texture> m_Texturer;
-	std::unique_ptr<Texture> m_Textureq;
-	std::unique_ptr<Texture> m_Texturek;
-	std::unique_ptr<Texture> m_TextureEmpty;
 	std::array<unsigned int, 64> BoardSquare;
 	
 

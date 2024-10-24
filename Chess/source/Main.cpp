@@ -50,8 +50,8 @@ int main(void)
     }
     std::cout << glGetString(GL_VERSION) << '\n';
     {
-
-
+        GLCall(glEnable(GL_BLEND));
+        GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
         Renderer renderer;
 

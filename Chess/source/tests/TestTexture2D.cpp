@@ -3,7 +3,7 @@
 #include <GLFW/glfw3.h>
 #include "Renderer.h"
 #include "imgui/imgui.h"
-
+#include "Texture.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "CreateQuadDynamic.h"
@@ -17,6 +17,7 @@ namespace test {
 		m_TranslationA(353,363,0), m_TranslationB(400,200,0)
 		
 	{
+
 		glm::vec3 translationA(200, 200, 0);
 
 
@@ -36,6 +37,22 @@ namespace test {
 		m_Shader = std::make_unique<Shader>("res/shaders/Basic.shader");
 		m_Shader->Bind();
 
+		Texture texture;
+		TEX_ChessBoard =texture.CreateTexture("res/textures/Chessboard.png");
+		TEX_P = texture.CreateTexture("res/textures/wp.png");
+		TEX_B = texture.CreateTexture("res/textures/wb.png");
+		TEX_N = texture.CreateTexture("res/textures/wn.png");
+		TEX_R = texture.CreateTexture("res/textures/wr.png");
+		TEX_Q = texture.CreateTexture("res/textures/wq.png");
+		TEX_K = texture.CreateTexture("res/textures/wk.png");
+		TEX_p = texture.CreateTexture("res/textures/bp.png");
+		TEX_b = texture.CreateTexture("res/textures/bb.png");
+		TEX_n = texture.CreateTexture("res/textures/bn.png");
+		TEX_r = texture.CreateTexture("res/textures/br.png");
+		TEX_q = texture.CreateTexture("res/textures/bq.png");
+		TEX_k = texture.CreateTexture("res/textures/bk.png");
+		TEX_Empty = texture.CreateTexture("res/textures/Empty.png");
+
 		//texture sampling part
 		int samplers[14] = { 0, 1, 2, 3, 4, 5 ,6, 7, 8, 9, 10, 11, 12 ,13 };
 		m_Shader->SetUniform1iv("u_Textures", 14, *samplers);
@@ -54,7 +71,7 @@ namespace test {
 
 	}
 
-	void TestTexture2D::OnRender(GLFWwindow* window)//TODO: i have to do in some way both cursor position and Left mouse click, to drag and drop pieces
+	void TestTexture2D::OnRender(GLFWwindow* window)
 	{
 
 
@@ -64,14 +81,26 @@ namespace test {
 		renderChessPieces.SetStaticBoardSquare(board.GetPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"));
 		auto position = renderChessPieces.MemcopyObjects(renderChessPieces.CreateObjects());
 		
-		
-		
+		//just dont look at this
+		GLCall(glBindTextureUnit(0, TEX_ChessBoard));
+		GLCall(glBindTextureUnit(1, TEX_P));
+		GLCall(glBindTextureUnit(2, TEX_B));
+		GLCall(glBindTextureUnit(3, TEX_N));
+		GLCall(glBindTextureUnit(4, TEX_R));
+		GLCall(glBindTextureUnit(5, TEX_Q));
+		GLCall(glBindTextureUnit(6, TEX_K));
+		GLCall(glBindTextureUnit(7, TEX_p));
+		GLCall(glBindTextureUnit(8, TEX_b));
+		GLCall(glBindTextureUnit(9, TEX_n));
+		GLCall(glBindTextureUnit(10, TEX_r));
+		GLCall(glBindTextureUnit(11, TEX_q));
+		GLCall(glBindTextureUnit(12, TEX_k));
+		GLCall(glBindTextureUnit(13, TEX_Empty));
+
 		m_VertexBuffer->SetDynamicVB(&position, sizeof(position));
 
 		Renderer renderer;
 		
-		renderChessPieces.BindEveryTexture();//this is so slow because of stbi_load_images, it's probably because i create a tex every render, i should stop using unique_ptr
-		//but uhhh, i have an idea on how to do that, but it will take time, so i will do in later in the project when i have some good experience
 		//TODO: Actually, i have no idea how to fix the artifacts
 
 		renderChessPieces.WasLeftButtonPressed();

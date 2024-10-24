@@ -118,38 +118,6 @@ std::array<VertexStructure, 264> RenderChessPieces::MemcopyObjects(std::array<st
 	return positions;
 }
 
-void RenderChessPieces::BindEveryTexture()
-{
-	m_TextureChessBoard = std::make_unique<Texture>("res/textures/Chessboard.png");
-	m_TextureP = std::make_unique<Texture>("res/textures/bp.png");
-	m_TextureB = std::make_unique<Texture>("res/textures/bb.png");
-	m_TextureN = std::make_unique<Texture>("res/textures/bn.png");
-	m_TextureR = std::make_unique<Texture>("res/textures/br.png");
-	m_TextureQ = std::make_unique<Texture>("res/textures/bq.png");
-	m_TextureK = std::make_unique<Texture>("res/textures/bk.png");
-	m_Texturep = std::make_unique<Texture>("res/textures/wp.png");
-	m_Textureb = std::make_unique<Texture>("res/textures/wb.png");
-	m_Texturen = std::make_unique<Texture>("res/textures/wn.png");
-	m_Texturer = std::make_unique<Texture>("res/textures/wr.png");
-	m_Textureq = std::make_unique<Texture>("res/textures/wq.png");
-	m_Texturek = std::make_unique<Texture>("res/textures/wk.png");
-	m_TextureEmpty = std::make_unique<Texture>("res/textures/Empty.png");
-	m_TextureChessBoard->Bind(0);
-	m_TextureP->Bind(1);
-	m_TextureB->Bind(2);
-	m_TextureN->Bind(3);
-	m_TextureR->Bind(4);
-	m_TextureQ->Bind(5);
-	m_TextureK->Bind(6);
-	m_Texturep->Bind(7);
-	m_Textureb->Bind(8);
-	m_Texturen->Bind(9);
-	m_Texturer->Bind(10);
-	m_Textureq->Bind(11);
-	m_Texturek->Bind(12);
-	m_TextureEmpty->Bind(13);
-
-}
 
 float RenderChessPieces::GetPieceTextureID(std::array<unsigned int, 64> BoardSquare, unsigned int i)
 {
