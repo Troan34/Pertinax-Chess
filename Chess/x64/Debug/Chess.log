@@ -1,20 +1,5 @@
-﻿  RenderChesspcs.cpp
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(75,115): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=unsigned int
-          ]
-  Main.cpp
-  TestTexture2D.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\memory(3465,56): warning C4244: 'argument': conversion from '_Ty' to 'unsigned int', possible loss of data
-          with
-          [
-              _Ty=unsigned __int64
-          ]
-C:\Users\roanb\source\repos\Chess\Chess\source\tests\TestTexture2D.cpp(29,25): message : see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,nullptr,unsigned __int64,0>(nullptr &&,unsigned __int64 &&)' being compiled
-  Texture.cpp
-  Generating Code...
-glew32s.lib(glew.obj) : warning LNK4099: PDB '' was not found with 'glew32s.lib(glew.obj)' or at ''; linking object as if no debug info
+﻿glew32s.lib(glew.obj) : warning LNK4099: PDB '' was not found with 'glew32s.lib(glew.obj)' or at ''; linking object as if no debug info
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  Chess.vcxproj -> C:\Users\roanb\source\repos\Chess\x64\Debug\Chess.exe
+LegalMoves.obj : error LNK2001: unresolved external symbol "public: static class std::array<class std::array<int,8>,64> GenerateLegalMoves::NumOfSquaresUntilEdge" (?NumOfSquaresUntilEdge@GenerateLegalMoves@@2V?$array@V?$array@H$07@std@@$0EA@@std@@A)
+C:\Users\roanb\source\repos\Chess\x64\Debug\Chess.exe : fatal error LNK1120: 1 unresolved externals

@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\ChessThings\Board.cpp" />
+    <ClCompile Include="source\ChessThings\LegalMoves.cpp" />
     <ClCompile Include="source\ChessThings\RenderChesspcs.cpp" />
     <ClCompile Include="source\CreateQuadDynamic.cpp" />
     <ClCompile Include="source\IndexBuffer.cpp" />
@@ -165,6 +166,7 @@
     <Image Include="res\textures\bq.png" />
     <Image Include="res\textures\br.png" />
     <Image Include="res\textures\Chessboard.png" />
+    <Image Include="res\textures\Red.png" />
     <Image Include="res\textures\wb.png" />
     <Image Include="res\textures\wk.png" />
     <Image Include="res\textures\wn.png" />
@@ -174,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\ChessThings\Board.h" />
+    <ClInclude Include="source\ChessThings\LegalMoves.h" />
     <ClInclude Include="source\ChessThings\RenderChesspcs.h" />
     <ClInclude Include="source\CreateQuadDynamic.h" />
     <ClInclude Include="source\IndexBuffer.h" />
