@@ -10,6 +10,8 @@
 #include "ChessThings/Board.h"
 #include "ChessThings/RenderChesspcs.h"
 #include <string>
+#include "ChessThings/LegalMoves.h"
+
 namespace test {
 
 	class TestTexture2D : public Test

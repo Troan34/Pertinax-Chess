@@ -94,6 +94,8 @@ std::array<std::array<VertexStructure, 4Ui64>, 66> RenderChessPieces::CreateObje
 	
 	return quads;
 }
+
+//could output a vector, but this is chess, not a game engine
 std::array<VertexStructure, 264> RenderChessPieces::MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,66> quads)
 {
 

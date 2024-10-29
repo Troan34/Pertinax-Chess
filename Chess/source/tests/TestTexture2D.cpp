@@ -73,8 +73,6 @@ namespace test {
 
 	void TestTexture2D::OnRender(GLFWwindow* window)
 	{
-
-
 		Board board;
 		RenderChessPieces renderChessPieces;
 		renderChessPieces.GetMouseInput(window);

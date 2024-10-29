@@ -10,4 +10,5 @@ private:
 public:
 	Board();
 	std::array<unsigned int, 64> GetPositionFromFEN(std::string FenString);
+	static bool IsPieceColorWhite(unsigned int BoardSquareValue);
 };

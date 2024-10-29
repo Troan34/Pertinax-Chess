@@ -51,3 +51,21 @@ std::array<unsigned int, 64> Board::GetPositionFromFEN(std::string FenString)
 	}
 	return BoardSquare;
 }
+
+bool Board::IsPieceColorWhite(unsigned int BoardSquareValue)
+{
+	if (BoardSquareValue >= 17)
+		return true;
+	try
+	{
+		if (BoardSquareValue == 0)
+		{
+			throw std::runtime_error("Value == 0(not a color) Error");
+		}
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "Caught exception: " << e.what() << '\n';
+	}
+	return false;
+}
