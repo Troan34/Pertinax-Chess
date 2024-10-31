@@ -23,5 +23,5 @@ private:
 public:
 	GenerateLegalMoves(std::array<unsigned int, 64> BoardSquare);
 	void GenerateMoves(bool isNextMoveForWhite);
-	void SliderMoveGen(unsigned int PieceType, unsigned int BoardSquarePos, bool isNextMoveForWhite);
+	void SliderMoveGen(unsigned int PieceType, int BoardSquarePos, bool isNextMoveForWhite);
 };

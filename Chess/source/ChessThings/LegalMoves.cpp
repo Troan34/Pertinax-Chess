@@ -32,20 +32,57 @@ void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
 }
 
 //slider means Rook, Bishop, Queen
-void GenerateLegalMoves::SliderMoveGen(unsigned int PieceType, unsigned int BoardSquarePos, bool isNextMoveForWhite)
+void GenerateLegalMoves::SliderMoveGen(unsigned int PieceType, int BoardSquarePos, bool isNextMoveForWhite)
 {
 	for (unsigned int direction = 0; direction < 8; direction++)
 	{
-		for (unsigned int i = 0; i < NumOfSquaresUntilEdge[BoardSquarePos][direction]; i++)
+		for (int i = 0; i < NumOfSquaresUntilEdge[BoardSquarePos][direction]; i++)
 		{
+			unsigned int PieceType = m_BoardSquare[BoardSquarePos];
 			//rook
-			if (m_BoardSquare[BoardSquarePos] == 10 or m_BoardSquare[BoardSquarePos] == 4)
+			if ((PieceType == 20 or PieceType == 12) and direction <= 3)
 			{
-				if (direction > 3)
-					continue;
-
+				if(Board::IsPieceColorWhite(PieceType == Board::IsPieceColorWhite(PieceType + (OffsetForDirections[direction]* i))))
+					break;
+				if (Board::IsPieceColorWhite(PieceType != Board::IsPieceColorWhite(PieceType + (OffsetForDirections[direction] * i))))
+				{
+					moves[BoardSquarePos + (OffsetForDirections[direction] * i)].PieceType = PieceType;
+					moves[BoardSquarePos + (OffsetForDirections[direction] * i)].TargetSquares.push_back(PieceType + (OffsetForDirections[direction] * i));
+					break;
+				}
+				moves[BoardSquarePos + (OffsetForDirections[direction] * i)].PieceType = PieceType;
+				moves[BoardSquarePos + (OffsetForDirections[direction] * i)].TargetSquares.push_back(PieceType + (OffsetForDirections[direction] * i));
 			}
 
+			//bishop
+			if ((PieceType == 18 or PieceType == 10) and direction > 3)
+			{
+				if (Board::IsPieceColorWhite(PieceType == Board::IsPieceColorWhite(PieceType + (OffsetForDirections[direction] * i))))
+					break;
+				if (Board::IsPieceColorWhite(PieceType != Board::IsPieceColorWhite(PieceType + (OffsetForDirections[direction] * i))))
+				{
+					moves[BoardSquarePos + (OffsetForDirections[direction] * i)].PieceType = PieceType;
+					moves[BoardSquarePos + (OffsetForDirections[direction] * i)].TargetSquares.push_back(PieceType + (OffsetForDirections[direction] * i));
+					break;
+				}
+				moves[BoardSquarePos + (OffsetForDirections[direction] * i)].PieceType = PieceType;
+				moves[BoardSquarePos + (OffsetForDirections[direction] * i)].TargetSquares.push_back(PieceType + (OffsetForDirections[direction] * i));
+			}
+			//queen
+			if ((PieceType == 21 or PieceType == 13))
+			{
+				if (Board::IsPieceColorWhite(PieceType == Board::IsPieceColorWhite(PieceType + (OffsetForDirections[direction] * i))))
+					break;
+				if (Board::IsPieceColorWhite(PieceType != Board::IsPieceColorWhite(PieceType + (OffsetForDirections[direction] * i))))
+				{
+					moves[BoardSquarePos + (OffsetForDirections[direction] * i)].PieceType = PieceType;
+					moves[BoardSquarePos + (OffsetForDirections[direction] * i)].TargetSquares.push_back(PieceType + (OffsetForDirections[direction] * i));
+					break;
+				}
+				moves[BoardSquarePos + (OffsetForDirections[direction] * i)].PieceType = PieceType;
+				moves[BoardSquarePos + (OffsetForDirections[direction] * i)].TargetSquares.push_back(PieceType + (OffsetForDirections[direction] * i));
+			}
+			
 		}
 	}
 }

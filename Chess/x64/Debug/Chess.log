@@ -1,11 +1,2 @@
-﻿  LegalMoves.cpp
-  Main.cpp
-  TestTexture2D.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\memory(3465,56): warning C4244: 'argument': conversion from '_Ty' to 'unsigned int', possible loss of data
-          with
-          [
-              _Ty=unsigned __int64
-          ]
-C:\Users\roanb\source\repos\Chess\Chess\source\tests\TestTexture2D.cpp(29,25): message : see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,nullptr,unsigned __int64,0>(nullptr &&,unsigned __int64 &&)' being compiled
-  Generating Code...
+﻿  Board.cpp
   Chess.vcxproj -> C:\Users\roanb\source\repos\Chess\x64\Debug\Chess.exe

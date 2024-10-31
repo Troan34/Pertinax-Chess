@@ -81,18 +81,18 @@ namespace test {
 		
 		//just dont look at this
 		GLCall(glBindTextureUnit(0, TEX_ChessBoard));
-		GLCall(glBindTextureUnit(1, TEX_P));
-		GLCall(glBindTextureUnit(2, TEX_B));
-		GLCall(glBindTextureUnit(3, TEX_N));
-		GLCall(glBindTextureUnit(4, TEX_R));
-		GLCall(glBindTextureUnit(5, TEX_Q));
-		GLCall(glBindTextureUnit(6, TEX_K));
-		GLCall(glBindTextureUnit(7, TEX_p));
-		GLCall(glBindTextureUnit(8, TEX_b));
-		GLCall(glBindTextureUnit(9, TEX_n));
-		GLCall(glBindTextureUnit(10, TEX_r));
-		GLCall(glBindTextureUnit(11, TEX_q));
-		GLCall(glBindTextureUnit(12, TEX_k));
+		GLCall(glBindTextureUnit(7, TEX_P));
+		GLCall(glBindTextureUnit(8, TEX_B));
+		GLCall(glBindTextureUnit(9, TEX_N));
+		GLCall(glBindTextureUnit(10, TEX_R));
+		GLCall(glBindTextureUnit(11, TEX_Q));
+		GLCall(glBindTextureUnit(12, TEX_K));
+		GLCall(glBindTextureUnit(1, TEX_p));
+		GLCall(glBindTextureUnit(2, TEX_b));
+		GLCall(glBindTextureUnit(3, TEX_n));
+		GLCall(glBindTextureUnit(4, TEX_r));
+		GLCall(glBindTextureUnit(5, TEX_q));
+		GLCall(glBindTextureUnit(6, TEX_k));
 		GLCall(glBindTextureUnit(13, TEX_Empty));
 
 		m_VertexBuffer->SetDynamicVB(&position, sizeof(position));
