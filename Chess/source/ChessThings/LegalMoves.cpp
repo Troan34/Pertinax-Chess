@@ -1,4 +1,33 @@
 #include "LegalMoves.h"
+static std::array<unsigned int, 64> m_previousBoardSquare;
+GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare)
+	:moves(), m_BoardSquare(BoardSquare)
+{
+	for (int file = 0; file < 8; file++)
+	{
+		for (int rank = 0; rank < 8; rank++)
+		{
+			int numNorth = 7 - rank;
+			int numSouth = rank;
+			int numWest = file;
+			int numEast = 7 - file;
+
+			unsigned int squareIndex = rank * 8 + file;
+
+			NumOfSquaresUntilEdge[squareIndex][0] = numNorth;
+			NumOfSquaresUntilEdge[squareIndex][1] = numSouth;
+			NumOfSquaresUntilEdge[squareIndex][2] = numWest;
+			NumOfSquaresUntilEdge[squareIndex][3] = numEast;
+			NumOfSquaresUntilEdge[squareIndex][4] = std::min(numNorth, numWest);
+			NumOfSquaresUntilEdge[squareIndex][5] = std::min(numSouth, numEast);
+			NumOfSquaresUntilEdge[squareIndex][6] = std::min(numNorth, numEast);
+			NumOfSquaresUntilEdge[squareIndex][7] = std::min(numSouth, numWest);
+
+		}
+	}
+	m_previousBoardSquare = previousBoardSquare;
+}
+
 GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64> BoardSquare)
 	:moves(), m_BoardSquare(BoardSquare)
 {
@@ -123,7 +152,7 @@ void GenerateLegalMoves::KnightMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 			if (((int)m_BoardSquare[BoardSquarePos] + i) == 0 or (Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos]) != Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos] + i)))
 			{
 				moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos] + i;
-				moves[BoardSquarePos].TargetSquares.push_back(m_BoardSquare[BoardSquarePos] + i);
+				moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + i);
 			}
 		}
 	}
@@ -135,78 +164,69 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 	unsigned int PieceType = m_BoardSquare[BoardSquarePos];
 	if (PieceType == 17)//white pawn
 	{
-		if (m_BoardSquare[BoardSquarePos + 9] != 0)
+		for (int Offset : OffsetForWhitePawn)
 		{
-			if (Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos + 9]) != Board::IsPieceColorWhite(PieceType))
+			unsigned int BoardPosPlusOffset = BoardSquarePos + Offset;
+			unsigned int PieceTypeAtOffset = m_BoardSquare[BoardPosPlusOffset];
+			
+			if (NumOfSquaresUntilEdge[BoardSquarePos][Offset] != 0)
 			{
-				moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos + 9];
-				moves[BoardSquarePos].TargetSquares.push_back(m_BoardSquare[BoardSquarePos + 9]);
+				if (PieceTypeAtOffset != 0 and !Board::IsPieceColorWhite(PieceTypeAtOffset))
+				{
+					moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
+				}
+				if (Offset == 8 and PieceTypeAtOffset == 0)
+				{
+					if (m_BoardSquare[BoardSquarePos + 16] == 0 and BoardSquarePos <= 16 and BoardSquarePos >= 9)
+					{
+						moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos + 16];
+						moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + 16);
+					}
+					moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
+				}
+				//en passant
+				if (BoardSquarePos <= 40 and BoardSquarePos >= 33 and Offset != 8 and PieceTypeAtOffset == 0 and (m_previousBoardSquare[BoardSquarePos + (Offset*2)]) == 9 and (m_BoardSquare[BoardSquarePos + Offset - 8]) == 9)
+				{
+					moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
+				}
 			}
 		}
-		if (m_BoardSquare[BoardSquarePos + 7] != 0)
-		{
-			if (Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos + 7]) != Board::IsPieceColorWhite(PieceType))
-			{
-				moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos + 7];
-				moves[BoardSquarePos].TargetSquares.push_back(m_BoardSquare[BoardSquarePos + 7]);
-			}
-		}
-		if (m_BoardSquare[BoardSquarePos + 8] == 0)
-		{
-			moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos + 8];
-			moves[BoardSquarePos].TargetSquares.push_back(m_BoardSquare[BoardSquarePos + 8]);
-		}
-		if ((BoardSquarePos >= 9 and BoardSquarePos <= 16) and m_BoardSquare[BoardSquarePos + 16] == 0)
-		{
-			moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos + 16];
-			moves[BoardSquarePos].TargetSquares.push_back(m_BoardSquare[BoardSquarePos + 16]);
-		}
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
 	}
 	if (PieceType == 9)//black pawn
 	{
-		if (m_BoardSquare[BoardSquarePos - 9] != 0)
+		for (int Offset : OffsetForBlackPawn)
 		{
-			if (Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos - 9]) != Board::IsPieceColorWhite(PieceType))
+			unsigned int BoardPosPlusOffset = BoardSquarePos + Offset;
+			unsigned int PieceTypeAtOffset = m_BoardSquare[BoardPosPlusOffset];
+
+			if (NumOfSquaresUntilEdge[BoardSquarePos][Offset] != 0)
 			{
-				moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos + 9];
-				moves[BoardSquarePos].TargetSquares.push_back(m_BoardSquare[BoardSquarePos + 9]);
+				if (PieceTypeAtOffset != 0 and !Board::IsPieceColorWhite(PieceTypeAtOffset))
+				{
+					moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
+				}
+				if (Offset == -8 and PieceTypeAtOffset == 0)
+				{
+					if (m_BoardSquare[BoardSquarePos - 16] == 0 and BoardSquarePos <= 56 and BoardSquarePos >= 49)
+					{
+						moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos - 16];
+						moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos - 16);
+					}
+					moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
+				}
+				//en passant
+				if (BoardSquarePos <= 32 and BoardSquarePos >= 25 and Offset != -8 and PieceTypeAtOffset == 0 and (m_previousBoardSquare[BoardSquarePos + (Offset * 2)]) == 9 and (m_BoardSquare[BoardSquarePos + Offset + 8]) == 17)
+				{
+					moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
+				}
 			}
 		}
-		if (m_BoardSquare[BoardSquarePos - 7] != 0)
-		{
-			if (Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos - 7]) != Board::IsPieceColorWhite(PieceType))
-			{
-				moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos - 7];
-				moves[BoardSquarePos].TargetSquares.push_back(m_BoardSquare[BoardSquarePos - 7]);
-			}
-		}
-		if (m_BoardSquare[BoardSquarePos - 8] == 0)
-		{
-			moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos - 8];
-			moves[BoardSquarePos].TargetSquares.push_back(m_BoardSquare[BoardSquarePos - 8]);
-		}
-		if ((BoardSquarePos >= 49 and BoardSquarePos <= 56) and m_BoardSquare[BoardSquarePos - 16] == 0)
-		{
-			moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos - 16];
-			moves[BoardSquarePos].TargetSquares.push_back(m_BoardSquare[BoardSquarePos - 16]);
-		}
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
-		//TODO: en passant 3.7.3.1 on the FIDE rulebook
 	}
 }
 

@@ -19,9 +19,12 @@ private:
 	std::array<std::array<unsigned int, 8>, 64>NumOfSquaresUntilEdge;
 	std::array<MOVE, 64> moves;
 	std::array<unsigned int, 64> m_BoardSquare;
-	const int OffsetForKnight[8] = {17, 10, -6, 10, -17, 6, 15};//these aren't in a specific order(for my future-self debugging)
 
+	const int OffsetForKnight[8] = {17, 10, -6, 10, -17, 6, 15};//these aren't in a specific order(for my future-self debugging)
+	const int OffsetForWhitePawn[3] = {7, 8, 9};
+	const int OffsetForBlackPawn[3] = {-7, -8, -9};
 public:
+	GenerateLegalMoves(std::array<unsigned int, 64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare);
 	GenerateLegalMoves(std::array<unsigned int, 64> BoardSquare);
 	void GenerateMoves(bool isNextMoveForWhite);
 	void SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhite);
