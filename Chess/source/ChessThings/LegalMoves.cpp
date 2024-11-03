@@ -1,7 +1,7 @@
 #include "LegalMoves.h"
 static std::array<unsigned int, 64> m_previousBoardSquare;
-GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare)
-	:moves(), m_BoardSquare(BoardSquare)
+GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle)
+	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle)
 {
 	for (int file = 0; file < 8; file++)
 	{
@@ -28,8 +28,8 @@ GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64> BoardSquare,
 	m_previousBoardSquare = previousBoardSquare;
 }
 
-GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64> BoardSquare)
-	:moves(), m_BoardSquare(BoardSquare)
+GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64> BoardSquare, canCastle CanCastle)
+	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle)
 {
 	for (int file = 0; file < 8; file++)
 	{
@@ -73,15 +73,15 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 			{
 				if (m_BoardSquare[PieceType + (OffsetForDirections[direction] * i)] == 0)
 				{
-					moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
+					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
 					moves[BoardSquarePos].TargetSquares.push_back(PieceType + (OffsetForDirections[direction] * i));
 					continue;
 				}
 				if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceType + (OffsetForDirections[direction] * i)))
 				{
-					moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
+					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
 					moves[BoardSquarePos].TargetSquares.push_back(PieceType + (OffsetForDirections[direction] * i));
-					moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * (i + 1));
+					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * (i + 1));
 					moves[BoardSquarePos].TargetSquares.push_back(PieceType + (OffsetForDirections[direction] * (i + 1)));
 					break;
 				}
@@ -96,15 +96,15 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 			{
 				if (m_BoardSquare[PieceType + (OffsetForDirections[direction] * i)] == 0)
 				{
-					moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
+					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
 					moves[BoardSquarePos].TargetSquares.push_back(PieceType + (OffsetForDirections[direction] * i));
 					continue;
 				}
 				if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceType + (OffsetForDirections[direction] * i)))
 				{
-					moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
+					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
 					moves[BoardSquarePos].TargetSquares.push_back(PieceType + (OffsetForDirections[direction] * i));
-					moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * (i + 1));
+					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * (i + 1));
 					moves[BoardSquarePos].TargetSquares.push_back(PieceType + (OffsetForDirections[direction] * (i + 1)));
 					break;
 				}
@@ -120,14 +120,14 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 				if (m_BoardSquare[PieceType + (OffsetForDirections[direction] * i)] == 0)
 				{
 					moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
-					moves[BoardSquarePos].TargetSquares.push_back(PieceType + (OffsetForDirections[direction] * i));
+					//moves[BoardSquarePos].TargetSquares.push_back(PieceType + (OffsetForDirections[direction] * i));
 					continue;
 				}
 				if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceType + (OffsetForDirections[direction] * i)))
 				{
-					moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
+					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
 					moves[BoardSquarePos].TargetSquares.push_back(PieceType + (OffsetForDirections[direction] * i));
-					moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * (i + 1));
+					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * (i + 1));
 					moves[BoardSquarePos].TargetSquares.push_back(PieceType + (OffsetForDirections[direction] * (i + 1)));
 					break;
 				}
@@ -136,7 +136,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 					break;
 				}
 			}
-			
+
 		}
 	}
 }
@@ -144,14 +144,14 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 //knight
 void GenerateLegalMoves::KnightMoveGen(int BoardSquarePos, bool isNextMoveForWhite)
 {
-	for(int i : OffsetForKnight)
+	for (int i : OffsetForKnight)
 	{
 		if ((int)m_BoardSquare[BoardSquarePos] + i >= 0 and (int)m_BoardSquare[BoardSquarePos] + i <= 64)
 		{
 			//i know that if only the first condition is met then c++ won't check the other one, if it does i'm blaming c++ and i WILL be calling it stupid
 			if (((int)m_BoardSquare[BoardSquarePos] + i) == 0 or (Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos]) != Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos] + i)))
 			{
-				moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos] + i;
+				//moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos] + i;
 				moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + i);
 			}
 		}
@@ -168,28 +168,28 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 		{
 			unsigned int BoardPosPlusOffset = BoardSquarePos + Offset;
 			unsigned int PieceTypeAtOffset = m_BoardSquare[BoardPosPlusOffset];
-			
+
 			if (NumOfSquaresUntilEdge[BoardSquarePos][Offset] != 0)
 			{
 				if (PieceTypeAtOffset != 0 and !Board::IsPieceColorWhite(PieceTypeAtOffset))
 				{
-					moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					//moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
 				}
 				if (Offset == 8 and PieceTypeAtOffset == 0)
 				{
 					if (m_BoardSquare[BoardSquarePos + 16] == 0 and BoardSquarePos <= 16 and BoardSquarePos >= 9)
 					{
-						moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos + 16];
+						//moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos + 16];
 						moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + 16);
 					}
-					moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					//moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
 				}
 				//en passant
-				if (BoardSquarePos <= 40 and BoardSquarePos >= 33 and Offset != 8 and PieceTypeAtOffset == 0 and (m_previousBoardSquare[BoardSquarePos + (Offset*2)]) == 9 and (m_BoardSquare[BoardSquarePos + Offset - 8]) == 9)
+				if (BoardSquarePos <= 40 and BoardSquarePos >= 33 and Offset != 8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + (Offset * 2)]) == 9 and (m_BoardSquare[BoardSquarePos + Offset - 8]) == 9)
 				{
-					moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					//moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
 				}
 			}
@@ -206,23 +206,23 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 			{
 				if (PieceTypeAtOffset != 0 and !Board::IsPieceColorWhite(PieceTypeAtOffset))
 				{
-					moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					//moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
 				}
 				if (Offset == -8 and PieceTypeAtOffset == 0)
 				{
 					if (m_BoardSquare[BoardSquarePos - 16] == 0 and BoardSquarePos <= 56 and BoardSquarePos >= 49)
 					{
-						moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos - 16];
+						//moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos - 16];
 						moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos - 16);
 					}
-					moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					//moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
 				}
 				//en passant
-				if (BoardSquarePos <= 32 and BoardSquarePos >= 25 and Offset != -8 and PieceTypeAtOffset == 0 and (m_previousBoardSquare[BoardSquarePos + (Offset * 2)]) == 9 and (m_BoardSquare[BoardSquarePos + Offset + 8]) == 17)
+				if (BoardSquarePos <= 32 and BoardSquarePos >= 25 and Offset != -8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + (Offset * 2)]) == 9 and (m_BoardSquare[BoardSquarePos + Offset + 8]) == 17)
 				{
-					moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					//moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
 				}
 			}
@@ -230,3 +230,30 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 	}
 }
 
+//king
+void GenerateLegalMoves::KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite)
+{
+	for (int Direction : OffsetForDirections)
+	{
+		if (NumOfSquaresUntilEdge[BoardSquarePos][Direction] != 0 and m_BoardSquare[BoardSquarePos + Direction] == 0 or Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos + Direction]) != Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos]))
+		{
+			moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + Direction);
+		}
+	}
+	//TODO(more like remember): this thing relies HEAVILY on RenderChesspcs and i NEED to make the function there,
+														//i could do the function here but i would have to bring over a lot of variables
+	if (m_BoardSquare[BoardSquarePos] == 22 and !CanCastle.HasWhiteKingMoved)
+	{
+		if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[2, 3, 4] == 0)
+			moves[5].TargetSquares.push_back(3);
+		if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[6, 7] == 0)
+			moves[5].TargetSquares.push_back(7);
+	}
+	if (m_BoardSquare[BoardSquarePos] == 14 and !CanCastle.HasBlackKingMoved)
+	{
+		if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[58, 59, 60] == 0)
+			moves[61].TargetSquares.push_back(59);
+		if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[62, 63] == 0)
+			moves[61].TargetSquares.push_back(63);
+	}
+}
