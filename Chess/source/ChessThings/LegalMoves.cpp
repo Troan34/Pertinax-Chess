@@ -57,7 +57,16 @@ GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64> BoardSquare,
 
 void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
 {
-
+	for (int i : m_BoardSquare)
+	{
+		if (i == 0)
+			continue;
+		if (i == 10 or i == 12 or i == 18 or i == 20 or i == 21 or i == 13)
+		{
+			SliderMoveGen(i, isNextMoveForWhite);
+			continue;
+		}
+	}
 }
 
 //slider means Rook, Bishop, Queen
@@ -69,7 +78,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 		{
 			unsigned int PieceType = m_BoardSquare[BoardSquarePos];
 			//rook
-			if ((PieceType == 20 or PieceType == 12) and direction <= 3)
+			if ((PieceType == 20 and isNextMoveForWhite) or (PieceType == 12 and !isNextMoveForWhite) and direction <= 3)
 			{
 				if (m_BoardSquare[PieceType + (OffsetForDirections[direction] * i)] == 0)
 				{
@@ -92,7 +101,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 			}
 
 			//bishop
-			if ((PieceType == 18 or PieceType == 10) and direction > 3)
+			if ((PieceType == 18 and isNextMoveForWhite) or (PieceType == 10 and !isNextMoveForWhite) and direction > 3)
 			{
 				if (m_BoardSquare[PieceType + (OffsetForDirections[direction] * i)] == 0)
 				{
@@ -115,7 +124,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 			}
 
 			//queen
-			if ((PieceType == 21 or PieceType == 13))
+			if ((PieceType == 21 and isNextMoveForWhite) or (PieceType == 13 and !isNextMoveForWhite))
 			{
 				if (m_BoardSquare[PieceType + (OffsetForDirections[direction] * i)] == 0)
 				{
@@ -144,15 +153,18 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 //knight
 void GenerateLegalMoves::KnightMoveGen(int BoardSquarePos, bool isNextMoveForWhite)
 {
-	for (int i : OffsetForKnight)
+	if ((m_BoardSquare[BoardSquarePos] == 19 and isNextMoveForWhite) or (m_BoardSquare[BoardSquarePos] == 11 and !isNextMoveForWhite))
 	{
-		if ((int)m_BoardSquare[BoardSquarePos] + i >= 0 and (int)m_BoardSquare[BoardSquarePos] + i <= 64)
+		for (int i : OffsetForKnight)
 		{
-			//i know that if only the first condition is met then c++ won't check the other one, if it does i'm blaming c++ and i WILL be calling it stupid
-			if (((int)m_BoardSquare[BoardSquarePos] + i) == 0 or (Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos]) != Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos] + i)))
+			if ((int)m_BoardSquare[BoardSquarePos] + i >= 0 and (int)m_BoardSquare[BoardSquarePos] + i <= 64)
 			{
-				//moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos] + i;
-				moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + i);
+				//i know that if only the first condition is met then c++ won't check the other one, if it does i'm blaming c++ and i WILL be calling it stupid
+				if (((int)m_BoardSquare[BoardSquarePos] + i) == 0 or (Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos]) != Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos] + i)))
+				{
+					//moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos] + i;
+					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + i);
+				}
 			}
 		}
 	}
@@ -162,7 +174,7 @@ void GenerateLegalMoves::KnightMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite)
 {
 	unsigned int PieceType = m_BoardSquare[BoardSquarePos];
-	if (PieceType == 17)//white pawn
+	if (PieceType == 17 and isNextMoveForWhite)//white pawn
 	{
 		for (int Offset : OffsetForWhitePawn)
 		{
@@ -195,7 +207,7 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 			}
 		}
 	}
-	if (PieceType == 9)//black pawn
+	if (PieceType == 9 and !isNextMoveForWhite)//black pawn
 	{
 		for (int Offset : OffsetForBlackPawn)
 		{
@@ -233,27 +245,28 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 //king
 void GenerateLegalMoves::KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite)
 {
-	for (int Direction : OffsetForDirections)
-	{
-		if (NumOfSquaresUntilEdge[BoardSquarePos][Direction] != 0 and m_BoardSquare[BoardSquarePos + Direction] == 0 or Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos + Direction]) != Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos]))
+	if ((m_BoardSquare[BoardSquarePos] == 21 and isNextMoveForWhite) or (m_BoardSquare[BoardSquarePos] == 13 and !isNextMoveForWhite))
+		for (int Direction : OffsetForDirections)
 		{
-			moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + Direction);
+			if (NumOfSquaresUntilEdge[BoardSquarePos][Direction] != 0 and m_BoardSquare[BoardSquarePos + Direction] == 0 or Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos + Direction]) != Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos]))
+			{
+				moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + Direction);
+			}
 		}
-	}
-	//TODO(more like remember): this thing relies HEAVILY on RenderChesspcs and i NEED to make the function there,
-														//i could do the function here but i would have to bring over a lot of variables
-	if (m_BoardSquare[BoardSquarePos] == 22 and !CanCastle.HasWhiteKingMoved)
-	{
-		if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[2, 3, 4] == 0)
-			moves[5].TargetSquares.push_back(3);
-		if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[6, 7] == 0)
-			moves[5].TargetSquares.push_back(7);
-	}
-	if (m_BoardSquare[BoardSquarePos] == 14 and !CanCastle.HasBlackKingMoved)
-	{
-		if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[58, 59, 60] == 0)
-			moves[61].TargetSquares.push_back(59);
-		if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[62, 63] == 0)
-			moves[61].TargetSquares.push_back(63);
-	}
+		//TODO(more like remember): this thing relies HEAVILY on RenderChesspcs and i NEED to make the function there,
+															//i could do the function here but i would have to bring over a lot of variables
+		if (m_BoardSquare[BoardSquarePos] == 22 and !CanCastle.HasWhiteKingMoved)
+		{
+			if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[2, 3, 4] == 0)
+				moves[5].TargetSquares.push_back(3);
+			if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[6, 7] == 0)
+				moves[5].TargetSquares.push_back(7);
+		}
+		if (m_BoardSquare[BoardSquarePos] == 14 and !CanCastle.HasBlackKingMoved)
+		{
+			if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[58, 59, 60] == 0)
+				moves[61].TargetSquares.push_back(59);
+			if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[62, 63] == 0)
+				moves[61].TargetSquares.push_back(63);
+		}
 }
