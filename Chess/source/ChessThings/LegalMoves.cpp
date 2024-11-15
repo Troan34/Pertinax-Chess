@@ -1,6 +1,6 @@
 #include "LegalMoves.h"
 static std::array<unsigned int, 64> m_previousBoardSquare;
-GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle)
+GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite)
 	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle)
 {
 	for (int file = 0; file < 8; file++)
@@ -25,10 +25,11 @@ GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64> BoardSquare,
 
 		}
 	}
+	GenerateMoves(isNextMoveForWhite);
 	m_previousBoardSquare = previousBoardSquare;
 }
 
-GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64> BoardSquare, canCastle CanCastle)
+GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, canCastle CanCastle, bool isNextMoveForWhite)
 	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle)
 {
 	for (int file = 0; file < 8; file++)
@@ -53,6 +54,7 @@ GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64> BoardSquare,
 
 		}
 	}
+	GenerateMoves(isNextMoveForWhite);
 }
 
 void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
@@ -61,11 +63,22 @@ void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
 	{
 		if (i == 0)
 			continue;
-		if (i == 10 or i == 12 or i == 18 or i == 20 or i == 21 or i == 13)
+		else if (i == 10 or i == 12 or i == 18 or i == 20 or i == 21 or i == 13)
 		{
 			SliderMoveGen(i, isNextMoveForWhite);
 			continue;
 		}
+		else if (i == 17 or i == 9)
+		{
+			PawnMoveGen(i, isNextMoveForWhite);
+			continue;
+		}
+		else if (i == 19 or i == 11)
+		{
+			KnightMoveGen(i, isNextMoveForWhite);
+			continue;
+		}
+		KingMoveGen(i, isNextMoveForWhite);
 	}
 }
 

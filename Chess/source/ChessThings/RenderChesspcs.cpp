@@ -4,6 +4,8 @@ static float RememberTexID;
 static int RememberBoardSquareID;
 static std::array<unsigned int, 64Ui64> static_BoardSquare;
 static bool wasStatic_BoardSquareCreated = false;
+static std::array<unsigned int, 64Ui64> previousBoardsquare;
+static unsigned int MoveNum;
 
 static void cursorPositionCallBack(GLFWwindow* window, double xPosition, double yPosition)
 {
@@ -48,11 +50,23 @@ std::array<std::array<VertexStructure, 4Ui64>, 66> RenderChessPieces::CreateObje
 		}
 		float PieceTexID = GetPieceTextureID(static_BoardSquare, i - 1);
 		bool HasDragAndDropFunHappened = false;
+		bool isNextMoveForWhite = false;
+
+		if(MoveNum == 0 or MoveNum % 2 == 0)
+			bool isNextMoveForWhite = true;
+
+		
+
+		if (yDifference > 0 or xDifference > 0)
+		{
+			GenerateLegalMoves LegalMoves(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite);
+		}
+		GenerateLegalMoves LegalMoves(static_BoardSquare, CanCastle, isNextMoveForWhite);
 
 		//drag and drop
 		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed == false and PieceTexID != 0.0f)
 		{
-			//next two ifs are to check which objects has to be dragged
+			//next two ifs are to check which objects have to be dragged
 			if ((g_mouseInput.xPos - 350.0f) > (-350.0f + xDifference) and (g_mouseInput.xPos - 350.0f) < (-350.0f + xDifference + 87.5f))
 			{
 				if ((-g_mouseInput.yPos + 360.0f) > (-350.0f + yDifference) and (-g_mouseInput.yPos + 360.0f) < (-350.0f + yDifference + 87.5f))
@@ -74,6 +88,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 66> RenderChessPieces::CreateObje
 				{
 					static_BoardSquare[static_cast<std::array<unsigned int, 64Ui64>::size_type>(i) - 1] = GetBoardSquarefromTexID(RememberTexID);
 					PieceTexID = RememberTexID;
+					MoveNum++;
 				}
 			}
 		}
@@ -91,7 +106,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 66> RenderChessPieces::CreateObje
 
 		xDifference += 87.5f;
 	}
-	
+	previousBoardsquare = static_BoardSquare;
 	return quads;
 }
 
@@ -120,6 +135,10 @@ std::array<VertexStructure, 264> RenderChessPieces::MemcopyObjects(std::array<st
 	return positions;
 }
 
+bool RenderChessPieces::CanMoveBeMade(int BoardSquare)
+{
+	
+}
 
 float RenderChessPieces::GetPieceTextureID(std::array<unsigned int, 64> BoardSquare, unsigned int i)
 {

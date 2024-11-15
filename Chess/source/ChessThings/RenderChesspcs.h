@@ -7,6 +7,7 @@
 #include <iostream>
 #include<GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "LegalMoves.h"
 
 struct MouseInput
 {
@@ -24,13 +25,14 @@ class RenderChessPieces
 {
 private:
 	std::array<unsigned int, 64> BoardSquare;
-	
+	canCastle CanCastle;
 
 public:
 	RenderChessPieces();
 	~RenderChessPieces();
 	std::array<std::array<VertexStructure, 4Ui64>,66> CreateObjects();
 	std::array<VertexStructure, 264> MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,66> quads);
+	bool CanMoveBeMade(int BoardSquare);
 	void WasLeftButtonPressed();
 	float GetBoardSquarefromTexID(float TexID);
 	float GetPieceTextureID(std::array<unsigned int, 64> BoardSquare, unsigned int i);
