@@ -25,14 +25,14 @@ class RenderChessPieces
 {
 private:
 	std::array<unsigned int, 64> BoardSquare;
-	canCastle CanCastle;
+	
 
 public:
 	RenderChessPieces();
 	~RenderChessPieces();
-	std::array<std::array<VertexStructure, 4Ui64>,66> CreateObjects();
-	std::array<VertexStructure, 264> MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,66> quads);
-	bool CanMoveBeMade(int BoardSquare);
+	std::array<std::array<VertexStructure, 4Ui64>,130> CreateObjects();
+	std::array<VertexStructure, 520> MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,130> quads);
+	void WillCanCastleChange(unsigned int PieceType, unsigned int BoardSquareNum);
 	void WasLeftButtonPressed();
 	float GetBoardSquarefromTexID(float TexID);
 	float GetPieceTextureID(std::array<unsigned int, 64> BoardSquare, unsigned int i);

@@ -33,7 +33,7 @@ namespace test {
 		glm::vec3 m_TranslationA, m_TranslationB;
 
 
-		GLuint TEX_ChessBoard, TEX_B, TEX_N, TEX_R, TEX_Q, TEX_P, TEX_p, TEX_b, TEX_n, TEX_r, TEX_K, TEX_k, TEX_q, TEX_Empty;
+		GLuint TEX_ChessBoard, TEX_B, TEX_N, TEX_R, TEX_Q, TEX_P, TEX_p, TEX_b, TEX_n, TEX_r, TEX_K, TEX_k, TEX_q, TEX_Empty, TEX_Red;
 		
 	};
 

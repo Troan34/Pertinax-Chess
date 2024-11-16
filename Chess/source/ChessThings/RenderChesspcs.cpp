@@ -5,7 +5,10 @@ static int RememberBoardSquareID;
 static std::array<unsigned int, 64Ui64> static_BoardSquare;
 static bool wasStatic_BoardSquareCreated = false;
 static std::array<unsigned int, 64Ui64> previousBoardsquare;
+static bool wasStatic_previousBoardsquareCreated = false;
 static unsigned int MoveNum;
+static canCastle CanCastle;
+static int BoardSquareBeingSelected = -1;
 
 static void cursorPositionCallBack(GLFWwindow* window, double xPosition, double yPosition)
 {
@@ -35,12 +38,18 @@ RenderChessPieces::~RenderChessPieces()
 
 }
 
-std::array<std::array<VertexStructure, 4Ui64>, 66> RenderChessPieces::CreateObjects()
+std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObjects()
 {
-	std::array<std::array<VertexStructure, 4Ui64>, 66> quads{};
+	std::array<std::array<VertexStructure, 4Ui64>, 130> quads{};
 	quads[0] = CreateQuad(-350.0f, -350.0f, 700.0f, 0.0f);
 	float xDifference = 0.0f;
 	float yDifference = 0.0f;
+	bool isNextMoveForWhite = true;
+	if (MoveNum == 0 or MoveNum % 2 != 0)
+		bool isNextMoveForWhite = false;
+
+	
+
  	for (int i = 1; i < 65; i++)
 	{
 		if (xDifference > 650.0f)
@@ -48,20 +57,13 @@ std::array<std::array<VertexStructure, 4Ui64>, 66> RenderChessPieces::CreateObje
 			xDifference = 0.0f;
 			yDifference += 87.5f;
 		}
+
+		WillCanCastleChange(static_BoardSquare[i - 1], i - 1);
+
 		float PieceTexID = GetPieceTextureID(static_BoardSquare, i - 1);
 		bool HasDragAndDropFunHappened = false;
-		bool isNextMoveForWhite = false;
-
-		if(MoveNum == 0 or MoveNum % 2 == 0)
-			bool isNextMoveForWhite = true;
-
 		
-
-		if (yDifference > 0 or xDifference > 0)
-		{
-			GenerateLegalMoves LegalMoves(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite);
-		}
-		GenerateLegalMoves LegalMoves(static_BoardSquare, CanCastle, isNextMoveForWhite);
+		
 
 		//drag and drop
 		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed == false and PieceTexID != 0.0f)
@@ -73,7 +75,8 @@ std::array<std::array<VertexStructure, 4Ui64>, 66> RenderChessPieces::CreateObje
 				{
 					quads[65] = CreateQuad(g_mouseInput.xPos - 393.5f, -g_mouseInput.yPos + 319.25f, 87.5f, PieceTexID);
 					RememberTexID = PieceTexID;
-					static_BoardSquare[i - 1] = (unsigned int)0;					
+					static_BoardSquare[i - 1] = (unsigned int)0;
+					BoardSquareBeingSelected = i - 1;
 				}
 			}
 		}
@@ -89,6 +92,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 66> RenderChessPieces::CreateObje
 					static_BoardSquare[static_cast<std::array<unsigned int, 64Ui64>::size_type>(i) - 1] = GetBoardSquarefromTexID(RememberTexID);
 					PieceTexID = RememberTexID;
 					MoveNum++;
+					BoardSquareBeingSelected = -1;
 				}
 			}
 		}
@@ -98,24 +102,70 @@ std::array<std::array<VertexStructure, 4Ui64>, 66> RenderChessPieces::CreateObje
 			//func to get the y from yPos is f(x) = -x + 360
 		}
 
-		quads[i] = CreateQuad(-350.0f + xDifference, -350.0f + yDifference, 87.5f, PieceTexID);
 		
 
+		quads[i] = CreateQuad(-350.0f + xDifference, -350.0f + yDifference, 87.5f, PieceTexID);
+		
 		
 		
 
 		xDifference += 87.5f;
 	}
+
+	if (BoardSquareBeingSelected != -1)
+	{
+		float xxDifference = 0.0f;
+		float yyDifference = 0.0f;
+		if (wasStatic_previousBoardsquareCreated)
+		{
+			GenerateLegalMoves LegalMoves(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite);
+			for (int i = 66; i < 130; i++)
+			{
+				if (xxDifference > 650.0f)
+				{
+					xxDifference = 0.0f;
+					yyDifference += 87.5f;
+				}
+				
+				quads[i] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 0);
+				
+			}
+			for (int j : LegalMoves.moves[BoardSquareBeingSelected].TargetSquares)
+			{
+				quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
+			}
+		}
+		else
+		{
+			GenerateLegalMoves LegalMoves(static_BoardSquare, CanCastle, isNextMoveForWhite);
+			for (int i = 66; i < 130; i++)
+			{
+				if (xxDifference > 650.0f)
+				{
+					xxDifference = 0.0f;
+					yyDifference += 87.5f;
+				}
+
+				quads[i] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 0);
+
+			}
+			for (int j : LegalMoves.moves[BoardSquareBeingSelected].TargetSquares)
+			{
+				quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
+			}
+		}
+	}
 	previousBoardsquare = static_BoardSquare;
+	wasStatic_previousBoardsquareCreated = true;
 	return quads;
 }
 
 //could output a vector, but this is chess, not a game engine
-std::array<VertexStructure, 264> RenderChessPieces::MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,66> quads)
+std::array<VertexStructure, 520> RenderChessPieces::MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,130> quads)
 {
 
-	std::array<VertexStructure, 264> positions{};
-	for (int i = 0; i < 66; i++)
+	std::array<VertexStructure, 520> positions{};
+	for (int i = 0; i < 130; i++)
 	{
 		int PositionCount = i * 4;
 		positions[PositionCount].Position = quads[i][0].Position;
@@ -135,9 +185,20 @@ std::array<VertexStructure, 264> RenderChessPieces::MemcopyObjects(std::array<st
 	return positions;
 }
 
-bool RenderChessPieces::CanMoveBeMade(int BoardSquare)
+void RenderChessPieces::WillCanCastleChange(unsigned int PieceType, unsigned int BoardSquareNum)
 {
-	
+	if (BoardSquareNum == 5 and PieceType == 0)
+		CanCastle.HasWhiteKingMoved = true;
+	else if (PieceType == 0 and BoardSquareNum == 61)
+		CanCastle.HasBlackKingMoved = true;
+	else if (PieceType == 0 and BoardSquareNum == 0)
+		CanCastle.HasWhiteLongRookMoved = true;
+	else if (PieceType == 0 and BoardSquareNum == 8)
+		CanCastle.HasWhiteShortRookMoved = true;
+	else if (PieceType == 0 and BoardSquareNum == 64)
+		CanCastle.HasBlackShortRookMoved = true;
+	else if (PieceType == 0 and BoardSquareNum == 57)
+		CanCastle.HasBlackLongRookMoved = true;
 }
 
 float RenderChessPieces::GetPieceTextureID(std::array<unsigned int, 64> BoardSquare, unsigned int i)

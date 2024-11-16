@@ -52,10 +52,10 @@ namespace test {
 		TEX_q = texture.CreateTexture("res/textures/bq.png");
 		TEX_k = texture.CreateTexture("res/textures/bk.png");
 		TEX_Empty = texture.CreateTexture("res/textures/Empty.png");
-
+		TEX_Red = texture.CreateTexture("res/textures/Red.png");
 		//texture sampling part
-		int samplers[14] = { 0, 1, 2, 3, 4, 5 ,6, 7, 8, 9, 10, 11, 12 ,13 };
-		m_Shader->SetUniform1iv("u_Textures", 14, *samplers);
+		int samplers[15] = { 0, 1, 2, 3, 4, 5 ,6, 7, 8, 9, 10, 11, 12 ,13, 14 };
+		m_Shader->SetUniform1iv("u_Textures", 15, *samplers);
 
 		
 
@@ -94,6 +94,7 @@ namespace test {
 		GLCall(glBindTextureUnit(5, TEX_q));
 		GLCall(glBindTextureUnit(6, TEX_k));
 		GLCall(glBindTextureUnit(13, TEX_Empty));
+		GLCall(glBindTextureUnit(14, TEX_Red));
 
 		m_VertexBuffer->SetDynamicVB(&position, sizeof(position));
 

@@ -193,8 +193,9 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 		{
 			unsigned int BoardPosPlusOffset = BoardSquarePos + Offset;
 			unsigned int PieceTypeAtOffset = m_BoardSquare[BoardPosPlusOffset];
+			int directions[3] = { 4,0,6 };
 
-			if (NumOfSquaresUntilEdge[BoardSquarePos][Offset] != 0)
+			if (NumOfSquaresUntilEdge[BoardSquarePos][directions[Offset-7]] != 0)
 			{
 				if (PieceTypeAtOffset != 0 and !Board::IsPieceColorWhite(PieceTypeAtOffset))
 				{
@@ -226,8 +227,9 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 		{
 			unsigned int BoardPosPlusOffset = BoardSquarePos + Offset;
 			unsigned int PieceTypeAtOffset = m_BoardSquare[BoardPosPlusOffset];
+			int directions[3] = { 7,1,5 };
 
-			if (NumOfSquaresUntilEdge[BoardSquarePos][Offset] != 0)
+			if (NumOfSquaresUntilEdge[BoardSquarePos][directions[Offset+9]] != 0)
 			{
 				if (PieceTypeAtOffset != 0 and !Board::IsPieceColorWhite(PieceTypeAtOffset))
 				{

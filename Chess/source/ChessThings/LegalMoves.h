@@ -13,7 +13,7 @@ struct MOVE
 
 struct canCastle
 {
-	bool HasWhiteLongRookMoved, HasWhiteShortRookMoved, HasBlackLongRookMoved, HasBlackShortRookMoved, HasWhiteKingMoved, HasBlackKingMoved;
+	bool HasWhiteLongRookMoved = false, HasWhiteShortRookMoved = false, HasBlackLongRookMoved = false, HasBlackShortRookMoved = false, HasWhiteKingMoved = false, HasBlackKingMoved = false;
 };
 
 class GenerateLegalMoves
@@ -21,7 +21,6 @@ class GenerateLegalMoves
 private:
 	const int OffsetForDirections[8] = {8, -8, -1, 1, 7, -7, 9, -9};
 	std::array<std::array<unsigned int, 8>, 64>NumOfSquaresUntilEdge;
-	std::array<MOVE, 64> moves;
 	std::array<unsigned int, 64> m_BoardSquare;
 	canCastle CanCastle;
 
@@ -29,6 +28,7 @@ private:
 	const int OffsetForWhitePawn[3] = {7, 8, 9};
 	const int OffsetForBlackPawn[3] = {-7, -8, -9};
 public:
+	std::array<MOVE, 64> moves;
 	GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite);
 	GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, canCastle CanCastle, bool isNextMoveForWhite);
 	void GenerateMoves(bool isNextMoveForWhite);
