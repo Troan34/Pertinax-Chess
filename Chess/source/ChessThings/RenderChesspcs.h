@@ -34,7 +34,7 @@ public:
 	std::array<VertexStructure, 520> MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,130> quads);
 	void WillCanCastleChange(unsigned int PieceType, unsigned int BoardSquareNum);
 	void WasLeftButtonPressed();
-	float GetBoardSquarefromTexID(float TexID);
+	float GetPieceTypefromTexID(float TexID);
 	float GetPieceTextureID(std::array<unsigned int, 64> BoardSquare, unsigned int i);
 	void SetStaticBoardSquare(std::array<unsigned int, 64> BoardSquare);
 	void GetMouseInput(GLFWwindow* window);

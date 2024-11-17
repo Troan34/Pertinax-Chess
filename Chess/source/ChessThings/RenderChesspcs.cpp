@@ -1,7 +1,6 @@
 #include "RenderChesspcs.h"
 static MouseInput g_mouseInput;
 static float RememberTexID;
-static int RememberBoardSquareID;
 static std::array<unsigned int, 64Ui64> static_BoardSquare;
 static bool wasStatic_BoardSquareCreated = false;
 static std::array<unsigned int, 64Ui64> previousBoardsquare;
@@ -44,11 +43,8 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 	quads[0] = CreateQuad(-350.0f, -350.0f, 700.0f, 0.0f);
 	float xDifference = 0.0f;
 	float yDifference = 0.0f;
-	bool isNextMoveForWhite = true;
-	if (MoveNum == 0 or MoveNum % 2 != 0)
-		bool isNextMoveForWhite = false;
-
 	
+	previousBoardsquare = static_BoardSquare;
 
  	for (int i = 1; i < 65; i++)
 	{
@@ -89,10 +85,11 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 			{
 				if ((-g_mouseInput.yPos + 360.0f) > (-350.0f + yDifference) and (-g_mouseInput.yPos + 360.0f) < (-350.0f + yDifference + 87.5f))
 				{
-					static_BoardSquare[static_cast<std::array<unsigned int, 64Ui64>::size_type>(i) - 1] = GetBoardSquarefromTexID(RememberTexID);
+					static_BoardSquare[static_cast<std::array<unsigned int, 64Ui64>::size_type>(i) - 1] = GetPieceTypefromTexID(RememberTexID);
 					PieceTexID = RememberTexID;
 					MoveNum++;
 					BoardSquareBeingSelected = -1;
+					wasStatic_previousBoardsquareCreated = true;
 				}
 			}
 		}
@@ -112,10 +109,15 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		xDifference += 87.5f;
 	}
 
+	bool isNextMoveForWhite = true;
+	if (MoveNum % 2 != 0)
+		bool isNextMoveForWhite = false;
+
 	if (BoardSquareBeingSelected != -1)
 	{
 		float xxDifference = 0.0f;
 		float yyDifference = 0.0f;
+		static_BoardSquare[BoardSquareBeingSelected] = GetPieceTypefromTexID(RememberTexID);
 		if (wasStatic_previousBoardsquareCreated)
 		{
 			GenerateLegalMoves LegalMoves(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite);
@@ -154,9 +156,9 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 				quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
 			}
 		}
+		static_BoardSquare[BoardSquareBeingSelected] = 0;
 	}
-	previousBoardsquare = static_BoardSquare;
-	wasStatic_previousBoardsquareCreated = true;
+	
 	return quads;
 }
 
@@ -238,7 +240,7 @@ float RenderChessPieces::GetPieceTextureID(std::array<unsigned int, 64> BoardSqu
 	}
 }
 
-float RenderChessPieces::GetBoardSquarefromTexID(float TexID)
+float RenderChessPieces::GetPieceTypefromTexID(float TexID)
 {
 	if (TexID == 13.0f)
 	{
