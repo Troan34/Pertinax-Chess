@@ -23,8 +23,8 @@ private:
 	std::array<std::array<unsigned int, 8>, 64>NumOfSquaresUntilEdge;
 	std::array<unsigned int, 64> m_BoardSquare;
 	canCastle CanCastle;
+	std::vector<int> OffsetsForKnight;
 
-	const int OffsetForKnight[8] = {17, 10, -6, 10, -17, 6, 15};//these aren't in a specific order(for my future-self debugging)
 	const int OffsetForWhitePawn[3] = {7, 8, 9};
 	const int OffsetForBlackPawn[3] = {-7, -8, -9};
 public:
@@ -34,6 +34,7 @@ public:
 	void GenerateMoves(bool isNextMoveForWhite);
 	void SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhite);
 	void KnightMoveGen(int BoardSquarePos, bool isNextMoveForWhite);
+	void CreateOffesetsForKnight(int BoardSquarePos);
 	void PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite);
 	void KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite);
 };

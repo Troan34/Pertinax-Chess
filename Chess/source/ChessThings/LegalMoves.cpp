@@ -63,27 +63,34 @@ void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
 	for (int i : m_BoardSquare)
 	{
 		if (i == 0)
+		{
+			BoardSquarePos++;
 			continue;
+		}
 		else if (i == 10 or i == 12 or i == 18 or i == 20 or i == 21 or i == 13)
 		{
 			SliderMoveGen(BoardSquarePos, isNextMoveForWhite);
+			BoardSquarePos++;
 			continue;
 		}
 		else if (i == 17 or i == 9)
 		{
 			PawnMoveGen(BoardSquarePos, isNextMoveForWhite);
+			BoardSquarePos++;
 			continue;
 		}
 		else if (i == 19 or i == 11)
 		{
 			KnightMoveGen(BoardSquarePos, isNextMoveForWhite);
+			BoardSquarePos++;
 			continue;
 		}
 		else if (i == 22 or i == 14)
 		{
 			KingMoveGen(BoardSquarePos, isNextMoveForWhite);
+			BoardSquarePos++;
 		}
-		BoardSquarePos++;
+		
 	}
 }
 
@@ -175,15 +182,59 @@ void GenerateLegalMoves::KnightMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 {
 	if ((m_BoardSquare[BoardSquarePos] == 19 and isNextMoveForWhite) or (m_BoardSquare[BoardSquarePos] == 11 and !isNextMoveForWhite))
 	{
-		for (int i : OffsetForKnight)
+		CreateOffesetsForKnight(BoardSquarePos);
+		for (int i : OffsetsForKnight)
 		{
-			if ((int)m_BoardSquare[BoardSquarePos] + i >= 0 and (int)m_BoardSquare[BoardSquarePos] + i <= 64)
+			//i know that if only the first condition is met then c++ won't check the other one, if it does i'm blaming c++ and i WILL be calling it stupid
+			if (((int)m_BoardSquare[i]) == 0 or (Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos]) != Board::IsPieceColorWhite(m_BoardSquare[i])))
 			{
-				//i know that if only the first condition is met then c++ won't check the other one, if it does i'm blaming c++ and i WILL be calling it stupid
-				if (((int)m_BoardSquare[BoardSquarePos] + i) == 0 or (Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos]) != Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos] + i)))
+				//moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos] + i;
+				moves[BoardSquarePos].TargetSquares.push_back(i);
+			}
+			
+		}
+		OffsetsForKnight.resize(0);
+	}
+}
+
+void GenerateLegalMoves::CreateOffesetsForKnight(int BoardSquarePos)
+{
+	for (int i = 0; i <= 4; i++)
+	{
+		if (NumOfSquaresUntilEdge[BoardSquarePos][i] >= 1)
+		{
+			if (i == 0 and BoardSquarePos <= 47)
+			{
+				if (NumOfSquaresUntilEdge[BoardSquarePos + 16][2] >= 1)
+					OffsetsForKnight.push_back(BoardSquarePos + 15);
+				if (NumOfSquaresUntilEdge[BoardSquarePos + 16][3] >= 1)
+					OffsetsForKnight.push_back(BoardSquarePos + 17);
+			}
+			else if (i == 1 and BoardSquarePos >= 16)
+			{
+				if (NumOfSquaresUntilEdge[BoardSquarePos - 16][2] >= 1)
+					OffsetsForKnight.push_back(BoardSquarePos - 15);
+				if (NumOfSquaresUntilEdge[BoardSquarePos - 16][3] >= 1)
+					OffsetsForKnight.push_back(BoardSquarePos - 17);
+			}
+			if (NumOfSquaresUntilEdge[BoardSquarePos][2] >= 2)
+			{
+				if (i == 2 and BoardSquarePos >= 2)
 				{
-					//moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos] + i;
-					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + i);
+					if (NumOfSquaresUntilEdge[BoardSquarePos - 2][0] >= 1)
+						OffsetsForKnight.push_back(BoardSquarePos + 6);
+					if (NumOfSquaresUntilEdge[BoardSquarePos - 2][1] >= 1)
+						OffsetsForKnight.push_back(BoardSquarePos - 10);
+				}
+			}
+			if (NumOfSquaresUntilEdge[BoardSquarePos][3] >= 2)
+			{
+				if (i == 3 and BoardSquarePos <= 61)
+				{
+					if (NumOfSquaresUntilEdge[BoardSquarePos + 2][0] >= 1)
+						OffsetsForKnight.push_back(BoardSquarePos + 10);
+					if (NumOfSquaresUntilEdge[BoardSquarePos + 2][1] >= 1)
+						OffsetsForKnight.push_back(BoardSquarePos - 6);
 				}
 			}
 		}
