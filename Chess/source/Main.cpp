@@ -43,7 +43,6 @@ int main(void)
     }
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
-    glfwSwapInterval(1);
 
     if (glewInit() != GLEW_OK) {
         std::cout << "Err" << '\n';

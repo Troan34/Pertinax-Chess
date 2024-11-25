@@ -109,15 +109,17 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		xDifference += 87.5f;
 	}
 
-	bool isNextMoveForWhite = true;
-	if (MoveNum % 2 != 0)
-		bool isNextMoveForWhite = false;
-
+	
 	if (BoardSquareBeingSelected != -1)
 	{
 		float xxDifference = 0.0f;
 		float yyDifference = 0.0f;
 		static_BoardSquare[BoardSquareBeingSelected] = GetPieceTypefromTexID(RememberTexID);
+
+		bool isNextMoveForWhite = true;
+		if (MoveNum % 2 != 0)
+			isNextMoveForWhite = false;
+
 		if (wasStatic_previousBoardsquareCreated)
 		{
 			GenerateLegalMoves LegalMoves(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite);
@@ -154,11 +156,11 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 			for (int j : LegalMoves.moves[BoardSquareBeingSelected].TargetSquares)
 			{
 				quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
-			}
+			}//absolutuly stupid, instead of working normally, a fucking semi-transparent square HAS to FUCK UP everything
+			
 		}
 		static_BoardSquare[BoardSquareBeingSelected] = 0;
 	}
-	
 	return quads;
 }
 
