@@ -161,6 +161,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		}
 		static_BoardSquare[BoardSquareBeingSelected] = 0;
 	}
+	quads[66] = CreateQuad(-350.0f, -350.0f, 87.5f, 14);
 	return quads;
 }
 

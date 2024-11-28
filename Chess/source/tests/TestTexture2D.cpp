@@ -32,7 +32,7 @@ namespace test {
 		layout.Push<float>(2);
 		layout.Push<float>(1);
 		m_VAO -> AddBuffer(*m_VertexBuffer, layout);
-		m_IndexBuffer = std::make_unique<IndexBuffer>(66);
+		m_IndexBuffer = std::make_unique<IndexBuffer>(130);
 
 		m_Shader = std::make_unique<Shader>("res/shaders/Basic.shader");
 		m_Shader->Bind();
