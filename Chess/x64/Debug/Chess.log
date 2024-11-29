@@ -1,10 +1,10 @@
 ﻿  RenderChesspcs.cpp
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(88,113): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(87,113): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
           with
           [
               _Ty=unsigned int
           ]
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(117,71): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(120,71): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
           with
           [
               _Ty=unsigned int

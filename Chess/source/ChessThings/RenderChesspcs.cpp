@@ -78,7 +78,6 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		}
 		
 		//this if is to "drop" the object
-		//TODO: when we have rules this cant be just here, like if a move is illegal the piece return here from the cursor, or you cant just eat your pieces...
 		if (g_mouseInput.LeftButtonPressed == false and g_mouseInput.WasLeftButtonPressed == true)
 		{
 			if ((g_mouseInput.xPos - 350.0f) > (-350.0f + xDifference) and (g_mouseInput.xPos - 350.0f) < (-350.0f + xDifference + 87.5f))
@@ -87,9 +86,13 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 				{
 					static_BoardSquare[static_cast<std::array<unsigned int, 64Ui64>::size_type>(i) - 1] = GetPieceTypefromTexID(RememberTexID);
 					PieceTexID = RememberTexID;
-					MoveNum++;
+					if (i != BoardSquareBeingSelected+1)
+					{
+						wasStatic_previousBoardsquareCreated = true;
+						MoveNum++;
+					}
 					BoardSquareBeingSelected = -1;
-					wasStatic_previousBoardsquareCreated = true;
+					
 				}
 			}
 		}
@@ -123,45 +126,36 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		if (wasStatic_previousBoardsquareCreated)
 		{
 			GenerateLegalMoves LegalMoves(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite);
-			for (int i = 66; i < 130; i++)
-			{
-				if (xxDifference > 650.0f)
-				{
-					xxDifference = 0.0f;
-					yyDifference += 87.5f;
-				}
-				
-				quads[i] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 0);
-				
-			}
 			for (int j : LegalMoves.moves[BoardSquareBeingSelected].TargetSquares)
 			{
+				xxDifference = j * 87.5f;
+				yyDifference = 0;
+				while (xxDifference >= 650.0f)
+				{
+					xxDifference -= 700.0f;
+					yyDifference += 87.5f;
+				}
 				quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
 			}
 		}
 		else
 		{
 			GenerateLegalMoves LegalMoves(static_BoardSquare, CanCastle, isNextMoveForWhite);
-			for (int i = 66; i < 130; i++)
-			{
-				if (xxDifference > 650.0f)
-				{
-					xxDifference = 0.0f;
-					yyDifference += 87.5f;
-				}
-
-				quads[i] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 0);
-
-			}
 			for (int j : LegalMoves.moves[BoardSquareBeingSelected].TargetSquares)
 			{
+				xxDifference = j * 87.5f;
+				yyDifference = 0;
+				while (xxDifference >= 650.0f)
+				{
+					xxDifference -= 700.0f;
+					yyDifference += 87.5f;
+				}
 				quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
-			}//absolutuly stupid, instead of working normally, a fucking semi-transparent square HAS to FUCK UP everything
+			}
 			
 		}
 		static_BoardSquare[BoardSquareBeingSelected] = 0;
 	}
-	quads[66] = CreateQuad(-350.0f, -350.0f, 87.5f, 14);
 	return quads;
 }
 
