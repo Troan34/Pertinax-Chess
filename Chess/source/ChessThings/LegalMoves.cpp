@@ -50,7 +50,7 @@ GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSqu
 			NumOfSquaresUntilEdge[squareIndex][4] = std::min(numNorth, numWest);
 			NumOfSquaresUntilEdge[squareIndex][5] = std::min(numSouth, numEast);
 			NumOfSquaresUntilEdge[squareIndex][6] = std::min(numNorth, numEast);
-			NumOfSquaresUntilEdge[squareIndex][7] = std::min(numNorth, numWest);
+			NumOfSquaresUntilEdge[squareIndex][7] = std::min(numSouth, numWest);
 
 		}
 	}
@@ -61,7 +61,7 @@ void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
 {
 	int BoardSquarePos = 0;
 	for (int i : m_BoardSquare)
-	{
+	{ 
 		if (i == 0)
 		{
 			BoardSquarePos++;
@@ -94,20 +94,19 @@ void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
 	}
 }
 
-//slider means Rook, Bishop, Queen
 void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhite)
 {
 	unsigned int PieceType = m_BoardSquare[BoardSquarePos];
 	
 	for (unsigned int direction = 0; direction < 8; direction++)
 	{
-		for (int i = 0; i < NumOfSquaresUntilEdge[BoardSquarePos][direction]; i++)
+		for (int i = 1; i <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; i++)
 		{
 			int PieceTypeAtOffset = m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * i)];
 			//rook
-			if ((PieceType == 20 and isNextMoveForWhite) or (PieceType == 12 and !isNextMoveForWhite) and direction <= 3)
+			if (((PieceType == 20 and isNextMoveForWhite) or (PieceType == 12 and !isNextMoveForWhite)) and direction <= 3)
 			{
-				if (m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * i)] == 0)
+				if (PieceTypeAtOffset == 0)
 				{
 					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
@@ -117,8 +116,6 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 				{
 					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
-					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * (i + 1));
-					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * (i + 1)));
 					break;
 				}
 				else
@@ -128,9 +125,9 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 			}
 
 			//bishop
-			if ((PieceType == 18 and isNextMoveForWhite) or (PieceType == 10 and !isNextMoveForWhite) and direction > 3)
+			if (((PieceType == 18 and isNextMoveForWhite) or (PieceType == 10 and !isNextMoveForWhite)) and direction > 3)
 			{
-				if (m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * i)] == 0)
+				if (PieceTypeAtOffset == 0)
 				{
 					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
@@ -140,8 +137,6 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 				{
 					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
-					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * (i + 1));
-					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * (i + 1)));
 					break;
 				}
 				else
@@ -153,7 +148,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 			//queen
 			if ((PieceType == 21 and isNextMoveForWhite) or (PieceType == 13 and !isNextMoveForWhite))
 			{
-				if (m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * i)] == 0)
+				if (PieceTypeAtOffset == 0)
 				{
 					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
@@ -163,8 +158,6 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 				{
 					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
-					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * (i + 1));
-					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * (i + 1)));
 					break;
 				}
 				else

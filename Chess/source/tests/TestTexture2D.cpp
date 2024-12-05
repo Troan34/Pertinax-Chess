@@ -38,7 +38,7 @@ namespace test {
 		m_Shader->Bind();
 
 		Texture texture;
-		TEX_ChessBoard =texture.CreateTexture("res/textures/Chessboard.png");
+		TEX_ChessBoard = texture.CreateTexture("res/textures/Chessboard.png");
 		TEX_P = texture.CreateTexture("res/textures/wp.png");
 		TEX_B = texture.CreateTexture("res/textures/wb.png");
 		TEX_N = texture.CreateTexture("res/textures/wn.png");
