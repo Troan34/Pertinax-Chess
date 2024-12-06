@@ -311,12 +311,23 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 //king
 void GenerateLegalMoves::KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite)
 {
-	if ((m_BoardSquare[BoardSquarePos] == 21 and isNextMoveForWhite) or (m_BoardSquare[BoardSquarePos] == 13 and !isNextMoveForWhite))
-		for (int Direction : OffsetForDirections)
+	if ((m_BoardSquare[BoardSquarePos] == 22 and isNextMoveForWhite) or (m_BoardSquare[BoardSquarePos] == 14 and !isNextMoveForWhite))
+	{
+		unsigned int PieceType = m_BoardSquare[BoardSquarePos];
+		for (unsigned int direction = 0; direction < 8; direction++)
 		{
-			if (NumOfSquaresUntilEdge[BoardSquarePos][Direction] != 0 and m_BoardSquare[BoardSquarePos + Direction] == 0 or Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos + Direction]) != Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos]))
+			if (NumOfSquaresUntilEdge[BoardSquarePos][direction] > 0)
 			{
-				moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + Direction);
+				if (m_BoardSquare[BoardSquarePos + OffsetForDirections[direction]] == 0)
+				{
+					//moves[BoardSquarePos].PieceType = PieceType + OffsetForDirections[direction];
+					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + OffsetForDirections[direction]);
+				}
+				if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos + OffsetForDirections[direction]]))
+				{
+					//moves[BoardSquarePos].PieceType = PieceType + OffsetForDirections[direction];
+					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + OffsetForDirections[direction]);
+				}
 			}
 		}
 		//TODO(more like remember): this thing relies HEAVILY on RenderChesspcs and i NEED to make the function there,
@@ -335,4 +346,5 @@ void GenerateLegalMoves::KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 			if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[62, 63] == 0)
 				moves[61].TargetSquares.push_back(63);
 		}
+	}
 }
