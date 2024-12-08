@@ -8,6 +8,7 @@ static bool wasStatic_previousBoardsquareCreated = false;
 static unsigned int MoveNum;
 static canCastle CanCastle;
 static int BoardSquareBeingSelected = -1;
+int AttackedSquare = -1;
 
 static void cursorPositionCallBack(GLFWwindow* window, double xPosition, double yPosition)
 {
@@ -39,6 +40,7 @@ RenderChessPieces::~RenderChessPieces()
 
 std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObjects()
 {
+	
 	std::array<std::array<VertexStructure, 4Ui64>, 130> quads{};
 	quads[0] = CreateQuad(-350.0f, -350.0f, 700.0f, 0.0f);
 	float xDifference = 0.0f;
@@ -54,12 +56,9 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 			yDifference += 87.5f;
 		}
 
-		WillCanCastleChange(static_BoardSquare[i - 1], i - 1);
-
+		
 		float PieceTexID = GetPieceTextureID(static_BoardSquare, i - 1);
 		bool HasDragAndDropFunHappened = false;
-		
-		
 
 		//drag and drop
 		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed == false and PieceTexID != 0.0f)
@@ -91,24 +90,22 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 						wasStatic_previousBoardsquareCreated = true;
 						MoveNum++;
 					}
+					AttackedSquare = i - 1;
 					BoardSquareBeingSelected = -1;
+					WillCanCastleChange(static_BoardSquare[i - 1], i - 1);
 					
 				}
 			}
 		}
+
 		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed and RememberTexID != 0)
 		{
 			quads[65] = CreateQuad(g_mouseInput.xPos - 393.5f, -g_mouseInput.yPos + 319.25f, 87.5f, RememberTexID); //took way too much time,
 			//func to get the y from yPos is f(x) = -x + 360
 		}
 
-		
-
 		quads[i] = CreateQuad(-350.0f + xDifference, -350.0f + yDifference, 87.5f, PieceTexID);
 		
-		
-		
-
 		xDifference += 87.5f;
 	}
 
@@ -152,8 +149,32 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 				}
 				quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
 			}
-			
+			if (AttackedSquare != -1)
+			{
+				if (static_BoardSquare[BoardSquareBeingSelected] == 22 or static_BoardSquare[BoardSquareBeingSelected] == 14)
+				{
+					if (abs(BoardSquareBeingSelected - AttackedSquare) > 2)
+					{
+						switch (BoardSquareBeingSelected - AttackedSquare)
+						{
+						case -2:
+							if (BoardSquareBeingSelected == 4)
+								quads[3][3].TexID = 20;
+							else
+								quads[60][3].TexID = 12;
+						case 2:
+							if (BoardSquareBeingSelected == 4)
+								quads[7][3].TexID = 20;
+							else
+								quads[64][3].TexID = 12;
+						default:
+							break;
+						}
+					}
+				}
+			}
 		}
+		
 		static_BoardSquare[BoardSquareBeingSelected] = 0;
 	}
 	return quads;

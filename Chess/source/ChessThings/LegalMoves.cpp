@@ -322,6 +322,7 @@ void GenerateLegalMoves::KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 				{
 					//moves[BoardSquarePos].PieceType = PieceType + OffsetForDirections[direction];
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + OffsetForDirections[direction]);
+					continue;
 				}
 				if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos + OffsetForDirections[direction]]))
 				{
@@ -330,21 +331,31 @@ void GenerateLegalMoves::KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 				}
 			}
 		}
-		//TODO(more like remember): this thing relies HEAVILY on RenderChesspcs and i NEED to make the function there,
-															//i could do the function here but i would have to bring over a lot of variables
-		if (m_BoardSquare[BoardSquarePos] == 22 and !CanCastle.HasWhiteKingMoved)
+		if (PieceType == 22 and !CanCastle.HasWhiteKingMoved)
 		{
-			if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[2, 3, 4] == 0)
-				moves[5].TargetSquares.push_back(3);
-			if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[6, 7] == 0)
-				moves[5].TargetSquares.push_back(7);
+			if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[1, 2, 3] == 0)
+			{
+				moves[4].TargetSquares.push_back(2);
+				moves[4].Castle = 1;
+			}
+			if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[5, 6] == 0)
+			{
+				moves[4].TargetSquares.push_back(6);
+				moves[4].Castle = 2;
+			}
 		}
-		if (m_BoardSquare[BoardSquarePos] == 14 and !CanCastle.HasBlackKingMoved)
+		if (PieceType == 14 and !CanCastle.HasBlackKingMoved)
 		{
-			if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[58, 59, 60] == 0)
-				moves[61].TargetSquares.push_back(59);
-			if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[62, 63] == 0)
-				moves[61].TargetSquares.push_back(63);
+			if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[57, 58, 59] == 0)
+			{
+				moves[60].TargetSquares.push_back(58);
+				moves[60].Castle = 3;
+			}
+			if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[61, 62] == 0)
+			{
+				moves[60].TargetSquares.push_back(62);
+				moves[60].Castle = 4;
+			}
 		}
 	}
 }
