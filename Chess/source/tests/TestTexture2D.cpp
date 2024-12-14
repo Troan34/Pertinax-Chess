@@ -76,7 +76,7 @@ namespace test {
 		Board board;
 		RenderChessPieces renderChessPieces;
 		renderChessPieces.GetMouseInput(window);
-		renderChessPieces.SetStaticBoardSquare(board.GetPositionFromFEN("r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1"));
+		renderChessPieces.SetStaticBoardSquare(board.GetPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"));
 		auto position = renderChessPieces.MemcopyObjects(renderChessPieces.CreateObjects());
 		
 		//just dont look at this
