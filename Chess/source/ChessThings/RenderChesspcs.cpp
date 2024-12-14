@@ -76,7 +76,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 			}
 		}
 		
-		//this if is to "drop" the object
+		//this if is to "drop" the object ( and other things )
 		if (g_mouseInput.LeftButtonPressed == false and g_mouseInput.WasLeftButtonPressed == true)
 		{
 			if ((g_mouseInput.xPos - 350.0f) > (-350.0f + xDifference) and (g_mouseInput.xPos - 350.0f) < (-350.0f + xDifference + 87.5f))
@@ -91,12 +91,50 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 						MoveNum++;
 					}
 					AttackedSquare = i - 1;
+					//castling
+					if (AttackedSquare != -1)
+					{
+						if (RememberTexID == 12 or RememberTexID == 6)
+						{
+							if (abs(BoardSquareBeingSelected - AttackedSquare) == 2)
+							{
+								if (BoardSquareBeingSelected - AttackedSquare == -2)
+								{
+									if (BoardSquareBeingSelected == 4)
+									{
+										static_BoardSquare[5] = 20;
+										static_BoardSquare[7] = 0;
+									}
+									else
+									{
+										static_BoardSquare[61] = 12;
+										static_BoardSquare[63] = 0;
+									}
+								}
+								if (BoardSquareBeingSelected - AttackedSquare == 2)
+								{
+									if (BoardSquareBeingSelected == 4)
+									{
+										static_BoardSquare[3] = 20;
+										static_BoardSquare[0] = 0;
+									}
+									else
+									{
+										static_BoardSquare[59] = 12;
+										static_BoardSquare[56] = 0;
+									}
+								}
+							}
+						}
+					}
 					BoardSquareBeingSelected = -1;
 					WillCanCastleChange(static_BoardSquare[i - 1], i - 1);
 					
 				}
 			}
 		}
+
+		
 
 		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed and RememberTexID != 0)
 		{
@@ -109,7 +147,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		xDifference += 87.5f;
 	}
 
-	
+	//Legal Moves
 	if (BoardSquareBeingSelected != -1)
 	{
 		float xxDifference = 0.0f;
@@ -149,30 +187,8 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 				}
 				quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
 			}
-			if (AttackedSquare != -1)
-			{
-				if (static_BoardSquare[BoardSquareBeingSelected] == 22 or static_BoardSquare[BoardSquareBeingSelected] == 14)
-				{
-					if (abs(BoardSquareBeingSelected - AttackedSquare) > 2)
-					{
-						switch (BoardSquareBeingSelected - AttackedSquare)
-						{
-						case -2:
-							if (BoardSquareBeingSelected == 4)
-								quads[3][3].TexID = 20;
-							else
-								quads[60][3].TexID = 12;
-						case 2:
-							if (BoardSquareBeingSelected == 4)
-								quads[7][3].TexID = 20;
-							else
-								quads[64][3].TexID = 12;
-						default:
-							break;
-						}
-					}
-				}
-			}
+			
+			
 		}
 		
 		static_BoardSquare[BoardSquareBeingSelected] = 0;
