@@ -108,14 +108,33 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 			{
 				if (PieceTypeAtOffset == 0)
 				{
-					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
+					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
 					continue;
 				}else
 				if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffset))
 				{
-					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
+					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
+					moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
+
+					//calculate pinnable squares
+					for (int j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
+					{
+						int PieceTypeAtOffsetBehind = m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * j)];
+						if (PieceTypeAtOffsetBehind == 0)
+						{
+							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
+							continue;
+						}
+						else if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffsetBehind))
+						{
+							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
+							break;
+						}
+						else
+							break;
+					}
 					break;
 				}
 				else
@@ -129,14 +148,33 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 			{
 				if (PieceTypeAtOffset == 0)
 				{
-					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
+					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
 					continue;
 				}
 				if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffset))
 				{
-					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
+					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
+					moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
+
+					//calculate pinnable squares
+					for (int j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
+					{
+						int PieceTypeAtOffsetBehind = m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * j)];
+						if (PieceTypeAtOffsetBehind == 0)
+						{
+							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
+							continue;
+						}
+						else if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffsetBehind))
+						{
+							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
+							break;
+						}
+						else
+							break;
+					}
 					break;
 				}
 				else
@@ -150,14 +188,33 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 			{
 				if (PieceTypeAtOffset == 0)
 				{
-					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
+					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
 					continue;
 				}
 				if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffset))
 				{
-					//moves[BoardSquarePos].PieceType = PieceType + (OffsetForDirections[direction] * i);
+					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
+					moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
+
+					//calculate pinnable squares
+					for (int j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
+					{
+						int PieceTypeAtOffsetBehind = m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * j)];
+						if (PieceTypeAtOffsetBehind == 0)
+						{
+							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
+							continue;
+						}
+						else if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffsetBehind))
+						{
+							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
+							break;
+						}
+						else
+							break;
+					}
 					break;
 				}
 				else
@@ -181,7 +238,7 @@ void GenerateLegalMoves::KnightMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 			//i know that if only the first condition is met then c++ won't check the other one, if it does i'm blaming c++ and i WILL be calling it stupid
 			if (((int)m_BoardSquare[i]) == 0 or (Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos]) != Board::IsPieceColorWhite(m_BoardSquare[i])))
 			{
-				//moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos] + i;
+				moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos];
 				moves[BoardSquarePos].TargetSquares.push_back(i);
 			}
 			
@@ -250,23 +307,23 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 			{
 				if (PieceTypeAtOffset != 0 and !Board::IsPieceColorWhite(PieceTypeAtOffset) and Offset != 8)
 				{
-					//moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
 				}
 				if (Offset == 8 and PieceTypeAtOffset == 0)
 				{
 					if (m_BoardSquare[BoardSquarePos + 16] == 0 and BoardSquarePos <= 16 and BoardSquarePos >= 8)
 					{
-						//moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos + 16];
+						moves[BoardSquarePos].PieceType = PieceType;
 						moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + 16);
 					}
-					//moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
 				}
 				//en passant
 				if (BoardSquarePos <= 40 and BoardSquarePos >= 33 and Offset != 8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + (Offset * 2)]) == 9 and (m_BoardSquare[BoardSquarePos + Offset - 8]) == 9)
 				{
-					//moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
 				}
 			}
@@ -284,23 +341,23 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 			{
 				if (PieceTypeAtOffset != 0 and Board::IsPieceColorWhite(PieceTypeAtOffset) and Offset != -8)
 				{
-					//moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
 				}
 				if (Offset == -8 and PieceTypeAtOffset == 0)
 				{
 					if (m_BoardSquare[BoardSquarePos - 16] == 0 and BoardSquarePos <= 55 and BoardSquarePos >= 48)
 					{
-						//moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos - 16];
+						moves[BoardSquarePos].PieceType = PieceType;
 						moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos - 16);
 					}
-					//moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
 				}
 				//en passant
 				if (BoardSquarePos <= 32 and BoardSquarePos >= 25 and Offset != -8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + (Offset * 2)]) == 17 and (m_BoardSquare[BoardSquarePos + Offset + 8]) == 17)
 				{
-					//moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
+					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
 				}
 			}
@@ -320,13 +377,13 @@ void GenerateLegalMoves::KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 			{
 				if (m_BoardSquare[BoardSquarePos + OffsetForDirections[direction]] == 0)
 				{
-					//moves[BoardSquarePos].PieceType = PieceType + OffsetForDirections[direction];
+					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + OffsetForDirections[direction]);
 					continue;
 				}
 				if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos + OffsetForDirections[direction]]))
 				{
-					//moves[BoardSquarePos].PieceType = PieceType + OffsetForDirections[direction];
+					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + OffsetForDirections[direction]);
 				}
 			}
@@ -358,4 +415,44 @@ void GenerateLegalMoves::KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 			}
 		}
 	}
+}
+
+void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
+{
+	std::vector<unsigned int> BoardSquarePiecesThatAreChecking;//long ass name
+	std::vector<unsigned int> BoardSquarePiecesThatArePinning;
+	unsigned int BoardSquareOfAttackedKing = 0;
+
+	if (isNextMoveForWhite)
+	{
+		for (BoardSquareOfAttackedKing < 64; BoardSquareOfAttackedKing++;)
+		{
+			if (moves[BoardSquareOfAttackedKing].PieceType == 22)
+				break;
+		}
+
+	}
+	else
+	{
+		for (BoardSquareOfAttackedKing < 64; BoardSquareOfAttackedKing++;)
+		{
+			if (moves[BoardSquareOfAttackedKing].PieceType == 14)
+				break;
+		}
+	}
+
+	for (MOVE i : moves)
+	{
+		for (unsigned int j : i.TargetSquares)
+		{
+			if (j == BoardSquareOfAttackedKing)
+			{
+				BoardSquarePiecesThatAreChecking.push_back(j);
+				break;
+			}
+		}
+	}
+
+	BoardSquarePiecesThatAreChecking.resize(0);
+	BoardSquarePiecesThatArePinning.resize(0);
 }

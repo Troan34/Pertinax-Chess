@@ -140,8 +140,8 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 					if (RememberTexID != 13.0f)
 					{
 						//the if under here is to check if the move is legal
-						//if (std::find(LegalMovesForSelectedSquare.TargetSquares.begin(), LegalMovesForSelectedSquare.TargetSquares.end(), i - 1) != LegalMovesForSelectedSquare.TargetSquares.end())
-						//{
+						if (std::find(LegalMovesForSelectedSquare.TargetSquares.begin(), LegalMovesForSelectedSquare.TargetSquares.end(), i - 1) != LegalMovesForSelectedSquare.TargetSquares.end())
+						{
 							static_BoardSquare[static_cast<std::array<unsigned int, 64Ui64>::size_type>(i) - 1] = GetPieceTypefromTexID(RememberTexID);
 							PieceTexID = RememberTexID;
 							if (i != BoardSquareBeingSelected + 1)
@@ -212,7 +212,12 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 							}
 							BoardSquareBeingSelected = -1;
 							WillCanCastleChange(static_BoardSquare[i - 1], i - 1);
-						//}
+						}
+						else
+						{
+							static_BoardSquare[BoardSquareBeingSelected] = GetPieceTypefromTexID((unsigned int)RememberTexID);
+							BoardSquareBeingSelected = -1;
+						}
 					}
 
 				}

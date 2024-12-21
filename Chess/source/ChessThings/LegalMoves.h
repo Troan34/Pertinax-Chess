@@ -7,8 +7,9 @@
 
 struct MOVE
 {
-	unsigned int PieceType;//the piecetype on the target square
+	unsigned int PieceType;
 	std::vector<unsigned int> TargetSquares;
+	std::vector<unsigned int> PinnedTargetSquares;
 	unsigned int Castle;
 };
 
@@ -38,4 +39,5 @@ public:
 	void CreateOffesetsForKnight(int BoardSquarePos);
 	void PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite);
 	void KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite);
+	void RemoveIllegalMoves(bool isNextMoveForWhite);
 };
