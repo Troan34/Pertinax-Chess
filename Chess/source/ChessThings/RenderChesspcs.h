@@ -8,6 +8,7 @@
 #include<GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "LegalMoves.h"
+#include <algorithm>
 
 struct MouseInput
 {

@@ -9,12 +9,6 @@ struct MOVE
 {
 	unsigned int PieceType;//the piecetype on the target square
 	std::vector<unsigned int> TargetSquares;
-	unsigned int SquareKilled_EnPassant;
-	//Castle Legend
-	//1 = Long White has to move
-	//2 = Short White has to move
-	//3 = Long Black has to move
-	//4 = Short White has to move
 	unsigned int Castle;
 };
 

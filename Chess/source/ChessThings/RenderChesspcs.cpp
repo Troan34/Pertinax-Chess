@@ -9,6 +9,7 @@ static unsigned int MoveNum;
 static canCastle CanCastle;
 static int BoardSquareBeingSelected = -1;
 int AttackedSquare = -1;
+MOVE LegalMovesForSelectedSquare;
 
 static void cursorPositionCallBack(GLFWwindow* window, double xPosition, double yPosition)
 {
@@ -40,7 +41,7 @@ RenderChessPieces::~RenderChessPieces()
 
 std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObjects()
 {
-	
+
 	std::array<std::array<VertexStructure, 4Ui64>, 130> quads{};
 	quads[0] = CreateQuad(-350.0f, -350.0f, 700.0f, 0.0f);
 	float xDifference = 0.0f;
@@ -48,104 +49,6 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 	
 	previousBoardsquare = static_BoardSquare;
 
- 	for (int i = 1; i < 65; i++)
-	{
-		if (xDifference > 650.0f)
-		{
-			xDifference = 0.0f;
-			yDifference += 87.5f;
-		}
-
-		
-		float PieceTexID = GetPieceTextureID(static_BoardSquare, i - 1);
-		bool HasDragAndDropFunHappened = false;
-
-		//drag and drop
-		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed == false and PieceTexID != 0.0f)
-		{
-			//next two ifs are to check which objects have to be dragged
-			if ((g_mouseInput.xPos - 350.0f) > (-350.0f + xDifference) and (g_mouseInput.xPos - 350.0f) < (-350.0f + xDifference + 87.5f))
-			{
-				if ((-g_mouseInput.yPos + 360.0f) > (-350.0f + yDifference) and (-g_mouseInput.yPos + 360.0f) < (-350.0f + yDifference + 87.5f))
-				{
-					quads[65] = CreateQuad(g_mouseInput.xPos - 393.5f, -g_mouseInput.yPos + 319.25f, 87.5f, PieceTexID);
-					RememberTexID = PieceTexID;
-					static_BoardSquare[i - 1] = (unsigned int)0;
-					BoardSquareBeingSelected = i - 1;
-				}
-			}
-		}
-		
-		//this if is to "drop" the object ( and other things )
-		if (g_mouseInput.LeftButtonPressed == false and g_mouseInput.WasLeftButtonPressed == true)
-		{
-			if ((g_mouseInput.xPos - 350.0f) > (-350.0f + xDifference) and (g_mouseInput.xPos - 350.0f) < (-350.0f + xDifference + 87.5f))
-			{
-				if ((-g_mouseInput.yPos + 360.0f) > (-350.0f + yDifference) and (-g_mouseInput.yPos + 360.0f) < (-350.0f + yDifference + 87.5f))
-				{
-					static_BoardSquare[static_cast<std::array<unsigned int, 64Ui64>::size_type>(i) - 1] = GetPieceTypefromTexID(RememberTexID);
-					PieceTexID = RememberTexID;
-					if (i != BoardSquareBeingSelected+1)
-					{
-						wasStatic_previousBoardsquareCreated = true;
-						MoveNum++;
-					}
-					AttackedSquare = i - 1;
-					//castling
-					if (AttackedSquare != -1)
-					{
-						if (RememberTexID == 12 or RememberTexID == 6)
-						{
-							if (abs(BoardSquareBeingSelected - AttackedSquare) == 2)
-							{
-								if (BoardSquareBeingSelected - AttackedSquare == -2)
-								{
-									if (BoardSquareBeingSelected == 4)
-									{
-										static_BoardSquare[5] = 20;
-										static_BoardSquare[7] = 0;
-									}
-									else
-									{
-										static_BoardSquare[61] = 12;
-										static_BoardSquare[63] = 0;
-									}
-								}
-								if (BoardSquareBeingSelected - AttackedSquare == 2)
-								{
-									if (BoardSquareBeingSelected == 4)
-									{
-										static_BoardSquare[3] = 20;
-										static_BoardSquare[0] = 0;
-									}
-									else
-									{
-										static_BoardSquare[59] = 12;
-										static_BoardSquare[56] = 0;
-									}
-								}
-							}
-						}
-					}
-					BoardSquareBeingSelected = -1;
-					WillCanCastleChange(static_BoardSquare[i - 1], i - 1);
-					
-				}
-			}
-		}
-
-		
-
-		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed and RememberTexID != 0)
-		{
-			quads[65] = CreateQuad(g_mouseInput.xPos - 393.5f, -g_mouseInput.yPos + 319.25f, 87.5f, RememberTexID); //took way too much time,
-			//func to get the y from yPos is f(x) = -x + 360
-		}
-
-		quads[i] = CreateQuad(-350.0f + xDifference, -350.0f + yDifference, 87.5f, PieceTexID);
-		
-		xDifference += 87.5f;
-	}
 
 	//Legal Moves
 	if (BoardSquareBeingSelected != -1)
@@ -171,7 +74,9 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 					yyDifference += 87.5f;
 				}
 				quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
+				LegalMovesForSelectedSquare.TargetSquares.push_back(j);
 			}
+			
 		}
 		else
 		{
@@ -186,13 +91,150 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 					yyDifference += 87.5f;
 				}
 				quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
+				LegalMovesForSelectedSquare.TargetSquares.push_back(j);
 			}
-			
-			
+
+
 		}
 		
 		static_BoardSquare[BoardSquareBeingSelected] = 0;
 	}
+
+ 	for (int i = 1; i < 65; i++)
+	{
+		if (xDifference > 650.0f)
+		{
+			xDifference = 0.0f;
+			yDifference += 87.5f;
+		}
+
+		
+		float PieceTexID = GetPieceTextureID(static_BoardSquare, i - 1);
+		bool HasDragAndDropFunHappened = false;
+
+		//drag and drop
+		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed == false and PieceTexID != 0.0f)
+		{
+			//next two ifs are to check which objects have to be dragged
+			if ((g_mouseInput.xPos - 350.0f) > (-350.0f + xDifference) and (g_mouseInput.xPos - 350.0f) < (-350.0f + xDifference + 87.5f))
+			{
+				if ((-g_mouseInput.yPos + 360.0f) > (-350.0f + yDifference) and (-g_mouseInput.yPos + 360.0f) < (-350.0f + yDifference + 87.5f))
+				{
+					
+					quads[65] = CreateQuad(g_mouseInput.xPos - 393.5f, -g_mouseInput.yPos + 319.25f, 87.5f, PieceTexID);
+					RememberTexID = PieceTexID;
+					static_BoardSquare[i - 1] = (unsigned int)0;
+					BoardSquareBeingSelected = i - 1;
+					
+				}
+			}
+		}
+		
+		//this if is to "drop" the object ( and other things )
+		if (g_mouseInput.LeftButtonPressed == false and g_mouseInput.WasLeftButtonPressed == true)
+		{
+			if ((g_mouseInput.xPos - 350.0f) > (-350.0f + xDifference) and (g_mouseInput.xPos - 350.0f) < (-350.0f + xDifference + 87.5f))
+			{
+				if ((-g_mouseInput.yPos + 360.0f) > (-350.0f + yDifference) and (-g_mouseInput.yPos + 360.0f) < (-350.0f + yDifference + 87.5f))
+				{
+					if (RememberTexID != 13.0f)
+					{
+						//the if under here is to check if the move is legal
+						//if (std::find(LegalMovesForSelectedSquare.TargetSquares.begin(), LegalMovesForSelectedSquare.TargetSquares.end(), i - 1) != LegalMovesForSelectedSquare.TargetSquares.end())
+						//{
+							static_BoardSquare[static_cast<std::array<unsigned int, 64Ui64>::size_type>(i) - 1] = GetPieceTypefromTexID(RememberTexID);
+							PieceTexID = RememberTexID;
+							if (i != BoardSquareBeingSelected + 1)
+							{
+								wasStatic_previousBoardsquareCreated = true;
+								MoveNum++;
+							}
+							AttackedSquare = i - 1;
+
+							//castling and en passant
+							if (AttackedSquare != -1)
+							{
+								if (RememberTexID == 12.0f or RememberTexID == 6.0f)
+								{
+									if (abs(BoardSquareBeingSelected - AttackedSquare) == 2)
+									{
+										if (BoardSquareBeingSelected - AttackedSquare == -2)
+										{
+											if (BoardSquareBeingSelected == 4)
+											{
+												static_BoardSquare[5] = 20;
+												static_BoardSquare[7] = 0;
+											}
+											else
+											{
+												static_BoardSquare[61] = 12;
+												static_BoardSquare[63] = 0;
+											}
+										}
+										if (BoardSquareBeingSelected - AttackedSquare == 2)
+										{
+											if (BoardSquareBeingSelected == 4)
+											{
+												static_BoardSquare[3] = 20;
+												static_BoardSquare[0] = 0;
+											}
+											else
+											{
+												static_BoardSquare[59] = 12;
+												static_BoardSquare[56] = 0;
+											}
+										}
+									}
+								}
+
+								//white en passant
+								if (RememberTexID == 7)
+								{
+									if (previousBoardsquare[AttackedSquare] == 0)
+									{
+										if (BoardSquareBeingSelected - AttackedSquare == -7 or BoardSquareBeingSelected - AttackedSquare == -9)
+										{
+											static_BoardSquare[AttackedSquare - 8] = 0;
+										}
+									}
+								}
+								//black en passant
+								if (RememberTexID == 1)
+								{
+									if (previousBoardsquare[AttackedSquare] == 0)
+									{
+										if (BoardSquareBeingSelected - AttackedSquare == 7 or BoardSquareBeingSelected - AttackedSquare == 9)
+										{
+											static_BoardSquare[AttackedSquare + 8] = 0;
+										}
+									}
+								}
+							}
+							BoardSquareBeingSelected = -1;
+							WillCanCastleChange(static_BoardSquare[i - 1], i - 1);
+						//}
+					}
+
+				}
+			}
+		}
+
+		
+
+		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed and RememberTexID != 13.0f)
+		{
+			quads[65] = CreateQuad(g_mouseInput.xPos - 393.5f, -g_mouseInput.yPos + 319.25f, 87.5f, RememberTexID); //took way too much time,
+			//func to get the y from yPos is f(x) = -x + 360
+		}
+
+		quads[i] = CreateQuad(-350.0f + xDifference, -350.0f + yDifference, 87.5f, PieceTexID);
+		
+		xDifference += 87.5f;
+
+		
+	}
+
+	
 	return quads;
 }
 

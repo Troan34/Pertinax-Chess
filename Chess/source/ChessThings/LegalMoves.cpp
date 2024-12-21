@@ -282,7 +282,7 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 
 			if (NumOfSquaresUntilEdge[BoardSquarePos][directions[Offset+9]] != 0)
 			{
-				if (PieceTypeAtOffset != 0 and !Board::IsPieceColorWhite(PieceTypeAtOffset) and Offset != -8)
+				if (PieceTypeAtOffset != 0 and Board::IsPieceColorWhite(PieceTypeAtOffset) and Offset != -8)
 				{
 					//moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
@@ -298,7 +298,7 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
 				}
 				//en passant
-				if (BoardSquarePos <= 32 and BoardSquarePos >= 25 and Offset != -8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + (Offset * 2)]) == 9 and (m_BoardSquare[BoardSquarePos + Offset + 8]) == 17)
+				if (BoardSquarePos <= 32 and BoardSquarePos >= 25 and Offset != -8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + (Offset * 2)]) == 17 and (m_BoardSquare[BoardSquarePos + Offset + 8]) == 17)
 				{
 					//moves[BoardSquarePos].PieceType = PieceTypeAtOffset;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
