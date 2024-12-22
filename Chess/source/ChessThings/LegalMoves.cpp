@@ -90,7 +90,7 @@ void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
 			KingMoveGen(BoardSquarePos, isNextMoveForWhite);
 			BoardSquarePos++;
 		}
-		
+		RemoveIllegalMoves(isNextMoveForWhite);
 	}
 }
 
@@ -116,7 +116,6 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 				{
 					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
-					moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
 
 					//calculate pinnable squares
 					for (int j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
@@ -156,7 +155,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 				{
 					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
-					moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
+
 
 					//calculate pinnable squares
 					for (int j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
@@ -196,7 +195,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 				{
 					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
-					moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
+
 
 					//calculate pinnable squares
 					for (int j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
@@ -448,6 +447,14 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 			if (j == BoardSquareOfAttackedKing)
 			{
 				BoardSquarePiecesThatAreChecking.push_back(j);
+				break;
+			}
+		}
+		for (unsigned int j : i.PinnedTargetSquares)
+		{
+			if (j == BoardSquareOfAttackedKing)
+			{
+				BoardSquarePiecesThatArePinning.push_back(j);
 				break;
 			}
 		}
