@@ -5,7 +5,7 @@ static std::array<unsigned int, 64Ui64> static_BoardSquare;
 static bool wasStatic_BoardSquareCreated = false;
 static std::array<unsigned int, 64Ui64> previousBoardsquare;
 static bool wasStatic_previousBoardsquareCreated = false;
-static unsigned int MoveNum;
+static unsigned int MoveNum = 0;
 static canCastle CanCastle;
 static int BoardSquareBeingSelected = -1;
 int AttackedSquare = -1;
@@ -63,7 +63,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 
 		if (wasStatic_previousBoardsquareCreated)
 		{
-			GenerateLegalMoves LegalMoves(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite);
+			GenerateLegalMoves LegalMoves(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum);
 			for (int j : LegalMoves.moves[BoardSquareBeingSelected].TargetSquares)
 			{
 				xxDifference = j * 87.5f;
@@ -80,7 +80,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		}
 		else
 		{
-			GenerateLegalMoves LegalMoves(static_BoardSquare, CanCastle, isNextMoveForWhite);
+			GenerateLegalMoves LegalMoves(static_BoardSquare, CanCastle, isNextMoveForWhite, MoveNum);
 			for (int j : LegalMoves.moves[BoardSquareBeingSelected].TargetSquares)
 			{
 				xxDifference = j * 87.5f;

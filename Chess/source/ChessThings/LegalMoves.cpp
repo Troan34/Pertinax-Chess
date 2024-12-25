@@ -1,7 +1,8 @@
 #include "LegalMoves.h"
 static std::array<unsigned int, 64> m_previousBoardSquare;
-GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite)
-	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle)
+static std::array<MOVE, 64> OppositeMoves;
+GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum)
+	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
 {
 	for (int file = 0; file < 8; file++)
 	{
@@ -26,11 +27,55 @@ GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSqu
 		}
 	}
 	GenerateMoves(isNextMoveForWhite);
+	RemoveIllegalMoves_Checks_AbsolutePins(isNextMoveForWhite);
+	if (!isItCheckmate)
+	{
+		if (!isA64ArrayEmpty(LegalMoves))
+			moves = LegalMoves;
+	}
+	else
+		std::cout << "Checkmate" << '\n';
 	m_previousBoardSquare = previousBoardSquare;
 }
 
-GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, canCastle CanCastle, bool isNextMoveForWhite)
-	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle)
+GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum)
+	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
+{
+	for (int file = 0; file < 8; file++)
+	{
+		for (int rank = 0; rank < 8; rank++)
+		{
+			int numNorth = 7 - rank;
+			int numSouth = rank;
+			int numWest = file;
+			int numEast = 7 - file;
+
+			unsigned int squareIndex = rank * 8 + file;
+
+			NumOfSquaresUntilEdge[squareIndex][0] = numNorth;
+			NumOfSquaresUntilEdge[squareIndex][1] = numSouth;
+			NumOfSquaresUntilEdge[squareIndex][2] = numWest;
+			NumOfSquaresUntilEdge[squareIndex][3] = numEast;
+			NumOfSquaresUntilEdge[squareIndex][4] = std::min(numNorth, numWest);
+			NumOfSquaresUntilEdge[squareIndex][5] = std::min(numSouth, numEast);
+			NumOfSquaresUntilEdge[squareIndex][6] = std::min(numNorth, numEast);
+			NumOfSquaresUntilEdge[squareIndex][7] = std::min(numSouth, numWest);
+
+		}
+	}
+	GenerateMoves(isNextMoveForWhite);
+	RemoveIllegalMoves_Checks_AbsolutePins(isNextMoveForWhite);
+	if (!isItCheckmate)
+	{
+		if (!isA64ArrayEmpty(LegalMoves))
+			moves = LegalMoves;
+	}
+	else
+		std::cout << "Checkmate" << '\n';
+}
+
+GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
+	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
 {
 	for (int file = 0; file < 8; file++)
 	{
@@ -90,8 +135,8 @@ void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
 			KingMoveGen(BoardSquarePos, isNextMoveForWhite);
 			BoardSquarePos++;
 		}
-		RemoveIllegalMoves(isNextMoveForWhite);
 	}
+
 }
 
 void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhite)
@@ -118,7 +163,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
 
 					//calculate pinnable squares
-					for (int j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
+					for (unsigned int j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
 					{
 						int PieceTypeAtOffsetBehind = m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * j)];
 						if (PieceTypeAtOffsetBehind == 0)
@@ -158,7 +203,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 
 
 					//calculate pinnable squares
-					for (int j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
+					for (unsigned int j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
 					{
 						int PieceTypeAtOffsetBehind = m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * j)];
 						if (PieceTypeAtOffsetBehind == 0)
@@ -198,7 +243,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 
 
 					//calculate pinnable squares
-					for (int j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
+					for (unsigned int j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
 					{
 						int PieceTypeAtOffsetBehind = m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * j)];
 						if (PieceTypeAtOffsetBehind == 0)
@@ -416,50 +461,134 @@ void GenerateLegalMoves::KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 	}
 }
 
-void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
-{
-	std::vector<unsigned int> BoardSquarePiecesThatAreChecking;//long ass name
-	std::vector<unsigned int> BoardSquarePiecesThatArePinning;
+//sidenote: this is only for x-ray moves, i have to work out the knight and pawn
+void GenerateLegalMoves::RemoveIllegalMoves_Checks_AbsolutePins(bool isNextMoveForWhite)
+{	
+	
+	std::vector<unsigned int> TargetSquaresThatAreChecking;
+	std::vector<unsigned int> PinnedTargetSquaresThatAreAbsolutePinning;
+	std::vector<unsigned int> SquareWhichTargetSquaresThatAreChecking;
+	std::vector<unsigned int> SquareWhichPinnedTargetSquaresThatAreAbsolutePinning;//peak of variable names
 	unsigned int BoardSquareOfAttackedKing = 0;
 
 	if (isNextMoveForWhite)
 	{
-		for (BoardSquareOfAttackedKing < 64; BoardSquareOfAttackedKing++;)
+		for (BoardSquareOfAttackedKing = 0; BoardSquareOfAttackedKing < 64; BoardSquareOfAttackedKing++)
 		{
-			if (moves[BoardSquareOfAttackedKing].PieceType == 22)
+			if (m_BoardSquare[BoardSquareOfAttackedKing] == 22)
 				break;
 		}
 
 	}
 	else
 	{
-		for (BoardSquareOfAttackedKing < 64; BoardSquareOfAttackedKing++;)
+		for (BoardSquareOfAttackedKing = 0; BoardSquareOfAttackedKing < 64; BoardSquareOfAttackedKing++)
 		{
-			if (moves[BoardSquareOfAttackedKing].PieceType == 14)
+			if (m_BoardSquare[BoardSquareOfAttackedKing] == 14)
 				break;
 		}
 	}
 
-	for (MOVE i : moves)
+	//ouch, could be optimized, but i'm not gonna use just one thread for the whole project, so yeah, fuck it
+	GenerateLegalMoves OppositeMoves(m_BoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true);
+
+	//fill the vectors
+	unsigned int count = 0;
+	for (MOVE i : OppositeMoves.moves)
 	{
-		for (unsigned int j : i.TargetSquares)
+		
+		switch (i.PieceType)
 		{
-			if (j == BoardSquareOfAttackedKing)
-			{
-				BoardSquarePiecesThatAreChecking.push_back(j);
-				break;
-			}
+		case 10 or 12 or 13 or 18 or 20 or 21:
+		{
+			for(unsigned int j : i.TargetSquares)
+				if (i.TargetSquares.back() == BoardSquareOfAttackedKing)
+				{
+					for (unsigned int j : i.TargetSquares)
+						TargetSquaresThatAreChecking.push_back(j);
+
+					SquareWhichTargetSquaresThatAreChecking.push_back(count);
+				}
+
+
+				if (i.PinnedTargetSquares.back() == BoardSquareOfAttackedKing)
+				{
+					for (unsigned int j : i.PinnedTargetSquares)
+						PinnedTargetSquaresThatAreAbsolutePinning.push_back(j);
+
+					SquareWhichPinnedTargetSquaresThatAreAbsolutePinning.push_back(count);
+				}
 		}
-		for (unsigned int j : i.PinnedTargetSquares)
+		default:
+			break;
+		}
+			
+		count++;
+	}
+
+	if (TargetSquaresThatAreChecking.empty() and PinnedTargetSquaresThatAreAbsolutePinning.empty())
+	{
+		isItCheckmate = false;
+		return;
+	}
+
+	
+	if (SquareWhichTargetSquaresThatAreChecking.size() == 1)
+	{
+		for (unsigned int j = 0; j < 64; j++)
 		{
-			if (j == BoardSquareOfAttackedKing)
+			bool isPiecePinned = false;
+			for (unsigned int l : SquareWhichPinnedTargetSquaresThatAreAbsolutePinning)
 			{
-				BoardSquarePiecesThatArePinning.push_back(j);
-				break;
+				if (moves[l].TargetSquares.back() == j)
+					isPiecePinned = true;
+
+			}
+			
+			if (!isPiecePinned)
+			{
+				for (unsigned int i : TargetSquaresThatAreChecking)
+				{
+
+					for (unsigned int k : moves[j].TargetSquares)
+					{
+						if (k == i or k == SquareWhichTargetSquaresThatAreChecking[0])
+						{
+							LegalMoves[j].TargetSquares.push_back(k);
+							isItCheckmate = false;
+						}
+					}
+				}
 			}
 		}
 	}
 
-	BoardSquarePiecesThatAreChecking.resize(0);
-	BoardSquarePiecesThatArePinning.resize(0);
+	if (SquareWhichTargetSquaresThatAreChecking.size() >= 1)
+	{
+		for (unsigned int i : moves[BoardSquareOfAttackedKing].TargetSquares)
+		{
+			for (unsigned int j : TargetSquaresThatAreChecking)
+			{
+				if (i != j)
+				{
+					LegalMoves[BoardSquareOfAttackedKing].TargetSquares.push_back(j);
+					isItCheckmate = false;
+				}
+			}
+		}
+	}
+
 }
+
+bool GenerateLegalMoves::isA64ArrayEmpty(std::array<MOVE, 64> Array)
+{
+	for (MOVE i : Array)
+	{
+		if (!i.TargetSquares.empty())
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
