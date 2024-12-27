@@ -11,6 +11,7 @@ struct MOVE
 	std::vector<unsigned int> TargetSquares;
 	std::vector<unsigned int> PinnedTargetSquares;
 	unsigned int Castle;
+	std::vector<unsigned int> CheckTargetSquaresWithoutKing;
 };
 
 struct canCastle
