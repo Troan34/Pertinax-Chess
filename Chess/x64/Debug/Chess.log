@@ -1,3 +1,19 @@
-﻿  LegalMoves.cpp
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\LegalMoves.cpp(148,21): warning C4018: '<=': signed/unsigned mismatch
+﻿  RenderChesspcs.cpp
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(61,71): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=unsigned int
+          ]
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(144,79): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(146,116): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=unsigned int
+          ]
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(220,91): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(220,76): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=unsigned int
+          ]
   Chess.vcxproj -> C:\Users\roanb\source\repos\Chess\x64\Debug\Chess.exe

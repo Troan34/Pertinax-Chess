@@ -182,17 +182,11 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
 							continue;
 						}
-						else if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffsetBehind) and (PieceTypeAtOffsetBehind == 14 or PieceTypeAtOffsetBehind == 22))
+						else if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffsetBehind))
 						{
 							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
 							break;
 						}
-						else
-						{
-							moves[BoardSquarePos].PinnedTargetSquares.clear();
-							break;
-						}
-							
 					}
 					break;
 				}
@@ -236,14 +230,9 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
 							continue;
 						}
-						else if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffsetBehind) and (PieceTypeAtOffsetBehind == 14 or PieceTypeAtOffsetBehind == 22))
+						else if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffsetBehind))
 						{
 							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
-							break;
-						}
-						else
-						{
-							moves[BoardSquarePos].PinnedTargetSquares.clear();
 							break;
 						}
 					}
@@ -289,14 +278,9 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
 							continue;
 						}
-						else if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffsetBehind) and (PieceTypeAtOffsetBehind == 14 or PieceTypeAtOffsetBehind == 22))
+						else if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffsetBehind))
 						{
 							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
-							break;
-						}
-						else
-						{
-							moves[BoardSquarePos].PinnedTargetSquares.clear();
 							break;
 						}
 					}
@@ -599,9 +583,34 @@ void GenerateLegalMoves::RemoveIllegalMoves_Checks_AbsolutePins(bool isNextMoveF
 
 					for (unsigned int k : moves[j].TargetSquares)
 					{
-						if (k == i or k == SquareWhichTargetSquaresThatAreChecking[0])
+						if ((k == i and k != BoardSquareOfAttackedKing) or k == SquareWhichTargetSquaresThatAreChecking[0])
 						{
 							LegalMoves[j].TargetSquares.push_back(k);
+							isItCheckmate = false;
+						}
+					}
+				}
+				//if king and piece are next to each other
+				if (TargetSquaresThatAreChecking.empty())
+				{
+					for (unsigned int k : moves[j].TargetSquares)
+					{
+						if (k == SquareWhichTargetSquaresThatAreChecking[0])
+						{
+							LegalMoves[j].TargetSquares.push_back(k);
+							isItCheckmate = false;
+						}
+					}
+				}
+				//moves that make the king 'run away'
+				//optimization sidenote: std::find appears really slow
+				for (unsigned int KingMove : moves[BoardSquareOfAttackedKing].TargetSquares)
+				{
+					if (std::find(OppositeMoves.moves[SquareWhichTargetSquaresThatAreChecking[0]].TargetSquares.begin(), OppositeMoves.moves[SquareWhichTargetSquaresThatAreChecking[0]].TargetSquares.end(), KingMove) == OppositeMoves.moves[SquareWhichTargetSquaresThatAreChecking[0]].TargetSquares.end())
+					{
+						if (std::find(OppositeMoves.moves[SquareWhichTargetSquaresThatAreChecking[0]].PinnedTargetSquares.begin(), OppositeMoves.moves[SquareWhichTargetSquaresThatAreChecking[0]].PinnedTargetSquares.end(), KingMove) == OppositeMoves.moves[SquareWhichTargetSquaresThatAreChecking[0]].PinnedTargetSquares.end())
+						{
+							LegalMoves[BoardSquareOfAttackedKing].TargetSquares.push_back(KingMove);
 							isItCheckmate = false;
 						}
 					}
@@ -612,15 +621,16 @@ void GenerateLegalMoves::RemoveIllegalMoves_Checks_AbsolutePins(bool isNextMoveF
 
 	if (SquareWhichTargetSquaresThatAreChecking.size() >= 1)
 	{
-		for (unsigned int i : moves[BoardSquareOfAttackedKing].TargetSquares)
+		for (unsigned int KingMove : moves[BoardSquareOfAttackedKing].TargetSquares)
 		{
-			for (unsigned int j : TargetSquaresThatAreChecking)
+			for (unsigned int j : SquareWhichTargetSquaresThatAreChecking)
 			{
-				if (i != j)
-				{
-					LegalMoves[BoardSquareOfAttackedKing].TargetSquares.push_back(j);
-					isItCheckmate = false;
-				}
+				for(unsigned int PieceMove : OppositeMoves.moves[j].TargetSquares)
+					if (KingMove != PieceMove)
+					{
+						LegalMoves[BoardSquareOfAttackedKing].TargetSquares.push_back(j);
+						isItCheckmate = false;
+					}
 			}
 		}
 	}

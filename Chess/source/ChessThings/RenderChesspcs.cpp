@@ -49,6 +49,9 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 	
 	previousBoardsquare = static_BoardSquare;
 
+	bool isNextMoveForWhite = true;
+	if (MoveNum % 2 != 0)
+		isNextMoveForWhite = false;
 
 	//Legal Moves
 	if (BoardSquareBeingSelected != -1)
@@ -56,10 +59,6 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		float xxDifference = 0.0f;
 		float yyDifference = 0.0f;
 		static_BoardSquare[BoardSquareBeingSelected] = GetPieceTypefromTexID(RememberTexID);
-
-		bool isNextMoveForWhite = true;
-		if (MoveNum % 2 != 0)
-			isNextMoveForWhite = false;
 
 		if (wasStatic_previousBoardsquareCreated)
 		{
@@ -74,7 +73,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 					yyDifference += 87.5f;
 				}
 				quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
-				LegalMovesForSelectedSquare.TargetSquares.push_back(j);
+				LegalMovesForSelectedSquare.TargetSquares.push_back(j);//optimization sidenote: this gets crazy big, crazy fast
 			}
 			
 		}
@@ -91,7 +90,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 					yyDifference += 87.5f;
 				}
 				quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
-				LegalMovesForSelectedSquare.TargetSquares.push_back(j);
+				LegalMovesForSelectedSquare.TargetSquares.push_back(j);//optimization sidenote: this gets crazy big, crazy fast
 			}
 
 
@@ -142,76 +141,79 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 						//the if under here is to check if the move is legal
 						if (std::find(LegalMovesForSelectedSquare.TargetSquares.begin(), LegalMovesForSelectedSquare.TargetSquares.end(), i - 1) != LegalMovesForSelectedSquare.TargetSquares.end())
 						{
-							static_BoardSquare[static_cast<std::array<unsigned int, 64Ui64>::size_type>(i) - 1] = GetPieceTypefromTexID(RememberTexID);
-							PieceTexID = RememberTexID;
-							if (i != BoardSquareBeingSelected + 1)
+							if(isNextMoveForWhite == Board::IsPieceColorWhite(GetPieceTypefromTexID(RememberTexID)))
 							{
-								wasStatic_previousBoardsquareCreated = true;
-								MoveNum++;
-							}
-							AttackedSquare = i - 1;
+								static_BoardSquare[static_cast<std::array<unsigned int, 64Ui64>::size_type>(i) - 1] = GetPieceTypefromTexID(RememberTexID);
+								PieceTexID = RememberTexID;
+								if (i != BoardSquareBeingSelected + 1)
+								{
+									wasStatic_previousBoardsquareCreated = true;
+									MoveNum++;
+								}
+								AttackedSquare = i - 1;
 
-							//castling and en passant
-							if (AttackedSquare != -1)
-							{
-								if (RememberTexID == 12.0f or RememberTexID == 6.0f)
+								//castling and en passant
+								if (AttackedSquare != -1)
 								{
-									if (abs(BoardSquareBeingSelected - AttackedSquare) == 2)
+									if (RememberTexID == 12.0f or RememberTexID == 6.0f)
 									{
-										if (BoardSquareBeingSelected - AttackedSquare == -2)
+										if (abs(BoardSquareBeingSelected - AttackedSquare) == 2)
 										{
-											if (BoardSquareBeingSelected == 4)
+											if (BoardSquareBeingSelected - AttackedSquare == -2)
 											{
-												static_BoardSquare[5] = 20;
-												static_BoardSquare[7] = 0;
+												if (BoardSquareBeingSelected == 4)
+												{
+													static_BoardSquare[5] = 20;
+													static_BoardSquare[7] = 0;
+												}
+												else
+												{
+													static_BoardSquare[61] = 12;
+													static_BoardSquare[63] = 0;
+												}
 											}
-											else
+											if (BoardSquareBeingSelected - AttackedSquare == 2)
 											{
-												static_BoardSquare[61] = 12;
-												static_BoardSquare[63] = 0;
-											}
-										}
-										if (BoardSquareBeingSelected - AttackedSquare == 2)
-										{
-											if (BoardSquareBeingSelected == 4)
-											{
-												static_BoardSquare[3] = 20;
-												static_BoardSquare[0] = 0;
-											}
-											else
-											{
-												static_BoardSquare[59] = 12;
-												static_BoardSquare[56] = 0;
+												if (BoardSquareBeingSelected == 4)
+												{
+													static_BoardSquare[3] = 20;
+													static_BoardSquare[0] = 0;
+												}
+												else
+												{
+													static_BoardSquare[59] = 12;
+													static_BoardSquare[56] = 0;
+												}
 											}
 										}
 									}
-								}
 
-								//white en passant
-								if (RememberTexID == 7)
-								{
-									if (previousBoardsquare[AttackedSquare] == 0)
+									//white en passant
+									if (RememberTexID == 7)
 									{
-										if (BoardSquareBeingSelected - AttackedSquare == -7 or BoardSquareBeingSelected - AttackedSquare == -9)
+										if (previousBoardsquare[AttackedSquare] == 0)
 										{
-											static_BoardSquare[AttackedSquare - 8] = 0;
+											if (BoardSquareBeingSelected - AttackedSquare == -7 or BoardSquareBeingSelected - AttackedSquare == -9)
+											{
+												static_BoardSquare[AttackedSquare - 8] = 0;
+											}
+										}
+									}
+									//black en passant
+									if (RememberTexID == 1)
+									{
+										if (previousBoardsquare[AttackedSquare] == 0)
+										{
+											if (BoardSquareBeingSelected - AttackedSquare == 7 or BoardSquareBeingSelected - AttackedSquare == 9)
+											{
+												static_BoardSquare[AttackedSquare + 8] = 0;
+											}
 										}
 									}
 								}
-								//black en passant
-								if (RememberTexID == 1)
-								{
-									if (previousBoardsquare[AttackedSquare] == 0)
-									{
-										if (BoardSquareBeingSelected - AttackedSquare == 7 or BoardSquareBeingSelected - AttackedSquare == 9)
-										{
-											static_BoardSquare[AttackedSquare + 8] = 0;
-										}
-									}
-								}
+								BoardSquareBeingSelected = -1;
+								WillCanCastleChange(static_BoardSquare[i - 1], i - 1);
 							}
-							BoardSquareBeingSelected = -1;
-							WillCanCastleChange(static_BoardSquare[i - 1], i - 1);
 						}
 						else
 						{

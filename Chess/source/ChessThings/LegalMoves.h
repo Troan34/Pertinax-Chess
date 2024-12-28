@@ -10,6 +10,7 @@ struct MOVE
 	unsigned int PieceType;
 	std::vector<unsigned int> TargetSquares;
 	std::vector<unsigned int> PinnedTargetSquares;
+	unsigned int PieceTypeUnderAttack;
 	unsigned int Castle;
 	std::vector<unsigned int> CheckTargetSquaresWithoutKing;
 };
