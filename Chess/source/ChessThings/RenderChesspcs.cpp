@@ -214,12 +214,18 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 								BoardSquareBeingSelected = -1;
 								WillCanCastleChange(static_BoardSquare[i - 1], i - 1);
 							}
+							else
+							{
+								static_BoardSquare[BoardSquareBeingSelected] = GetPieceTypefromTexID((unsigned int)RememberTexID);
+								BoardSquareBeingSelected = -1;
+							}
 						}
 						else
 						{
 							static_BoardSquare[BoardSquareBeingSelected] = GetPieceTypefromTexID((unsigned int)RememberTexID);
 							BoardSquareBeingSelected = -1;
 						}
+						
 					}
 
 				}
