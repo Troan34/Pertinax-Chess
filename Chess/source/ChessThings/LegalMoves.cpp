@@ -173,7 +173,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 					{
 						iterator = moves[BoardSquarePos].TargetSquares.end();
 
-						for (int j = 1; - i + j < 0; j++)
+						for (int j = 0; - i + j < 0; j++)
 						{
 							CheckTargetSquares[*(iterator - i + j)] = BoardSquarePos;
 						}
@@ -237,7 +237,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 					{
 						iterator = moves[BoardSquarePos].TargetSquares.end();
 
-						for (int j = 1; -i + j < 0; j++)
+						for (int j = 0; -i + j < 0; j++)
 						{
 							CheckTargetSquares[*(iterator - i + j)] = BoardSquarePos;
 						}
@@ -302,7 +302,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 					{
 						iterator = moves[BoardSquarePos].TargetSquares.end();
 
-						for (int index = 1; -i + index < 0; index++)
+						for (int index = 0; -i + index < 0; index++)
 						{
 							CheckTargetSquares[*(iterator - i + index)] = BoardSquarePos;
 						}
@@ -364,6 +364,10 @@ void GenerateLegalMoves::KnightMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 				moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos];
 				moves[BoardSquarePos].TargetSquares.push_back(i);
 				AttackedSquares[BoardSquarePos] = true;
+				if (m_BoardSquare[i] == 14 and isNextMoveForWhite or m_BoardSquare[i] == 22 and !isNextMoveForWhite)
+				{
+					CheckTargetSquares[BoardSquarePos] = BoardSquarePos;
+				}
 			}
 			
 		}
@@ -600,7 +604,7 @@ void GenerateLegalMoves::RemoveIllegalMoves_Checks_AbsolutePins(bool isNextMoveF
 	//fill the vectors
 	uint8_t count = 0;
 	bool Has1CheckBeenFound = 0;
-	for (unsigned int Square : CheckTargetSquares)
+	for (unsigned int Square : OppositeMoves.CheckTargetSquares)
 	{
 		if (Square != 0)
 		{
