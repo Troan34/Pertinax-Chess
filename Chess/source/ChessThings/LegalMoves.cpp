@@ -27,7 +27,7 @@ GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSqu
 		}
 	}
 	GenerateMoves(isNextMoveForWhite);
-	RemoveIllegalMoves_Checks_AbsolutePins(isNextMoveForWhite);
+	RemoveIllegalMoves(isNextMoveForWhite);
 	if (!isItCheckmate)
 	{
 		if (!isA64ArrayEmpty(LegalMoves))
@@ -64,7 +64,7 @@ GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSqu
 		}
 	}
 	GenerateMoves(isNextMoveForWhite);
-	RemoveIllegalMoves_Checks_AbsolutePins(isNextMoveForWhite);
+	RemoveIllegalMoves(isNextMoveForWhite);
 	if (!isItCheckmate)
 	{
 		if (!isA64ArrayEmpty(LegalMoves))
@@ -359,11 +359,11 @@ void GenerateLegalMoves::KnightMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 		for (int i : OffsetsForKnight)
 		{
 			//i know that if only the first condition is met then c++ won't check the other one, if it does i'm blaming c++ and i WILL be calling it stupid
-			if (((int)m_BoardSquare[i]) == 0 or (Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos]) != Board::IsPieceColorWhite(m_BoardSquare[i])))
+			if ((m_BoardSquare[i]) == 0 or (Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos]) != Board::IsPieceColorWhite(m_BoardSquare[i])))
 			{
 				moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos];
 				moves[BoardSquarePos].TargetSquares.push_back(i);
-				AttackedSquares[BoardSquarePos] = true;
+				AttackedSquares[i] = true;
 				if (m_BoardSquare[i] == 14 and isNextMoveForWhite or m_BoardSquare[i] == 22 and !isNextMoveForWhite)
 				{
 					CheckTargetSquares[BoardSquarePos] = BoardSquarePos;
@@ -542,12 +542,12 @@ void GenerateLegalMoves::KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 		}
 		if (PieceType == 22 and !CanCastle.HasWhiteKingMoved)
 		{
-			if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[1, 2, 3] == 0)
+			if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[1] == 0 and m_BoardSquare[2] == 0 and m_BoardSquare[3] == 0)
 			{
 				moves[4].TargetSquares.push_back(2);
 				moves[4].Castle = 1;
 			}
-			if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[5, 6] == 0)
+			if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[5] == 0 and m_BoardSquare[6] == 0)
 			{
 				moves[4].TargetSquares.push_back(6);
 				moves[4].Castle = 2;
@@ -555,12 +555,12 @@ void GenerateLegalMoves::KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 		}
 		if (PieceType == 14 and !CanCastle.HasBlackKingMoved)
 		{
-			if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[57, 58, 59] == 0)
+			if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[57] == 0 and m_BoardSquare[58] == 0 and m_BoardSquare[59] == 0)
 			{
 				moves[60].TargetSquares.push_back(58);
 				moves[60].Castle = 3;
 			}
-			if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[61, 62] == 0)
+			if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[61] == 0 and m_BoardSquare[62] == 0)
 			{
 				moves[60].TargetSquares.push_back(62);
 				moves[60].Castle = 4;
@@ -569,14 +569,9 @@ void GenerateLegalMoves::KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 	}
 }
 
-//sidenote: this is only for x-ray moves, i have to work out the knight and pawn
-void GenerateLegalMoves::RemoveIllegalMoves_Checks_AbsolutePins(bool isNextMoveForWhite)
+void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 {	
-	
-	std::vector<unsigned int> TargetSquaresThatAreChecking;
-	std::vector<unsigned int> PinnedTargetSquaresThatAreAbsolutePinning;
 	std::vector<unsigned int> SquareWhichTargetSquaresThatAreChecking;
-	std::vector<unsigned int> SquareWhichPinnedTargetSquaresThatAreAbsolutePinning;//peak of variable names
 	unsigned int BoardSquareOfAttackedKing = 0;
 	bool isKingUnderCheck = false;
 
@@ -601,99 +596,27 @@ void GenerateLegalMoves::RemoveIllegalMoves_Checks_AbsolutePins(bool isNextMoveF
 	//ouch, could be optimized, but i'm not gonna use just one thread for the whole project, so yeah, fuck it
 	GenerateLegalMoves OppositeMoves(m_BoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true);
 
-	//fill the vectors
+	//fill SquareWhichTargetSquaresThatAreChecking
 	uint8_t count = 0;
-	bool Has1CheckBeenFound = 0;
-	for (unsigned int Square : OppositeMoves.CheckTargetSquares)
+	uint16_t CheckingSquare = 0;
+	for (uint16_t Square : OppositeMoves.CheckTargetSquares)
 	{
 		if (Square != 0)
 		{
-			if (Has1CheckBeenFound)
+			if (CheckingSquare == Square)
+			{
+				continue;
+			}
+			else
 			{
 				SquareWhichTargetSquaresThatAreChecking.push_back(Square);
-				break;
+				CheckingSquare = Square;
 			}
-			Has1CheckBeenFound = true;
-			SquareWhichTargetSquaresThatAreChecking.push_back(Square);
 		}
-
 		count++;
 	}
 
-	/*
-	if (SquareWhichTargetSquaresThatAreChecking.size() == 1)
-	{
-		for (unsigned int j = 0; j < 64; j++)
-		{
-			bool isPiecePinned = false;
-			for (unsigned int l : SquareWhichPinnedTargetSquaresThatAreAbsolutePinning)
-			{
-				if (std::find(moves[l].TargetSquares.begin(), moves[l].TargetSquares.end(), j) != moves[l].TargetSquares.end())
-					isPiecePinned = true;
-			}
-			
-			if (!isPiecePinned)
-			{
-				for (unsigned int i : TargetSquaresThatAreChecking)
-				{
-
-					for (unsigned int k : moves[j].TargetSquares)
-					{
-						if ((k == i and k != BoardSquareOfAttackedKing) or k == SquareWhichTargetSquaresThatAreChecking[0])
-						{
-							LegalMoves[j].TargetSquares.push_back(k);
-							isItCheckmate = false;
-						}
-					}
-				}
-				//if king and piece are next to each other
-				if (TargetSquaresThatAreChecking.empty())
-				{
-					for (unsigned int k : moves[j].TargetSquares)
-					{
-						if (k == SquareWhichTargetSquaresThatAreChecking[0])
-						{
-							LegalMoves[j].TargetSquares.push_back(k);
-							isItCheckmate = false;
-						}
-					}
-				}
-				//moves that make the king 'run away'
-				//optimization sidenote: std::find appears really slow
-				for (unsigned int KingMove : moves[BoardSquareOfAttackedKing].TargetSquares)
-				{
-					if (std::find(OppositeMoves.moves[SquareWhichTargetSquaresThatAreChecking[0]].TargetSquares.begin(), OppositeMoves.moves[SquareWhichTargetSquaresThatAreChecking[0]].TargetSquares.end(), KingMove) == OppositeMoves.moves[SquareWhichTargetSquaresThatAreChecking[0]].TargetSquares.end())
-					{
-						if (std::find(OppositeMoves.moves[SquareWhichTargetSquaresThatAreChecking[0]].PinnedTargetSquares.begin(), OppositeMoves.moves[SquareWhichTargetSquaresThatAreChecking[0]].PinnedTargetSquares.end(), KingMove) == OppositeMoves.moves[SquareWhichTargetSquaresThatAreChecking[0]].PinnedTargetSquares.end())
-						{
-							LegalMoves[BoardSquareOfAttackedKing].TargetSquares.push_back(KingMove);
-							isItCheckmate = false;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	if (SquareWhichTargetSquaresThatAreChecking.size() >= 1)
-	{
-		for (unsigned int KingMove : moves[BoardSquareOfAttackedKing].TargetSquares)
-		{
-			for (unsigned int j : SquareWhichTargetSquaresThatAreChecking)
-			{
-				for (unsigned int PieceMove : OppositeMoves.moves[j].TargetSquares)
-				{
-					if (KingMove != PieceMove)
-					{
-						LegalMoves[BoardSquareOfAttackedKing].TargetSquares.push_back(j);
-						isItCheckmate = false;
-					}
-				}
-			}
-		}
-	}*/
-
-	//possible overhaul of how Legal moves are calculated
+	//moves for King
 	if (SquareWhichTargetSquaresThatAreChecking.size() >= 0)
 	{
 		for (unsigned int KingMove : moves[BoardSquareOfAttackedKing].TargetSquares)
@@ -710,22 +633,28 @@ void GenerateLegalMoves::RemoveIllegalMoves_Checks_AbsolutePins(bool isNextMoveF
 			}
 		}
 	}
+	//Moves for every piece while check
 	if (SquareWhichTargetSquaresThatAreChecking.size() == 1)
 	{
 		count = 0;
 		for (MOVE Piece : moves)
 		{
 			if (Piece.PieceType == 22 or Piece.PieceType == 14)
+			{
+				count++;
 				continue;
+			}
+
 			//checks if not under abs pin
 			if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] == 0)
 			{
 				for (unsigned int Move : Piece.TargetSquares)
 				{
 					//checks if Move captures piece or blocks check
-					if (Move == SquareWhichTargetSquaresThatAreChecking[0] or CheckTargetSquares[Move] == SquareWhichTargetSquaresThatAreChecking[0])
+					if (Move == SquareWhichTargetSquaresThatAreChecking[0] or OppositeMoves.CheckTargetSquares[Move] == SquareWhichTargetSquaresThatAreChecking[0])
 					{
 						LegalMoves[count].TargetSquares.push_back(Move);
+						LegalMoves[count].Castle = Piece.Castle;
 						isItCheckmate = false;
 					}
 				}
@@ -734,6 +663,42 @@ void GenerateLegalMoves::RemoveIllegalMoves_Checks_AbsolutePins(bool isNextMoveF
 			count++;
 		}
 	}
+	//moves for every piece while no checks
+	if (SquareWhichTargetSquaresThatAreChecking.size() == 0)
+	{
+		count = 0;
+		for (MOVE Piece : moves)
+		{
+			if (Piece.PieceType == 22 or Piece.PieceType == 14)
+			{
+				count++;
+				continue;
+			}
+			if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 0)
+			{
+				for (uint16_t Move : Piece.TargetSquares)
+				{
+					if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] == OppositeMoves.WhichBoardSquaresAreAbsPinned[Move])
+					{
+						LegalMoves[count].TargetSquares.push_back(Move);
+						LegalMoves[count].Castle = Piece.Castle;
+						isItCheckmate = false;
+					}
+				}
+			}
+			else
+			{
+				for (uint16_t Move : Piece.TargetSquares)
+				{
+					LegalMoves[count].TargetSquares.push_back(Move);
+					LegalMoves[count].Castle = Piece.Castle;
+					isItCheckmate = false;
+				}
+			}
+			count++;
+		}
+	}
+	SquareWhichTargetSquaresThatAreChecking.clear();
 	
 }
 

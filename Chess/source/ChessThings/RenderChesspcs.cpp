@@ -9,7 +9,7 @@ static unsigned int MoveNum = 0;
 static canCastle CanCastle;
 static int BoardSquareBeingSelected = -1;
 int AttackedSquare = -1;
-MOVE LegalMovesForSelectedSquare;
+std::unordered_set<unsigned int> LegalMovesForSelectedSquare;
 
 static void cursorPositionCallBack(GLFWwindow* window, double xPosition, double yPosition)
 {
@@ -73,7 +73,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 					yyDifference += 87.5f;
 				}
 				quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
-				LegalMovesForSelectedSquare.TargetSquares.push_back(j);//optimization sidenote: this gets crazy big, crazy fast
+				LegalMovesForSelectedSquare.insert(j);
 			}
 			
 		}
@@ -90,7 +90,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 					yyDifference += 87.5f;
 				}
 				quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
-				LegalMovesForSelectedSquare.TargetSquares.push_back(j);//optimization sidenote: this gets crazy big, crazy fast
+				LegalMovesForSelectedSquare.insert(j);
 			}
 
 
@@ -139,7 +139,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 					if (RememberTexID != 13.0f)
 					{
 						//the if under here is to check if the move is legal
-						if (std::find(LegalMovesForSelectedSquare.TargetSquares.begin(), LegalMovesForSelectedSquare.TargetSquares.end(), i - 1) != LegalMovesForSelectedSquare.TargetSquares.end())
+						if (LegalMovesForSelectedSquare.find(i - 1) != LegalMovesForSelectedSquare.end())
 						{
 							if(isNextMoveForWhite == Board::IsPieceColorWhite(GetPieceTypefromTexID(RememberTexID)))
 							{
@@ -213,16 +213,17 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 								}
 								BoardSquareBeingSelected = -1;
 								WillCanCastleChange(static_BoardSquare[i - 1], i - 1);
+								LegalMovesForSelectedSquare.clear();
 							}
 							else
 							{
-								static_BoardSquare[BoardSquareBeingSelected] = GetPieceTypefromTexID((unsigned int)RememberTexID);
+								static_BoardSquare[BoardSquareBeingSelected] = GetPieceTypefromTexID(RememberTexID);
 								BoardSquareBeingSelected = -1;
 							}
 						}
 						else
 						{
-							static_BoardSquare[BoardSquareBeingSelected] = GetPieceTypefromTexID((unsigned int)RememberTexID);
+							static_BoardSquare[BoardSquareBeingSelected] = GetPieceTypefromTexID(RememberTexID);
 							BoardSquareBeingSelected = -1;
 						}
 						
@@ -247,7 +248,6 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		
 	}
 
-	
 	return quads;
 }
 

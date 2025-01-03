@@ -9,6 +9,7 @@
 #include <GLFW/glfw3.h>
 #include "LegalMoves.h"
 #include <algorithm>
+#include <unordered_set>
 
 struct MouseInput
 {

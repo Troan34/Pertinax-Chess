@@ -56,7 +56,7 @@ public:
 	void CreateOffesetsForKnight(int BoardSquarePos);
 	void PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite);
 	void KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite);
-	void RemoveIllegalMoves_Checks_AbsolutePins(bool isNextMoveForWhite);
+	void RemoveIllegalMoves(bool isNextMoveForWhite);
 	bool isA64ArrayEmpty(std::array<MOVE, 64> Array);
 
 };
