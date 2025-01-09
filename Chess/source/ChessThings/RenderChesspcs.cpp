@@ -10,6 +10,7 @@ static canCastle CanCastle;
 static int BoardSquareBeingSelected = -1;
 int AttackedSquare = -1;
 std::unordered_set<unsigned int> LegalMovesForSelectedSquare;
+static bool CalculateEVERYMove = 1;
 
 static void cursorPositionCallBack(GLFWwindow* window, double xPosition, double yPosition)
 {
@@ -46,6 +47,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 	quads[0] = CreateQuad(-350.0f, -350.0f, 700.0f, 0.0f);
 	float xDifference = 0.0f;
 	float yDifference = 0.0f;
+
 	
 	previousBoardsquare = static_BoardSquare;
 
@@ -244,8 +246,10 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		quads[i] = CreateQuad(-350.0f + xDifference, -350.0f + yDifference, 87.5f, PieceTexID);
 		
 		xDifference += 87.5f;
+		if(CalculateEVERYMove)
+			std::cout << NumberOfMoves(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, 3);
 
-		
+		CalculateEVERYMove = false;
 	}
 
 	return quads;
@@ -384,5 +388,93 @@ void RenderChessPieces::SetStaticBoardSquare(std::array<unsigned int, 64> BoardS
 	}
 }
 
+uint32_t RenderChessPieces::NumberOfMoves(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, uint8_t depth)
+{
+	if (depth == 0)
+		return 1;
+	
+	uint32_t NumOfMoves = 0;
+	GenerateLegalMoves LegalMoves(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum);
+	
+	unsigned int count = 0;
+	std::array<unsigned int, 64Ui64> BoardSquare_Copy = BoardSquare;
 
+	for (MOVE piece : LegalMoves.moves)
+	{
+		for (unsigned int move : piece.TargetSquares)
+		{
+			MakeMove(count, move, piece.PieceType, BoardSquare, previousBoardSquare);
+			NumOfMoves += NumberOfMoves(static_BoardSquare, previousBoardsquare, CanCastle, !isNextMoveForWhite, MoveNum, depth - 1);
+			BoardSquare = BoardSquare_Copy;
+		}
+		count++;
+	}
 
+	return NumOfMoves;
+}
+
+void RenderChessPieces::MakeMove(unsigned int BoardSquare, unsigned int move, unsigned int PieceType, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64> fun_previousBoardSquare)
+{
+	fun_BoardSquare[BoardSquare] = 0;
+	fun_BoardSquare[move] = PieceType;
+	//castling and en passant
+	if (AttackedSquare != -1)
+	{
+		if (PieceType == 22 or PieceType == 14)
+		{
+			if (BoardSquare - move == 2)
+			{
+				if (BoardSquare - move == -2)
+				{
+					if (BoardSquare == 4)
+					{
+						fun_BoardSquare[5] = 20;
+						fun_BoardSquare[7] = 0;
+					}
+					else
+					{
+						fun_BoardSquare[61] = 12;
+						fun_BoardSquare[63] = 0;
+					}
+				}
+				if (BoardSquare - move == 2)
+				{
+					if (BoardSquare == 4)
+					{
+						fun_BoardSquare[3] = 20;
+						fun_BoardSquare[0] = 0;
+					}
+					else
+					{
+						fun_BoardSquare[59] = 12;
+						fun_BoardSquare[56] = 0;
+					}
+				}
+			}
+		}
+
+		//white en passant
+		if (PieceType == 17)
+		{
+			if (fun_previousBoardSquare[move] == 0)
+			{
+				if (BoardSquare - move == -7 or BoardSquare - move == -9)
+				{
+					fun_BoardSquare[move - 8] = 0;
+				}
+			}
+		}
+		//black en passant
+		if (PieceType == 9)
+		{
+			if (fun_previousBoardSquare[move] == 0)
+			{
+				if (BoardSquare - move == 7 or BoardSquare - move == 9)
+				{
+					fun_BoardSquare[move + 8] = 0;
+				}
+			}
+		}
+	}
+
+}

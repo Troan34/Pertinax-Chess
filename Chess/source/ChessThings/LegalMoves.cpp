@@ -101,6 +101,34 @@ GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSqu
 	}
 	GenerateMoves(isNextMoveForWhite);
 }
+GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
+	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
+{
+	for (int file = 0; file < 8; file++)
+	{
+		for (int rank = 0; rank < 8; rank++)
+		{
+			int numNorth = 7 - rank;
+			int numSouth = rank;
+			int numWest = file;
+			int numEast = 7 - file;
+
+			unsigned int squareIndex = rank * 8 + file;
+
+			NumOfSquaresUntilEdge[squareIndex][0] = numNorth;
+			NumOfSquaresUntilEdge[squareIndex][1] = numSouth;
+			NumOfSquaresUntilEdge[squareIndex][2] = numWest;
+			NumOfSquaresUntilEdge[squareIndex][3] = numEast;
+			NumOfSquaresUntilEdge[squareIndex][4] = std::min(numNorth, numWest);
+			NumOfSquaresUntilEdge[squareIndex][5] = std::min(numSouth, numEast);
+			NumOfSquaresUntilEdge[squareIndex][6] = std::min(numNorth, numEast);
+			NumOfSquaresUntilEdge[squareIndex][7] = std::min(numSouth, numWest);
+
+		}
+	}
+	GenerateMoves(isNextMoveForWhite);
+	m_previousBoardSquare = previousBoardSquare;
+}
 
 void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
 {
@@ -202,7 +230,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 
 								for (unsigned int k = i + 1; k < j; k++)
 								{
-									WhichBoardSquaresAreAbsPinned[*(absPin_iter - (k - (i + 1)))] = BoardSquarePos;
+									WhichBoardSquaresAreAbsPinned[*(absPin_iter - (k - (i)))] = BoardSquarePos;
 								}
 							}
 							break;
@@ -267,7 +295,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 
 								for (unsigned int k = i + 1; k < j; k++)
 								{
-									WhichBoardSquaresAreAbsPinned[*(absPin_iter - (k - (i + 1)))] = BoardSquarePos;
+									WhichBoardSquaresAreAbsPinned[*(absPin_iter - (k - (i)))] = BoardSquarePos;
 								}
 							}
 							break;
@@ -331,7 +359,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 
 								for (unsigned int k = i + 1; k < j; k++)
 								{
-									WhichBoardSquaresAreAbsPinned[*(absPin_iter - (k - (i + 1)))] = BoardSquarePos;
+									WhichBoardSquaresAreAbsPinned[*(absPin_iter - (k - (i)))] = BoardSquarePos;
 								}
 							}
 							break;
@@ -594,7 +622,12 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 	}
 
 	//ouch, could be optimized, but i'm not gonna use just one thread for the whole project, so yeah, fuck it
-	GenerateLegalMoves OppositeMoves(m_BoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true);
+	GenerateLegalMoves OppositeMoves(m_BoardSquare,m_previousBoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true);
+	if (MoveNum == 0)
+	{
+		GenerateLegalMoves OppositeMoves(m_BoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true);
+	}
+
 
 	//fill SquareWhichTargetSquaresThatAreChecking
 	uint8_t count = 0;
@@ -627,6 +660,7 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 				//checks if possible move is not going to be under attack when it's made
 				if (OppositeMoves.PinnedSquaresWithTheKingBeingPinned[KingMove] == false)
 				{
+					LegalMoves[BoardSquareOfAttackedKing].PieceType = moves[BoardSquareOfAttackedKing].PieceType;
 					LegalMoves[BoardSquareOfAttackedKing].TargetSquares.push_back(KingMove);
 					isItCheckmate = false;
 				}
@@ -653,6 +687,7 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 					//checks if Move captures piece or blocks check
 					if (Move == SquareWhichTargetSquaresThatAreChecking[0] or OppositeMoves.CheckTargetSquares[Move] == SquareWhichTargetSquaresThatAreChecking[0])
 					{
+						LegalMoves[count].PieceType = Piece.PieceType;
 						LegalMoves[count].TargetSquares.push_back(Move);
 						LegalMoves[count].Castle = Piece.Castle;
 						isItCheckmate = false;
@@ -674,6 +709,7 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 				count++;
 				continue;
 			}
+
 			if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 0)
 			{
 				for (uint16_t Move : Piece.TargetSquares)
