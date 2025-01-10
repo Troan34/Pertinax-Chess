@@ -247,7 +247,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		
 		xDifference += 87.5f;
 		if(CalculateEVERYMove)
-			std::cout << NumberOfMoves(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, 3);
+			std::cout << Perft(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, 4);
 
 		CalculateEVERYMove = false;
 	}
@@ -388,14 +388,26 @@ void RenderChessPieces::SetStaticBoardSquare(std::array<unsigned int, 64> BoardS
 	}
 }
 
-uint32_t RenderChessPieces::NumberOfMoves(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, uint8_t depth)
+uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, uint8_t depth)
 {
 	if (depth == 0)
 		return 1;
 	
 	uint32_t NumOfMoves = 0;
-	GenerateLegalMoves LegalMoves(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum);
-	
+	GenerateLegalMoves LegalMoves(BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum);
+	/*Bulk Counting
+	if (depth == 1)
+	{
+		for (MOVE piece : LegalMoves.moves)
+		{
+			for (unsigned int move : piece.TargetSquares)
+			{
+				NumOfMoves++;
+			}
+		}
+		return NumOfMoves;
+	}*/
+
 	unsigned int count = 0;
 	std::array<unsigned int, 64Ui64> BoardSquare_Copy = BoardSquare;
 
@@ -403,8 +415,8 @@ uint32_t RenderChessPieces::NumberOfMoves(std::array<unsigned int, 64Ui64> Board
 	{
 		for (unsigned int move : piece.TargetSquares)
 		{
-			MakeMove(count, move, piece.PieceType, BoardSquare, previousBoardSquare);
-			NumOfMoves += NumberOfMoves(static_BoardSquare, previousBoardsquare, CanCastle, !isNextMoveForWhite, MoveNum, depth - 1);
+			MakeMove(count, move, BoardSquare, previousBoardSquare);
+			NumOfMoves += Perft(BoardSquare, BoardSquare_Copy, CanCastle, !isNextMoveForWhite, MoveNum, depth - 1);
 			BoardSquare = BoardSquare_Copy;
 		}
 		count++;
@@ -413,14 +425,14 @@ uint32_t RenderChessPieces::NumberOfMoves(std::array<unsigned int, 64Ui64> Board
 	return NumOfMoves;
 }
 
-void RenderChessPieces::MakeMove(unsigned int BoardSquare, unsigned int move, unsigned int PieceType, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64> fun_previousBoardSquare)
+void RenderChessPieces::MakeMove(unsigned int BoardSquare, unsigned int move, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64> fun_previousBoardSquare)
 {
+	fun_BoardSquare[move] = fun_BoardSquare[BoardSquare];
 	fun_BoardSquare[BoardSquare] = 0;
-	fun_BoardSquare[move] = PieceType;
 	//castling and en passant
 	if (AttackedSquare != -1)
 	{
-		if (PieceType == 22 or PieceType == 14)
+		if (fun_BoardSquare[BoardSquare] == 22 or fun_BoardSquare[BoardSquare] == 14)
 		{
 			if (BoardSquare - move == 2)
 			{
@@ -454,7 +466,7 @@ void RenderChessPieces::MakeMove(unsigned int BoardSquare, unsigned int move, un
 		}
 
 		//white en passant
-		if (PieceType == 17)
+		if (fun_BoardSquare[BoardSquare] == 17)
 		{
 			if (fun_previousBoardSquare[move] == 0)
 			{
@@ -465,7 +477,7 @@ void RenderChessPieces::MakeMove(unsigned int BoardSquare, unsigned int move, un
 			}
 		}
 		//black en passant
-		if (PieceType == 9)
+		if (fun_BoardSquare[BoardSquare] == 9)
 		{
 			if (fun_previousBoardSquare[move] == 0)
 			{

@@ -7,12 +7,12 @@
 
 struct MOVE
 {
-	unsigned int PieceType;
-	std::vector<unsigned int> TargetSquares;
-	std::vector<unsigned int> PinnedTargetSquares;
-	std::vector<unsigned int> AttackableSquares;
-	unsigned int PieceTypeUnderAttack;
-	unsigned int Castle;
+	uint8_t PieceType;
+	std::vector<uint8_t> TargetSquares;
+	std::vector<uint8_t> PinnedTargetSquares;
+	std::vector<uint8_t> AttackableSquares;
+	uint8_t PieceTypeUnderAttack;
+	uint8_t Castle;
 };
 
 struct canCastle
@@ -24,7 +24,7 @@ class GenerateLegalMoves
 {
 private:
 	const int OffsetForDirections[8] = {8, -8, -1, 1, 7, -7, 9, -9};
-	std::array<std::array<unsigned int, 8>, 64>NumOfSquaresUntilEdge;
+	std::array<std::array<uint8_t, 8>, 64>NumOfSquaresUntilEdge;
 	std::array<unsigned int, 64> m_BoardSquare;
 	canCastle CanCastle;
 	std::vector<int> OffsetsForKnight;

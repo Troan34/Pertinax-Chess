@@ -34,10 +34,12 @@ GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSqu
 			moves = LegalMoves;
 	}
 	else
+	{
+		moves = LegalMoves;
 		std::cout << "Checkmate" << '\n';
+	}
 	m_previousBoardSquare = previousBoardSquare;
 }
-
 GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum)
 	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
 {
@@ -73,7 +75,6 @@ GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSqu
 	else
 		std::cout << "Checkmate" << '\n';
 }
-
 GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
 	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
 {
@@ -173,8 +174,8 @@ void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
 void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhite)
 {
 	unsigned int PieceType = m_BoardSquare[BoardSquarePos];
-	std::vector<unsigned int>::iterator iterator;
-	std::vector<unsigned int>::iterator absPin_iter;
+	std::vector<uint8_t>::iterator iterator;
+	std::vector<uint8_t>::iterator absPin_iter;
 	for (unsigned int direction = 0; direction < 8; direction++)
 	{
 		for (int i = 1; i <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; i++)
@@ -419,9 +420,9 @@ void GenerateLegalMoves::CreateOffesetsForKnight(int BoardSquarePos)
 			else if (i == 1 and BoardSquarePos >= 16)
 			{
 				if (NumOfSquaresUntilEdge[BoardSquarePos - 16][2] >= 1)
-					OffsetsForKnight.push_back(BoardSquarePos - 15);
-				if (NumOfSquaresUntilEdge[BoardSquarePos - 16][3] >= 1)
 					OffsetsForKnight.push_back(BoardSquarePos - 17);
+				if (NumOfSquaresUntilEdge[BoardSquarePos - 16][3] >= 1)
+					OffsetsForKnight.push_back(BoardSquarePos - 15);
 			}
 			if (NumOfSquaresUntilEdge[BoardSquarePos][2] >= 2)
 			{
@@ -717,6 +718,7 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 					if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] == OppositeMoves.WhichBoardSquaresAreAbsPinned[Move])
 					{
 						LegalMoves[count].TargetSquares.push_back(Move);
+						LegalMoves[count].PieceType = Piece.PieceType;
 						LegalMoves[count].Castle = Piece.Castle;
 						isItCheckmate = false;
 					}
