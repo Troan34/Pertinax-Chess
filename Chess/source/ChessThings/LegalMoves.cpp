@@ -473,7 +473,7 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 				}
 				else if (Offset == 8 and PieceTypeAtOffset == 0)
 				{
-					if (m_BoardSquare[BoardSquarePos + 16] == 0 and BoardSquarePos <= 16 and BoardSquarePos >= 8)
+					if (m_BoardSquare[BoardSquarePos + 16] == 0 and BoardSquarePos < 16 and BoardSquarePos >= 8)
 					{
 						moves[BoardSquarePos].PieceType = PieceType;
 						moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + 16);
