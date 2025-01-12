@@ -251,7 +251,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		if (CalculateEVERYMove)
 		{
 			auto start = std::chrono::high_resolution_clock::now();
-			std::cout << "Nodes searched: " << Perft(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, 4, true) << '\n';
+			std::cout << "Nodes searched: " << Perft(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, 5, true) << '\n';
 			auto stop = std::chrono::high_resolution_clock::now();
 			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 			std::cout << "In " << duration.count() << " ms" << '\n';

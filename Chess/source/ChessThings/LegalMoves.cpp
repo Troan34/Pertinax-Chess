@@ -228,8 +228,8 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 							if ((PieceTypeAtOffsetBehind == 14 and isNextMoveForWhite) or (PieceTypeAtOffsetBehind == 22 and !isNextMoveForWhite))
 							{
 								absPin_iter = moves[BoardSquarePos].PinnedTargetSquares.end();
-
-								for (unsigned int k = i + 1; k < j; k++)
+								WhichBoardSquaresAreAbsPinned[BoardSquarePos + (OffsetForDirections[direction] * i)] = BoardSquarePos;
+								for (unsigned int k = i + 1; k <= j; k++)
 								{
 									WhichBoardSquaresAreAbsPinned[*(absPin_iter - (k - (i)))] = BoardSquarePos;
 								}
@@ -293,8 +293,8 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 							if ((PieceTypeAtOffsetBehind == 14 and isNextMoveForWhite) or (PieceTypeAtOffsetBehind == 22 and !isNextMoveForWhite))
 							{
 								absPin_iter = moves[BoardSquarePos].PinnedTargetSquares.end();
-
-								for (unsigned int k = i + 1; k < j; k++)
+								WhichBoardSquaresAreAbsPinned[BoardSquarePos + (OffsetForDirections[direction] * i)] = BoardSquarePos;
+								for (unsigned int k = i + 1; k <= j; k++)
 								{
 									WhichBoardSquaresAreAbsPinned[*(absPin_iter - (k - (i)))] = BoardSquarePos;
 								}
@@ -357,8 +357,8 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 							if ((PieceTypeAtOffsetBehind == 14 and isNextMoveForWhite) or (PieceTypeAtOffsetBehind == 22 and !isNextMoveForWhite))
 							{
 								absPin_iter = moves[BoardSquarePos].PinnedTargetSquares.end();
-
-								for (unsigned int k = i + 1; k < j; k++)
+								WhichBoardSquaresAreAbsPinned[BoardSquarePos + (OffsetForDirections[direction] * i)] = BoardSquarePos;
+								for (unsigned int k = i + 1; k <= j; k++)
 								{
 									WhichBoardSquaresAreAbsPinned[*(absPin_iter - (k - (i)))] = BoardSquarePos;
 								}

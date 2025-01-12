@@ -39,7 +39,7 @@ public:
 	std::array<bool, 64> PinnedSquaresWithTheKingBeingPinned;
 
 	/**
-	* array with every abs pinned square(behind the piece pinned until the king)
+	* array with every abs pinned square(behind the piece pinned until the king + actual piece pinned)
 	* 
 	* The array is structured like a Board in which squares that are pinned (behind pinned piece)
 	* receive the value of the pinning piece BoardSquarePos
