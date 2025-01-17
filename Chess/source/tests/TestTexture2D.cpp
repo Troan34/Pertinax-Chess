@@ -77,7 +77,8 @@ namespace test {
 		RenderChessPieces renderChessPieces;
 		renderChessPieces.GetMouseInput(window);
 		renderChessPieces.SetStaticBoardSquare(board.GetPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"));
-		auto position = renderChessPieces.MemcopyObjects(renderChessPieces.CreateObjects());
+		auto quads = renderChessPieces.CreateObjects();
+		auto position = renderChessPieces.MemcopyObjects(quads);
 		
 		//just dont look at this
 		GLCall(glBindTextureUnit(0, TEX_ChessBoard));

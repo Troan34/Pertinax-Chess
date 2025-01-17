@@ -1,7 +1,7 @@
 #include "LegalMoves.h"
 static std::array<unsigned int, 64> m_previousBoardSquare;
 static std::array<MOVE, 64> OppositeMoves;
-GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum)
+GenerateLegalMoves::GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, const std::array<unsigned int, 64>& previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum)
 	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
 {
 	for (int file = 0; file < 8; file++)
@@ -40,7 +40,7 @@ GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSqu
 	}
 	m_previousBoardSquare = previousBoardSquare;
 }
-GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum)
+GenerateLegalMoves::GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum)
 	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
 {
 	for (int file = 0; file < 8; file++)
@@ -75,7 +75,7 @@ GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSqu
 	else
 		std::cout << "Checkmate" << '\n';
 }
-GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
+GenerateLegalMoves::GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
 	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
 {
 	for (int file = 0; file < 8; file++)
@@ -102,7 +102,7 @@ GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSqu
 	}
 	GenerateMoves(isNextMoveForWhite);
 }
-GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
+GenerateLegalMoves::GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, const std::array<unsigned int, 64>& previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
 	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
 {
 	for (int file = 0; file < 8; file++)
@@ -129,6 +129,11 @@ GenerateLegalMoves::GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSqu
 	}
 	GenerateMoves(isNextMoveForWhite);
 	m_previousBoardSquare = previousBoardSquare;
+}
+
+GenerateLegalMoves::~GenerateLegalMoves()
+{
+
 }
 
 void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
@@ -484,7 +489,6 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 				else if (PieceTypeAtOffset == 0 and Offset != 8)
 				{
 					moves[BoardSquarePos].PieceType = PieceType;
-					moves[BoardSquarePos].AttackableSquares.push_back(BoardPosPlusOffset);
 					AttackedSquares[BoardPosPlusOffset] = true;
 				}
 
@@ -530,7 +534,6 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 				else if (PieceTypeAtOffset == 0 and Offset != -8)
 				{
 					moves[BoardSquarePos].PieceType = PieceType;
-					moves[BoardSquarePos].AttackableSquares.push_back(BoardPosPlusOffset);
 					AttackedSquares[BoardPosPlusOffset] = true;
 				}
 				//en passant
@@ -574,12 +577,10 @@ void GenerateLegalMoves::KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 			if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[1] == 0 and m_BoardSquare[2] == 0 and m_BoardSquare[3] == 0)
 			{
 				moves[4].TargetSquares.push_back(2);
-				moves[4].Castle = 1;
 			}
 			if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[5] == 0 and m_BoardSquare[6] == 0)
 			{
 				moves[4].TargetSquares.push_back(6);
-				moves[4].Castle = 2;
 			}
 		}
 		if (PieceType == 14 and !CanCastle.HasBlackKingMoved)
@@ -587,12 +588,10 @@ void GenerateLegalMoves::KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 			if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[57] == 0 and m_BoardSquare[58] == 0 and m_BoardSquare[59] == 0)
 			{
 				moves[60].TargetSquares.push_back(58);
-				moves[60].Castle = 3;
 			}
 			if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[61] == 0 and m_BoardSquare[62] == 0)
 			{
 				moves[60].TargetSquares.push_back(62);
-				moves[60].Castle = 4;
 			}
 		}
 	}
@@ -690,7 +689,6 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 					{
 						LegalMoves[count].PieceType = Piece.PieceType;
 						LegalMoves[count].TargetSquares.push_back(Move);
-						LegalMoves[count].Castle = Piece.Castle;
 						isItCheckmate = false;
 					}
 				}
@@ -719,7 +717,6 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 					{
 						LegalMoves[count].TargetSquares.push_back(Move);
 						LegalMoves[count].PieceType = Piece.PieceType;
-						LegalMoves[count].Castle = Piece.Castle;
 						isItCheckmate = false;
 					}
 				}
@@ -729,7 +726,6 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 				for (uint16_t Move : Piece.TargetSquares)
 				{
 					LegalMoves[count].TargetSquares.push_back(Move);
-					LegalMoves[count].Castle = Piece.Castle;
 					isItCheckmate = false;
 				}
 			}

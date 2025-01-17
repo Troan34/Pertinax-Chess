@@ -10,9 +10,7 @@ struct MOVE
 	uint8_t PieceType;
 	std::vector<uint8_t> TargetSquares;
 	std::vector<uint8_t> PinnedTargetSquares;
-	std::vector<uint8_t> AttackableSquares;
 	uint8_t PieceTypeUnderAttack;
-	uint8_t Castle;
 };
 
 struct canCastle
@@ -47,10 +45,11 @@ public:
 	std::array<unsigned int, 64> WhichBoardSquaresAreAbsPinned;
 	std::array<unsigned int, 64> CheckTargetSquares;
 	unsigned int MoveNum;
-	GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum);
-	GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum);
-	GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
-	GenerateLegalMoves(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
+	GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, const std::array<unsigned int, 64>& previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum);
+	GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum);
+	GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
+	GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, const std::array<unsigned int, 64>& previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
+	~GenerateLegalMoves();
 	void GenerateMoves(bool isNextMoveForWhite);
 	void SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhite);
 	void KnightMoveGen(int BoardSquarePos, bool isNextMoveForWhite);

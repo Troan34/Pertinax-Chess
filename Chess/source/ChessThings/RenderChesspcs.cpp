@@ -42,18 +42,29 @@ RenderChessPieces::~RenderChessPieces()
 
 std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObjects()
 {
-
-	std::array<std::array<VertexStructure, 4Ui64>, 130> quads{};
+	std::array<std::array<VertexStructure, 4Ui64>, 130> quads;
 	quads[0] = CreateQuad(-350.0f, -350.0f, 700.0f, 0.0f);
 	float xDifference = 0.0f;
 	float yDifference = 0.0f;
-
 	
 	previousBoardsquare = static_BoardSquare;
 
 	bool isNextMoveForWhite = true;
 	if (MoveNum % 2 != 0)
 		isNextMoveForWhite = false;
+
+	//start perft
+	if (CalculateEVERYMove)
+	{
+		canCastle perftCastle = CanCastle;
+		auto start = std::chrono::high_resolution_clock::now();
+		std::cout << "Nodes searched: " << Perft(static_BoardSquare, previousBoardsquare, perftCastle, isNextMoveForWhite, MoveNum, 5, true) << '\n';
+		auto stop = std::chrono::high_resolution_clock::now();
+		auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+		std::cout << "In " << duration.count() << " ms" << '\n';
+	}
+
+	CalculateEVERYMove = false;
 
 	//Legal Moves
 	if (BoardSquareBeingSelected != -1)
@@ -213,8 +224,8 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 										}
 									}
 								}
+								WillCanCastleChange(static_BoardSquare[BoardSquareBeingSelected], BoardSquareBeingSelected, CanCastle);
 								BoardSquareBeingSelected = -1;
-								WillCanCastleChange(static_BoardSquare[i - 1], i - 1);
 								LegalMovesForSelectedSquare.clear();
 							}
 							else
@@ -247,24 +258,14 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		
 		xDifference += 87.5f;
 
-		//start perft
-		if (CalculateEVERYMove)
-		{
-			auto start = std::chrono::high_resolution_clock::now();
-			std::cout << "Nodes searched: " << Perft(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, 5, true) << '\n';
-			auto stop = std::chrono::high_resolution_clock::now();
-			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-			std::cout << "In " << duration.count() << " ms" << '\n';
-		}
-
-		CalculateEVERYMove = false;
+		
 	}
 
 	return quads;
 }
 
 //could output a vector, but this is chess, not a game engine
-std::array<VertexStructure, 520> RenderChessPieces::MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,130> quads)
+std::array<VertexStructure, 520> RenderChessPieces::MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,130>& quads)
 {
 
 	std::array<VertexStructure, 520> positions{};
@@ -288,20 +289,20 @@ std::array<VertexStructure, 520> RenderChessPieces::MemcopyObjects(std::array<st
 	return positions;
 }
 
-void RenderChessPieces::WillCanCastleChange(unsigned int PieceType, unsigned int BoardSquareNum)
+void RenderChessPieces::WillCanCastleChange(unsigned int PieceType, unsigned int BoardSquareNumItMovedFrom, canCastle& Castle)
 {
-	if (BoardSquareNum == 5 and PieceType == 0)
-		CanCastle.HasWhiteKingMoved = true;
-	else if (PieceType == 0 and BoardSquareNum == 61)
-		CanCastle.HasBlackKingMoved = true;
-	else if (PieceType == 0 and BoardSquareNum == 0)
-		CanCastle.HasWhiteLongRookMoved = true;
-	else if (PieceType == 0 and BoardSquareNum == 8)
-		CanCastle.HasWhiteShortRookMoved = true;
-	else if (PieceType == 0 and BoardSquareNum == 64)
-		CanCastle.HasBlackShortRookMoved = true;
-	else if (PieceType == 0 and BoardSquareNum == 57)
-		CanCastle.HasBlackLongRookMoved = true;
+	if (BoardSquareNumItMovedFrom == 5 and PieceType == 22)
+		Castle.HasWhiteKingMoved = true;
+	else if (PieceType == 14 and BoardSquareNumItMovedFrom == 61)
+		Castle.HasBlackKingMoved = true;
+	else if (PieceType == 20 and BoardSquareNumItMovedFrom == 0)
+		Castle.HasWhiteLongRookMoved = true;
+	else if (PieceType == 20 and BoardSquareNumItMovedFrom == 8)
+		Castle.HasWhiteShortRookMoved = true;
+	else if (PieceType == 12 and BoardSquareNumItMovedFrom == 64)
+		Castle.HasBlackShortRookMoved = true;
+	else if (PieceType == 12 and BoardSquareNumItMovedFrom == 57)
+		Castle.HasBlackLongRookMoved = true;
 }
 
 float RenderChessPieces::GetPieceTextureID(std::array<unsigned int, 64> BoardSquare, unsigned int i)
@@ -387,7 +388,7 @@ void RenderChessPieces::GetMouseInput(GLFWwindow* window)
  
 }
 
-void RenderChessPieces::SetStaticBoardSquare(std::array<unsigned int, 64> BoardSquare)
+void RenderChessPieces::SetStaticBoardSquare(const std::array<unsigned int, 64>& BoardSquare)
 {
 	if (wasStatic_BoardSquareCreated == false)
 	{
@@ -396,11 +397,11 @@ void RenderChessPieces::SetStaticBoardSquare(std::array<unsigned int, 64> BoardS
 	}
 }
 
-uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, uint8_t depth, bool DivideFunON)
+uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> perftPreviousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, uint8_t depth, bool DivideFunON)
 {
 	
 	uint32_t NumOfMoves = 0;
-	GenerateLegalMoves LegalMoves(BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum);
+	GenerateLegalMoves LegalMoves(BoardSquare, perftPreviousBoardSquare, CanCastle, isNextMoveForWhite, MoveNum);
 	//Bulk Counting
 	if (depth == 1)
 	{
@@ -422,7 +423,7 @@ uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, 
 		for (unsigned int move : piece.TargetSquares)
 		{
 
-			MakeMove(count, move, BoardSquare, previousBoardSquare);
+			MakeMove(count, move, BoardSquare, perftPreviousBoardSquare, CanCastle);
 			if (DivideFunON)
 			{
 				uint32_t DivideFunNum = 0;
@@ -440,8 +441,9 @@ uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, 
 	return NumOfMoves;
 }
 
-void RenderChessPieces::MakeMove(unsigned int BoardSquare, unsigned int move, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64> fun_previousBoardSquare)
+void RenderChessPieces::MakeMove(unsigned int BoardSquare, unsigned int move, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64>& fun_previousBoardSquare, canCastle& Castle)
 {
+	WillCanCastleChange(fun_BoardSquare[BoardSquare], BoardSquare, Castle);
 	fun_BoardSquare[move] = fun_BoardSquare[BoardSquare];
 	fun_BoardSquare[BoardSquare] = 0;
 	//castling and en passant
@@ -503,5 +505,4 @@ void RenderChessPieces::MakeMove(unsigned int BoardSquare, unsigned int move, st
 			}
 		}
 	}
-
 }

@@ -1,21 +1,21 @@
 ﻿  RenderChesspcs.cpp
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(63,71): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(74,71): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
           with
           [
               _Ty=unsigned int
           ]
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(146,79): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(148,116): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(157,79): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(159,116): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
           with
           [
               _Ty=unsigned int
           ]
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(222,77): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(233,77): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
           with
           [
               _Ty=unsigned int
           ]
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(228,76): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(239,76): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
           with
           [
               _Ty=unsigned int
