@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <unordered_set>
 #include <chrono>
+#include <string>
 
 struct MouseInput
 {
@@ -41,6 +42,6 @@ public:
 	float GetPieceTextureID(std::array<unsigned int, 64> BoardSquare, unsigned int i);
 	void SetStaticBoardSquare(const std::array<unsigned int, 64>& BoardSquare);
 	void GetMouseInput(GLFWwindow* window);
-	uint32_t Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, uint8_t depth, bool DivideFunON);
+	uint32_t Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON);
 	void MakeMove(unsigned int BoardSquare, unsigned int move, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64>& fun_previousBoardSquare, canCastle& Castle);
 };

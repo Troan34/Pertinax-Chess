@@ -26,7 +26,7 @@ namespace test {
 
 		m_VAO = std::make_unique<VertexArray>();
 		
-		m_VertexBuffer = std::make_unique<VertexBuffer>(nullptr, sizeof(VertexStructure)*2000);
+		m_VertexBuffer = std::make_unique<VertexBuffer>(nullptr, sizeof(VertexStructure)*1000);
 		VertexBufferLayout layout;
 		layout.Push<float>(2);
 		layout.Push<float>(2);
@@ -57,7 +57,8 @@ namespace test {
 		int samplers[15] = { 0, 1, 2, 3, 4, 5 ,6, 7, 8, 9, 10, 11, 12 ,13, 14 };
 		m_Shader->SetUniform1iv("u_Textures", 15, *samplers);
 
-		
+		std::cout << "Welcome to Pertinax" << std::endl;
+		std::cout << "'help' for commands" << std::endl;
 
 	}
 

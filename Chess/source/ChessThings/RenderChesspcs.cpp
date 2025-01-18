@@ -32,6 +32,11 @@ static void mouseButtonCallBack(GLFWwindow* window, int button, int action, int 
 	}
 }
 
+static std::string GetCommand()
+{
+
+}
+
 RenderChessPieces::RenderChessPieces()
 {
 }
@@ -46,25 +51,57 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 	quads[0] = CreateQuad(-350.0f, -350.0f, 700.0f, 0.0f);
 	float xDifference = 0.0f;
 	float yDifference = 0.0f;
-	
 	previousBoardsquare = static_BoardSquare;
+
+
+	std::string command;
+	std::getline(std::cin, command);
+	while(command == "help")
+	{
+		std::cout << "- perft {depth}" << '\n' <<
+			"other things" << std::endl;
+		std::getline(std::cin, command);
+	}
+
+	//start perft
+	if (command.find("perft") != std::string::npos)
+	{
+		uint16_t strIndex = command.find("perft");
+
+		char depth = command.at(strIndex + 6);
+		if (!isdigit(depth))
+		{
+			std::cout << "Wrong syntax" << std::endl;
+		}
+		else
+		{
+			depth = (uint8_t)depth - '0';
+			canCastle perftCastle = CanCastle;
+			auto perftBoardsquare = static_BoardSquare;
+			auto perftPreviousBoardsquare = previousBoardsquare;
+			//use when debugging
+			//MakeMove(8, 24, perftBoardsquare, perftPreviousBoardsquare, perftCastle);
+
+			bool isNextMoveForWhite = true;
+			if (MoveNum % 2 != 0)
+				isNextMoveForWhite = false;
+
+			auto start = std::chrono::high_resolution_clock::now();
+			std::cout << "Nodes searched: " << Perft(perftBoardsquare, perftPreviousBoardsquare, perftCastle, isNextMoveForWhite, depth, true) << '\n';
+			auto stop = std::chrono::high_resolution_clock::now();
+			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+			std::cout << "In " << duration.count() << " ms" << '\n';
+
+			MoveNum = 0;
+		}
+	}
+
+	CalculateEVERYMove = false;
 
 	bool isNextMoveForWhite = true;
 	if (MoveNum % 2 != 0)
 		isNextMoveForWhite = false;
 
-	//start perft
-	if (CalculateEVERYMove)
-	{
-		canCastle perftCastle = CanCastle;
-		auto start = std::chrono::high_resolution_clock::now();
-		std::cout << "Nodes searched: " << Perft(static_BoardSquare, previousBoardsquare, perftCastle, isNextMoveForWhite, MoveNum, 5, true) << '\n';
-		auto stop = std::chrono::high_resolution_clock::now();
-		auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-		std::cout << "In " << duration.count() << " ms" << '\n';
-	}
-
-	CalculateEVERYMove = false;
 
 	//Legal Moves
 	if (BoardSquareBeingSelected != -1)
@@ -397,9 +434,8 @@ void RenderChessPieces::SetStaticBoardSquare(const std::array<unsigned int, 64>&
 	}
 }
 
-uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> perftPreviousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, uint8_t depth, bool DivideFunON)
+uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> perftPreviousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON)
 {
-	
 	uint32_t NumOfMoves = 0;
 	GenerateLegalMoves LegalMoves(BoardSquare, perftPreviousBoardSquare, CanCastle, isNextMoveForWhite, MoveNum);
 	//Bulk Counting
@@ -427,12 +463,12 @@ uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, 
 			if (DivideFunON)
 			{
 				uint32_t DivideFunNum = 0;
-				DivideFunNum += Perft(BoardSquare, BoardSquare_Copy, CanCastle, !isNextMoveForWhite, MoveNum, depth - 1, false);
+				DivideFunNum += Perft(BoardSquare, BoardSquare_Copy, CanCastle, !isNextMoveForWhite, depth - 1, false);
 				NumOfMoves += DivideFunNum;
 				std::cout << count << " " << move << ": " << DivideFunNum << '\n';
 			}
 			else
-				NumOfMoves += Perft(BoardSquare, BoardSquare_Copy, CanCastle, !isNextMoveForWhite, MoveNum, depth - 1, false);
+				NumOfMoves += Perft(BoardSquare, BoardSquare_Copy, CanCastle, !isNextMoveForWhite, depth - 1, false);
 			BoardSquare = BoardSquare_Copy;
 		}
 		count++;
@@ -505,4 +541,5 @@ void RenderChessPieces::MakeMove(unsigned int BoardSquare, unsigned int move, st
 			}
 		}
 	}
+	MoveNum++;
 }
