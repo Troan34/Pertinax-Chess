@@ -1,16 +1,31 @@
 #include "RenderChesspcs.h"
 static MouseInput g_mouseInput;
+
 static float RememberTexID;
 static std::array<unsigned int, 64Ui64> static_BoardSquare;
 static bool wasStatic_BoardSquareCreated = false;
 static std::array<unsigned int, 64Ui64> previousBoardsquare;
 static bool wasStatic_previousBoardsquareCreated = false;
+
+//(mostly) Drop fun vars
 static unsigned int MoveNum = 0;
 static canCastle CanCastle;
 static int BoardSquareBeingSelected = -1;
 int AttackedSquare = -1;
 std::unordered_set<unsigned int> LegalMovesForSelectedSquare;
-static bool CalculateEVERYMove = 1;
+
+//multithreading vars
+static std::atomic<bool> IsGetCommandRunning = true;
+static std::string Command;
+static std::atomic<bool> ReceivedACommand(false);
+
+RenderChessPieces::RenderChessPieces()
+{
+}
+RenderChessPieces::~RenderChessPieces()
+{
+
+}
 
 static void cursorPositionCallBack(GLFWwindow* window, double xPosition, double yPosition)
 {
@@ -32,19 +47,17 @@ static void mouseButtonCallBack(GLFWwindow* window, int button, int action, int 
 	}
 }
 
-static std::string GetCommand()
+//waits for a command to be written
+static void GetCommand()
 {
-
+	std::getline(std::cin, Command);
+	ReceivedACommand = true;
+	IsGetCommandRunning = false;
 }
 
-RenderChessPieces::RenderChessPieces()
-{
-}
-RenderChessPieces::~RenderChessPieces()
-{
+static std::thread CommandThread(GetCommand);
 
-}
-
+/**********************************************************************************************/
 std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObjects()
 {
 	std::array<std::array<VertexStructure, 4Ui64>, 130> quads;
@@ -53,50 +66,45 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 	float yDifference = 0.0f;
 	previousBoardsquare = static_BoardSquare;
 
-
-	std::string command;
-	std::getline(std::cin, command);
-	while(command == "help")
+	//Console Commands and threads
+	if (!IsGetCommandRunning)
 	{
-		std::cout << "- perft {depth}" << '\n' <<
-			"other things" << std::endl;
-		std::getline(std::cin, command);
+		CommandThread.join();
+		CommandThread = std::thread(GetCommand);
+		IsGetCommandRunning = true;
 	}
 
-	//start perft
-	if (command.find("perft") != std::string::npos)
+	if (ReceivedACommand == true)
 	{
-		uint16_t strIndex = command.find("perft");
-
-		char depth = command.at(strIndex + 6);
-		if (!isdigit(depth))
+		if (Command == "help")
 		{
-			std::cout << "Wrong syntax" << std::endl;
+			std::cout << "perft {depth}" << '\n' <<
+				"other things\n";
 		}
-		else
+		else if (Command.find("perft") != std::string::npos)
 		{
-			depth = (uint8_t)depth - '0';
-			canCastle perftCastle = CanCastle;
-			auto perftBoardsquare = static_BoardSquare;
-			auto perftPreviousBoardsquare = previousBoardsquare;
-			//use when debugging
-			//MakeMove(8, 24, perftBoardsquare, perftPreviousBoardsquare, perftCastle);
+			uint16_t strIndex = Command.find("perft");
 
-			bool isNextMoveForWhite = true;
-			if (MoveNum % 2 != 0)
-				isNextMoveForWhite = false;
-
-			auto start = std::chrono::high_resolution_clock::now();
-			std::cout << "Nodes searched: " << Perft(perftBoardsquare, perftPreviousBoardsquare, perftCastle, isNextMoveForWhite, depth, true) << '\n';
-			auto stop = std::chrono::high_resolution_clock::now();
-			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-			std::cout << "In " << duration.count() << " ms" << '\n';
-
-			MoveNum = 0;
+			char depth = Command.at(strIndex + 6);
+			if (!isdigit(depth))
+			{
+				std::cout << "Wrong syntax" << std::endl;
+			}
+			else
+			{
+				depth = (uint8_t)depth - '0';
+				std::thread RunPerft(&RenderChessPieces::CreatePerft, this, depth);
+				RunPerft.detach();
+			}
+		}
+		if (!IsGetCommandRunning)
+		{
+			CommandThread.join();
+			CommandThread = std::thread(GetCommand);
+			IsGetCommandRunning = true;
+			ReceivedACommand = false;
 		}
 	}
-
-	CalculateEVERYMove = false;
 
 	bool isNextMoveForWhite = true;
 	if (MoveNum % 2 != 0)
@@ -542,4 +550,25 @@ void RenderChessPieces::MakeMove(unsigned int BoardSquare, unsigned int move, st
 		}
 	}
 	MoveNum++;
+}
+
+void RenderChessPieces::CreatePerft(uint8_t PerftDepth)
+{
+	canCastle perftCastle = CanCastle;
+	auto perftBoardsquare = static_BoardSquare;
+	auto perftPreviousBoardsquare = previousBoardsquare;
+	//use when debugging
+	//MakeMove(8, 24, perftBoardsquare, perftPreviousBoardsquare, perftCastle);
+
+	bool isNextMoveForWhite = true;
+	if (MoveNum % 2 != 0)
+		isNextMoveForWhite = false;
+
+	auto start = std::chrono::high_resolution_clock::now();
+	std::cout << "Nodes searched: " << Perft(perftBoardsquare, perftPreviousBoardsquare, perftCastle, isNextMoveForWhite, PerftDepth, true) << '\n';
+	auto stop = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+	std::cout << "In " << duration.count() << " ms" << '\n';
+
+	MoveNum = 0;
 }

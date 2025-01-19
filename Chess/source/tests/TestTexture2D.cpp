@@ -17,7 +17,6 @@ namespace test {
 		m_TranslationA(353,363,0), m_TranslationB(400,200,0)
 		
 	{
-
 		glm::vec3 translationA(200, 200, 0);
 
 
@@ -60,6 +59,7 @@ namespace test {
 		std::cout << "Welcome to Pertinax" << std::endl;
 		std::cout << "'help' for commands" << std::endl;
 
+
 	}
 
 	TestTexture2D::~TestTexture2D()
@@ -80,7 +80,6 @@ namespace test {
 		renderChessPieces.SetStaticBoardSquare(board.GetPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"));
 		auto quads = renderChessPieces.CreateObjects();
 		auto position = renderChessPieces.MemcopyObjects(quads);
-		
 		//just dont look at this
 		GLCall(glBindTextureUnit(0, TEX_ChessBoard));
 		GLCall(glBindTextureUnit(7, TEX_P));
@@ -105,6 +104,7 @@ namespace test {
 		//TODO: Actually, i have no idea how to fix the artifacts
 
 		renderChessPieces.WasLeftButtonPressed();
+
 
 		{
 			glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationA);

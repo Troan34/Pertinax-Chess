@@ -12,6 +12,10 @@
 #include <unordered_set>
 #include <chrono>
 #include <string>
+#include <atomic>
+#include <thread>
+#include <mutex>
+
 
 struct MouseInput
 {
@@ -44,4 +48,5 @@ public:
 	void GetMouseInput(GLFWwindow* window);
 	uint32_t Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON);
 	void MakeMove(unsigned int BoardSquare, unsigned int move, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64>& fun_previousBoardSquare, canCastle& Castle);
+	void CreatePerft(uint8_t PerftDepth);
 };
