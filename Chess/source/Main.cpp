@@ -20,6 +20,8 @@
 #include "tests/TestTexture2D.h"
 #include "ChessThings/Board.h"
 
+//#define VSync 1;
+
 
 int main(void)
 {
@@ -43,6 +45,9 @@ int main(void)
     }
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
+#ifdef VSync
+    glfwSwapInterval(1);
+#endif
 
     if (glewInit() != GLEW_OK) {
         std::cout << "Err" << '\n';
@@ -97,6 +102,7 @@ int main(void)
 
             /* Poll for and process events */
             glfwPollEvents();
+
         }
         delete currentTest;
         if (currentTest != testMenu)

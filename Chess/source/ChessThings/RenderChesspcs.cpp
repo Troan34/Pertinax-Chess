@@ -95,15 +95,21 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 				depth = (uint8_t)depth - '0';
 				std::thread RunPerft(&RenderChessPieces::CreatePerft, this, depth);
 				RunPerft.detach();
+				std::cout << "Main CPU: " << GetCurrentProcessorNumber() << std::endl;
 			}
 		}
+		else
+		{
+			std::cout << "Wrong syntax" << std::endl;
+		}
+
 		if (!IsGetCommandRunning)
 		{
 			CommandThread.join();
 			CommandThread = std::thread(GetCommand);
 			IsGetCommandRunning = true;
-			ReceivedACommand = false;
 		}
+		ReceivedACommand = false;
 	}
 
 	bool isNextMoveForWhite = true;
@@ -157,6 +163,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		static_BoardSquare[BoardSquareBeingSelected] = 0;
 	}
 
+	//rendering part
  	for (int i = 1; i < 65; i++)
 	{
 		if (xDifference > 650.0f)
@@ -554,14 +561,16 @@ void RenderChessPieces::MakeMove(unsigned int BoardSquare, unsigned int move, st
 
 void RenderChessPieces::CreatePerft(uint8_t PerftDepth)
 {
+	std::cout << "Worker at start CPU: " << GetCurrentProcessorNumber() << std::endl;
 	canCastle perftCastle = CanCastle;
 	auto perftBoardsquare = static_BoardSquare;
 	auto perftPreviousBoardsquare = previousBoardsquare;
+	auto Movenum = MoveNum;
 	//use when debugging
 	//MakeMove(8, 24, perftBoardsquare, perftPreviousBoardsquare, perftCastle);
 
 	bool isNextMoveForWhite = true;
-	if (MoveNum % 2 != 0)
+	if (Movenum % 2 != 0)
 		isNextMoveForWhite = false;
 
 	auto start = std::chrono::high_resolution_clock::now();
@@ -570,5 +579,5 @@ void RenderChessPieces::CreatePerft(uint8_t PerftDepth)
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 	std::cout << "In " << duration.count() << " ms" << '\n';
 
-	MoveNum = 0;
+	std::cout << "Worker CPU: " << GetCurrentProcessorNumber() << std::endl;
 }

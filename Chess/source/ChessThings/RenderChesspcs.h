@@ -15,6 +15,7 @@
 #include <atomic>
 #include <thread>
 #include <mutex>
+#include <windows.h>
 
 
 struct MouseInput
