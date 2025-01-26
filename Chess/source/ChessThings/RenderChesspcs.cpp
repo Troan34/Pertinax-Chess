@@ -93,9 +93,8 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 			else
 			{
 				depth = (uint8_t)depth - '0';
-				std::thread RunPerft(&RenderChessPieces::CreatePerft, this, depth);
-				RunPerft.detach();
-				std::cout << "Main CPU: " << GetCurrentProcessorNumber() << std::endl;
+				void_Futures.push_back(std::async(std::launch::async, &RenderChessPieces::CreatePerft, this, depth));
+				//std::cout << "Main CPU: " << GetCurrentProcessorNumber() << std::endl;
 			}
 		}
 		else
@@ -449,7 +448,7 @@ void RenderChessPieces::SetStaticBoardSquare(const std::array<unsigned int, 64>&
 	}
 }
 
-uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> perftPreviousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON)
+uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> perftPreviousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int& PerftMoveNum)
 {
 	uint32_t NumOfMoves = 0;
 	GenerateLegalMoves LegalMoves(BoardSquare, perftPreviousBoardSquare, CanCastle, isNextMoveForWhite, MoveNum);
@@ -474,16 +473,16 @@ uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, 
 		for (unsigned int move : piece.TargetSquares)
 		{
 
-			MakeMove(count, move, BoardSquare, perftPreviousBoardSquare, CanCastle);
+			MakeMove(count, move, PerftMoveNum, BoardSquare, perftPreviousBoardSquare, CanCastle);
 			if (DivideFunON)
 			{
 				uint32_t DivideFunNum = 0;
-				DivideFunNum += Perft(BoardSquare, BoardSquare_Copy, CanCastle, !isNextMoveForWhite, depth - 1, false);
+				DivideFunNum += Perft(BoardSquare, BoardSquare_Copy, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
 				NumOfMoves += DivideFunNum;
 				std::cout << count << " " << move << ": " << DivideFunNum << '\n';
 			}
 			else
-				NumOfMoves += Perft(BoardSquare, BoardSquare_Copy, CanCastle, !isNextMoveForWhite, depth - 1, false);
+				NumOfMoves += Perft(BoardSquare, BoardSquare_Copy, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
 			BoardSquare = BoardSquare_Copy;
 		}
 		count++;
@@ -492,7 +491,7 @@ uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, 
 	return NumOfMoves;
 }
 
-void RenderChessPieces::MakeMove(unsigned int BoardSquare, unsigned int move, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64>& fun_previousBoardSquare, canCastle& Castle)
+void RenderChessPieces::MakeMove(unsigned int BoardSquare, unsigned int move, unsigned int& PerftMoveNum, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64>& fun_previousBoardSquare, canCastle& Castle)
 {
 	WillCanCastleChange(fun_BoardSquare[BoardSquare], BoardSquare, Castle);
 	fun_BoardSquare[move] = fun_BoardSquare[BoardSquare];
@@ -556,28 +555,26 @@ void RenderChessPieces::MakeMove(unsigned int BoardSquare, unsigned int move, st
 			}
 		}
 	}
-	MoveNum++;
+	PerftMoveNum++;
 }
 
 void RenderChessPieces::CreatePerft(uint8_t PerftDepth)
 {
-	std::cout << "Worker at start CPU: " << GetCurrentProcessorNumber() << std::endl;
+	//std::cout << "Worker at start CPU: " << GetCurrentProcessorNumber() << std::endl;
 	canCastle perftCastle = CanCastle;
 	auto perftBoardsquare = static_BoardSquare;
 	auto perftPreviousBoardsquare = previousBoardsquare;
 	auto Movenum = MoveNum;
-	//use when debugging
-	//MakeMove(8, 24, perftBoardsquare, perftPreviousBoardsquare, perftCastle);
 
 	bool isNextMoveForWhite = true;
 	if (Movenum % 2 != 0)
 		isNextMoveForWhite = false;
 
 	auto start = std::chrono::high_resolution_clock::now();
-	std::cout << "Nodes searched: " << Perft(perftBoardsquare, perftPreviousBoardsquare, perftCastle, isNextMoveForWhite, PerftDepth, true) << '\n';
+	std::cout << "Nodes searched: " << Perft(perftBoardsquare, perftPreviousBoardsquare, perftCastle, isNextMoveForWhite, PerftDepth, true, Movenum) << '\n';
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 	std::cout << "In " << duration.count() << " ms" << '\n';
 
-	std::cout << "Worker CPU: " << GetCurrentProcessorNumber() << std::endl;
+	//std::cout << "Worker CPU: " << GetCurrentProcessorNumber() << std::endl;
 }

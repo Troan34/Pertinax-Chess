@@ -16,6 +16,7 @@
 #include <thread>
 #include <mutex>
 #include <windows.h>
+#include <future>
 
 
 struct MouseInput
@@ -34,7 +35,7 @@ class RenderChessPieces
 {
 private:
 	std::array<unsigned int, 64> BoardSquare;
-	
+	std::vector<std::future<void>> void_Futures;
 
 public:
 	RenderChessPieces();
@@ -47,7 +48,7 @@ public:
 	float GetPieceTextureID(std::array<unsigned int, 64> BoardSquare, unsigned int i);
 	void SetStaticBoardSquare(const std::array<unsigned int, 64>& BoardSquare);
 	void GetMouseInput(GLFWwindow* window);
-	uint32_t Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON);
-	void MakeMove(unsigned int BoardSquare, unsigned int move, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64>& fun_previousBoardSquare, canCastle& Castle);
+	uint32_t Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int& PerftMoveNum);
+	void MakeMove(unsigned int BoardSquare, unsigned int move, unsigned int& PerftMoveNum, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64>& fun_previousBoardSquare, canCastle& Castle);
 	void CreatePerft(uint8_t PerftDepth);
 };

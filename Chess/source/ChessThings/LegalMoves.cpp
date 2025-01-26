@@ -35,7 +35,7 @@ GenerateLegalMoves::GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& B
 	else
 	{
 		moves = LegalMoves;
-		std::cout << "Checkmate" << '\n';
+		//std::cout << "Checkmate" << '\n';
 	}
 	m_previousBoardSquare = previousBoardSquare;
 }
@@ -70,8 +70,8 @@ GenerateLegalMoves::GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& B
 	{
 			moves = LegalMoves;
 	}
-	else
-		std::cout << "Checkmate" << '\n';
+	//else
+		//std::cout << "Checkmate" << '\n';
 }
 GenerateLegalMoves::GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
 	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
@@ -729,6 +729,103 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 			count++;
 		}
 	}
+
+
+
+
+
+	//moves for King
+	if (SquareWhichTargetSquaresThatAreChecking.size() >= 0)
+	{
+		uint8_t IterCount = 0;
+		for (unsigned int KingMove : moves[BoardSquareOfAttackedKing].TargetSquares)
+		{
+			//checks if possible move square is not under attack
+			if (!OppositeMoves.AttackedSquares[KingMove] == false)
+			{
+				//checks if possible move is not going to be under attack when it's made
+				if (!OppositeMoves.PinnedSquaresWithTheKingBeingPinned[KingMove] == false)
+				{
+					moves[BoardSquareOfAttackedKing].TargetSquares.erase(moves[BoardSquareOfAttackedKing].TargetSquares.begin() + IterCount);
+					isItCheckmate = false;
+				}
+			}
+			count++;
+		}
+	}
+	//Moves for every piece while check
+	if (SquareWhichTargetSquaresThatAreChecking.size() == 1)
+	{
+		count = 0;
+		for (MOVE Piece : moves)
+		{
+			if (Piece.PieceType == 22 or Piece.PieceType == 14)
+			{
+				count++;
+				continue;
+			}
+
+			//checks if not under abs pin
+			if (!OppositeMoves.WhichBoardSquaresAreAbsPinned[count] == 0)
+			{
+				uint8_t IterCount = 0;
+				for (unsigned int Move : Piece.TargetSquares)
+				{
+
+					//checks if Move captures piece or blocks check
+					if (!Move == SquareWhichTargetSquaresThatAreChecking[0] or !OppositeMoves.CheckTargetSquares[Move] == SquareWhichTargetSquaresThatAreChecking[0])
+					{
+						moves[count].TargetSquares.erase(moves[count].TargetSquares.begin() + IterCount);
+						isItCheckmate = false;
+					}
+					IterCount++;
+				}
+			}
+
+			count++;
+		}
+	}
+	//moves for every piece while no checks
+
+	if (SquareWhichTargetSquaresThatAreChecking.size() == 0)
+	{
+		count = 0;
+		for (MOVE Piece : moves)
+		{
+			if (Piece.PieceType == 22 or Piece.PieceType == 14)
+			{
+				count++;
+				continue;
+			}
+
+			if (!OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 0)
+			{
+				uint8_t IterCount = 0;
+				for (uint8_t Move : Piece.TargetSquares)
+				{
+					
+					if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] == OppositeMoves.WhichBoardSquaresAreAbsPinned[Move] or OppositeMoves.WhichBoardSquaresAreAbsPinned[count] == Move)
+					{
+						moves[count].TargetSquares.erase(moves[count].TargetSquares.begin() + IterCount);
+						isItCheckmate = false;
+					}
+					IterCount++;
+				}
+			}
+			else
+			{
+				uint8_t IterCount = 0;
+				for (uint8_t Move : Piece.TargetSquares)
+				{
+					moves[count].TargetSquares.erase(moves[count].TargetSquares.begin() + IterCount);
+					
+					IterCount++;
+				}
+			}
+			count++;
+		}
+	}
+
 	SquareWhichTargetSquaresThatAreChecking.clear();
 	
 }
