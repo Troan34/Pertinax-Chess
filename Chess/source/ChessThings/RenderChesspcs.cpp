@@ -60,7 +60,6 @@ static std::thread CommandThread(GetCommand);
 /**********************************************************************************************/
 std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObjects()
 {
-	std::array<std::array<VertexStructure, 4Ui64>, 130> quads;
 	quads[0] = CreateQuad(-350.0f, -350.0f, 700.0f, 0.0f);
 	float xDifference = 0.0f;
 	float yDifference = 0.0f;

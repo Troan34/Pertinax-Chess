@@ -36,7 +36,7 @@ class RenderChessPieces
 private:
 	std::array<unsigned int, 64> BoardSquare;
 	std::vector<std::future<void>> void_Futures;
-
+	std::array<std::array<VertexStructure, 4Ui64>, 130> quads;
 public:
 	RenderChessPieces();
 	~RenderChessPieces();

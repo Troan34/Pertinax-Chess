@@ -64,7 +64,6 @@ namespace test {
 
 	TestTexture2D::~TestTexture2D()
 	{
-
 	}
 
 	void TestTexture2D::OnUpdate(float deltaTime)

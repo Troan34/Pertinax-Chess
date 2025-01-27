@@ -35,7 +35,7 @@ private:
 	const int OffsetForBlackPawn[3] = { -7, -8, -9 };
 public:
 	std::array<MOVE, 64> moves;//array of Moves, every pseudolegal move
-	std::array<MOVE, 64> LegalMoves;
+	//std::array<MOVE, 64> LegalMoves;
 	std::array<bool, 64> AttackedSquares;
 	std::array<bool, 64> PinnedSquaresWithTheKingBeingPinned;
 
