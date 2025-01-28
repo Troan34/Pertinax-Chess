@@ -57,7 +57,7 @@ static void GetCommand()
 
 static std::thread CommandThread(GetCommand);
 
-/**********************************************************************************************/
+/*********MAIN FUNCTION*********does quad calculations, calls command thread, drag and drop...**************/
 std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObjects()
 {
 	quads[0] = CreateQuad(-350.0f, -350.0f, 700.0f, 0.0f);
@@ -125,7 +125,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		if (wasStatic_previousBoardsquareCreated)
 		{
 			GenerateLegalMoves LegalMoves(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum);
-			for (int j : LegalMoves.moves[BoardSquareBeingSelected].TargetSquares)
+			for (uint8_t j : LegalMoves.moves[BoardSquareBeingSelected].TargetSquares)
 			{
 				xxDifference = j * 87.5f;
 				yyDifference = 0;
@@ -170,7 +170,6 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 			yDifference += 87.5f;
 		}
 
-		
 		float PieceTexID = GetPieceTextureID(static_BoardSquare, i - 1);
 		bool HasDragAndDropFunHappened = false;
 
@@ -308,7 +307,6 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		
 		xDifference += 87.5f;
 
-		
 	}
 
 	return quads;
