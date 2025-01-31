@@ -63,7 +63,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 	quads[0] = CreateQuad(-350.0f, -350.0f, 700.0f, 0.0f);
 	float xDifference = 0.0f;
 	float yDifference = 0.0f;
-	previousBoardsquare = static_BoardSquare;
+
 
 	//Console Commands and threads
 	if (!IsGetCommandRunning)
@@ -155,7 +155,6 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 				LegalMovesForSelectedSquare.insert(j);
 			}
 
-
 		}
 		
 		static_BoardSquare[BoardSquareBeingSelected] = 0;
@@ -205,6 +204,9 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 						{
 							if(isNextMoveForWhite == Board::IsPieceColorWhite(GetPieceTypefromTexID(RememberTexID)))
 							{
+								static_BoardSquare[BoardSquareBeingSelected] = GetPieceTypefromTexID(RememberTexID);
+								previousBoardsquare = static_BoardSquare;
+								static_BoardSquare[BoardSquareBeingSelected] = 0;
 								static_BoardSquare[static_cast<std::array<unsigned int, 64Ui64>::size_type>(i) - 1] = GetPieceTypefromTexID(RememberTexID);
 								PieceTexID = RememberTexID;
 								if (i != BoardSquareBeingSelected + 1)
@@ -276,6 +278,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 								WillCanCastleChange(static_BoardSquare[BoardSquareBeingSelected], BoardSquareBeingSelected, CanCastle);
 								BoardSquareBeingSelected = -1;
 								LegalMovesForSelectedSquare.clear();
+
 							}
 							else
 							{
@@ -295,8 +298,6 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 			}
 		}
 
-		
-
 		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed and RememberTexID != 13.0f)
 		{
 			quads[65] = CreateQuad(g_mouseInput.xPos - 393.5f, -g_mouseInput.yPos + 319.25f, 87.5f, RememberTexID); //took way too much time,
@@ -306,6 +307,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		quads[i] = CreateQuad(-350.0f + xDifference, -350.0f + yDifference, 87.5f, PieceTexID);
 		
 		xDifference += 87.5f;
+
 
 	}
 
@@ -390,7 +392,7 @@ float RenderChessPieces::GetPieceTextureID(std::array<unsigned int, 64> BoardSqu
 	}
 }
 
-float RenderChessPieces::GetPieceTypefromTexID(float TexID)
+uint8_t RenderChessPieces::GetPieceTypefromTexID(float TexID)
 {
 	if (TexID == 13.0f)
 	{

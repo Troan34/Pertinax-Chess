@@ -485,7 +485,7 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 
 
 				//en passant
-				if (BoardSquarePos <= 39 and BoardSquarePos >= 32 and Offset != 8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + (Offset * 2)]) == 9 and (m_BoardSquare[BoardSquarePos + Offset - 8]) == 9)
+				if (BoardSquarePos <= 39 and BoardSquarePos >= 32 and Offset != 8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + (Offset + 8)]) == 9 and (m_BoardSquare[BoardSquarePos + Offset - 8]) == 9)
 				{
 					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
@@ -527,7 +527,7 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 					AttackedSquares[BoardPosPlusOffset] = true;
 				}
 				//en passant
-				if (BoardSquarePos <= 31 and BoardSquarePos >= 24 and Offset != -8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + (Offset * 2)]) == 17 and (m_BoardSquare[BoardSquarePos + Offset + 8]) == 17)
+				if (BoardSquarePos <= 31 and BoardSquarePos >= 24 and Offset != -8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + (Offset - 8)]) == 17 and (m_BoardSquare[BoardSquarePos + Offset + 8]) == 17)
 				{
 					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
@@ -671,7 +671,7 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 	{
 		count = 0;
 		for (MOVE Piece : moves)
-		{
+		{//this Piece.PieceType == 0 might be risky, but only if piece has moves and Piecetype = 0 is either no piece or no moves for the piece
 			if (Piece.PieceType == 22 or Piece.PieceType == 14 or Piece.PieceType == 0)
 			{
 				count++;
@@ -711,7 +711,7 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 	{
 		count = 0;
 		for (MOVE Piece : moves)
-		{
+		{//this Piece.PieceType == 0 might be risky, but only if piece has moves and Piecetype = 0 is either no piece or no moves for the piece
 			if (Piece.PieceType == 22 or Piece.PieceType == 14 or Piece.PieceType == 0)
 			{
 				count++;
