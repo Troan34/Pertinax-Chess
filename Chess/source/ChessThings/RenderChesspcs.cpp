@@ -465,24 +465,23 @@ uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, 
 	}
 
 	unsigned int count = 0;
-	std::array<unsigned int, 64Ui64> BoardSquare_Copy = BoardSquare;
+
 
 	for (MOVE piece : LegalMoves.moves)
 	{
 		for (unsigned int move : piece.TargetSquares)
 		{
-
 			MakeMove(count, move, PerftMoveNum, BoardSquare, perftPreviousBoardSquare, CanCastle);
 			if (DivideFunON)
 			{
 				uint32_t DivideFunNum = 0;
-				DivideFunNum += Perft(BoardSquare, BoardSquare_Copy, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+				DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
 				NumOfMoves += DivideFunNum;
 				std::cout << count << " " << move << ": " << DivideFunNum << '\n';
 			}
 			else
-				NumOfMoves += Perft(BoardSquare, BoardSquare_Copy, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
-			BoardSquare = BoardSquare_Copy;
+				NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+			BoardSquare = perftPreviousBoardSquare;
 		}
 		count++;
 	}
@@ -492,68 +491,68 @@ uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, 
 
 void RenderChessPieces::MakeMove(unsigned int BoardSquare, unsigned int move, unsigned int& PerftMoveNum, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64>& fun_previousBoardSquare, canCastle& Castle)
 {
+	fun_previousBoardSquare = fun_BoardSquare;
 	WillCanCastleChange(fun_BoardSquare[BoardSquare], BoardSquare, Castle);
 	fun_BoardSquare[move] = fun_BoardSquare[BoardSquare];
-	fun_BoardSquare[BoardSquare] = 0;
-	//castling and en passant
-	if (AttackedSquare != -1)
+
+	//castling
+	if (fun_BoardSquare[BoardSquare] == 22 or fun_BoardSquare[BoardSquare] == 14)
 	{
-		if (fun_BoardSquare[BoardSquare] == 22 or fun_BoardSquare[BoardSquare] == 14)
+		if (BoardSquare - move == 2)
 		{
+			if (BoardSquare - move == -2)
+			{
+				if (BoardSquare == 4)
+				{
+					fun_BoardSquare[5] = 20;
+					fun_BoardSquare[7] = 0;
+				}
+				else
+				{
+					fun_BoardSquare[61] = 12;
+					fun_BoardSquare[63] = 0;
+				}
+			}
 			if (BoardSquare - move == 2)
 			{
-				if (BoardSquare - move == -2)
+				if (BoardSquare == 4)
 				{
-					if (BoardSquare == 4)
-					{
-						fun_BoardSquare[5] = 20;
-						fun_BoardSquare[7] = 0;
-					}
-					else
-					{
-						fun_BoardSquare[61] = 12;
-						fun_BoardSquare[63] = 0;
-					}
+					fun_BoardSquare[3] = 20;
+					fun_BoardSquare[0] = 0;
 				}
-				if (BoardSquare - move == 2)
+				else
 				{
-					if (BoardSquare == 4)
-					{
-						fun_BoardSquare[3] = 20;
-						fun_BoardSquare[0] = 0;
-					}
-					else
-					{
-						fun_BoardSquare[59] = 12;
-						fun_BoardSquare[56] = 0;
-					}
-				}
-			}
-		}
-
-		//white en passant
-		if (fun_BoardSquare[BoardSquare] == 17)
-		{
-			if (fun_previousBoardSquare[move] == 0)
-			{
-				if (BoardSquare - move == -7 or BoardSquare - move == -9)
-				{
-					fun_BoardSquare[move - 8] = 0;
-				}
-			}
-		}
-		//black en passant
-		if (fun_BoardSquare[BoardSquare] == 9)
-		{
-			if (fun_previousBoardSquare[move] == 0)
-			{
-				if (BoardSquare - move == 7 or BoardSquare - move == 9)
-				{
-					fun_BoardSquare[move + 8] = 0;
+					fun_BoardSquare[59] = 12;
+					fun_BoardSquare[56] = 0;
 				}
 			}
 		}
 	}
+	//white en passant
+	if (fun_BoardSquare[BoardSquare] == 17)
+	{
+		if (fun_previousBoardSquare[move] == 0)
+		{
+			if (BoardSquare - move == -7 or BoardSquare - move == -9)
+			{
+				fun_BoardSquare[move - 8] = 0;
+			}
+		}
+	}
+	//black en passant
+	if (fun_BoardSquare[BoardSquare] == 9)
+	{
+		if (fun_previousBoardSquare[move] == 0)
+		{
+			if (BoardSquare - move == 7 or BoardSquare - move == 9)
+			{
+				fun_BoardSquare[move + 8] = 0;
+			}
+		}
+	}
+
+	fun_BoardSquare[BoardSquare] = 0;
+	
 	PerftMoveNum++;
 }
 
