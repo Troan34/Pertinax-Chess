@@ -481,6 +481,7 @@ uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, 
 			}
 			else
 				NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+
 			BoardSquare = perftPreviousBoardSquare;
 		}
 		count++;
@@ -572,7 +573,7 @@ void RenderChessPieces::CreatePerft(uint8_t PerftDepth)
 	std::cout << "Nodes searched: " << Perft(perftBoardsquare, perftPreviousBoardsquare, perftCastle, isNextMoveForWhite, PerftDepth, true, Movenum) << '\n';
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-	std::cout << "In " << duration.count() << " ms" << '\n';
+	std::cout << "In " << duration.count() << " ms" << '\n' << std::endl;
 
 	//std::cout << "Worker CPU: " << GetCurrentProcessorNumber() << std::endl;
 }
