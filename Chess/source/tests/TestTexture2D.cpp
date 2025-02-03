@@ -73,9 +73,16 @@ namespace test {
 
 	void TestTexture2D::OnRender(GLFWwindow* window)
 	{
+		static bool wasBoardSquareSet = 0;
 		RenderChessPieces renderChessPieces;
 		renderChessPieces.GetMouseInput(window);
-		renderChessPieces.SetStaticBoardSquare(board.GetPositionFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"));
+		//FEN is in header file
+		if (!wasBoardSquareSet)
+		{
+			renderChessPieces.SetStaticBoardSquare(board.GetPositionFromFEN());
+			renderChessPieces.SetMoveNum(board.MoveNum());
+			wasBoardSquareSet++;
+		}
 		auto quads = renderChessPieces.CreateObjects();
 		auto position = renderChessPieces.MemcopyObjects(quads);
 		//just dont look at this

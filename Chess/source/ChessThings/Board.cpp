@@ -14,19 +14,23 @@ public:
 	const unsigned int White = 16;
 	const unsigned int Black = 8;
 };
-Board::Board()
-	:BoardSquare()
+Board::Board(const std::string& FenString)
+	:BoardSquare(), FEN(FenString), IndexOfSideToMove(FEN.find(' ')),
+	IndexOfCastling(FEN.find(' ', IndexOfSideToMove + 1)),
+	IndexOfEnPassant(FEN.find(' ', IndexOfCastling + 1)),
+	IndexOfHalfmoveClock(FEN.find(' ', IndexOfEnPassant + 1)),
+	IndexOfFullMoveCounter(FEN.find(' ', IndexOfHalfmoveClock + 1))
 {
 
 }
-std::array<unsigned int, 64> Board::GetPositionFromFEN(std::string FenString)
+std::array<unsigned int, 64> Board::GetPositionFromFEN()
 {
 	Piece piece;
 	std::unordered_map <char, unsigned int> PieceTypeFromChar =
 	{
 		{'k', piece.King}, {'q', piece.Queen}, {'b', piece.Bishop}, {'r', piece.Rook}, {'p', piece.Pawn}, {'n', piece.Knight}
 	};
-	std::string FenPiecePlacement = FenString.substr(0, FenString.find(' '));
+	std::string FenPiecePlacement = FEN.substr(0, IndexOfSideToMove);
 	
 	unsigned int file = 0, rank = 7;
 	for (char character : FenPiecePlacement)
@@ -50,6 +54,18 @@ std::array<unsigned int, 64> Board::GetPositionFromFEN(std::string FenString)
 		}
 	}
 	return BoardSquare;
+}
+
+uint32_t Board::MoveNum()
+{
+	std::string FullMove = FEN.substr(IndexOfFullMoveCounter + 1, std::string::npos);
+
+	if (FEN.at(IndexOfSideToMove + 1) == 'w')
+	{
+		return (std::stoul(FullMove) * 2) - 2;
+	}
+	else
+		return (std::stoul(FullMove) * 2) - 1;
 }
 
 bool Board::IsPieceColorWhite(unsigned int BoardSquareValue)

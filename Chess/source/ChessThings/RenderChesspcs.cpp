@@ -577,3 +577,8 @@ void RenderChessPieces::CreatePerft(uint8_t PerftDepth)
 
 	//std::cout << "Worker CPU: " << GetCurrentProcessorNumber() << std::endl;
 }
+
+void RenderChessPieces::SetMoveNum(const uint32_t& Movenum)
+{
+	MoveNum = Movenum;
+}
