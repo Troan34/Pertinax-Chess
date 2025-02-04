@@ -3,6 +3,11 @@
 #include <unordered_map>
 #include <array>
 
+struct canCastle
+{
+	bool HasWhiteLongRookMoved = false, HasWhiteShortRookMoved = false, HasBlackLongRookMoved = false, HasBlackShortRookMoved = false, HasWhiteKingMoved = false, HasBlackKingMoved = false;
+};
+
 class Board
 {
 private:
@@ -17,5 +22,8 @@ public:
 	Board(const std::string& FenString);
 	std::array<unsigned int, 64> GetPositionFromFEN();
 	uint32_t MoveNum();
+	canCastle GetCanCastle();
+	uint32_t GetPawnMoveSquare();
+	uint32_t ALG2BoardSquareConverter(const std::string& ALG);
 	static bool IsPieceColorWhite(unsigned int BoardSquareValue);
 };

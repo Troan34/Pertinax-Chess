@@ -14,6 +14,7 @@ public:
 	const unsigned int White = 16;
 	const unsigned int Black = 8;
 };
+
 Board::Board(const std::string& FenString)
 	:BoardSquare(), FEN(FenString), IndexOfSideToMove(FEN.find(' ')),
 	IndexOfCastling(FEN.find(' ', IndexOfSideToMove + 1)),
@@ -66,6 +67,118 @@ uint32_t Board::MoveNum()
 	}
 	else
 		return (std::stoul(FullMove) * 2) - 1;
+}
+
+canCastle Board::GetCanCastle()
+{
+	canCastle CanCastle{};
+	const std::string CastlingAbility = FEN.substr(++IndexOfCastling, IndexOfEnPassant - IndexOfCastling);
+	bool K = 0;
+	bool k = 0;
+	bool Q = 0;
+	bool q = 0;
+	for (char castleCharacter : CastlingAbility)
+	{
+		if (castleCharacter == '-')
+			break;
+
+		if (castleCharacter == 'K')
+		{
+			++K;
+			continue;
+		}
+		else if (castleCharacter == 'k')
+		{
+			++k;
+			continue;
+		}
+		else if (castleCharacter == 'Q')
+		{
+			++Q;
+			continue;
+		}
+		else if (castleCharacter == 'q')
+		{
+			++q;
+			continue;
+		}
+	}
+
+	if (K or Q)
+	{
+		if (!K and Q)
+			CanCastle.HasWhiteShortRookMoved = true;
+		else if (!Q and K)
+			CanCastle.HasWhiteLongRookMoved = true;
+	}
+	else
+	{
+		CanCastle.HasWhiteKingMoved = true;
+		CanCastle.HasWhiteLongRookMoved = true;
+		CanCastle.HasWhiteShortRookMoved = true;
+	}
+
+	if (k or q)
+	{
+		if (!k and q)
+			CanCastle.HasBlackShortRookMoved = true;
+		else if (!q and k)
+			CanCastle.HasBlackLongRookMoved = true;
+	}
+	else
+	{
+		CanCastle.HasBlackKingMoved = true;
+		CanCastle.HasBlackLongRookMoved = true;
+		CanCastle.HasBlackShortRookMoved = true;
+	}
+	return CanCastle;
+}
+
+uint32_t Board::GetPawnMoveSquare()
+{
+	const std::string PawnMove = FEN.substr(++IndexOfEnPassant, IndexOfEnPassant - IndexOfHalfmoveClock);
+
+	if (PawnMove == "-")
+		return 65;
+
+	return ALG2BoardSquareConverter(PawnMove);
+}
+
+uint32_t Board::ALG2BoardSquareConverter(const std::string& ALG)
+{
+	uint8_t file = 0;
+	uint8_t rank = 0;
+	switch (ALG[0])
+	{
+	case 'a':
+		break;
+	case 'b':
+		file = 1;
+		break;
+	case 'c':
+		file = 2;
+		break;
+	case 'd':
+		file = 3;
+		break;
+	case 'e':
+		file = 4;
+		break;
+	case 'f':
+		file = 5;
+		break;
+	case 'g':
+		file = 6;
+		break;
+	case 'h':
+		file = 7;
+		break;
+	default:
+		break;
+	}
+	rank = ALG[1] - '0' - 1;
+
+	return rank * 8 + file;
 }
 
 bool Board::IsPieceColorWhite(unsigned int BoardSquareValue)

@@ -13,11 +13,6 @@ struct MOVE
 	uint8_t PieceTypeUnderAttack;
 };
 
-struct canCastle
-{
-	bool HasWhiteLongRookMoved = false, HasWhiteShortRookMoved = false, HasBlackLongRookMoved = false, HasBlackShortRookMoved = false, HasWhiteKingMoved = false, HasBlackKingMoved = false;
-};
-
 class GenerateLegalMoves
 {
 private:

@@ -52,4 +52,6 @@ public:
 	void MakeMove(unsigned int BoardSquare, unsigned int move, unsigned int& PerftMoveNum, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64>& fun_previousBoardSquare, canCastle& Castle);
 	void CreatePerft(uint8_t PerftDepth);
 	void SetMoveNum(const uint32_t& Movenum);
+	void SetCanCastle(const canCastle& f_canCastle);
+	void SetPrevBoardSquare_FEN_EP(const uint32_t& f_BoardSquare);
 };

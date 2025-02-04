@@ -81,6 +81,8 @@ namespace test {
 		{
 			renderChessPieces.SetStaticBoardSquare(board.GetPositionFromFEN());
 			renderChessPieces.SetMoveNum(board.MoveNum());
+			renderChessPieces.SetCanCastle(board.GetCanCastle());
+			renderChessPieces.SetPrevBoardSquare_FEN_EP(board.GetPawnMoveSquare());
 			wasBoardSquareSet++;
 		}
 		auto quads = renderChessPieces.CreateObjects();

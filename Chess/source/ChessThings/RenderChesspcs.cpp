@@ -21,6 +21,7 @@ static std::atomic<bool> ReceivedACommand(false);
 
 RenderChessPieces::RenderChessPieces()
 {
+
 }
 RenderChessPieces::~RenderChessPieces()
 {
@@ -581,4 +582,26 @@ void RenderChessPieces::CreatePerft(uint8_t PerftDepth)
 void RenderChessPieces::SetMoveNum(const uint32_t& Movenum)
 {
 	MoveNum = Movenum;
+}
+
+void RenderChessPieces::SetCanCastle(const canCastle& f_canCastle)
+{
+	CanCastle = f_canCastle;
+}
+
+void RenderChessPieces::SetPrevBoardSquare_FEN_EP(const uint32_t& f_BoardSquare)
+{
+	if (f_BoardSquare == 65)
+		return;
+	uint32_t f_previousBoardSquare = 0;
+	wasStatic_previousBoardsquareCreated = true;
+	if(f_BoardSquare < 32)
+		f_previousBoardSquare = f_BoardSquare - 16;
+	else
+		f_previousBoardSquare = f_BoardSquare + 16;
+	auto BS_copy = static_BoardSquare;
+	auto f_PieceType = BS_copy[f_BoardSquare];
+	BS_copy[f_BoardSquare] = 0;
+	BS_copy[f_previousBoardSquare] = f_PieceType;
+	previousBoardsquare = BS_copy;
 }
