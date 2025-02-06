@@ -40,18 +40,24 @@ private:
 public:
 	RenderChessPieces();
 	~RenderChessPieces();
+
 	std::array<std::array<VertexStructure, 4Ui64>,130> CreateObjects();
 	std::array<VertexStructure, 520> MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,130>& quads);
+
 	void WillCanCastleChange(unsigned int PieceTypeThatMoved, unsigned int BoardSquareNum, canCastle& Castle);
 	void WasLeftButtonPressed();
 	uint8_t GetPieceTypefromTexID(float TexID);
 	float GetPieceTextureID(std::array<unsigned int, 64> BoardSquare, unsigned int i);
 	void SetStaticBoardSquare(const std::array<unsigned int, 64>& BoardSquare);
 	void GetMouseInput(GLFWwindow* window);
+	
 	uint32_t Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int& PerftMoveNum);
 	void MakeMove(unsigned int BoardSquare, unsigned int move, unsigned int& PerftMoveNum, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64>& fun_previousBoardSquare, canCastle& Castle);
 	void CreatePerft(uint8_t PerftDepth);
+	
 	void SetMoveNum(const uint32_t& Movenum);
 	void SetCanCastle(const canCastle& f_canCastle);
 	void SetPrevBoardSquare_FEN_EP(const uint32_t& f_BoardSquare);
+
+
 };

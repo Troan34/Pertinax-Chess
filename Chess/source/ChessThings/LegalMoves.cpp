@@ -1,7 +1,7 @@
 #include "LegalMoves.h"
 static std::array<unsigned int, 64> m_previousBoardSquare;
 static std::array<MOVE, 64> OppositeMoves;
-GenerateLegalMoves::GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, const std::array<unsigned int, 64>& previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum)
+GenerateLegalMoves::GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, const std::array<unsigned int, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
 	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
 {
 	for (int file = 0; file < 8; file++)
@@ -27,100 +27,16 @@ GenerateLegalMoves::GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& B
 		}
 	}
 	GenerateMoves(isNextMoveForWhite);
-	RemoveIllegalMoves(isNextMoveForWhite);
-	if (isItCheckmate)
+	if (!isForOppositeMoves)
 	{
-		//std::cout << "Checkmate" << '\n';
-	}
-	m_previousBoardSquare = previousBoardSquare;
-}
-GenerateLegalMoves::GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum)
-	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
-{
-	for (int file = 0; file < 8; file++)
-	{
-		for (int rank = 0; rank < 8; rank++)
+		RemoveIllegalMoves(isNextMoveForWhite);
+		if (isItCheckmate)
 		{
-			int numNorth = 7 - rank;
-			int numSouth = rank;
-			int numWest = file;
-			int numEast = 7 - file;
-
-			unsigned int squareIndex = rank * 8 + file;
-
-			NumOfSquaresUntilEdge[squareIndex][0] = numNorth;
-			NumOfSquaresUntilEdge[squareIndex][1] = numSouth;
-			NumOfSquaresUntilEdge[squareIndex][2] = numWest;
-			NumOfSquaresUntilEdge[squareIndex][3] = numEast;
-			NumOfSquaresUntilEdge[squareIndex][4] = std::min(numNorth, numWest);
-			NumOfSquaresUntilEdge[squareIndex][5] = std::min(numSouth, numEast);
-			NumOfSquaresUntilEdge[squareIndex][6] = std::min(numNorth, numEast);
-			NumOfSquaresUntilEdge[squareIndex][7] = std::min(numSouth, numWest);
-
+			//std::cout << "Checkmate" << '\n';
 		}
 	}
-	GenerateMoves(isNextMoveForWhite);
-	RemoveIllegalMoves(isNextMoveForWhite);
-	if (isItCheckmate)
-	{
-		//std::cout << "Checkmate" << '\n';
-	}
-
-}
-GenerateLegalMoves::GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
-	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
-{
-	for (int file = 0; file < 8; file++)
-	{
-		for (int rank = 0; rank < 8; rank++)
-		{
-			int numNorth = 7 - rank;
-			int numSouth = rank;
-			int numWest = file;
-			int numEast = 7 - file;
-
-			unsigned int squareIndex = rank * 8 + file;
-
-			NumOfSquaresUntilEdge[squareIndex][0] = numNorth;
-			NumOfSquaresUntilEdge[squareIndex][1] = numSouth;
-			NumOfSquaresUntilEdge[squareIndex][2] = numWest;
-			NumOfSquaresUntilEdge[squareIndex][3] = numEast;
-			NumOfSquaresUntilEdge[squareIndex][4] = std::min(numNorth, numWest);
-			NumOfSquaresUntilEdge[squareIndex][5] = std::min(numSouth, numEast);
-			NumOfSquaresUntilEdge[squareIndex][6] = std::min(numNorth, numEast);
-			NumOfSquaresUntilEdge[squareIndex][7] = std::min(numSouth, numWest);
-
-		}
-	}
-	GenerateMoves(isNextMoveForWhite);
-}
-GenerateLegalMoves::GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, const std::array<unsigned int, 64>& previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
-	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
-{
-	for (int file = 0; file < 8; file++)
-	{
-		for (int rank = 0; rank < 8; rank++)
-		{
-			int numNorth = 7 - rank;
-			int numSouth = rank;
-			int numWest = file;
-			int numEast = 7 - file;
-
-			unsigned int squareIndex = rank * 8 + file;
-
-			NumOfSquaresUntilEdge[squareIndex][0] = numNorth;
-			NumOfSquaresUntilEdge[squareIndex][1] = numSouth;
-			NumOfSquaresUntilEdge[squareIndex][2] = numWest;
-			NumOfSquaresUntilEdge[squareIndex][3] = numEast;
-			NumOfSquaresUntilEdge[squareIndex][4] = std::min(numNorth, numWest);
-			NumOfSquaresUntilEdge[squareIndex][5] = std::min(numSouth, numEast);
-			NumOfSquaresUntilEdge[squareIndex][6] = std::min(numNorth, numEast);
-			NumOfSquaresUntilEdge[squareIndex][7] = std::min(numSouth, numWest);
-
-		}
-	}
-	GenerateMoves(isNextMoveForWhite);
-	m_previousBoardSquare = previousBoardSquare;
+	if(previousBoardSquare != nullptr)
+		m_previousBoardSquare = *previousBoardSquare;
 }
 
 GenerateLegalMoves::~GenerateLegalMoves()
@@ -134,7 +50,7 @@ void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
 	PinnedSquaresWithTheKingBeingPinned.fill(false);
 	WhichBoardSquaresAreAbsPinned.fill(0);
 	int BoardSquarePos = 0;
-	for (int i : m_BoardSquare)
+	for (uint8_t i : m_BoardSquare)
 	{ 
 		if (i == 0)
 		{
@@ -168,7 +84,7 @@ void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
 
 }
  
-void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhite)
+void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos, bool isNextMoveForWhite)
 {
 	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
 	std::vector<uint8_t>::iterator iterator;
@@ -371,7 +287,7 @@ void GenerateLegalMoves::SliderMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 }
 
 //knight
-void GenerateLegalMoves::KnightMoveGen(int BoardSquarePos, bool isNextMoveForWhite)
+void GenerateLegalMoves::KnightMoveGen(const uint8_t& BoardSquarePos, bool isNextMoveForWhite)
 {
 	if ((m_BoardSquare[BoardSquarePos] == 19 and isNextMoveForWhite) or (m_BoardSquare[BoardSquarePos] == 11 and !isNextMoveForWhite))
 	{
@@ -395,7 +311,7 @@ void GenerateLegalMoves::KnightMoveGen(int BoardSquarePos, bool isNextMoveForWhi
 	}
 }
 
-void GenerateLegalMoves::CreateOffesetsForKnight(int BoardSquarePos)
+void GenerateLegalMoves::CreateOffesetsForKnight(const uint8_t& BoardSquarePos)
 {
 	for (int i = 0; i <= 4; i++)
 	{
@@ -440,7 +356,7 @@ void GenerateLegalMoves::CreateOffesetsForKnight(int BoardSquarePos)
 }
 
 //pawn
-void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite)
+void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos, bool isNextMoveForWhite)
 {
 	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
 	if (PieceType == 17 and isNextMoveForWhite)//white pawn
@@ -536,7 +452,7 @@ void GenerateLegalMoves::PawnMoveGen(int BoardSquarePos, bool isNextMoveForWhite
 }
 
 //king
-void GenerateLegalMoves::KingMoveGen(int BoardSquarePos, bool isNextMoveForWhite)
+void GenerateLegalMoves::KingMoveGen(const uint8_t& BoardSquarePos, bool isNextMoveForWhite)
 {
 	if ((m_BoardSquare[BoardSquarePos] == 22 and isNextMoveForWhite) or (m_BoardSquare[BoardSquarePos] == 14 and !isNextMoveForWhite))
 	{
@@ -609,10 +525,10 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 	}
 
 	//ouch, could be optimized, but i'm not gonna use just one thread for the whole project, so yeah, fuck it
-	GenerateLegalMoves OppositeMoves(m_BoardSquare,m_previousBoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true);
+	GenerateLegalMoves OppositeMoves(m_BoardSquare,&m_previousBoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true);
 	if (MoveNum == 0)
 	{
-		GenerateLegalMoves OppositeMoves(m_BoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true);
+		GenerateLegalMoves OppositeMoves(m_BoardSquare, nullptr, CanCastle, !isNextMoveForWhite, MoveNum, true);
 	}
 
 

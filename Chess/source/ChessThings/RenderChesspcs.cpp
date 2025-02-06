@@ -19,6 +19,7 @@ static std::atomic<bool> IsGetCommandRunning = true;
 static std::string Command;
 static std::atomic<bool> ReceivedACommand(false);
 
+
 RenderChessPieces::RenderChessPieces()
 {
 
@@ -125,7 +126,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 
 		if (wasStatic_previousBoardsquareCreated)
 		{
-			GenerateLegalMoves LegalMoves(static_BoardSquare, previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum);
+			GenerateLegalMoves LegalMoves(static_BoardSquare, &previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, false);
 			for (uint8_t j : LegalMoves.moves[BoardSquareBeingSelected].TargetSquares)
 			{
 				xxDifference = j * 87.5f;
@@ -142,7 +143,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 130> RenderChessPieces::CreateObj
 		}
 		else
 		{
-			GenerateLegalMoves LegalMoves(static_BoardSquare, CanCastle, isNextMoveForWhite, MoveNum);
+			GenerateLegalMoves LegalMoves(static_BoardSquare,nullptr, CanCastle, isNextMoveForWhite, MoveNum, false);
 			for (int j : LegalMoves.moves[BoardSquareBeingSelected].TargetSquares)
 			{
 				xxDifference = j * 87.5f;
@@ -451,7 +452,7 @@ void RenderChessPieces::SetStaticBoardSquare(const std::array<unsigned int, 64>&
 uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> perftPreviousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int& PerftMoveNum)
 {
 	uint32_t NumOfMoves = 0;
-	GenerateLegalMoves LegalMoves(BoardSquare, perftPreviousBoardSquare, CanCastle, isNextMoveForWhite, MoveNum);
+	GenerateLegalMoves LegalMoves(BoardSquare, &perftPreviousBoardSquare, CanCastle, isNextMoveForWhite, MoveNum, false);
 	//Bulk Counting
 	if (depth == 1)
 	{

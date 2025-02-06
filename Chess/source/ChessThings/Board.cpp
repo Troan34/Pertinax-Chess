@@ -136,7 +136,7 @@ canCastle Board::GetCanCastle()
 
 uint32_t Board::GetPawnMoveSquare()
 {
-	const std::string PawnMove = FEN.substr(++IndexOfEnPassant, IndexOfEnPassant - IndexOfHalfmoveClock);
+	const std::string PawnMove = FEN.substr(++IndexOfEnPassant, IndexOfHalfmoveClock - IndexOfEnPassant);
 
 	if (PawnMove == "-")
 		return 65;

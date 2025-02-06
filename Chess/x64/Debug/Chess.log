@@ -1,4 +1,23 @@
-﻿  Main.cpp
+﻿  LegalMoves.cpp
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\LegalMoves.cpp(145,36): warning C4018: '<': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\LegalMoves.cpp(209,36): warning C4018: '<': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\LegalMoves.cpp(270,36): warning C4018: '<': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\LegalMoves.cpp(302,51): warning C4244: 'argument': conversion from 'int16_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=uint8_t
+          ]
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\LegalMoves.cpp(548,55): warning C4244: 'argument': conversion from 'uint16_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=uint8_t
+          ]
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\LegalMoves.cpp(549,22): warning C4244: '=': conversion from 'uint16_t' to 'uint8_t', possible loss of data
+  RenderChesspcs.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
+C:\Users\roanb\source\repos\Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,1): message : see previous definition of 'APIENTRY'
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(87,22): warning C4267: 'initializing': conversion from 'size_t' to 'uint16_t', possible loss of data
+  Main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
 C:\Users\roanb\source\repos\Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,1): message : see previous definition of 'APIENTRY'
   TestTexture2D.cpp
