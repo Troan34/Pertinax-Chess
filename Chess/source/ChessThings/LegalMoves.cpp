@@ -1,6 +1,7 @@
 #include "LegalMoves.h"
 static std::array<unsigned int, 64> m_previousBoardSquare;
 static std::array<MOVE, 64> OppositeMoves;
+
 GenerateLegalMoves::GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, const std::array<unsigned int, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
 	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
 {
@@ -381,7 +382,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos, bool isNextM
 				}
 				else if (Offset == 8 and PieceTypeAtOffset == 0)
 				{
-					if (m_BoardSquare[BoardSquarePos + 16] == 0 and BoardSquarePos < 16 and BoardSquarePos >= 8)
+					if (BoardSquarePos < 16 and BoardSquarePos >= 8 and m_BoardSquare[BoardSquarePos + 16] == 0)
 					{
 						moves[BoardSquarePos].PieceType = PieceType;
 						moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + 16);
@@ -427,7 +428,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos, bool isNextM
 				}
 				else if (Offset == -8 and PieceTypeAtOffset == 0)
 				{
-					if (m_BoardSquare[BoardSquarePos - 16] == 0 and BoardSquarePos <= 55 and BoardSquarePos >= 48)
+					if (BoardSquarePos <= 55 and BoardSquarePos >= 48 and m_BoardSquare[BoardSquarePos - 16] == 0)
 					{
 						moves[BoardSquarePos].PieceType = PieceType;
 						moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos - 16);
@@ -503,33 +504,33 @@ void GenerateLegalMoves::KingMoveGen(const uint8_t& BoardSquarePos, bool isNextM
 void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 {	
 	std::vector<uint8_t> SquareWhichTargetSquaresThatAreChecking;
-	uint8_t BoardSquareOfAttackedKing = 0;
+	uint8_t BoardSquareOfKingToMove = 0;
 	bool isKingUnderCheck = false;
 
 	if (isNextMoveForWhite)
 	{
-		for (BoardSquareOfAttackedKing = 0; BoardSquareOfAttackedKing < 64; BoardSquareOfAttackedKing++)
+		for (BoardSquareOfKingToMove = 0; BoardSquareOfKingToMove < 64; BoardSquareOfKingToMove++)
 		{
-			if (m_BoardSquare[BoardSquareOfAttackedKing] == 22)
+			if (m_BoardSquare[BoardSquareOfKingToMove] == 22)
 				break;
 		}
 
 	}
 	else
 	{
-		for (BoardSquareOfAttackedKing = 0; BoardSquareOfAttackedKing < 64; BoardSquareOfAttackedKing++)
+		for (BoardSquareOfKingToMove = 0; BoardSquareOfKingToMove < 64; BoardSquareOfKingToMove++)
 		{
-			if (m_BoardSquare[BoardSquareOfAttackedKing] == 14)
+			if (m_BoardSquare[BoardSquareOfKingToMove] == 14)
 				break;
 		}
 	}
 
-	//ouch, could be optimized, but i'm not gonna use just one thread for the whole project, so yeah, fuck it
-	GenerateLegalMoves OppositeMoves(m_BoardSquare,&m_previousBoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true);
+	
+	auto p_prevBoardSquare = &m_previousBoardSquare;
 	if (MoveNum == 0)
-	{
-		GenerateLegalMoves OppositeMoves(m_BoardSquare, nullptr, CanCastle, !isNextMoveForWhite, MoveNum, true);
-	}
+		p_prevBoardSquare = nullptr;
+
+	GenerateLegalMoves OppositeMoves(m_BoardSquare,p_prevBoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true);
 
 
 	//fill SquareWhichTargetSquaresThatAreChecking
@@ -554,28 +555,32 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 	//moves for King
 	if (SquareWhichTargetSquaresThatAreChecking.size() >= 0)
 	{
-		//for (unsigned int KingMove : moves[BoardSquareOfAttackedKing].TargetSquares)
-		for(auto it = moves[BoardSquareOfAttackedKing].TargetSquares.begin(); it != moves[BoardSquareOfAttackedKing].TargetSquares.end();)
+		//for (unsigned int KingMove : moves[BoardSquareOfKingToMove].TargetSquares)
+		for(auto it = moves[BoardSquareOfKingToMove].TargetSquares.begin(); it != moves[BoardSquareOfKingToMove].TargetSquares.end();)
 		{
 			uint8_t KingMove = *it;
 			//checks if possible move square is under attack
 			if (OppositeMoves.AttackedSquares[KingMove] == true)
 			{
-				it = moves[BoardSquareOfAttackedKing].TargetSquares.erase(it);
+				it = moves[BoardSquareOfKingToMove].TargetSquares.erase(it);
 				continue;
 			}
 			//checks if possible move is going to be under attack when it's made
 			else if (OppositeMoves.PinnedSquaresWithTheKingBeingPinned[KingMove] == true)
 			{
-				it = moves[BoardSquareOfAttackedKing].TargetSquares.erase(it);
+				it = moves[BoardSquareOfKingToMove].TargetSquares.erase(it);
 				continue;
+			}
+			//checks that it can castle
+			else if (BoardSquareOfKingToMove - KingMove == 2 or BoardSquareOfKingToMove - KingMove == -2)//checked for weird behaviours, rvalue(i think)
+			{
+				CanKingCastle_LMoves(OppositeMoves, isItCheckmate, it, BoardSquareOfKingToMove, KingMove);
 			}
 			else
 			{
 				isItCheckmate = false;
 				++it;
 			}
-			count++;
 		}
 	}
 	//Moves for every piece while check
@@ -660,3 +665,60 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 	
 }
 
+void GenerateLegalMoves::CanKingCastle_LMoves(const GenerateLegalMoves& OppositeMoves, bool& isItCheckmate, std::vector<uint8_t>::iterator& it, const uint8_t& BoardSquareOfKingToMove, const uint8_t& KingMove)
+{
+	if (Board::IsPieceColorWhite(m_BoardSquare[BoardSquareOfKingToMove]))
+	{
+		if (BoardSquareOfKingToMove - KingMove == 2)
+		{
+			if (OppositeMoves.AttackedSquares[4] != false or OppositeMoves.AttackedSquares[3] != false or OppositeMoves.AttackedSquares[2] != false)//checked for weird behaviours
+			{
+				it = moves[BoardSquareOfKingToMove].TargetSquares.erase(it);
+			}
+			else
+			{
+				isItCheckmate = false;
+				++it;
+			}
+		}
+		else if (BoardSquareOfKingToMove - KingMove == -2)
+		{
+			if (OppositeMoves.AttackedSquares[4] != false or OppositeMoves.AttackedSquares[5] != false or OppositeMoves.AttackedSquares[6] != false)
+			{
+				it = moves[BoardSquareOfKingToMove].TargetSquares.erase(it);
+			}
+			else
+			{
+				isItCheckmate = false;
+				++it;
+			}
+		}
+	}
+	else
+	{
+		if (BoardSquareOfKingToMove - KingMove == 2)
+		{
+			if (OppositeMoves.AttackedSquares[58] != false or OppositeMoves.AttackedSquares[59] != false or OppositeMoves.AttackedSquares[60] != false)//checked for weird behaviours
+			{
+				it = moves[BoardSquareOfKingToMove].TargetSquares.erase(it);
+			}
+			else
+			{
+				isItCheckmate = false;
+				++it;
+			}
+		}
+		else if (BoardSquareOfKingToMove - KingMove == -2)
+		{
+			if (OppositeMoves.AttackedSquares[60] != false or OppositeMoves.AttackedSquares[61] != false or OppositeMoves.AttackedSquares[62] != false)
+			{
+				it = moves[BoardSquareOfKingToMove].TargetSquares.erase(it);
+			}
+			else
+			{
+				isItCheckmate = false;
+				++it;
+			}
+		}
+	}
+}

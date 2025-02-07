@@ -28,6 +28,9 @@ private:
 
 	const int OffsetForWhitePawn[3] = { 7, 8, 9 };
 	const int OffsetForBlackPawn[3] = { -7, -8, -9 };
+
+
+	void CanKingCastle_LMoves(const GenerateLegalMoves& OppositeMoves, bool& isItCheckmate, std::vector<uint8_t>::iterator& it, const uint8_t& BoardSquareOfKingToMove, const uint8_t& KingMove);
 public:
 	std::array<MOVE, 64> moves;//array of Moves, every legal move
 	std::array<bool, 64> AttackedSquares;
@@ -40,6 +43,11 @@ public:
 	* receive the value of the pinning piece BoardSquarePos
 	*/
 	std::array<unsigned int, 64> WhichBoardSquaresAreAbsPinned;
+
+	/*
+	* BoardSquare where the square's value is the checking piece BoardSquarePos
+	* The king's BoardSquarePos is included
+	*/
 	std::array<unsigned int, 64> CheckTargetSquares;
 	unsigned int MoveNum;
 	GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, const std::array<unsigned int, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
