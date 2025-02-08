@@ -36,13 +36,13 @@ class RenderChessPieces
 private:
 	std::array<unsigned int, 64> BoardSquare;
 	std::vector<std::future<void>> void_Futures;
-	std::array<std::array<VertexStructure, 4Ui64>, 130> quads;
+	std::array<std::array<VertexStructure, 4Ui64>, 135> quads;
 public:
 	RenderChessPieces();
 	~RenderChessPieces();
 
-	std::array<std::array<VertexStructure, 4Ui64>,130> CreateObjects();
-	std::array<VertexStructure, 520> MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,130>& quads);
+	std::array<std::array<VertexStructure, 4Ui64>,135> CreateObjects();
+	std::array<VertexStructure, 540> MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,135>& quads);
 
 	void WillCanCastleChange(unsigned int PieceTypeThatMoved, unsigned int BoardSquareNum, canCastle& Castle);
 	void WasLeftButtonPressed();
@@ -52,7 +52,7 @@ public:
 	void GetMouseInput(GLFWwindow* window);
 	
 	uint32_t Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int& PerftMoveNum);
-	void MakeMove(unsigned int BoardSquare, unsigned int move, unsigned int& PerftMoveNum, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64>& fun_previousBoardSquare, canCastle& Castle);
+	void MakeMove(unsigned int BoardSquare, unsigned int move, unsigned int& PerftMoveNum, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64>& fun_previousBoardSquare, canCastle& Castle, const uint8_t& PieceTypeToPromoteTo);
 	void CreatePerft(uint8_t PerftDepth);
 	
 	void SetMoveNum(const uint32_t& Movenum);

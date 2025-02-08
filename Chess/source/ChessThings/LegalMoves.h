@@ -10,6 +10,7 @@ struct MOVE
 	uint8_t PieceType;
 	std::vector<uint8_t> TargetSquares;
 	std::vector<uint8_t> PinnedTargetSquares;
+	std::array<uint8_t, 3> Promotion{65, 65, 65};//which move let's pawn promote
 	uint8_t PieceTypeUnderAttack;
 };
 

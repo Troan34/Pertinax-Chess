@@ -31,7 +31,7 @@ namespace test {
 		layout.Push<float>(2);
 		layout.Push<float>(1);
 		m_VAO -> AddBuffer(*m_VertexBuffer, layout);
-		m_IndexBuffer = std::make_unique<IndexBuffer>(130);
+		m_IndexBuffer = std::make_unique<IndexBuffer>(135);
 
 		m_Shader = std::make_unique<Shader>("res/shaders/Basic.shader");
 		m_Shader->Bind();
@@ -52,9 +52,11 @@ namespace test {
 		TEX_k = texture.CreateTexture("res/textures/bk.png");
 		TEX_Empty = texture.CreateTexture("res/textures/Empty.png");
 		TEX_Red = texture.CreateTexture("res/textures/Red.png");
+		TEX_Prom = texture.CreateTexture("res/textures/PromotionSquare.png");
+
 		//texture sampling part
-		int samplers[15] = { 0, 1, 2, 3, 4, 5 ,6, 7, 8, 9, 10, 11, 12 ,13, 14 };
-		m_Shader->SetUniform1iv("u_Textures", 15, *samplers);
+		int samplers[16] = { 0, 1, 2, 3, 4, 5 ,6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+		m_Shader->SetUniform1iv("u_Textures", 16, *samplers);
 
 		std::cout << "Welcome to Pertinax" << std::endl;
 		std::cout << "'help' for commands" << std::endl;
@@ -103,6 +105,7 @@ namespace test {
 		GLCall(glBindTextureUnit(6, TEX_k));
 		GLCall(glBindTextureUnit(13, TEX_Empty));
 		GLCall(glBindTextureUnit(14, TEX_Red));
+		GLCall(glBindTextureUnit(15, TEX_Prom));
 
 		m_VertexBuffer->SetDynamicVB(&position, sizeof(position));
 

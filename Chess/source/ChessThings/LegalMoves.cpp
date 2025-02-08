@@ -379,6 +379,10 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos, bool isNextM
 					}
 					if (PieceTypeAtOffset == 14)
 						CheckTargetSquares[BoardPosPlusOffset] = BoardSquarePos;
+
+					//promotion
+					if (BoardPosPlusOffset >= 56)
+						moves[BoardSquarePos].Promotion[Offset - 7] = BoardPosPlusOffset;
 				}
 				else if (Offset == 8 and PieceTypeAtOffset == 0)
 				{
@@ -389,6 +393,10 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos, bool isNextM
 					}
 					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
+
+					//promotion
+					if (BoardPosPlusOffset >= 56)
+						moves[BoardSquarePos].Promotion[1] = BoardPosPlusOffset;
 				}
 				else if (PieceTypeAtOffset == 0 and Offset != 8)
 				{
@@ -396,7 +404,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos, bool isNextM
 					AttackedSquares[BoardPosPlusOffset] = true;
 				}
 
-
+				
 				//en passant
 				if (BoardSquarePos <= 39 and BoardSquarePos >= 32 and Offset != 8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + (Offset + 8)]) == 9 and (m_BoardSquare[BoardSquarePos + Offset - 8]) == 9)
 				{
@@ -425,6 +433,10 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos, bool isNextM
 					}
 					if (PieceTypeAtOffset == 22)
 						CheckTargetSquares[BoardPosPlusOffset] = BoardSquarePos;
+
+					//promotion
+					if (BoardPosPlusOffset <= 7)
+						moves[BoardSquarePos].Promotion[Offset + 9] = BoardPosPlusOffset;
 				}
 				else if (Offset == -8 and PieceTypeAtOffset == 0)
 				{
@@ -435,6 +447,10 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos, bool isNextM
 					}
 					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
+
+					//promotion
+					if (BoardPosPlusOffset <= 7)
+						moves[BoardSquarePos].Promotion[1] = BoardPosPlusOffset;
 				}
 				else if (PieceTypeAtOffset == 0 and Offset != -8)
 				{
@@ -665,6 +681,7 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 	
 }
 
+//fun for LegalMoves, checks if castling is permitted
 void GenerateLegalMoves::CanKingCastle_LMoves(const GenerateLegalMoves& OppositeMoves, bool& isItCheckmate, std::vector<uint8_t>::iterator& it, const uint8_t& BoardSquareOfKingToMove, const uint8_t& KingMove)
 {
 	if (Board::IsPieceColorWhite(m_BoardSquare[BoardSquareOfKingToMove]))
