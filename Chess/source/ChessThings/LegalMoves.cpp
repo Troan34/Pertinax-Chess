@@ -492,24 +492,24 @@ void GenerateLegalMoves::KingMoveGen(const uint8_t& BoardSquarePos, bool isNextM
 				}
 			}
 		}
-		if (PieceType == 22 and !CanCastle.HasWhiteKingMoved)
+		if (PieceType == 22 and !CanCastle.HasWhiteKingMoved)//castling
 		{
 			if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[1] == 0 and m_BoardSquare[2] == 0 and m_BoardSquare[3] == 0)
 			{
 				moves[4].TargetSquares.push_back(2);
 			}
-			if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[5] == 0 and m_BoardSquare[6] == 0)
+			if (!CanCastle.HasWhiteShortRookMoved and m_BoardSquare[5] == 0 and m_BoardSquare[6] == 0)
 			{
 				moves[4].TargetSquares.push_back(6);
 			}
 		}
-		if (PieceType == 14 and !CanCastle.HasBlackKingMoved)
+		if (PieceType == 14 and !CanCastle.HasBlackKingMoved)//castling
 		{
 			if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[57] == 0 and m_BoardSquare[58] == 0 and m_BoardSquare[59] == 0)
 			{
 				moves[60].TargetSquares.push_back(58);
 			}
-			if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[61] == 0 and m_BoardSquare[62] == 0)
+			if (!CanCastle.HasBlackShortRookMoved and m_BoardSquare[61] == 0 and m_BoardSquare[62] == 0)
 			{
 				moves[60].TargetSquares.push_back(62);
 			}
@@ -521,7 +521,6 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 {	
 	std::vector<uint8_t> SquareWhichTargetSquaresThatAreChecking;
 	uint8_t BoardSquareOfKingToMove = 0;
-	bool isKingUnderCheck = false;
 
 	if (isNextMoveForWhite)
 	{

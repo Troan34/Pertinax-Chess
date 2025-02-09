@@ -44,7 +44,7 @@ public:
 	std::array<std::array<VertexStructure, 4Ui64>,135> CreateObjects();
 	std::array<VertexStructure, 540> MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,135>& quads);
 
-	void WillCanCastleChange(unsigned int PieceTypeThatMoved, unsigned int BoardSquareNum, canCastle& Castle);
+	void WillCanCastleChange(unsigned int PieceTypeThatMoved, unsigned int BoardSquareItMovedFrom, const unsigned int& BoardSquareItMovedTo, canCastle& Castle);
 	void WasLeftButtonPressed();
 	uint8_t GetPieceTypefromTexID(float TexID);
 	float GetPieceTextureID(std::array<unsigned int, 64> BoardSquare, unsigned int i);

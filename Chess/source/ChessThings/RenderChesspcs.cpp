@@ -283,7 +283,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 										}
 									}
 								}
-								WillCanCastleChange(static_BoardSquare[BoardSquareBeingSelected], BoardSquareBeingSelected, CanCastle);
+								WillCanCastleChange(previousBoardsquare[BoardSquareBeingSelected], BoardSquareBeingSelected, AttackedSquare, CanCastle);
 
 								//promoting
 								if (AttackedSquare >= 56 and GetPieceTypefromTexID(RememberTexID) == 17 or AttackedSquare <= 7 and GetPieceTypefromTexID(RememberTexID) == 9 )
@@ -450,19 +450,39 @@ std::array<VertexStructure, 540> RenderChessPieces::MemcopyObjects(std::array<st
 	return positions;
 }
 
-void RenderChessPieces::WillCanCastleChange(unsigned int PieceType, unsigned int BoardSquareNumItMovedFrom, canCastle& Castle)
+void RenderChessPieces::WillCanCastleChange(unsigned int PieceType, unsigned int BoardSquareNumItMovedFrom, const unsigned int& BoardSquareItMovedTo, canCastle& Castle)
 {
-	if (BoardSquareNumItMovedFrom == 5 and PieceType == 22)
+	if (BoardSquareNumItMovedFrom == 4 and PieceType == 22)
+	{
 		Castle.HasWhiteKingMoved = true;
-	else if (PieceType == 14 and BoardSquareNumItMovedFrom == 61)
+		if (BoardSquareItMovedTo == 6)
+		{
+			Castle.HasWhiteShortRookMoved = true;
+		}
+		else if (BoardSquareItMovedTo == 2)
+		{
+			Castle.HasWhiteLongRookMoved = true;
+		}
+	}
+	else if (PieceType == 14 and BoardSquareNumItMovedFrom == 60)
+	{
 		Castle.HasBlackKingMoved = true;
+		if (BoardSquareItMovedTo == 62)
+		{
+			Castle.HasBlackShortRookMoved = true;
+		}
+		else if (BoardSquareItMovedTo == 58)
+		{
+			Castle.HasBlackLongRookMoved = true;
+		}
+	}
 	else if (PieceType == 20 and BoardSquareNumItMovedFrom == 0)
 		Castle.HasWhiteLongRookMoved = true;
-	else if (PieceType == 20 and BoardSquareNumItMovedFrom == 8)
+	else if (PieceType == 20 and BoardSquareNumItMovedFrom == 7)
 		Castle.HasWhiteShortRookMoved = true;
-	else if (PieceType == 12 and BoardSquareNumItMovedFrom == 64)
+	else if (PieceType == 12 and BoardSquareNumItMovedFrom == 63)
 		Castle.HasBlackShortRookMoved = true;
-	else if (PieceType == 12 and BoardSquareNumItMovedFrom == 57)
+	else if (PieceType == 12 and BoardSquareNumItMovedFrom == 56)
 		Castle.HasBlackLongRookMoved = true;
 }
 
@@ -575,6 +595,10 @@ uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, 
 		return NumOfMoves;
 	}
 
+	const auto ConstBoardSquare = BoardSquare;
+	const auto ConstPreviousBoardSquare = perftPreviousBoardSquare;
+	const canCastle ConstCanCastle = CanCastle;
+	const auto ConstMoveNum = MoveNum;
 	unsigned int count = 0;
 
 	for (MOVE piece : LegalMoves.moves)
@@ -605,6 +629,8 @@ uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, 
 				piece.Promotion[0] = 65;
 				piece.Promotion[1] = 65;
 				piece.Promotion[2] = 65;
+				count++;
+				continue;
 			}
 
 			MakeMove(count, move, PerftMoveNum, BoardSquare, perftPreviousBoardSquare, CanCastle, 65);
@@ -618,7 +644,10 @@ uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, 
 			else
 				NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
 
-			BoardSquare = perftPreviousBoardSquare;
+			BoardSquare = ConstBoardSquare;
+			perftPreviousBoardSquare = ConstPreviousBoardSquare;
+			CanCastle = ConstCanCastle;
+			MoveNum = ConstMoveNum;
 		}
 		count++;
 	}
@@ -629,41 +658,39 @@ uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, 
 void RenderChessPieces::MakeMove(unsigned int BoardSquare, unsigned int move, unsigned int& PerftMoveNum, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64>& fun_previousBoardSquare, canCastle& Castle, const uint8_t& PieceTypeToPromoteTo)
 {
 	fun_previousBoardSquare = fun_BoardSquare;
-	WillCanCastleChange(fun_BoardSquare[BoardSquare], BoardSquare, Castle);
+	WillCanCastleChange(fun_BoardSquare[BoardSquare], BoardSquare, move, Castle);
 	fun_BoardSquare[move] = fun_BoardSquare[BoardSquare];
 
 	//castling
 	if (fun_BoardSquare[BoardSquare] == 22 or fun_BoardSquare[BoardSquare] == 14)
 	{
-		if (BoardSquare - move == 2)
+		if (BoardSquare - move == -2)
 		{
-			if (BoardSquare - move == -2)
+			if (BoardSquare == 4)
 			{
-				if (BoardSquare == 4)
-				{
-					fun_BoardSquare[5] = 20;
-					fun_BoardSquare[7] = 0;
-				}
-				else
-				{
-					fun_BoardSquare[61] = 12;
-					fun_BoardSquare[63] = 0;
-				}
+				fun_BoardSquare[5] = 20;
+				fun_BoardSquare[7] = 0;
 			}
-			if (BoardSquare - move == 2)
+			else
 			{
-				if (BoardSquare == 4)
-				{
-					fun_BoardSquare[3] = 20;
-					fun_BoardSquare[0] = 0;
-				}
-				else
-				{
-					fun_BoardSquare[59] = 12;
-					fun_BoardSquare[56] = 0;
-				}
+				fun_BoardSquare[61] = 12;
+				fun_BoardSquare[63] = 0;
 			}
 		}
+		if (BoardSquare - move == 2)
+		{
+			if (BoardSquare == 4)
+			{
+				fun_BoardSquare[3] = 20;
+				fun_BoardSquare[0] = 0;
+			}
+			else
+			{
+				fun_BoardSquare[59] = 12;
+				fun_BoardSquare[56] = 0;
+			}
+		}
+
 	}
 
 	//promoting
