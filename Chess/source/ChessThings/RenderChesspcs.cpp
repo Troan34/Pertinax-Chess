@@ -581,20 +581,15 @@ void RenderChessPieces::SetStaticBoardSquare(const std::array<unsigned int, 64>&
 uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> perftPreviousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int& PerftMoveNum)
 {
 	uint32_t NumOfMoves = 0;
+	//LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS 
+	//after a1b1 e8f8 e5f7 
+	//f6 is considered pinned but it's not, WhichBoardSquaresAreAbsPinned
+	//LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS 
 	GenerateLegalMoves LegalMoves(BoardSquare, &perftPreviousBoardSquare, CanCastle, isNextMoveForWhite, MoveNum, false);
-	//Bulk Counting
-	if (depth == 1)
-	{
-		for (MOVE piece : LegalMoves.moves)
-		{
-			for (unsigned int move : piece.TargetSquares)
-			{
-				NumOfMoves++;
-			}
-		}
-		return NumOfMoves;
-	}
-
+	//LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS
+	//LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS
+	//LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS
+	//LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS LOOK AT THIS DUMBASS
 	const auto ConstBoardSquare = BoardSquare;
 	const auto ConstPreviousBoardSquare = perftPreviousBoardSquare;
 	const canCastle ConstCanCastle = CanCastle;
@@ -603,51 +598,90 @@ uint32_t RenderChessPieces::Perft(std::array<unsigned int, 64Ui64> BoardSquare, 
 
 	for (MOVE piece : LegalMoves.moves)
 	{
-		for (unsigned int move : piece.TargetSquares)
+		for (uint8_t move : piece.TargetSquares)
 		{
 			//perft the promotions, this if is basically a blunt .find()
 			if (piece.Promotion[0] != 65 and piece.Promotion[0] == move or piece.Promotion[1] != 65 and piece.Promotion[1] == move or piece.Promotion[2] != 65 and piece.Promotion[2] == move)
 			{
+				bool IsWhite = Board::IsPieceColorWhite(BoardSquare[count]);
+
 				for (uint8_t i = 0; i != 4; ++i)
 				{
-					if(Board::IsPieceColorWhite(BoardSquare[count]))
-						MakeMove(count, move, PerftMoveNum, BoardSquare, perftPreviousBoardSquare, CanCastle, i + 18);
-					else
-						MakeMove(count, move, PerftMoveNum, BoardSquare, perftPreviousBoardSquare, CanCastle, i + 10);
-					if (DivideFunON)
+					if (depth == 1)
 					{
-						uint32_t DivideFunNum = 0;
-						DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
-						NumOfMoves += DivideFunNum;
-						std::cout << count << " " << move << ": " << DivideFunNum << '\n';
+						if (DivideFunON)
+						{
+							if (IsWhite)
+								std::cout << count << " " << +move << " to " << Board::PieceType2letter(i + 18) << ": 1" << '\n';
+							else
+								std::cout << count << " " << +move << " to " << Board::PieceType2letter(i + 10) << ": 1" << '\n';
+						}
+						NumOfMoves++;
 					}
 					else
-						NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+					{
 
-					BoardSquare = perftPreviousBoardSquare;
+						if (IsWhite)
+							MakeMove(count, move, PerftMoveNum, BoardSquare, perftPreviousBoardSquare, CanCastle, i + 18);
+						else
+							MakeMove(count, move, PerftMoveNum, BoardSquare, perftPreviousBoardSquare, CanCastle, i + 10);
+						if (DivideFunON)
+						{
+							uint32_t DivideFunNum = 0;
+							DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+							NumOfMoves += DivideFunNum;
+							if (IsWhite)
+								std::cout << count << " " << +move << ": " << DivideFunNum << " to " << Board::PieceType2letter(i + 18) << '\n';
+							else
+								std::cout << count << " " << +move << ": " << DivideFunNum << " to " << Board::PieceType2letter(i + 10) << '\n';
+						}
+						else
+							NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+
+						BoardSquare = perftPreviousBoardSquare;
+					}
 				}
-				piece.Promotion[0] = 65;
-				piece.Promotion[1] = 65;
-				piece.Promotion[2] = 65;
-				count++;
+
+				if (depth != 1)
+				{
+					BoardSquare = ConstBoardSquare;
+					perftPreviousBoardSquare = ConstPreviousBoardSquare;
+					CanCastle = ConstCanCastle;
+					MoveNum = ConstMoveNum;
+				}
+
+				if (IsWhite)
+					piece.Promotion[move - count - 7] = 65;
+				else
+					piece.Promotion[move - count + 9] = 65;
+
 				continue;
 			}
 
-			MakeMove(count, move, PerftMoveNum, BoardSquare, perftPreviousBoardSquare, CanCastle, 65);
-			if (DivideFunON)
+			if (depth == 1)
 			{
-				uint32_t DivideFunNum = 0;
-				DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
-				NumOfMoves += DivideFunNum;
-				std::cout << count << " " << move << ": " << DivideFunNum << '\n';
+				if(DivideFunON)
+					std::cout << count << " " << +move << ": 1" << '\n';
+				NumOfMoves++;
 			}
 			else
-				NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+			{
+				MakeMove(count, move, PerftMoveNum, BoardSquare, perftPreviousBoardSquare, CanCastle, 65);
+				if (DivideFunON)
+				{
+					uint32_t DivideFunNum = 0;
+					DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+					NumOfMoves += DivideFunNum;
+					std::cout << count << " " << +move << ": " << DivideFunNum << '\n';
+				}
+				else
+					NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
 
-			BoardSquare = ConstBoardSquare;
-			perftPreviousBoardSquare = ConstPreviousBoardSquare;
-			CanCastle = ConstCanCastle;
-			MoveNum = ConstMoveNum;
+				BoardSquare = ConstBoardSquare;
+				perftPreviousBoardSquare = ConstPreviousBoardSquare;
+				CanCastle = ConstCanCastle;
+				MoveNum = ConstMoveNum;
+			}
 		}
 		count++;
 	}

@@ -90,9 +90,11 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos, bool isNex
 	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
 	std::vector<uint8_t>::iterator iterator;
 	std::vector<uint8_t>::iterator absPin_iter;
+	bool DoNotRun = 0;
+
 	for (uint8_t direction = 0; direction < 8; direction++)
 	{
-		for (int16_t i = 1; i <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; i++)
+		for (uint8_t i = 1; i <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; i++)
 		{
 			uint8_t PieceTypeAtOffset = m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * i)];
 			//rook
@@ -129,24 +131,35 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos, bool isNex
 						if (PieceTypeAtOffsetBehind == 0)
 						{
 							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
+
 							if ((PieceTypeAtOffset == 14 and isNextMoveForWhite) or (PieceTypeAtOffset == 22 and !isNextMoveForWhite))
 								PinnedSquaresWithTheKingBeingPinned[BoardSquarePos + (OffsetForDirections[direction] * j)] = true;
+
 							continue;
 						}
 						else if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffsetBehind))
 						{
 							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
+
 							if ((PieceTypeAtOffset == 14 and isNextMoveForWhite) or (PieceTypeAtOffset == 22 and !isNextMoveForWhite))
 								PinnedSquaresWithTheKingBeingPinned[BoardSquarePos + (OffsetForDirections[direction] * j)] = true;
+
 							//calculate abs pins
 							if ((PieceTypeAtOffsetBehind == 14 and isNextMoveForWhite) or (PieceTypeAtOffsetBehind == 22 and !isNextMoveForWhite))
 							{
 								absPin_iter = moves[BoardSquarePos].TargetSquares.end();
 								WhichBoardSquaresAreAbsPinned[BoardSquarePos + (OffsetForDirections[direction] * i)] = BoardSquarePos;
+
 								for (unsigned int k = 0; k < i; k++)
+								{
+									if (m_BoardSquare[*(absPin_iter - k - 1)] != 0)
+										DoNotRun = true;
+								}
+								for (unsigned int k = 0; k < i and !DoNotRun; k++)
 								{
 									WhichBoardSquaresAreAbsPinned[*(absPin_iter - k - 1)] = BoardSquarePos;
 								}
+								DoNotRun = false;
 							}
 							break;
 						}
@@ -200,17 +213,26 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos, bool isNex
 						else if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffsetBehind))
 						{
 							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
+
 							if ((PieceTypeAtOffset == 14 and isNextMoveForWhite) or (PieceTypeAtOffset == 22 and !isNextMoveForWhite))
 								PinnedSquaresWithTheKingBeingPinned[BoardSquarePos + (OffsetForDirections[direction] * j)] = true;
+
 							//calculate abs pins
 							if ((PieceTypeAtOffsetBehind == 14 and isNextMoveForWhite) or (PieceTypeAtOffsetBehind == 22 and !isNextMoveForWhite))
 							{
 								absPin_iter = moves[BoardSquarePos].TargetSquares.end();
 								WhichBoardSquaresAreAbsPinned[BoardSquarePos + (OffsetForDirections[direction] * i)] = BoardSquarePos;
+
 								for (unsigned int k = 0; k < i; k++)
+								{
+									if (m_BoardSquare[*(absPin_iter - k - 1)] != 0)
+										DoNotRun = true;
+								}
+								for (unsigned int k = 0; k < i and !DoNotRun; k++)
 								{
 									WhichBoardSquaresAreAbsPinned[*(absPin_iter - k - 1)] = BoardSquarePos;
 								}
+								DoNotRun = false;
 							}
 							break;
 						}
@@ -268,10 +290,17 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos, bool isNex
 							{
 								absPin_iter = moves[BoardSquarePos].TargetSquares.end();
 								WhichBoardSquaresAreAbsPinned[BoardSquarePos + (OffsetForDirections[direction] * i)] = BoardSquarePos;
+
 								for (unsigned int k = 0; k < i; k++)
+								{
+									if(m_BoardSquare[*(absPin_iter - k - 1)] != 0)
+										DoNotRun = true;
+								}
+								for (unsigned int k = 0; k < i and !DoNotRun; k++)
 								{
 									WhichBoardSquaresAreAbsPinned[*(absPin_iter - k - 1)] = BoardSquarePos;
 								}
+								DoNotRun = false;
 							}
 							break;
 						}

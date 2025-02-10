@@ -2,6 +2,7 @@
 #include <string>
 #include <unordered_map>
 #include <array>
+#include <Renderer.h>
 
 struct canCastle
 {
@@ -26,4 +27,5 @@ public:
 	uint32_t GetPawnMoveSquare();
 	uint32_t ALG2BoardSquareConverter(const std::string& ALG);
 	static bool IsPieceColorWhite(unsigned int BoardSquareValue);
+	static char PieceType2letter(const uint8_t& PieceType);
 };

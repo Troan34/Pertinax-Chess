@@ -198,3 +198,48 @@ bool Board::IsPieceColorWhite(unsigned int BoardSquareValue)
 	}
 	return false;
 }
+
+char Board::PieceType2letter(const uint8_t& PieceType)
+{
+	switch (PieceType)
+	{
+	case 9:
+		return 'p';
+		break;
+	case 10:
+		return 'b';
+		break;
+	case 11:
+		return 'n';
+		break;
+	case 12:
+		return 'r';
+		break;
+	case 13:
+		return 'q';
+		break;
+	case 14:
+		return 'k';
+		break;
+	case 17:
+		return 'P';
+		break;
+	case 18:
+		return 'B';
+		break;
+	case 19:
+		return 'N';
+		break;
+	case 20:
+		return 'R';
+		break;
+	case 21:
+		return 'Q';
+		break;
+	case 22:
+		return 'K';
+		break;
+	default:
+		ASSERT(false);
+	}
+}
