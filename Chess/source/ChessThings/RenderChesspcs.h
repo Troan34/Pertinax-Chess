@@ -34,7 +34,7 @@ struct Vec2MouseInput
 class RenderChessPieces
 {
 private:
-	std::array<unsigned int, 64> BoardSquare;
+	std::array<uint8_t, 64> BoardSquare;
 	std::vector<std::future<void>> void_Futures;
 	std::array<std::array<VertexStructure, 4Ui64>, 135> quads;
 public:
@@ -47,12 +47,12 @@ public:
 	void WillCanCastleChange(unsigned int PieceTypeThatMoved, unsigned int BoardSquareItMovedFrom, const unsigned int& BoardSquareItMovedTo, canCastle& Castle);
 	void WasLeftButtonPressed();
 	uint8_t GetPieceTypefromTexID(float TexID);
-	float GetPieceTextureID(std::array<unsigned int, 64> BoardSquare, unsigned int i);
-	void SetStaticBoardSquare(const std::array<unsigned int, 64>& BoardSquare);
+	float GetPieceTextureID(const std::array<uint8_t, 64>& BoardSquare, unsigned int i);
+	void SetStaticBoardSquare(const std::array<uint8_t, 64>& BoardSquare);
 	void GetMouseInput(GLFWwindow* window);
 	
-	uint32_t Perft(std::array<unsigned int, 64Ui64> BoardSquare, std::array<unsigned int, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int& PerftMoveNum);
-	void MakeMove(unsigned int BoardSquare, unsigned int move, unsigned int& PerftMoveNum, std::array<unsigned int, 64>& fun_BoardSquare, std::array<unsigned int, 64>& fun_previousBoardSquare, canCastle& Castle, const uint8_t& PieceTypeToPromoteTo);
+	uint32_t Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int& PerftMoveNum, uint64_t& PerftDebugID);
+	void MakeMove(const uint8_t& BoardSquare, const uint8_t& move, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle, const uint8_t& PieceTypeToPromoteTo, uint64_t& PerftDebugID);
 	void CreatePerft(uint8_t PerftDepth);
 	
 	void SetMoveNum(const uint32_t& Movenum);

@@ -1,8 +1,8 @@
 #include "LegalMoves.h"
-static std::array<unsigned int, 64> m_previousBoardSquare;
+static std::array<uint8_t, 64> m_previousBoardSquare;
 static std::array<MOVE, 64> OppositeMoves;
 
-GenerateLegalMoves::GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, const std::array<unsigned int, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
+GenerateLegalMoves::GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
 	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
 {
 	for (int file = 0; file < 8; file++)
@@ -50,7 +50,7 @@ void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
 	AttackedSquares.fill(false);
 	PinnedSquaresWithTheKingBeingPinned.fill(false);
 	WhichBoardSquaresAreAbsPinned.fill(0);
-	int BoardSquarePos = 0;
+	uint8_t BoardSquarePos = 0;
 	for (uint8_t i : m_BoardSquare)
 	{ 
 		if (i == 0)
@@ -90,7 +90,6 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos, bool isNex
 	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
 	std::vector<uint8_t>::iterator iterator;
 	std::vector<uint8_t>::iterator absPin_iter;
-	bool DoNotRun = 0;
 
 	for (uint8_t direction = 0; direction < 8; direction++)
 	{
@@ -125,9 +124,9 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos, bool isNex
 					}
 					
 					//calculate pinnable squares
-					for (unsigned int j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
+					for (uint8_t j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
 					{
-						int PieceTypeAtOffsetBehind = m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * j)];
+						uint8_t PieceTypeAtOffsetBehind = m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * j)];
 						if (PieceTypeAtOffsetBehind == 0)
 						{
 							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
@@ -148,18 +147,31 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos, bool isNex
 							if ((PieceTypeAtOffsetBehind == 14 and isNextMoveForWhite) or (PieceTypeAtOffsetBehind == 22 and !isNextMoveForWhite))
 							{
 								absPin_iter = moves[BoardSquarePos].TargetSquares.end();
-								WhichBoardSquaresAreAbsPinned[BoardSquarePos + (OffsetForDirections[direction] * i)] = BoardSquarePos;
 
-								for (unsigned int k = 0; k < i; k++)
+								bool DoNotRun = false;
+								bool Flag = false;
+								for (uint8_t k = 0; k < i; k++)
 								{
 									if (m_BoardSquare[*(absPin_iter - k - 1)] != 0)
-										DoNotRun = true;
+									{
+										if (!Flag)
+											Flag = true;
+										else
+										{
+											DoNotRun = true;
+										}
+									}
 								}
-								for (unsigned int k = 0; k < i and !DoNotRun; k++)
+
+								if (!DoNotRun)
 								{
-									WhichBoardSquaresAreAbsPinned[*(absPin_iter - k - 1)] = BoardSquarePos;
+									WhichBoardSquaresAreAbsPinned[BoardSquarePos + (OffsetForDirections[direction] * i)] = BoardSquarePos;
+									for (uint8_t k = 0; k < i; k++)
+									{
+										WhichBoardSquaresAreAbsPinned[*(absPin_iter - k - 1)] = BoardSquarePos;
+									}
+									DoNotRun = false;
 								}
-								DoNotRun = false;
 							}
 							break;
 						}
@@ -221,18 +233,31 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos, bool isNex
 							if ((PieceTypeAtOffsetBehind == 14 and isNextMoveForWhite) or (PieceTypeAtOffsetBehind == 22 and !isNextMoveForWhite))
 							{
 								absPin_iter = moves[BoardSquarePos].TargetSquares.end();
-								WhichBoardSquaresAreAbsPinned[BoardSquarePos + (OffsetForDirections[direction] * i)] = BoardSquarePos;
 
-								for (unsigned int k = 0; k < i; k++)
+								bool DoNotRun = false;
+								bool Flag = false;
+								for (uint8_t k = 0; k < i; k++)
 								{
 									if (m_BoardSquare[*(absPin_iter - k - 1)] != 0)
-										DoNotRun = true;
+									{
+										if (!Flag)
+											Flag = true;
+										else
+										{
+											DoNotRun = true;
+										}
+									}
 								}
-								for (unsigned int k = 0; k < i and !DoNotRun; k++)
+
+								if (!DoNotRun)
 								{
-									WhichBoardSquaresAreAbsPinned[*(absPin_iter - k - 1)] = BoardSquarePos;
+									WhichBoardSquaresAreAbsPinned[BoardSquarePos + (OffsetForDirections[direction] * i)] = BoardSquarePos;
+									for (uint8_t k = 0; k < i; k++)
+									{
+										WhichBoardSquaresAreAbsPinned[*(absPin_iter - k - 1)] = BoardSquarePos;
+									}
+									DoNotRun = false;
 								}
-								DoNotRun = false;
 							}
 							break;
 						}
@@ -272,7 +297,8 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos, bool isNex
 					//calculate pinnable squares
 					for (uint8_t j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
 					{
-						int8_t PieceTypeAtOffsetBehind = m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * j)];
+						uint8_t PieceTypeAtOffsetBehind = m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * j)];
+
 						if (PieceTypeAtOffsetBehind == 0)
 						{
 							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
@@ -280,27 +306,42 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos, bool isNex
 								PinnedSquaresWithTheKingBeingPinned[BoardSquarePos + (OffsetForDirections[direction] * j)] = true;
 							continue;
 						}
+
 						else if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffsetBehind))
 						{
 							moves[BoardSquarePos].PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
 							if ((PieceTypeAtOffset == 14 and isNextMoveForWhite) or (PieceTypeAtOffset == 22 and !isNextMoveForWhite))
 								PinnedSquaresWithTheKingBeingPinned[BoardSquarePos + (OffsetForDirections[direction] * j)] = true;
+
 							//calculate abs pins
 							if ((PieceTypeAtOffsetBehind == 14 and isNextMoveForWhite) or (PieceTypeAtOffsetBehind == 22 and !isNextMoveForWhite))
 							{
 								absPin_iter = moves[BoardSquarePos].TargetSquares.end();
-								WhichBoardSquaresAreAbsPinned[BoardSquarePos + (OffsetForDirections[direction] * i)] = BoardSquarePos;
 
-								for (unsigned int k = 0; k < i; k++)
+								bool DoNotRun = false;
+								bool Flag = false;
+								for (uint8_t k = 0; k < i; k++)
 								{
-									if(m_BoardSquare[*(absPin_iter - k - 1)] != 0)
-										DoNotRun = true;
+									if (m_BoardSquare[*(absPin_iter - k - 1)] != 0)
+									{
+										if (!Flag)
+											Flag = true;
+										else
+										{
+											DoNotRun = true;
+										}
+									}
 								}
-								for (unsigned int k = 0; k < i and !DoNotRun; k++)
+
+								if (!DoNotRun)
 								{
-									WhichBoardSquaresAreAbsPinned[*(absPin_iter - k - 1)] = BoardSquarePos;
+									WhichBoardSquaresAreAbsPinned[BoardSquarePos + (OffsetForDirections[direction] * i)] = BoardSquarePos;
+									for (uint8_t k = 0; k < i; k++)
+									{
+										WhichBoardSquaresAreAbsPinned[*(absPin_iter - k - 1)] = BoardSquarePos;
+									}
+									DoNotRun = false;
 								}
-								DoNotRun = false;
 							}
 							break;
 						}
@@ -322,7 +363,7 @@ void GenerateLegalMoves::KnightMoveGen(const uint8_t& BoardSquarePos, bool isNex
 	if ((m_BoardSquare[BoardSquarePos] == 19 and isNextMoveForWhite) or (m_BoardSquare[BoardSquarePos] == 11 and !isNextMoveForWhite))
 	{
 		CreateOffesetsForKnight(BoardSquarePos);
-		for (int16_t i : OffsetsForKnight)
+		for (int8_t i : OffsetsForKnight)
 		{
 			AttackedSquares[i] = true;
 			//i know that if only the first condition is met then c++ won't check the other one, if it does i'm blaming c++ and i WILL be calling it stupid
@@ -343,7 +384,7 @@ void GenerateLegalMoves::KnightMoveGen(const uint8_t& BoardSquarePos, bool isNex
 
 void GenerateLegalMoves::CreateOffesetsForKnight(const uint8_t& BoardSquarePos)
 {
-	for (int i = 0; i <= 4; i++)
+	for (uint8_t i = 0; i <= 4; i++)
 	{
 		if (NumOfSquaresUntilEdge[BoardSquarePos][i] >= 1)
 		{
@@ -502,8 +543,8 @@ void GenerateLegalMoves::KingMoveGen(const uint8_t& BoardSquarePos, bool isNextM
 {
 	if ((m_BoardSquare[BoardSquarePos] == 22 and isNextMoveForWhite) or (m_BoardSquare[BoardSquarePos] == 14 and !isNextMoveForWhite))
 	{
-		unsigned int PieceType = m_BoardSquare[BoardSquarePos];
-		for (unsigned int direction = 0; direction < 8; direction++)
+		uint8_t PieceType = m_BoardSquare[BoardSquarePos];
+		for (uint8_t direction = 0; direction < 8; direction++)
 		{
 			if (NumOfSquaresUntilEdge[BoardSquarePos][direction] > 0)
 			{

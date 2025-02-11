@@ -19,7 +19,7 @@ class GenerateLegalMoves
 private:
 	const int OffsetForDirections[8] = { 8, -8, -1, 1, 7, -7, 9, -9 };
 	std::array<std::array<uint8_t, 8>, 64>NumOfSquaresUntilEdge;
-	std::array<unsigned int, 64> m_BoardSquare;
+	std::array<uint8_t, 64> m_BoardSquare;
 	canCastle CanCastle;
 	std::vector<uint8_t> OffsetsForKnight;
 	bool isItCheckmate = true;
@@ -43,15 +43,15 @@ public:
 	* The array is structured like a Board in which squares that are pinned
 	* receive the value of the pinning piece BoardSquarePos
 	*/
-	std::array<unsigned int, 64> WhichBoardSquaresAreAbsPinned;
+	std::array<uint8_t, 64> WhichBoardSquaresAreAbsPinned;
 
 	/*
 	* BoardSquare where the square's value is the checking piece BoardSquarePos
 	* The king's BoardSquarePos is included
 	*/
-	std::array<unsigned int, 64> CheckTargetSquares;
+	std::array<uint8_t, 64> CheckTargetSquares;
 	unsigned int MoveNum;
-	GenerateLegalMoves(const std::array<unsigned int, 64Ui64>& BoardSquare, const std::array<unsigned int, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
+	GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
 	~GenerateLegalMoves();
 	void GenerateMoves(bool isNextMoveForWhite);
 	void SliderMoveGen(const uint8_t& BoardSquarePos, bool isNextMoveForWhite);

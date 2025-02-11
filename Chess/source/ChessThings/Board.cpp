@@ -24,7 +24,7 @@ Board::Board(const std::string& FenString)
 {
 
 }
-std::array<unsigned int, 64> Board::GetPositionFromFEN()
+std::array<uint8_t, 64> Board::GetPositionFromFEN()
 {
 	Piece piece;
 	std::unordered_map <char, unsigned int> PieceTypeFromChar =
