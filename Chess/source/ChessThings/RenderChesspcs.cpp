@@ -450,7 +450,7 @@ std::array<VertexStructure, 540> RenderChessPieces::MemcopyObjects(std::array<st
 	return positions;
 }
 
-void RenderChessPieces::WillCanCastleChange(unsigned int PieceType, unsigned int BoardSquareNumItMovedFrom, const unsigned int& BoardSquareItMovedTo, canCastle& Castle)
+void RenderChessPieces::WillCanCastleChange(const uint8_t& PieceType, const uint8_t& BoardSquareNumItMovedFrom, const uint8_t& BoardSquareItMovedTo, canCastle& Castle)
 {
 	if (BoardSquareNumItMovedFrom == 4 and PieceType == 22)
 	{
@@ -476,13 +476,13 @@ void RenderChessPieces::WillCanCastleChange(unsigned int PieceType, unsigned int
 			Castle.HasBlackLongRookMoved = true;
 		}
 	}
-	else if (PieceType == 20 and BoardSquareNumItMovedFrom == 0)
+	else if (PieceType == 20 and BoardSquareNumItMovedFrom == 0 or BoardSquareItMovedTo == 0)
 		Castle.HasWhiteLongRookMoved = true;
-	else if (PieceType == 20 and BoardSquareNumItMovedFrom == 7)
+	else if (PieceType == 20 and BoardSquareNumItMovedFrom == 7 or BoardSquareItMovedTo == 7)
 		Castle.HasWhiteShortRookMoved = true;
-	else if (PieceType == 12 and BoardSquareNumItMovedFrom == 63)
+	else if (PieceType == 12 and BoardSquareNumItMovedFrom == 63 or BoardSquareItMovedTo == 63)
 		Castle.HasBlackShortRookMoved = true;
-	else if (PieceType == 12 and BoardSquareNumItMovedFrom == 56)
+	else if (PieceType == 12 and BoardSquareNumItMovedFrom == 56 or BoardSquareItMovedTo == 56)
 		Castle.HasBlackLongRookMoved = true;
 }
 

@@ -9,8 +9,7 @@ struct MOVE
 {
 	uint8_t PieceType;
 	std::vector<uint8_t> TargetSquares;
-	std::array<uint8_t, 3> Promotion{65, 65, 65};//which move let's pawn promote
-	uint8_t PieceTypeUnderAttack;
+	std::array<uint8_t, 3> Promotion{65, 65, 65};//which move lets pawn promote
 };
 
 class GenerateLegalMoves
@@ -37,7 +36,7 @@ public:
 	std::array<bool, 64> PinnedSquaresWithTheKingBeingPinned;
 
 	/**
-	* array with every abs pinned square(infront the piece pinned until the attacking piece + actual piece pinned)
+	* array with every abs pinned square(infront the piece pinned until the attacking piece + actual piece pinned + behind until the (included)king)
 	*
 	* The array is structured like a Board in which squares that are pinned
 	* receive the value of the pinning piece BoardSquarePos
