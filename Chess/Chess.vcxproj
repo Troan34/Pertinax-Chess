@@ -158,6 +158,7 @@
     <ClCompile Include="source\VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\Downloads\PromotionSquare.png" />
     <Image Include="res\textures\Empty.png" />
     <Image Include="res\textures\bb.png" />
     <Image Include="res\textures\bk.png" />
@@ -166,6 +167,7 @@
     <Image Include="res\textures\bq.png" />
     <Image Include="res\textures\br.png" />
     <Image Include="res\textures\Chessboard.png" />
+    <Image Include="res\textures\PromotionSquare.png" />
     <Image Include="res\textures\Red.png" />
     <Image Include="res\textures\wb.png" />
     <Image Include="res\textures\wk.png" />

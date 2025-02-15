@@ -590,9 +590,9 @@ uint32_t RenderChessPieces::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::
 	uint8_t count = 0;
 
 
-	for (MOVE piece : LegalMoves.moves)
+	for (MOVE& piece : LegalMoves.moves)
 	{
-		for (uint8_t move : piece.TargetSquares)
+		for (const uint8_t& move : piece.TargetSquares)
 		{
 
 			//perft the promotions, this if is basically a blunt .find()

@@ -46,6 +46,8 @@
     <Image Include="res\textures\wr.png" />
     <Image Include="res\textures\Empty.png" />
     <Image Include="res\textures\Red.png" />
+    <Image Include="..\..\..\..\Downloads\PromotionSquare.png" />
+    <Image Include="res\textures\PromotionSquare.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\IndexBuffer.h" />

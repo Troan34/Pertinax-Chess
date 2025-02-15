@@ -21,13 +21,14 @@ private:
 	canCastle CanCastle;
 	std::vector<uint8_t> OffsetsForKnight;
 	bool isItCheckmate = true;
+	uint8_t DoubleCheckBoardSquare = 65; //if two checks collide the last one modifying the value will write to this
+	bool isNextMoveForWhite;
 
 	const uint8_t WhitePawnDirections[3] = { 4,0,6 };
 	const uint8_t BlackPawnDirections[3] = { 7,1,5 };
 
 	const int OffsetForWhitePawn[3] = { 7, 8, 9 };
 	const int OffsetForBlackPawn[3] = { -7, -8, -9 };
-
 
 	void CanKingCastle_LMoves(const GenerateLegalMoves& OppositeMoves, bool& isItCheckmate, std::vector<uint8_t>::iterator& it, const uint8_t& BoardSquareOfKingToMove, const uint8_t& KingMove);
 public:
@@ -51,12 +52,12 @@ public:
 	unsigned int MoveNum;
 	GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
 	~GenerateLegalMoves();
-	void GenerateMoves(bool isNextMoveForWhite);
-	void SliderMoveGen(const uint8_t& BoardSquarePos, bool isNextMoveForWhite);
-	void KnightMoveGen(const uint8_t& BoardSquarePos, bool isNextMoveForWhite);
+	void GenerateMoves();
+	void SliderMoveGen(const uint8_t& BoardSquarePos);
+	void KnightMoveGen(const uint8_t& BoardSquarePos);
 	void CreateOffesetsForKnight(const uint8_t& BoardSquarePos);
-	void PawnMoveGen(const uint8_t& BoardSquarePos, bool isNextMoveForWhite);
-	void KingMoveGen(const uint8_t& BoardSquarePos, bool isNextMoveForWhite);
-	void RemoveIllegalMoves(bool isNextMoveForWhite);
+	void PawnMoveGen(const uint8_t& BoardSquarePos);
+	void KingMoveGen(const uint8_t& BoardSquarePos);
+	void RemoveIllegalMoves();
 
 };

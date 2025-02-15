@@ -3,7 +3,7 @@ static std::array<uint8_t, 64> m_previousBoardSquare;
 static std::array<MOVE, 64> OppositeMoves;
 
 GenerateLegalMoves::GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
-	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum)
+	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum), isNextMoveForWhite(isNextMoveForWhite)
 {
 	for (int file = 0; file < 8; file++)
 	{
@@ -27,17 +27,19 @@ GenerateLegalMoves::GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardS
 
 		}
 	}
-	GenerateMoves(isNextMoveForWhite);
+	if (previousBoardSquare != nullptr)
+		m_previousBoardSquare = *previousBoardSquare;
+
+	GenerateMoves();
 	if (!isForOppositeMoves)
 	{
-		RemoveIllegalMoves(isNextMoveForWhite);
+		RemoveIllegalMoves();
 		if (isItCheckmate)
 		{
 			//std::cout << "Checkmate" << '\n';
 		}
 	}
-	if(previousBoardSquare != nullptr)
-		m_previousBoardSquare = *previousBoardSquare;
+
 }
 
 GenerateLegalMoves::~GenerateLegalMoves()
@@ -45,13 +47,14 @@ GenerateLegalMoves::~GenerateLegalMoves()
 
 }
 
-void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
+void GenerateLegalMoves::GenerateMoves()
 {
 	AttackedSquares.fill(false);
 	PinnedSquaresWithTheKingBeingPinned.fill(false);
-	WhichBoardSquaresAreAbsPinned.fill(0);
+	WhichBoardSquaresAreAbsPinned.fill(65);
+	CheckTargetSquares.fill(65);
 	uint8_t BoardSquarePos = 0;
-	for (uint8_t i : m_BoardSquare)
+	for (const uint8_t& i : m_BoardSquare)
 	{ 
 		if (i == 0)
 		{
@@ -60,32 +63,32 @@ void GenerateLegalMoves::GenerateMoves(bool isNextMoveForWhite)
 		}
 		else if (i == 10 or i == 12 or i == 18 or i == 20 or i == 21 or i == 13)
 		{
-			SliderMoveGen(BoardSquarePos, isNextMoveForWhite);
+			SliderMoveGen(BoardSquarePos);
 			BoardSquarePos++;
 			continue;
 		}
 		else if (i == 17 or i == 9)
 		{
-			PawnMoveGen(BoardSquarePos, isNextMoveForWhite);
+			PawnMoveGen(BoardSquarePos);
 			BoardSquarePos++;
 			continue;
 		}
 		else if (i == 19 or i == 11)
 		{
-			KnightMoveGen(BoardSquarePos, isNextMoveForWhite);
+			KnightMoveGen(BoardSquarePos);
 			BoardSquarePos++;
 			continue;
 		}
 		else if (i == 22 or i == 14)
 		{
-			KingMoveGen(BoardSquarePos, isNextMoveForWhite);
+			KingMoveGen(BoardSquarePos);
 			BoardSquarePos++;
 		}
 	}
 
 }
  
-void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos, bool isNextMoveForWhite)
+void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos)
 {
 	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
 	std::vector<uint8_t>::iterator iterator;
@@ -120,7 +123,10 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos, bool isNex
 
 						for (int j = 0; - i + j < 0; j++)
 						{
-							CheckTargetSquares[*(iterator - i + j)] = BoardSquarePos;
+							if (CheckTargetSquares[*(iterator - i + j)] != 65)
+								DoubleCheckBoardSquare = BoardSquarePos;
+							else
+								CheckTargetSquares[*(iterator - i + j)] = BoardSquarePos;
 						}
 					}
 					
@@ -196,7 +202,10 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos, bool isNex
 
 						for (int j = 0; -i + j < 0; j++)
 						{
-							CheckTargetSquares[*(iterator - i + j)] = BoardSquarePos;
+							if (CheckTargetSquares[*(iterator - i + j)] != 65)
+								DoubleCheckBoardSquare = BoardSquarePos;
+							else
+								CheckTargetSquares[*(iterator - i + j)] = BoardSquarePos;
 						}
 					}
 
@@ -270,7 +279,10 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos, bool isNex
 
 						for (int index = 0; -i + index < 0; index++)
 						{
-							CheckTargetSquares[*(iterator - i + index)] = BoardSquarePos;
+							if (CheckTargetSquares[*(iterator - i + index)] != 65)
+								DoubleCheckBoardSquare = BoardSquarePos;
+							else
+								CheckTargetSquares[*(iterator - i + index)] = BoardSquarePos;
 						}
 					}
 
@@ -327,12 +339,12 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos, bool isNex
 }
 
 //knight
-void GenerateLegalMoves::KnightMoveGen(const uint8_t& BoardSquarePos, bool isNextMoveForWhite)
+void GenerateLegalMoves::KnightMoveGen(const uint8_t& BoardSquarePos)
 {
 	if ((m_BoardSquare[BoardSquarePos] == 19 and isNextMoveForWhite) or (m_BoardSquare[BoardSquarePos] == 11 and !isNextMoveForWhite))
 	{
 		CreateOffesetsForKnight(BoardSquarePos);
-		for (int8_t i : OffsetsForKnight)
+		for (const int8_t& i : OffsetsForKnight)
 		{
 			AttackedSquares[i] = true;
 			//i know that if only the first condition is met then c++ won't check the other one, if it does i'm blaming c++ and i WILL be calling it stupid
@@ -342,7 +354,10 @@ void GenerateLegalMoves::KnightMoveGen(const uint8_t& BoardSquarePos, bool isNex
 				moves[BoardSquarePos].TargetSquares.push_back(i);
 				if (m_BoardSquare[i] == 14 and isNextMoveForWhite or m_BoardSquare[i] == 22 and !isNextMoveForWhite)
 				{
-					CheckTargetSquares[BoardSquarePos] = BoardSquarePos;
+					if (CheckTargetSquares[i] != 65)
+						DoubleCheckBoardSquare = BoardSquarePos;
+					else
+						CheckTargetSquares[i] = BoardSquarePos;
 				}
 			}
 			
@@ -396,12 +411,12 @@ void GenerateLegalMoves::CreateOffesetsForKnight(const uint8_t& BoardSquarePos)
 }
 
 //pawn
-void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos, bool isNextMoveForWhite)
+void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos)
 {
 	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
 	if (PieceType == 17 and isNextMoveForWhite)//white pawn
 	{
-		for (int Offset : OffsetForWhitePawn)
+		for (const int& Offset : OffsetForWhitePawn)
 		{
 			if (BoardSquarePos == 48 and Offset == 7 or BoardSquarePos == 55 and Offset == 9)
 				continue;
@@ -420,7 +435,13 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos, bool isNextM
 						moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
 					}
 					if (PieceTypeAtOffset == 14)
-						CheckTargetSquares[BoardPosPlusOffset] = BoardSquarePos;
+					{
+						if (CheckTargetSquares[BoardPosPlusOffset] != 65)
+							DoubleCheckBoardSquare = BoardSquarePos;
+						else
+							CheckTargetSquares[BoardPosPlusOffset] = BoardSquarePos;
+					}
+
 
 					//promotion
 					if (BoardPosPlusOffset >= 56)
@@ -458,7 +479,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos, bool isNextM
 	}
 	if (PieceType == 9 and !isNextMoveForWhite)//black pawn
 	{
-		for (int Offset : OffsetForBlackPawn)
+		for (const int& Offset : OffsetForBlackPawn)
 		{
 			if (BoardSquarePos == 8 and Offset == -9 or BoardSquarePos == 15 and Offset == -7)
 				continue;
@@ -477,7 +498,12 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos, bool isNextM
 						moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
 					}
 					if (PieceTypeAtOffset == 22)
-						CheckTargetSquares[BoardPosPlusOffset] = BoardSquarePos;
+					{
+						if (CheckTargetSquares[BoardPosPlusOffset] != 65)
+							DoubleCheckBoardSquare = BoardSquarePos;
+						else
+							CheckTargetSquares[BoardPosPlusOffset] = BoardSquarePos;
+					}
 
 					//promotion
 					if (BoardPosPlusOffset <= 7)
@@ -514,7 +540,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos, bool isNextM
 }
 
 //king
-void GenerateLegalMoves::KingMoveGen(const uint8_t& BoardSquarePos, bool isNextMoveForWhite)
+void GenerateLegalMoves::KingMoveGen(const uint8_t& BoardSquarePos)
 {
 	if ((m_BoardSquare[BoardSquarePos] == 22 and isNextMoveForWhite) or (m_BoardSquare[BoardSquarePos] == 14 and !isNextMoveForWhite))
 	{
@@ -562,7 +588,7 @@ void GenerateLegalMoves::KingMoveGen(const uint8_t& BoardSquarePos, bool isNextM
 	}
 }
 
-void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
+void GenerateLegalMoves::RemoveIllegalMoves()
 {	
 	std::vector<uint8_t> SquareWhichTargetSquaresThatAreChecking;
 	uint8_t BoardSquareOfKingToMove = 0;
@@ -595,10 +621,10 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 
 	//fill SquareWhichTargetSquaresThatAreChecking
 	uint8_t count = 0;
-	uint8_t CheckingSquare = 0;
-	for (uint16_t Square : OppositeMoves.CheckTargetSquares)
+	uint8_t CheckingSquare = 65;
+	for (const uint8_t& Square : OppositeMoves.CheckTargetSquares)
 	{
-		if (Square != 0)
+		if (Square != 65)
 		{
 			if (CheckingSquare == Square)
 			{
@@ -612,10 +638,23 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 		}
 	}
 
+	size_t NumberOfChecks = SquareWhichTargetSquaresThatAreChecking.size();
+
 	//moves for King
-	if (SquareWhichTargetSquaresThatAreChecking.size() >= 0)
+	if (NumberOfChecks >= 0)
 	{
-		//for (unsigned int KingMove : moves[BoardSquareOfKingToMove].TargetSquares)
+		if (NumberOfChecks == 2)
+		{
+			for (MOVE& Piece : moves)
+			{
+				if (Piece.PieceType == 0 or Piece.PieceType != m_BoardSquare[BoardSquareOfKingToMove])
+				{
+					Piece.TargetSquares.clear();
+				}
+			}
+		}
+
+
 		for(auto it = moves[BoardSquareOfKingToMove].TargetSquares.begin(); it != moves[BoardSquareOfKingToMove].TargetSquares.end();)
 		{
 			uint8_t KingMove = *it;
@@ -644,10 +683,10 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 		}
 	}
 	//Moves for every piece while check
-	if (SquareWhichTargetSquaresThatAreChecking.size() == 1)
+	if (NumberOfChecks == 1)
 	{
 		count = 0;
-		for (MOVE Piece : moves)
+		for (MOVE& Piece : moves)
 		{//this Piece.PieceType == 0 might be risky, but only if piece has moves and Piecetype = 0 is either no piece or no moves for the piece
 			if (Piece.PieceType == 22 or Piece.PieceType == 14 or Piece.PieceType == 0)
 			{
@@ -656,26 +695,26 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 			}
 
 			//checks if under abs pin
-			if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 0)
+			if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 65)
 			{
-				moves[count].TargetSquares.clear();
+				Piece.TargetSquares.clear();
 			}
 			else
 			{
-				int16_t IterCount = 0;
-				for (unsigned int Move : Piece.TargetSquares)
+				for (auto it = moves[count].TargetSquares.begin(); it != moves[count].TargetSquares.end();)
 				{
+					uint8_t Move = *it;
 					//checks if Move neither captures piece and doesn't block check
 					if (Move != SquareWhichTargetSquaresThatAreChecking[0] and OppositeMoves.CheckTargetSquares[Move] != SquareWhichTargetSquaresThatAreChecking[0])
 					{
-						moves[count].TargetSquares.erase(moves[count].TargetSquares.begin() + IterCount);
+						it = Piece.TargetSquares.erase(it);
 						continue;
 					}
 					else
 					{
 						isItCheckmate = false;
+						it++;
 					}
-					IterCount++;
 				}
 			}
 
@@ -684,10 +723,10 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 	}
 
 	//moves for every piece while no checks
-	if (SquareWhichTargetSquaresThatAreChecking.size() == 0)
+	if (NumberOfChecks == 0)
 	{
 		count = 0;
-		for (MOVE Piece : moves)
+		for (MOVE& Piece : moves)
 		{//this Piece.PieceType == 0 might be risky, but only if piece has moves and Piecetype = 0 is either no piece or no moves for the piece
 			if (Piece.PieceType == 22 or Piece.PieceType == 14 or Piece.PieceType == 0)
 			{
@@ -695,15 +734,15 @@ void GenerateLegalMoves::RemoveIllegalMoves(bool isNextMoveForWhite)
 				continue;
 			}
 
-			if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 0)
+			if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 65)
 			{
 				int16_t IterCount = 0;
-				for (uint8_t Move : Piece.TargetSquares)
+				for (const uint8_t& Move : Piece.TargetSquares)
 				{
 					
 					if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != OppositeMoves.WhichBoardSquaresAreAbsPinned[Move] and OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != Move)
 					{
-						moves[count].TargetSquares.erase(moves[count].TargetSquares.begin() + IterCount);
+						Piece.TargetSquares.erase(moves[count].TargetSquares.begin() + IterCount);
 						continue;
 					}
 					else

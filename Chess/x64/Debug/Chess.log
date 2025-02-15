@@ -1,8 +1,8 @@
 ﻿  LegalMoves.cpp
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\LegalMoves.cpp(608,55): warning C4244: 'argument': conversion from 'uint16_t' to '_Ty', possible loss of data
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\LegalMoves.cpp(635,55): warning C4244: 'argument': conversion from 'uint16_t' to '_Ty', possible loss of data
           with
           [
               _Ty=uint8_t
           ]
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\LegalMoves.cpp(609,22): warning C4244: '=': conversion from 'uint16_t' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\LegalMoves.cpp(636,22): warning C4244: '=': conversion from 'uint16_t' to 'uint8_t', possible loss of data
   Chess.vcxproj -> C:\Users\roanb\source\repos\Chess\x64\Debug\Chess.exe
