@@ -1,20 +1,23 @@
 #include "LegalMoves.h"
 static std::array<uint8_t, 64> m_previousBoardSquare;
 static std::array<MOVE, 64> OppositeMoves;
+static std::unordered_map<uint8_t, bool> DoNOTEnPassantEat; //for weird RemoveIllegalMoves things
+static bool DoNotEPEatFlag = false;
 
-GenerateLegalMoves::GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
-	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum), isNextMoveForWhite(isNextMoveForWhite)
+
+GenerateLegalMoves::GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves, bool letDoNotEPEatBeCleared, bool DoNotEpEatFlag)
+	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum), isNextMoveForWhite(isNextMoveForWhite), letDoNotEPEatBeCleared(letDoNotEPEatBeCleared)
 {
-	for (int file = 0; file < 8; file++)
+	for (uint8_t file = 0; file < 8; file++)
 	{
-		for (int rank = 0; rank < 8; rank++)
+		for (uint8_t rank = 0; rank < 8; rank++)
 		{
-			int numNorth = 7 - rank;
-			int numSouth = rank;
-			int numWest = file;
-			int numEast = 7 - file;
+			uint8_t numNorth = 7 - rank;
+			uint8_t numSouth = rank;
+			uint8_t numWest = file;
+			uint8_t numEast = 7 - file;
 
-			unsigned int squareIndex = rank * 8 + file;
+			uint8_t squareIndex = rank * 8 + file;
 
 			NumOfSquaresUntilEdge[squareIndex][0] = numNorth;
 			NumOfSquaresUntilEdge[squareIndex][1] = numSouth;
@@ -30,14 +33,14 @@ GenerateLegalMoves::GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardS
 	if (previousBoardSquare != nullptr)
 		m_previousBoardSquare = *previousBoardSquare;
 
+	DoNotEPEatFlag = DoNotEpEatFlag;
+
 	GenerateMoves();
 	if (!isForOppositeMoves)
 	{
 		RemoveIllegalMoves();
-		if (isItCheckmate)
-		{
+		//if (isItCheckmate)
 			//std::cout << "Checkmate" << '\n';
-		}
 	}
 
 }
@@ -74,15 +77,16 @@ void GenerateLegalMoves::GenerateMoves()
 		}
 		BoardSquarePos++;
 	}
-
+	DoNOTEnPassantEat.clear();
 }
- 
 
 void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos)
 {
 	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
 	std::vector<uint8_t>::iterator iterator;
 	std::vector<uint8_t>::iterator absPin_iter;
+	MOVE& Piece = moves[BoardSquarePos];
+	Piece.TargetSquares.reserve(4);
 
 	for (uint8_t direction = 0; direction < 8; direction++)
 	{
@@ -101,19 +105,19 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos)
 
 			if (PieceTypeAtOffset == 0)
 			{
-				moves[BoardSquarePos].PieceType = PieceType;
-				moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
+				Piece.PieceType = PieceType;
+				Piece.TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
 				continue;
 			}
 			else if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffset))
 			{
-				moves[BoardSquarePos].PieceType = PieceType;
-				moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
+				Piece.PieceType = PieceType;
+				Piece.TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
 
 				//calculate checking squares
 				if ((PieceTypeAtOffset == 14 and isNextMoveForWhite) or (PieceTypeAtOffset == 22 and !isNextMoveForWhite))
 				{
-					iterator = moves[BoardSquarePos].TargetSquares.end();
+					iterator = Piece.TargetSquares.end();
 
 					for (int j = 0; -i + j < 0; j++)
 					{
@@ -125,6 +129,8 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos)
 				}
 
 				std::vector<uint8_t> PinnedTargetSquares;
+				PinnedTargetSquares.reserve(Piece.TargetSquares.capacity());
+
 				//calculate pinnable squares
 				for (uint8_t j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
 				{
@@ -137,7 +143,7 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos)
 					//calculate abs pins
 					if ((PieceTypeAtOffsetBehind == 14 and isNextMoveForWhite) or (PieceTypeAtOffsetBehind == 22 and !isNextMoveForWhite))
 					{
-						absPin_iter = moves[BoardSquarePos].TargetSquares.end();
+						absPin_iter = Piece.TargetSquares.end();
 
 						bool DoNotRun = false;
 						for (auto k = PinnedTargetSquares.begin(); k < PinnedTargetSquares.end() - 1; k++)
@@ -173,8 +179,6 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos)
 		}
 	}
 }
-
-
 
 //knight
 void GenerateLegalMoves::KnightMoveGen(const uint8_t& BoardSquarePos)
@@ -309,12 +313,16 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos)
 				//en passant
 				if (BoardSquarePos <= 39 and BoardSquarePos >= 32 and Offset != 8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + Offset + 8]) == 9 and (m_BoardSquare[BoardSquarePos + Offset - 8]) == 9 and !(m_previousBoardSquare[BoardSquarePos + Offset - 8] == 9) and m_BoardSquare[BoardSquarePos + Offset + 8] == 0)
 				{
-					moves[BoardSquarePos].PieceType = PieceType;
-					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
+					if (DoNOTEnPassantEat.find(BoardSquarePos + Offset - 8) == DoNOTEnPassantEat.end())
+					{
+						moves[BoardSquarePos].PieceType = PieceType;
+						moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
+					}
 				}
 			}
 		}
 	}
+
 	if (PieceType == 9 and !isNextMoveForWhite)//black pawn
 	{
 		for (const int& Offset : OffsetForBlackPawn)
@@ -369,8 +377,11 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos)
 				//en passant
 				if (BoardSquarePos <= 31 and BoardSquarePos >= 24 and Offset != -8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + Offset - 8]) == 17 and (m_BoardSquare[BoardSquarePos + Offset + 8]) == 17 and !(m_previousBoardSquare[BoardSquarePos + Offset + 8] == 17) and m_BoardSquare[BoardSquarePos + Offset - 8] == 0)
 				{
-					moves[BoardSquarePos].PieceType = PieceType;
-					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
+					if (DoNOTEnPassantEat.find(BoardSquarePos + Offset + 8) == DoNOTEnPassantEat.end())
+					{
+						moves[BoardSquarePos].PieceType = PieceType;
+						moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
+					}
 				}
 			}
 		}
@@ -454,7 +465,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 	if (MoveNum == 0)
 		p_prevBoardSquare = nullptr;
 
-	GenerateLegalMoves OppositeMoves(m_BoardSquare,p_prevBoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true);
+	GenerateLegalMoves OppositeMoves(m_BoardSquare,p_prevBoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true, true, DoNotEPEatFlag);
 
 
 	//fill SquareWhichTargetSquaresThatAreChecking
@@ -520,8 +531,8 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 			}
 		}
 	}
-	//Moves for every piece while check
-	if (NumberOfChecks == 1)
+
+	if (NumberOfChecks < 2)
 	{
 		count = 0;
 		for (MOVE& Piece : moves)
@@ -533,70 +544,65 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 			}
 
 			//checks if under abs pin
-			if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 65)
+			if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 65 and NumberOfChecks == 1)
 			{
 				Piece.TargetSquares.clear();
-			}
-			else
-			{
-				for (auto it = moves[count].TargetSquares.begin(); it != moves[count].TargetSquares.end();)
-				{
-					uint8_t Move = *it;
-					//checks if Move neither captures piece and doesn't block check
-					if (Move != SquareWhichTargetSquaresThatAreChecking[0] and OppositeMoves.CheckTargetSquares[Move] != SquareWhichTargetSquaresThatAreChecking[0])
-					{
-						it = Piece.TargetSquares.erase(it);
-						continue;
-					}
-					else
-					{
-						isItCheckmate = false;
-						it++;
-					}
-				}
-			}
-
-			count++;
-		}
-	}
-
-	//moves for every piece while no checks
-	if (NumberOfChecks == 0)
-	{
-		count = 0;
-		for (MOVE& Piece : moves)
-		{//this Piece.PieceType == 0 might be risky, but only if piece has moves and Piecetype == 0 is either no piece or no moves for the piece
-			if (Piece.PieceType == 22 or Piece.PieceType == 14 or Piece.PieceType == 0)
-			{
 				count++;
 				continue;
 			}
-
-			if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 65)
+			else 
 			{
-				for (auto it = moves[count].TargetSquares.begin(); it != moves[count].TargetSquares.end();)
+				for (auto it = Piece.TargetSquares.begin(); it != Piece.TargetSquares.end();)
 				{
 					uint8_t Move = *it;
-					if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != OppositeMoves.WhichBoardSquaresAreAbsPinned[Move] and OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != Move)
+
+					//for those things that happen with pawns
+					if (Piece.PieceType == 9 or Piece.PieceType == 17)
 					{
-						it = Piece.TargetSquares.erase(it);
-						continue;
+						if (abs(count - Move) == 16 and WhichBoardSquaresAreAbsPinned[Move] != 65)
+						{
+							DoNOTEnPassantEat.insert({Move, true});
+						}
 					}
-					else
+
+					if ((OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 65 and NumberOfChecks == 0) or NumberOfChecks == 1)
 					{
-						isItCheckmate = false;
-						it++;
+						if (NumberOfChecks == 1)
+						{
+							//checks if Move neither captures piece nor doesn't block check
+							if (Move != SquareWhichTargetSquaresThatAreChecking[0] and OppositeMoves.CheckTargetSquares[Move] != SquareWhichTargetSquaresThatAreChecking[0])
+							{
+								it = Piece.TargetSquares.erase(it);
+								continue;
+							}
+							else
+							{
+								isItCheckmate = false;
+							}
+						}
+						else
+						{//checks if move causes an illegal check
+							if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != OppositeMoves.WhichBoardSquaresAreAbsPinned[Move] and OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != Move)
+							{
+								it = Piece.TargetSquares.erase(it);
+								continue;
+							}
+							else
+							{
+								isItCheckmate = false;
+							}
+						}
 					}
+					it++;
+
 				}
 			}
-			else
-			{
-				isItCheckmate = false;
-			}
+
 			count++;
 		}
 	}
 
+	
 	SquareWhichTargetSquaresThatAreChecking.clear();
 	
 }
@@ -657,5 +663,18 @@ void GenerateLegalMoves::CanKingCastle_LMoves(const GenerateLegalMoves& Opposite
 				++it;
 			}
 		}
+	}
+}
+
+void GenerateLegalMoves::ClearDoNOTEnPassantEat()
+{
+	if (DoNotEPEatFlag)
+	{
+		DoNOTEnPassantEat.clear();
+		DoNotEPEatFlag = false;
+	}
+	else
+	{
+		DoNotEPEatFlag = true;
 	}
 }
