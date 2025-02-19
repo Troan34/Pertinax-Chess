@@ -24,7 +24,6 @@ private:
 	bool isItCheckmate = true;
 	uint8_t DoubleCheckBoardSquare = 65; //if two checks collide the last one modifying the value will write to this
 	bool isNextMoveForWhite;
-	bool letDoNotEPEatBeCleared;
 
 	const uint8_t WhitePawnDirections[3] = { 4,0,6 };
 	const uint8_t BlackPawnDirections[3] = { 7,1,5 };
@@ -52,7 +51,7 @@ public:
 	*/
 	std::array<uint8_t, 64> CheckTargetSquares;
 	unsigned int MoveNum;
-	GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves, bool letDoNotEPEatBeCleared, bool DoNotEPEatFlag);
+	GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
 	~GenerateLegalMoves();
 	void GenerateMoves();
 	void SliderMoveGen(const uint8_t& BoardSquarePos);
@@ -61,6 +60,6 @@ public:
 	void PawnMoveGen(const uint8_t& BoardSquarePos);
 	void KingMoveGen(const uint8_t& BoardSquarePos);
 	void RemoveIllegalMoves();
-	static void ClearDoNOTEnPassantEat();
+	static void SetDoNotEnPassant(bool SetToThis);
 
 };

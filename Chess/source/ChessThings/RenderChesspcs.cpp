@@ -15,7 +15,6 @@ int AttackedSquare = -1;
 std::unordered_set<uint8_t> LegalMovesForSelectedSquare;
 static bool WaitingForUserPromotion = false;
 static uint8_t rememberAttackedSquareForUserPromotion;
-static bool DoNotEPEatFlag = false;
 
 //multithreading vars
 static std::atomic<bool> IsGetCommandRunning = true;
@@ -119,6 +118,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 	if (MoveNum % 2 != 0)
 		isNextMoveForWhite = false;
 
+	GenerateLegalMoves* p_LegalMoves = nullptr;
 
 	//Legal Moves
 	if (BoardSquareBeingSelected != -1)
@@ -126,41 +126,26 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 		float xxDifference = 0.0f;
 		float yyDifference = 0.0f;
 		static_BoardSquare[BoardSquareBeingSelected] = GetPieceTypefromTexID(RememberTexID);
-
+		std::array<uint8_t, 64Ui64>* p_prevBoardSquare;
 		if (wasStatic_previousBoardsquareCreated)
-		{
-			GenerateLegalMoves LegalMoves(static_BoardSquare, &previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, false, false, DoNotEPEatFlag);
-			for (uint8_t j : LegalMoves.moves[BoardSquareBeingSelected].TargetSquares)
-			{
-				xxDifference = j * 87.5f;
-				yyDifference = 0;
-				while (xxDifference >= 650.0f)
-				{
-					xxDifference -= 700.0f;
-					yyDifference += 87.5f;
-				}
-				quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
-				LegalMovesForSelectedSquare.insert(j);
-			}
-			
-		}
+			p_prevBoardSquare = &previousBoardsquare;
 		else
-		{
-			GenerateLegalMoves LegalMoves(static_BoardSquare,nullptr, CanCastle, isNextMoveForWhite, MoveNum, false, false, DoNotEPEatFlag);
-			for (int j : LegalMoves.moves[BoardSquareBeingSelected].TargetSquares)
-			{
-				xxDifference = j * 87.5f;
-				yyDifference = 0;
-				while (xxDifference >= 650.0f)
-				{
-					xxDifference -= 700.0f;
-					yyDifference += 87.5f;
-				}
-				quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
-				LegalMovesForSelectedSquare.insert(j);
-			}
+			p_prevBoardSquare = nullptr;
 
+		GenerateLegalMoves LegalMoves(static_BoardSquare, p_prevBoardSquare, CanCastle, isNextMoveForWhite, MoveNum, false);
+		for (uint8_t j : LegalMoves.moves[BoardSquareBeingSelected].TargetSquares)
+		{
+			xxDifference = j * 87.5f;
+			yyDifference = 0;
+			while (xxDifference >= 650.0f)
+			{
+				xxDifference -= 700.0f;
+				yyDifference += 87.5f;
+			}
+			quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
+			LegalMovesForSelectedSquare.insert(j);
 		}
+		p_LegalMoves = &LegalMoves;
 		
 		static_BoardSquare[BoardSquareBeingSelected] = 0;
 	}
@@ -294,10 +279,14 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 									rememberAttackedSquareForUserPromotion = AttackedSquare;
 								}
 
-								BoardSquareBeingSelected = -1;
-								LegalMovesForSelectedSquare.clear();
-								GenerateLegalMoves::ClearDoNOTEnPassantEat();
 
+								LegalMovesForSelectedSquare.clear();
+								GenerateLegalMoves::SetDoNotEnPassant(false);
+								if (abs(BoardSquareBeingSelected - AttackedSquare) == 16 and p_LegalMoves->WhichBoardSquaresAreAbsPinned[AttackedSquare] != 65)
+								{
+									GenerateLegalMoves::SetDoNotEnPassant(true);
+								}
+								BoardSquareBeingSelected = -1;
 							}
 							else
 							{
@@ -580,16 +569,15 @@ void RenderChessPieces::SetStaticBoardSquare(const std::array<uint8_t, 64>& Boar
 	}
 }
 
-uint32_t RenderChessPieces::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> perftPreviousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int& PerftMoveNum, uint64_t& PerftDebugID, bool DoNotEPEatFlag)
+uint32_t RenderChessPieces::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> perftPreviousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int& PerftMoveNum, uint64_t& PerftDebugID)
 {
 	uint32_t NumOfMoves = 0;
 
-	GenerateLegalMoves LegalMoves(BoardSquare, &perftPreviousBoardSquare, CanCastle, isNextMoveForWhite, MoveNum, false, true, DoNotEPEatFlag);
+	GenerateLegalMoves LegalMoves(BoardSquare, &perftPreviousBoardSquare, CanCastle, isNextMoveForWhite, MoveNum, false);
 
 	const auto ConstBoardSquare = BoardSquare;
 	const auto ConstPreviousBoardSquare = perftPreviousBoardSquare;
 	const canCastle ConstCanCastle = CanCastle;
-	const bool ConstDoNotEPEatFlag = DoNotEPEatFlag;
 	uint8_t count = 0;
 
 
@@ -621,13 +609,13 @@ uint32_t RenderChessPieces::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::
 					{
 
 						if (IsWhite)
-							MakeMove(count, move, BoardSquare, perftPreviousBoardSquare, CanCastle, i + 18, PerftDebugID);
+							MakeMove(LegalMoves, count, move, BoardSquare, perftPreviousBoardSquare, CanCastle, i + 18, PerftDebugID);
 						else
-							MakeMove(count, move, BoardSquare, perftPreviousBoardSquare, CanCastle, i + 10, PerftDebugID);
+							MakeMove(LegalMoves, count, move, BoardSquare, perftPreviousBoardSquare, CanCastle, i + 10, PerftDebugID);
 						if (DivideFunON)
 						{
 							uint32_t DivideFunNum = 0;
-							DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum, PerftDebugID, DoNotEPEatFlag);
+							DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum, PerftDebugID);
 							NumOfMoves += DivideFunNum;
 							if (IsWhite)
 								std::cout << +count << " " << +move << ": " << DivideFunNum << " to " << Board::PieceType2letter(i + 18) << '\n';
@@ -635,7 +623,7 @@ uint32_t RenderChessPieces::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::
 								std::cout << +count << " " << +move << ": " << DivideFunNum << " to " << Board::PieceType2letter(i + 10) << '\n';
 						}
 						else
-							NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum, PerftDebugID, DoNotEPEatFlag);
+							NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum, PerftDebugID);
 
 						BoardSquare = perftPreviousBoardSquare;
 					}
@@ -646,7 +634,6 @@ uint32_t RenderChessPieces::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::
 					BoardSquare = ConstBoardSquare;
 					perftPreviousBoardSquare = ConstPreviousBoardSquare;
 					CanCastle = ConstCanCastle;
-					DoNotEPEatFlag = ConstDoNotEPEatFlag;
 				}
 
 				if (IsWhite)
@@ -667,21 +654,20 @@ uint32_t RenderChessPieces::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::
 			else
 			{
 
-				MakeMove(count, move, BoardSquare, perftPreviousBoardSquare, CanCastle, 65, PerftDebugID);
+				MakeMove(LegalMoves, count, move, BoardSquare, perftPreviousBoardSquare, CanCastle, 65, PerftDebugID);
 				if (DivideFunON)
 				{
 					uint32_t DivideFunNum = 0;
-					DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum, PerftDebugID, DoNotEPEatFlag);
+					DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum, PerftDebugID);
 					NumOfMoves += DivideFunNum;
 					std::cout << +count << " " << +move << ": " << DivideFunNum << '\n';
 				}
 				else
-					NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum, PerftDebugID, DoNotEPEatFlag);
+					NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum, PerftDebugID);
 
 				BoardSquare = ConstBoardSquare;
 				perftPreviousBoardSquare = ConstPreviousBoardSquare;
 				CanCastle = ConstCanCastle;
-				DoNotEPEatFlag = ConstDoNotEPEatFlag;
 			}
 		}
 		count++;
@@ -690,7 +676,7 @@ uint32_t RenderChessPieces::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::
 	return NumOfMoves;
 }
 
-void RenderChessPieces::MakeMove(const uint8_t& BoardSquare, const uint8_t& move, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle, const uint8_t& PieceTypeToPromoteTo, uint64_t& PerftDebugID)
+void RenderChessPieces::MakeMove(const GenerateLegalMoves& LegalMoves, const uint8_t& BoardSquare, const uint8_t& move, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle, const uint8_t& PieceTypeToPromoteTo, uint64_t& PerftDebugID)
 {
 	fun_previousBoardSquare = fun_BoardSquare;
 	WillCanCastleChange(fun_BoardSquare[BoardSquare], BoardSquare, move, Castle);
@@ -728,7 +714,7 @@ void RenderChessPieces::MakeMove(const uint8_t& BoardSquare, const uint8_t& move
 
 	}
 
-	//promoting
+	//promoting and en passant
 	if (PieceTypeToPromoteTo != 65)
 	{
 		fun_BoardSquare[move] = PieceTypeToPromoteTo;
@@ -762,7 +748,11 @@ void RenderChessPieces::MakeMove(const uint8_t& BoardSquare, const uint8_t& move
 	fun_BoardSquare[BoardSquare] = 0;
 	
 	PerftDebugID++;
-	GenerateLegalMoves::ClearDoNOTEnPassantEat();
+	GenerateLegalMoves::SetDoNotEnPassant(false);
+	if (abs(BoardSquare - move) == 16 and LegalMoves.WhichBoardSquaresAreAbsPinned[move] != 65)
+	{
+		GenerateLegalMoves::SetDoNotEnPassant(true);
+	}
 }
 
 void RenderChessPieces::CreatePerft(uint8_t PerftDepth)
@@ -780,7 +770,7 @@ void RenderChessPieces::CreatePerft(uint8_t PerftDepth)
 	uint64_t PerftDebugID = 0;
 
 	auto start = std::chrono::high_resolution_clock::now();
-	std::cout << "Nodes searched: " << Perft(perftBoardsquare, perftPreviousBoardsquare, perftCastle, isNextMoveForWhite, PerftDepth, true, Movenum, PerftDebugID, DoNotEPEatFlag) << '\n';
+	std::cout << "Nodes searched: " << Perft(perftBoardsquare, perftPreviousBoardsquare, perftCastle, isNextMoveForWhite, PerftDepth, true, Movenum, PerftDebugID) << '\n';
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 	std::cout << "In " << duration.count() << " ms" << '\n' << std::endl;

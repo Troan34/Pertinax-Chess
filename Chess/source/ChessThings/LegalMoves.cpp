@@ -1,12 +1,11 @@
 #include "LegalMoves.h"
 static std::array<uint8_t, 64> m_previousBoardSquare;
 static std::array<MOVE, 64> OppositeMoves;
-static std::unordered_map<uint8_t, bool> DoNOTEnPassantEat; //for weird RemoveIllegalMoves things
-static bool DoNotEPEatFlag = false;
+static bool DoNotEnPassant; //for weird RemoveIllegalMoves things
 
 
-GenerateLegalMoves::GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves, bool letDoNotEPEatBeCleared, bool DoNotEpEatFlag)
-	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum), isNextMoveForWhite(isNextMoveForWhite), letDoNotEPEatBeCleared(letDoNotEPEatBeCleared)
+GenerateLegalMoves::GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
+	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum), isNextMoveForWhite(isNextMoveForWhite)
 {
 	for (uint8_t file = 0; file < 8; file++)
 	{
@@ -33,7 +32,6 @@ GenerateLegalMoves::GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardS
 	if (previousBoardSquare != nullptr)
 		m_previousBoardSquare = *previousBoardSquare;
 
-	DoNotEPEatFlag = DoNotEpEatFlag;
 
 	GenerateMoves();
 	if (!isForOppositeMoves)
@@ -77,7 +75,6 @@ void GenerateLegalMoves::GenerateMoves()
 		}
 		BoardSquarePos++;
 	}
-	DoNOTEnPassantEat.clear();
 }
 
 void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos)
@@ -313,7 +310,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos)
 				//en passant
 				if (BoardSquarePos <= 39 and BoardSquarePos >= 32 and Offset != 8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + Offset + 8]) == 9 and (m_BoardSquare[BoardSquarePos + Offset - 8]) == 9 and !(m_previousBoardSquare[BoardSquarePos + Offset - 8] == 9) and m_BoardSquare[BoardSquarePos + Offset + 8] == 0)
 				{
-					if (DoNOTEnPassantEat.find(BoardSquarePos + Offset - 8) == DoNOTEnPassantEat.end())
+					if (!DoNotEnPassant)
 					{
 						moves[BoardSquarePos].PieceType = PieceType;
 						moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
@@ -377,7 +374,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos)
 				//en passant
 				if (BoardSquarePos <= 31 and BoardSquarePos >= 24 and Offset != -8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + Offset - 8]) == 17 and (m_BoardSquare[BoardSquarePos + Offset + 8]) == 17 and !(m_previousBoardSquare[BoardSquarePos + Offset + 8] == 17) and m_BoardSquare[BoardSquarePos + Offset - 8] == 0)
 				{
-					if (DoNOTEnPassantEat.find(BoardSquarePos + Offset + 8) == DoNOTEnPassantEat.end())
+					if (!DoNotEnPassant)
 					{
 						moves[BoardSquarePos].PieceType = PieceType;
 						moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
@@ -465,7 +462,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 	if (MoveNum == 0)
 		p_prevBoardSquare = nullptr;
 
-	GenerateLegalMoves OppositeMoves(m_BoardSquare,p_prevBoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true, true, DoNotEPEatFlag);
+	GenerateLegalMoves OppositeMoves(m_BoardSquare,p_prevBoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true);
 
 
 	//fill SquareWhichTargetSquaresThatAreChecking
@@ -559,9 +556,10 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 					//for those things that happen with pawns
 					if (Piece.PieceType == 9 or Piece.PieceType == 17)
 					{
-						if (abs(count - Move) == 16 and WhichBoardSquaresAreAbsPinned[Move] != 65)
+						if (DoNotEnPassant and m_BoardSquare[Move] == 0 and (abs(count - Move) == 7 or abs(count - Move) == 9))
 						{
-							DoNOTEnPassantEat.insert({Move, true});
+							it = Piece.TargetSquares.erase(it);
+							continue;
 						}
 					}
 
@@ -666,15 +664,7 @@ void GenerateLegalMoves::CanKingCastle_LMoves(const GenerateLegalMoves& Opposite
 	}
 }
 
-void GenerateLegalMoves::ClearDoNOTEnPassantEat()
+void GenerateLegalMoves::SetDoNotEnPassant(bool SetToThis)
 {
-	if (DoNotEPEatFlag)
-	{
-		DoNOTEnPassantEat.clear();
-		DoNotEPEatFlag = false;
-	}
-	else
-	{
-		DoNotEPEatFlag = true;
-	}
+	DoNotEnPassant = SetToThis;
 }
