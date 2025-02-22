@@ -4,13 +4,26 @@
 #include <vector>
 #include "Board.h"
 #include <iostream>
+#include <unordered_set>
+constexpr unsigned int WHITE_PAWN = WHITE + PAWN;     //17
+constexpr unsigned int WHITE_BISHOP = WHITE + BISHOP; //18
+constexpr unsigned int WHITE_KNIGHT = WHITE + KNIGHT; //19
+constexpr unsigned int WHITE_ROOK = WHITE + ROOK;     //20
+constexpr unsigned int WHITE_QUEEN = WHITE + QUEEN;   //21
+constexpr unsigned int WHITE_KING = WHITE + KING;     //22
+constexpr unsigned int BLACK_PAWN = BLACK + PAWN;     //9
+constexpr unsigned int BLACK_BISHOP = BLACK + BISHOP; //10
+constexpr unsigned int BLACK_KNIGHT = BLACK + KNIGHT; //11
+constexpr unsigned int BLACK_ROOK = BLACK + ROOK;     //12
+constexpr unsigned int BLACK_QUEEN = BLACK + QUEEN;   //13
+constexpr unsigned int BLACK_KING = BLACK + KING;     //14
+
 
 struct MOVE
 {
 	uint8_t PieceType;
 	std::vector<uint8_t> TargetSquares;
-	std::array<uint8_t, 3> Promotion{65, 65, 65};//which move lets pawn promote
-
+	std::array<uint8_t, 3> Promotion{65, 65, 65};//which move lets PAWN promote
 };
 
 class GenerateLegalMoves
@@ -20,9 +33,9 @@ private:
 	std::array<std::array<uint8_t, 8>, 64>NumOfSquaresUntilEdge;
 	std::array<uint8_t, 64> m_BoardSquare;
 	canCastle CanCastle;
-	std::vector<uint8_t> OffsetsForKnight;
+
 	bool isItCheckmate = true;
-	uint8_t DoubleCheckBoardSquare = 65; //if two checks collide the last one modifying the value will write to this
+	uint8_t DoubleCheckBoardSquare = 65; //if two checks collide the last one that wants to modify the value will write to this
 	bool isNextMoveForWhite;
 
 	const uint8_t WhitePawnDirections[3] = { 4,0,6 };
@@ -56,7 +69,7 @@ public:
 	void GenerateMoves();
 	void SliderMoveGen(const uint8_t& BoardSquarePos);
 	void KnightMoveGen(const uint8_t& BoardSquarePos);
-	void CreateOffesetsForKnight(const uint8_t& BoardSquarePos);
+	std::array<uint8_t, 8>& CreateOffesetsForKnight(const uint8_t& BoardSquarePos);
 	void PawnMoveGen(const uint8_t& BoardSquarePos);
 	void KingMoveGen(const uint8_t& BoardSquarePos);
 	void RemoveIllegalMoves();

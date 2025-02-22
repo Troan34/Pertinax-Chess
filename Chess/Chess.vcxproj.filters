@@ -362,6 +362,7 @@
     <ClInclude Include="source\CreateQuadDynamic.h" />
     <ClInclude Include="source\ChessThings\RenderChesspcs.h" />
     <ClInclude Include="source\ChessThings\LegalMoves.h" />
+    <ClInclude Include="source\ChessThings\Engine\Search.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="source\vendor\glm\detail\func_common.inl" />

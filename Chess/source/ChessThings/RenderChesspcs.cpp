@@ -118,9 +118,9 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 	if (MoveNum % 2 != 0)
 		isNextMoveForWhite = false;
 
-	GenerateLegalMoves* p_LegalMoves = nullptr;
-
+	
 	//Legal Moves
+	GenerateLegalMoves* p_LegalMoves = nullptr;
 	if (BoardSquareBeingSelected != -1)
 	{
 		float xxDifference = 0.0f;
@@ -142,7 +142,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 				xxDifference -= 700.0f;
 				yyDifference += 87.5f;
 			}
-			quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14);
+			quads[j + 66] = CreateQuad(-350.0f + xxDifference, -350.0f + yyDifference, 87.5f, 14.0f);
 			LegalMovesForSelectedSquare.insert(j);
 		}
 		p_LegalMoves = &LegalMoves;
@@ -221,12 +221,12 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 											{
 												if (BoardSquareBeingSelected == 4)
 												{
-													static_BoardSquare[5] = 20;
+													static_BoardSquare[5] = WHITE_ROOK;
 													static_BoardSquare[7] = 0;
 												}
 												else
 												{
-													static_BoardSquare[61] = 12;
+													static_BoardSquare[61] = BLACK_ROOK;
 													static_BoardSquare[63] = 0;
 												}
 											}
@@ -234,19 +234,19 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 											{
 												if (BoardSquareBeingSelected == 4)
 												{
-													static_BoardSquare[3] = 20;
+													static_BoardSquare[3] = WHITE_ROOK;
 													static_BoardSquare[0] = 0;
 												}
 												else
 												{
-													static_BoardSquare[59] = 12;
+													static_BoardSquare[59] = BLACK_ROOK;
 													static_BoardSquare[56] = 0;
 												}
 											}
 										}
 									}
 
-									//white en passant
+									//White en passant
 									if (RememberTexID == 7)
 									{
 										if (previousBoardsquare[AttackedSquare] == 0)
@@ -257,7 +257,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 											}
 										}
 									}
-									//black en passant
+									//Black en passant
 									if (RememberTexID == 1)
 									{
 										if (previousBoardsquare[AttackedSquare] == 0)
@@ -272,7 +272,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 								WillCanCastleChange(previousBoardsquare[BoardSquareBeingSelected], BoardSquareBeingSelected, AttackedSquare, CanCastle);
 
 								//promoting
-								if (AttackedSquare >= 56 and GetPieceTypefromTexID(RememberTexID) == 17 or AttackedSquare <= 7 and GetPieceTypefromTexID(RememberTexID) == 9 )
+								if (AttackedSquare >= 56 and GetPieceTypefromTexID(RememberTexID) == WHITE_PAWN or AttackedSquare <= 7 and GetPieceTypefromTexID(RememberTexID) == BLACK_PAWN )
 								{
 									WaitingForUserPromotion = true;
 									MoveNum--;
@@ -322,7 +322,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 	//does promotion things
 	if(WaitingForUserPromotion)
 	{
-		if (isNextMoveForWhite)//white promotion quads
+		if (isNextMoveForWhite)//White promotion quads
 		{
 			quads[130] = CreateQuad(-87.5f, 0.0f, 175.0f, 15.0f);
 			quads[131] = CreateQuad(-87.5f, 0.0f, 87.5f, 11.0f);
@@ -330,7 +330,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 			quads[133] = CreateQuad(-87.5f, 87.5f, 87.5f, 9.0f);
 			quads[134] = CreateQuad(0.0f, 87.5f, 87.5f, 8.0f);
 		}
-		else//black promotion quads
+		else//Black promotion quads
 		{
 			quads[130] = CreateQuad(-87.5f, -175.0f, 175.0f, 15.0f);
 			quads[131] = CreateQuad(-87.5f, -175.0f, 87.5f, 6.0f);
@@ -342,19 +342,19 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 		//check which promotion type was selected, the code is HIGHLY unreadable, comments may help you
 		if (g_mouseInput.LeftButtonPressed and g_mouseInput.WasLeftButtonPressed == false)
 		{
-			if (isNextMoveForWhite)//when white promotes
+			if (isNextMoveForWhite)//when White promotes
 			{
 				if (-g_mouseInput.yPos + 360.0f < 87.5f and -g_mouseInput.yPos + 360.0f >= 0.0f)//the 'bottom' ones
 				{
 					if (g_mouseInput.xPos - 350.0f < 0.0f and g_mouseInput.xPos - 350.0f > -87.5f)//Q
 					{
-						static_BoardSquare[rememberAttackedSquareForUserPromotion] = 21;
+						static_BoardSquare[rememberAttackedSquareForUserPromotion] = WHITE_QUEEN;
 						WaitingForUserPromotion = false;
 						MoveNum++;
 					}
 					else if (g_mouseInput.xPos - 350.0f < 87.5f and g_mouseInput.xPos - 350.0f > 0.0f)//R
 					{
-						static_BoardSquare[rememberAttackedSquareForUserPromotion] = 20;
+						static_BoardSquare[rememberAttackedSquareForUserPromotion] = WHITE_ROOK;
 						WaitingForUserPromotion = false;
 						MoveNum++;
 					}
@@ -363,31 +363,31 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 				{
 					if (g_mouseInput.xPos - 350.0f < 0.0f and g_mouseInput.xPos - 350.0f > -87.5f)//N
 					{
-						static_BoardSquare[rememberAttackedSquareForUserPromotion] = 19;
+						static_BoardSquare[rememberAttackedSquareForUserPromotion] = WHITE_KNIGHT;
 						WaitingForUserPromotion = false;
 						MoveNum++;
 					}
 					else if (g_mouseInput.xPos - 350.0f < 87.5f and g_mouseInput.xPos - 350.0f > 0.0f)//B
 					{
-						static_BoardSquare[rememberAttackedSquareForUserPromotion] = 18;
+						static_BoardSquare[rememberAttackedSquareForUserPromotion] = WHITE_BISHOP;
 						WaitingForUserPromotion = false;
 						MoveNum++;
 					}
 				}
 			}
-			else//black promotes
+			else//Black promotes
 			{
 				if (-g_mouseInput.yPos + 360.0f <= -87.5f and -g_mouseInput.yPos + 360.0f >= -175.0f)//the 'bottom' ones
 				{
 					if (g_mouseInput.xPos - 350.0f < 0.0f and g_mouseInput.xPos - 350.0f > -87.5f)//q
 					{
-						static_BoardSquare[rememberAttackedSquareForUserPromotion] = 13;
+						static_BoardSquare[rememberAttackedSquareForUserPromotion] = BLACK_QUEEN;
 						WaitingForUserPromotion = false;
 						MoveNum++;
 					}
 					else if (g_mouseInput.xPos - 350.0f < 87.5f and g_mouseInput.xPos - 350.0f > 0.0f)//r
 					{
-						static_BoardSquare[rememberAttackedSquareForUserPromotion] = 12;
+						static_BoardSquare[rememberAttackedSquareForUserPromotion] = BLACK_ROOK;
 						WaitingForUserPromotion = false;
 						MoveNum++;
 					}
@@ -396,13 +396,13 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 				{
 					if (g_mouseInput.xPos - 350.0f < 0.0f and g_mouseInput.xPos - 350.0f > -87.5f)//n
 					{
-						static_BoardSquare[rememberAttackedSquareForUserPromotion] = 11;
+						static_BoardSquare[rememberAttackedSquareForUserPromotion] = BLACK_KNIGHT;
 						WaitingForUserPromotion = false;
 						MoveNum++;
 					}
 					else if (g_mouseInput.xPos - 350.0f < 87.5f and g_mouseInput.xPos - 350.0f > 0.0f)//b
 					{
-						static_BoardSquare[rememberAttackedSquareForUserPromotion] = 10;
+						static_BoardSquare[rememberAttackedSquareForUserPromotion] = BLACK_BISHOP;
 						WaitingForUserPromotion = false;
 						MoveNum++;
 					}
@@ -443,7 +443,7 @@ std::array<VertexStructure, 540> RenderChessPieces::MemcopyObjects(std::array<st
 
 void RenderChessPieces::WillCanCastleChange(const uint8_t& PieceType, const uint8_t& BoardSquareNumItMovedFrom, const uint8_t& BoardSquareItMovedTo, canCastle& Castle)
 {
-	if (BoardSquareNumItMovedFrom == 4 and PieceType == 22)
+	if (BoardSquareNumItMovedFrom == 4 and PieceType == WHITE_KING)
 	{
 		Castle.HasWhiteKingMoved = true;
 		if (BoardSquareItMovedTo == 6)
@@ -455,7 +455,7 @@ void RenderChessPieces::WillCanCastleChange(const uint8_t& PieceType, const uint
 			Castle.HasWhiteLongRookMoved = true;
 		}
 	}
-	else if (PieceType == 14 and BoardSquareNumItMovedFrom == 60)
+	else if (PieceType == BLACK_KING and BoardSquareNumItMovedFrom == 60)
 	{
 		Castle.HasBlackKingMoved = true;
 		if (BoardSquareItMovedTo == 62)
@@ -467,13 +467,13 @@ void RenderChessPieces::WillCanCastleChange(const uint8_t& PieceType, const uint
 			Castle.HasBlackLongRookMoved = true;
 		}
 	}
-	else if (PieceType == 20 and BoardSquareNumItMovedFrom == 0 or BoardSquareItMovedTo == 0)
+	else if (PieceType == WHITE_ROOK and BoardSquareNumItMovedFrom == 0 or BoardSquareItMovedTo == 0)
 		Castle.HasWhiteLongRookMoved = true;
-	else if (PieceType == 20 and BoardSquareNumItMovedFrom == 7 or BoardSquareItMovedTo == 7)
+	else if (PieceType == WHITE_ROOK and BoardSquareNumItMovedFrom == 7 or BoardSquareItMovedTo == 7)
 		Castle.HasWhiteShortRookMoved = true;
-	else if (PieceType == 12 and BoardSquareNumItMovedFrom == 63 or BoardSquareItMovedTo == 63)
+	else if (PieceType == BLACK_ROOK and BoardSquareNumItMovedFrom == 63 or BoardSquareItMovedTo == 63)
 		Castle.HasBlackShortRookMoved = true;
-	else if (PieceType == 12 and BoardSquareNumItMovedFrom == 56 or BoardSquareItMovedTo == 56)
+	else if (PieceType == BLACK_ROOK and BoardSquareNumItMovedFrom == 56 or BoardSquareItMovedTo == 56)
 		Castle.HasBlackLongRookMoved = true;
 }
 
@@ -483,30 +483,30 @@ float RenderChessPieces::GetPieceTextureID(const std::array<uint8_t, 64>& BoardS
 	switch (BoardSquare[i]) 
 	{
 		case 0:
-			return 13.0f;//none
-		case 9:
+			return 13.0f;//NONE
+		case BLACK_PAWN:
 			return 1.0f;//p
-		case 10:
+		case BLACK_BISHOP:
 			return 2.0f;//b
-		case 11:
+		case BLACK_KNIGHT:
 			return 3.0f;//n
-		case 12:
+		case BLACK_ROOK:
 			return 4.0f;//r
-		case 13:
+		case BLACK_QUEEN:
 			return 5.0f;//q
-		case 14:
+		case BLACK_KING:
 			return 6.0f;//k
-		case 17:
+		case WHITE_PAWN:
 			return 7.0f;//P
-		case 18:
+		case WHITE_BISHOP:
 			return 8.0f;//B
-		case 19:
-			return 9.0f;//N
-		case 20:
+		case WHITE_KNIGHT:
+			return 17.0f;//N
+		case WHITE_ROOK:
 			return 10.0f;//R
-		case 21:
+		case WHITE_QUEEN:
 			return 11.0f;//Q
-		case 22:
+		case WHITE_KING:
 			return 12.0f;//K
 		default:
 			ASSERT(false);
@@ -518,20 +518,20 @@ uint8_t RenderChessPieces::GetPieceTypefromTexID(float TexID)
 {
 	if (TexID == 13.0f)
 	{
-		return 0;//none
+		return 0;//NONE
 	}
-	else if (TexID == 1.0f) { return 9; }//p
-	else if (TexID == 2.0f) { return 10; }//b
-	else if (TexID == 3.0f) { return 11; }//n
-	else if (TexID == 4.0f) { return 12; }//r
-	else if (TexID == 5.0f) { return 13; }
-	else if (TexID == 6.0f) { return 14; }
-	else if (TexID == 7.0f) { return 17; }
-	else if (TexID == 8.0f) { return 18; }
-	else if (TexID == 9.0f) { return 19; }
-	else if (TexID == 10.0f) { return 20; }
-	else if (TexID == 11.0f) { return 21; }
-	else if (TexID == 12.0f) { return 22; }
+	else if (TexID == 1.0f) { return BLACK_PAWN; }//p
+	else if (TexID == 2.0f) { return BLACK_BISHOP; }//b
+	else if (TexID == 3.0f) { return BLACK_KNIGHT; }//n
+	else if (TexID == 4.0f) { return BLACK_ROOK; }//r
+	else if (TexID == 5.0f) { return BLACK_QUEEN; }
+	else if (TexID == 6.0f) { return BLACK_KING; }
+	else if (TexID == 7.0f) { return WHITE_PAWN; }
+	else if (TexID == 8.0f) { return WHITE_BISHOP; }
+	else if (TexID == 9.0f) { return WHITE_KNIGHT; }
+	else if (TexID == 10.0f) { return WHITE_ROOK; }
+	else if (TexID == 11.0f) { return WHITE_QUEEN; }
+	else if (TexID == 12.0f) { return WHITE_KING; }
 	else
 	{
 		ASSERT(false);
@@ -683,18 +683,18 @@ void RenderChessPieces::MakeMove(const GenerateLegalMoves& LegalMoves, const uin
 	fun_BoardSquare[move] = fun_BoardSquare[BoardSquare];
 
 	//castling
-	if (fun_BoardSquare[BoardSquare] == 22 or fun_BoardSquare[BoardSquare] == 14)
+	if (fun_BoardSquare[BoardSquare] == WHITE_KING or fun_BoardSquare[BoardSquare] == BLACK_KING)
 	{
 		if (BoardSquare - move == -2)
 		{
 			if (BoardSquare == 4)
 			{
-				fun_BoardSquare[5] = 20;
+				fun_BoardSquare[5] = WHITE_ROOK;
 				fun_BoardSquare[7] = 0;
 			}
 			else
 			{
-				fun_BoardSquare[61] = 12;
+				fun_BoardSquare[61] = BLACK_ROOK;
 				fun_BoardSquare[63] = 0;
 			}
 		}
@@ -702,12 +702,12 @@ void RenderChessPieces::MakeMove(const GenerateLegalMoves& LegalMoves, const uin
 		{
 			if (BoardSquare == 4)
 			{
-				fun_BoardSquare[3] = 20;
+				fun_BoardSquare[3] = WHITE_ROOK;
 				fun_BoardSquare[0] = 0;
 			}
 			else
 			{
-				fun_BoardSquare[59] = 12;
+				fun_BoardSquare[59] = BLACK_ROOK;
 				fun_BoardSquare[56] = 0;
 			}
 		}
@@ -721,8 +721,8 @@ void RenderChessPieces::MakeMove(const GenerateLegalMoves& LegalMoves, const uin
 	}
 	else//optimization
 	{
-		//white en passant
-		if (fun_BoardSquare[BoardSquare] == 17)
+		//White en passant
+		if (fun_BoardSquare[BoardSquare] == WHITE_PAWN)
 		{
 			if (fun_previousBoardSquare[move] == 0)
 			{
@@ -732,8 +732,8 @@ void RenderChessPieces::MakeMove(const GenerateLegalMoves& LegalMoves, const uin
 				}
 			}
 		}
-		//black en passant
-		if (fun_BoardSquare[BoardSquare] == 9)
+		//Black en passant
+		if (fun_BoardSquare[BoardSquare] == BLACK_PAWN)
 		{
 			if (fun_previousBoardSquare[move] == 0)
 			{
@@ -768,9 +768,9 @@ void RenderChessPieces::CreatePerft(uint8_t PerftDepth)
 		isNextMoveForWhite = false;
 
 	uint64_t PerftDebugID = 0;
-
 	auto start = std::chrono::high_resolution_clock::now();
-	std::cout << "Nodes searched: " << Perft(perftBoardsquare, perftPreviousBoardsquare, perftCastle, isNextMoveForWhite, PerftDepth, true, Movenum, PerftDebugID) << '\n';
+	uint32_t result = Perft(perftBoardsquare, perftPreviousBoardsquare, perftCastle, isNextMoveForWhite, PerftDepth, true, Movenum, PerftDebugID);
+	std::cout << "Nodes searched: " << result << '\n';
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 	std::cout << "In " << duration.count() << " ms" << '\n' << std::endl;

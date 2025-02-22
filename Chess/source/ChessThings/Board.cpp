@@ -1,19 +1,6 @@
 #include "Board.h"
 #include <iostream>
-class Piece
-{
-public:
-	const unsigned int None = 0;
-	const unsigned int Pawn = 1;
-	const unsigned int Bishop = 2;
-	const unsigned int Knight = 3;
-	const unsigned int Rook = 4;
-	const unsigned int Queen = 5;
-	const unsigned int King = 6;
 
-	const unsigned int White = 16;
-	const unsigned int Black = 8;
-};
 
 Board::Board(const std::string& FenString)
 	:BoardSquare(), FEN(FenString), IndexOfSideToMove(FEN.find(' ')),
@@ -24,12 +11,12 @@ Board::Board(const std::string& FenString)
 {
 
 }
+
 std::array<uint8_t, 64> Board::GetPositionFromFEN()
 {
-	Piece piece;
 	std::unordered_map <char, unsigned int> PieceTypeFromChar =
 	{
-		{'k', piece.King}, {'q', piece.Queen}, {'b', piece.Bishop}, {'r', piece.Rook}, {'p', piece.Pawn}, {'n', piece.Knight}
+		{'k', KING}, {'q', QUEEN}, {'b', BISHOP}, {'r', ROOK}, {'p', PAWN}, {'n', KNIGHT}
 	};
 	std::string FenPiecePlacement = FEN.substr(0, IndexOfSideToMove);
 	
@@ -47,7 +34,7 @@ std::array<uint8_t, 64> Board::GetPositionFromFEN()
 		}
 		else
 		{
-			unsigned int PieceColor = isupper(character) ? piece.White : piece.Black;
+			unsigned int PieceColor = isupper(character) ? WHITE : BLACK;
 			unsigned int PieceType = PieceTypeFromChar[tolower(character)];
 			BoardSquare[static_cast<std::array<unsigned int, 64Ui64>::size_type>(rank) * 8 + file] = PieceType | PieceColor;
 			file += 1;
@@ -72,7 +59,7 @@ uint32_t Board::MoveNum()
 canCastle Board::GetCanCastle()
 {
 	canCastle CanCastle{};
-	const std::string CastlingAbility = FEN.substr(++IndexOfCastling, IndexOfEnPassant - IndexOfCastling);
+	const std::string CastlingAbility = FEN.substr(++IndexOfCastling, IndexOfEnPassant - IndexOfCastling - 1);
 	bool K = 0;
 	bool k = 0;
 	bool Q = 0;
@@ -84,22 +71,22 @@ canCastle Board::GetCanCastle()
 
 		if (castleCharacter == 'K')
 		{
-			++K;
+			K = true;
 			continue;
 		}
 		else if (castleCharacter == 'k')
 		{
-			++k;
+			k = true;
 			continue;
 		}
 		else if (castleCharacter == 'Q')
 		{
-			++Q;
+			Q = true;
 			continue;
 		}
 		else if (castleCharacter == 'q')
 		{
-			++q;
+			q = true;
 			continue;
 		}
 	}
@@ -136,7 +123,7 @@ canCastle Board::GetCanCastle()
 
 uint32_t Board::GetPawnMoveSquare()
 {
-	const std::string PawnMove = FEN.substr(++IndexOfEnPassant, IndexOfHalfmoveClock - IndexOfEnPassant);
+	const std::string PawnMove = FEN.substr(++IndexOfEnPassant, IndexOfHalfmoveClock - IndexOfEnPassant - 1);
 
 	if (PawnMove == "-")
 		return 65;
@@ -181,22 +168,11 @@ uint32_t Board::ALG2BoardSquareConverter(const std::string& ALG)
 	return rank * 8 + file;
 }
 
-bool Board::IsPieceColorWhite(unsigned int BoardSquareValue)
+bool Board::IsPieceColorWhite(const uint8_t& BoardSquareValue)
 {
-	if (BoardSquareValue >= 17)
-		return true;
-	try
-	{
-		if (BoardSquareValue == 0)
-		{
-			throw std::runtime_error("Value == 0(not a color) Error");
-		}
-	}
-	catch (const std::exception& e)
-	{
-		std::cout << "Caught exception: " << e.what() << '\n';
-	}
-	return false;
+	if (BoardSquareValue == 0)
+		ASSERT(false);
+	return (BoardSquareValue >= 17);
 }
 
 char Board::PieceType2letter(const uint8_t& PieceType)

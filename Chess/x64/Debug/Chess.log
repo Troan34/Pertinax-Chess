@@ -1,5 +1,22 @@
-﻿  RenderChesspcs.cpp
+﻿  Board.cpp
+  LegalMoves.cpp
+  RenderChesspcs.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
 C:\Users\roanb\source\repos\Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,1): message : see previous definition of 'APIENTRY'
 C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(89,22): warning C4267: 'initializing': conversion from 'size_t' to 'uint16_t', possible loss of data
+  Main.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
+C:\Users\roanb\source\repos\Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,1): message : see previous definition of 'APIENTRY'
+  TestTexture2D.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
+C:\Users\roanb\source\repos\Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,1): message : see previous definition of 'APIENTRY'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\memory(3465,56): warning C4244: 'argument': conversion from '_Ty' to 'unsigned int', possible loss of data
+          with
+          [
+              _Ty=unsigned __int64
+          ]
+C:\Users\roanb\source\repos\Chess\Chess\source\tests\TestTexture2D.cpp(28,25): message : see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,nullptr,unsigned __int64,0>(nullptr &&,unsigned __int64 &&)' being compiled
+  Generating Code...
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\LegalMoves.cpp(282): warning C4172: returning address of local variable or temporary: OffsetsForKnight
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Board.cpp(219): warning C4715: 'Board::PieceType2letter': not all control paths return a value
   Chess.vcxproj -> C:\Users\roanb\source\repos\Chess\x64\Debug\Chess.exe

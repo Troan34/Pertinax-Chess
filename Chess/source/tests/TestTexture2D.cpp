@@ -75,7 +75,7 @@ namespace test {
 
 	void TestTexture2D::OnRender(GLFWwindow* window)
 	{
-		static bool wasBoardSquareSet = 0;
+		static bool wasBoardSquareSet = false;
 		RenderChessPieces renderChessPieces;
 		renderChessPieces.GetMouseInput(window);
 		//FEN is in header file
@@ -85,7 +85,7 @@ namespace test {
 			renderChessPieces.SetMoveNum(board.MoveNum());
 			renderChessPieces.SetCanCastle(board.GetCanCastle());
 			renderChessPieces.SetPrevBoardSquare_FEN_EP(board.GetPawnMoveSquare());
-			wasBoardSquareSet++;
+			wasBoardSquareSet = true;
 		}
 		auto quads = renderChessPieces.CreateObjects();
 		auto position = renderChessPieces.MemcopyObjects(quads);
