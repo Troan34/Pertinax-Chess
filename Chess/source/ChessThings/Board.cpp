@@ -219,3 +219,39 @@ char Board::PieceType2letter(const uint8_t& PieceType)
 		ASSERT(false);
 	}
 }
+
+void Board::WillCanCastleChange(const uint8_t& PieceType, const uint8_t& BoardSquareNumItMovedFrom, const uint8_t& BoardSquareItMovedTo, canCastle& Castle)
+{
+	if (BoardSquareNumItMovedFrom == 4 and PieceType == WHITE_KING)
+	{
+		Castle.HasWhiteKingMoved = true;
+		if (BoardSquareItMovedTo == 6)
+		{
+			Castle.HasWhiteShortRookMoved = true;
+		}
+		else if (BoardSquareItMovedTo == 2)
+		{
+			Castle.HasWhiteLongRookMoved = true;
+		}
+	}
+	else if (PieceType == BLACK_KING and BoardSquareNumItMovedFrom == 60)
+	{
+		Castle.HasBlackKingMoved = true;
+		if (BoardSquareItMovedTo == 62)
+		{
+			Castle.HasBlackShortRookMoved = true;
+		}
+		else if (BoardSquareItMovedTo == 58)
+		{
+			Castle.HasBlackLongRookMoved = true;
+		}
+	}
+	else if (PieceType == WHITE_ROOK and BoardSquareNumItMovedFrom == 0 or BoardSquareItMovedTo == 0)
+		Castle.HasWhiteLongRookMoved = true;
+	else if (PieceType == WHITE_ROOK and BoardSquareNumItMovedFrom == 7 or BoardSquareItMovedTo == 7)
+		Castle.HasWhiteShortRookMoved = true;
+	else if (PieceType == BLACK_ROOK and BoardSquareNumItMovedFrom == 63 or BoardSquareItMovedTo == 63)
+		Castle.HasBlackShortRookMoved = true;
+	else if (PieceType == BLACK_ROOK and BoardSquareNumItMovedFrom == 56 or BoardSquareItMovedTo == 56)
+		Castle.HasBlackLongRookMoved = true;
+}

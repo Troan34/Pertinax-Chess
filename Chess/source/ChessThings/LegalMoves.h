@@ -5,18 +5,37 @@
 #include "Board.h"
 #include <iostream>
 #include <unordered_set>
-constexpr unsigned int WHITE_PAWN = WHITE + PAWN;     //17
-constexpr unsigned int WHITE_BISHOP = WHITE + BISHOP; //18
-constexpr unsigned int WHITE_KNIGHT = WHITE + KNIGHT; //19
-constexpr unsigned int WHITE_ROOK = WHITE + ROOK;     //20
-constexpr unsigned int WHITE_QUEEN = WHITE + QUEEN;   //21
-constexpr unsigned int WHITE_KING = WHITE + KING;     //22
-constexpr unsigned int BLACK_PAWN = BLACK + PAWN;     //9
-constexpr unsigned int BLACK_BISHOP = BLACK + BISHOP; //10
-constexpr unsigned int BLACK_KNIGHT = BLACK + KNIGHT; //11
-constexpr unsigned int BLACK_ROOK = BLACK + ROOK;     //12
-constexpr unsigned int BLACK_QUEEN = BLACK + QUEEN;   //13
-constexpr unsigned int BLACK_KING = BLACK + KING;     //14
+
+//compute NumOfSquaresUntilEdge at compile time
+constexpr std::array<std::array<uint8_t, 8>, 64> fillNumOfSquaresUntilEdge()
+{
+	std::array<std::array<uint8_t, 8>, 64> l_NumOfSquaresUntilEdge{};
+	for (uint8_t file = 0; file < 8; file++)
+	{
+		for (uint8_t rank = 0; rank < 8; rank++)
+		{
+			uint8_t numNorth = 7 - rank;
+			uint8_t numSouth = rank;
+			uint8_t numWest = file;
+			uint8_t numEast = 7 - file;
+
+			uint8_t squareIndex = rank * 8 + file;
+
+			l_NumOfSquaresUntilEdge[squareIndex][0] = numNorth;
+			l_NumOfSquaresUntilEdge[squareIndex][1] = numSouth;
+			l_NumOfSquaresUntilEdge[squareIndex][2] = numWest;
+			l_NumOfSquaresUntilEdge[squareIndex][3] = numEast;
+			l_NumOfSquaresUntilEdge[squareIndex][4] = std::min(numNorth, numWest);
+			l_NumOfSquaresUntilEdge[squareIndex][5] = std::min(numSouth, numEast);
+			l_NumOfSquaresUntilEdge[squareIndex][6] = std::min(numNorth, numEast);
+			l_NumOfSquaresUntilEdge[squareIndex][7] = std::min(numSouth, numWest);
+
+		}
+	}
+
+	return l_NumOfSquaresUntilEdge;
+}
+
 
 
 struct MOVE
@@ -30,7 +49,8 @@ class GenerateLegalMoves
 {
 private:
 	const int OffsetForDirections[8] = { 8, -8, -1, 1, 7, -7, 9, -9 };
-	std::array<std::array<uint8_t, 8>, 64>NumOfSquaresUntilEdge;
+	static constexpr std::array<std::array<uint8_t, 8>, 64>NumOfSquaresUntilEdge = fillNumOfSquaresUntilEdge();
+
 	std::array<uint8_t, 64> m_BoardSquare;
 	canCastle CanCastle;
 

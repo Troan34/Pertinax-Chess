@@ -7,28 +7,7 @@ static bool DoNotEnPassant; //for weird RemoveIllegalMoves things
 GenerateLegalMoves::GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
 	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum), isNextMoveForWhite(isNextMoveForWhite)
 {
-	for (uint8_t file = 0; file < 8; file++)
-	{
-		for (uint8_t rank = 0; rank < 8; rank++)
-		{
-			uint8_t numNorth = 7 - rank;
-			uint8_t numSouth = rank;
-			uint8_t numWest = file;
-			uint8_t numEast = 7 - file;
 
-			uint8_t squareIndex = rank * 8 + file;
-
-			NumOfSquaresUntilEdge[squareIndex][0] = numNorth;
-			NumOfSquaresUntilEdge[squareIndex][1] = numSouth;
-			NumOfSquaresUntilEdge[squareIndex][2] = numWest;
-			NumOfSquaresUntilEdge[squareIndex][3] = numEast;
-			NumOfSquaresUntilEdge[squareIndex][4] = std::min(numNorth, numWest);
-			NumOfSquaresUntilEdge[squareIndex][5] = std::min(numSouth, numEast);
-			NumOfSquaresUntilEdge[squareIndex][6] = std::min(numNorth, numEast);
-			NumOfSquaresUntilEdge[squareIndex][7] = std::min(numSouth, numWest);
-
-		}
-	}
 	if (previousBoardSquare != nullptr)
 		m_previousBoardSquare = *previousBoardSquare;
 

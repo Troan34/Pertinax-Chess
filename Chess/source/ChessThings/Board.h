@@ -15,6 +15,19 @@ constexpr unsigned int KING = 6;
 constexpr unsigned int WHITE = 16;
 constexpr unsigned int BLACK = 8;
 
+constexpr unsigned int WHITE_PAWN = WHITE + PAWN;     //17
+constexpr unsigned int WHITE_BISHOP = WHITE + BISHOP; //18
+constexpr unsigned int WHITE_KNIGHT = WHITE + KNIGHT; //19
+constexpr unsigned int WHITE_ROOK = WHITE + ROOK;     //20
+constexpr unsigned int WHITE_QUEEN = WHITE + QUEEN;   //21
+constexpr unsigned int WHITE_KING = WHITE + KING;     //22
+constexpr unsigned int BLACK_PAWN = BLACK + PAWN;     //9
+constexpr unsigned int BLACK_BISHOP = BLACK + BISHOP; //10
+constexpr unsigned int BLACK_KNIGHT = BLACK + KNIGHT; //11
+constexpr unsigned int BLACK_ROOK = BLACK + ROOK;     //12
+constexpr unsigned int BLACK_QUEEN = BLACK + QUEEN;   //13
+constexpr unsigned int BLACK_KING = BLACK + KING;     //14
+
 struct canCastle
 {
 	bool HasWhiteLongRookMoved = false, HasWhiteShortRookMoved = false, HasBlackLongRookMoved = false, HasBlackShortRookMoved = false, HasWhiteKingMoved = false, HasBlackKingMoved = false;
@@ -41,4 +54,5 @@ public:
 	uint32_t ALG2BoardSquareConverter(const std::string& ALG);
 	static bool IsPieceColorWhite(const uint8_t& BoardSquareValue);
 	static char PieceType2letter(const uint8_t& PieceType);
+	static void WillCanCastleChange(const uint8_t& PieceTypeThatMoved, const uint8_t& BoardSquareItMovedFrom, const uint8_t& BoardSquareItMovedTo, canCastle& Castle);
 };
