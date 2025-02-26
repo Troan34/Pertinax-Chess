@@ -3,6 +3,7 @@
 Search::Search(std::array<uint8_t, 64> BoardSquare, std::array<uint8_t, 64> PreviousBoardSquare, canCastle CanCastle, uint8_t depth, uint16_t MoveNum)
 	:m_BoardSquare(BoardSquare), m_PreviousBoardSquare(PreviousBoardSquare), m_CanCastle(CanCastle), m_depth(depth), m_MoveNum(MoveNum)
 {
+
 }
 
 Search::~Search()
@@ -15,7 +16,7 @@ int Search::LoopThroughTheTree()//TODO: make parameters, finish the basic functi
 	int BestEvaluation = -INT64_MAX;
 
 	GenerateLegalMoves LegalMoves(m_BoardSquare, &m_PreviousBoardSquare, m_CanCastle, (m_MoveNum % 2 != 0) ? false : true, m_MoveNum, false);
-
+	Evaluator evaluator(LegalMoves, m_BoardSquare, m_PreviousBoardSquare, m_CanCastle);
 
 	uint8_t count = 0;
 
@@ -33,7 +34,12 @@ int Search::LoopThroughTheTree()//TODO: make parameters, finish the basic functi
 				{
 					if (m_depth == 1)
 					{
-						
+						int Evaluation = evaluator.Evaluate(count, move);
+
+						if(Evaluation > BestEvaluation)
+							BestEvaluation = Evaluation;
+
+						continue;
 					}
 					else
 					{

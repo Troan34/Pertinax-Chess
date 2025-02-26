@@ -1,4 +1,6 @@
 C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Board.cpp;C:\Users\roanb\source\repos\Chess\Chess\x64\Release\Board.obj
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Evaluation.cpp;C:\Users\roanb\source\repos\Chess\Chess\x64\Release\Evaluation.obj
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Search.cpp;C:\Users\roanb\source\repos\Chess\Chess\x64\Release\Search.obj
 C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\LegalMoves.cpp;C:\Users\roanb\source\repos\Chess\Chess\x64\Release\LegalMoves.obj
 C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp;C:\Users\roanb\source\repos\Chess\Chess\x64\Release\RenderChesspcs.obj
 C:\Users\roanb\source\repos\Chess\Chess\source\CreateQuadDynamic.cpp;C:\Users\roanb\source\repos\Chess\Chess\x64\Release\CreateQuadDynamic.obj
