@@ -16,6 +16,7 @@
 #include <mutex>
 #include <windows.h>
 #include <future>
+#include "ChessThings/Engine/Search.h"
 
 
 struct MouseInput

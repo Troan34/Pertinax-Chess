@@ -15,6 +15,7 @@ int AttackedSquare = -1;
 std::unordered_set<uint8_t> LegalMovesForSelectedSquare;
 static bool WaitingForUserPromotion = false;
 static uint8_t rememberAttackedSquareForUserPromotion;
+static bool WaitingForEnemyMove = false;
 
 //multithreading vars
 static std::atomic<bool> IsGetCommandRunning = true;
@@ -150,6 +151,16 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 		static_BoardSquare[BoardSquareBeingSelected] = 0;
 	}
 
+	
+	//Make engine move
+	if (WaitingForEnemyMove)
+	{
+		Search search(static_BoardSquare, previousBoardsquare, CanCastle, 3, MoveNum);
+		EvalMove BestMove = search.GetBestMove();
+		GenerateLegalMoves LegalMoves(static_BoardSquare, &previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, false);
+		MakeMove(LegalMoves, BestMove.BoardSquarePos, BestMove.MovePos, static_BoardSquare, previousBoardsquare, CanCastle, BestMove.PieceToPromoteTo);
+		WaitingForEnemyMove = false;
+	}
 
 	//rendering part
  	for (int i = 1; i < 65; i++)
@@ -287,6 +298,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 									GenerateLegalMoves::SetDoNotEnPassant(true);
 								}
 								BoardSquareBeingSelected = -1;
+								WaitingForEnemyMove = true;
 							}
 							else
 							{

@@ -4,16 +4,24 @@
 #include "ChessThings/LegalMoves.h"
 #include <cmath>
 
+struct EvalMove
+{
+	uint8_t BoardSquarePos;
+	uint8_t MovePos;
+	int32_t Eval = -INT32_MAX;
+	uint8_t PieceToPromoteTo;
+};
+
 class Evaluator
 {
 private:
-	static constexpr uint8_t M_PAWN_MATERIAL_VALUE = 100;
-	static constexpr uint8_t M_KNIGHT_MATERIAL_VALUE = 300;
-	static constexpr uint8_t M_BISHOP_MATERIAL_VALUE = 310;
-	static constexpr uint8_t M_ROOK_MATERIAL_VALUE = 400;
-	static constexpr uint8_t M_QUEEN_MATERIAL_VALUE = 900;
+	static constexpr int16_t M_PAWN_MATERIAL_VALUE = 100;
+	static constexpr int16_t M_KNIGHT_MATERIAL_VALUE = 300;
+	static constexpr int16_t M_BISHOP_MATERIAL_VALUE = 310;
+	static constexpr int16_t M_ROOK_MATERIAL_VALUE = 400;
+	static constexpr int16_t M_QUEEN_MATERIAL_VALUE = 900;
 
-	static constexpr uint8_t ConvertPieceTypeToMatValue(const uint8_t& PieceType)
+	static constexpr int16_t ConvertPieceTypeToMatValue(const uint8_t& PieceType)
 	{
 		switch (PieceType)
 		{
