@@ -160,6 +160,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 		GenerateLegalMoves LegalMoves(static_BoardSquare, &previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, false);
 		MakeMove(LegalMoves, BestMove.BoardSquarePos, BestMove.MovePos, static_BoardSquare, previousBoardsquare, CanCastle, BestMove.PieceToPromoteTo);
 		WaitingForEnemyMove = false;
+		MoveNum++;
 	}
 
 	//rendering part
