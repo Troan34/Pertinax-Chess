@@ -1,10 +1,12 @@
-﻿  RenderChesspcs.cpp
+﻿  Search.cpp
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Search.cpp(15,72): warning C4244: 'argument': conversion from 'const uint16_t' to 'uint8_t', possible loss of data
+  RenderChesspcs.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
 C:\Users\roanb\source\repos\Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,1): message : see previous definition of 'APIENTRY'
 C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\RenderChesspcs.cpp(90,22): warning C4267: 'initializing': conversion from 'size_t' to 'uint16_t', possible loss of data
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  2 of 3940 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  4 of 3942 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     44 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

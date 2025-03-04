@@ -156,9 +156,9 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 	if (WaitingForEnemyMove)
 	{
 		Search search(static_BoardSquare, previousBoardsquare, CanCastle, 3, MoveNum);
-		EvalMove BestMove = search.GetBestMove();
+		std::pair<std::pair<uint8_t, uint8_t>, uint8_t> BestMove = search.GetBestMove();
 		GenerateLegalMoves LegalMoves(static_BoardSquare, &previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, false);
-		MakeMove(LegalMoves, BestMove.BoardSquarePos, BestMove.MovePos, static_BoardSquare, previousBoardsquare, CanCastle, BestMove.PieceToPromoteTo);
+		MakeMove(LegalMoves, BestMove.first.first , BestMove.first.second, static_BoardSquare, previousBoardsquare, CanCastle, BestMove.second);
 		WaitingForEnemyMove = false;
 		MoveNum++;
 	}

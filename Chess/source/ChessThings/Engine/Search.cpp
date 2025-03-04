@@ -10,17 +10,18 @@ Search::~Search()
 {
 }
 
-EvalMove Search::GetBestMove()
+std::pair<std::pair<uint8_t, uint8_t>, uint8_t> Search::GetBestMove()
 {
-	return LoopThroughTheTree(m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum, m_depth);
+	LoopThroughTheTree(m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum, m_depth);
+	std::pair<uint8_t, uint8_t> pair(m_BestBoardPos, m_BestMove);
+	std::pair<std::pair<uint8_t, uint8_t>, uint8_t> ppair(pair, m_BestPromotion);
+	return ppair;
 }
 
-EvalMove Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth)
+int Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth)
 {
-	int Evaluation = 0;
-	int WorstEvaluation = -INT32_MAX;
-	EvalMove WorstEvalMove;
-	EvalMove tempEvalMove;
+	int Evaluation;
+	int BestEval = -INT32_MAX;
 
 	GenerateLegalMoves LegalMoves(BoardSquare, &previousBoardSquare, CanCastle, (MoveNum % 2 != 0) ? false : true, MoveNum, false);
 	Evaluator evaluator(LegalMoves, BoardSquare, previousBoardSquare, CanCastle);
@@ -38,12 +39,6 @@ EvalMove Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std
 
 		for (const uint8_t& move : piece.TargetSquares)
 		{
-			if (WorstEvalMove.Eval == INT32_MAX)
-			{
-				WorstEvalMove.BoardSquarePos = count;
-				WorstEvalMove.MovePos = move;
-				WorstEvalMove.Eval = INT32_MAX - 1;
-			}
 
 
 			//perft the promotions, this if is basically a blunt .find()
@@ -53,17 +48,14 @@ EvalMove Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std
 
 				for (uint8_t i = 0; i != 4; ++i)
 				{
+
 					if (depth == 1)
 					{
 						Evaluation = evaluator.Evaluate(count, move);
 
-						if (Evaluation < WorstEvaluation)
+						if (Evaluation > BestEval)
 						{
-							WorstEvaluation = Evaluation;
-							WorstEvalMove.BoardSquarePos = count;
-							WorstEvalMove.MovePos = move;
-							WorstEvalMove.Eval = WorstEvaluation;
-							WorstEvalMove.PieceToPromoteTo = IsWhite ? i + 18 : i + 10;
+							BestEval = Evaluation;
 						}
 					}
 					else
@@ -74,10 +66,27 @@ EvalMove Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std
 						else
 							MakeMove(LegalMoves, count, move, tempBoardSquare, tempPreviousBoardSquare, tempCanCastle, i + 10);
 
-						tempEvalMove = LoopThroughTheTree(tempBoardSquare, tempPreviousBoardSquare, tempCanCastle, tempMoveNum + 1, depth - 1);
+						Evaluation = -LoopThroughTheTree(tempBoardSquare, tempPreviousBoardSquare, tempCanCastle, tempMoveNum + 1, depth - 1);
 
-						if (tempEvalMove.Eval < WorstEvalMove.Eval)
-							WorstEvalMove = tempEvalMove;
+						if (Evaluation > BestEval)
+						{
+							if (depth == m_depth)
+							{
+								if (Evaluation > BestEval)
+								{
+									m_BestBoardPos = count;
+									m_BestMove = move;
+									m_BestPromotion = 65;
+									if (IsWhite)
+										m_BestPromotion = i + 18;
+									else
+										m_BestPromotion = i + 10;
+								}
+							}
+							BestEval = Evaluation;
+
+						}
+
 
 						tempBoardSquare = previousBoardSquare;
 					}
@@ -103,13 +112,9 @@ EvalMove Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std
 			{
 				Evaluation = evaluator.Evaluate(count, move);
 
-				if (Evaluation < WorstEvaluation)
+				if (Evaluation > BestEval)
 				{
-					WorstEvaluation = Evaluation;
-					WorstEvalMove.BoardSquarePos = count;
-					WorstEvalMove.MovePos = move;
-					WorstEvalMove.Eval = WorstEvaluation;
-					WorstEvalMove.PieceToPromoteTo = 65;
+					BestEval = Evaluation;
 				}
 
 				continue;
@@ -120,10 +125,25 @@ EvalMove Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std
 
 				MakeMove(LegalMoves, count, move, tempBoardSquare, tempPreviousBoardSquare, tempCanCastle, 65);
 
-				tempEvalMove = LoopThroughTheTree(tempBoardSquare, tempPreviousBoardSquare, tempCanCastle, tempMoveNum + 1, depth - 1);
+				Evaluation = -LoopThroughTheTree(tempBoardSquare, tempPreviousBoardSquare, tempCanCastle, tempMoveNum + 1, depth - 1);
 
-				if (tempEvalMove.Eval < WorstEvalMove.Eval)
-					WorstEvalMove = tempEvalMove;
+				if (Evaluation > BestEval)
+				{
+					if (depth == m_depth)
+					{
+						if (Evaluation > BestEval)
+						{
+							m_BestBoardPos = count;
+							m_BestMove = move;
+							m_BestPromotion = 65;
+						}
+					}
+					BestEval = Evaluation;
+
+				}
+
+
+
 
 				tempBoardSquare = BoardSquare;
 				tempPreviousBoardSquare = previousBoardSquare;
@@ -134,10 +154,10 @@ EvalMove Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std
 		count++;
 	}
 
-	if (WorstEvalMove.Eval == INT32_MAX)
-		std::cout << "Checkmate" << std::endl;
+	//if (WorstEvaluation == INT32_MAX)
+		//std::cout << "Checkmate found while searching" << std::endl;
 
-	return WorstEvalMove;
+	return BestEval;
 }
 
 void Search::MakeMove(const GenerateLegalMoves& LegalMoves, const uint8_t& BoardSquare, const uint8_t& move, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle, const uint8_t& PieceTypeToPromoteTo)

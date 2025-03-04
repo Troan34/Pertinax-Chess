@@ -4,13 +4,6 @@
 #include "ChessThings/LegalMoves.h"
 #include <cmath>
 
-struct EvalMove
-{
-	uint8_t BoardSquarePos;
-	uint8_t MovePos;
-	int32_t Eval = -INT32_MAX;
-	uint8_t PieceToPromoteTo;
-};
 
 class Evaluator
 {
