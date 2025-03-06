@@ -28,10 +28,10 @@ int Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std::arr
 
 	uint8_t count = 0;
 
-	auto tempBoardSquare = BoardSquare;
-	auto tempPreviousBoardSquare = previousBoardSquare;
-	auto tempCanCastle = CanCastle;
-	auto tempMoveNum = MoveNum;
+	auto const cBoardSquare = BoardSquare;
+	auto const cPreviousBoardSquare = previousBoardSquare;
+	auto const cCanCastle = CanCastle;
+	auto const cMoveNum = MoveNum;
 
 
 	for (MOVE& piece : LegalMoves.moves)
@@ -62,42 +62,40 @@ int Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std::arr
 					{
 
 						if (IsWhite)
-							MakeMove(LegalMoves, count, move, tempBoardSquare, tempPreviousBoardSquare, tempCanCastle, i + 18);
+							MakeMove(LegalMoves, count, move, BoardSquare, previousBoardSquare, CanCastle, i + 18);
 						else
-							MakeMove(LegalMoves, count, move, tempBoardSquare, tempPreviousBoardSquare, tempCanCastle, i + 10);
+							MakeMove(LegalMoves, count, move, BoardSquare, previousBoardSquare, CanCastle, i + 10);
 
-						Evaluation = -LoopThroughTheTree(tempBoardSquare, tempPreviousBoardSquare, tempCanCastle, tempMoveNum + 1, depth - 1);
+						Evaluation = -LoopThroughTheTree(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1);
 
 						if (Evaluation > BestEval)
 						{
 							if (depth == m_depth)
 							{
-								if (Evaluation > BestEval)
-								{
-									m_BestBoardPos = count;
-									m_BestMove = move;
-									m_BestPromotion = 65;
-									if (IsWhite)
-										m_BestPromotion = i + 18;
-									else
-										m_BestPromotion = i + 10;
-								}
+								m_BestBoardPos = count;
+								m_BestMove = move;
+								m_BestPromotion = 65;
+								if (IsWhite)
+									m_BestPromotion = i + 18;
+								else
+									m_BestPromotion = i + 10;
+
 							}
 							BestEval = Evaluation;
 
 						}
 
 
-						tempBoardSquare = previousBoardSquare;
+						BoardSquare = cPreviousBoardSquare;
 					}
 				}
 
 				if (depth != 1)
 				{
-					tempBoardSquare = BoardSquare;
-					tempPreviousBoardSquare = previousBoardSquare;
-					tempCanCastle = CanCastle;
-					tempMoveNum = MoveNum;
+					BoardSquare = cBoardSquare;
+					previousBoardSquare = cPreviousBoardSquare;
+					CanCastle = cCanCastle;
+					MoveNum = cMoveNum;
 				}
 
 				if (IsWhite)
@@ -123,32 +121,28 @@ int Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std::arr
 			else
 			{
 
-				MakeMove(LegalMoves, count, move, tempBoardSquare, tempPreviousBoardSquare, tempCanCastle, 65);
+				MakeMove(LegalMoves, count, move, BoardSquare, previousBoardSquare, CanCastle, 65);
 
-				Evaluation = -LoopThroughTheTree(tempBoardSquare, tempPreviousBoardSquare, tempCanCastle, tempMoveNum + 1, depth - 1);
+				Evaluation = -LoopThroughTheTree(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1);
 
 				if (Evaluation > BestEval)
 				{
 					if (depth == m_depth)
 					{
-						if (Evaluation > BestEval)
-						{
-							m_BestBoardPos = count;
-							m_BestMove = move;
-							m_BestPromotion = 65;
-						}
+						m_BestBoardPos = count;
+						m_BestMove = move;
+						m_BestPromotion = 65;
 					}
 					BestEval = Evaluation;
-
 				}
 
 
 
 
-				tempBoardSquare = BoardSquare;
-				tempPreviousBoardSquare = previousBoardSquare;
-				tempCanCastle = CanCastle;
-				tempMoveNum = MoveNum;
+				BoardSquare = cBoardSquare;
+				previousBoardSquare = cPreviousBoardSquare;
+				CanCastle = cCanCastle;
+				MoveNum = cMoveNum;
 			}
 		}
 		count++;
