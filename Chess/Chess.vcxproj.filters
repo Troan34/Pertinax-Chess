@@ -48,7 +48,6 @@
     <Image Include="res\textures\wr.png" />
     <Image Include="res\textures\Empty.png" />
     <Image Include="res\textures\Red.png" />
-    <Image Include="..\..\..\..\Downloads\PromotionSquare.png" />
     <Image Include="res\textures\PromotionSquare.png" />
   </ItemGroup>
   <ItemGroup>
@@ -364,8 +363,8 @@
     <ClInclude Include="source\CreateQuadDynamic.h" />
     <ClInclude Include="source\ChessThings\RenderChesspcs.h" />
     <ClInclude Include="source\ChessThings\LegalMoves.h" />
-    <ClInclude Include="source\ChessThings\Engine\Search.h" />
     <ClInclude Include="source\ChessThings\Engine\Evaluation.h" />
+    <ClInclude Include="source\ChessThings\Engine\Search.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="source\vendor\glm\detail\func_common.inl" />

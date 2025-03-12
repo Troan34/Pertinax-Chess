@@ -21,7 +21,7 @@ int Evaluator::Evaluate(const uint8_t& BoardSquarePos, const uint8_t& Move)
 
 int Evaluator::CapturingEval(const uint8_t& CapturingPieceType, const uint8_t& CapturedPieceType)
 {
-	return ConvertPieceTypeToMatValue(CapturedPieceType) - (ConvertPieceTypeToMatValue(CapturingPieceType) / 10);
+	return (ConvertPieceTypeToMatValue(CapturedPieceType) - (ConvertPieceTypeToMatValue(CapturingPieceType) / 10) * (Board::IsPieceColorWhite(CapturingPieceType) ? 1 : -1));
 }
 
 

@@ -1,4 +1,5 @@
 #include "Search.h"
+#include <chrono>
 
 Search::Search(std::array<uint8_t, 64> BoardSquare, std::array<uint8_t, 64> PreviousBoardSquare, canCastle CanCastle, uint8_t depth, uint16_t MoveNum)
 	:m_BoardSquare(BoardSquare), m_PreviousBoardSquare(PreviousBoardSquare), m_CanCastle(CanCastle), m_depth(depth), m_MoveNum(MoveNum)
@@ -12,13 +13,17 @@ Search::~Search()
 
 std::pair<std::pair<uint8_t, uint8_t>, uint8_t> Search::GetBestMove()
 {
-	LoopThroughTheTree(m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum, m_depth);
+	auto start = std::chrono::high_resolution_clock::now();
+	NegaMax(m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum, m_depth, -INT64_MAX, INT64_MAX);
 	std::pair<uint8_t, uint8_t> pair(m_BestBoardPos, m_BestMove);
 	std::pair<std::pair<uint8_t, uint8_t>, uint8_t> ppair(pair, m_BestPromotion);
+	auto stop = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+	std::cout << "In " << duration.count() << " ms" << '\n' << std::endl;
 	return ppair;
 }
 
-int Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth)
+int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int64_t alpha, int64_t beta)
 {
 	int Evaluation;
 	int BestEval = -INT32_MAX;
@@ -40,8 +45,6 @@ int Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std::arr
 		for (const uint8_t& move : piece.TargetSquares)
 		{
 
-
-			//perft the promotions, this if is basically a blunt .find()
 			if (piece.Promotion[0] != 65 and piece.Promotion[0] == move or piece.Promotion[1] != 65 and piece.Promotion[1] == move or piece.Promotion[2] != 65 and piece.Promotion[2] == move)
 			{
 				bool IsWhite = Board::IsPieceColorWhite(BoardSquare[count]);
@@ -66,7 +69,7 @@ int Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std::arr
 						else
 							MakeMove(LegalMoves, count, move, BoardSquare, previousBoardSquare, CanCastle, i + 10);
 
-						Evaluation = -LoopThroughTheTree(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1);
+						Evaluation = -NegaMax(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, alpha, beta);
 
 						if (Evaluation > BestEval)
 						{
@@ -82,8 +85,13 @@ int Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std::arr
 
 							}
 							BestEval = Evaluation;
-
+							if (Evaluation > alpha)
+								alpha = Evaluation;
 						}
+
+						if (Evaluation >= beta)
+							return BestEval;
+						
 
 
 						BoardSquare = cPreviousBoardSquare;
@@ -108,7 +116,7 @@ int Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std::arr
 
 			if (depth == 1)
 			{
-				Evaluation = evaluator.Evaluate(count, move);
+				Evaluation = evaluator.Evaluate(count, move);//to change with a quiescent fun
 
 				if (Evaluation > BestEval)
 				{
@@ -123,7 +131,7 @@ int Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std::arr
 
 				MakeMove(LegalMoves, count, move, BoardSquare, previousBoardSquare, CanCastle, 65);
 
-				Evaluation = -LoopThroughTheTree(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1);
+				Evaluation = -NegaMax(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, alpha, beta);
 
 				if (Evaluation > BestEval)
 				{
@@ -134,7 +142,12 @@ int Search::LoopThroughTheTree(std::array<uint8_t, 64Ui64> BoardSquare, std::arr
 						m_BestPromotion = 65;
 					}
 					BestEval = Evaluation;
+
+					if (Evaluation > alpha)
+						alpha = Evaluation;
 				}
+				if (Evaluation >= beta)
+					return BestEval;
 
 
 
