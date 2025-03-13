@@ -14,7 +14,7 @@ Search::~Search()
 std::pair<std::pair<uint8_t, uint8_t>, uint8_t> Search::GetBestMove()
 {
 	auto start = std::chrono::high_resolution_clock::now();
-	NegaMax(m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum, m_depth, -INT64_MAX, INT64_MAX);
+	NegaMax(m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum, m_depth, -INT32_MAX, INT32_MAX);
 	std::pair<uint8_t, uint8_t> pair(m_BestBoardPos, m_BestMove);
 	std::pair<std::pair<uint8_t, uint8_t>, uint8_t> ppair(pair, m_BestPromotion);
 	auto stop = std::chrono::high_resolution_clock::now();
@@ -23,7 +23,7 @@ std::pair<std::pair<uint8_t, uint8_t>, uint8_t> Search::GetBestMove()
 	return ppair;
 }
 
-int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int64_t alpha, int64_t beta)
+int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta)
 {
 	int Evaluation;
 	int BestEval = -INT32_MAX;
@@ -37,11 +37,17 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 	auto const cPreviousBoardSquare = previousBoardSquare;
 	auto const cCanCastle = CanCastle;
 	auto const cMoveNum = MoveNum;
+	bool BreakFlag = false;
 
 
 	for (MOVE& piece : LegalMoves.moves)
 	{
-
+		if (BreakFlag)
+		{
+			BreakFlag = false;
+			break;
+		}
+		
 		for (const uint8_t& move : piece.TargetSquares)
 		{
 
@@ -52,7 +58,7 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 				for (uint8_t i = 0; i != 4; ++i)
 				{
 
-					if (depth == 1)
+					if (depth == 0)
 					{
 						Evaluation = evaluator.Evaluate(count, move);
 
@@ -69,7 +75,16 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 						else
 							MakeMove(LegalMoves, count, move, BoardSquare, previousBoardSquare, CanCastle, i + 10);
 
-						Evaluation = -NegaMax(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, alpha, beta);
+						Evaluation = std::max(Evaluation, -NegaMax(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha));
+						alpha = std::max(alpha, Evaluation);
+
+						if (alpha >= beta)
+						{
+							std::cout << "Pruning" << std::endl;
+							Evaluation = true;
+							BreakFlag = true;
+							break;
+						}
 
 						if (Evaluation > BestEval)
 						{
@@ -82,23 +97,15 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 									m_BestPromotion = i + 18;
 								else
 									m_BestPromotion = i + 10;
-
 							}
 							BestEval = Evaluation;
-							if (Evaluation > alpha)
-								alpha = Evaluation;
 						}
-
-						if (Evaluation >= beta)
-							return BestEval;
-						
-
 
 						BoardSquare = cPreviousBoardSquare;
 					}
 				}
 
-				if (depth != 1)
+				if (depth != 0)
 				{
 					BoardSquare = cBoardSquare;
 					previousBoardSquare = cPreviousBoardSquare;
@@ -114,7 +121,7 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 				continue;
 			}
 
-			if (depth == 1)
+			if (depth == 0)
 			{
 				Evaluation = evaluator.Evaluate(count, move);//to change with a quiescent fun
 
@@ -131,7 +138,16 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 
 				MakeMove(LegalMoves, count, move, BoardSquare, previousBoardSquare, CanCastle, 65);
 
-				Evaluation = -NegaMax(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, alpha, beta);
+				Evaluation = std::max(Evaluation, -NegaMax(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha));
+				alpha = std::max(alpha, Evaluation);
+
+				if (alpha >= beta)
+				{
+					std::cout << "Pruning" << std::endl;
+					Evaluation = true;
+					BreakFlag = true;
+					break;
+				}
 
 				if (Evaluation > BestEval)
 				{
@@ -142,14 +158,7 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 						m_BestPromotion = 65;
 					}
 					BestEval = Evaluation;
-
-					if (Evaluation > alpha)
-						alpha = Evaluation;
 				}
-				if (Evaluation >= beta)
-					return BestEval;
-
-
 
 
 				BoardSquare = cBoardSquare;
