@@ -58,7 +58,19 @@ namespace test {
 		int samplers[16] = { 0, 1, 2, 3, 4, 5 ,6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
 		m_Shader->SetUniform1iv("u_Textures", 16, *samplers);
 
-		std::cout << "Welcome to Pertinax" << std::endl;
+		std::cout << "----------------------------------------Welcome to----------------------------------------\n" <<
+			"_________  _________  _________  _________  __  __       __       __      __      __\n" <<
+			"|        | |        | |   __   | |___  ___| | | | \\      | |     //\\\\     \\ \\    / /\n" <<
+			"|        | |  |~~~~~| |   |_|  |     | |    | | |  \\     | |    //  \\\\     \\ \\  / /\n" <<
+			"|   |~~~~| |  |       |    ____|     | |    | | | | \\    | |   //____\\\\     \\ \\/ /\n" <<
+			"|   |      |  |~~~~~| |  |\\ \\        | |    | | | |  \\   | |  //______\\\\    | || |  \n" <<
+			"|   |      |  |       |  | \\ \\       | |    | | | |   \\  | | //        \\\\   //  \\\\\n" <<
+			"|   |      |  |~~~~~  |  |  \\ \\      | |    | | | |    \\ | |//          \\\\ //    \\\\______\n" <<
+			"|___|      |________| |__|   \\.\\     |_|    |_| |_|     \\__||_|         |_|U      L______:~,\n" << std::endl;
+
+		std::cout << "'word' means the command is the word without the backticks\n" <<
+			"{word} Number(without typing curly brackets), unsigned unless specified, \"word\" specifies the value\n"
+			"Example: 'perft' {depth} = perft 5\n"<< std::endl;
 		std::cout << "'help' for commands" << std::endl;
 
 

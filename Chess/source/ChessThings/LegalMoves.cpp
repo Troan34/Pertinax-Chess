@@ -618,7 +618,14 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 		}
 	}
 
-	
+	for (MOVE& Piece : moves)
+	{
+		for (uint8_t& Move : Piece.TargetSquares)
+		{
+			m_NumOfLegalMoves++;
+		}
+	}
+
 	SquareWhichTargetSquaresThatAreChecking.clear();
 	
 }

@@ -83,6 +83,8 @@ public:
 	* The king's BoardSquarePos is included
 	*/
 	std::array<uint8_t, 64> CheckTargetSquares;
+
+	uint32_t m_NumOfLegalMoves = 0;
 	unsigned int MoveNum;
 	GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
 	~GenerateLegalMoves();

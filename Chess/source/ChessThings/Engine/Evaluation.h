@@ -13,6 +13,7 @@ private:
 	static constexpr int16_t M_BISHOP_MATERIAL_VALUE = 310;
 	static constexpr int16_t M_ROOK_MATERIAL_VALUE = 400;
 	static constexpr int16_t M_QUEEN_MATERIAL_VALUE = 900;
+	static constexpr int16_t M_KING_MATERIAL_VALUE = 15000;
 
 	static constexpr int16_t ConvertPieceTypeToMatValue(const uint8_t& PieceType)
 	{
@@ -28,6 +29,8 @@ private:
 			return M_ROOK_MATERIAL_VALUE;
 		case BLACK_QUEEN:
 			return M_QUEEN_MATERIAL_VALUE;
+		case BLACK_KING:
+			return M_KING_MATERIAL_VALUE;
 		case WHITE_PAWN:
 			return M_PAWN_MATERIAL_VALUE;
 		case WHITE_BISHOP:
@@ -38,22 +41,22 @@ private:
 			return M_ROOK_MATERIAL_VALUE;
 		case WHITE_QUEEN:
 			return M_QUEEN_MATERIAL_VALUE;
+		case WHITE_KING:
+			return M_KING_MATERIAL_VALUE;
 		}
 	}
 
-	const std::array<uint8_t, 64>& m_BoardSquare;
-	const std::array<uint8_t, 64>& m_PreviousBoardSquare;
-	const canCastle& m_CanCastle;
+	const GenerateLegalMoves& m_LegalMoves;
+	std::array<uint8_t, 64> m_BoardSquare; // Change reference to value
+	std::array<uint8_t, 64> m_PreviousBoardSquare; // Change reference to value
+	canCastle m_CanCastle; // Change reference to value
+	int32_t m_Evaluation = 0;
+	int8_t m_SideToMove;
 
-	const GenerateLegalMoves m_LegalMoves;
-
-
-	int CapturingEval(const uint8_t& CapturingPieceType, const uint8_t& CapturedPieceType);
+	void BoardMatValue();
 
 public:
-	
-	Evaluator(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle);
-	int Evaluate(const uint8_t& BoardSquarePos, const uint8_t& Move);
-
-
+	Evaluator(const GenerateLegalMoves& LegalMoves);
+	void SetParameters(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint8_t& MoveNum);
+	int Evaluate();
 };

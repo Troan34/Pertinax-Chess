@@ -22,6 +22,9 @@ static std::atomic<bool> IsGetCommandRunning = true;
 static std::string Command;
 static std::atomic<bool> ReceivedACommand(false);
 
+//Engine vars
+static bool EngineOn = true;
+static uint8_t EngineDepth = 6;
 
 RenderChessPieces::RenderChessPieces()
 {
@@ -78,21 +81,27 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 		IsGetCommandRunning = true;
 	}
 
-	if (ReceivedACommand == true)
+	//processes commands
+	if (ReceivedACommand == true)  
 	{
 		if (Command == "help")
 		{
-			std::cout << "perft {depth}" << '\n' <<
-				"other things\n";
+			std::cout << "__________________________________Help menu__________________________________" << std::endl;
+			std::cout << "\n'perft' {depth}            --Run perft with current position\n\n" <<
+				"Engine things: " << '\n' <<
+				"   'Engine off'            --The engine won't respond to your moves" << '\n' <<
+				"   'Engine on'             --The engine will respond to your moves" << '\n' <<
+				"   'Engine depth' {depth}  --The engine will search to the specified depth\n" <<
+				"   'Engine settings'       --Shows current settings for the engine" << "\n\n" <<
+				"Default Engine settings: On, depth 6" << '\n' <<
+				"_____________________________________________________________________________" << "\n\n";
 		}
-		else if (Command.find("perft") != std::string::npos)
+		else if (Command.find("perft") != std::string::npos)//perft command
 		{
-			uint16_t strIndex = Command.find("perft");
-
-			char depth = Command.at(strIndex + 6);
+			char depth = Command.at(6);
 			if (!isdigit(depth))
 			{
-				std::cout << "Wrong syntax" << std::endl;
+				std::cout << "Wrong syntax: depth wasn't a digit\n" << std::endl;
 			}
 			else
 			{
@@ -101,9 +110,49 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 				//std::cout << "Main CPU: " << GetCurrentProcessorNumber() << std::endl;
 			}
 		}
+		else if (Command.find("Engine") != std::string::npos)//engine commands
+		{
+			if (Command.find("off", Command.find("Engine") + 7) != std::string::npos)         //turn off engine
+			{
+				EngineOn = false;
+				std::cout << "Engine was successfully turned off!\n" << std::endl;
+			}
+			else if (Command.find("on", Command.find("Engine") + 7) != std::string::npos)     //turn on engine
+			{
+				EngineOn = true;
+				std::cout << "Engine was successfully turned on!\n" << std::endl;
+			}
+			else if (Command.find("depth", Command.find("Engine") + 7) != std::string::npos)  //set engine depth
+			{
+                std::string depthStr = Command.substr(Command.find("depth", Command.find("Engine") + 7) + 6);
+                if (!std::all_of(depthStr.begin(), depthStr.end(), ::isdigit))
+                {
+                    std::cout << "Wrong syntax: depth wasn't a digit\n" << std::endl;
+                }
+                else
+                {
+                    uint8_t depth = std::stoi(depthStr);
+                    std::cout << "Engine will search to depth " << static_cast<int>(depth) << "!\n" << std::endl;
+                    //std::cout << "Main CPU: " << GetCurrentProcessorNumber() << std::endl;
+                }
+			}
+			else if (Command.find("settings", Command.find("Engine") + 7) != std::string::npos) //show engine settings
+			{
+				std::cout << "Engine is ";
+				if (EngineOn)
+					std::cout << "on";
+				else
+					std::cout << "off";
+				std::cout << " and will search to depth " << static_cast<int>(EngineDepth) << "!\n" << std::endl;
+			}
+			else
+			{
+				std::cout << "Wrong syntax: couldn't understand after 'Engine'\n" << std::endl;
+			}
+		}
 		else
 		{
-			std::cout << "Wrong syntax" << std::endl;
+			std::cout << "Wrong syntax, couldn't recognize first word\n" << std::endl;
 		}
 
 		if (!IsGetCommandRunning)
@@ -153,9 +202,9 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 
 	
 	//Make engine move
-	if (WaitingForEnemyMove)
+	if (WaitingForEnemyMove and EngineOn)
 	{
-		Search search(static_BoardSquare, previousBoardsquare, CanCastle, 5, MoveNum);
+		Search search(static_BoardSquare, previousBoardsquare, CanCastle, EngineDepth, MoveNum);
 		std::pair<std::pair<uint8_t, uint8_t>, uint8_t> BestMove = search.GetBestMove();
 		GenerateLegalMoves LegalMoves(static_BoardSquare, &previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, false);
 		MakeMove(LegalMoves, BestMove.first.first , BestMove.first.second, static_BoardSquare, previousBoardsquare, CanCastle, BestMove.second);
@@ -165,7 +214,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 		if (MoveNum % 2 != 0)
 			isNextMoveForWhite = false;
 	}
-
+	
 	//rendering part
  	for (int i = 1; i < 65; i++)
 	{

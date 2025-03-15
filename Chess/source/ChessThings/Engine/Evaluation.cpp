@@ -1,27 +1,46 @@
 #include "Evaluation.h"
 
-Evaluator::Evaluator(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle)
-	:m_BoardSquare(BoardSquare), m_PreviousBoardSquare(PreviousBoardSquare), m_CanCastle(CanCastle), m_LegalMoves(LegalMoves)
+Evaluator::Evaluator(const GenerateLegalMoves& LegalMoves)
+	:m_LegalMoves(LegalMoves)
 {
 
 }
 
-
-int Evaluator::Evaluate(const uint8_t& BoardSquarePos, const uint8_t& Move)
+void Evaluator::SetParameters(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint8_t& MoveNum)
 {
-	int Eval = 0;
+	m_BoardSquare = BoardSquare;
+	m_PreviousBoardSquare = PreviousBoardSquare;
+	m_CanCastle = CanCastle;
+	m_SideToMove = (MoveNum % 2 == 0) ? 1 : -1;
+	m_Evaluation = 0;
+}
 
-	if (m_BoardSquare[Move] != 0)
+
+int Evaluator::Evaluate()
+{
+	BoardMatValue();
+	//m_Evaluation += m_LegalMoves.m_NumOfLegalMoves * 1 * m_SideToMove;
+
+	return m_Evaluation * m_SideToMove;
+}
+
+void Evaluator::BoardMatValue()
+{
+	int32_t eval = 0;
+	for (uint8_t i = 0; i != 64; ++i)
 	{
-		Eval += CapturingEval(m_BoardSquare[BoardSquarePos], m_BoardSquare[Move]);
+		if (m_BoardSquare[i] == 0)
+			continue;
+		if (Board::IsPieceColorWhite(m_BoardSquare[i]))
+		{
+			eval += ConvertPieceTypeToMatValue(m_BoardSquare[i]);
+		}
+		else
+		{
+			eval -= ConvertPieceTypeToMatValue(m_BoardSquare[i]);
+		}
 	}
-
-	return Eval;
+	
+	m_Evaluation += std::abs(eval);
 }
-
-int Evaluator::CapturingEval(const uint8_t& CapturingPieceType, const uint8_t& CapturedPieceType)
-{
-	return (ConvertPieceTypeToMatValue(CapturedPieceType) - (ConvertPieceTypeToMatValue(CapturingPieceType) / 10) * (Board::IsPieceColorWhite(CapturingPieceType) ? 1 : -1));
-}
-
 

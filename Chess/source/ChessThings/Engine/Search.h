@@ -13,6 +13,7 @@ private:
 	uint8_t m_BestMove;
 	uint8_t m_BestBoardPos;
 	uint8_t m_BestPromotion = 65;
+	int32_t m_BestEvaluation = -INT32_MAX;
 
 	int NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle,uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta );
 	void MakeMove(const GenerateLegalMoves& LegalMoves, const uint8_t& BoardSquare, const uint8_t& move, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle, const uint8_t& PieceTypeToPromoteTo);
