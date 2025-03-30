@@ -24,7 +24,7 @@ static std::atomic<bool> ReceivedACommand(false);
 
 //Engine vars
 static bool EngineOn = true;
-static uint8_t EngineDepth = 6;
+static uint8_t EngineDepth = 5;
 
 RenderChessPieces::RenderChessPieces()
 {
@@ -133,7 +133,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
                 {
                     uint8_t depth = std::stoi(depthStr);
                     std::cout << "Engine will search to depth " << static_cast<int>(depth) << "!\n" << std::endl;
-                    //std::cout << "Main CPU: " << GetCurrentProcessorNumber() << std::endl;
+					EngineDepth = depth;
                 }
 			}
 			else if (Command.find("settings", Command.find("Engine") + 7) != std::string::npos) //show engine settings

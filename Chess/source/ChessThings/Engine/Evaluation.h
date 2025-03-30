@@ -51,9 +51,10 @@ private:
 	std::array<uint8_t, 64> m_PreviousBoardSquare; // Change reference to value
 	canCastle m_CanCastle; // Change reference to value
 	int32_t m_Evaluation = 0;
-	int8_t m_SideToMove;
+	int32_t m_MoveNum;
 
-	void BoardMatValue();
+	int32_t BoardMatValue();
+	int32_t MobilityEval();
 
 public:
 	Evaluator(const GenerateLegalMoves& LegalMoves);

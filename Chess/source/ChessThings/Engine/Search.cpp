@@ -19,7 +19,7 @@ std::pair<std::pair<uint8_t, uint8_t>, uint8_t> Search::GetBestMove()
 	std::pair<std::pair<uint8_t, uint8_t>, uint8_t> ppair(pair, m_BestPromotion);
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-	std::cout << "In " << duration.count() << " ms" << '\n' << std::endl;
+	std::cout << "Found move in " << duration.count() << " ms" << '\n' << std::endl;
 	return ppair;
 }
 
@@ -36,8 +36,6 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 		evaluator.SetParameters(BoardSquare, previousBoardSquare, CanCastle, MoveNum);
 		Evaluation = std::max(Evaluation, evaluator.Evaluate());//to change with a quiescent fun
 		alpha = std::max(alpha, Evaluation);
-		if (Evaluation == -858993460)
-			ASSERT(false);
 		return Evaluation;
 	}
 
@@ -55,12 +53,15 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 		if (BreakFlag)
 		{
 			BreakFlag = false;
+			count++;
 			break;
 		}
 		
 		for (const uint8_t& move : piece.TargetSquares)
 		{
-
+			if (BreakFlag)
+				break;
+			
 			if (piece.Promotion[0] != 65 and piece.Promotion[0] == move or piece.Promotion[1] != 65 and piece.Promotion[1] == move or piece.Promotion[2] != 65 and piece.Promotion[2] == move)
 			{
 				bool IsWhite = Board::IsPieceColorWhite(BoardSquare[count]);
@@ -78,8 +79,6 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 
 					if (alpha >= beta)
 					{
-						std::cout << "Pruning" << std::endl;
-						Evaluation = true;
 						BreakFlag = true;
 						break;
 					}
@@ -118,8 +117,6 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 
 			if (alpha >= beta)
 			{
-				std::cout << "Pruning" << std::endl;
-				Evaluation = true;
 				BreakFlag = true;
 				break;
 			}
