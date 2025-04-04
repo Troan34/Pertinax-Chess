@@ -47,6 +47,7 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 	auto const cMoveNum = MoveNum;
 	bool BreakFlag = false;
 
+	auto GuessedOrder = OrderMoves(LegalMoves);
 
 	for (MOVE& piece : LegalMoves.moves)
 	{
@@ -220,4 +221,34 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, const uint8_t& Board
 	{
 		GenerateLegalMoves::SetDoNotEnPassant(true);
 	}
+}
+
+//Order moves by the best guessed move, vector<<BoardSquare, TargetSquare>, promotion={piecetype}>, vector is already sorted best to worst
+std::vector<std::pair<uint8_t, uint8_t>, uint8_t> Search::OrderMoves(const GenerateLegalMoves& LegalMoves)
+{
+	std::vector<std::pair<uint8_t, uint8_t>, uint8_t> f_OrderedMoves;
+	uint8_t count = 0;
+	for (const MOVE& piece : LegalMoves.moves)
+	{
+		for (const uint8_t& move : piece.TargetSquares)
+		{
+			int16_t GuessedEval = 0;
+			if (m_BoardSquare[move] != NONE)
+			{
+				GuessedEval += (10 * Evaluator::ConvertPieceTypeToMatValue(m_BoardSquare[move])) - Evaluator::ConvertPieceTypeToMatValue(m_BoardSquare[count]);
+			}
+
+			if (LegalMoves.AttackedSquares[move])
+			{
+				GuessedEval -= Evaluator::ConvertPieceTypeToMatValue(m_BoardSquare[count]);
+			}
+
+			std::pair<uint8_t, uint8_t> (count, move);
+			f_OrderedMoves.emplace_back(std::pair(count, move), GuessedEval);
+			//todo: i have no idea how to sort this, especially deciding wether to put the promotion instead of guessed eval and how to do that
+
+		}
+		count++;
+	}
+
 }
