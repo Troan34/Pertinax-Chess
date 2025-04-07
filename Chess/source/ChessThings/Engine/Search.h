@@ -5,6 +5,21 @@
 #include <algorithm>
 
 
+struct GuessStruct
+{
+	uint8_t BoardSquare;
+	uint8_t Move;
+	uint8_t PromotionType = 65;
+	int16_t GuessedEval;
+
+	GuessStruct(uint8_t BoardSquare, uint8_t Move, uint8_t PromotionType, int32_t GuessedEval)
+		: BoardSquare(BoardSquare),
+		Move(Move),
+		PromotionType(PromotionType),
+		GuessedEval(GuessedEval) {
+	}
+};
+
 class Search {
 private:
 	const std::array<uint8_t, 64> m_BoardSquare;
@@ -19,7 +34,7 @@ private:
 
 	int NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle,uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta );
 	void MakeMove(const GenerateLegalMoves& LegalMoves, const uint8_t& BoardSquare, const uint8_t& move, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle, const uint8_t& PieceTypeToPromoteTo);
-	std::vector<std::pair<uint8_t, uint8_t>, uint8_t> OrderMoves(const GenerateLegalMoves& LegalMoves);
+	std::vector<GuessStruct> OrderMoves(const GenerateLegalMoves& LegalMoves);
 
 public:
 

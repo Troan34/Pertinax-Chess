@@ -25,7 +25,6 @@ std::pair<std::pair<uint8_t, uint8_t>, uint8_t> Search::GetBestMove()
 
 int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta)
 {
-
 	int Evaluation;
 
 	GenerateLegalMoves LegalMoves(BoardSquare, &previousBoardSquare, CanCastle, (MoveNum % 2 != 0) ? false : true, MoveNum, false);
@@ -39,79 +38,27 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 		return Evaluation;
 	}
 
-	uint8_t count = 0;
-
 	auto const cBoardSquare = BoardSquare;
 	auto const cPreviousBoardSquare = previousBoardSquare;
 	auto const cCanCastle = CanCastle;
 	auto const cMoveNum = MoveNum;
 	bool BreakFlag = false;
 
-	auto GuessedOrder = OrderMoves(LegalMoves);
+	std::vector<GuessStruct> GuessedOrder = OrderMoves(LegalMoves);
 
-	for (MOVE& piece : LegalMoves.moves)
+	for (const GuessStruct& Guess : GuessedOrder)
 	{
 		if (BreakFlag)
 		{
 			BreakFlag = false;
-			count++;
-			break;
+			continue;
 		}
-		
-		for (const uint8_t& move : piece.TargetSquares)
+
+		if (Guess.PromotionType != 65)
 		{
-			if (BreakFlag)
-				break;
-			
-			if (piece.Promotion[0] != 65 and piece.Promotion[0] == move or piece.Promotion[1] != 65 and piece.Promotion[1] == move or piece.Promotion[2] != 65 and piece.Promotion[2] == move)
-			{
-				bool IsWhite = Board::IsPieceColorWhite(BoardSquare[count]);
+			bool IsWhite = Board::IsPieceColorWhite(BoardSquare[Guess.BoardSquare]);
 
-				for (uint8_t i = 0; i != 4; ++i)
-				{
-					if (IsWhite)
-						MakeMove(LegalMoves, count, move, BoardSquare, previousBoardSquare, CanCastle, i + 18);
-					else
-						MakeMove(LegalMoves, count, move, BoardSquare, previousBoardSquare, CanCastle, i + 10);
-
-
-					Evaluation = std::max(Evaluation, -NegaMax(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha));
-					alpha = std::max(alpha, Evaluation);
-
-					if (alpha >= beta)
-					{
-						BreakFlag = true;
-						break;
-					}
-
-					if (depth == m_depth and Evaluation > m_BestEvaluation)
-					{
-						m_BestBoardPos = count;
-						m_BestMove = move;
-						m_BestPromotion = 65;
-						if (IsWhite)
-							m_BestPromotion = i + 18;
-						else
-							m_BestPromotion = i + 10;
-						m_BestEvaluation = Evaluation;
-					}
-
-					BoardSquare = cBoardSquare;
-					previousBoardSquare = cPreviousBoardSquare;
-					CanCastle = cCanCastle;
-					MoveNum = cMoveNum;
-				}
-
-				if (IsWhite)
-					piece.Promotion[move - count - 7] = 65;
-				else
-					piece.Promotion[move - count + 9] = 65;
-
-				continue;
-			}
-
-
-			MakeMove(LegalMoves, count, move, BoardSquare, previousBoardSquare, CanCastle, 65);
+			MakeMove(LegalMoves, Guess.BoardSquare, Guess.Move, BoardSquare, previousBoardSquare, CanCastle, Guess.PromotionType);
 
 			Evaluation = std::max(Evaluation, -NegaMax(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha));
 			alpha = std::max(alpha, Evaluation);
@@ -124,9 +71,10 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 
 			if (depth == m_depth and Evaluation > m_BestEvaluation)
 			{
-				m_BestBoardPos = count;
-				m_BestMove = move;
+				m_BestBoardPos = Guess.BoardSquare;
+				m_BestMove = Guess.Move;
 				m_BestPromotion = 65;
+				m_BestPromotion = Guess.PromotionType;
 				m_BestEvaluation = Evaluation;
 			}
 
@@ -135,13 +83,34 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 			CanCastle = cCanCastle;
 			MoveNum = cMoveNum;
 
+			continue;
 		}
-		count++;
+
+		MakeMove(LegalMoves, Guess.BoardSquare, Guess.Move, BoardSquare, previousBoardSquare, CanCastle, 65);
+
+		Evaluation = std::max(Evaluation, -NegaMax(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha));
+		alpha = std::max(alpha, Evaluation);
+
+		if (alpha >= beta)
+		{
+			BreakFlag = true;
+			break;
+		}
+
+		if (depth == m_depth and Evaluation > m_BestEvaluation)
+		{
+			m_BestBoardPos = Guess.BoardSquare;
+			m_BestMove = Guess.Move;
+			m_BestPromotion = 65;
+			m_BestEvaluation = Evaluation;
+		}
+
+		BoardSquare = cBoardSquare;
+		previousBoardSquare = cPreviousBoardSquare;
+		CanCastle = cCanCastle;
+		MoveNum = cMoveNum;
+
 	}
-
-	//if (WorstEvaluation == INT32_MAX)
-		//std::cout << "Checkmate found while searching" << std::endl;
-
 	return alpha;
 }
 
@@ -223,32 +192,65 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, const uint8_t& Board
 	}
 }
 
-//Order moves by the best guessed move, vector<<BoardSquare, TargetSquare>, promotion={piecetype}>, vector is already sorted best to worst
-std::vector<std::pair<uint8_t, uint8_t>, uint8_t> Search::OrderMoves(const GenerateLegalMoves& LegalMoves)
+//sorted best to worst
+std::vector<GuessStruct> Search::OrderMoves(const GenerateLegalMoves& LegalMoves)
 {
-	std::vector<std::pair<uint8_t, uint8_t>, uint8_t> f_OrderedMoves;
+	std::vector<GuessStruct> f_OrderedMoves;
 	uint8_t count = 0;
-	for (const MOVE& piece : LegalMoves.moves)
+	bool BreakFlag = false;
+
+	for (MOVE piece : LegalMoves.moves)
 	{
 		for (const uint8_t& move : piece.TargetSquares)
 		{
-			int16_t GuessedEval = 0;
-			if (m_BoardSquare[move] != NONE)
+			if (BreakFlag)
 			{
-				GuessedEval += (10 * Evaluator::ConvertPieceTypeToMatValue(m_BoardSquare[move])) - Evaluator::ConvertPieceTypeToMatValue(m_BoardSquare[count]);
+				BreakFlag = false;
+				break;
 			}
 
-			if (LegalMoves.AttackedSquares[move])
+			for (uint8_t i = 0; i != 3; ++i)
 			{
-				GuessedEval -= Evaluator::ConvertPieceTypeToMatValue(m_BoardSquare[count]);
+				int16_t GuessedEval = 0;
+				if (m_BoardSquare[move] != NONE)
+				{
+					GuessedEval += (10 * Evaluator::ConvertPieceTypeToMatValue(m_BoardSquare[move])) - Evaluator::ConvertPieceTypeToMatValue(m_BoardSquare[count]);
+				}
+
+				if (LegalMoves.AttackedSquares[move])
+				{
+					GuessedEval -= Evaluator::ConvertPieceTypeToMatValue(m_BoardSquare[count]);
+				}
+
+				if (!(piece.Promotion[0] != 65 and piece.Promotion[0] == move) or !(piece.Promotion[1] != 65 and piece.Promotion[1] == move) or !(piece.Promotion[2] != 65 and piece.Promotion[2] == move))
+				{
+					BreakFlag = true;
+					f_OrderedMoves.emplace_back(count, move, 65, GuessedEval);
+					break;
+				}
+
+				bool IsWhite = Board::IsPieceColorWhite(m_BoardSquare[count]);
+				if (IsWhite)
+				{
+					piece.Promotion[move - count - 7] = 65;
+					GuessedEval += Evaluator::ConvertPieceTypeToMatValue(i + 18);
+				}
+				else
+				{
+					piece.Promotion[move - count + 9] = 65;
+					GuessedEval += Evaluator::ConvertPieceTypeToMatValue(i + 10);
+				}
+
+                f_OrderedMoves.emplace_back(count, move, (IsWhite ? i + 18 : i + 10), GuessedEval);
 			}
-
-			std::pair<uint8_t, uint8_t> (count, move);
-			f_OrderedMoves.emplace_back(std::pair(count, move), GuessedEval);
-			//todo: i have no idea how to sort this, especially deciding wether to put the promotion instead of guessed eval and how to do that
-
 		}
 		count++;
 	}
 
+	std::sort(f_OrderedMoves.begin(), f_OrderedMoves.end(),
+		[](const auto& a, const auto& b) {
+			return a.GuessedEval > b.GuessedEval;
+		});
+
+	return f_OrderedMoves;
 }
