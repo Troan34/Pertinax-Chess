@@ -31,6 +31,7 @@
     <ClCompile Include="source\ChessThings\LegalMoves.cpp" />
     <ClCompile Include="source\ChessThings\Engine\Search.cpp" />
     <ClCompile Include="source\ChessThings\Engine\Evaluation.cpp" />
+    <ClCompile Include="source\ChessThings\Engine\Transposition\ZobristHashing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\bb.png" />
@@ -365,6 +366,7 @@
     <ClInclude Include="source\ChessThings\LegalMoves.h" />
     <ClInclude Include="source\ChessThings\Engine\Evaluation.h" />
     <ClInclude Include="source\ChessThings\Engine\Search.h" />
+    <ClInclude Include="source\ChessThings\Engine\Transposition\ZobristHashing.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="source\vendor\glm\detail\func_common.inl" />
