@@ -48,6 +48,7 @@ private:
    std::array<uint8_t, 64> BoardSquare;
    canCastle CanCastle;
 
+   ////////////////TODO : PUT EVERYTHING IN THE .cpp
    void CreateInitialHash()
    {
        uint64_t hash = 0;
