@@ -3,6 +3,7 @@
 #include <array>  
 #include <random>  
 #include "ChessThings/Board.h"
+#include "ChessThings/LegalMoves.h"
 
 class ZobristHashing  
 {  
@@ -17,67 +18,23 @@ private:
    }
 
    static std::array<std::array<uint64_t, 64>, 12> ZobristPieces; // 2d array: 64 squares for the 12 piece types  
-   static std::array<uint64_t, 4> ZobristCastlingRights; // castling rights  
+   static std::array<uint64_t, 4> ZobristCastlingRights; // castling rights, order: KQkq 
    static std::array<uint64_t, 8> ZobristEnPassant; // en passant squares  
    static uint64_t ZobristSideToMove; // hash for black to move
+   
 
+   uint64_t m_Hash = 0; // current hash
+   GenerateLegalMoves* m_LegalMoves;
+   std::array<uint8_t, 64> m_BoardSquare;
+   CastlingAbility m_CastleAbility;
+   bool m_SideToMove = false; // true for white, false for black
 
-   void InitializeKeys()  
-   {  
-       for (auto& piece : ZobristPieces)  
-       {  
-           for (auto& square : piece)  
-           {  
-               square = Random64Bit();  
-           }  
-       }  
-
-       for (auto& castling : ZobristCastlingRights)  
-       {  
-           castling = Random64Bit();  
-       }  
-
-       for (auto& enPassant : ZobristEnPassant)  
-       {  
-           enPassant = Random64Bit();  
-       }
-
-	   ZobristSideToMove = Random64Bit();
-   }  
-
-   std::array<uint8_t, 64> BoardSquare;
-   canCastle CanCastle;
-
-   ////////////////TODO : PUT EVERYTHING IN THE .cpp
-   void CreateInitialHash()
-   {
-       uint64_t hash = 0;
-
-	   for (uint8_t i = 0; i < 64; ++i)
-	   {
-		   uint8_t piece = BoardSquare[i];
-		   if (piece != 0)
-		   {
-			   hash ^= ZobristPieces[piece][i]; // XOR the hash with the piece's hash
-		   }
-	   }
-
-	   for (uint8_t i = 0; i < 4; i++)
-	   {
-		   if (CanCastle.)//fix the canCastle struct
-		   {
-			   hash ^= ZobristCastlingRights[]; // XOR the hash with the castling rights
-		   }
-	   }
-   }
+   void InitializeKeys();
+   void CreateInitialHash();
+   void UpdateHash(const uint8_t& BoardSquare, const uint8_t& move, const uint8_t& PieceType, const uint8_t& PieceTypeToPromoteTo);
 
 public:  
-    ZobristHashing(const std::array<uint8_t, 64>& BoardSquare, const canCastle& CanCastle)
-		:BoardSquare(BoardSquare),
-		 CanCastle(CanCastle)
-	{
-		InitializeKeys();
-	}
+    ZobristHashing(const std::array<uint8_t, 64>& BoardSquare, const canCastle& CanCastle, GenerateLegalMoves* LegalMoves, const uint32_t& MoveNum);
 
 
 };  

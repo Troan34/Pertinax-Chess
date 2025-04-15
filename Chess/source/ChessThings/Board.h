@@ -31,6 +31,36 @@ constexpr unsigned int BLACK_KING = BLACK + KING;     //14
 struct canCastle
 {
 	bool HasWhiteLongRookMoved = false, HasWhiteShortRookMoved = false, HasBlackLongRookMoved = false, HasBlackShortRookMoved = false, HasWhiteKingMoved = false, HasBlackKingMoved = false;
+
+};
+
+struct CastlingAbility
+{
+	bool WhiteShort = false;
+	bool WhiteLong = false;
+	bool BlackShort = false;
+	bool BlackLong = false;
+
+	bool operator[](uint8_t index)
+	{
+		switch (index)
+		{
+		case 0:
+			return WhiteShort;
+			break;
+		case 1:
+			return WhiteLong;
+			break;
+		case 2:
+			return BlackShort;
+			break;
+		case 3:
+			return BlackLong;
+			break;
+		default:
+			ASSERT(false);
+		}
+	}
 };
 
 class Board
@@ -52,6 +82,7 @@ public:
 	canCastle GetCanCastle();
 	uint32_t GetPawnMoveSquare();
 	uint32_t ALG2BoardSquareConverter(const std::string& ALG);
+	static CastlingAbility canCastle2CastlingAbility(const canCastle& Castle);
 	static bool IsPieceColorWhite(const uint8_t& BoardSquareValue);
 	static char PieceType2letter(const uint8_t& PieceType);
 	static void WillCanCastleChange(const uint8_t& PieceTypeThatMoved, const uint8_t& BoardSquareItMovedFrom, const uint8_t& BoardSquareItMovedTo, canCastle& Castle);

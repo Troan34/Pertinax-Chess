@@ -168,6 +168,18 @@ uint32_t Board::ALG2BoardSquareConverter(const std::string& ALG)
 	return rank * 8 + file;
 }
 
+CastlingAbility Board::canCastle2CastlingAbility(const canCastle& Castle)
+{
+	CastlingAbility CastlingAbility;
+
+	CastlingAbility.WhiteLong = !Castle.HasWhiteLongRookMoved and !Castle.HasWhiteKingMoved;
+	CastlingAbility.WhiteShort = !Castle.HasWhiteShortRookMoved and !Castle.HasWhiteKingMoved;
+	CastlingAbility.BlackLong = !Castle.HasBlackLongRookMoved and !Castle.HasBlackKingMoved;
+	CastlingAbility.BlackShort = !Castle.HasBlackShortRookMoved and !Castle.HasBlackKingMoved;
+
+	return CastlingAbility;
+}
+
 bool Board::IsPieceColorWhite(const uint8_t& BoardSquareValue)
 {
 	if (BoardSquareValue == 0)

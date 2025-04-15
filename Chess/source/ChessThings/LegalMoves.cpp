@@ -326,6 +326,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos)
 					{
 						moves[BoardSquarePos].PieceType = PieceType;
 						moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
+						EnPassantFiles[(BoardSquarePos + Offset) % 8] = true;
 					}
 				}
 			}
@@ -390,6 +391,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos)
 					{
 						moves[BoardSquarePos].PieceType = PieceType;
 						moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
+						EnPassantFiles[(BoardSquarePos + Offset) % 8] = true;
 					}
 				}
 			}

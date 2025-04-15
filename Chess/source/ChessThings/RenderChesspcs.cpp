@@ -24,7 +24,7 @@ static std::atomic<bool> ReceivedACommand(false);
 
 //Engine vars
 static bool EngineOn = true;
-static uint8_t EngineDepth = 5;
+static uint8_t EngineDepth = 8;
 
 RenderChessPieces::RenderChessPieces()
 {
