@@ -82,8 +82,10 @@ public:
 	canCastle GetCanCastle();
 	uint32_t GetPawnMoveSquare();
 	uint32_t ALG2BoardSquareConverter(const std::string& ALG);
+	static uint8_t GetPieceType2Uncolored(const uint8_t& PieceType);
 	static CastlingAbility canCastle2CastlingAbility(const canCastle& Castle);
 	static bool IsPieceColorWhite(const uint8_t& BoardSquareValue);
 	static char PieceType2letter(const uint8_t& PieceType);
 	static void WillCanCastleChange(const uint8_t& PieceTypeThatMoved, const uint8_t& BoardSquareItMovedFrom, const uint8_t& BoardSquareItMovedTo, canCastle& Castle);
+	static bool WillCanCastleChange(const uint8_t& PieceTypeThatMoved, const uint8_t& BoardSquareItMovedFrom, const uint8_t& BoardSquareItMovedTo);
 };

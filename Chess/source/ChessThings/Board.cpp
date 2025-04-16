@@ -168,6 +168,16 @@ uint32_t Board::ALG2BoardSquareConverter(const std::string& ALG)
 	return rank * 8 + file;
 }
 
+uint8_t Board::GetPieceType2Uncolored(const uint8_t& PieceType)
+{
+	if (PieceType > 16)
+		return(PieceType - 16);
+	else if (PieceType > 8)
+		return(PieceType - 8);
+	else
+		ASSERT(false);
+}
+
 CastlingAbility Board::canCastle2CastlingAbility(const canCastle& Castle)
 {
 	CastlingAbility CastlingAbility;
@@ -266,4 +276,26 @@ void Board::WillCanCastleChange(const uint8_t& PieceType, const uint8_t& BoardSq
 		Castle.HasBlackShortRookMoved = true;
 	else if (PieceType == BLACK_ROOK and BoardSquareNumItMovedFrom == 56 or BoardSquareItMovedTo == 56)
 		Castle.HasBlackLongRookMoved = true;
+}
+
+bool Board::WillCanCastleChange(const uint8_t& PieceType, const uint8_t& BoardSquareNumItMovedFrom, const uint8_t& BoardSquareItMovedTo)
+{
+	if (BoardSquareNumItMovedFrom == 4 and PieceType == WHITE_KING)
+	{
+		return true;
+	}
+	else if (PieceType == BLACK_KING and BoardSquareNumItMovedFrom == 60)
+	{
+		return true;
+	}
+	else if (PieceType == WHITE_ROOK and BoardSquareNumItMovedFrom == 0 or BoardSquareItMovedTo == 0)
+		return true;
+	else if (PieceType == WHITE_ROOK and BoardSquareNumItMovedFrom == 7 or BoardSquareItMovedTo == 7)
+		return true;
+	else if (PieceType == BLACK_ROOK and BoardSquareNumItMovedFrom == 63 or BoardSquareItMovedTo == 63)
+		return true;
+	else if (PieceType == BLACK_ROOK and BoardSquareNumItMovedFrom == 56 or BoardSquareItMovedTo == 56)
+		return true;
+
+	return false;
 }

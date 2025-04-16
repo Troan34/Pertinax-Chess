@@ -1,8 +1,9 @@
 #include "ZobristHashing.h"
 
-ZobristHashing::ZobristHashing(const std::array<uint8_t, 64>& BoardSquare, const canCastle& CanCastle, GenerateLegalMoves* LegalMoves, const uint32_t& MoveNum)
+ZobristHashing::ZobristHashing(std::array<uint8_t, 64>* BoardSquare, std::array<uint8_t, 64>* PreviousBoardSquare, const canCastle& CanCastle, GenerateLegalMoves* LegalMoves, const uint32_t& MoveNum)
 	:m_BoardSquare(BoardSquare),
-	m_LegalMoves(LegalMoves)
+	m_LegalMoves(LegalMoves),
+	m_PreviousBoardSquare(PreviousBoardSquare)
 {
 	m_CastleAbility = Board::canCastle2CastlingAbility(CanCastle);
 	m_SideToMove = MoveNum % 2 == 0; // true for white, false for black
@@ -40,7 +41,7 @@ void ZobristHashing::CreateInitialHash()
 
     for (uint8_t i = 0; i < 64; ++i)
     {
-        uint8_t piece = m_BoardSquare[i];
+        uint8_t piece = m_BoardSquare->at(i);
         if (piece != 0)
         {
             m_Hash ^= ZobristPieces[piece][i]; // XOR the hash with the piece's hash
@@ -71,19 +72,56 @@ void ZobristHashing::CreateInitialHash()
 
 void ZobristHashing::UpdateHash(const uint8_t& StartingSquare, const uint8_t& move, const uint8_t& PieceType, const uint8_t& PieceTypeToPromoteTo)
 {
+	uint8_t f_PieceType = Board::GetPieceType2Uncolored(PieceType);
+	if (Board::WillCanCastleChange(PieceType, StartingSquare, move))
+	{
+		if (PieceType == WHITE_KING)
+		{
+			m_Hash ^= ZobristCastlingRights[0];
+			m_Hash ^= ZobristCastlingRights[1];
+		}
+		else if (PieceType == WHITE_ROOK)
+		{
+			if (StartingSquare == 0)
+			{
+				m_Hash ^= ZobristCastlingRights[1];
+			}
+			else
+			{
+				m_Hash ^= ZobristCastlingRights[0];
+			}
+		}
+		else if (PieceType == BLACK_KING)
+		{
+			m_Hash ^= ZobristCastlingRights[2];
+			m_Hash ^= ZobristCastlingRights[3];
+		}
+		else if (PieceType == BLACK_ROOK)
+		{
+			if (StartingSquare == 56)
+			{
+				m_Hash ^= ZobristCastlingRights[3];
+			}
+			else
+			{
+				m_Hash ^= ZobristCastlingRights[2];
+			}
+		}
+	}
+
     if (PieceTypeToPromoteTo != 65)
     {
-		m_Hash ^= ZobristPieces[PieceType][StartingSquare]; // XOR piece removal
-		m_Hash ^= ZobristPieces[PieceTypeToPromoteTo][move]; // XOR placing and promoting
+		m_Hash ^= ZobristPieces[f_PieceType][StartingSquare]; // XOR piece removal
+		m_Hash ^= ZobristPieces[Board::GetPieceType2Uncolored(PieceTypeToPromoteTo)][move]; // XOR placing and promoting
 	}
     else
     {
-        m_Hash ^= ZobristPieces[PieceType][StartingSquare]; // XOR piece removal
-		m_Hash ^= ZobristPieces[PieceType][move]; // XOR placing
+        m_Hash ^= ZobristPieces[f_PieceType][StartingSquare]; // XOR piece removal
+		m_Hash ^= ZobristPieces[f_PieceType][move]; // XOR placing
     }
 
 	//castling
-	if (m_BoardSquare[StartingSquare] == WHITE_KING or m_BoardSquare[StartingSquare] == BLACK_KING)
+	if (f_PieceType == KING)
 	{
 		if (StartingSquare - move == -2)
 		{
@@ -114,26 +152,28 @@ void ZobristHashing::UpdateHash(const uint8_t& StartingSquare, const uint8_t& mo
 
 	}
 
-	//TODO: Figure out how to get previousBoardSquare efficiently
-	if (m_BoardSquare[BoardSquare] == WHITE_PAWN)
+	//white en passant
+	if (PieceType == WHITE_PAWN)
 	{
-		if (fun_previousBoardSquare[move] == 0)
+		if (m_PreviousBoardSquare->at(move) == 0)
 		{
-			if (BoardSquare - move == -7 or BoardSquare - move == -9)
+			if (StartingSquare - move == -7 or StartingSquare - move == -9)
 			{
-				fun_BoardSquare[move - 8] = 0;
+				m_Hash ^= ZobristPieces[PAWN][move - 8];
 			}
 		}
 	}
 	//Black en passant
-	if (m_BoardSquare[BoardSquare] == BLACK_PAWN)
+	if (PieceType == BLACK_PAWN)
 	{
-		if (fun_previousBoardSquare[move] == 0)
+		if (m_PreviousBoardSquare->at(move) == 0)
 		{
-			if (BoardSquare - move == 7 or BoardSquare - move == 9)
+			if (StartingSquare - move == 7 or StartingSquare - move == 9)
 			{
-				fun_BoardSquare[move + 8] = 0;
+				m_Hash ^= ZobristPieces[PAWN][move + 8];
 			}
 		}
 	}
+
+	//TODO: add en passant hashing and side to move
 }
