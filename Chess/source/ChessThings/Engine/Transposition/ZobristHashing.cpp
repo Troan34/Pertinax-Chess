@@ -1,5 +1,21 @@
 #include "ZobristHashing.h"
 
+static std::default_random_engine rng;
+static std::uniform_int_distribution<uint64_t> dist;
+
+static uint64_t Random64Bit()
+{
+	return dist(rng);
+}
+
+static std::array<std::array<uint64_t, 64>, 12> ZobristPieces; // 2d array: 64 squares for the 12 piece types  
+static std::array<uint64_t, 4> ZobristCastlingRights; // castling rights, order: KQkq 
+static std::array<uint64_t, 8> ZobristEnPassant; // en passant squares  
+static uint64_t ZobristSideToMove; // hash for black to move
+static bool Initialized = false;
+static uint8_t WhichFileHadEnPassant = 8; //8 for none
+
+
 ZobristHashing::ZobristHashing(std::array<uint8_t, 64>* BoardSquare, std::array<uint8_t, 64>* PreviousBoardSquare, const canCastle& CanCastle, GenerateLegalMoves* LegalMoves, const uint32_t& MoveNum)
 	:m_BoardSquare(BoardSquare),
 	m_LegalMoves(LegalMoves),
@@ -7,8 +23,8 @@ ZobristHashing::ZobristHashing(std::array<uint8_t, 64>* BoardSquare, std::array<
 {
 	m_CastleAbility = Board::canCastle2CastlingAbility(CanCastle);
 	m_SideToMove = MoveNum % 2 == 0; // true for white, false for black
-	InitializeKeys();
-
+	if (!Initialized)
+		InitializeKeys();
 }
 
 void ZobristHashing::InitializeKeys()
@@ -33,7 +49,7 @@ void ZobristHashing::InitializeKeys()
     }
 
     ZobristSideToMove = Random64Bit();
-    
+	Initialized = true;
 }
 
 void ZobristHashing::CreateInitialHash()
@@ -175,5 +191,11 @@ void ZobristHashing::UpdateHash(const uint8_t& StartingSquare, const uint8_t& mo
 		}
 	}
 
-	//TODO: add en passant hashing and side to move
+	for (uint8_t index = 0; index < 8; index++)
+	{
+		if (m_LegalMoves->EnPassantFiles[index] == true)
+		{
+			m_Hash ^= ZobristEnPassant[index]; // XOR the hash with the en passant square
+		}//TODO: XOR when en passant privilege is removed
+	}
 }

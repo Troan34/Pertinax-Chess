@@ -1,11 +1,11 @@
 ﻿  ZobristHashing.cpp
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Transposition\ZobristHashing.cpp(118,20): error C2065: 'BoardSquare': undeclared identifier
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Transposition\ZobristHashing.cpp(120,7): error C2065: 'fun_previousBoardSquare': undeclared identifier
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Transposition\ZobristHashing.cpp(122,8): error C2065: 'BoardSquare': undeclared identifier
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Transposition\ZobristHashing.cpp(122,36): error C2065: 'BoardSquare': undeclared identifier
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Transposition\ZobristHashing.cpp(124,5): error C2065: 'fun_BoardSquare': undeclared identifier
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Transposition\ZobristHashing.cpp(129,20): error C2065: 'BoardSquare': undeclared identifier
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Transposition\ZobristHashing.cpp(131,7): error C2065: 'fun_previousBoardSquare': undeclared identifier
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Transposition\ZobristHashing.cpp(133,8): error C2065: 'BoardSquare': undeclared identifier
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Transposition\ZobristHashing.cpp(133,35): error C2065: 'BoardSquare': undeclared identifier
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Transposition\ZobristHashing.cpp(135,5): error C2065: 'fun_BoardSquare': undeclared identifier
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Generating code
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Evaluation.h(59): warning C4715: 'Evaluator::ConvertPieceTypeToMatValue': not all control paths return a value
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Board.cpp(243): warning C4715: 'Board::PieceType2letter': not all control paths return a value
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\LegalMoves.cpp(261): warning C4172: returning address of local variable or temporary : OffsetsForKnight
+  All 4027 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+glew32s.lib(glew.obj) : warning LNK4099: PDB '' was not found with 'glew32s.lib(glew.obj)' or at ''; linking object as if no debug info
+  Chess.vcxproj -> C:\Users\roanb\source\repos\Chess\x64\Release\Chess.exe

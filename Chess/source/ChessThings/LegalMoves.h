@@ -86,7 +86,7 @@ public:
 
 	uint32_t m_NumOfLegalMoves = 0;
 	unsigned int MoveNum;
-	std::array<bool, 8> EnPassantFiles;
+	std::array<bool, 8> EnPassantFiles{false};
 
 	GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
 	~GenerateLegalMoves();
