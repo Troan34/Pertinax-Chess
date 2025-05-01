@@ -16,7 +16,7 @@ static bool Initialized = false;
 static uint8_t WhichFileHadEnPassant = 8; //8 for none
 
 
-ZobristHashing::ZobristHashing(std::array<uint8_t, 64>* BoardSquare, std::array<uint8_t, 64>* PreviousBoardSquare, const canCastle& CanCastle, GenerateLegalMoves* LegalMoves, const uint32_t& MoveNum)
+ZobristHashing::ZobristHashing(GenerateLegalMoves* LegalMoves, std::array<uint8_t, 64>* BoardSquare, std::array<uint8_t, 64>* PreviousBoardSquare, const canCastle& CanCastle, const uint32_t& MoveNum)
 	:m_BoardSquare(BoardSquare),
 	m_LegalMoves(LegalMoves),
 	m_PreviousBoardSquare(PreviousBoardSquare)
@@ -191,11 +191,18 @@ void ZobristHashing::UpdateHash(const uint8_t& StartingSquare, const uint8_t& mo
 		}
 	}
 
+	if (WhichFileHadEnPassant != 8)
+	{
+		m_Hash ^= ZobristEnPassant[WhichFileHadEnPassant]; // XOR the hash with the en passant square
+		WhichFileHadEnPassant = 8; // reset to none
+	}
+
 	for (uint8_t index = 0; index < 8; index++)
 	{
 		if (m_LegalMoves->EnPassantFiles[index] == true)
 		{
 			m_Hash ^= ZobristEnPassant[index]; // XOR the hash with the en passant square
-		}//TODO: XOR when en passant privilege is removed
+			WhichFileHadEnPassant = index;
+		}
 	}
 }

@@ -21,7 +21,7 @@ int Evaluator::Evaluate()
 	m_Evaluation = BoardMatValue() + MobilityEval();
 	//m_Evaluation += m_LegalMoves.m_NumOfLegalMoves * 1 * m_SideToMove;
 
-	return m_Evaluation * (m_MoveNum % 2 == 0) ? 1 : -1;
+	return m_Evaluation * ((m_MoveNum % 2 == 0) ? 1 : -1);
 }
 
 int32_t Evaluator::BoardMatValue()

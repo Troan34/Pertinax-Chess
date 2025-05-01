@@ -56,7 +56,10 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 		alpha = std::max(alpha, Evaluation);
 
 		if (alpha >= beta)
+		{ 
 			break;//prune
+		}
+
 
 		if (depth == m_depth and Evaluation > m_BestEvaluation)
 		{
@@ -158,18 +161,11 @@ std::vector<GuessStruct> Search::OrderMoves(const GenerateLegalMoves& LegalMoves
 {
 	std::vector<GuessStruct> f_OrderedMoves;
 	uint8_t count = 0;
-	bool BreakFlag = false;
 
 	for (MOVE piece : LegalMoves.moves)
 	{
 		for (const uint8_t& move : piece.TargetSquares)
 		{
-			if (BreakFlag)
-			{
-				BreakFlag = false;
-				break;
-			}
-
 			for (uint8_t i = 0; i != 3; ++i)
 			{
 				int16_t GuessedEval = 0;
@@ -185,7 +181,6 @@ std::vector<GuessStruct> Search::OrderMoves(const GenerateLegalMoves& LegalMoves
 
 				if (!(piece.Promotion[0] != 65 and piece.Promotion[0] == move) or !(piece.Promotion[1] != 65 and piece.Promotion[1] == move) or !(piece.Promotion[2] != 65 and piece.Promotion[2] == move))
 				{
-					BreakFlag = true;
 					f_OrderedMoves.emplace_back(count, move, 65, GuessedEval);
 					break;
 				}
