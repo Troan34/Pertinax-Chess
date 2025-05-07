@@ -24,7 +24,7 @@ static std::atomic<bool> ReceivedACommand(false);
 
 //Engine vars
 static bool EngineOn = true;
-static uint8_t EngineDepth = 8;
+static uint8_t EngineDepth = 5;
 
 RenderChessPieces::RenderChessPieces()
 {
@@ -202,7 +202,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 
 	
 	//Make engine move
-	if (WaitingForEnemyMove and EngineOn)
+	if (WaitingForEnemyMove and EngineOn and !WaitingForUserPromotion)
 	{
 		Search search(static_BoardSquare, previousBoardsquare, CanCastle, EngineDepth, MoveNum);
 		std::pair<std::pair<uint8_t, uint8_t>, uint8_t> BestMove = search.GetBestMove();
@@ -212,7 +212,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 		MoveNum++;
 		isNextMoveForWhite = true;
 		if (MoveNum % 2 != 0)
-			isNextMoveForWhite = false;
+			ASSERT(false);
 	}
 	
 	//rendering part
