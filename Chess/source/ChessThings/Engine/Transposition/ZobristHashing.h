@@ -7,11 +7,7 @@
 
 class ZobristHashing  
 {  
-private:  
-
-
-   
-
+private:
    uint64_t m_Hash = 0; // current hash
    GenerateLegalMoves* m_LegalMoves;
    std::array<uint8_t, 64>* m_BoardSquare;
