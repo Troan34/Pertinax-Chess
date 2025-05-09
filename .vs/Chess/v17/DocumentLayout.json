@@ -11,20 +11,24 @@
       "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\Engine\\Search.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\LegalMoves.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\LegalMoves.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Board.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\Board.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Engine\\Transposition\\ZobristHashing.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\Engine\\Transposition\\ZobristHashing.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Board.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\Board.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Engine\\Transposition\\ZobristHashing.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\Engine\\Transposition\\ZobristHashing.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\LegalMoves.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\LegalMoves.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Engine\\Transposition\\ZobristHashing.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\Engine\\Transposition\\ZobristHashing.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\LegalMoves.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -54,7 +58,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "TestTexture2D.cpp",
               "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\tests\\TestTexture2D.cpp",
               "RelativeDocumentMoniker": "Chess\\source\\tests\\TestTexture2D.cpp",
@@ -67,7 +71,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "TestTexture2D.h",
               "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\tests\\TestTexture2D.h",
               "RelativeDocumentMoniker": "Chess\\source\\tests\\TestTexture2D.h",
@@ -86,7 +90,7 @@
               "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\Engine\\Search.cpp",
               "ToolTip": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Engine\\Search.cpp",
               "RelativeToolTip": "Chess\\source\\ChessThings\\Engine\\Search.cpp",
-              "ViewState": "AgIAACMAAAAAAAAAAIAwwDoAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAwwKEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-02-24T17:21:14.816Z",
               "IsPinned": true,
@@ -100,35 +104,21 @@
               "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\Engine\\Search.h",
               "ToolTip": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Engine\\Search.h",
               "RelativeToolTip": "Chess\\source\\ChessThings\\Engine\\Search.h",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAACUAAABUAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABMAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-12T20:18:33.701Z",
+              "WhenOpened": "2025-05-09T15:04:18.434Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Board.h",
-              "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Board.h",
-              "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\Board.h",
-              "ToolTip": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Board.h",
-              "RelativeToolTip": "Chess\\source\\ChessThings\\Board.h",
-              "ViewState": "AgIAABgAAAAAAAAAAIAwwCsAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-03-15T15:53:58.449Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "ZobristHashing.cpp",
               "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Engine\\Transposition\\ZobristHashing.cpp",
               "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\Engine\\Transposition\\ZobristHashing.cpp",
               "ToolTip": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Engine\\Transposition\\ZobristHashing.cpp",
               "RelativeToolTip": "Chess\\source\\ChessThings\\Engine\\Transposition\\ZobristHashing.cpp",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAFgAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAwwKgAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-04-09T20:30:48.466Z",
               "IsPinned": true,
@@ -136,13 +126,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "ZobristHashing.h",
               "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Engine\\Transposition\\ZobristHashing.h",
               "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\Engine\\Transposition\\ZobristHashing.h",
               "ToolTip": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Engine\\Transposition\\ZobristHashing.h",
               "RelativeToolTip": "Chess\\source\\ChessThings\\Engine\\Transposition\\ZobristHashing.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-09T20:31:08.653Z",
               "IsPinned": true,
@@ -150,29 +140,30 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "LegalMoves.cpp",
               "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\LegalMoves.cpp",
               "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\LegalMoves.cpp",
               "ToolTip": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\LegalMoves.cpp",
               "RelativeToolTip": "Chess\\source\\ChessThings\\LegalMoves.cpp",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAgBAABDAAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAwwAgBAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-04-29T20:37:46.757Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "LegalMoves.h",
               "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\LegalMoves.h",
               "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\LegalMoves.h",
               "ToolTip": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\LegalMoves.h",
               "RelativeToolTip": "Chess\\source\\ChessThings\\LegalMoves.h",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAAAFoAAAA4AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-04-29T20:38:20.226Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -184,7 +175,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 4,
+              "Title": "Board.cpp",
+              "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Board.cpp",
+              "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\Board.cpp",
+              "ToolTip": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Board.cpp",
+              "RelativeToolTip": "Chess\\source\\ChessThings\\Board.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-09T15:03:45.413Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Board.h",
+              "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Board.h",
+              "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\Board.h",
+              "ToolTip": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\Board.h",
+              "RelativeToolTip": "Chess\\source\\ChessThings\\Board.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-03-15T15:53:58.449Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "RenderChesspcs.cpp",
               "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Chess\\Chess\\source\\ChessThings\\RenderChesspcs.cpp",
               "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\RenderChesspcs.cpp",

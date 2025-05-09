@@ -1,10 +1,11 @@
 #pragma once
 #include "ChessThings/Board.h"
 #include "ChessThings/Engine/Evaluation.h"
+#include "ChessThings/Engine/Transposition/ZobristHashing.h"
 #include <iostream>
 #include <algorithm>
 #include <chrono>
-#include "ChessThings/Engine/Transposition/ZobristHashing.h"
+
 
 struct GuessStruct
 {

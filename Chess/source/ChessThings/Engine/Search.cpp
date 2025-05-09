@@ -42,6 +42,8 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 	auto const cPreviousBoardSquare = previousBoardSquare;
 	auto const cCanCastle = CanCastle;
 	auto const cMoveNum = MoveNum;
+	auto const cHash = m_Hash->m_Hash;
+
 
 	std::vector<GuessStruct> GuessedOrder = OrderMoves(LegalMoves, BoardSquare);
 
@@ -73,6 +75,7 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 		previousBoardSquare = cPreviousBoardSquare;
 		CanCastle = cCanCastle;
 		MoveNum = cMoveNum;
+		m_Hash->m_Hash = cHash;
 
 	}
 	return alpha;
@@ -80,6 +83,8 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 
 void Search::MakeMove(const GenerateLegalMoves& LegalMoves, std::unique_ptr<ZobristHashing>& Hash, const uint8_t& BoardSquare, const uint8_t& move, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle, const uint8_t& PieceTypeToPromoteTo)
 {
+	Hash->UpdateHash(BoardSquare, move, fun_BoardSquare[BoardSquare], PieceTypeToPromoteTo);
+
 	fun_previousBoardSquare = fun_BoardSquare;
 	Board::WillCanCastleChange(fun_BoardSquare[BoardSquare], BoardSquare, move, Castle);
 	fun_BoardSquare[move] = fun_BoardSquare[BoardSquare];
@@ -154,6 +159,7 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, std::unique_ptr<Zobr
 	{
 		GenerateLegalMoves::SetDoNotEnPassant(true);
 	}
+
 }
 
 //sorted best to worst
