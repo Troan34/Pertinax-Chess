@@ -63,6 +63,13 @@ struct CastlingAbility
 	}
 };
 
+struct Move
+{
+	uint8_t BoardSquare;
+	uint8_t Move;
+	uint8_t PromotionType = 65;
+};
+
 class Board
 {
 private:

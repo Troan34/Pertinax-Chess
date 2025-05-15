@@ -1,5 +1,7 @@
 #include "Search.h"
 
+static std::unordered_map<uint64_t, TranspositionTable> TranspositionTableMap;
+
 Search::Search(std::array<uint8_t, 64> BoardSquare, std::array<uint8_t, 64> PreviousBoardSquare, canCastle CanCastle, uint8_t depth, uint16_t MoveNum)
 	:m_BoardSquare(BoardSquare), m_PreviousBoardSquare(PreviousBoardSquare), m_CanCastle(CanCastle), m_depth(depth), m_MoveNum(MoveNum)
 {
@@ -25,6 +27,26 @@ std::pair<std::pair<uint8_t, uint8_t>, uint8_t> Search::GetBestMove()
 
 int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta)
 {
+	auto TTentry = TranspositionTableMap.find(m_Hash->m_Hash);
+	if (TTentry != TranspositionTableMap.end())
+	{
+		if (TTentry->second.Hash == m_Hash->m_Hash and TTentry->second.Depth >= depth)
+		{
+			if (TTentry->second.BoundType == 'e')
+			{
+				return TTentry->second.Evaluation;
+			}
+			else if (TTentry->second.BoundType == 'l')
+			{
+				alpha = std::max(alpha, TTentry->second.Evaluation);
+			}
+			else if (TTentry->second.BoundType == 'u')
+			{
+				beta = std::min(beta, TTentry->second.Evaluation);
+			}
+		}
+	}
+
 	int Evaluation;
 
 	GenerateLegalMoves LegalMoves(BoardSquare, &previousBoardSquare, CanCastle, (MoveNum % 2 != 0) ? false : true, MoveNum, false);
@@ -77,7 +99,11 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 		MoveNum = cMoveNum;
 		m_Hash->m_Hash = cHash;
 
+
 	}
+
+
+
 	return alpha;
 }
 

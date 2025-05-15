@@ -22,6 +22,15 @@ struct GuessStruct
 	}
 };
 
+struct TranspositionTable
+{
+	uint64_t Hash;
+	Move BestMove;
+	char BoundType; // e for exact, l for lower, u for upper
+	int32_t Evaluation;
+	uint8_t Depth;
+};
+
 class Search {
 private:
 	std::unique_ptr<ZobristHashing> m_Hash;
