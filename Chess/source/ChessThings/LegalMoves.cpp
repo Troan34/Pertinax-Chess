@@ -282,7 +282,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos)
 			//promotion
 			if (BoardPosPlusOffset >= 56 and PieceTypeAtOffset == 0)
 			{
-				moves[BoardSquarePos].Promotion[Offset + 9] = BoardPosPlusOffset;
+				moves[BoardSquarePos].Promotion[Offset - 7] = BoardPosPlusOffset;
 			}
 
 			if (NumOfSquaresUntilEdge[BoardSquarePos][WhitePawnDirections[Offset-7]] != 0)

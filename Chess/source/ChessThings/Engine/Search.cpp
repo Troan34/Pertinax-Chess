@@ -27,25 +27,31 @@ std::pair<std::pair<uint8_t, uint8_t>, uint8_t> Search::GetBestMove()
 
 int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta)
 {
-	auto TTentry = TranspositionTableMap.find(m_Hash->m_Hash);
+	//Search the TT
+	auto TTentry = TranspositionTableMap.find(m_Hash->Hash);
 	if (TTentry != TranspositionTableMap.end())
 	{
-		if (TTentry->second.Hash == m_Hash->m_Hash and TTentry->second.Depth >= depth)
+		if (TTentry->second.Hash == m_Hash->Hash and TTentry->second.Depth >= depth)
 		{
-			if (TTentry->second.BoundType == 'e')
+			if (TTentry->second.BoundType == EXACT)
 			{
 				return TTentry->second.Evaluation;
 			}
-			else if (TTentry->second.BoundType == 'l')
+			else if (TTentry->second.BoundType == LOWER_BOUND)
 			{
 				alpha = std::max(alpha, TTentry->second.Evaluation);
 			}
-			else if (TTentry->second.BoundType == 'u')
+			else if (TTentry->second.BoundType == UPPER_BOUND)
 			{
 				beta = std::min(beta, TTentry->second.Evaluation);
 			}
 		}
+		if (alpha >= beta)
+		{
+			return alpha;//prune
+		}
 	}
+	
 
 	int Evaluation;
 
@@ -64,7 +70,7 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 	auto const cPreviousBoardSquare = previousBoardSquare;
 	auto const cCanCastle = CanCastle;
 	auto const cMoveNum = MoveNum;
-	auto const cHash = m_Hash->m_Hash;
+	auto const cHash = m_Hash->Hash;
 
 
 	std::vector<GuessStruct> GuessedOrder = OrderMoves(LegalMoves, BoardSquare);
@@ -79,12 +85,22 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 		Evaluation = std::max(Evaluation, -NegaMax(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha));
 		alpha = std::max(alpha, Evaluation);
 
+		//Transposition table
+		TranspositionTable newTTentry;
+		newTTentry.Hash = m_Hash->Hash;
+		newTTentry.Depth = depth;
+		newTTentry.Evaluation = Evaluation;
+		newTTentry.BoundType = (Evaluation <= alpha) ? UPPER_BOUND :
+			(Evaluation >= beta) ? LOWER_BOUND : EXACT;
+		newTTentry.BestMove = Move(Guess.BoardSquare, Guess.Move, Guess.PromotionType);
+		TranspositionTableMap[m_Hash->Hash] = newTTentry;
+
 		if (alpha >= beta)
 		{ 
 			break;//prune
 		}
 
-
+		//undo move
 		if (depth == m_depth and Evaluation > m_BestEvaluation)
 		{
 			m_BestBoardPos = Guess.BoardSquare;
@@ -97,12 +113,10 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 		previousBoardSquare = cPreviousBoardSquare;
 		CanCastle = cCanCastle;
 		MoveNum = cMoveNum;
-		m_Hash->m_Hash = cHash;
+		m_Hash->Hash = cHash;
 
 
 	}
-
-
 
 	return alpha;
 }
@@ -241,3 +255,4 @@ std::vector<GuessStruct> Search::OrderMoves(const GenerateLegalMoves& LegalMoves
 
 	return f_OrderedMoves;
 }
+

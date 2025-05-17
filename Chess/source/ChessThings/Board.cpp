@@ -299,3 +299,7 @@ bool Board::WillCanCastleChange(const uint8_t& PieceType, const uint8_t& BoardSq
 
 	return false;
 }
+
+Move::Move()
+{
+}

@@ -60,7 +60,7 @@ void ZobristHashing::CreateInitialHash()
         uint8_t piece = m_BoardSquare->at(i);
         if (piece != 0)
         {
-            m_Hash ^= ZobristPieces[piece][i]; // XOR the hash with the piece's hash
+            Hash ^= ZobristPieces[piece][i]; // XOR the hash with the piece's hash
         }
     }
 
@@ -68,7 +68,7 @@ void ZobristHashing::CreateInitialHash()
     {
         if (m_CastleAbility[i])//fix the canCastle struct
         {
-            m_Hash ^= ZobristCastlingRights[i]; // XOR the hash with the castling rights
+            Hash ^= ZobristCastlingRights[i]; // XOR the hash with the castling rights
         }
     }
     
@@ -76,13 +76,13 @@ void ZobristHashing::CreateInitialHash()
 	{
 		if (m_LegalMoves->EnPassantFiles[i] == true)
 		{
-			m_Hash ^= ZobristEnPassant[i]; // XOR the hash with the en passant square
+			Hash ^= ZobristEnPassant[i]; // XOR the hash with the en passant square
 		}
 	}
 
 	if (!m_SideToMove)
 	{
-		m_Hash ^= ZobristSideToMove; // XOR the hash with the side to move
+		Hash ^= ZobristSideToMove; // XOR the hash with the side to move
 	}
 }
 
@@ -93,47 +93,47 @@ void ZobristHashing::UpdateHash(const uint8_t& StartingSquare, const uint8_t& mo
 	{
 		if (PieceType == WHITE_KING)
 		{
-			m_Hash ^= ZobristCastlingRights[0];
-			m_Hash ^= ZobristCastlingRights[1];
+			Hash ^= ZobristCastlingRights[0];
+			Hash ^= ZobristCastlingRights[1];
 		}
 		else if (PieceType == WHITE_ROOK)
 		{
 			if (StartingSquare == 0)
 			{
-				m_Hash ^= ZobristCastlingRights[1];
+				Hash ^= ZobristCastlingRights[1];
 			}
 			else
 			{
-				m_Hash ^= ZobristCastlingRights[0];
+				Hash ^= ZobristCastlingRights[0];
 			}
 		}
 		else if (PieceType == BLACK_KING)
 		{
-			m_Hash ^= ZobristCastlingRights[2];
-			m_Hash ^= ZobristCastlingRights[3];
+			Hash ^= ZobristCastlingRights[2];
+			Hash ^= ZobristCastlingRights[3];
 		}
 		else if (PieceType == BLACK_ROOK)
 		{
 			if (StartingSquare == 56)
 			{
-				m_Hash ^= ZobristCastlingRights[3];
+				Hash ^= ZobristCastlingRights[3];
 			}
 			else
 			{
-				m_Hash ^= ZobristCastlingRights[2];
+				Hash ^= ZobristCastlingRights[2];
 			}
 		}
 	}
 
     if (PieceTypeToPromoteTo != 65)
     {
-		m_Hash ^= ZobristPieces[f_PieceType][StartingSquare]; // XOR piece removal
-		m_Hash ^= ZobristPieces[Board::GetPieceType2Uncolored(PieceTypeToPromoteTo)][move]; // XOR placing and promoting
+		Hash ^= ZobristPieces[f_PieceType][StartingSquare]; // XOR piece removal
+		Hash ^= ZobristPieces[Board::GetPieceType2Uncolored(PieceTypeToPromoteTo)][move]; // XOR placing and promoting
 	}
     else
     {
-        m_Hash ^= ZobristPieces[f_PieceType][StartingSquare]; // XOR piece removal
-		m_Hash ^= ZobristPieces[f_PieceType][move]; // XOR placing
+        Hash ^= ZobristPieces[f_PieceType][StartingSquare]; // XOR piece removal
+		Hash ^= ZobristPieces[f_PieceType][move]; // XOR placing
     }
 
 	//castling
@@ -143,26 +143,26 @@ void ZobristHashing::UpdateHash(const uint8_t& StartingSquare, const uint8_t& mo
 		{
 			if (StartingSquare == 4)
 			{
-				m_Hash ^= ZobristPieces[ROOK][7];
-				m_Hash ^= ZobristPieces[ROOK][5];
+				Hash ^= ZobristPieces[ROOK][7];
+				Hash ^= ZobristPieces[ROOK][5];
 			}
 			else
 			{
-				m_Hash ^= ZobristPieces[ROOK][63];
-				m_Hash ^= ZobristPieces[ROOK][61];
+				Hash ^= ZobristPieces[ROOK][63];
+				Hash ^= ZobristPieces[ROOK][61];
 			}
 		}
 		if (StartingSquare - move == 2)
 		{
 			if (StartingSquare == 4)
 			{
-				m_Hash ^= ZobristPieces[ROOK][0];
-				m_Hash ^= ZobristPieces[ROOK][3];
+				Hash ^= ZobristPieces[ROOK][0];
+				Hash ^= ZobristPieces[ROOK][3];
 			}
 			else
 			{
-				m_Hash ^= ZobristPieces[ROOK][56];
-				m_Hash ^= ZobristPieces[ROOK][59];
+				Hash ^= ZobristPieces[ROOK][56];
+				Hash ^= ZobristPieces[ROOK][59];
 			}
 		}
 
@@ -175,7 +175,7 @@ void ZobristHashing::UpdateHash(const uint8_t& StartingSquare, const uint8_t& mo
 		{
 			if (StartingSquare - move == -7 or StartingSquare - move == -9)
 			{
-				m_Hash ^= ZobristPieces[PAWN][move - 8];
+				Hash ^= ZobristPieces[PAWN][move - 8];
 			}
 		}
 	}
@@ -186,14 +186,14 @@ void ZobristHashing::UpdateHash(const uint8_t& StartingSquare, const uint8_t& mo
 		{
 			if (StartingSquare - move == 7 or StartingSquare - move == 9)
 			{
-				m_Hash ^= ZobristPieces[PAWN][move + 8];
+				Hash ^= ZobristPieces[PAWN][move + 8];
 			}
 		}
 	}
 
 	if (WhichFileHadEnPassant != 8)
 	{
-		m_Hash ^= ZobristEnPassant[WhichFileHadEnPassant]; // XOR the hash with the en passant square
+		Hash ^= ZobristEnPassant[WhichFileHadEnPassant]; // XOR the hash with the en passant square
 		WhichFileHadEnPassant = 8; // reset to none
 	}
 
@@ -201,7 +201,7 @@ void ZobristHashing::UpdateHash(const uint8_t& StartingSquare, const uint8_t& mo
 	{
 		if (m_LegalMoves->EnPassantFiles[index] == true)
 		{
-			m_Hash ^= ZobristEnPassant[index]; // XOR the hash with the en passant square
+			Hash ^= ZobristEnPassant[index]; // XOR the hash with the en passant square
 			WhichFileHadEnPassant = index;
 		}
 	}

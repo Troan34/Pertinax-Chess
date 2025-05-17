@@ -28,6 +28,11 @@ constexpr unsigned int BLACK_ROOK = BLACK + ROOK;     //12
 constexpr unsigned int BLACK_QUEEN = BLACK + QUEEN;   //13
 constexpr unsigned int BLACK_KING = BLACK + KING;     //14
 
+constexpr unsigned int LOWER_BOUND = 50; //CUT-NODE, just a random number
+constexpr unsigned int UPPER_BOUND = 100; //ALL-NODE, just a random number
+constexpr unsigned int EXACT = 150; //PV-NODE, just a random number
+
+
 struct canCastle
 {
 	bool HasWhiteLongRookMoved = false, HasWhiteShortRookMoved = false, HasBlackLongRookMoved = false, HasBlackShortRookMoved = false, HasWhiteKingMoved = false, HasBlackKingMoved = false;
@@ -65,9 +70,15 @@ struct CastlingAbility
 
 struct Move
 {
-	uint8_t BoardSquare;
-	uint8_t Move;
-	uint8_t PromotionType = 65;
+	uint8_t s_BoardSquare;
+	uint8_t s_Move;
+	uint8_t s_PromotionType = 65;
+
+	Move(const uint8_t& boardSquare, const uint8_t& move, const uint8_t& promotionType)
+		: s_BoardSquare(boardSquare), s_Move(move), s_PromotionType(promotionType)
+	{
+	}
+	Move();
 };
 
 class Board

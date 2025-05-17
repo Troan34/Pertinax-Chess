@@ -1,46 +1,12 @@
-﻿  Board.cpp
-  Evaluation.cpp
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(56,56): warning C4244: '+=': conversion from 'double' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(60,56): warning C4244: '-=': conversion from 'double' to 'int32_t', possible loss of data
-  Search.cpp
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Search.cpp(17,61): warning C4244: 'argument': conversion from 'const uint16_t' to 'uint8_t', possible loss of data
-  ZobristHashing.cpp
-  LegalMoves.cpp
-  RenderChesspcs.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
-  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
-      C:\Users\roanb\source\repos\Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,11):
-      see previous definition of 'APIENTRY'
-  
-  Main.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
-  (compiling source file 'source/Main.cpp')
-      C:\Users\roanb\source\repos\Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,11):
-      see previous definition of 'APIENTRY'
-  
-  TestTexture2D.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
-  (compiling source file 'source/tests/TestTexture2D.cpp')
-      C:\Users\roanb\source\repos\Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,11):
-      see previous definition of 'APIENTRY'
-  
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3594,56): warning C4244: 'argument': conversion from '_Ty' to 'unsigned int', possible loss of data
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3594,56): warning C4244:         with
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3594,56): warning C4244:         [
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3594,56): warning C4244:             _Ty=unsigned __int64
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3594,56): warning C4244:         ]
-  (compiling source file 'source/tests/TestTexture2D.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3594,56):
-      the template instantiation context (the oldest one first) is
-          C:\Users\roanb\source\repos\Chess\Chess\source\tests\TestTexture2D.cpp(28,25):
-          see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,nullptr,unsigned __int64,0>(nullptr &&,unsigned __int64 &&)' being compiled
-  
+﻿  LegalMoves.cpp
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Engine\Evaluation.h(59): warning C4715: 'Evaluator::ConvertPieceTypeToMatValue': not all control paths return a value
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Board.cpp(243): warning C4715: 'Board::PieceType2letter': not all control paths return a value
 C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Board.cpp(179): warning C4715: 'Board::GetPieceType2Uncolored': not all control paths return a value
-  121 of 4106 functions ( 2.9%) were compiled, the rest were copied from previous compilation.
-    25 functions were new in current compilation
-    49 functions had inline decision re-evaluated but remain unchanged
+C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\LegalMoves.cpp(261): warning C4172: returning address of local variable or temporary : OffsetsForKnight
+  All 4271 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
 glew32s.lib(glew.obj) : warning LNK4099: PDB '' was not found with 'glew32s.lib(glew.obj)' or at ''; linking object as if no debug info
   Chess.vcxproj -> C:\Users\roanb\source\repos\Chess\x64\Release\Chess.exe
