@@ -26,6 +26,9 @@ static std::atomic<bool> ReceivedACommand(false);
 static bool EngineOn = true;
 static uint8_t EngineDepth = 6;
 
+//UCI
+static bool UCImode = false;
+
 RenderChessPieces::RenderChessPieces()
 {
 
@@ -68,9 +71,7 @@ static std::thread CommandThread(GetCommand);
 /*********MAIN FUNCTION*********does quad calculations, calls command thread, drag and drop...**************/
 std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObjects()
 {
-	quads[0] = CreateQuad(-350.0f, -350.0f, 700.0f, 0.0f);
-	float xDifference = 0.0f;
-	float yDifference = 0.0f;
+
 
 
 	//Console Commands and threads
@@ -82,7 +83,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 	}
 
 	//processes commands
-	if (ReceivedACommand == true)  
+	if (ReceivedACommand == true and !UCImode)  
 	{
 		if (Command == "help")
 		{
@@ -150,12 +151,21 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 				std::cout << "Wrong syntax: couldn't understand after 'Engine'\n" << std::endl;
 			}
 		}
+		else if (Command == "uci") //UCI mode
+		{
+			UCImode == true;
+			std::cout <<
+				"id name Pertinax Chess 0.1\n" <<
+				"id author R.Bukaci (github.com/Troan34)\n\n" <<
+				"option name type spin Depth default " << static_cast<int>(EngineDepth) << " min 2 max 255\n" <<
+				"uciok\n";
+		}
 		else
 		{
 			std::cout << "Wrong syntax, couldn't recognize first word\n" << std::endl;
 		}
 
-		if (!IsGetCommandRunning)
+		if (!IsGetCommandRunning and !UCImode)
 		{
 			CommandThread.join();
 			CommandThread = std::thread(GetCommand);
@@ -216,6 +226,10 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 	}
 	
 	//rendering part
+	quads[0] = CreateQuad(-350.0f, -350.0f, 700.0f, 0.0f);
+	float xDifference = 0.0f;
+	float yDifference = 0.0f;
+
  	for (int i = 1; i < 65; i++)
 	{
 		if (xDifference > 650.0f)
