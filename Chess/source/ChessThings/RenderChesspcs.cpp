@@ -21,13 +21,19 @@ static bool WaitingForEnemyMove = false;
 static std::atomic<bool> IsGetCommandRunning = true;
 static std::string Command;
 static std::atomic<bool> ReceivedACommand(false);
+static std::atomic<bool> RunCommandThread(true);
 
 //Engine vars
 static bool EngineOn = true;
 static uint8_t EngineDepth = 6;
 
 //UCI
+static std::thread Thread;
 static bool UCImode = false;
+static void RunUCI()//this is a workaround
+{
+	UCI uci;
+}
 
 RenderChessPieces::RenderChessPieces()
 {
@@ -61,9 +67,14 @@ static void mouseButtonCallBack(GLFWwindow* window, int button, int action, int 
 //waits for a command to be written
 static void GetCommand()
 {
-	std::getline(std::cin, Command);
-	ReceivedACommand = true;
-	IsGetCommandRunning = false;
+	if (RunCommandThread)
+	{
+		std::getline(std::cin, Command);
+		if (Command == "uci")
+			UCImode = true;
+		ReceivedACommand = true;
+		IsGetCommandRunning = false;
+	}
 }
 
 static std::thread CommandThread(GetCommand);
@@ -72,10 +83,8 @@ static std::thread CommandThread(GetCommand);
 std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObjects()
 {
 
-
-
 	//Console Commands and threads
-	if (!IsGetCommandRunning)
+	if (!IsGetCommandRunning and !UCImode)
 	{
 		CommandThread.join();
 		CommandThread = std::thread(GetCommand);
@@ -83,7 +92,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 	}
 
 	//processes commands
-	if (ReceivedACommand == true and !UCImode)  
+	if (ReceivedACommand == true)  
 	{
 		if (Command == "help")
 		{
@@ -153,12 +162,13 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 		}
 		else if (Command == "uci") //UCI mode
 		{
-			UCImode == true;
 			std::cout <<
 				"id name Pertinax Chess 0.1\n" <<
 				"id author R.Bukaci (github.com/Troan34)\n\n" <<
-				"option name type spin Depth default " << static_cast<int>(EngineDepth) << " min 2 max 255\n" <<
-				"uciok\n";
+				"option name type spin depth default " << static_cast<int>(EngineDepth) << " min 2 max 255\n" <<
+				"uciok\n" << std::endl;
+
+			RunCommandThread = false;
 		}
 		else
 		{
@@ -170,6 +180,12 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 			CommandThread.join();
 			CommandThread = std::thread(GetCommand);
 			IsGetCommandRunning = true;
+		}
+
+		if (UCImode)
+		{
+			std::thread Thread(RunUCI);
+			Thread.detach();
 		}
 		ReceivedACommand = false;
 	}
