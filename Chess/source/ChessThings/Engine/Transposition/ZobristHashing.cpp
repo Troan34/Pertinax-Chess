@@ -86,10 +86,10 @@ void ZobristHashing::CreateInitialHash()
 	}
 }
 
-void ZobristHashing::UpdateHash(const uint8_t& StartingSquare, const uint8_t& move, const uint8_t& PieceType, const uint8_t& PieceTypeToPromoteTo)
+void ZobristHashing::UpdateHash(Move Move_, const uint8_t& PieceType)
 {
 	uint8_t f_PieceType = Board::GetPieceType2Uncolored(PieceType);
-	if (Board::WillCanCastleChange(PieceType, StartingSquare, move))
+	if (Board::WillCanCastleChange(PieceType, Move_.s_BoardSquare, Move_.s_Move))
 	{
 		if (PieceType == WHITE_KING)
 		{
@@ -98,7 +98,7 @@ void ZobristHashing::UpdateHash(const uint8_t& StartingSquare, const uint8_t& mo
 		}
 		else if (PieceType == WHITE_ROOK)
 		{
-			if (StartingSquare == 0)
+			if (Move_.s_BoardSquare == 0)
 			{
 				Hash ^= ZobristCastlingRights[1];
 			}
@@ -114,7 +114,7 @@ void ZobristHashing::UpdateHash(const uint8_t& StartingSquare, const uint8_t& mo
 		}
 		else if (PieceType == BLACK_ROOK)
 		{
-			if (StartingSquare == 56)
+			if (Move_.s_BoardSquare == 56)
 			{
 				Hash ^= ZobristCastlingRights[3];
 			}
@@ -125,23 +125,32 @@ void ZobristHashing::UpdateHash(const uint8_t& StartingSquare, const uint8_t& mo
 		}
 	}
 
+	uint8_t PieceTypeToPromoteTo = 65;
+	if (Move_.s_PromotionType < 9)
+	{
+		if (Board::IsPieceColorWhite(m_BoardSquare->at(Move_.s_BoardSquare)) and Move_.s_PromotionType != 65)
+			PieceTypeToPromoteTo = Move_.s_PromotionType + WHITE;
+		else
+			PieceTypeToPromoteTo = Move_.s_PromotionType + BLACK;
+	}
+
     if (PieceTypeToPromoteTo != 65)
     {
-		Hash ^= ZobristPieces[f_PieceType][StartingSquare]; // XOR piece removal
-		Hash ^= ZobristPieces[Board::GetPieceType2Uncolored(PieceTypeToPromoteTo)][move]; // XOR placing and promoting
+		Hash ^= ZobristPieces[f_PieceType][Move_.s_BoardSquare]; // XOR piece removal
+		Hash ^= ZobristPieces[Board::GetPieceType2Uncolored(PieceTypeToPromoteTo)][Move_.s_Move]; // XOR placing and promoting
 	}
     else
     {
-        Hash ^= ZobristPieces[f_PieceType][StartingSquare]; // XOR piece removal
-		Hash ^= ZobristPieces[f_PieceType][move]; // XOR placing
+        Hash ^= ZobristPieces[f_PieceType][Move_.s_BoardSquare]; // XOR piece removal
+		Hash ^= ZobristPieces[f_PieceType][Move_.s_Move]; // XOR placing
     }
 
 	//castling
 	if (f_PieceType == KING)
 	{
-		if (StartingSquare - move == -2)
+		if (Move_.s_BoardSquare - Move_.s_Move == -2)
 		{
-			if (StartingSquare == 4)
+			if (Move_.s_BoardSquare == 4)
 			{
 				Hash ^= ZobristPieces[ROOK][7];
 				Hash ^= ZobristPieces[ROOK][5];
@@ -152,9 +161,9 @@ void ZobristHashing::UpdateHash(const uint8_t& StartingSquare, const uint8_t& mo
 				Hash ^= ZobristPieces[ROOK][61];
 			}
 		}
-		if (StartingSquare - move == 2)
+		if (Move_.s_BoardSquare - Move_.s_Move == 2)
 		{
-			if (StartingSquare == 4)
+			if (Move_.s_BoardSquare == 4)
 			{
 				Hash ^= ZobristPieces[ROOK][0];
 				Hash ^= ZobristPieces[ROOK][3];
@@ -171,22 +180,22 @@ void ZobristHashing::UpdateHash(const uint8_t& StartingSquare, const uint8_t& mo
 	//white en passant
 	if (PieceType == WHITE_PAWN)
 	{
-		if (m_PreviousBoardSquare->at(move) == 0)
+		if (m_PreviousBoardSquare->at(Move_.s_Move) == 0)
 		{
-			if (StartingSquare - move == -7 or StartingSquare - move == -9)
+			if (Move_.s_BoardSquare - Move_.s_Move == -7 or Move_.s_BoardSquare - Move_.s_Move == -9)
 			{
-				Hash ^= ZobristPieces[PAWN][move - 8];
+				Hash ^= ZobristPieces[PAWN][Move_.s_Move - 8];
 			}
 		}
 	}
 	//Black en passant
 	if (PieceType == BLACK_PAWN)
 	{
-		if (m_PreviousBoardSquare->at(move) == 0)
+		if (m_PreviousBoardSquare->at(Move_.s_Move) == 0)
 		{
-			if (StartingSquare - move == 7 or StartingSquare - move == 9)
+			if (Move_.s_BoardSquare - Move_.s_Move == 7 or Move_.s_BoardSquare - Move_.s_Move == 9)
 			{
-				Hash ^= ZobristPieces[PAWN][move + 8];
+				Hash ^= ZobristPieces[PAWN][Move_.s_Move + 8];
 			}
 		}
 	}

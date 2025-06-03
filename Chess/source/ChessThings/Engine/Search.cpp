@@ -13,16 +13,20 @@ Search::~Search()
 {
 }
 
-std::pair<std::pair<uint8_t, uint8_t>, uint8_t> Search::GetBestMove()
+Move Search::GetBestMove()
 {
 	auto start = std::chrono::high_resolution_clock::now();
+
 	NegaMax(m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum, m_depth, -INT32_MAX, INT32_MAX);
-	std::pair<uint8_t, uint8_t> pair(m_BestBoardPos, m_BestMove);
-	std::pair<std::pair<uint8_t, uint8_t>, uint8_t> ppair(pair, m_BestPromotion);
+
+	Move BestMove(m_BestBoardPos, m_BestMove, m_BestPromotion);
+
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+
 	std::cout << "Found move in " << duration.count() << " ms" << '\n' << std::endl;
-	return ppair;
+
+	return BestMove;
 }
 
 int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta)
@@ -80,7 +84,8 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 
 		bool IsWhite = Board::IsPieceColorWhite(BoardSquare[Guess.BoardSquare]);
 
-		MakeMove(LegalMoves, m_Hash, Guess.BoardSquare, Guess.Move, BoardSquare, previousBoardSquare, CanCastle, Guess.PromotionType);
+		Move Move_(Guess.BoardSquare, Guess.Move, Guess.PromotionType);
+		MakeMove(LegalMoves, m_Hash,Move_, BoardSquare, previousBoardSquare, CanCastle);
 
 		Evaluation = std::max(Evaluation, -NegaMax(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha));
 		alpha = std::max(alpha, Evaluation);
@@ -121,20 +126,20 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 	return alpha;
 }
 
-void Search::MakeMove(const GenerateLegalMoves& LegalMoves, std::unique_ptr<ZobristHashing>& Hash, const uint8_t& BoardSquare, const uint8_t& move, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle, const uint8_t& PieceTypeToPromoteTo)
+void Search::MakeMove(const GenerateLegalMoves& LegalMoves, std::unique_ptr<ZobristHashing>& Hash, Move Move_, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle)
 {
-	Hash->UpdateHash(BoardSquare, move, fun_BoardSquare[BoardSquare], PieceTypeToPromoteTo);
+	Hash->UpdateHash(Move_, fun_BoardSquare[Move_.s_BoardSquare]);
 
 	fun_previousBoardSquare = fun_BoardSquare;
-	Board::WillCanCastleChange(fun_BoardSquare[BoardSquare], BoardSquare, move, Castle);
-	fun_BoardSquare[move] = fun_BoardSquare[BoardSquare];
+	Board::WillCanCastleChange(fun_BoardSquare[Move_.s_BoardSquare], Move_.s_BoardSquare, Move_.s_Move, Castle);
+	fun_BoardSquare[Move_.s_Move] = fun_BoardSquare[Move_.s_BoardSquare];
 
 	//castling
-	if (fun_BoardSquare[BoardSquare] == WHITE_KING or fun_BoardSquare[BoardSquare] == BLACK_KING)
+	if (fun_BoardSquare[Move_.s_BoardSquare] == WHITE_KING or fun_BoardSquare[Move_.s_BoardSquare] == BLACK_KING)
 	{
-		if (BoardSquare - move == -2)
+		if (Move_.s_BoardSquare - Move_.s_Move == -2)
 		{
-			if (BoardSquare == 4)
+			if (Move_.s_BoardSquare == 4)
 			{
 				fun_BoardSquare[5] = WHITE_ROOK;
 				fun_BoardSquare[7] = 0;
@@ -145,9 +150,9 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, std::unique_ptr<Zobr
 				fun_BoardSquare[63] = 0;
 			}
 		}
-		if (BoardSquare - move == 2)
+		if (Move_.s_BoardSquare - Move_.s_Move == 2)
 		{
-			if (BoardSquare == 4)
+			if (Move_.s_BoardSquare == 4)
 			{
 				fun_BoardSquare[3] = WHITE_ROOK;
 				fun_BoardSquare[0] = 0;
@@ -161,41 +166,50 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, std::unique_ptr<Zobr
 
 	}
 
+	uint8_t PieceTypeToPromoteTo = 65;
+	if (Move_.s_PromotionType < 9)//put this so ALG2MOVE doesn't break anything
+	{
+		if (Board::IsPieceColorWhite(fun_BoardSquare[Move_.s_BoardSquare]) and Move_.s_PromotionType != 65)
+			PieceTypeToPromoteTo = Move_.s_PromotionType + WHITE;
+		else
+			PieceTypeToPromoteTo = Move_.s_PromotionType + BLACK;
+	}
+
 	//promoting and en passant
 	if (PieceTypeToPromoteTo != 65)
 	{
-		fun_BoardSquare[move] = PieceTypeToPromoteTo;
+		fun_BoardSquare[Move_.s_Move] = PieceTypeToPromoteTo;
 	}
 	else//optimization
 	{
 		//White en passant
-		if (fun_BoardSquare[BoardSquare] == WHITE_PAWN)
+		if (fun_BoardSquare[Move_.s_BoardSquare] == WHITE_PAWN)
 		{
-			if (fun_previousBoardSquare[move] == 0)
+			if (fun_previousBoardSquare[Move_.s_Move] == 0)
 			{
-				if (BoardSquare - move == -7 or BoardSquare - move == -9)
+				if (Move_.s_BoardSquare - Move_.s_Move == -7 or Move_.s_BoardSquare - Move_.s_Move == -9)
 				{
-					fun_BoardSquare[move - 8] = 0;
+					fun_BoardSquare[Move_.s_Move - 8] = 0;
 				}
 			}
 		}
 		//Black en passant
-		if (fun_BoardSquare[BoardSquare] == BLACK_PAWN)
+		if (fun_BoardSquare[Move_.s_BoardSquare] == BLACK_PAWN)
 		{
-			if (fun_previousBoardSquare[move] == 0)
+			if (fun_previousBoardSquare[Move_.s_Move] == 0)
 			{
-				if (BoardSquare - move == 7 or BoardSquare - move == 9)
+				if (Move_.s_BoardSquare - Move_.s_Move == 7 or Move_.s_BoardSquare - Move_.s_Move == 9)
 				{
-					fun_BoardSquare[move + 8] = 0;
+					fun_BoardSquare[Move_.s_Move + 8] = 0;
 				}
 			}
 		}
 	}
 
-	fun_BoardSquare[BoardSquare] = 0;
+	fun_BoardSquare[Move_.s_BoardSquare] = 0;
 
 	GenerateLegalMoves::SetDoNotEnPassant(false);
-	if (abs(BoardSquare - move) == 16 and LegalMoves.WhichBoardSquaresAreAbsPinned[move] != 65)
+	if (abs(Move_.s_BoardSquare - Move_.s_Move) == 16 and LegalMoves.WhichBoardSquaresAreAbsPinned[Move_.s_Move] != 65)
 	{
 		GenerateLegalMoves::SetDoNotEnPassant(true);
 	}

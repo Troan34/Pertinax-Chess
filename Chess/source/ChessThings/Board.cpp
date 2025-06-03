@@ -131,7 +131,7 @@ uint32_t Board::GetPawnMoveSquare()
 	return ALG2BoardSquareConverter(PawnMove);
 }
 
-uint32_t Board::ALG2BoardSquareConverter(const std::string& ALG)
+uint8_t Board::ALG2BoardSquareConverter(const std::string& ALG)
 {
 	uint8_t file = 0;
 	uint8_t rank = 0;
@@ -166,6 +166,38 @@ uint32_t Board::ALG2BoardSquareConverter(const std::string& ALG)
 	rank = ALG[1] - '0' - 1;
 
 	return rank * 8 + file;
+}
+
+Move Board::LongALG2Move(const std::string& ALG)
+{
+	Move TranslatedMove;
+
+	TranslatedMove.s_BoardSquare = ALG2BoardSquareConverter(ALG.substr(0, 2));
+	TranslatedMove.s_Move = ALG2BoardSquareConverter(ALG.substr(2, 2));
+	
+	if (!isdigit(ALG.back()))
+	{
+		//this WON'T work, make other functions check if the promotiontype is their color
+		switch (ALG.back())
+		{
+		case 'q':
+			TranslatedMove.s_PromotionType = QUEEN;
+			break;
+		case 'r':
+			TranslatedMove.s_PromotionType = ROOK;
+			break;
+		case 'b':
+			TranslatedMove.s_PromotionType = BISHOP;
+			break;
+		case 'n':
+			TranslatedMove.s_PromotionType = KNIGHT;
+			break;
+		default:
+			ASSERT(false);
+		}
+	}
+
+	return TranslatedMove;
 }
 
 uint8_t Board::GetPieceType2Uncolored(const uint8_t& PieceType)

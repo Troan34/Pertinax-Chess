@@ -231,9 +231,9 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 	if (WaitingForEnemyMove and EngineOn and !WaitingForUserPromotion)
 	{
 		Search search(static_BoardSquare, previousBoardsquare, CanCastle, EngineDepth, MoveNum);
-		std::pair<std::pair<uint8_t, uint8_t>, uint8_t> BestMove = search.GetBestMove();
+		Move BestMove = search.GetBestMove();
 		GenerateLegalMoves LegalMoves(static_BoardSquare, &previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, false);
-		MakeMove(LegalMoves, BestMove.first.first , BestMove.first.second, static_BoardSquare, previousBoardsquare, CanCastle, BestMove.second);
+		MakeMove(LegalMoves, BestMove, static_BoardSquare, previousBoardsquare, CanCastle);
 		WaitingForEnemyMove = false;
 		MoveNum++;
 		isNextMoveForWhite = true;
@@ -665,11 +665,14 @@ uint32_t RenderChessPieces::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::
 					}
 					else
 					{
+						Move Move_(count, move);
 
 						if (IsWhite)
-							MakeMove(LegalMoves, count, move, BoardSquare, perftPreviousBoardSquare, CanCastle, i + 18);
+							Move_.s_PromotionType = i + 18;
 						else
-							MakeMove(LegalMoves, count, move, BoardSquare, perftPreviousBoardSquare, CanCastle, i + 10);
+							Move_.s_PromotionType = i + 10;
+
+						MakeMove(LegalMoves, Move_ , BoardSquare, perftPreviousBoardSquare, CanCastle);
 						if (DivideFunON)
 						{
 							uint32_t DivideFunNum = 0;
@@ -710,8 +713,9 @@ uint32_t RenderChessPieces::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::
 			}
 			else
 			{
-
-				MakeMove(LegalMoves, count, move, BoardSquare, perftPreviousBoardSquare, CanCastle, 65);
+				Move Move_(count, move);
+				
+				MakeMove(LegalMoves, Move_, BoardSquare, perftPreviousBoardSquare, CanCastle);
 				if (DivideFunON)
 				{
 					uint32_t DivideFunNum = 0;
@@ -733,18 +737,28 @@ uint32_t RenderChessPieces::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::
 	return NumOfMoves;
 }
 
-void RenderChessPieces::MakeMove(const GenerateLegalMoves& LegalMoves, const uint8_t& BoardSquare, const uint8_t& move, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle, const uint8_t& PieceTypeToPromoteTo)
+void RenderChessPieces::MakeMove(const GenerateLegalMoves& LegalMoves, Move move, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle)
 {
 	fun_previousBoardSquare = fun_BoardSquare;
-	Board::WillCanCastleChange(fun_BoardSquare[BoardSquare], BoardSquare, move, Castle);
-	fun_BoardSquare[move] = fun_BoardSquare[BoardSquare];
+	Board::WillCanCastleChange(fun_BoardSquare[move.s_BoardSquare], move.s_BoardSquare, move.s_Move, Castle);
+	fun_BoardSquare[move.s_Move] = fun_BoardSquare[move.s_BoardSquare];
+
+	uint8_t PieceTypeToPromoteTo = 65;
+
+	if (move.s_PromotionType < 9)
+	{
+		if (Board::IsPieceColorWhite(fun_BoardSquare[move.s_BoardSquare]) and move.s_PromotionType != 65)
+			PieceTypeToPromoteTo = move.s_PromotionType + WHITE;
+		else
+			PieceTypeToPromoteTo = move.s_PromotionType + BLACK;
+	}
 
 	//castling
-	if (fun_BoardSquare[BoardSquare] == WHITE_KING or fun_BoardSquare[BoardSquare] == BLACK_KING)
+	if (fun_BoardSquare[move.s_BoardSquare] == WHITE_KING or fun_BoardSquare[move.s_BoardSquare] == BLACK_KING)
 	{
-		if (BoardSquare - move == -2)
+		if (move.s_BoardSquare - move.s_Move == -2)
 		{
-			if (BoardSquare == 4)
+			if (move.s_BoardSquare == 4)
 			{
 				fun_BoardSquare[5] = WHITE_ROOK;
 				fun_BoardSquare[7] = 0;
@@ -755,9 +769,9 @@ void RenderChessPieces::MakeMove(const GenerateLegalMoves& LegalMoves, const uin
 				fun_BoardSquare[63] = 0;
 			}
 		}
-		if (BoardSquare - move == 2)
+		if (move.s_BoardSquare - move.s_Move == 2)
 		{
-			if (BoardSquare == 4)
+			if (move.s_BoardSquare == 4)
 			{
 				fun_BoardSquare[3] = WHITE_ROOK;
 				fun_BoardSquare[0] = 0;
@@ -774,38 +788,38 @@ void RenderChessPieces::MakeMove(const GenerateLegalMoves& LegalMoves, const uin
 	//promoting and en passant
 	if (PieceTypeToPromoteTo != 65)
 	{
-		fun_BoardSquare[move] = PieceTypeToPromoteTo;
+		fun_BoardSquare[move.s_Move] = PieceTypeToPromoteTo;
 	}
 	else//optimization
 	{
 		//White en passant
-		if (fun_BoardSquare[BoardSquare] == WHITE_PAWN)
+		if (fun_BoardSquare[move.s_BoardSquare] == WHITE_PAWN)
 		{
-			if (fun_previousBoardSquare[move] == 0)
+			if (fun_previousBoardSquare[move.s_Move] == 0)
 			{
-				if (BoardSquare - move == -7 or BoardSquare - move == -9)
+				if (move.s_BoardSquare - move.s_Move == -7 or move.s_BoardSquare - move.s_Move == -9)
 				{
-					fun_BoardSquare[move - 8] = 0;
+					fun_BoardSquare[move.s_Move - 8] = 0;
 				}
 			}
 		}
 		//Black en passant
-		if (fun_BoardSquare[BoardSquare] == BLACK_PAWN)
+		if (fun_BoardSquare[move.s_BoardSquare] == BLACK_PAWN)
 		{
-			if (fun_previousBoardSquare[move] == 0)
+			if (fun_previousBoardSquare[move.s_Move] == 0)
 			{
-				if (BoardSquare - move == 7 or BoardSquare - move == 9)
+				if (move.s_BoardSquare - move.s_Move == 7 or move.s_BoardSquare - move.s_Move == 9)
 				{
-					fun_BoardSquare[move + 8] = 0;
+					fun_BoardSquare[move.s_Move + 8] = 0;
 				}
 			}
 		}
 	}
 
-	fun_BoardSquare[BoardSquare] = 0;
+	fun_BoardSquare[move.s_BoardSquare] = 0;
 	
 	GenerateLegalMoves::SetDoNotEnPassant(false);
-	if (abs(BoardSquare - move) == 16 and LegalMoves.WhichBoardSquaresAreAbsPinned[move] != 65)
+	if (abs(move.s_BoardSquare - move.s_Move) == 16 and LegalMoves.WhichBoardSquaresAreAbsPinned[move.s_Move] != 65)
 	{
 		GenerateLegalMoves::SetDoNotEnPassant(true);
 	}
