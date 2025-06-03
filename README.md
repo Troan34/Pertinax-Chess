@@ -1,4 +1,14 @@
-Chess bot, OpenGL (minimum 4.0) based on TheCherno's series.
-This is basically my first "actual project", even tho i don't know c++ in depth, i hope i will be able to learn from this multi-month project.
-I WILL receive criticism as long as it's constructive.
-And yeah that's all, i will maybe add an explanation on how the project is structured.
+This is a Chess game, that has an UCI compatible engine made by myself.
+
+Engine features:
+Negamax with alpha-beta pruning
+TT(no hash limit, for the moment)
+UCI
+
+Requirements:
+OpenGL 4.0 (or higher)
+A way to execute an .exe (Windows, Wine...)
+
+Help:
+Run program(TODO: make it runnable) and press on the "pertinax" box, now you have the rendered window and the terminal one.
+On terminal type 'help' for help
