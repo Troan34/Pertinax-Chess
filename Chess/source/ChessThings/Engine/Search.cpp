@@ -270,3 +270,15 @@ std::vector<GuessStruct> Search::OrderMoves(const GenerateLegalMoves& LegalMoves
 	return f_OrderedMoves;
 }
 
+void Search::CheckAndResizeTT(std::unordered_map<uint64_t, TranspositionTable>& TT, size_t TTsize)
+{
+	if (sizeof(TT) < (TTsize * 1000000))
+	{
+		return;
+	}
+	else //TODO:Always replaced type, make tweaks(extra-TODO: test suite)
+	{
+
+	}
+}
+

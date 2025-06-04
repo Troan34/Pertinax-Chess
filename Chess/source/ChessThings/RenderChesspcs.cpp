@@ -32,7 +32,10 @@ static std::thread Thread;
 static bool UCImode = false;
 static void RunUCI()//this is a workaround
 {
-	UCI uci;
+	UciVars_p Vars_p;
+	Vars_p.depth = &EngineDepth;
+	Vars_p.EngineOn = &EngineOn;
+	UCI uci(Vars_p);
 }
 
 RenderChessPieces::RenderChessPieces()
@@ -166,6 +169,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 				"id name Pertinax Chess 0.1\n" <<
 				"id author R.Bukaci (github.com/Troan34)\n\n" <<
 				"option name type spin depth default " << static_cast<int>(EngineDepth) << " min 2 max 255\n" <<
+				"option name type button EngineOn default On\n"
 				"uciok\n" << std::endl;
 
 			RunCommandThread = false;
