@@ -35,6 +35,8 @@ static void RunUCI()//this is a workaround
 	UciVars_p Vars_p;
 	Vars_p.depth = &EngineDepth;
 	Vars_p.EngineOn = &EngineOn;
+	Vars_p.BoardSquare = &static_BoardSquare;
+	Vars_p.MoveNum = &MoveNum;
 	UCI uci(Vars_p);
 }
 

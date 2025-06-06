@@ -32,6 +32,8 @@ constexpr unsigned int LOWER_BOUND = 50; //CUT-NODE, just a random number
 constexpr unsigned int UPPER_BOUND = 100; //ALL-NODE, just a random number
 constexpr unsigned int EXACT = 150; //PV-NODE, just a random number
 
+constexpr std::string_view STARTPOS = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
 
 struct canCastle
 {
@@ -94,12 +96,13 @@ private:
 	size_t IndexOfCastling;//before castling ability
 	size_t IndexOfEnPassant;//before en passant
 	size_t IndexOfHalfmoveClock;//before halfmove clock
-	size_t IndexOfFullMoveCounter;//before halfmove clock
+	size_t IndexOfFullMoveCounter;//end of FEN
 
 
 public:
 	Board(const std::string& FenString);
 	std::array<uint8_t, 64> GetPositionFromFEN();
+	static std::array<uint8_t, 64> GetPositionFromFEN(const std::string& FenString);
 	uint32_t MoveNum();
 	canCastle GetCanCastle();
 	uint32_t GetPawnMoveSquare();

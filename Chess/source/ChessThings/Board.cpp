@@ -44,6 +44,47 @@ std::array<uint8_t, 64> Board::GetPositionFromFEN()
 	return BoardSquare;
 }
 
+std::array<uint8_t, 64> Board::GetPositionFromFEN(const std::string& Fen)
+{
+	size_t IndexOfSideToMove = Fen.find(' ');
+	size_t IndexOfCastling = Fen.find(' ', IndexOfSideToMove + 1);
+	size_t IndexOfEnPassant = Fen.find(' ', IndexOfCastling + 1);
+	size_t IndexOfHalfmoveClock = Fen.find(' ', IndexOfEnPassant + 1);
+	size_t IndexOfFullMoveCounter = Fen.find(' ', IndexOfHalfmoveClock + 1);
+
+	std::array<uint8_t, 64> BoardSquare;
+	BoardSquare.fill(0);
+
+	std::unordered_map <char, unsigned int> PieceTypeFromChar =
+	{
+		{'k', KING}, {'q', QUEEN}, {'b', BISHOP}, {'r', ROOK}, {'p', PAWN}, {'n', KNIGHT}
+	};
+	std::string FenPiecePlacement = Fen.substr(0, IndexOfSideToMove);
+
+	unsigned int file = 0, rank = 7;
+	for (char character : FenPiecePlacement)
+	{
+		if (character == '/')
+		{
+			file = 0;
+			rank -= 1;
+		}
+		else if (isdigit(character))
+		{
+			file += character - '0';
+		}
+		else
+		{
+			unsigned int PieceColor = isupper(character) ? WHITE : BLACK;
+			unsigned int PieceType = PieceTypeFromChar[tolower(character)];
+			BoardSquare[static_cast<std::array<unsigned int, 64Ui64>::size_type>(rank) * 8 + file] = PieceType | PieceColor;
+			file += 1;
+
+		}
+	}
+	return BoardSquare;
+}
+
 uint32_t Board::MoveNum()
 {
 	std::string FullMove = FEN.substr(IndexOfFullMoveCounter + 1, std::string::npos);

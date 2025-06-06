@@ -10,6 +10,8 @@
 #include "ChessThings/Board.h"
 #include "ChessThings/RenderChesspcs.h"
 
+Board board{ "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" };
+
 namespace test {
 	TestTexture2D::TestTexture2D()
 		:m_Proj(glm::ortho(0.0f, 1280.0f, 0.0f, 720.0f, -1.0f, 1.0f)),

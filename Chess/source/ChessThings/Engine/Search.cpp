@@ -276,7 +276,8 @@ void Search::CheckAndResizeTT(std::unordered_map<uint64_t, TranspositionTable>& 
 	{
 		return;
 	}
-	else //TODO:Always replaced type, make tweaks(extra-TODO: test suite)
+	else //TODO:Always replaced type, make tweaks(extra-TODO: test suite) 
+		 //i am surprised by how hard it is to think about something that won't be REALLY slow
 	{
 
 	}
