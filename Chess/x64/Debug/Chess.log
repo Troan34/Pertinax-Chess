@@ -1,4 +1,2 @@
-﻿  Board.cpp
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Board.cpp(252,1): warning C4715: 'Board::GetPieceType2Uncolored': not all control paths return a value
-C:\Users\roanb\source\repos\Chess\Chess\source\ChessThings\Board.cpp(316,1): warning C4715: 'Board::PieceType2letter': not all control paths return a value
+﻿  UCI.cpp
   Chess.vcxproj -> C:\Users\roanb\source\repos\Chess\x64\Debug\Chess.exe

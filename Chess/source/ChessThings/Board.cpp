@@ -373,6 +373,187 @@ bool Board::WillCanCastleChange(const uint8_t& PieceType, const uint8_t& BoardSq
 	return false;
 }
 
+void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t EnpassantIndex, canCastle Castle)
+{
+	Board::WillCanCastleChange(BoardSquare[move.s_BoardSquare], move.s_BoardSquare, move.s_Move, Castle);
+	BoardSquare[move.s_Move] = BoardSquare[move.s_BoardSquare];
+
+	uint8_t PieceTypeToPromoteTo = 65;
+
+	if (move.s_PromotionType < 9)
+	{
+		if (Board::IsPieceColorWhite(BoardSquare[move.s_BoardSquare]) and move.s_PromotionType != 65)
+			PieceTypeToPromoteTo = move.s_PromotionType + WHITE;
+		else
+			PieceTypeToPromoteTo = move.s_PromotionType + BLACK;
+	}
+	else
+	{
+		PieceTypeToPromoteTo = move.s_PromotionType;
+	}
+
+	//castling
+	if (BoardSquare[move.s_BoardSquare] == WHITE_KING or BoardSquare[move.s_BoardSquare] == BLACK_KING)
+	{
+		if (move.s_BoardSquare - move.s_Move == -2)
+		{
+			if (move.s_BoardSquare == 4)
+			{
+				BoardSquare[5] = WHITE_ROOK;
+				BoardSquare[7] = 0;
+			}
+			else
+			{
+				BoardSquare[61] = BLACK_ROOK;
+				BoardSquare[63] = 0;
+			}
+		}
+		if (move.s_BoardSquare - move.s_Move == 2)
+		{
+			if (move.s_BoardSquare == 4)
+			{
+				BoardSquare[3] = WHITE_ROOK;
+				BoardSquare[0] = 0;
+			}
+			else
+			{
+				BoardSquare[59] = BLACK_ROOK;
+				BoardSquare[56] = 0;
+			}
+		}
+
+	}
+
+	//promoting and en passant
+	if (PieceTypeToPromoteTo != 65)
+	{
+		BoardSquare[move.s_Move] = PieceTypeToPromoteTo;
+	}
+	else//optimization
+	{
+		//White en passant
+		if (BoardSquare[move.s_BoardSquare] == WHITE_PAWN)
+		{
+			if (move.s_BoardSquare == EnpassantIndex)
+			{
+				BoardSquare[move.s_Move - 8] = 0;
+			}
+		}
+		//Black en passant
+		if (BoardSquare[move.s_BoardSquare] == BLACK_PAWN)
+		{
+			if (move.s_BoardSquare == EnpassantIndex)
+			{
+				BoardSquare[move.s_Move + 8] = 0;
+			}
+		}
+	}
+
+	BoardSquare[move.s_BoardSquare] = 0;
+
+	/*not having this causes a bug where a pawn enpassanting does an illegal move
+	GenerateLegalMoves::SetDoNotEnPassant(false);
+	if (abs(move.s_BoardSquare - move.s_Move) == 16 and LegalMoves.WhichBoardSquaresAreAbsPinned[move.s_Move] != 65)
+	{
+		GenerateLegalMoves::SetDoNotEnPassant(true);
+	}
+	*/
+}
+
+void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, std::array<uint8_t, 64>& previousBoardSquare, canCastle Castle)
+{
+	previousBoardSquare = BoardSquare;
+	Board::WillCanCastleChange(BoardSquare[move.s_BoardSquare], move.s_BoardSquare, move.s_Move, Castle);
+	BoardSquare[move.s_Move] = BoardSquare[move.s_BoardSquare];
+
+	uint8_t PieceTypeToPromoteTo = 65;
+
+	if (move.s_PromotionType < 9)
+	{
+		if (Board::IsPieceColorWhite(BoardSquare[move.s_BoardSquare]) and move.s_PromotionType != 65)
+			PieceTypeToPromoteTo = move.s_PromotionType + WHITE;
+		else
+			PieceTypeToPromoteTo = move.s_PromotionType + BLACK;
+	}
+	else
+	{
+		PieceTypeToPromoteTo = move.s_PromotionType;
+	}
+
+	//castling
+	if (BoardSquare[move.s_BoardSquare] == WHITE_KING or BoardSquare[move.s_BoardSquare] == BLACK_KING)
+	{
+		if (move.s_BoardSquare - move.s_Move == -2)
+		{
+			if (move.s_BoardSquare == 4)
+			{
+				BoardSquare[5] = WHITE_ROOK;
+				BoardSquare[7] = 0;
+			}
+			else
+			{
+				BoardSquare[61] = BLACK_ROOK;
+				BoardSquare[63] = 0;
+			}
+		}
+		if (move.s_BoardSquare - move.s_Move == 2)
+		{
+			if (move.s_BoardSquare == 4)
+			{
+				BoardSquare[3] = WHITE_ROOK;
+				BoardSquare[0] = 0;
+			}
+			else
+			{
+				BoardSquare[59] = BLACK_ROOK;
+				BoardSquare[56] = 0;
+			}
+		}
+
+	}
+
+	//promoting and en passant
+	if (PieceTypeToPromoteTo != 65)
+	{
+		BoardSquare[move.s_Move] = PieceTypeToPromoteTo;
+	}
+	else//optimization
+	{
+		//White en passant
+		if (BoardSquare[move.s_BoardSquare] == WHITE_PAWN)
+		{
+			if (previousBoardSquare[move.s_Move] == 0)
+			{
+				if (move.s_BoardSquare - move.s_Move == -7 or move.s_BoardSquare - move.s_Move == -9)
+				{
+					BoardSquare[move.s_Move - 8] = 0;
+				}
+			}
+		}
+		//Black en passant
+		if (BoardSquare[move.s_BoardSquare] == BLACK_PAWN)
+		{
+			if (previousBoardSquare[move.s_Move] == 0)
+			{
+				if (move.s_BoardSquare - move.s_Move == 7 or move.s_BoardSquare - move.s_Move == 9)
+				{
+					BoardSquare[move.s_Move + 8] = 0;
+				}
+			}
+		}
+	}
+
+	BoardSquare[move.s_BoardSquare] = 0;
+
+	/*not having this causes a bug where a pawn enpassanting does an illegal move
+	GenerateLegalMoves::SetDoNotEnPassant(false);
+	if (abs(move.s_BoardSquare - move.s_Move) == 16 and LegalMoves.WhichBoardSquaresAreAbsPinned[move.s_Move] != 65)
+	{
+		GenerateLegalMoves::SetDoNotEnPassant(true);
+	}
+	*/
+}
+
 Move::Move()
 {
 }

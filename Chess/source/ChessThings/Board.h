@@ -106,13 +106,15 @@ public:
 	uint32_t MoveNum();
 	canCastle GetCanCastle();
 	uint32_t GetPawnMoveSquare();
-	uint8_t ALG2BoardSquareConverter(const std::string& ALG);
-	Move LongALG2Move(const std::string& ALG);
+	static uint8_t ALG2BoardSquareConverter(const std::string& ALG);
+	static Move LongALG2Move(const std::string& ALG);
 	static uint8_t GetPieceType2Uncolored(const uint8_t& PieceType);
 	static CastlingAbility canCastle2CastlingAbility(const canCastle& Castle);
 	static bool IsPieceColorWhite(const uint8_t& BoardSquareValue);
 	static char PieceType2letter(const uint8_t& PieceType);
 	static void WillCanCastleChange(const uint8_t& PieceTypeThatMoved, const uint8_t& BoardSquareItMovedFrom, const uint8_t& BoardSquareItMovedTo, canCastle& Castle);
 	static bool WillCanCastleChange(const uint8_t& PieceTypeThatMoved, const uint8_t& BoardSquareItMovedFrom, const uint8_t& BoardSquareItMovedTo);
+	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t EnpassantIndex, canCastle Castle);
+	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, std::array<uint8_t, 64>& previousBoardSquare, canCastle Castle);
 
 };

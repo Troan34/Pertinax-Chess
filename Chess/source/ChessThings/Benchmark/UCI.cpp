@@ -46,16 +46,29 @@ void UCI::RunCommand()
 		}
 		else
 		{
-			if (Command.find("moves") != std::string::npos)
+			if (Command.find(FEN_COMMAND, 8) != std::string::npos)
 			{
-				//Finish this
-			}
-			else 
-			{
-				auto Fen = Command.substr(8, std::string::npos);
-				Board board{ Fen };
-				*Vars_p.BoardSquare = board.GetPositionFromFEN();
-				*Vars_p.MoveNum = board.MoveNum();
+				if (Command.find("moves") != std::string::npos)
+				{
+					size_t Index = Command.find(' ', Command.find("moves"));
+
+					while (true)
+					{
+						if (Index > SIZE_MAX - 20)//if Index overflowed, it means we are at the end of string
+							break;
+						Move move = Board::LongALG2Move(Command.substr(Index + 1, Command.find(' ', Index + 1)));
+						Index = Command.find(' ', Index + 1);//will overflow when it reaches the end
+						Board::MakeMove(move, *Vars_p.BoardSquare, *Vars_p.previousBoardSquare, *Vars_p.CanCastle);
+						*Vars_p.MoveNum += 1;
+					}
+				}
+				else
+				{
+					auto Fen = Command.substr(8, std::string::npos);
+					Board board{ Fen };
+					*Vars_p.BoardSquare = board.GetPositionFromFEN();
+					*Vars_p.MoveNum = board.MoveNum();
+				}
 			}
 
 		}

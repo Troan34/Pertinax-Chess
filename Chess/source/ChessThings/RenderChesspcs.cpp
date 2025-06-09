@@ -37,6 +37,8 @@ static void RunUCI()//this is a workaround
 	Vars_p.EngineOn = &EngineOn;
 	Vars_p.BoardSquare = &static_BoardSquare;
 	Vars_p.MoveNum = &MoveNum;
+	Vars_p.previousBoardSquare = &previousBoardsquare;
+	Vars_p.CanCastle = &CanCastle;
 	UCI uci(Vars_p);
 }
 
@@ -757,6 +759,10 @@ void RenderChessPieces::MakeMove(const GenerateLegalMoves& LegalMoves, Move move
 			PieceTypeToPromoteTo = move.s_PromotionType + WHITE;
 		else
 			PieceTypeToPromoteTo = move.s_PromotionType + BLACK;
+	}
+	else
+	{
+		PieceTypeToPromoteTo = move.s_PromotionType;
 	}
 
 	//castling
