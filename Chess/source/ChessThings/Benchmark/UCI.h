@@ -20,7 +20,7 @@ struct UciVars_p
 	uint8_t* depth;
 	bool* EngineOn;
 	std::array<uint8_t, 64Ui64>* BoardSquare;
-	std::array<uint8_t, 64Ui64>* previousBoardSquare;
+	std::array<uint8_t, 64Ui64>* previousBoardSquare;//also used to 'simulate' an e.p. opportunity
 	uint32_t* MoveNum;
 	canCastle* CanCastle;
 };

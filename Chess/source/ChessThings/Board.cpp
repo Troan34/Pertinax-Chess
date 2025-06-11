@@ -12,6 +12,8 @@ Board::Board(const std::string& FenString)
 
 }
 
+
+//VV from fen to normal values funs VV
 std::array<uint8_t, 64> Board::GetPositionFromFEN()
 {
 	std::unordered_map <char, unsigned int> PieceTypeFromChar =
@@ -85,6 +87,7 @@ std::array<uint8_t, 64> Board::GetPositionFromFEN(const std::string& Fen)
 	return BoardSquare;
 }
 
+//get the fullmove num(doubled to be compatible with the rest)
 uint32_t Board::MoveNum()
 {
 	std::string FullMove = FEN.substr(IndexOfFullMoveCounter + 1, std::string::npos);
@@ -97,6 +100,7 @@ uint32_t Board::MoveNum()
 		return (std::stoul(FullMove) * 2) - 1;
 }
 
+//get castling abilities
 canCastle Board::GetCanCastle()
 {
 	canCastle CanCastle{};
@@ -162,7 +166,8 @@ canCastle Board::GetCanCastle()
 	return CanCastle;
 }
 
-uint32_t Board::GetPawnMoveSquare()
+//get the boardsquare where an e.p. is possible, 65 if not
+uint8_t Board::GetPawnMoveSquare()
 {
 	const std::string PawnMove = FEN.substr(++IndexOfEnPassant, IndexOfHalfmoveClock - IndexOfEnPassant - 1);
 
@@ -172,6 +177,8 @@ uint32_t Board::GetPawnMoveSquare()
 	return ALG2BoardSquareConverter(PawnMove);
 }
 
+
+//VV general (mostly traduction) funs VV
 uint8_t Board::ALG2BoardSquareConverter(const std::string& ALG)
 {
 	uint8_t file = 0;
@@ -552,6 +559,24 @@ void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, std::array
 		GenerateLegalMoves::SetDoNotEnPassant(true);
 	}
 	*/
+}
+
+std::array<uint8_t, 64> Board::PrevBoardSquareFromEP(const std::array<uint8_t, 64>& BoardSquare, uint8_t EPBoardsquare)
+{
+	ASSERT(!(EPBoardsquare == 65));
+	std::array<uint8_t, 64> previousBoardSquare = BoardSquare;
+
+	previousBoardSquare[EPBoardsquare] = 0;
+	if (Board::IsPieceColorWhite(BoardSquare[EPBoardsquare]))
+	{
+		previousBoardSquare[EPBoardsquare - 8] = WHITE_PAWN;
+	}
+	else 
+	{
+		previousBoardSquare[EPBoardsquare + 8] = BLACK_PAWN;
+	}
+
+	return previousBoardSquare;
 }
 
 Move::Move()

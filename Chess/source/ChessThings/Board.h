@@ -105,7 +105,7 @@ public:
 	static std::array<uint8_t, 64> GetPositionFromFEN(const std::string& FenString);
 	uint32_t MoveNum();
 	canCastle GetCanCastle();
-	uint32_t GetPawnMoveSquare();
+	uint8_t GetPawnMoveSquare();
 	static uint8_t ALG2BoardSquareConverter(const std::string& ALG);
 	static Move LongALG2Move(const std::string& ALG);
 	static uint8_t GetPieceType2Uncolored(const uint8_t& PieceType);
@@ -116,5 +116,6 @@ public:
 	static bool WillCanCastleChange(const uint8_t& PieceTypeThatMoved, const uint8_t& BoardSquareItMovedFrom, const uint8_t& BoardSquareItMovedTo);
 	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t EnpassantIndex, canCastle Castle);
 	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, std::array<uint8_t, 64>& previousBoardSquare, canCastle Castle);
+	static std::array<uint8_t, 64> PrevBoardSquareFromEP(const std::array<uint8_t, 64>& BoardSquare, uint8_t EPBoardsquare);
 
 };

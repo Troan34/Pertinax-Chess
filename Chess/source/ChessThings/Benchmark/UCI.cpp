@@ -23,17 +23,11 @@ void UCI::RunCommand()
 				*Vars_p.depth = Command[21] - '0';
 			}
 
-
 		}
 
 		if (Command.substr(15, 8) == ENGINE_ON_COMMAND)
 			*Vars_p.EngineOn = !*Vars_p.EngineOn;
 
-
-
-		//
-		//TODO: do all the commands AND how to access those variables from this class
-		//
 	}
 
 	if (Command.find(POSITION_COMMAND) != std::string::npos)
@@ -42,12 +36,26 @@ void UCI::RunCommand()
 		{
 			Board board{ std::string(STARTPOS) };
 			*Vars_p.BoardSquare = board.GetPositionFromFEN();
-			*Vars_p.MoveNum = 0;
+			*Vars_p.MoveNum = board.MoveNum();
+			if (board.GetPawnMoveSquare() != 65)
+			{
+				*Vars_p.previousBoardSquare = Board::PrevBoardSquareFromEP(*Vars_p.BoardSquare, board.GetPawnMoveSquare());
+			}
 		}
 		else
 		{
 			if (Command.find(FEN_COMMAND, 8) != std::string::npos)
 			{
+				auto Fen = Command.substr(8, std::string::npos);
+				Board board{ Fen };
+				*Vars_p.BoardSquare = board.GetPositionFromFEN();
+				*Vars_p.BoardSquare = board.GetPositionFromFEN();
+				*Vars_p.MoveNum = board.MoveNum();
+				if (board.GetPawnMoveSquare() != 65)
+				{
+					*Vars_p.previousBoardSquare = Board::PrevBoardSquareFromEP(*Vars_p.BoardSquare, board.GetPawnMoveSquare());
+				}
+
 				if (Command.find("moves") != std::string::npos)
 				{
 					size_t Index = Command.find(' ', Command.find("moves"));
@@ -61,13 +69,6 @@ void UCI::RunCommand()
 						Board::MakeMove(move, *Vars_p.BoardSquare, *Vars_p.previousBoardSquare, *Vars_p.CanCastle);
 						*Vars_p.MoveNum += 1;
 					}
-				}
-				else
-				{
-					auto Fen = Command.substr(8, std::string::npos);
-					Board board{ Fen };
-					*Vars_p.BoardSquare = board.GetPositionFromFEN();
-					*Vars_p.MoveNum = board.MoveNum();
 				}
 			}
 
