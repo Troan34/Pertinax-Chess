@@ -87,6 +87,19 @@ struct Move
 	Move();
 };
 
+struct Timer
+{
+	uint32_t WTime;
+	uint32_t BTime;
+	uint32_t WIncrement;
+	uint32_t BIncrement;
+
+	Timer(uint32_t WTime_inms, uint32_t BTime_inms, uint32_t WIncrement_inms, uint32_t BIncrement_inms)
+		:WTime(WTime_inms), BTime(BTime_inms), WIncrement(WIncrement_inms), BIncrement(BIncrement_inms)
+	{
+	}
+};
+
 class Board
 {
 private:

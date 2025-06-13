@@ -1,21 +1,17 @@
 #include "RenderChesspcs.h"
-static MouseInput g_mouseInput;
 
 static float RememberTexID;
-static std::array<uint8_t, 64Ui64> static_BoardSquare;
 static bool wasStatic_BoardSquareCreated = false;
-static std::array<uint8_t, 64Ui64> previousBoardsquare;
 static bool wasStatic_previousBoardsquareCreated = false;
 
 //(mostly) Drop fun vars
-static unsigned int MoveNum = 0;
-static canCastle CanCastle;
 static int BoardSquareBeingSelected = -1;
 int AttackedSquare = -1;
 std::unordered_set<uint8_t> LegalMovesForSelectedSquare;
 static bool WaitingForUserPromotion = false;
 static uint8_t rememberAttackedSquareForUserPromotion;
 static bool WaitingForEnemyMove = false;
+static MouseInput g_mouseInput;
 
 //multithreading vars
 static std::atomic<bool> IsGetCommandRunning = true;
@@ -23,13 +19,21 @@ static std::string Command;
 static std::atomic<bool> ReceivedACommand(false);
 static std::atomic<bool> RunCommandThread(true);
 
-//Engine vars
-static bool EngineOn = true;
-static uint8_t EngineDepth = 6;
-
 //UCI
 static std::thread Thread;
 static bool UCImode = false;
+
+//Vars shared with UCI
+static unsigned int MoveNum = 0;
+static canCastle CanCastle;
+static std::array<uint8_t, 64Ui64> static_BoardSquare;
+static std::array<uint8_t, 64Ui64> previousBoardsquare;
+	//Engine vars
+	static bool EngineOn = true;
+	static uint8_t EngineDepth = 6;
+	static std::vector<Move> SearchMoves;
+	static Timer timer;
+
 static void RunUCI()//this is a workaround
 {
 	UciVars_p Vars_p;
@@ -39,6 +43,8 @@ static void RunUCI()//this is a workaround
 	Vars_p.MoveNum = &MoveNum;
 	Vars_p.previousBoardSquare = &previousBoardsquare;
 	Vars_p.CanCastle = &CanCastle;
+	Vars_p.SearchMoves = &SearchMoves;
+	Vars_p.timer = &timer;
 	UCI uci(Vars_p);
 }
 

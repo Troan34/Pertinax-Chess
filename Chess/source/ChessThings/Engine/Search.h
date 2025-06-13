@@ -40,6 +40,8 @@ private:
 	const canCastle m_CanCastle;
 	const uint8_t m_depth;
 	const uint16_t m_MoveNum;
+	const std::vector<Move> m_SearchMoves;
+
 	uint8_t m_BestMove;
 	uint8_t m_BestBoardPos;
 	uint8_t m_BestPromotion = 65;
@@ -54,6 +56,7 @@ private:
 public:
 
 	Search(std::array<uint8_t, 64> BoardSquare, std::array<uint8_t, 64> PreviousBoardSquare, canCastle CanCastle, uint8_t depth, uint16_t MoveNum);
+	Search(std::array<uint8_t, 64> BoardSquare, std::array<uint8_t, 64> PreviousBoardSquare, canCastle CanCastle, uint8_t depth, uint16_t MoveNum, std::vector<Move> SearchMoves);
 	~Search();
 	Move GetBestMove();
 

@@ -9,22 +9,29 @@ Search::Search(std::array<uint8_t, 64> BoardSquare, std::array<uint8_t, 64> Prev
 	m_Hash = std::make_unique<ZobristHashing>(&LegalMoves, &BoardSquare, &PreviousBoardSquare, CanCastle, MoveNum);
 }
 
+Search::Search(std::array<uint8_t, 64> BoardSquare, std::array<uint8_t, 64> PreviousBoardSquare, canCastle CanCastle, uint8_t depth, uint16_t MoveNum, std::vector<Move> SearchMoves)
+	:m_BoardSquare(BoardSquare), m_PreviousBoardSquare(PreviousBoardSquare), m_CanCastle(CanCastle), m_depth(depth), m_MoveNum(MoveNum), m_SearchMoves(SearchMoves)
+{
+	GenerateLegalMoves LegalMoves(m_BoardSquare, &m_PreviousBoardSquare, m_CanCastle, (MoveNum % 2 != 0) ? false : true, MoveNum, false);
+	m_Hash = std::make_unique<ZobristHashing>(&LegalMoves, &BoardSquare, &PreviousBoardSquare, CanCastle, MoveNum);
+}
+
 Search::~Search()
 {
 }
 
 Move Search::GetBestMove()
 {
-	auto start = std::chrono::high_resolution_clock::now();
+	//auto start = std::chrono::high_resolution_clock::now();
 
 	NegaMax(m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum, m_depth, -INT32_MAX, INT32_MAX);
 
 	Move BestMove(m_BestBoardPos, m_BestMove, m_BestPromotion);
 
-	auto stop = std::chrono::high_resolution_clock::now();
-	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+	//auto stop = std::chrono::high_resolution_clock::now();
+	//auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 
-	std::cout << "Found move in " << duration.count() << " ms" << '\n' << std::endl;
+	//std::cout << "Found move in " << duration.count() << " ms" << '\n' << std::endl;
 
 	return BestMove;
 }
@@ -221,42 +228,63 @@ std::vector<GuessStruct> Search::OrderMoves(const GenerateLegalMoves& LegalMoves
 {
 	std::vector<GuessStruct> f_OrderedMoves;
 	uint8_t count = 0;
+	bool flag = false;
 
 	for (MOVE piece : LegalMoves.moves)
 	{
-		for (const uint8_t& move : piece.TargetSquares)
+
+		if (!m_SearchMoves.empty())
 		{
-			for (uint8_t i = 0; i != 3; ++i)
+			for (Move move_ : m_SearchMoves)
 			{
-				int16_t GuessedEval = 0;
-				bool IsWhite = Board::IsPieceColorWhite(fun_BoardSquare[count]);
-				if (fun_BoardSquare[move] != NONE)
+				if (move_.s_BoardSquare == count)
 				{
-					GuessedEval += (10 * Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[move])) - Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[count]);
+					count++;
+					flag = true;
+					break;
 				}
+			}
+		}
+		else {
+			flag = true;
+		}
 
-				if (LegalMoves.AttackedSquares[move])
+		if (flag)
+		{
+			for (const uint8_t& move : piece.TargetSquares)
+			{
+				for (uint8_t i = 0; i != 3; ++i)
 				{
-					GuessedEval -= Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[count]);
-				}
-
-				if ((piece.Promotion[0] != 65 and piece.Promotion[0] == move) or (piece.Promotion[1] != 65 and piece.Promotion[1] == move) or (piece.Promotion[2] != 65 and piece.Promotion[2] == move))
-				{
-					if (IsWhite)
+					int16_t GuessedEval = 0;
+					bool IsWhite = Board::IsPieceColorWhite(fun_BoardSquare[count]);
+					if (fun_BoardSquare[move] != NONE)
 					{
-						piece.Promotion[move - count - 7] = 65;
-						GuessedEval += Evaluator::ConvertPieceTypeToMatValue(i + 18);
+						GuessedEval += (10 * Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[move])) - Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[count]);
 					}
-					else
-					{
-						piece.Promotion[move - count + 9] = 65;
-						GuessedEval += Evaluator::ConvertPieceTypeToMatValue(i + 10);
-					}
-					f_OrderedMoves.emplace_back(count, move, (IsWhite ? i + 18 : i + 10), GuessedEval);
-					continue;
-				}
 
-                f_OrderedMoves.emplace_back(count, move, 65, GuessedEval);
+					if (LegalMoves.AttackedSquares[move])
+					{
+						GuessedEval -= Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[count]);
+					}
+
+					if ((piece.Promotion[0] != 65 and piece.Promotion[0] == move) or (piece.Promotion[1] != 65 and piece.Promotion[1] == move) or (piece.Promotion[2] != 65 and piece.Promotion[2] == move))
+					{
+						if (IsWhite)
+						{
+							piece.Promotion[move - count - 7] = 65;
+							GuessedEval += Evaluator::ConvertPieceTypeToMatValue(i + 18);
+						}
+						else
+						{
+							piece.Promotion[move - count + 9] = 65;
+							GuessedEval += Evaluator::ConvertPieceTypeToMatValue(i + 10);
+						}
+						f_OrderedMoves.emplace_back(count, move, (IsWhite ? i + 18 : i + 10), GuessedEval);
+						continue;
+					}
+
+					f_OrderedMoves.emplace_back(count, move, 65, GuessedEval);
+				}
 			}
 		}
 		count++;

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -135,7 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\ChessThings\Benchmark\UCI.cpp" />
+    <ClCompile Include="source\ChessThings\UCI\UCI.cpp" />
     <ClCompile Include="source\ChessThings\Board.cpp" />
     <ClCompile Include="source\ChessThings\Engine\Evaluation.cpp" />
     <ClCompile Include="source\ChessThings\Engine\Search.cpp" />
@@ -182,7 +182,7 @@
     <Image Include="res\textures\wr.png" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\ChessThings\Benchmark\UCI.h" />
+    <ClInclude Include="source\ChessThings\UCI\UCI.h" />
     <ClInclude Include="source\ChessThings\Board.h" />
     <ClInclude Include="source\ChessThings\Engine\Evaluation.h" />
     <ClInclude Include="source\ChessThings\Engine\Search.h" />

@@ -12,6 +12,11 @@ constexpr std::string_view ENGINE_ON_COMMAND = "EngineOn";
 constexpr std::string_view POSITION_COMMAND = "position";
 constexpr std::string_view STARTPOS_COMMAND = "startpos";
 constexpr std::string_view FEN_COMMAND = "fen";
+constexpr std::string_view UCINEWGAME_COMMAND = "ucinewgame";
+
+//go commands
+constexpr std::string_view GO_COMMAND = "go";
+constexpr std::string_view SEARCHMOVES_COMMAND = "searchmoves";
 
 
 
@@ -23,6 +28,8 @@ struct UciVars_p
 	std::array<uint8_t, 64Ui64>* previousBoardSquare;//also used to 'simulate' an e.p. opportunity
 	uint32_t* MoveNum;
 	canCastle* CanCastle;
+	std::vector<Move>* SearchMoves;
+	Timer* timer;
 };
 
 class UCI

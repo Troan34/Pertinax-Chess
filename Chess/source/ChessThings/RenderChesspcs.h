@@ -17,7 +17,7 @@
 #include <windows.h>
 #include <future>
 #include "ChessThings/Engine/Search.h"
-#include "ChessThings/Benchmark/UCI.h"
+#include "ChessThings/UCI/UCI.h"
 
 
 struct MouseInput
