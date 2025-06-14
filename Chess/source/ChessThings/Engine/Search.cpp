@@ -1,6 +1,6 @@
 #include "Search.h"
 
-static std::unordered_map<uint64_t, TranspositionTable> TranspositionTableMap;
+static TranspositionTable TT;
 
 Search::Search(std::array<uint8_t, 64> BoardSquare, std::array<uint8_t, 64> PreviousBoardSquare, canCastle CanCastle, uint8_t depth, uint16_t MoveNum)
 	:m_BoardSquare(BoardSquare), m_PreviousBoardSquare(PreviousBoardSquare), m_CanCastle(CanCastle), m_depth(depth), m_MoveNum(MoveNum)
@@ -38,31 +38,17 @@ Move Search::GetBestMove()
 
 int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta)
 {
-	//Search the TT
-	auto TTentry = TranspositionTableMap.find(m_Hash->Hash);
-	if (TTentry != TranspositionTableMap.end())
+	//Probe TT
+	int32_t Eval_Temp;
+	TT.TTprobe(alpha, beta, Eval_Temp, m_Hash->Hash, depth);
+	if (alpha >= beta)
 	{
-		if (TTentry->second.Hash == m_Hash->Hash and TTentry->second.Depth >= depth)
-		{
-			if (TTentry->second.BoundType == EXACT)
-			{
-				return TTentry->second.Evaluation;
-			}
-			else if (TTentry->second.BoundType == LOWER_BOUND)
-			{
-				alpha = std::max(alpha, TTentry->second.Evaluation);
-			}
-			else if (TTentry->second.BoundType == UPPER_BOUND)
-			{
-				beta = std::min(beta, TTentry->second.Evaluation);
-			}
-		}
-		if (alpha >= beta)
-		{
-			return alpha;//prune
-		}
+		return alpha;//prune
 	}
-	
+	if (Eval_Temp != NOT_FOUND_EXACT_BOUND_FLAG)
+	{
+		return Eval_Temp;
+	}
 
 	int Evaluation;
 
@@ -98,14 +84,14 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 		alpha = std::max(alpha, Evaluation);
 
 		//Transposition table
-		TranspositionTable newTTentry;
+		TTEntry newTTentry;
 		newTTentry.Hash = m_Hash->Hash;
 		newTTentry.Depth = depth;
 		newTTentry.Evaluation = Evaluation;
 		newTTentry.BoundType = (Evaluation <= alpha) ? UPPER_BOUND :
 			(Evaluation >= beta) ? LOWER_BOUND : EXACT;
 		newTTentry.BestMove = Move(Guess.BoardSquare, Guess.Move, Guess.PromotionType);
-		TranspositionTableMap[m_Hash->Hash] = newTTentry;
+		TT[m_Hash->Hash] = newTTentry;//create a .save() in TT(.h)
 
 		if (alpha >= beta)
 		{ 
@@ -310,4 +296,3 @@ void Search::CheckAndResizeTT(std::unordered_map<uint64_t, TranspositionTable>& 
 
 	}
 }
-

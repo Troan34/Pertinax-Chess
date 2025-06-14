@@ -24,10 +24,11 @@
     <ClCompile Include="source\CreateQuadDynamic.cpp" />
     <ClCompile Include="source\ChessThings\RenderChesspcs.cpp" />
     <ClCompile Include="source\ChessThings\LegalMoves.cpp" />
-    <ClCompile Include="source\ChessThings\Engine\Search.cpp" />
     <ClCompile Include="source\ChessThings\Engine\Evaluation.cpp" />
     <ClCompile Include="source\ChessThings\Engine\Transposition\ZobristHashing.cpp" />
-    <ClCompile Include="source\ChessThings\Benchmark\UCI.cpp" />
+    <ClCompile Include="source\ChessThings\UCI\UCI.cpp" />
+    <ClCompile Include="source\ChessThings\Engine\Search.cpp" />
+    <ClCompile Include="source\ChessThings\Engine\Transposition\TT.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\bb.png" />
@@ -363,7 +364,8 @@
     <ClInclude Include="source\ChessThings\Engine\Evaluation.h" />
     <ClInclude Include="source\ChessThings\Engine\Search.h" />
     <ClInclude Include="source\ChessThings\Engine\Transposition\ZobristHashing.h" />
-    <ClInclude Include="source\ChessThings\Benchmark\UCI.h" />
+    <ClInclude Include="source\ChessThings\UCI\UCI.h" />
+    <ClInclude Include="source\ChessThings\Engine\Transposition\TT.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="source\vendor\glm\detail\func_common.inl" />

@@ -2,6 +2,7 @@
 #include "ChessThings/Board.h"
 #include "ChessThings/Engine/Evaluation.h"
 #include "ChessThings/Engine/Transposition/ZobristHashing.h"
+#include "ChessThings/Engine/Transposition/TT.h"
 #include <iostream>
 #include <algorithm>
 #include <chrono>
@@ -22,15 +23,7 @@ struct GuessStruct
 	}
 };
 
-struct TranspositionTable
-{
-	uint64_t Hash;
-	Move BestMove;
-	uint8_t BoundType;
-	int32_t Evaluation;
-	uint8_t Depth;
-	
-};
+
 
 class Search {
 private:
