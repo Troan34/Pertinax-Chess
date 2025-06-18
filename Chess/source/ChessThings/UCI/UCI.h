@@ -5,18 +5,18 @@
 #include <thread>
 
 //options
-constexpr std::string_view DEPTH_COMMAND = "depth";
-constexpr std::string_view ENGINE_ON_COMMAND = "EngineOn";
+static constexpr std::string_view DEPTH_COMMAND = "depth";
+static constexpr std::string_view ENGINE_ON_COMMAND = "EngineOn";
 
 //go and other position commands
-constexpr std::string_view POSITION_COMMAND = "position";
-constexpr std::string_view STARTPOS_COMMAND = "startpos";
-constexpr std::string_view FEN_COMMAND = "fen";
-constexpr std::string_view UCINEWGAME_COMMAND = "ucinewgame";
+static constexpr std::string_view POSITION_COMMAND = "position";
+static constexpr std::string_view STARTPOS_COMMAND = "startpos";
+static constexpr std::string_view FEN_COMMAND = "fen";
+static constexpr std::string_view UCINEWGAME_COMMAND = "ucinewgame";
 
 //go commands
-constexpr std::string_view GO_COMMAND = "go";
-constexpr std::string_view SEARCHMOVES_COMMAND = "searchmoves";
+static constexpr std::string_view GO_COMMAND = "go";
+static constexpr std::string_view SEARCHMOVES_COMMAND = "searchmoves";
 
 
 

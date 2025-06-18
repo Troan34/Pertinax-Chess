@@ -5,35 +5,35 @@
 #include <Renderer.h>
 #include <cmath>
 
-constexpr unsigned int NONE = 0;
-constexpr unsigned int PAWN = 1;
-constexpr unsigned int BISHOP = 2;
-constexpr unsigned int KNIGHT = 3;
-constexpr unsigned int ROOK = 4;
-constexpr unsigned int QUEEN = 5;
-constexpr unsigned int KING = 6;
+static constexpr unsigned int NONE = 0;
+static constexpr unsigned int PAWN = 1;
+static constexpr unsigned int BISHOP = 2;
+static constexpr unsigned int KNIGHT = 3;
+static constexpr unsigned int ROOK = 4;
+static constexpr unsigned int QUEEN = 5;
+static constexpr unsigned int KING = 6;
 
-constexpr unsigned int WHITE = 16;
-constexpr unsigned int BLACK = 8;
+static constexpr unsigned int WHITE = 16;
+static constexpr unsigned int BLACK = 8;
 
-constexpr unsigned int WHITE_PAWN = WHITE + PAWN;     //17
-constexpr unsigned int WHITE_BISHOP = WHITE + BISHOP; //18
-constexpr unsigned int WHITE_KNIGHT = WHITE + KNIGHT; //19
-constexpr unsigned int WHITE_ROOK = WHITE + ROOK;     //20
-constexpr unsigned int WHITE_QUEEN = WHITE + QUEEN;   //21
-constexpr unsigned int WHITE_KING = WHITE + KING;     //22
-constexpr unsigned int BLACK_PAWN = BLACK + PAWN;     //9
-constexpr unsigned int BLACK_BISHOP = BLACK + BISHOP; //10
-constexpr unsigned int BLACK_KNIGHT = BLACK + KNIGHT; //11
-constexpr unsigned int BLACK_ROOK = BLACK + ROOK;     //12
-constexpr unsigned int BLACK_QUEEN = BLACK + QUEEN;   //13
-constexpr unsigned int BLACK_KING = BLACK + KING;     //14
+static constexpr unsigned int WHITE_PAWN = WHITE + PAWN;     //17
+static constexpr unsigned int WHITE_BISHOP = WHITE + BISHOP; //18
+static constexpr unsigned int WHITE_KNIGHT = WHITE + KNIGHT; //19
+static constexpr unsigned int WHITE_ROOK = WHITE + ROOK;     //20
+static constexpr unsigned int WHITE_QUEEN = WHITE + QUEEN;   //21
+static constexpr unsigned int WHITE_KING = WHITE + KING;     //22
+static constexpr unsigned int BLACK_PAWN = BLACK + PAWN;     //9
+static constexpr unsigned int BLACK_BISHOP = BLACK + BISHOP; //10
+static constexpr unsigned int BLACK_KNIGHT = BLACK + KNIGHT; //11
+static constexpr unsigned int BLACK_ROOK = BLACK + ROOK;     //12
+static constexpr unsigned int BLACK_QUEEN = BLACK + QUEEN;   //13
+static constexpr unsigned int BLACK_KING = BLACK + KING;     //14
 
-constexpr unsigned int LOWER_BOUND = 50; //CUT-NODE, just a random number
-constexpr unsigned int UPPER_BOUND = 100; //ALL-NODE, just a random number
-constexpr unsigned int EXACT = 150; //PV-NODE, just a random number
+static constexpr unsigned int LOWER_BOUND = 50; //CUT-NODE, just a random number
+static constexpr unsigned int UPPER_BOUND = 100; //ALL-NODE, just a random number
+static constexpr unsigned int EXACT = 150; //PV-NODE, just a random number
 
-constexpr std::string_view STARTPOS = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+static constexpr std::string_view STARTPOS = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 
 struct canCastle
