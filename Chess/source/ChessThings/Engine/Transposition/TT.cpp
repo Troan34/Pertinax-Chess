@@ -1,5 +1,13 @@
 #include "ChessThings/Engine/Transposition/TT.h"
 
+
+
+TranspositionTable::TranspositionTable(size_t TTSize)
+	:HashSize(TTSize)
+{
+	TT.reserve(floor(HashSize / SIZE_OF_HASHMAP_ELEMENT));
+}
+
 void TranspositionTable::TTprobe(int32_t& alpha, int32_t& beta, int32_t& eval, const uint64_t& Hash, const uint8_t& depth)
 {
 	auto TTentry = TT.find(Hash);
@@ -25,6 +33,18 @@ void TranspositionTable::TTprobe(int32_t& alpha, int32_t& beta, int32_t& eval, c
 }
 
 void TranspositionTable::AddEntry(const TTEntry& Entry, uint64_t Hash)
+{
+	if (HashSize > TT.size())
+	{
+		TT[Hash] = Entry;
+	}
+	else
+	{
+
+	}
+}
+
+void TranspositionTable::ResizeTT()
 {
 
 }

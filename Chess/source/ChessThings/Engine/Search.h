@@ -7,7 +7,6 @@
 #include <algorithm>
 #include <chrono>
 
-
 struct GuessStruct
 {
 	uint8_t BoardSquare;
@@ -24,7 +23,6 @@ struct GuessStruct
 };
 
 
-
 class Search {
 private:
 	std::unique_ptr<ZobristHashing> m_Hash;
@@ -34,6 +32,8 @@ private:
 	const uint8_t m_depth;
 	const uint16_t m_MoveNum;
 	const std::vector<Move> m_SearchMoves;
+	size_t HashSize;
+	static TranspositionTable TT;
 
 	uint8_t m_BestMove;
 	uint8_t m_BestBoardPos;
@@ -43,13 +43,10 @@ private:
 	int NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle,uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta );
 	void MakeMove(const GenerateLegalMoves& LegalMoves, std::unique_ptr<ZobristHashing>& Hash, Move Move_, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle);
 	std::vector<GuessStruct> OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& fun_BoardSquare);
-	void CheckAndResizeTT(std::unordered_map<uint64_t, TranspositionTable>& TT, size_t TTsize);
-
 
 public:
 
-	Search(std::array<uint8_t, 64> BoardSquare, std::array<uint8_t, 64> PreviousBoardSquare, canCastle CanCastle, uint8_t depth, uint16_t MoveNum);
-	Search(std::array<uint8_t, 64> BoardSquare, std::array<uint8_t, 64> PreviousBoardSquare, canCastle CanCastle, uint8_t depth, uint16_t MoveNum, std::vector<Move> SearchMoves);
+	Search(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint8_t& depth, const uint16_t& MoveNum, std::vector<Move>& SearchMoves, const size_t& HashSize);
 	~Search();
 	Move GetBestMove();
 

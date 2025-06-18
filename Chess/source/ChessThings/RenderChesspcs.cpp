@@ -31,8 +31,9 @@ static std::array<uint8_t, 64Ui64> previousBoardsquare;
 	//Engine vars
 	static bool EngineOn = true;
 	static uint8_t EngineDepth = 6;
-	static std::vector<Move> SearchMoves;
+	static std::vector<Move> SearchMoves{};
 	static Timer timer;
+	static size_t HashSize;
 
 static void RunUCI()//this is a workaround
 {
@@ -244,7 +245,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 	//Make engine move
 	if (WaitingForEnemyMove and EngineOn and !WaitingForUserPromotion)
 	{
-		Search search(static_BoardSquare, previousBoardsquare, CanCastle, EngineDepth, MoveNum);
+		Search search(static_BoardSquare, previousBoardsquare, CanCastle, EngineDepth, MoveNum, SearchMoves, HashSize);
 		Move BestMove = search.GetBestMove();
 		GenerateLegalMoves LegalMoves(static_BoardSquare, &previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, false);
 		MakeMove(LegalMoves, BestMove, static_BoardSquare, previousBoardsquare, CanCastle);

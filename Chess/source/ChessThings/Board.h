@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <array>
 #include <Renderer.h>
+#include <cmath>
 
 constexpr unsigned int NONE = 0;
 constexpr unsigned int PAWN = 1;
@@ -98,6 +99,7 @@ struct Timer
 		:WTime(WTime_inms), BTime(BTime_inms), WIncrement(WIncrement_inms), BIncrement(BIncrement_inms)
 	{
 	}
+	Timer()
 };
 
 class Board

@@ -1,19 +1,14 @@
 #include "Search.h"
 
-static TranspositionTable TT;
 
-Search::Search(std::array<uint8_t, 64> BoardSquare, std::array<uint8_t, 64> PreviousBoardSquare, canCastle CanCastle, uint8_t depth, uint16_t MoveNum)
-	:m_BoardSquare(BoardSquare), m_PreviousBoardSquare(PreviousBoardSquare), m_CanCastle(CanCastle), m_depth(depth), m_MoveNum(MoveNum)
+
+
+Search::Search(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint8_t& depth, const uint16_t& MoveNum, std::vector<Move>& SearchMoves, const size_t& HashSize)
+	:m_BoardSquare(BoardSquare), m_PreviousBoardSquare(PreviousBoardSquare), m_CanCastle(CanCastle), m_depth(depth), m_MoveNum(MoveNum), m_SearchMoves(SearchMoves), HashSize(HashSize)
 {
 	GenerateLegalMoves LegalMoves(m_BoardSquare, &m_PreviousBoardSquare, m_CanCastle, (MoveNum % 2 != 0) ? false : true, MoveNum, false);
 	m_Hash = std::make_unique<ZobristHashing>(&LegalMoves, &BoardSquare, &PreviousBoardSquare, CanCastle, MoveNum);
-}
-
-Search::Search(std::array<uint8_t, 64> BoardSquare, std::array<uint8_t, 64> PreviousBoardSquare, canCastle CanCastle, uint8_t depth, uint16_t MoveNum, std::vector<Move> SearchMoves)
-	:m_BoardSquare(BoardSquare), m_PreviousBoardSquare(PreviousBoardSquare), m_CanCastle(CanCastle), m_depth(depth), m_MoveNum(MoveNum), m_SearchMoves(SearchMoves)
-{
-	GenerateLegalMoves LegalMoves(m_BoardSquare, &m_PreviousBoardSquare, m_CanCastle, (MoveNum % 2 != 0) ? false : true, MoveNum, false);
-	m_Hash = std::make_unique<ZobristHashing>(&LegalMoves, &BoardSquare, &PreviousBoardSquare, CanCastle, MoveNum);
+	TT = TranspositionTable(HashSize);
 }
 
 Search::~Search()
@@ -83,7 +78,7 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 		Evaluation = std::max(Evaluation, -NegaMax(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha));
 		alpha = std::max(alpha, Evaluation);
 
-		//Transposition table
+		//Make a TT entry
 		TTEntry newTTentry;
 		newTTentry.Hash = m_Hash->Hash;
 		newTTentry.Depth = depth;
@@ -91,7 +86,7 @@ int Search::NegaMax(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 		newTTentry.BoundType = (Evaluation <= alpha) ? UPPER_BOUND :
 			(Evaluation >= beta) ? LOWER_BOUND : EXACT;
 		newTTentry.BestMove = Move(Guess.BoardSquare, Guess.Move, Guess.PromotionType);
-		TT[m_Hash->Hash] = newTTentry;//create a .save() in TT(.h)
+		TT.AddEntry(newTTentry, m_Hash->Hash);
 
 		if (alpha >= beta)
 		{ 
@@ -284,15 +279,3 @@ std::vector<GuessStruct> Search::OrderMoves(const GenerateLegalMoves& LegalMoves
 	return f_OrderedMoves;
 }
 
-void Search::CheckAndResizeTT(std::unordered_map<uint64_t, TranspositionTable>& TT, size_t TTsize)
-{
-	if (sizeof(TT) < (TTsize * 1000000))
-	{
-		return;
-	}
-	else //TODO:Always replaced type, make tweaks(extra-TODO: test suite) 
-		 //i am surprised by how hard it is to think about something that won't be REALLY slow
-	{
-
-	}
-}

@@ -1,12 +1,6 @@
-﻿  UCI.cpp
-  Board.cpp
-  Evaluation.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(56,56): warning C4244: '+=': conversion from 'double' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(60,56): warning C4244: '-=': conversion from 'double' to 'int32_t', possible loss of data
-  Search.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(1,1): warning C4821: Unable to determine Unicode encoding type, please save the file with signature (BOM)
-  ZobristHashing.cpp
-  LegalMoves.cpp
+﻿  Search.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(27,61): warning C4244: 'argument': conversion from 'const uint16_t' to 'uint8_t', possible loss of data
+  TT.cpp
   RenderChesspcs.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
   (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
@@ -18,17 +12,12 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChessp
       see declaration of 'Timer'
   
   CreateQuadDynamic.cpp
-  IndexBuffer.cpp
   Main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
   (compiling source file 'source/Main.cpp')
       C:\Users\roanb\source\repos\Pertinax-Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,11):
       see previous definition of 'APIENTRY'
   
-  Renderer.cpp
-  Shader.cpp
-  Test.cpp
-  TestClearColor.cpp
   TestTexture2D.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
   (compiling source file 'source/tests/TestTexture2D.cpp')
@@ -46,24 +35,7 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.3480
           C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\tests\TestTexture2D.cpp(30,25):
           see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,nullptr,unsigned __int64,0>(nullptr &&,unsigned __int64 &&)' being compiled
   
-  Texture.cpp
-  glm.cpp
-  imgui.cpp
-  imgui_demo.cpp
   imgui_draw.cpp
-  Generating Code...
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(261,1): warning C4172: returning address of local variable or temporary : OffsetsForKnight
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(70,1): warning C4715: 'CastlingAbility::operator[]': not all control paths return a value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.h(59,1): warning C4715: 'Evaluator::ConvertPieceTypeToMatValue': not all control paths return a value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(259,1): warning C4715: 'Board::GetPieceType2Uncolored': not all control paths return a value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(323,1): warning C4715: 'Board::PieceType2letter': not all control paths return a value
-  Compiling...
-  imgui_impl_glfw.cpp
-  imgui_impl_opengl3.cpp
-  imgui_tables.cpp
-  imgui_widgets.cpp
-  stb_image.cpp
-  VertexArray.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\VertexArray.cpp(25,3): warning C4312: 'type cast': conversion from 'unsigned int' to 'const void *' of greater size
   VertexBuffer.cpp
   Generating Code...
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.h(59,1): warning C4715: 'Evaluator::ConvertPieceTypeToMatValue': not all control paths return a value
