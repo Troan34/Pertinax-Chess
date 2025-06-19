@@ -8,43 +8,83 @@ TranspositionTable::TranspositionTable(size_t TTSize)
 	TT.reserve(floor(HashSize / SIZE_OF_HASHMAP_ELEMENT));
 }
 
+TranspositionTable::TranspositionTable()
+{
+}
+
+
 void TranspositionTable::TTprobe(int32_t& alpha, int32_t& beta, int32_t& eval, const uint64_t& Hash, const uint8_t& depth)
 {
 	auto TTentry = TT.find(Hash);
 	if (TTentry != TT.end())
 	{
-		if (TTentry->second.Hash == Hash and TTentry->second.Depth >= depth)
+		switch (GetBound(TTentry->second.AgeBound))
 		{
-			if (TTentry->second.BoundType == EXACT)
-			{
-				eval = TTentry->second.Evaluation;
-			}
-			else if (TTentry->second.BoundType == LOWER_BOUND)
-			{
-				alpha = std::max(alpha, TTentry->second.Evaluation);
-			}
-			else if (TTentry->second.BoundType == UPPER_BOUND)
-			{
-				beta = std::min(beta, TTentry->second.Evaluation);
-			}
+		case(EXACT):
+			eval = TTentry->second.Evaluation;
+			break;
+		case(LOWER_BOUND):
+			alpha = std::max(alpha, TTentry->second.Evaluation);
+			break;
+		case(UPPER_BOUND):
+			beta = std::min(beta, TTentry->second.Evaluation);
+			break;
+		default:
+			ASSERT(false)
 		}
-
 	}
 }
 
-void TranspositionTable::AddEntry(const TTEntry& Entry, uint64_t Hash)
+void TranspositionTable::AddEntry(Move BestMove, int32_t Eval, uint8_t Depth, uint8_t Bound, uint64_t Hash)
 {
-	if (HashSize > TT.size())
+	TTEntry Entry;
+	Entry.AgeBound = Bound;
+	Entry.BestMove = BestMove;
+	Entry.Depth = Depth;
+	Entry.Evaluation = Eval;
+
+	if (HashSize > (TT.size() * SIZE_OF_HASHMAP_ELEMENT))
 	{
 		TT[Hash] = Entry;
 	}
 	else
 	{
-
+		ResizeTT();
+		TT[Hash] = Entry;
 	}
 }
 
-void TranspositionTable::ResizeTT()
-{
+void inline TranspositionTable::AgeIncrementOnNewSearch() { CurrentAge += AGE_DELTA; }
 
+void TranspositionTable::ResizeTT()//Just age(no other strategies)
+{
+	uint16_t NumOfDeletedEntries = 0;
+	uint8_t MinimumAgeDelta = 100; //SIMULATE (or whatever else) TO GET A BETTER NUMBER
+	uint8_t MinAgeDeltaIncrement = 9; //THIS TOO
+
+	while (NumOfDeletedEntries < NUM_OF_ENTRIES_TO_BE_DELETED)
+	{
+		for (auto& it : TT)
+		{
+			if (RelativeAge(it.second.AgeBound) > MinimumAgeDelta);
+			{
+				TT.erase(it.first);//This might be a bug, SAME bug as that one in LegalMoves(when i deleted the element i was iterating)
+				NumOfDeletedEntries++;
+				if (NumOfDeletedEntries < NUM_OF_ENTRIES_TO_BE_DELETED)
+					continue;
+				else
+					break;
+			}
+		}
+		MinimumAgeDelta -= MinAgeDeltaIncrement;
+	}
+}
+
+uint8_t inline TranspositionTable::GetAge(const uint8_t& AgeBound) { return AgeBound & AGE_MASK; }
+
+uint8_t inline TranspositionTable::GetBound(const uint8_t& AgeBound) { return AgeBound & BOUND_MASK; }
+
+uint8_t TranspositionTable::RelativeAge(const uint8_t& AgeBound)
+{
+	return abs(CurrentAge - GetAge(AgeBound));
 }

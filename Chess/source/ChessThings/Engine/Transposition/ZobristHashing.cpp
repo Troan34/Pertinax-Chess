@@ -16,12 +16,9 @@ static bool Initialized = false;
 static uint8_t WhichFileHadEnPassant = 8; //8 for none
 
 
-ZobristHashing::ZobristHashing(GenerateLegalMoves* LegalMoves, std::array<uint8_t, 64>* BoardSquare, std::array<uint8_t, 64>* PreviousBoardSquare, const canCastle& CanCastle, const uint32_t& MoveNum)
-	:m_BoardSquare(BoardSquare),
-	m_LegalMoves(LegalMoves),
-	m_PreviousBoardSquare(PreviousBoardSquare)
+ZobristHashing::ZobristHashing(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint32_t& MoveNum)
+	:m_BoardSquare(&BoardSquare), m_LegalMoves(&LegalMoves), m_PreviousBoardSquare(&PreviousBoardSquare), m_CastleAbility(Board::canCastle2CastlingAbility(CanCastle))
 {
-	m_CastleAbility = Board::canCastle2CastlingAbility(CanCastle);
 	m_SideToMove = MoveNum % 2 == 0; // true for white, false for black
 	if (!Initialized)
 		InitializeKeys();
@@ -66,7 +63,7 @@ void ZobristHashing::CreateInitialHash()
 
     for (uint8_t i = 0; i < 4; i++)
     {
-        if (m_CastleAbility[i])//fix the canCastle struct
+        if (m_CastleAbility.at(i))
         {
             Hash ^= ZobristCastlingRights[i]; // XOR the hash with the castling rights
         }

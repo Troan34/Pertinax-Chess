@@ -33,7 +33,7 @@ static std::array<uint8_t, 64Ui64> previousBoardsquare;
 	static uint8_t EngineDepth = 6;
 	static std::vector<Move> SearchMoves{};
 	static Timer timer;
-	static size_t HashSize;
+	static size_t HashSize = 64000000;//default 64MB
 
 static void RunUCI()//this is a workaround
 {

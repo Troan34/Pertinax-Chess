@@ -29,9 +29,9 @@ static constexpr unsigned int BLACK_ROOK = BLACK + ROOK;     //12
 static constexpr unsigned int BLACK_QUEEN = BLACK + QUEEN;   //13
 static constexpr unsigned int BLACK_KING = BLACK + KING;     //14
 
-static constexpr unsigned int LOWER_BOUND = 50; //CUT-NODE, just a random number
-static constexpr unsigned int UPPER_BOUND = 100; //ALL-NODE, just a random number
-static constexpr unsigned int EXACT = 150; //PV-NODE, just a random number
+static constexpr unsigned int LOWER_BOUND = 0; //CUT-NODE
+static constexpr unsigned int UPPER_BOUND = 1; //ALL-NODE
+static constexpr unsigned int EXACT = 2; //PV-NODE
 
 static constexpr std::string_view STARTPOS = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
@@ -49,7 +49,7 @@ struct CastlingAbility
 	bool BlackShort = false;
 	bool BlackLong = false;
 
-	bool operator[](uint8_t index)
+	bool at(uint8_t index) const
 	{
 		switch (index)
 		{
@@ -99,7 +99,7 @@ struct Timer
 		:WTime(WTime_inms), BTime(BTime_inms), WIncrement(WIncrement_inms), BIncrement(BIncrement_inms)
 	{
 	}
-	Timer()
+	Timer(){}
 };
 
 class Board
