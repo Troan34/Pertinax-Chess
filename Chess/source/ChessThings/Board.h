@@ -4,6 +4,7 @@
 #include <array>
 #include <Renderer.h>
 #include <cmath>
+#include <iostream>
 
 static constexpr unsigned int NONE = 0;
 static constexpr unsigned int PAWN = 1;

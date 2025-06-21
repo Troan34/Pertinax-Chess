@@ -25,6 +25,7 @@ Move Search::GetBestMove()
 	//auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 
 	//std::cout << "Found move in " << duration.count() << " ms" << '\n' << std::endl;
+	//std::cout << (int)((float)TT.GetTTSize()/(float)HashSize * 1000) << std::endl;HashFull permille
 
 	return BestMove;
 }

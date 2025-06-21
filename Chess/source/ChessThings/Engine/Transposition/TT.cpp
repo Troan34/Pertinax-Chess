@@ -33,6 +33,10 @@ void TranspositionTable::TTprobe(int32_t& alpha, int32_t& beta, int32_t& eval, c
 			ASSERT(false)
 		}
 	}
+	else {
+		eval = NOT_FOUND_EXACT_BOUND_FLAG;
+		return;
+	}
 }
 
 void TranspositionTable::AddEntry(Move BestMove, int32_t Eval, uint8_t Depth, uint8_t Bound, uint64_t Hash)
@@ -56,6 +60,11 @@ void TranspositionTable::AddEntry(Move BestMove, int32_t Eval, uint8_t Depth, ui
 
 void inline TranspositionTable::AgeIncrementOnNewSearch() { CurrentAge += AGE_DELTA; }
 
+size_t TranspositionTable::GetTTSize() const
+{
+	return (TT.size() * SIZE_OF_HASHMAP_ELEMENT);
+}
+
 void TranspositionTable::ResizeTT()//Just age(no other strategies)
 {
 	uint16_t NumOfDeletedEntries = 0;
@@ -78,6 +87,7 @@ void TranspositionTable::ResizeTT()//Just age(no other strategies)
 		}
 		MinimumAgeDelta -= MinAgeDeltaIncrement;
 	}
+	
 }
 
 uint8_t inline TranspositionTable::GetAge(const uint8_t& AgeBound) { return AgeBound & AGE_MASK; }

@@ -1,7 +1,7 @@
 #pragma once
 #include "ChessThings/Board.h"
 
-static constexpr int16_t NOT_FOUND_EXACT_BOUND_FLAG = 0xFFF2;//random number, hopefully this doesn't get hit
+static constexpr int32_t NOT_FOUND_EXACT_BOUND_FLAG = 1524334251;//random number, hopefully this doesn't get hit
 static constexpr size_t SIZE_OF_TTENTRY = 12;
 static constexpr size_t SIZE_OF_HASHMAP_ELEMENT = 12 + sizeof(uint64_t); //bucket + key
 static constexpr uint16_t NUM_OF_ENTRIES_TO_BE_DELETED = 1024;//felt like a good number, TO BE OPTIMIZED
@@ -40,5 +40,6 @@ public:
 	void TTprobe(int32_t& alpha, int32_t& beta, int32_t& eval, const uint64_t& Hash, const uint8_t& depth);
 	void AddEntry(Move BestMove, int32_t Eval, uint8_t Depth, uint8_t Bound, uint64_t Hash);
 	void AgeIncrementOnNewSearch();
+	size_t GetTTSize() const;
 };
 
