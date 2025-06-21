@@ -103,6 +103,14 @@ struct Timer
 	Timer(){}
 };
 
+struct UCIInfoes
+{
+	uint8_t* Depth = nullptr;
+	uint64_t* NumOfNodes = nullptr;
+	uint32_t* NpS = nullptr;
+	uint16_t* HashFull = nullptr;
+};
+
 class Board
 {
 private:

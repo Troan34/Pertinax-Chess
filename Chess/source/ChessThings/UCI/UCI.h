@@ -8,7 +8,7 @@
 static constexpr std::string_view DEPTH_COMMAND = "depth";
 static constexpr std::string_view ENGINE_ON_COMMAND = "EngineOn";
 
-//go and other position commands
+//position commands
 static constexpr std::string_view POSITION_COMMAND = "position";
 static constexpr std::string_view STARTPOS_COMMAND = "startpos";
 static constexpr std::string_view FEN_COMMAND = "fen";
@@ -17,6 +17,7 @@ static constexpr std::string_view UCINEWGAME_COMMAND = "ucinewgame";
 //go commands
 static constexpr std::string_view GO_COMMAND = "go";
 static constexpr std::string_view SEARCHMOVES_COMMAND = "searchmoves";
+static constexpr std::string_view DEPTH_COMMAND = "depth";
 
 
 
@@ -41,8 +42,9 @@ private:
 
 	void RunCommand();
 public:
-	UCI(UciVars_p Vars);
 
+	UCI(UciVars_p Vars);
+	void UCIInfoesToSend(UCIInfoes UCIInfo, bool IncludeFrequentInfo);
 
 
 };

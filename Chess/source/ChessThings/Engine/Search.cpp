@@ -1,6 +1,12 @@
 #include "Search.h"
 static TranspositionTable TT;
 
+//UCI info
+static uint64_t NodesVisited = 0;
+static uint64_t DeltaNodesVisited = 0; //for nps
+static std::chrono::milliseconds DeltaTime;
+
+
 Search::Search(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint8_t& depth, const uint16_t& MoveNum, std::vector<Move>& SearchMoves, const size_t& HashSize)
 	:m_BoardSquare(BoardSquare), m_PreviousBoardSquare(PreviousBoardSquare), m_CanCastle(CanCastle), m_depth(depth), m_MoveNum(MoveNum), m_SearchMoves(SearchMoves), HashSize(HashSize)
 {
@@ -14,6 +20,7 @@ Search::~Search()
 Move Search::GetBestMove()
 {
 	//auto start = std::chrono::high_resolution_clock::now();
+
 	GenerateLegalMoves LegalMoves(m_BoardSquare, &m_PreviousBoardSquare, m_CanCastle, (m_MoveNum % 2 != 0) ? false : true, m_MoveNum, false);
 	ZobristHashing m_Hash(LegalMoves, m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum);
 
@@ -28,6 +35,11 @@ Move Search::GetBestMove()
 	//std::cout << (int)((float)TT.GetTTSize()/(float)HashSize * 1000) << std::endl;HashFull permille
 
 	return BestMove;
+}
+
+void Search::ComputeUCIInfo(UCIInfoes UciInfo)
+{
+
 }
 
 int Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta)

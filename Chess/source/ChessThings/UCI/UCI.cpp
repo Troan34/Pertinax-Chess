@@ -94,6 +94,23 @@ void UCI::RunCommand()
 			}
 		}
 
-		//do timer things
+		if (Command.find(DEPTH_COMMAND, 2) != std::string::npos)
+		{
+			*Vars_p.depth = (Command.find(' ', Command.find(SEARCHMOVES_COMMAND)) + 1) - '0';
+		}
+		else
+		{
+			*Vars_p.depth = UINT8_MAX;
+			//!!!
+			//! THE ENGINE DOESN'T CHOSE A MOVE (or selects pv nodes) IF DEPTH IS NOT FINITE
+			//!!!
+		}
+
 	}
+}
+
+void UCI::UCIInfoesToSend(UCIInfoes UCIInfo, bool IncludeFrequentInfo)
+{
+	std::cout << "info " << "depth " << *UCIInfo.Depth << " nodes " << *UCIInfo.NumOfNodes << " nps " << *UCIInfo.NpS << " hashfull " << *UCIInfo.HashFull
+		<< std::endl;
 }

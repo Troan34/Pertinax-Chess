@@ -28,6 +28,7 @@ static unsigned int MoveNum = 0;
 static canCastle CanCastle;
 static std::array<uint8_t, 64Ui64> static_BoardSquare;
 static std::array<uint8_t, 64Ui64> previousBoardsquare;
+static bool StartEngine = false;
 	//Engine vars
 	static bool EngineOn = true;
 	static uint8_t EngineDepth = 6;
