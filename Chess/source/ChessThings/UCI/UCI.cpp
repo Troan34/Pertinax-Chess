@@ -102,7 +102,7 @@ void UCI::RunCommand()
 		{
 			*Vars_p.depth = UINT8_MAX;
 			//!!!
-			//! THE ENGINE DOESN'T CHOSE A MOVE (or selects pv nodes) IF DEPTH IS NOT FINITE
+			//! THE ENGINE DOESN'T CHOSE A MOVE (or selects pv nodes) IF DEPTH IS NOT FINITE, add ID
 			//!!!
 		}
 

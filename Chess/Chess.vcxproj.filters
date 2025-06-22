@@ -29,6 +29,7 @@
     <ClCompile Include="source\ChessThings\UCI\UCI.cpp" />
     <ClCompile Include="source\ChessThings\Engine\Search.cpp" />
     <ClCompile Include="source\ChessThings\Engine\Transposition\TT.cpp" />
+    <ClCompile Include="source\ChessThings\Engine\IterativeD.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\bb.png" />
@@ -366,6 +367,7 @@
     <ClInclude Include="source\ChessThings\Engine\Transposition\ZobristHashing.h" />
     <ClInclude Include="source\ChessThings\UCI\UCI.h" />
     <ClInclude Include="source\ChessThings\Engine\Transposition\TT.h" />
+    <ClInclude Include="source\ChessThings\Engine\IterativeD.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="source\vendor\glm\detail\func_common.inl" />

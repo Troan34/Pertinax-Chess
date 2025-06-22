@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\ChessThings\Engine\IterativeD.cpp" />
     <ClCompile Include="source\ChessThings\Engine\Search.cpp" />
     <ClCompile Include="source\ChessThings\Engine\Transposition\TT.cpp" />
     <ClCompile Include="source\ChessThings\UCI\UCI.cpp" />
@@ -183,6 +184,7 @@
     <Image Include="res\textures\wr.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\ChessThings\Engine\IterativeD.h" />
     <ClInclude Include="source\ChessThings\Engine\Transposition\TT.h" />
     <ClInclude Include="source\ChessThings\UCI\UCI.h" />
     <ClInclude Include="source\ChessThings\Board.h" />

@@ -17,7 +17,6 @@ static constexpr std::string_view UCINEWGAME_COMMAND = "ucinewgame";
 //go commands
 static constexpr std::string_view GO_COMMAND = "go";
 static constexpr std::string_view SEARCHMOVES_COMMAND = "searchmoves";
-static constexpr std::string_view DEPTH_COMMAND = "depth";
 
 
 
