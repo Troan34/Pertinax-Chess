@@ -18,6 +18,7 @@
 #include <future>
 #include "ChessThings/Engine/Search.h"
 #include "ChessThings/UCI/UCI.h"
+#include "ChessThings/Engine/IterativeD.h"
 
 
 struct MouseInput

@@ -30,9 +30,13 @@ static constexpr unsigned int BLACK_ROOK = BLACK + ROOK;     //12
 static constexpr unsigned int BLACK_QUEEN = BLACK + QUEEN;   //13
 static constexpr unsigned int BLACK_KING = BLACK + KING;     //14
 
+//ID, TT, search, time management...
 static constexpr unsigned int LOWER_BOUND = 0; //CUT-NODE (>=beta)
 static constexpr unsigned int UPPER_BOUND = 1; //ALL-NODE (<=alpha)
 static constexpr unsigned int EXACT = 2; //PV-NODE
+static constexpr unsigned int TIME_INTERVAL_IN_NODES = 2048;//optimizable 
+
+
 
 static constexpr std::string_view STARTPOS = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 

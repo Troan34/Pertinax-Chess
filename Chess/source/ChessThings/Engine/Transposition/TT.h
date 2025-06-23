@@ -8,7 +8,7 @@ static constexpr uint16_t NUM_OF_ENTRIES_TO_BE_DELETED = 1024;//felt like a good
 
 //Could explain this but stockfish explains it better, and i just barely understand it.
 //Basically we compress some variables into AgeBound (Age, pv, bound) and we have to do some extra steps to store information,
-	//this means the AgeBound looks like this 0bAAAAApbb
+	//this means the AgeBound looks like this 0bAAAAANbb
 static constexpr uint8_t MISC_BITS = 3;
 static constexpr uint8_t AGE_DELTA = 0b00001000;//this is basically adding 1 to the AGE bits
 static constexpr uint16_t AGE_CYCLE = 0xFF + AGE_DELTA;//this just stops us from accidentally touching the misc bits
@@ -38,7 +38,7 @@ public:
 	TranspositionTable(size_t TTSize);
 	TranspositionTable();
 	void TTprobe(int32_t& alpha, int32_t& beta, int32_t& eval, const uint64_t& Hash, const uint8_t& depth);
-	void AddEntry(Move BestMove, int32_t Eval, uint8_t Depth, uint8_t Bound, uint64_t Hash);
+	void AddEntry(Move BestMove, int32_t Eval, uint8_t Depth, uint64_t Hash, const int32_t& alpha, const int32_t& beta);
 	void AgeIncrementOnNewSearch();
 	size_t GetTTSize() const;
 };

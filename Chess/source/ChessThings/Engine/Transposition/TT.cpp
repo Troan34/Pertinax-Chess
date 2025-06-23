@@ -39,10 +39,22 @@ void TranspositionTable::TTprobe(int32_t& alpha, int32_t& beta, int32_t& eval, c
 	}
 }
 
-void TranspositionTable::AddEntry(Move BestMove, int32_t Eval, uint8_t Depth, uint8_t Bound, uint64_t Hash)
+void TranspositionTable::AddEntry(Move BestMove, int32_t Eval, uint8_t Depth, uint64_t Hash, const int32_t& alpha, const int32_t& beta)
 {
 	TTEntry Entry;
-	Entry.AgeBound = Bound;
+	if (Eval >= beta)
+	{
+		Entry.AgeBound = LOWER_BOUND;
+	}
+	else if (Eval <= alpha)
+	{
+		Entry.AgeBound = UPPER_BOUND;
+	}
+	else
+	{
+		Entry.AgeBound = EXACT;
+	}
+
 	Entry.BestMove = BestMove;
 	Entry.Depth = Depth;
 	Entry.Evaluation = Eval;
