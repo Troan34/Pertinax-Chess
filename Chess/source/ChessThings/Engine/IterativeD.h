@@ -16,6 +16,8 @@ private:
 	int16_t m_MaxDepth;
 	uint8_t Depth = 0;
 
+	std::chrono::milliseconds TimeLeft();
+
 public:
 
 	IterativeDeepening(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint16_t& MoveNum,

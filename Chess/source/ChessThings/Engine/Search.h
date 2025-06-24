@@ -7,20 +7,6 @@
 #include <algorithm>
 #include <chrono>
 
-struct GuessStruct
-{
-	uint8_t BoardSquare;
-	uint8_t Move;
-	uint8_t PromotionType = 65;
-	int16_t GuessedEval;
-
-	GuessStruct(uint8_t BoardSquare, uint8_t Move, uint8_t PromotionType, int32_t GuessedEval)
-		: BoardSquare(BoardSquare),
-		Move(Move),
-		PromotionType(PromotionType),
-		GuessedEval(GuessedEval) {
-	}
-};
 
 
 class Search {

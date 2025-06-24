@@ -55,7 +55,6 @@ int Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSqu
 	}
 
 	int Evaluation;
-	std::vector<Move> LocalPV;
 
 	GenerateLegalMoves LegalMoves(BoardSquare, &previousBoardSquare, CanCastle, (MoveNum % 2 != 0) ? false : true, MoveNum, false);
 	Evaluator evaluator(LegalMoves);
@@ -79,7 +78,7 @@ int Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSqu
 		Move PVMove = PreviousPV.back();
 		MakeMove(LegalMoves, m_Hash, PVMove, BoardSquare, previousBoardSquare, CanCastle);
 
-		Evaluation = std::max(Evaluation, -NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, LocalPV));
+		Evaluation = std::max(Evaluation, -NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, PreviousPV));
 
 		BoardSquare = cBoardSquare;
 		previousBoardSquare = cPreviousBoardSquare;
@@ -90,7 +89,8 @@ int Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSqu
 		if (Evaluation > alpha)
 		{
 			alpha = Evaluation;
-			//Finish this
+			PreviousPV.push_back(PVMove);
+			
 		}
 	}
 
@@ -98,16 +98,23 @@ int Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSqu
 
 	for (const GuessStruct& Guess : GuessedOrder)
 	{
+		if (!PreviousPV.empty() and Move(Guess.BoardSquare, Guess.Move, Guess.PromotionType) == PreviousPV.back())
+			continue;
 
 		Move Move_(Guess.BoardSquare, Guess.Move, Guess.PromotionType);
 		MakeMove(LegalMoves, m_Hash,Move_, BoardSquare, previousBoardSquare, CanCastle);
 
-		Evaluation = std::max(Evaluation, -NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, LocalPV));
-		alpha = std::max(alpha, Evaluation);//get child's node PV
+		Evaluation = std::max(Evaluation, -NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, PreviousPV));
 
 		//Make a TT entry
 		TT.AddEntry(Move(Guess.BoardSquare, Guess.Move, Guess.PromotionType),
 			Evaluation, depth, m_Hash.Hash, alpha, beta);
+
+		if (Evaluation > alpha)
+		{
+			alpha = Evaluation;
+			PreviousPV.push_back(Move(Guess.BoardSquare, Guess.Move, Guess.PromotionType));
+		}
 
 		if (alpha >= beta)
 		{ 

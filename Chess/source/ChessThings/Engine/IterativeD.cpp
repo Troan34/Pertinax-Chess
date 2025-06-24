@@ -1,6 +1,12 @@
 #include "ChessThings/Engine/IterativeD.h"
 
 
+std::chrono::milliseconds IterativeDeepening::TimeLeft()
+{
+	std::chrono::milliseconds TimeLeft = Time.WTime;
+	return TimeLeft / (90 - m_MoveNum);//to algorithm-fy
+}
+
 IterativeDeepening::IterativeDeepening(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint16_t& MoveNum, std::vector<Move>& SearchMoves, const size_t& HashSize, Timer& Time, int16_t MaxDepth)
 	:Time(Time),m_BoardSquare(BoardSquare), m_PreviousBoardSquare(PreviousBoardSquare), m_CanCastle(CanCastle), m_MoveNum(MoveNum), m_SearchMoves(SearchMoves), HashSize(HashSize), m_MaxDepth(MaxDepth)
 {
@@ -8,6 +14,8 @@ IterativeDeepening::IterativeDeepening(const std::array<uint8_t, 64>& BoardSquar
 
 Move IterativeDeepening::GetBestMove()
 {
+	auto start = std::chrono::high_resolution_clock::now();
+
 	std::vector<Move> CurrentPV;
 	int32_t BestEval = -INT32_MAX;
 	Move BestMove;
@@ -20,6 +28,10 @@ Move IterativeDeepening::GetBestMove()
 
 		BestEval = bestMove.second;
 		BestMove = bestMove.first;
+
+		auto stop = std::chrono::high_resolution_clock::now();
+		if (std::chrono::duration_cast<std::chrono::milliseconds>(stop - start) >= TimeLeft())
+			break;
 	}
 
 	return BestMove;

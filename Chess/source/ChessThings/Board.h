@@ -91,14 +91,38 @@ struct Move
 	{
 	}
 	Move();
+	
+	bool operator ==(const Move& a) const
+	{
+		if (s_BoardSquare == a.s_BoardSquare and s_Move == a.s_Move and s_PromotionType == a.s_PromotionType)
+			return true;
+		else
+			return false;
+	}
+};
+
+struct GuessStruct
+{
+	uint8_t BoardSquare;
+	uint8_t Move;
+	uint8_t PromotionType = 65;
+	int16_t GuessedEval;
+
+	GuessStruct(uint8_t BoardSquare, uint8_t Move, uint8_t PromotionType, int32_t GuessedEval)
+		: BoardSquare(BoardSquare),
+		Move(Move),
+		PromotionType(PromotionType),
+		GuessedEval(GuessedEval) {
+	}
+
 };
 
 struct Timer
 {
-	uint32_t WTime;
-	uint32_t BTime;
-	uint32_t WIncrement;
-	uint32_t BIncrement;
+	std::chrono::milliseconds WTime;
+	std::chrono::milliseconds BTime;
+	std::chrono::milliseconds WIncrement;
+	std::chrono::milliseconds BIncrement;
 
 	Timer(uint32_t WTime_inms, uint32_t BTime_inms, uint32_t WIncrement_inms, uint32_t BIncrement_inms)
 		:WTime(WTime_inms), BTime(BTime_inms), WIncrement(WIncrement_inms), BIncrement(BIncrement_inms)
