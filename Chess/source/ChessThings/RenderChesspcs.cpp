@@ -33,7 +33,8 @@ static bool StartEngine = false;
 	static bool EngineOn = true;
 	static uint8_t EngineDepth = 6;
 	static std::vector<Move> SearchMoves{};
-	static Timer timer;
+	static std::chrono::milliseconds WTime(999999999);
+	static Timer timer(WTime, WTime, WTime, WTime);//max(for now)
 	static size_t HashSize = 64000000;//default 64MB
 
 static void RunUCI()//this is a workaround
@@ -47,6 +48,7 @@ static void RunUCI()//this is a workaround
 	Vars_p.CanCastle = &CanCastle;
 	Vars_p.SearchMoves = &SearchMoves;
 	Vars_p.timer = &timer;
+	Vars_p.HashSize = &HashSize;
 	UCI uci(Vars_p);
 }
 
@@ -247,7 +249,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 	if (WaitingForEnemyMove and EngineOn and !WaitingForUserPromotion)
 	{
 		IterativeDeepening ID(static_BoardSquare, previousBoardsquare, CanCastle, MoveNum, SearchMoves, HashSize, timer, EngineDepth);
-		Move BestMove = ID.GetBestMove();
+		Move BestMove = ID.GetBestMove(false);
 		GenerateLegalMoves LegalMoves(static_BoardSquare, &previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, false);
 		MakeMove(LegalMoves, BestMove, static_BoardSquare, previousBoardsquare, CanCastle);
 		WaitingForEnemyMove = false;

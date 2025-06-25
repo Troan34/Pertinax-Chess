@@ -41,5 +41,6 @@ public:
 	void AddEntry(Move BestMove, int32_t Eval, uint8_t Depth, uint64_t Hash, const int32_t& alpha, const int32_t& beta);
 	void AgeIncrementOnNewSearch();
 	size_t GetTTSize() const;
+	uint16_t GetTTFullness() const;
 };
 

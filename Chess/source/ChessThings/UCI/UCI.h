@@ -1,5 +1,6 @@
 #pragma once
 #include"ChessThings/Board.h"
+#include"ChessThings/Engine/IterativeD.h"
 #include <iostream>
 #include <atomic>
 #include <thread>
@@ -17,6 +18,10 @@ static constexpr std::string_view UCINEWGAME_COMMAND = "ucinewgame";
 //go commands
 static constexpr std::string_view GO_COMMAND = "go";
 static constexpr std::string_view SEARCHMOVES_COMMAND = "searchmoves";
+static constexpr std::string_view WTIME = "wtime";
+static constexpr std::string_view BTIME = "btime";
+static constexpr std::string_view WINC = "winc";
+static constexpr std::string_view BINC = "binc";
 
 
 
@@ -30,6 +35,7 @@ struct UciVars_p
 	canCastle* CanCastle;
 	std::vector<Move>* SearchMoves;
 	Timer* timer;
+	size_t* HashSize;
 };
 
 class UCI
@@ -40,10 +46,10 @@ private:
 	UciVars_p Vars_p;
 
 	void RunCommand();
+	void Go();
+
 public:
 
 	UCI(UciVars_p Vars);
-	void UCIInfoesToSend(UCIInfoes UCIInfo, bool IncludeFrequentInfo);
-
 
 };

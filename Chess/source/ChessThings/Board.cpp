@@ -248,6 +248,21 @@ Move Board::LongALG2Move(const std::string& ALG)
 	return TranslatedMove;
 }
 
+std::string Board::Move2ALG(Move move)
+{
+	std::string ALG;
+	char column = uint8_t(move.s_BoardSquare/8) + 'a';
+	char row = move.s_BoardSquare % 8 + '0';
+	ALG += column;//fun fact, += is just push_back
+	ALG += row;
+	column = uint8_t(move.s_Move / 8) + 'a';
+	row = move.s_Move % 8 + '0';
+	ALG += column;
+	ALG += row;
+
+	return ALG;
+}
+
 uint8_t Board::GetPieceType2Uncolored(const uint8_t& PieceType)
 {
 	if (PieceType > 16)
@@ -577,6 +592,19 @@ std::array<uint8_t, 64> Board::PrevBoardSquareFromEP(const std::array<uint8_t, 6
 	}
 
 	return previousBoardSquare;
+}
+
+std::string Board::GetPrintableFromVecOfMoves(std::vector<Move> Moves)
+{
+	std::string print;
+
+	for (Move MOVE : Moves)
+	{
+		print += Move2ALG(MOVE);
+		print += ' ';
+	}
+
+	return print;
 }
 
 Move::Move()

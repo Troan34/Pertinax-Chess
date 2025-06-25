@@ -1,12 +1,6 @@
 #include "Search.h"
 static TranspositionTable TT;
 
-//UCI info
-static uint64_t NodesVisited = 0;
-static uint64_t DeltaNodesVisited = 0; //for nps
-static std::chrono::milliseconds DeltaTime;
-
-
 Search::Search(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint8_t& depth, const uint16_t& MoveNum, std::vector<Move>& SearchMoves, const size_t& HashSize, std::vector<Move>& PreviousPV)
 	:m_BoardSquare(BoardSquare), m_PreviousBoardSquare(PreviousBoardSquare), m_CanCastle(CanCastle), m_depth(depth), m_MoveNum(MoveNum), m_SearchMoves(SearchMoves), HashSize(HashSize), m_PreviousPV(PreviousPV)
 {
@@ -35,9 +29,14 @@ std::pair<Move, int32_t> Search::GetBestMoveWithEval()
 	return std::make_pair(BestMove, Eval);
 }
 
-void Search::ComputeUCIInfo(UCIInfoes UciInfo)
+uint64_t Search::GetNodesVisited() const
 {
+	return NodesVisited;
+}
 
+uint16_t Search::GetTTFullness() const
+{
+	return TT.GetTTFullness();
 }
 
 int Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta, std::vector<Move>& PreviousPV)
@@ -64,6 +63,7 @@ int Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSqu
 		evaluator.SetParameters(BoardSquare, previousBoardSquare, CanCastle, MoveNum);
 		Evaluation = std::max(Evaluation, evaluator.Evaluate());//to change with a quiescent fun
 		alpha = std::max(alpha, Evaluation);
+		NodesVisited++;
 		return Evaluation;
 	}
 

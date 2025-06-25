@@ -5,6 +5,7 @@
 #include <Renderer.h>
 #include <cmath>
 #include <iostream>
+#include <chrono>
 
 static constexpr unsigned int NONE = 0;
 static constexpr unsigned int PAWN = 1;
@@ -124,7 +125,7 @@ struct Timer
 	std::chrono::milliseconds WIncrement;
 	std::chrono::milliseconds BIncrement;
 
-	Timer(uint32_t WTime_inms, uint32_t BTime_inms, uint32_t WIncrement_inms, uint32_t BIncrement_inms)
+	Timer(std::chrono::milliseconds WTime_inms, std::chrono::milliseconds BTime_inms, std::chrono::milliseconds WIncrement_inms, std::chrono::milliseconds BIncrement_inms)
 		:WTime(WTime_inms), BTime(BTime_inms), WIncrement(WIncrement_inms), BIncrement(BIncrement_inms)
 	{
 	}
@@ -137,6 +138,7 @@ struct UCIInfoes
 	uint64_t* NumOfNodes = nullptr;
 	uint32_t* NpS = nullptr;
 	uint16_t* HashFull = nullptr;
+	std::vector<Move>* PV;
 };
 
 class Board
@@ -160,6 +162,7 @@ public:
 	uint8_t GetPawnMoveSquare();
 	static uint8_t ALG2BoardSquareConverter(const std::string& ALG);
 	static Move LongALG2Move(const std::string& ALG);
+	static std::string Move2ALG(Move move);
 	static uint8_t GetPieceType2Uncolored(const uint8_t& PieceType);
 	static CastlingAbility canCastle2CastlingAbility(const canCastle& Castle);
 	static bool IsPieceColorWhite(const uint8_t& BoardSquareValue);
@@ -169,5 +172,5 @@ public:
 	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t EnpassantIndex, canCastle Castle);
 	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, std::array<uint8_t, 64>& previousBoardSquare, canCastle Castle);
 	static std::array<uint8_t, 64> PrevBoardSquareFromEP(const std::array<uint8_t, 64>& BoardSquare, uint8_t EPBoardsquare);
-
+	static std::string GetPrintableFromVecOfMoves(std::vector<Move> Moves);
 };

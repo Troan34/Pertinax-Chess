@@ -96,21 +96,33 @@ void UCI::RunCommand()
 
 		if (Command.find(DEPTH_COMMAND, 2) != std::string::npos)
 		{
-			*Vars_p.depth = (Command.find(' ', Command.find(SEARCHMOVES_COMMAND)) + 1) - '0';
+			*Vars_p.depth = (Command.find(' ', Command.find(DEPTH_COMMAND)) + 1) - '0';
 		}
 		else
 		{
 			*Vars_p.depth = UINT8_MAX;
-			//!!!
-			//! THE ENGINE DOESN'T CHOSE A MOVE (or selects pv nodes) IF DEPTH IS NOT FINITE, add ID
-			//!!!
 		}
 
+		
+		if(Command.find(WTIME, 2) != std::string::npos)
+			Vars_p.timer->WTime = static_cast<std::chrono::milliseconds>((Command.find(' ', Command.find(WTIME)) + 1) - '0');
+		if (Command.find(BTIME, 2) != std::string::npos)
+			Vars_p.timer->BTime = static_cast<std::chrono::milliseconds>((Command.find(' ', Command.find(BTIME)) + 1) - '0');
+		if (Command.find(WINC, 2) != std::string::npos)
+			Vars_p.timer->WIncrement = static_cast<std::chrono::milliseconds>((Command.find(' ', Command.find(WINC)) + 1) - '0');
+		if (Command.find(BINC, 2) != std::string::npos)
+			Vars_p.timer->BIncrement = static_cast<std::chrono::milliseconds>((Command.find(' ', Command.find(BINC)) + 1) - '0');
+		
+		Go();
 	}
 }
 
-void UCI::UCIInfoesToSend(UCIInfoes UCIInfo, bool IncludeFrequentInfo)
+void UCI::Go()
 {
-	std::cout << "info " << "depth " << *UCIInfo.Depth << " nodes " << *UCIInfo.NumOfNodes << " nps " << *UCIInfo.NpS << " hashfull " << *UCIInfo.HashFull
-		<< std::endl;
+	IterativeDeepening ID(*Vars_p.BoardSquare, *Vars_p.previousBoardSquare, *Vars_p.CanCastle, *Vars_p.MoveNum, *Vars_p.SearchMoves, *Vars_p.HashSize, *Vars_p.timer, *Vars_p.depth);
+	ID.GetBestMove(true);
+	auto PV = ID.GetPV();
+
 }
+
+
