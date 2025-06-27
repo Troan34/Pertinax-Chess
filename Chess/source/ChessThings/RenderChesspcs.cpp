@@ -33,7 +33,7 @@ static bool StartEngine = false;
 	static bool EngineOn = true;
 	static uint8_t EngineDepth = 6;
 	static std::vector<Move> SearchMoves{};
-	static std::chrono::milliseconds WTime(999999999);
+	static std::chrono::milliseconds WTime(999999);
 	static Timer timer(WTime, WTime, WTime, WTime);//max(for now)
 	static size_t HashSize = 64000000;//default 64MB
 

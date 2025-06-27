@@ -39,21 +39,23 @@ uint16_t Search::GetTTFullness() const
 	return TT.GetTTFullness();
 }
 
-int Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta, std::vector<Move>& PreviousPV)
+SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta, std::vector<Move>& PreviousPV)
 {
 	//Probe TT
 	int32_t Eval_Temp;
-	TT.TTprobe(alpha, beta, Eval_Temp, m_Hash.Hash, depth);
-	if (alpha >= beta)
+	uint8_t depth_Temp;
+	bool FoundTT = TT.TTprobe(alpha, beta, Eval_Temp, m_Hash.Hash, depth_Temp);
+	if (FoundTT and depth_Temp >= depth)
 	{
-		return alpha;//prune
+		if (alpha >= beta)
+		{
+			return alpha;//prune
+		}
 	}
-	if (Eval_Temp != NOT_FOUND_EXACT_BOUND_FLAG)
-	{
-		return Eval_Temp;
-	}
+	
 
 	int Evaluation;
+	std::vector<Move> LocalPV;
 
 	GenerateLegalMoves LegalMoves(BoardSquare, &previousBoardSquare, CanCastle, (MoveNum % 2 != 0) ? false : true, MoveNum, false);
 	Evaluator evaluator(LegalMoves);
@@ -78,6 +80,7 @@ int Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSqu
 		Move PVMove = PreviousPV.back();
 		MakeMove(LegalMoves, m_Hash, PVMove, BoardSquare, previousBoardSquare, CanCastle);
 
+		PreviousPV = GetVecTail(PreviousPV);
 		Evaluation = std::max(Evaluation, -NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, PreviousPV));
 
 		BoardSquare = cBoardSquare;
@@ -89,7 +92,12 @@ int Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSqu
 		if (Evaluation > alpha)
 		{
 			alpha = Evaluation;
-			PreviousPV.push_back(PVMove);
+			LocalPV = { PVMove };
+
+			if (!GetVecTail(PreviousPV).empty())
+			{
+				PushBackVec(LocalPV, GetVecTail(PreviousPV));
+			}
 			
 		}
 	}
@@ -98,12 +106,13 @@ int Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSqu
 
 	for (const GuessStruct& Guess : GuessedOrder)
 	{
-		if (!PreviousPV.empty() and Move(Guess.BoardSquare, Guess.Move, Guess.PromotionType) == PreviousPV.back())
+		if (!PreviousPV.empty() and Move(Guess.BoardSquare, Guess.Move, Guess.PromotionType) == PreviousPV[0])
 			continue;
 
 		Move Move_(Guess.BoardSquare, Guess.Move, Guess.PromotionType);
 		MakeMove(LegalMoves, m_Hash,Move_, BoardSquare, previousBoardSquare, CanCastle);
 
+		PreviousPV = GetVecTail(PreviousPV);
 		Evaluation = std::max(Evaluation, -NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, PreviousPV));
 
 		//Make a TT entry

@@ -13,16 +13,13 @@ TranspositionTable::TranspositionTable()
 }
 
 
-void TranspositionTable::TTprobe(int32_t& alpha, int32_t& beta, int32_t& eval, const uint64_t& Hash, const uint8_t& depth)
+bool TranspositionTable::TTprobe(int32_t& alpha, int32_t& beta, int32_t& eval, const uint64_t& Hash, uint8_t& depth)
 {
 	auto TTentry = TT.find(Hash);
 	if (TTentry != TT.end())
 	{
 		switch (GetBound(TTentry->second.AgeBound))
 		{
-		case(EXACT):
-			eval = TTentry->second.Evaluation;
-			break;
 		case(LOWER_BOUND):
 			alpha = std::max(alpha, TTentry->second.Evaluation);
 			break;
@@ -32,10 +29,12 @@ void TranspositionTable::TTprobe(int32_t& alpha, int32_t& beta, int32_t& eval, c
 		default:
 			ASSERT(false)
 		}
+		eval = TTentry->second.Evaluation;
+		depth = TTentry->second.Depth;
+		return true;
 	}
 	else {
-		eval = NOT_FOUND_EXACT_BOUND_FLAG;
-		return;
+		return false;
 	}
 }
 

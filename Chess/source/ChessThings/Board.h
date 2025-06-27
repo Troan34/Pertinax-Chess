@@ -141,6 +141,12 @@ struct UCIInfoes
 	std::vector<Move>* PV;
 };
 
+struct SearchResult
+{
+	int Eval;
+	std::vector<Move> PV;
+};
+
 class Board
 {
 private:
@@ -174,3 +180,13 @@ public:
 	static std::array<uint8_t, 64> PrevBoardSquareFromEP(const std::array<uint8_t, 64>& BoardSquare, uint8_t EPBoardsquare);
 	static std::string GetPrintableFromVecOfMoves(std::vector<Move> Moves);
 };
+
+
+template<typename T> inline std::vector<T> GetVecTail(const std::vector<T>& Vec)
+{
+	return std::vector<T>(Vec.begin() + 1, Vec.end());
+}
+template<typename T> inline void PushBackVec(std::vector<T>& Vec, const std::vector<T>& DataVec)
+{
+	return Vec.insert(Vec.end(), DataVec.begin(), DataVec.end());
+}
