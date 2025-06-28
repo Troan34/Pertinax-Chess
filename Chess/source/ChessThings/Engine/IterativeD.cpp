@@ -9,7 +9,9 @@ std::chrono::milliseconds IterativeDeepening::TimeLeft()
 
 void IterativeDeepening::PrintInfo(UCIInfoes Info)
 {
-	std::cout << "info " << "depth " << *Info.Depth << " nodes " << *Info.NumOfNodes << " nps " << *Info.NpS << " hashfull " << *Info.HashFull
+	//waiting for this to work (i put the compiler to c++23)
+	//std::println("info depth {} nodes {} nps {} hashfull {} pv {}", *Info.Depth, *Info.NumOfNodes, *Info.NpS, *Info.HashFull, Board::GetPrintableFromVecOfMoves(*Info.PV));
+	std::cout << "info " << "depth " << *Info.Depth + '0' - 48 << " nodes " << *Info.NumOfNodes << " nps " << *Info.NpS << " hashfull " << *Info.HashFull
 		<< " pv " << Board::GetPrintableFromVecOfMoves(*Info.PV) << std::endl;
 }
 
@@ -49,7 +51,7 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 
 			auto NumOfNds = search.GetNodesVisited();
 			Info.NumOfNodes = &NumOfNds;
-			auto PV = search.m_PreviousPV;
+			auto PV = CurrentPV;
 			Info.PV = &PV;
 
 			PrintInfo(Info);

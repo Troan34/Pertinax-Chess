@@ -19,7 +19,7 @@ std::pair<Move, int32_t> Search::GetBestMoveWithEval()
 	GenerateLegalMoves LegalMoves(m_BoardSquare, &m_PreviousBoardSquare, m_CanCastle, (m_MoveNum % 2 != 0) ? false : true, m_MoveNum, false);
 	ZobristHashing m_Hash(LegalMoves, m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum);
 
-	int32_t Eval = NegaMax(m_Hash, m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum, m_depth, -INT32_MAX, INT32_MAX, m_PreviousPV);
+	int32_t Eval = (NegaMax(m_Hash, m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum, m_depth, -INT32_MAX, INT32_MAX, m_PreviousPV)).Eval;
 
 	Move BestMove(m_BestBoardPos, m_BestMove, m_BestPromotion);
 
@@ -42,7 +42,7 @@ uint16_t Search::GetTTFullness() const
 SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta, std::vector<Move>& PreviousPV)
 {
 	//Probe TT
-	int32_t Eval_Temp;
+	int32_t Eval_Temp = -INT32_MAX;
 	uint8_t depth_Temp;
 	bool FoundTT = TT.TTprobe(alpha, beta, Eval_Temp, m_Hash.Hash, depth_Temp);
 	if (FoundTT and depth_Temp >= depth)
@@ -54,7 +54,7 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 	}
 	
 
-	int Evaluation;
+	int Evaluation = -INT32_MAX;
 	std::vector<Move> LocalPV;
 
 	GenerateLegalMoves LegalMoves(BoardSquare, &previousBoardSquare, CanCastle, (MoveNum % 2 != 0) ? false : true, MoveNum, false);
@@ -80,25 +80,20 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 		Move PVMove = PreviousPV.back();
 		MakeMove(LegalMoves, m_Hash, PVMove, BoardSquare, previousBoardSquare, CanCastle);
 
-		PreviousPV = GetVecTail(PreviousPV);
-		Evaluation = std::max(Evaluation, -NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, PreviousPV));
-
 		BoardSquare = cBoardSquare;
 		previousBoardSquare = cPreviousBoardSquare;
 		CanCastle = cCanCastle;
 		MoveNum = cMoveNum;
 		m_Hash.Hash = cHash;
 
+		auto Result = NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, PreviousPV);
+		Evaluation = std::max(Evaluation, -Result.Eval);
+
 		if (Evaluation > alpha)
 		{
 			alpha = Evaluation;
 			LocalPV = { PVMove };
-
-			if (!GetVecTail(PreviousPV).empty())
-			{
-				PushBackVec(LocalPV, GetVecTail(PreviousPV));
-			}
-			
+			PushBackVec(LocalPV, GetVecTail(Result.PV));
 		}
 	}
 
@@ -112,8 +107,9 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 		Move Move_(Guess.BoardSquare, Guess.Move, Guess.PromotionType);
 		MakeMove(LegalMoves, m_Hash,Move_, BoardSquare, previousBoardSquare, CanCastle);
 
-		PreviousPV = GetVecTail(PreviousPV);
-		Evaluation = std::max(Evaluation, -NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, PreviousPV));
+		auto Result = NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, PreviousPV);
+		Evaluation = std::max(Evaluation, -Result.Eval);
+
 
 		//Make a TT entry
 		TT.AddEntry(Move(Guess.BoardSquare, Guess.Move, Guess.PromotionType),
@@ -122,7 +118,8 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 		if (Evaluation > alpha)
 		{
 			alpha = Evaluation;
-			PreviousPV.push_back(Move(Guess.BoardSquare, Guess.Move, Guess.PromotionType));
+			LocalPV = { (Move)Guess };
+			PushBackVec(LocalPV, GetVecTail(Result.PV));
 		}
 
 		if (alpha >= beta)
@@ -130,7 +127,7 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 			break;//prune
 		}
 
-		//undo move
+		
 		if (depth == m_depth and Evaluation > m_BestEvaluation)
 		{
 			m_BestBoardPos = Guess.BoardSquare;
@@ -139,6 +136,7 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 			m_BestEvaluation = Evaluation;
 		}
 
+		//undo move
 		BoardSquare = cBoardSquare;
 		previousBoardSquare = cPreviousBoardSquare;
 		CanCastle = cCanCastle;
@@ -148,7 +146,7 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 
 	}
 
-	return alpha;
+	return { alpha, LocalPV };
 }
 
 void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash, Move Move_, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle)

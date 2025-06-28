@@ -33,7 +33,6 @@ private:
 public:
 	std::vector<Move> m_PreviousPV;
 
-
 	Search(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint8_t& depth, const uint16_t& MoveNum,
 		std::vector<Move>& SearchMoves, const size_t& HashSize, std::vector<Move>& PreviousPV);
 	~Search();

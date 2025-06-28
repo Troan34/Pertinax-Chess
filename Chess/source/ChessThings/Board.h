@@ -77,6 +77,22 @@ struct CastlingAbility
 	}
 };
 
+struct GuessStruct
+{
+	uint8_t BoardSquare;
+	uint8_t Move;
+	uint8_t PromotionType = 65;
+	int16_t GuessedEval;
+
+	GuessStruct(uint8_t BoardSquare, uint8_t Move, uint8_t PromotionType, int32_t GuessedEval)
+		: BoardSquare(BoardSquare),
+		Move(Move),
+		PromotionType(PromotionType),
+		GuessedEval(GuessedEval) {
+	}
+
+};
+
 struct Move
 {
 	uint8_t s_BoardSquare;
@@ -100,22 +116,10 @@ struct Move
 		else
 			return false;
 	}
-};
 
-struct GuessStruct
-{
-	uint8_t BoardSquare;
-	uint8_t Move;
-	uint8_t PromotionType = 65;
-	int16_t GuessedEval;
-
-	GuessStruct(uint8_t BoardSquare, uint8_t Move, uint8_t PromotionType, int32_t GuessedEval)
-		: BoardSquare(BoardSquare),
-		Move(Move),
-		PromotionType(PromotionType),
-		GuessedEval(GuessedEval) {
-	}
-
+	explicit Move(const GuessStruct& a)
+		:s_BoardSquare(a.BoardSquare), s_Move(a.Move), s_PromotionType(a.PromotionType)
+	{ }
 };
 
 struct Timer
@@ -145,6 +149,16 @@ struct SearchResult
 {
 	int Eval;
 	std::vector<Move> PV;
+
+	SearchResult(const int32_t& f_Eval)
+	{
+		Eval = f_Eval;
+	}
+	SearchResult(const int32_t& f_Eval, const std::vector<Move>& Pv)
+	{
+		Eval = f_Eval;
+		PV = Pv;
+	}
 };
 
 class Board
@@ -181,12 +195,14 @@ public:
 	static std::string GetPrintableFromVecOfMoves(std::vector<Move> Moves);
 };
 
-
 template<typename T> inline std::vector<T> GetVecTail(const std::vector<T>& Vec)
 {
-	return std::vector<T>(Vec.begin() + 1, Vec.end());
+	if (!Vec.empty())
+		return std::vector<T>(Vec.begin() + 1, Vec.end());
+	else
+		return std::vector<T>();
 }
 template<typename T> inline void PushBackVec(std::vector<T>& Vec, const std::vector<T>& DataVec)
 {
-	return Vec.insert(Vec.end(), DataVec.begin(), DataVec.end());
+	return (void)Vec.insert(Vec.end(), DataVec.begin(), DataVec.end());
 }
