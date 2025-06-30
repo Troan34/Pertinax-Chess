@@ -80,7 +80,7 @@ size_t TranspositionTable::GetTTSize() const
 
 uint16_t TranspositionTable::GetTTFullness() const
 {
-	return ((TT.size() * SIZE_OF_HASHMAP_ELEMENT)/HashSize)*1000;
+	return 1000*(TT.size()*SIZE_OF_HASHMAP_ELEMENT)/(HashSize);
 }
 
 void TranspositionTable::ResizeTT()//Just age(no other strategies)

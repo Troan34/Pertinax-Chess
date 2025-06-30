@@ -251,12 +251,12 @@ Move Board::LongALG2Move(const std::string& ALG)
 std::string Board::Move2ALG(Move move)
 {
 	std::string ALG;
-	char column = uint8_t(move.s_BoardSquare/8) + 'a';
-	char row = move.s_BoardSquare % 8 + '0';
+	char column = move.s_BoardSquare % 8 + 'a';
+	char row = move.s_BoardSquare/8 + '0' + 1;
 	ALG += column;//fun fact, += is just push_back
 	ALG += row;
-	column = uint8_t(move.s_Move / 8) + 'a';
-	row = move.s_Move % 8 + '0';
+	column = move.s_Move % 8 + 'a';
+	row = move.s_Move / 8 + '0' + 1;
 	ALG += column;
 	ALG += row;
 

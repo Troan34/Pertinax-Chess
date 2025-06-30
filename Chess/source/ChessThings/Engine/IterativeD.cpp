@@ -31,8 +31,8 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 	while(Depth < m_MaxDepth)
 	{
 		Depth++;
-		Search search(m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, Depth, m_MoveNum, m_SearchMoves, HashSize, CurrentPV);
-		auto bestMove = search.GetBestMoveWithEval();
+		Search search(m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, Depth, m_MoveNum, m_SearchMoves, HashSize);
+		auto bestMove = search.GetBestMoveWithEval(CurrentPV);
 
 		BestEval = bestMove.second;
 		BestMove = bestMove.first;
@@ -51,7 +51,7 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 
 			auto NumOfNds = search.GetNodesVisited();
 			Info.NumOfNodes = &NumOfNds;
-			auto PV = CurrentPV;
+			std::vector<Move> PV = CurrentPV;
 			Info.PV = &PV;
 
 			PrintInfo(Info);

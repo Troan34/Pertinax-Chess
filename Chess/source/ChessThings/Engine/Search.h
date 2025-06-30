@@ -18,6 +18,7 @@ private:
 	const uint16_t m_MoveNum;
 	const std::vector<Move> m_SearchMoves;
 	size_t HashSize;
+	std::vector<Move> m_PV;
 
 
 	uint8_t m_BestMove;
@@ -34,9 +35,9 @@ public:
 	std::vector<Move> m_PreviousPV;
 
 	Search(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint8_t& depth, const uint16_t& MoveNum,
-		std::vector<Move>& SearchMoves, const size_t& HashSize, std::vector<Move>& PreviousPV);
+		std::vector<Move>& SearchMoves, const size_t& HashSize);
 	~Search();
-	std::pair<Move, int32_t> GetBestMoveWithEval();
+	std::pair<Move, int32_t> GetBestMoveWithEval(std::vector<Move>& PV);
 	uint64_t GetNodesVisited() const;
 	uint16_t GetTTFullness() const;
 

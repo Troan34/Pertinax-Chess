@@ -1,4 +1,4 @@
-﻿  Search.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(22,85): warning C4244: 'argument': conversion from 'const uint16_t' to 'uint8_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.h(59,1): warning C4715: 'Evaluator::ConvertPieceTypeToMatValue': not all control paths return a value
+﻿  Board.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(274,1): warning C4715: 'Board::GetPieceType2Uncolored': not all control paths return a value
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(338,1): warning C4715: 'Board::PieceType2letter': not all control paths return a value
   Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Debug\Chess.exe
