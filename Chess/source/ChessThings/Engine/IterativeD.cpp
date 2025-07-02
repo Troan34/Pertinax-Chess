@@ -57,8 +57,8 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 			PrintInfo(Info);
 		}
 		
-		if (std::chrono::duration_cast<std::chrono::milliseconds>(stop - start) >= TimeLeft())
-			break;
+		//if (std::chrono::duration_cast<std::chrono::milliseconds>(stop - start) >= TimeLeft())
+			//break;
 	}
 
 	RanASearch = true;

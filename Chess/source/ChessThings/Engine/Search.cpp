@@ -80,25 +80,22 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 		Move PVMove = PreviousPV.back();
 		MakeMove(LegalMoves, m_Hash, PVMove, BoardSquare, previousBoardSquare, CanCastle);
 
+		PreviousPV = GetVecTail(PreviousPV);
+
+		auto Result = NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, PreviousPV);
+		Evaluation = std::max(Evaluation, -Result.Eval);
+
 		BoardSquare = cBoardSquare;
 		previousBoardSquare = cPreviousBoardSquare;
 		CanCastle = cCanCastle;
 		MoveNum = cMoveNum;
 		m_Hash.Hash = cHash;
-		PreviousPV = GetVecTail(PreviousPV);
-
-		auto Result = NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, PreviousPV);
-		if (Result.PV.empty())
-		{
-			Result.PV.push_back(PVMove);
-		}
-		Evaluation = std::max(Evaluation, -Result.Eval);
 
 		if (Evaluation > alpha)
 		{
 			alpha = Evaluation;
 			LocalPV = { PVMove };
-			PushBackVec(LocalPV, GetVecTail(Result.PV));
+			PushBackVec(LocalPV, Result.PV);
 		}
 	}
 
@@ -113,10 +110,6 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 		MakeMove(LegalMoves, m_Hash,Move_, BoardSquare, previousBoardSquare, CanCastle);
 
 		auto Result = NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, PreviousPV);
-		if (Result.PV.empty())
-		{
-			Result.PV.push_back(Move_);
-		}
 		Evaluation = std::max(Evaluation, -Result.Eval);
 
 
@@ -128,7 +121,7 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 		{
 			alpha = Evaluation;
 			LocalPV = { Move_ };
-			PushBackVec(LocalPV, GetVecTail(Result.PV));
+			PushBackVec(LocalPV, Result.PV);
 		}
 
 		if (alpha >= beta)

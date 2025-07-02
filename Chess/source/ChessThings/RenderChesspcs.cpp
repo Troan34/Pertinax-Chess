@@ -31,7 +31,7 @@ static std::array<uint8_t, 64Ui64> previousBoardsquare;
 static bool StartEngine = false;
 	//Engine vars
 	static bool EngineOn = true;
-	static uint8_t EngineDepth = 6;
+	static uint8_t EngineDepth = 10;
 	static std::vector<Move> SearchMoves{};
 	static std::chrono::milliseconds WTime(999999);
 	static Timer timer(WTime, WTime, WTime, WTime);//max(for now)
