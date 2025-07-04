@@ -1,10 +1,11 @@
 #include "ChessThings/Engine/IterativeD.h"
 
 
-std::chrono::milliseconds IterativeDeepening::TimeLeft()
+std::chrono::milliseconds IterativeDeepening::TimeLeft(std::chrono::milliseconds TimeUsed)
 {
-	std::chrono::milliseconds TimeLeft = Time.WTime;
-	return TimeLeft / (90 - m_MoveNum);//to algorithm-fy
+	std::chrono::milliseconds* TimeLeft = WhiteTurn ? &Time.WTime : &Time.BTime;
+	*TimeLeft += WhiteTurn ? Time.WIncrement : Time.BIncrement;
+	return *TimeLeft / (90 - m_MoveNum);//to algorithm-fy
 }
 
 void IterativeDeepening::PrintInfo(UCIInfoes Info)
@@ -15,8 +16,8 @@ void IterativeDeepening::PrintInfo(UCIInfoes Info)
 		<< " pv " << Board::GetPrintableFromVecOfMoves(*Info.PV) << std::endl;
 }
 
-IterativeDeepening::IterativeDeepening(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint16_t& MoveNum, std::vector<Move>& SearchMoves, const size_t& HashSize, Timer& Time, int16_t MaxDepth)
-	:Time(Time),m_BoardSquare(BoardSquare), m_PreviousBoardSquare(PreviousBoardSquare), m_CanCastle(CanCastle), m_MoveNum(MoveNum), m_SearchMoves(SearchMoves), HashSize(HashSize), m_MaxDepth(MaxDepth)
+IterativeDeepening::IterativeDeepening(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint16_t& MoveNum, std::vector<Move>& SearchMoves, const size_t& HashSize, Timer& Time, int16_t MaxDepth, bool WhiteTurn, bool* stop)
+	:Time(Time),m_BoardSquare(BoardSquare), m_PreviousBoardSquare(PreviousBoardSquare), m_CanCastle(CanCastle), m_MoveNum(MoveNum), m_SearchMoves(SearchMoves), HashSize(HashSize), m_MaxDepth(MaxDepth), WhiteTurn(WhiteTurn), stop(stop)
 {
 }
 
@@ -28,8 +29,10 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 	int32_t BestEval = -INT32_MAX;
 	Move BestMove;
 
-	while(Depth < m_MaxDepth)
+	while(Depth < m_MaxDepth and !(*stop))
 	{
+		auto LocalStart = std::chrono::high_resolution_clock::now();
+
 		Depth++;
 		Search search(m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, Depth, m_MoveNum, m_SearchMoves, HashSize);
 		auto bestMove = search.GetBestMoveWithEval(CurrentPV);
@@ -57,11 +60,12 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 			PrintInfo(Info);
 		}
 		
-		//if (std::chrono::duration_cast<std::chrono::milliseconds>(stop - start) >= TimeLeft())
-			//break;
+		if (std::chrono::duration_cast<std::chrono::milliseconds>(stop - start) >= TimeLeft(std::chrono::duration_cast<std::chrono::milliseconds>(stop - LocalStart)))
+			break;
 	}
 
 	RanASearch = true;
+	*stop = false;
 	return BestMove;
 }
 

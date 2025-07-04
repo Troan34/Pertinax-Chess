@@ -23,6 +23,8 @@ static constexpr std::string_view BTIME = "btime";
 static constexpr std::string_view WINC = "winc";
 static constexpr std::string_view BINC = "binc";
 
+static constexpr std::string_view STOP_COMMAND = "stop";
+
 
 
 struct UciVars_p
@@ -44,6 +46,7 @@ private:
 	std::atomic_bool QuitRequested{ false };
 	std::string Command;
 	UciVars_p Vars_p;
+	bool stop = false;
 
 	void RunCommand();
 	void Go();

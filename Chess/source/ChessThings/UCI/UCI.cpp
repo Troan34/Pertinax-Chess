@@ -113,13 +113,23 @@ void UCI::RunCommand()
 		if (Command.find(BINC, 2) != std::string::npos)
 			Vars_p.timer->BIncrement = static_cast<std::chrono::milliseconds>((Command.find(' ', Command.find(BINC)) + 1) - '0');
 		
-		Go();
+		if (stop)
+		{
+			std::cout << "Unable: Search running.\n";
+		}
+		std::thread Thread(&UCI::Go, this);
+		Thread.detach();
+	}
+
+	if (Command.find(STOP_COMMAND) != std::string::npos)
+	{
+		stop = true;
 	}
 }
 
 void UCI::Go()
 {
-	IterativeDeepening ID(*Vars_p.BoardSquare, *Vars_p.previousBoardSquare, *Vars_p.CanCastle, *Vars_p.MoveNum, *Vars_p.SearchMoves, *Vars_p.HashSize, *Vars_p.timer, *Vars_p.depth);
+	IterativeDeepening ID(*Vars_p.BoardSquare, *Vars_p.previousBoardSquare, *Vars_p.CanCastle, *Vars_p.MoveNum, *Vars_p.SearchMoves, *Vars_p.HashSize, *Vars_p.timer, *Vars_p.depth, !((*Vars_p.MoveNum) % 2), &stop);
 	ID.GetBestMove(true);
 	auto PV = ID.GetPV();
 

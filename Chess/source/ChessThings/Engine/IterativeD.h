@@ -18,13 +18,15 @@ private:
 	bool RanASearch = false;//exception handling
 	uint64_t NumOfNodesSearched;
 
-	std::chrono::milliseconds TimeLeft();
+	bool* stop;
+	bool WhiteTurn;
+	std::chrono::milliseconds TimeLeft(std::chrono::milliseconds TimeUsed);
 	void PrintInfo(UCIInfoes Info);
 
 public:
 
 	IterativeDeepening(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint16_t& MoveNum,
-		std::vector<Move>& SearchMoves, const size_t& HashSize, Timer& Time, int16_t MaxDepth);
+		std::vector<Move>& SearchMoves, const size_t& HashSize, Timer& Time, int16_t MaxDepth, bool WhiteTurn, bool* Stop);
 
 	Move GetBestMove(bool RanWithGo);
 	std::vector<Move> GetPV();

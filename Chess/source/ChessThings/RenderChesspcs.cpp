@@ -248,7 +248,8 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 	//Make engine move
 	if (WaitingForEnemyMove and EngineOn and !WaitingForUserPromotion)
 	{
-		IterativeDeepening ID(static_BoardSquare, previousBoardsquare, CanCastle, MoveNum, SearchMoves, HashSize, timer, EngineDepth);
+		bool stop = false;
+		IterativeDeepening ID(static_BoardSquare, previousBoardsquare, CanCastle, MoveNum, SearchMoves, HashSize, timer, EngineDepth, true, &stop);
 		Move BestMove = ID.GetBestMove(false);
 		GenerateLegalMoves LegalMoves(static_BoardSquare, &previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, false);
 		MakeMove(LegalMoves, BestMove, static_BoardSquare, previousBoardsquare, CanCastle);

@@ -77,7 +77,7 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 
 	if (!PreviousPV.empty())
 	{
-		Move PVMove = PreviousPV.back();
+		Move PVMove = PreviousPV.front();
 		MakeMove(LegalMoves, m_Hash, PVMove, BoardSquare, previousBoardSquare, CanCastle);
 
 		PreviousPV = GetVecTail(PreviousPV);
