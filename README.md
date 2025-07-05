@@ -1,10 +1,10 @@
-#Pertinax Chess
+# Pertinax Chess
 This is a Chess game, that has an UCI compatible engine made by myself.
 
-##Engine features 
+## Engine features 
 Negamax with alpha-beta pruning, TT.
 
-##Run the program
+## Run the program
 
 Requirements:
 OpenGL 4.0 (or higher).
