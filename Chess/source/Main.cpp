@@ -59,17 +59,7 @@ int main(void)
 
         Renderer renderer;
 
-        ImGui::CreateContext();
-        ImGui_ImplGlfw_InitForOpenGL(window, true);
-        ImGui::StyleColorsDark();
-        ImGui_ImplOpenGL3_Init();
-
-        test::Test* currentTest = nullptr;
-        test::TestMenu* testMenu = new test::TestMenu(currentTest);
-        currentTest = testMenu;
-
-        testMenu->RegisterTest<test::TestClearColor>("Clear Color");
-        testMenu->RegisterTest<test::TestTexture2D>("Pertinax");
+        test::TestTexture2D Chess;
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
@@ -78,25 +68,8 @@ int main(void)
             /* Render here */
             renderer.Clear();
 
-            ImGui_ImplOpenGL3_NewFrame();
-            ImGui_ImplGlfw_NewFrame();
-            ImGui::NewFrame();
-            if (currentTest)
-            {
-                currentTest->OnUpdate(0.0f);
-                currentTest->OnRender(window);
-                ImGui::Begin("Test");
-                if (currentTest != testMenu and ImGui::Button("<-"))
-                {
-                    delete currentTest;
-                    currentTest = testMenu;
-                }
-                currentTest->OnImGuiRender();
-                ImGui::End();
-            }
+            Chess.OnRender(window);
 
-            ImGui::Render();
-            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
 
@@ -104,12 +77,7 @@ int main(void)
             glfwPollEvents();
 
         }
-        delete currentTest;
-        if (currentTest != testMenu)
-            delete testMenu;
     }
-    ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext();
     glfwTerminate();
     return 0;
 }
