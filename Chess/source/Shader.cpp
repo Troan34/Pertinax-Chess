@@ -20,8 +20,30 @@ Shader::~Shader()
 
 ShaderProgramSource Shader::ParseShader(const std::string& filepath)
 {
-    std::ifstream stream(filepath);
+    // 1. Get executable directory
+    static std::string basePath = [] {
+        char buffer[MAX_PATH];
+        GetModuleFileNameA(NULL, buffer, MAX_PATH);
+        std::filesystem::path exePath(buffer);
+        return exePath.parent_path().string();
+        }();
 
+    // 2. Construct reliable path
+    std::string fullPath = basePath + "\\res\\shaders\\" + std::filesystem::path(filepath).filename().string();
+
+    // 3. Verify file exists
+    if (!std::filesystem::exists(fullPath)) {
+        std::cerr << "ERROR: Shader file not found: " << fullPath << "\n";
+        // Fallback to VS development path for debug builds
+#ifdef _DEBUG
+        fullPath = "../../" + filepath;  // Adjust relative to your project structure
+        if (!std::filesystem::exists(fullPath))
+#endif
+            return { "", "" };
+    }
+
+    std::ifstream stream(filepath);
+    
     enum class ShaderType
     {
         NONE = -1, VERTEX = 0, FRAGMENT = 1
@@ -36,7 +58,9 @@ ShaderProgramSource Shader::ParseShader(const std::string& filepath)
         if (line.find("#shader") != std::string::npos)
         {   //set mode to vertex
             if (line.find("vertex") != std::string::npos)
+            {
                 type = ShaderType::VERTEX;
+            }
             //set mode to fragment
             else if (line.find("fragment") != std::string::npos)
                 type = ShaderType::FRAGMENT;
@@ -46,8 +70,10 @@ ShaderProgramSource Shader::ParseShader(const std::string& filepath)
             ss[(int)type] << line << '\n';
         }
     }
+
     return { ss[0].str(), ss[1].str() };
 }
+
 unsigned int Shader::CompileShader(unsigned int type, const std::string& source) {
     GLCall(unsigned int id = glCreateShader(type));
     const char* src = source.c_str(); //source has to exist, else points at random memory

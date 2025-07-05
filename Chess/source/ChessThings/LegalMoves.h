@@ -25,10 +25,10 @@ constexpr std::array<std::array<uint8_t, 8>, 64> fillNumOfSquaresUntilEdge()
 			l_NumOfSquaresUntilEdge[squareIndex][1] = numSouth;
 			l_NumOfSquaresUntilEdge[squareIndex][2] = numWest;
 			l_NumOfSquaresUntilEdge[squareIndex][3] = numEast;
-			l_NumOfSquaresUntilEdge[squareIndex][4] = std::min(numNorth, numWest);
-			l_NumOfSquaresUntilEdge[squareIndex][5] = std::min(numSouth, numEast);
-			l_NumOfSquaresUntilEdge[squareIndex][6] = std::min(numNorth, numEast);
-			l_NumOfSquaresUntilEdge[squareIndex][7] = std::min(numSouth, numWest);
+			l_NumOfSquaresUntilEdge[squareIndex][4] = min(numNorth, numWest);
+			l_NumOfSquaresUntilEdge[squareIndex][5] = min(numSouth, numEast);
+			l_NumOfSquaresUntilEdge[squareIndex][6] = min(numNorth, numEast);
+			l_NumOfSquaresUntilEdge[squareIndex][7] = min(numSouth, numWest);
 
 		}
 	}

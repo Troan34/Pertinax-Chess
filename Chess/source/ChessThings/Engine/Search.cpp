@@ -63,8 +63,8 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 	if (depth == 0)
 	{
 		evaluator.SetParameters(BoardSquare, previousBoardSquare, CanCastle, MoveNum);
-		Evaluation = std::max(Evaluation, evaluator.Evaluate());//to change with a quiescent fun
-		alpha = std::max(alpha, Evaluation);
+		Evaluation = max(Evaluation, evaluator.Evaluate());//to change with a quiescent fun
+		alpha = max(alpha, Evaluation);
 		NodesVisited++;
 		return Evaluation;
 	}
@@ -83,7 +83,7 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 		PreviousPV = GetVecTail(PreviousPV);
 
 		auto Result = NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, PreviousPV);
-		Evaluation = std::max(Evaluation, -Result.Eval);
+		Evaluation = max(Evaluation, -Result.Eval);
 
 		BoardSquare = cBoardSquare;
 		previousBoardSquare = cPreviousBoardSquare;
@@ -110,7 +110,7 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 		MakeMove(LegalMoves, m_Hash,Move_, BoardSquare, previousBoardSquare, CanCastle);
 
 		auto Result = NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, PreviousPV);
-		Evaluation = std::max(Evaluation, -Result.Eval);
+		Evaluation = max(Evaluation, -Result.Eval);
 
 
 		//Make a TT entry

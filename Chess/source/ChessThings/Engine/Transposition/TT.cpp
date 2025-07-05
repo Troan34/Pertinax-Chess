@@ -21,10 +21,10 @@ bool TranspositionTable::TTprobe(int32_t& alpha, int32_t& beta, int32_t& eval, c
 		switch (GetBound(TTentry->second.AgeBound))
 		{
 		case(LOWER_BOUND):
-			alpha = std::max(alpha, TTentry->second.Evaluation);
+			alpha = max(alpha, TTentry->second.Evaluation);
 			break;
 		case(UPPER_BOUND):
-			beta = std::min(beta, TTentry->second.Evaluation);
+			beta = min(beta, TTentry->second.Evaluation);
 			break;
 		case(EXACT):
 			break;
