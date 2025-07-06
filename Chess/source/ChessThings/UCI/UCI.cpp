@@ -14,7 +14,7 @@ void UCI::RunCommand()
 {
 	if (Command.find("isready") != std::string::npos)
 		std::cout << "readyok\n";
-	if (Command.find("setoption name") != std::string::npos)
+	else if (Command.find("setoption name") != std::string::npos)
 	{
 		if (Command.substr(15, 5) == DEPTH_COMMAND)
 		{
@@ -28,6 +28,26 @@ void UCI::RunCommand()
 		if (Command.substr(15, 8) == ENGINE_ON_COMMAND)
 			*Vars_p.EngineOn = !*Vars_p.EngineOn;
 
+		if (Command.find(HASH_COMMAND, 15) != std::string::npos)
+		{
+			*Vars_p.HashSize = stoi(Command.substr(Command.find(HASH_COMMAND, 15) + 5)) * 1000000;
+		}
+
+		if (Command.find(GUI_COMMAND) != std::string::npos)
+		{
+			*Vars_p.GUI = !*Vars_p.GUI;
+		}
+	}
+	else if (Command == "uci") //UCI mode
+	{
+		std::cout <<
+			"id name Pertinax Chess 0.1\n" <<
+			"id author R.Bukaci (github.com/Troan34)\n\n" <<
+			"option name type spin Depth default " << static_cast<int>(*Vars_p.depth) << " min 2 max 255\n" <<
+			"option name type button EngineOn default On\n" <<
+			"option name type spin Hash default " << *Vars_p.HashSize / 1000000 << " min 1 max 512\n" <<
+			"option name type button Gui default Off\n" << 
+			"uciok\n" << std::endl;
 	}
 
 	if (Command.find(UCINEWGAME_COMMAND) != std::string::npos)//this should do other things, but i will work on that later
@@ -49,7 +69,7 @@ void UCI::RunCommand()
 		{
 			if (Command.find(FEN_COMMAND, 8) != std::string::npos)
 			{
-				auto Fen = Command.substr(8, std::string::npos);
+				auto Fen = Command.substr(Command.find(FEN_COMMAND, 8) + 4, std::string::npos);
 				Board board{ Fen };
 				*Vars_p.BoardSquare = board.GetPositionFromFEN();
 				*Vars_p.BoardSquare = board.GetPositionFromFEN();
@@ -105,13 +125,13 @@ void UCI::RunCommand()
 
 		
 		if(Command.find(WTIME, 2) != std::string::npos)
-			Vars_p.timer->WTime = static_cast<std::chrono::milliseconds>((Command.find(' ', Command.find(WTIME)) + 1) - '0');
+			Vars_p.timer->WTime = static_cast<std::chrono::milliseconds>(stoi(Command.substr(Command.find(' ', Command.find(WTIME)) + 1, Command.find(' ', Command.find(' ', Command.find(WTIME)) + 1))));
 		if (Command.find(BTIME, 2) != std::string::npos)
-			Vars_p.timer->BTime = static_cast<std::chrono::milliseconds>((Command.find(' ', Command.find(BTIME)) + 1) - '0');
+			Vars_p.timer->BTime = static_cast<std::chrono::milliseconds>(stoi(Command.substr(Command.find(' ', Command.find(BTIME)) + 1, Command.find(' ', Command.find(' ', Command.find(BTIME)) + 1))));
 		if (Command.find(WINC, 2) != std::string::npos)
-			Vars_p.timer->WIncrement = static_cast<std::chrono::milliseconds>((Command.find(' ', Command.find(WINC)) + 1) - '0');
+			Vars_p.timer->WIncrement = static_cast<std::chrono::milliseconds>(stoi(Command.substr(Command.find(' ', Command.find(WINC)) + 1, Command.find(' ', Command.find(' ', Command.find(WINC)) + 1))));
 		if (Command.find(BINC, 2) != std::string::npos)
-			Vars_p.timer->BIncrement = static_cast<std::chrono::milliseconds>((Command.find(' ', Command.find(BINC)) + 1) - '0');
+			Vars_p.timer->BIncrement = static_cast<std::chrono::milliseconds>(stoi(Command.substr(Command.find(' ', Command.find(BINC)) + 1, Command.find(' ', Command.find(' ', Command.find(BINC)) + 1))));
 		
 		if (stop)
 		{
@@ -130,7 +150,8 @@ void UCI::RunCommand()
 void UCI::Go()
 {
 	IterativeDeepening ID(*Vars_p.BoardSquare, *Vars_p.previousBoardSquare, *Vars_p.CanCastle, *Vars_p.MoveNum, *Vars_p.SearchMoves, *Vars_p.HashSize, *Vars_p.timer, *Vars_p.depth, !((*Vars_p.MoveNum) % 2), &stop);
-	ID.GetBestMove(true);
+	std::string Bestmove = Board::Move2ALG(ID.GetBestMove(true));
+	std::cout << "bestmove " << Bestmove << '\n';
 	auto PV = ID.GetPV();
 
 }

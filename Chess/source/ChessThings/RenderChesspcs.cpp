@@ -29,12 +29,14 @@ static canCastle CanCastle;
 static std::array<uint8_t, 64Ui64> static_BoardSquare;
 static std::array<uint8_t, 64Ui64> previousBoardsquare;
 static bool StartEngine = false;
+static bool GUI = false;
+static bool PreviousGuiOption = true;
 	//Engine vars
 	static bool EngineOn = true;
 	static uint8_t EngineDepth = 10;
 	static std::vector<Move> SearchMoves{};
 	static std::chrono::milliseconds WTime(999999);
-	static Timer timer(WTime, WTime, WTime, WTime);//max(for now)
+	static Timer timer(WTime, WTime, static_cast<std::chrono::milliseconds>(0), static_cast<std::chrono::milliseconds>(0));//max(for now)
 	static size_t HashSize = 64000000;//default 64MB
 
 static void RunUCI()//this is a workaround
@@ -49,10 +51,12 @@ static void RunUCI()//this is a workaround
 	Vars_p.SearchMoves = &SearchMoves;
 	Vars_p.timer = &timer;
 	Vars_p.HashSize = &HashSize;
+	Vars_p.GUI = &GUI;
 	UCI uci(Vars_p);
 }
 
-RenderChessPieces::RenderChessPieces()
+RenderChessPieces::RenderChessPieces(GLFWwindow* window)
+	:window(window)
 {
 
 }
@@ -182,11 +186,17 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 			std::cout <<
 				"id name Pertinax Chess 0.1\n" <<
 				"id author R.Bukaci (github.com/Troan34)\n\n" <<
-				"option name type spin depth default " << static_cast<int>(EngineDepth) << " min 2 max 255\n" <<
-				"option name type button EngineOn default On\n"
+				"option name type spin Depth default " << static_cast<int>(EngineDepth) << " min 2 max 255\n" <<
+				"option name type button EngineOn default On\n" <<
+				"option name type spin Hash default " << HashSize / 1000000 << " min 1 max 512\n" <<
+				"option name type button Gui default Off\n" <<
 				"uciok\n" << std::endl;
 
 			RunCommandThread = false;
+		}
+		else if (Command.find("gui") != std::string::npos)
+		{
+			GUI = !GUI;
 		}
 		else
 		{
@@ -211,7 +221,21 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 	bool isNextMoveForWhite = true;
 	if (MoveNum % 2 != 0)
 		isNextMoveForWhite = false;
+	
 
+	if (GUI == PreviousGuiOption)
+	{
+		if (GUI)
+		{
+			glfwShowWindow(window);
+			PreviousGuiOption = !GUI;
+		}
+		else
+		{
+			glfwHideWindow(window);
+			PreviousGuiOption = !GUI;
+		}
+	}
 	
 	//Legal Moves
 	GenerateLegalMoves* p_LegalMoves = nullptr;
@@ -627,7 +651,7 @@ void RenderChessPieces::WasLeftButtonPressed()
 		g_mouseInput.WasLeftButtonPressed = false;
 }
 
-void RenderChessPieces::GetMouseInput(GLFWwindow* window)
+void RenderChessPieces::GetMouseInput()
 {
 	glfwSetCursorPosCallback(window, cursorPositionCallBack);
 	glfwSetMouseButtonCallback(window, mouseButtonCallBack);

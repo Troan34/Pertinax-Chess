@@ -5,7 +5,8 @@ std::chrono::milliseconds IterativeDeepening::TimeLeft(std::chrono::milliseconds
 {
 	std::chrono::milliseconds* TimeLeft = WhiteTurn ? &Time.WTime : &Time.BTime;
 	*TimeLeft += WhiteTurn ? Time.WIncrement : Time.BIncrement;
-	return *TimeLeft / (90 - m_MoveNum);//to algorithm-fy
+	*TimeLeft -= TimeUsed;
+	return (*TimeLeft + TimeUsed) / (90 - m_MoveNum);//to algorithm-fy
 }
 
 void IterativeDeepening::PrintInfo(UCIInfoes Info)

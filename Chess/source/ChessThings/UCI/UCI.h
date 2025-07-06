@@ -6,8 +6,10 @@
 #include <thread>
 
 //options
-static constexpr std::string_view DEPTH_COMMAND = "depth";
+static constexpr std::string_view DEPTH_COMMAND = "Depth";
 static constexpr std::string_view ENGINE_ON_COMMAND = "EngineOn";
+static constexpr std::string_view HASH_COMMAND = "Hash";
+static constexpr std::string_view GUI_COMMAND = "Gui";
 
 //position commands
 static constexpr std::string_view POSITION_COMMAND = "position";
@@ -31,6 +33,7 @@ struct UciVars_p
 {
 	uint8_t* depth;
 	bool* EngineOn;
+	bool* GUI;
 	std::array<uint8_t, 64Ui64>* BoardSquare;
 	std::array<uint8_t, 64Ui64>* previousBoardSquare;//also used to 'simulate' an e.p. opportunity
 	uint32_t* MoveNum;

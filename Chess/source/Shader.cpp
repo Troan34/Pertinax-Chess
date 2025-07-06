@@ -20,29 +20,26 @@ Shader::~Shader()
 
 ShaderProgramSource Shader::ParseShader(const std::string& filepath)
 {
-    // 1. Get executable directory
+
     static std::string basePath = [] {
         char buffer[MAX_PATH];
         GetModuleFileNameA(NULL, buffer, MAX_PATH);
         std::filesystem::path exePath(buffer);
-        return exePath.parent_path().string();
+        exePath = exePath.parent_path();
+        if (exePath.string().find("Versions") != std::string::npos)
+        {
+            exePath = exePath.parent_path();
+        }
+        return exePath.string();
         }();
 
-    // 2. Construct reliable path
     std::string fullPath = basePath + "\\res\\shaders\\" + std::filesystem::path(filepath).filename().string();
 
-    // 3. Verify file exists
-    if (!std::filesystem::exists(fullPath)) {
-        std::cerr << "ERROR: Shader file not found: " << fullPath << "\n";
-        // Fallback to VS development path for debug builds
 #ifdef _DEBUG
-        fullPath = "../../" + filepath;  // Adjust relative to your project structure
-        if (!std::filesystem::exists(fullPath))
+    fullPath = filepath;
 #endif
-            return { "", "" };
-    }
 
-    std::ifstream stream(filepath);
+    std::ifstream stream(fullPath);
     
     enum class ShaderType
     {

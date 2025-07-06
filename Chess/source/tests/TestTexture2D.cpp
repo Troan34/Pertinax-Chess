@@ -60,6 +60,7 @@ namespace test {
 		int samplers[16] = { 0, 1, 2, 3, 4, 5 ,6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
 		m_Shader->SetUniform1iv("u_Textures", 16, *samplers);
 
+		/*
 		std::cout << "----------------------------------------Welcome to----------------------------------------\n" <<
 			"_________  _________  _________  _________  __  __       __       __      __      __\n" <<
 			"|        | |        | |   __   | |___  ___| | | | \\      | |     //\\\\     \\ \\    / /\n" <<
@@ -73,6 +74,8 @@ namespace test {
 		std::cout << "'word' means the command is the word without the backticks\n" <<
 			"{word} Number(without typing curly brackets), unsigned unless specified, \"word\" specifies the value\n"
 			"Example: 'perft' {depth} = perft 5\n"<< std::endl;
+		*/
+		std::cout << "Welcome to Pertinax by R.Bukaci (github.com/Troan34)\n";
 		std::cout << "'help' for commands" << std::endl;
 
 
@@ -90,8 +93,8 @@ namespace test {
 	void TestTexture2D::OnRender(GLFWwindow* window)
 	{
 		static bool wasBoardSquareSet = false;
-		RenderChessPieces renderChessPieces;
-		renderChessPieces.GetMouseInput(window);
+		RenderChessPieces renderChessPieces(window);
+		renderChessPieces.GetMouseInput();
 		//FEN is in header file
 		if (!wasBoardSquareSet)
 		{
