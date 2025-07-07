@@ -32,7 +32,7 @@ static bool StartEngine = false;
 static bool GUI = false;
 static bool PreviousGuiOption = true;
 	//Engine vars
-	static bool EngineOn = true;
+	static bool EngineOn = false;
 	static uint8_t EngineDepth = 10;
 	static std::vector<Move> SearchMoves{};
 	static std::chrono::milliseconds WTime(999999);

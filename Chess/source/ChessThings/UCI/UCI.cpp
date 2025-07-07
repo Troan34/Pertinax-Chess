@@ -87,7 +87,7 @@ void UCI::RunCommand()
 			{
 				if (Index > SIZE_MAX - 20)//if Index overflowed, it means we are at the end of string
 					break;
-				Move move = Board::LongALG2Move(Command.substr(Index + 1, Command.find(' ', Index + 1)));
+				Move move = Board::LongALG2Move(Command.substr(Index + 1, Command.find(' ', Index + 1) - Index - 1));
 				Index = Command.find(' ', Index + 1);//will overflow when it reaches the end
 				Board::MakeMove(move, *Vars_p.BoardSquare, *Vars_p.previousBoardSquare, *Vars_p.CanCastle);
 				*Vars_p.MoveNum += 1;

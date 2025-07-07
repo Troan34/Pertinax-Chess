@@ -1,330 +1,396 @@
-[INFO  ] [13:37:01.932953] <   > fastchess --- fastchess alpha 1.4.0 20250702-2a80921
-[INFO  ] [13:37:01.933754] <   > fastchess --- Setting seed to: 13786451193142396701
-[INFO  ] [13:37:01.933842] <   > fastchess --- Starting tournament...
-[Engine] [13:37:01.971158] <  2> Engine1 <--- uci
-[Engine] [13:37:02.186334] <  2> Engine1 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
-[Engine] [13:37:02.186397] <  2> Engine1 ---> 'help' for commands
-[Engine] [13:37:02.186425] <  2> Engine1 ---> id name Pertinax Chess 0.1
-[Engine] [13:37:02.186460] <  2> Engine1 ---> id author R.Bukaci (github.com/Troan34)
-[Engine] [13:37:02.186477] <  2> Engine1 ---> option name type spin Depth default 10 min 2 max 255
-[Engine] [13:37:02.186494] <  2> Engine1 ---> option name type button EngineOn default On
-[Engine] [13:37:02.186509] <  2> Engine1 ---> option name type spin Hash default 64 min 1 max 512
-[Engine] [13:37:02.186523] <  2> Engine1 ---> option name type button Gui default Off
-[Engine] [13:37:02.186538] <  2> Engine1 ---> uciok
-[Engine] [13:37:02.230848] <  2> Engine2 <--- uci
-[Engine] [13:37:02.455919] <  2> Engine2 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
-[Engine] [13:37:02.455990] <  2> Engine2 ---> 'help' for commands
-[Engine] [13:37:02.456019] <  2> Engine2 ---> id name Pertinax Chess 0.1
-[Engine] [13:37:02.456038] <  2> Engine2 ---> id author R.Bukaci (github.com/Troan34)
-[Engine] [13:37:02.456057] <  2> Engine2 ---> option name type spin Depth default 10 min 2 max 255
-[Engine] [13:37:02.456074] <  2> Engine2 ---> option name type button EngineOn default On
-[Engine] [13:37:02.456088] <  2> Engine2 ---> option name type spin Hash default 64 min 1 max 512
-[Engine] [13:37:02.456103] <  2> Engine2 ---> option name type button Gui default Off
-[Engine] [13:37:02.456117] <  2> Engine2 ---> uciok
-[Engine] [13:37:02.456142] <  2> Engine1 <--- ucinewgame
-[Engine] [13:37:02.456176] <  2> Engine1 <--- isready
-[Engine] [13:37:02.456221] <  2> Engine1 ---> readyok
-[Engine] [13:37:02.456248] <  2> Engine2 <--- ucinewgame
-[Engine] [13:37:02.456269] <  2> Engine2 <--- isready
-[Engine] [13:37:02.456305] <  2> Engine2 ---> readyok
-[Engine] [13:37:02.456333] <  2> Engine1 <--- isready
-[Engine] [13:37:02.456377] <  2> Engine1 ---> readyok
-[Engine] [13:37:02.456407] <  2> Engine1 <--- isready
-[Engine] [13:37:02.456441] <  2> Engine1 ---> readyok
-[Engine] [13:37:02.456460] <  2> Engine1 <--- position startpos
-[Engine] [13:37:02.456481] <  2> Engine1 <--- isready
-[Engine] [13:37:02.456515] <  2> Engine1 ---> readyok
-[Engine] [13:37:02.456540] <  2> Engine1 <--- go wtime 10500 btime 10500 winc 500 binc 500
-[Engine] [13:37:02.467120] <  2> Engine1 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv a2a4 
-[Engine] [13:37:02.480370] <  2> Engine1 ---> info depth 2 nodes 244 nps 0 hashfull 0 pv b1a3 a7a5 
-[Engine] [13:37:02.499485] <  2> Engine1 ---> info depth 3 nodes 1674 nps 0 hashfull 0 pv b1a3 a7a5 a3b5 
-[Engine] [13:37:02.717429] <  2> Engine1 ---> info depth 4 nodes 27319 nps 0 hashfull 0 pv b1a3 e7e5 a3b1 e5e4 
-[Engine] [13:37:02.717564] <  2> Engine1 ---> bestmove a2a4
-[Engine] [13:37:02.717609] <  2> Engine1 <--- isready
-[Engine] [13:37:02.717659] <  2> Engine1 ---> readyok
-[Engine] [13:37:02.718027] <  2> Engine2 <--- isready
-[Engine] [13:37:02.718136] <  2> Engine2 ---> readyok
-[Engine] [13:37:02.718178] <  2> Engine2 <--- position startpos moves a2a4
-[Engine] [13:37:02.718230] <  2> Engine2 <--- isready
-[Engine] [13:37:02.718298] <  2> Engine2 ---> readyok
-[Engine] [13:37:02.718344] <  2> Engine2 <--- go wtime 10739 btime 10500 winc 500 binc 500
-[Engine] [13:37:02.728621] <  2> Engine2 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv a2a4 
-[Engine] [13:37:02.741394] <  2> Engine2 ---> info depth 2 nodes 244 nps 0 hashfull 0 pv b1a3 a7a5 
-[Engine] [13:37:02.760137] <  2> Engine2 ---> info depth 3 nodes 1674 nps 0 hashfull 0 pv b1a3 a7a5 a3b5 
-[Engine] [13:37:02.982714] <  2> Engine2 ---> info depth 4 nodes 27319 nps 0 hashfull 0 pv b1a3 e7e5 a3b1 e5e4 
-[Engine] [13:37:02.982810] <  2> Engine2 ---> bestmove a2a4
-[Engine] [13:37:02.982904] <  2> Engine2 <--- isready
-[Engine] [13:37:02.982959] <  2> Engine2 ---> readyok
-[Engine] [13:37:02.983430] <  2> Engine2 <--- ucinewgame
-[Engine] [13:37:02.983468] <  2> Engine2 <--- isready
-[Engine] [13:37:02.983539] <  2> Engine2 ---> readyok
-[Engine] [13:37:02.983572] <  2> Engine1 <--- ucinewgame
-[Engine] [13:37:02.983597] <  2> Engine1 <--- isready
-[Engine] [13:37:02.983633] <  2> Engine1 ---> readyok
-[Engine] [13:37:02.983653] <  2> Engine2 <--- isready
-[Engine] [13:37:02.983688] <  2> Engine2 ---> readyok
-[Engine] [13:37:02.983710] <  2> Engine2 <--- isready
-[Engine] [13:37:02.983745] <  2> Engine2 ---> readyok
-[Engine] [13:37:02.983764] <  2> Engine2 <--- position startpos
-[Engine] [13:37:02.983784] <  2> Engine2 <--- isready
-[Engine] [13:37:02.983818] <  2> Engine2 ---> readyok
-[Engine] [13:37:02.983837] <  2> Engine2 <--- go wtime 10500 btime 10500 winc 500 binc 500
-[Engine] [13:37:02.996357] <  2> Engine2 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv a2a4 
-[Engine] [13:37:03.009535] <  2> Engine2 ---> info depth 2 nodes 244 nps 0 hashfull 0 pv b1a3 a7a5 
-[Engine] [13:37:03.028854] <  2> Engine2 ---> info depth 3 nodes 1674 nps 0 hashfull 0 pv b1a3 a7a5 a3b5 
-[Engine] [13:37:03.254788] <  2> Engine2 ---> info depth 4 nodes 27319 nps 0 hashfull 0 pv b1a3 e7e5 a3b1 e5e4 
-[Engine] [13:37:03.254893] <  2> Engine2 ---> bestmove a2a4
-[Engine] [13:37:03.254930] <  2> Engine2 <--- isready
-[Engine] [13:37:03.254991] <  2> Engine2 ---> readyok
-[Engine] [13:37:03.255330] <  2> Engine1 <--- isready
-[Engine] [13:37:03.255419] <  2> Engine1 ---> readyok
-[Engine] [13:37:03.255464] <  2> Engine1 <--- position startpos moves a2a4
-[Engine] [13:37:03.255497] <  2> Engine1 <--- isready
-[Engine] [13:37:03.255537] <  2> Engine1 ---> readyok
-[Engine] [13:37:03.255561] <  2> Engine1 <--- go wtime 10729 btime 10500 winc 500 binc 500
-[Engine] [13:37:03.268114] <  2> Engine1 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv a2a4 
-[Engine] [13:37:03.281101] <  2> Engine1 ---> info depth 2 nodes 244 nps 0 hashfull 0 pv b1a3 a7a5 
-[Engine] [13:37:03.299957] <  2> Engine1 ---> info depth 3 nodes 1674 nps 0 hashfull 0 pv b1a3 a7a5 a3b5 
-[Engine] [13:37:03.519092] <  2> Engine1 ---> info depth 4 nodes 27319 nps 0 hashfull 0 pv b1a3 e7e5 a3b1 e5e4 
-[Engine] [13:37:03.519191] <  2> Engine1 ---> bestmove a2a4
-[Engine] [13:37:03.519239] <  2> Engine1 <--- isready
-[Engine] [13:37:03.519298] <  2> Engine1 ---> readyok
-[Engine] [13:37:03.938657] <  1> Engine1 <--- quit
-[Engine] [13:37:03.938851] <  1> Engine2 <--- quit
-[INFO  ] [13:37:03.939135] <   > fastchess --- Finished match
+[INFO  ] [21:33:22.633825] <   > fastchess --- fastchess alpha 1.4.0 20250702-2a80921
+[INFO  ] [21:33:22.634792] <   > fastchess --- Setting seed to: 5567709843515602202
+[INFO  ] [21:33:22.636970] <   > fastchess --- PLEASE submit a bug report to https://github.com/Disservin/fastchess/issues/ and include command line parameters and possibly the stdout/log of fastchess.
 
-[INFO  ] [13:37:03.939219] <   > fastchess --- Total Time: 00:00:02 (hours:minutes:seconds)
+[INFO  ] [21:33:22.637046] <   > fastchess --- Invalid number of players, rounds, or games per round
 
+[INFO  ] [21:33:44.451139] <   > fastchess --- fastchess alpha 1.4.0 20250702-2a80921
+[INFO  ] [21:33:44.451899] <   > fastchess --- Setting seed to: 12315223449252133613
+[INFO  ] [21:33:44.451982] <   > fastchess --- Starting tournament...
+[Engine] [21:33:44.518069] <  2> Engine1 <--- uci
+[Engine] [21:33:44.746247] <  2> Engine1 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [21:33:44.746313] <  2> Engine1 ---> 'help' for commands
+[Engine] [21:33:44.746343] <  2> Engine1 ---> id name Pertinax Chess 0.1
+[Engine] [21:33:44.746379] <  2> Engine1 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [21:33:44.746403] <  2> Engine1 ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [21:33:44.746428] <  2> Engine1 ---> option name type button EngineOn default On
+[Engine] [21:33:44.746462] <  2> Engine1 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [21:33:44.746489] <  2> Engine1 ---> option name type button Gui default Off
+[Engine] [21:33:44.746503] <  2> Engine1 ---> uciok
+[Engine] [21:33:44.793175] <  2> Engine2 <--- uci
+[Engine] [21:33:44.991484] <  2> Engine2 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [21:33:44.991548] <  2> Engine2 ---> 'help' for commands
+[Engine] [21:33:44.991673] <  2> Engine2 ---> id name Pertinax Chess 0.1
+[Engine] [21:33:44.991697] <  2> Engine2 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [21:33:44.991713] <  2> Engine2 ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [21:33:44.991728] <  2> Engine2 ---> option name type button EngineOn default On
+[Engine] [21:33:44.991742] <  2> Engine2 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [21:33:44.991757] <  2> Engine2 ---> option name type button Gui default Off
+[Engine] [21:33:44.991772] <  2> Engine2 ---> uciok
+[Engine] [21:33:44.991796] <  2> Engine1 <--- ucinewgame
+[Engine] [21:33:44.991827] <  2> Engine1 <--- isready
+[Engine] [21:33:44.991877] <  2> Engine1 ---> readyok
+[Engine] [21:33:44.991902] <  2> Engine2 <--- ucinewgame
+[Engine] [21:33:44.991923] <  2> Engine2 <--- isready
+[Engine] [21:33:44.991961] <  2> Engine2 ---> readyok
+[Engine] [21:33:44.991983] <  2> Engine1 <--- isready
+[Engine] [21:33:44.992043] <  2> Engine1 ---> readyok
+[Engine] [21:33:44.992103] <  2> Engine1 <--- isready
+[Engine] [21:33:44.992178] <  2> Engine1 ---> readyok
+[Engine] [21:33:44.992232] <  2> Engine1 <--- position startpos
+[Engine] [21:33:44.992262] <  2> Engine1 <--- isready
+[Engine] [21:33:44.992316] <  2> Engine1 ---> readyok
+[Engine] [21:33:44.992346] <  2> Engine1 <--- go wtime 10500 btime 10500 winc 500 binc 500
+[Engine] [21:33:45.003028] <  2> Engine1 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv a2a4 
+[Engine] [21:33:45.016287] <  2> Engine1 ---> info depth 2 nodes 244 nps 0 hashfull 0 pv b1a3 a7a5 
+[Engine] [21:33:45.034810] <  2> Engine1 ---> info depth 3 nodes 1674 nps 0 hashfull 0 pv b1a3 a7a5 a3b5 
+[Engine] [21:33:45.259567] <  2> Engine1 ---> info depth 4 nodes 27319 nps 0 hashfull 0 pv b1a3 e7e5 a3b1 e5e4 
+[Engine] [21:33:45.259666] <  2> Engine1 ---> bestmove a2a4
+[Engine] [21:33:45.259689] <  2> Engine1 <--- isready
+[Engine] [21:33:45.259733] <  2> Engine1 ---> readyok
+[Engine] [21:33:45.260016] <  2> Engine2 <--- isready
+[Engine] [21:33:45.260091] <  2> Engine2 ---> readyok
+[Engine] [21:33:45.260132] <  2> Engine2 <--- position startpos moves a2a4
+[Engine] [21:33:45.260161] <  2> Engine2 <--- isready
+[Engine] [21:33:45.260203] <  2> Engine2 ---> readyok
+[Engine] [21:33:45.260229] <  2> Engine2 <--- go wtime 10733 btime 10500 winc 500 binc 500
+[Engine] [21:33:45.270358] <  2> Engine2 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv e7e5 
+[Engine] [21:33:45.282483] <  2> Engine2 ---> info depth 2 nodes 95 nps 0 hashfull 0 pv e7e5 c2c4 
+[Engine] [21:33:45.301471] <  2> Engine2 ---> info depth 3 nodes 1824 nps 0 hashfull 0 pv e7e5 c2c4 e5e4 
+[Engine] [21:33:45.332420] <  2> Engine2 ---> info depth 4 nodes 2687 nps 0 hashfull 0 pv e7e5 c2c4 e5e4 h2h4 
+[Engine] [21:33:48.384333] <  2> Engine2 ---> info depth 5 nodes 638953 nps 212984 hashfull 12 pv b7b6 a4a5 b6a5 a1a5 h7h5 
+[Engine] [21:33:48.384433] <  2> Engine2 ---> bestmove b7b6
+[Engine] [21:33:48.384462] <  2> Engine2 <--- isready
+[Engine] [21:33:48.384512] <  2> Engine2 ---> readyok
+[Engine] [21:33:48.384835] <  2> Engine1 <--- isready
+[Engine] [21:33:48.384905] <  2> Engine1 ---> readyok
+[Engine] [21:33:48.384942] <  2> Engine1 <--- position startpos moves a2a4 b7b6
+[Engine] [21:33:48.384971] <  2> Engine1 <--- isready
+[Engine] [21:33:48.385011] <  2> Engine1 ---> readyok
+[Engine] [21:33:48.385036] <  2> Engine1 <--- go wtime 10733 btime 7876 winc 500 binc 500
+[Engine] [21:33:48.397524] <  2> Engine1 ---> info depth 1 nodes 63 nps 0 hashfull 0 pv c2c4 
+[Engine] [21:33:48.410328] <  2> Engine1 ---> info depth 2 nodes 102 nps 0 hashfull 0 pv c2c4 b6b5 
+[Engine] [21:33:48.445672] <  2> Engine1 ---> info depth 3 nodes 5765 nps 0 hashfull 0 pv c2c4 e7e5 b2b4 
+[Engine] [21:33:48.753894] <  2> Engine1 ---> info depth 4 nodes 44035 nps 0 hashfull 2 pv a4a5 b6a5 a1a5 h7h5 
+[Engine] [21:33:48.753976] <  2> Engine1 ---> bestmove a4a5
+[Engine] [21:33:48.754002] <  2> Engine1 <--- isready
+[Engine] [21:33:48.754051] <  2> Engine1 ---> readyok
+[Engine] [21:33:48.754324] <  2> Engine2 <--- isready
+[Engine] [21:33:48.754382] <  2> Engine2 ---> readyok
+[Engine] [21:33:48.754404] <  2> Engine2 <--- position startpos moves a2a4 b7b6 a4a5
+[Engine] [21:33:48.754426] <  2> Engine2 <--- isready
+[Engine] [21:33:48.754461] <  2> Engine2 ---> readyok
+[Engine] [21:33:48.754496] <  2> Engine2 <--- go wtime 10865 btime 7876 winc 500 binc 500
+[Engine] [21:33:48.769838] <  2> Engine2 ---> info depth 1 nodes 63 nps 0 hashfull 0 pv b6a5 
+[Engine] [21:33:48.781963] <  2> Engine2 ---> info depth 2 nodes 86 nps 0 hashfull 0 pv b6a5 a1a5 
+[Engine] [21:33:48.799696] <  2> Engine2 ---> info depth 3 nodes 1486 nps 0 hashfull 0 pv b6a5 a1a5 h7h5 
+[Engine] [21:33:48.886205] <  2> Engine2 ---> info depth 4 nodes 15265 nps 0 hashfull 0 pv b6b5 g2g4 b5b4 e2e4 
+[Engine] [21:33:48.886323] <  2> Engine2 ---> bestmove b6b5
+[Engine] [21:33:48.886363] <  2> Engine2 <--- isready
+[Engine] [21:33:48.886407] <  2> Engine2 ---> readyok
+[Engine] [21:33:48.886775] <  2> Engine1 <--- isready
+[Engine] [21:33:48.886847] <  2> Engine1 ---> readyok
+[Engine] [21:33:48.886871] <  2> Engine1 <--- position startpos moves a2a4 b7b6 a4a5 b6b5
+[Engine] [21:33:48.886894] <  2> Engine1 <--- isready
+[Engine] [21:33:48.886928] <  2> Engine1 ---> readyok
+[Engine] [21:33:48.886948] <  2> Engine1 <--- go wtime 10865 btime 8245 winc 500 binc 500
+[Engine] [21:33:48.900561] <  2> Engine1 ---> info depth 1 nodes 66 nps 0 hashfull 0 pv g2g4 
+[Engine] [21:33:48.912580] <  2> Engine1 ---> info depth 2 nodes 100 nps 0 hashfull 0 pv g2g4 b5b4 
+[Engine] [21:33:48.934211] <  2> Engine1 ---> info depth 3 nodes 2006 nps 0 hashfull 0 pv g2g4 b5b4 e2e4 
+[Engine] [21:33:49.661398] <  2> Engine1 ---> info depth 4 nodes 152636 nps 0 hashfull 3 pv e2e3 b8c6 f1b5 c6a5 
+[Engine] [21:33:49.661499] <  2> Engine1 ---> bestmove e2e3
+[Engine] [21:33:49.661528] <  2> Engine1 <--- isready
+[Engine] [21:33:49.661580] <  2> Engine1 ---> readyok
+[Engine] [21:33:49.661876] <  2> Engine2 <--- isready
+[Engine] [21:33:49.661947] <  2> Engine2 ---> readyok
+[Engine] [21:33:49.661988] <  2> Engine2 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3
+[Engine] [21:33:49.662017] <  2> Engine2 <--- isready
+[Engine] [21:33:49.662055] <  2> Engine2 ---> readyok
+[Engine] [21:33:49.662093] <  2> Engine2 <--- go wtime 10591 btime 8245 winc 500 binc 500
+[Engine] [21:33:49.674440] <  2> Engine2 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv b5b4 
+[Engine] [21:33:49.686496] <  2> Engine2 ---> info depth 2 nodes 112 nps 0 hashfull 0 pv b5b4 e3e4 
+[Engine] [21:33:49.738550] <  2> Engine2 ---> info depth 3 nodes 9483 nps 0 hashfull 0 pv c7c6 d2d3 d8a5 
+[Engine] [21:33:49.840990] <  2> Engine2 ---> info depth 4 nodes 17998 nps 0 hashfull 0 pv b5b4 e3e4 g7g5 e4e5 
+[Engine] [21:33:49.841099] <  2> Engine2 ---> bestmove b5b4
+[Engine] [21:33:49.841136] <  2> Engine2 <--- isready
+[Engine] [21:33:49.841179] <  2> Engine2 ---> readyok
+[Engine] [21:33:49.841472] <  2> Engine1 <--- isready
+[Engine] [21:33:49.841539] <  2> Engine1 ---> readyok
+[Engine] [21:33:49.841580] <  2> Engine1 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3 b5b4
+[Engine] [21:33:49.841610] <  2> Engine1 <--- isready
+[Engine] [21:33:49.841654] <  2> Engine1 ---> readyok
+[Engine] [21:33:49.841694] <  2> Engine1 <--- go wtime 10591 btime 8567 winc 500 binc 500
+[Engine] [21:33:49.854959] <  2> Engine1 ---> info depth 1 nodes 93 nps 0 hashfull 0 pv e3e4 
+[Engine] [21:33:49.869475] <  2> Engine1 ---> info depth 2 nodes 355 nps 0 hashfull 0 pv h2h3 a7a6 
+[Engine] [21:33:49.933528] <  2> Engine1 ---> info depth 3 nodes 12686 nps 0 hashfull 0 pv d1h5 b4b3 h5f7 
+[Engine] [21:33:50.507580] <  2> Engine1 ---> info depth 4 nodes 112959 nps 0 hashfull 3 pv c2c4 d7d5 
+[Engine] [21:33:50.507668] <  2> Engine1 ---> bestmove c2c4
+[Engine] [21:33:50.507697] <  2> Engine1 <--- isready
+[Engine] [21:33:50.507750] <  2> Engine1 ---> readyok
+[Engine] [21:33:50.508053] <  2> Engine2 <--- isready
+[Engine] [21:33:50.508122] <  2> Engine2 ---> readyok
+[Engine] [21:33:50.508150] <  2> Engine2 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3 b5b4 c2c4
+[Engine] [21:33:50.508176] <  2> Engine2 <--- isready
+[Engine] [21:33:50.508220] <  2> Engine2 ---> readyok
+[Engine] [21:33:50.508256] <  2> Engine2 <--- go wtime 10426 btime 8567 winc 500 binc 500
+[Engine] [21:33:50.521058] <  2> Engine2 ---> info depth 1 nodes 63 nps 0 hashfull 0 pv b4c3 
+[Engine] [21:33:50.534269] <  2> Engine2 ---> info depth 2 nodes 177 nps 0 hashfull 0 pv b4c3 b2c3 
+[Engine] [21:33:50.572056] <  2> Engine2 ---> info depth 3 nodes 6519 nps 0 hashfull 0 pv c7c5 a5a6 b8a6 
+[Engine] [21:33:53.127660] <  2> Engine2 ---> info depth 4 nodes 595423 nps 297711 hashfull 6 pv c7c5 a1a4 f7f5 a4b4 
+[Engine] [21:33:53.127757] <  2> Engine2 ---> bestmove c7c5
+[Engine] [21:33:53.127796] <  2> Engine2 <--- isready
+[Engine] [21:33:53.127845] <  2> Engine2 ---> readyok
+[Engine] [21:33:53.128122] <  2> Engine1 <--- isready
+[Engine] [21:33:53.128189] <  2> Engine1 ---> readyok
+[Engine] [21:33:53.128223] <  2> Engine1 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3 b5b4 c2c4 c7c5
+[Engine] [21:33:53.128252] <  2> Engine1 <--- isready
+[Engine] [21:33:53.128295] <  2> Engine1 ---> readyok
+[Engine] [21:33:53.128321] <  2> Engine1 <--- go wtime 10426 btime 6448 winc 500 binc 500
+[Engine] [21:33:53.141433] <  2> Engine1 ---> info depth 1 nodes 87 nps 0 hashfull 0 pv a5a6 
+[Engine] [21:33:53.167592] <  2> Engine1 ---> info depth 2 nodes 3914 nps 0 hashfull 0 pv a5a6 b8a6 
+[Engine] [21:33:53.251891] <  2> Engine1 ---> info depth 3 nodes 18110 nps 0 hashfull 0 pv d1f3 d7d5 c4d5 
+[Engine] [21:33:56.477286] <  2> Engine1 ---> info depth 4 nodes 849345 nps 283115 hashfull 4 pv d1f3 b8c6 f3h3 c6a5 
+[Engine] [21:33:56.477389] <  2> Engine1 ---> bestmove a5a6
+[Engine] [21:33:56.477430] <  2> Engine1 <--- isready
+[Engine] [21:33:56.477479] <  2> Engine1 ---> readyok
+[Engine] [21:33:56.477753] <  2> Engine2 <--- isready
+[Engine] [21:33:56.477814] <  2> Engine2 ---> readyok
+[Engine] [21:33:56.477854] <  2> Engine2 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3 b5b4 c2c4 c7c5 a5a6
+[Engine] [21:33:56.477884] <  2> Engine2 <--- isready
+[Engine] [21:33:56.477929] <  2> Engine2 ---> readyok
+[Engine] [21:33:56.477968] <  2> Engine2 <--- go wtime 7577 btime 6448 winc 500 binc 500
+[Engine] [21:33:56.491777] <  2> Engine2 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv b8a6 
+[Engine] [21:33:56.506645] <  2> Engine2 ---> info depth 2 nodes 676 nps 0 hashfull 0 pv e7e5 h2h4 
+[Engine] [21:33:56.530187] <  2> Engine2 ---> info depth 3 nodes 2336 nps 0 hashfull 0 pv c8a6 e1e2 a6c4 
+[Engine] [21:33:59.310526] <  2> Engine2 ---> info depth 4 nodes 654312 nps 327156 hashfull 5 pv c8b7 a6b7 
+[Engine] [21:33:59.310617] <  2> Engine2 ---> bestmove c8b7
+[Engine] [21:33:59.310656] <  2> Engine2 <--- isready
+[Engine] [21:33:59.310702] <  2> Engine2 ---> readyok
+[Engine] [21:33:59.310995] <  2> Engine1 <--- isready
+[Engine] [21:33:59.311063] <  2> Engine1 ---> readyok
+[Engine] [21:33:59.311101] <  2> Engine1 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3 b5b4 c2c4 c7c5 a5a6 c8b7
+[Engine] [21:33:59.311131] <  2> Engine1 <--- isready
+[Engine] [21:33:59.311175] <  2> Engine1 ---> readyok
+[Engine] [21:33:59.311215] <  2> Engine1 <--- go wtime 7577 btime 4116 winc 500 binc 500
+[Engine] [21:33:59.324779] <  2> Engine1 ---> info depth 1 nodes 90 nps 0 hashfull 0 pv a6b7 
+[Engine] [21:33:59.337074] <  2> Engine1 ---> info depth 2 nodes 92 nps 0 hashfull 0 pv a6b7 e7e5 
+[Engine] [21:33:59.358982] <  2> Engine1 ---> info depth 3 nodes 2403 nps 0 hashfull 0 pv a6b7 e7e5 b7a8 
+[Engine] [21:33:59.396909] <  2> Engine1 ---> info depth 4 nodes 2148 nps 0 hashfull 0 pv a6b7 d7d5 b7a8 d5c4 
+[Engine] [21:33:59.775859] <  2> Engine1 ---> info depth 5 nodes 53464 nps 0 hashfull 3 pv a6b7 d8b6 d1h5 b6b7 h5f7 
+[Engine] [21:33:59.775987] <  2> Engine1 ---> bestmove a6b7
+[Engine] [21:33:59.776024] <  2> Engine1 <--- isready
+[Engine] [21:33:59.776107] <  2> Engine1 ---> readyok
+[Engine] [21:33:59.776459] <  2> Engine2 <--- isready
+[Engine] [21:33:59.776527] <  2> Engine2 ---> readyok
+[Engine] [21:33:59.776566] <  2> Engine2 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3 b5b4 c2c4 c7c5 a5a6 c8b7 a6b7
+[Engine] [21:33:59.776596] <  2> Engine2 <--- isready
+[Engine] [21:33:59.776634] <  2> Engine2 ---> readyok
+[Engine] [21:33:59.776662] <  2> Engine2 <--- go wtime 7613 btime 4116 winc 500 binc 500
+[Engine] [21:33:59.791125] <  2> Engine2 ---> info depth 1 nodes 63 nps 0 hashfull 0 pv e7e5 
+[Engine] [21:33:59.803641] <  2> Engine2 ---> info depth 2 nodes 117 nps 0 hashfull 0 pv e7e5 b7a8 
+[Engine] [21:33:59.821966] <  2> Engine2 ---> info depth 3 nodes 1494 nps 0 hashfull 0 pv d7d5 b7a8 d5c4 
+[Engine] [21:33:59.986356] <  2> Engine2 ---> info depth 4 nodes 12102 nps 0 hashfull 0 pv d8b6 d1h5 b6b7 h5f7 
+[Engine] [21:33:59.986456] <  2> Engine2 ---> bestmove d8b6
+[Engine] [21:33:59.986487] <  2> Engine2 <--- isready
+[Engine] [21:33:59.986540] <  2> Engine2 ---> readyok
+[Engine] [21:33:59.986887] <  2> Engine1 <--- isready
+[Engine] [21:33:59.986970] <  2> Engine1 ---> readyok
+[Engine] [21:33:59.987035] <  2> Engine1 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3 b5b4 c2c4 c7c5 a5a6 c8b7 a6b7 d8b6
+[Engine] [21:33:59.987096] <  2> Engine1 <--- isready
+[Engine] [21:33:59.987162] <  2> Engine1 ---> readyok
+[Engine] [21:33:59.987215] <  2> Engine1 <--- go wtime 7613 btime 4407 winc 500 binc 500
+[Engine] [21:34:00.000924] <  2> Engine1 ---> info depth 1 nodes 96 nps 0 hashfull 0 pv b7a8 
+[Engine] [21:34:00.018297] <  2> Engine1 ---> info depth 2 nodes 121 nps 0 hashfull 0 pv b7a8 b4b3 
+[Engine] [21:34:00.048748] <  2> Engine1 ---> info depth 3 nodes 3724 nps 0 hashfull 0 pv b7a8 b6d8 a1a7 
+[Engine] [21:34:00.096899] <  2> Engine1 ---> info depth 4 nodes 3539 nps 0 hashfull 0 pv b7a8 b6a5 h2h4 a5a1 
+[Engine] [21:34:03.515819] <  2> Engine1 ---> info depth 5 nodes 568379 nps 189459 hashfull 12 pv b7a8 b6c6 d1g4 c6a8 g4d7 
+[Engine] [21:34:03.515902] <  2> Engine1 ---> bestmove b7a8
+[Engine] [21:34:03.515929] <  2> Engine1 <--- isready
+[Engine] [21:34:03.515984] <  2> Engine1 ---> readyok
+[Engine] [21:34:03.516600] <  2> Engine2 <--- ucinewgame
+[Engine] [21:34:03.516634] <  2> Engine2 <--- isready
+[Engine] [21:34:03.516678] <  2> Engine2 ---> readyok
+[Engine] [21:34:03.516698] <  2> Engine1 <--- ucinewgame
+[Engine] [21:34:03.516719] <  2> Engine1 <--- isready
+[Engine] [21:34:03.516799] <  2> Engine1 ---> readyok
+[Engine] [21:34:03.516833] <  2> Engine2 <--- isready
+[Engine] [21:34:03.516872] <  2> Engine2 ---> readyok
+[Engine] [21:34:03.516893] <  2> Engine2 <--- isready
+[Engine] [21:34:03.516948] <  2> Engine2 ---> readyok
+[Engine] [21:34:03.516969] <  2> Engine2 <--- position startpos
+[Engine] [21:34:03.516989] <  2> Engine2 <--- isready
+[Engine] [21:34:03.517020] <  2> Engine2 ---> readyok
+[Engine] [21:34:03.517040] <  2> Engine2 <--- go wtime 10500 btime 10500 winc 500 binc 500
+[Engine] [21:34:03.529321] <  2> Engine2 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv a2a4 
+[Engine] [21:34:03.541881] <  2> Engine2 ---> info depth 2 nodes 244 nps 0 hashfull 0 pv b1a3 a7a5 
+[Engine] [21:34:03.560887] <  2> Engine2 ---> info depth 3 nodes 1674 nps 0 hashfull 0 pv b1a3 a7a5 a3b5 
+[Engine] [21:34:03.790998] <  2> Engine2 ---> info depth 4 nodes 27319 nps 0 hashfull 0 pv b1a3 e7e5 a3b1 e5e4 
+[Engine] [21:34:03.791102] <  2> Engine2 ---> bestmove a2a4
+[Engine] [21:34:03.791140] <  2> Engine2 <--- isready
+[Engine] [21:34:03.791190] <  2> Engine2 ---> readyok
+[Engine] [21:34:03.791484] <  2> Engine1 <--- isready
+[Engine] [21:34:03.791569] <  2> Engine1 ---> readyok
+[Engine] [21:34:03.791596] <  2> Engine1 <--- position startpos moves a2a4
+[Engine] [21:34:03.791618] <  2> Engine1 <--- isready
+[Engine] [21:34:03.791649] <  2> Engine1 ---> readyok
+[Engine] [21:34:03.791677] <  2> Engine1 <--- go wtime 10726 btime 10500 winc 500 binc 500
+[Engine] [21:34:03.807301] <  2> Engine1 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv e7e5 
+[Engine] [21:34:03.819900] <  2> Engine1 ---> info depth 2 nodes 95 nps 0 hashfull 0 pv e7e5 c2c4 
+[Engine] [21:34:03.839576] <  2> Engine1 ---> info depth 3 nodes 1824 nps 0 hashfull 0 pv e7e5 c2c4 e5e4 
+[Engine] [21:34:03.870037] <  2> Engine1 ---> info depth 4 nodes 2687 nps 0 hashfull 0 pv e7e5 c2c4 e5e4 h2h4 
+[Engine] [21:34:06.859428] <  2> Engine1 ---> info depth 5 nodes 638953 nps 212984 hashfull 12 pv b7b6 a4a5 b6a5 a1a5 h7h5 
+[Engine] [21:34:06.859559] <  2> Engine1 ---> bestmove b7b6
+[Engine] [21:34:06.859604] <  2> Engine1 <--- isready
+[Engine] [21:34:06.859649] <  2> Engine1 ---> readyok
+[Engine] [21:34:06.859944] <  2> Engine2 <--- isready
+[Engine] [21:34:06.860023] <  2> Engine2 ---> readyok
+[Engine] [21:34:06.860064] <  2> Engine2 <--- position startpos moves a2a4 b7b6
+[Engine] [21:34:06.860084] <  2> Engine2 <--- isready
+[Engine] [21:34:06.860119] <  2> Engine2 ---> readyok
+[Engine] [21:34:06.860137] <  2> Engine2 <--- go wtime 10726 btime 7933 winc 500 binc 500
+[Engine] [21:34:06.872565] <  2> Engine2 ---> info depth 1 nodes 63 nps 0 hashfull 0 pv c2c4 
+[Engine] [21:34:06.885339] <  2> Engine2 ---> info depth 2 nodes 102 nps 0 hashfull 0 pv c2c4 b6b5 
+[Engine] [21:34:06.921071] <  2> Engine2 ---> info depth 3 nodes 5765 nps 0 hashfull 0 pv c2c4 e7e5 b2b4 
+[Engine] [21:34:07.245193] <  2> Engine2 ---> info depth 4 nodes 44035 nps 0 hashfull 2 pv a4a5 b6a5 a1a5 h7h5 
+[Engine] [21:34:07.245290] <  2> Engine2 ---> bestmove a4a5
+[Engine] [21:34:07.245317] <  2> Engine2 <--- isready
+[Engine] [21:34:07.245363] <  2> Engine2 ---> readyok
+[Engine] [21:34:07.245680] <  2> Engine1 <--- isready
+[Engine] [21:34:07.245749] <  2> Engine1 ---> readyok
+[Engine] [21:34:07.245773] <  2> Engine1 <--- position startpos moves a2a4 b7b6 a4a5
+[Engine] [21:34:07.245798] <  2> Engine1 <--- isready
+[Engine] [21:34:07.245836] <  2> Engine1 ---> readyok
+[Engine] [21:34:07.245869] <  2> Engine1 <--- go wtime 10841 btime 7933 winc 500 binc 500
+[Engine] [21:34:07.262829] <  2> Engine1 ---> info depth 1 nodes 63 nps 0 hashfull 0 pv b6a5 
+[Engine] [21:34:07.275072] <  2> Engine1 ---> info depth 2 nodes 86 nps 0 hashfull 0 pv b6a5 a1a5 
+[Engine] [21:34:07.292787] <  2> Engine1 ---> info depth 3 nodes 1486 nps 0 hashfull 0 pv b6a5 a1a5 h7h5 
+[Engine] [21:34:07.373358] <  2> Engine1 ---> info depth 4 nodes 15265 nps 0 hashfull 0 pv b6b5 g2g4 b5b4 e2e4 
+[Engine] [21:34:07.373441] <  2> Engine1 ---> bestmove b6b5
+[Engine] [21:34:07.373472] <  2> Engine1 <--- isready
+[Engine] [21:34:07.373522] <  2> Engine1 ---> readyok
+[Engine] [21:34:07.373842] <  2> Engine2 <--- isready
+[Engine] [21:34:07.373922] <  2> Engine2 ---> readyok
+[Engine] [21:34:07.373959] <  2> Engine2 <--- position startpos moves a2a4 b7b6 a4a5 b6b5
+[Engine] [21:34:07.373986] <  2> Engine2 <--- isready
+[Engine] [21:34:07.374027] <  2> Engine2 ---> readyok
+[Engine] [21:34:07.374063] <  2> Engine2 <--- go wtime 10841 btime 8306 winc 500 binc 500
+[Engine] [21:34:07.386445] <  2> Engine2 ---> info depth 1 nodes 66 nps 0 hashfull 0 pv g2g4 
+[Engine] [21:34:07.398447] <  2> Engine2 ---> info depth 2 nodes 100 nps 0 hashfull 0 pv g2g4 b5b4 
+[Engine] [21:34:07.418160] <  2> Engine2 ---> info depth 3 nodes 2006 nps 0 hashfull 0 pv g2g4 b5b4 e2e4 
+[Engine] [21:34:08.154079] <  2> Engine2 ---> info depth 4 nodes 152636 nps 0 hashfull 3 pv e2e3 b8c6 f1b5 c6a5 
+[Engine] [21:34:08.154192] <  2> Engine2 ---> bestmove e2e3
+[Engine] [21:34:08.154220] <  2> Engine2 <--- isready
+[Engine] [21:34:08.154268] <  2> Engine2 ---> readyok
+[Engine] [21:34:08.154516] <  2> Engine1 <--- isready
+[Engine] [21:34:08.154588] <  2> Engine1 ---> readyok
+[Engine] [21:34:08.154624] <  2> Engine1 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3
+[Engine] [21:34:08.154649] <  2> Engine1 <--- isready
+[Engine] [21:34:08.154679] <  2> Engine1 ---> readyok
+[Engine] [21:34:08.154697] <  2> Engine1 <--- go wtime 10561 btime 8306 winc 500 binc 500
+[Engine] [21:34:08.166904] <  2> Engine1 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv b5b4 
+[Engine] [21:34:08.179705] <  2> Engine1 ---> info depth 2 nodes 112 nps 0 hashfull 0 pv b5b4 e3e4 
+[Engine] [21:34:08.228390] <  2> Engine1 ---> info depth 3 nodes 9483 nps 0 hashfull 0 pv c7c6 d2d3 d8a5 
+[Engine] [21:34:08.322342] <  2> Engine1 ---> info depth 4 nodes 17998 nps 0 hashfull 0 pv b5b4 e3e4 g7g5 e4e5 
+[Engine] [21:34:08.322450] <  2> Engine1 ---> bestmove b5b4
+[Engine] [21:34:08.322496] <  2> Engine1 <--- isready
+[Engine] [21:34:08.322542] <  2> Engine1 ---> readyok
+[Engine] [21:34:08.322808] <  2> Engine2 <--- isready
+[Engine] [21:34:08.322878] <  2> Engine2 ---> readyok
+[Engine] [21:34:08.322916] <  2> Engine2 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3 b5b4
+[Engine] [21:34:08.322943] <  2> Engine2 <--- isready
+[Engine] [21:34:08.322983] <  2> Engine2 ---> readyok
+[Engine] [21:34:08.323018] <  2> Engine2 <--- go wtime 10561 btime 8639 winc 500 binc 500
+[Engine] [21:34:08.335793] <  2> Engine2 ---> info depth 1 nodes 93 nps 0 hashfull 0 pv e3e4 
+[Engine] [21:34:08.348571] <  2> Engine2 ---> info depth 2 nodes 355 nps 0 hashfull 0 pv h2h3 a7a6 
+[Engine] [21:34:08.413564] <  2> Engine2 ---> info depth 3 nodes 12686 nps 0 hashfull 0 pv d1h5 b4b3 h5f7 
+[Engine] [21:34:09.018904] <  2> Engine2 ---> info depth 4 nodes 112959 nps 0 hashfull 3 pv c2c4 d7d5 
+[Engine] [21:34:09.018996] <  2> Engine2 ---> bestmove c2c4
+[Engine] [21:34:09.019040] <  2> Engine2 <--- isready
+[Engine] [21:34:09.019086] <  2> Engine2 ---> readyok
+[Engine] [21:34:09.019366] <  2> Engine1 <--- isready
+[Engine] [21:34:09.019436] <  2> Engine1 ---> readyok
+[Engine] [21:34:09.019473] <  2> Engine1 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3 b5b4 c2c4
+[Engine] [21:34:09.019500] <  2> Engine1 <--- isready
+[Engine] [21:34:09.019538] <  2> Engine1 ---> readyok
+[Engine] [21:34:09.019572] <  2> Engine1 <--- go wtime 10366 btime 8639 winc 500 binc 500
+[Engine] [21:34:09.031579] <  2> Engine1 ---> info depth 1 nodes 63 nps 0 hashfull 0 pv b4c3 
+[Engine] [21:34:09.043849] <  2> Engine1 ---> info depth 2 nodes 177 nps 0 hashfull 0 pv b4c3 b2c3 
+[Engine] [21:34:09.082594] <  2> Engine1 ---> info depth 3 nodes 6519 nps 0 hashfull 0 pv c7c5 a5a6 b8a6 
+[Engine] [21:34:11.457919] <  2> Engine1 ---> info depth 4 nodes 595423 nps 297711 hashfull 6 pv c7c5 a1a4 f7f5 a4b4 
+[Engine] [21:34:11.458019] <  2> Engine1 ---> bestmove c7c5
+[Engine] [21:34:11.458061] <  2> Engine1 <--- isready
+[Engine] [21:34:11.458112] <  2> Engine1 ---> readyok
+[Engine] [21:34:11.458407] <  2> Engine2 <--- isready
+[Engine] [21:34:11.458489] <  2> Engine2 ---> readyok
+[Engine] [21:34:11.458523] <  2> Engine2 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3 b5b4 c2c4 c7c5
+[Engine] [21:34:11.458544] <  2> Engine2 <--- isready
+[Engine] [21:34:11.458576] <  2> Engine2 ---> readyok
+[Engine] [21:34:11.458594] <  2> Engine2 <--- go wtime 10366 btime 6701 winc 500 binc 500
+[Engine] [21:34:11.471453] <  2> Engine2 ---> info depth 1 nodes 87 nps 0 hashfull 0 pv a5a6 
+[Engine] [21:34:11.497772] <  2> Engine2 ---> info depth 2 nodes 3914 nps 0 hashfull 0 pv a5a6 b8a6 
+[Engine] [21:34:11.580497] <  2> Engine2 ---> info depth 3 nodes 18110 nps 0 hashfull 0 pv d1f3 d7d5 c4d5 
+[Engine] [21:34:15.028773] <  2> Engine2 ---> info depth 4 nodes 849345 nps 283115 hashfull 4 pv d1f3 b8c6 f3h3 c6a5 
+[Engine] [21:34:15.028869] <  2> Engine2 ---> bestmove a5a6
+[Engine] [21:34:15.028910] <  2> Engine2 <--- isready
+[Engine] [21:34:15.029007] <  2> Engine2 ---> readyok
+[Engine] [21:34:15.029384] <  2> Engine1 <--- isready
+[Engine] [21:34:15.029454] <  2> Engine1 ---> readyok
+[Engine] [21:34:15.029488] <  2> Engine1 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3 b5b4 c2c4 c7c5 a5a6
+[Engine] [21:34:15.029515] <  2> Engine1 <--- isready
+[Engine] [21:34:15.029553] <  2> Engine1 ---> readyok
+[Engine] [21:34:15.029576] <  2> Engine1 <--- go wtime 7296 btime 6701 winc 500 binc 500
+[Engine] [21:34:15.042809] <  2> Engine1 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv b8a6 
+[Engine] [21:34:15.056897] <  2> Engine1 ---> info depth 2 nodes 676 nps 0 hashfull 0 pv e7e5 h2h4 
+[Engine] [21:34:15.080133] <  2> Engine1 ---> info depth 3 nodes 2336 nps 0 hashfull 0 pv c8a6 e1e2 a6c4 
+[Engine] [21:34:17.786008] <  2> Engine1 ---> info depth 4 nodes 654312 nps 327156 hashfull 5 pv c8b7 a6b7 
+[Engine] [21:34:17.786112] <  2> Engine1 ---> bestmove c8b7
+[Engine] [21:34:17.786150] <  2> Engine1 <--- isready
+[Engine] [21:34:17.786197] <  2> Engine1 ---> readyok
+[Engine] [21:34:17.786529] <  2> Engine2 <--- isready
+[Engine] [21:34:17.786605] <  2> Engine2 ---> readyok
+[Engine] [21:34:17.786636] <  2> Engine2 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3 b5b4 c2c4 c7c5 a5a6 c8b7
+[Engine] [21:34:17.786662] <  2> Engine2 <--- isready
+[Engine] [21:34:17.786699] <  2> Engine2 ---> readyok
+[Engine] [21:34:17.786720] <  2> Engine2 <--- go wtime 7296 btime 4445 winc 500 binc 500
+[Engine] [21:34:17.799985] <  2> Engine2 ---> info depth 1 nodes 90 nps 0 hashfull 0 pv a6b7 
+[Engine] [21:34:17.812860] <  2> Engine2 ---> info depth 2 nodes 92 nps 0 hashfull 0 pv a6b7 e7e5 
+[Engine] [21:34:17.834478] <  2> Engine2 ---> info depth 3 nodes 2403 nps 0 hashfull 0 pv a6b7 e7e5 b7a8 
+[Engine] [21:34:17.873724] <  2> Engine2 ---> info depth 4 nodes 2148 nps 0 hashfull 0 pv a6b7 d7d5 b7a8 d5c4 
+[Engine] [21:34:18.285037] <  2> Engine2 ---> info depth 5 nodes 53464 nps 0 hashfull 3 pv a6b7 d8b6 d1h5 b6b7 h5f7 
+[Engine] [21:34:18.285143] <  2> Engine2 ---> bestmove a6b7
+[Engine] [21:34:18.285177] <  2> Engine2 <--- isready
+[Engine] [21:34:18.285216] <  2> Engine2 ---> readyok
+[Engine] [21:34:18.285630] <  2> Engine1 <--- isready
+[Engine] [21:34:18.285721] <  2> Engine1 ---> readyok
+[Engine] [21:34:18.285758] <  2> Engine1 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3 b5b4 c2c4 c7c5 a5a6 c8b7 a6b7
+[Engine] [21:34:18.285785] <  2> Engine1 <--- isready
+[Engine] [21:34:18.285825] <  2> Engine1 ---> readyok
+[Engine] [21:34:18.285855] <  2> Engine1 <--- go wtime 7298 btime 4445 winc 500 binc 500
+[Engine] [21:34:18.299499] <  2> Engine1 ---> info depth 1 nodes 63 nps 0 hashfull 0 pv e7e5 
+[Engine] [21:34:18.311953] <  2> Engine1 ---> info depth 2 nodes 117 nps 0 hashfull 0 pv e7e5 b7a8 
+[Engine] [21:34:18.331213] <  2> Engine1 ---> info depth 3 nodes 1494 nps 0 hashfull 0 pv d7d5 b7a8 d5c4 
+[Engine] [21:34:18.491925] <  2> Engine1 ---> info depth 4 nodes 12102 nps 0 hashfull 0 pv d8b6 d1h5 b6b7 h5f7 
+[Engine] [21:34:18.492027] <  2> Engine1 ---> bestmove d8b6
+[Engine] [21:34:18.492053] <  2> Engine1 <--- isready
+[Engine] [21:34:18.492107] <  2> Engine1 ---> readyok
+[Engine] [21:34:18.492506] <  2> Engine2 <--- isready
+[Engine] [21:34:18.492568] <  2> Engine2 ---> readyok
+[Engine] [21:34:18.492598] <  2> Engine2 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3 b5b4 c2c4 c7c5 a5a6 c8b7 a6b7 d8b6
+[Engine] [21:34:18.492621] <  2> Engine2 <--- isready
+[Engine] [21:34:18.492653] <  2> Engine2 ---> readyok
+[Engine] [21:34:18.492679] <  2> Engine2 <--- go wtime 7298 btime 4739 winc 500 binc 500
+[Engine] [21:34:18.506846] <  2> Engine2 ---> info depth 1 nodes 96 nps 0 hashfull 0 pv b7a8 
+[Engine] [21:34:18.519633] <  2> Engine2 ---> info depth 2 nodes 121 nps 0 hashfull 0 pv b7a8 b4b3 
+[Engine] [21:34:18.549000] <  2> Engine2 ---> info depth 3 nodes 3724 nps 0 hashfull 0 pv b7a8 b6d8 a1a7 
+[Engine] [21:34:18.599060] <  2> Engine2 ---> info depth 4 nodes 3539 nps 0 hashfull 0 pv b7a8 b6a5 h2h4 a5a1 
+[Engine] [21:34:22.310321] <  2> Engine2 ---> info depth 5 nodes 568379 nps 189459 hashfull 12 pv b7a8 b6c6 d1g4 c6a8 g4d7 
+[Engine] [21:34:22.310426] <  2> Engine2 ---> bestmove b7a8
+[Engine] [21:34:22.310461] <  2> Engine2 <--- isready
+[Engine] [21:34:22.310508] <  2> Engine2 ---> readyok
+[Engine] [21:34:22.845938] <  1> Engine1 <--- quit
+[Engine] [21:34:22.846164] <  1> Engine2 <--- quit
+[INFO  ] [21:34:22.846512] <   > fastchess --- Finished match
 
-[INFO  ] [13:41:31.813800] <   > fastchess --- fastchess alpha 1.4.0 20250702-2a80921
-[INFO  ] [13:41:31.814582] <   > fastchess --- Setting seed to: 7332024472918203913
-[INFO  ] [13:41:31.814674] <   > fastchess --- Starting tournament...
-[Engine] [13:41:31.876667] <  2> Engine1 <--- uci
-[Engine] [13:41:32.141077] <  2> Engine1 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
-[Engine] [13:41:32.141142] <  2> Engine1 ---> 'help' for commands
-[Engine] [13:41:32.141167] <  2> Engine1 ---> id name Pertinax Chess 0.1
-[Engine] [13:41:32.141183] <  2> Engine1 ---> id author R.Bukaci (github.com/Troan34)
-[Engine] [13:41:32.141197] <  2> Engine1 ---> option name type spin Depth default 10 min 2 max 255
-[Engine] [13:41:32.141212] <  2> Engine1 ---> option name type button EngineOn default On
-[Engine] [13:41:32.141231] <  2> Engine1 ---> option name type spin Hash default 64 min 1 max 512
-[Engine] [13:41:32.141246] <  2> Engine1 ---> option name type button Gui default Off
-[Engine] [13:41:32.141260] <  2> Engine1 ---> uciok
-[Engine] [13:41:32.185786] <  2> Engine2 <--- uci
-[Engine] [13:41:32.407252] <  2> Engine2 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
-[Engine] [13:41:32.407317] <  2> Engine2 ---> 'help' for commands
-[Engine] [13:41:32.407347] <  2> Engine2 ---> id name Pertinax Chess 0.1
-[Engine] [13:41:32.407416] <  2> Engine2 ---> id author R.Bukaci (github.com/Troan34)
-[Engine] [13:41:32.407440] <  2> Engine2 ---> option name type spin Depth default 10 min 2 max 255
-[Engine] [13:41:32.407459] <  2> Engine2 ---> option name type button EngineOn default On
-[Engine] [13:41:32.407477] <  2> Engine2 ---> option name type spin Hash default 64 min 1 max 512
-[Engine] [13:41:32.407495] <  2> Engine2 ---> option name type button Gui default Off
-[Engine] [13:41:32.407513] <  2> Engine2 ---> uciok
-[Engine] [13:41:32.407541] <  2> Engine1 <--- ucinewgame
-[Engine] [13:41:32.407577] <  2> Engine1 <--- isready
-[Engine] [13:41:32.407624] <  2> Engine1 ---> readyok
-[Engine] [13:41:32.407653] <  2> Engine2 <--- ucinewgame
-[Engine] [13:41:32.407678] <  2> Engine2 <--- isready
-[Engine] [13:41:32.407718] <  2> Engine2 ---> readyok
-[Engine] [13:41:32.407744] <  2> Engine1 <--- isready
-[Engine] [13:41:32.407793] <  2> Engine1 ---> readyok
-[Engine] [13:41:32.407830] <  2> Engine1 <--- isready
-[Engine] [13:41:32.407873] <  2> Engine1 ---> readyok
-[Engine] [13:41:32.407897] <  2> Engine1 <--- position startpos
-[Engine] [13:41:32.407922] <  2> Engine1 <--- isready
-[Engine] [13:41:32.407963] <  2> Engine1 ---> readyok
-[Engine] [13:41:32.407990] <  2> Engine1 <--- go wtime 10500 btime 10500 winc 500 binc 500
-[Engine] [13:41:32.418719] <  2> Engine1 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv a2a4 
-[Engine] [13:41:32.431588] <  2> Engine1 ---> info depth 2 nodes 244 nps 0 hashfull 0 pv b1a3 a7a5 
-[Engine] [13:41:32.450371] <  2> Engine1 ---> info depth 3 nodes 1674 nps 0 hashfull 0 pv b1a3 a7a5 a3b5 
-[Engine] [13:41:32.671698] <  2> Engine1 ---> info depth 4 nodes 27319 nps 0 hashfull 0 pv b1a3 e7e5 a3b1 e5e4 
-[Engine] [13:41:32.672041] <  2> Engine1 ---> bestmove a2a4
-[Engine] [13:41:32.672088] <  2> Engine1 <--- isready
-[Engine] [13:41:32.672136] <  2> Engine1 ---> readyok
-[Engine] [13:41:32.672485] <  2> Engine2 <--- isready
-[Engine] [13:41:32.672555] <  2> Engine2 ---> readyok
-[Engine] [13:41:32.672581] <  2> Engine2 <--- position startpos moves a2a4
-[Engine] [13:41:32.672607] <  2> Engine2 <--- isready
-[Engine] [13:41:32.672654] <  2> Engine2 ---> readyok
-[Engine] [13:41:32.672682] <  2> Engine2 <--- go wtime 10736 btime 10500 winc 500 binc 500
-[Engine] [13:41:32.682991] <  2> Engine2 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv e7e5 
-[Engine] [13:41:32.695598] <  2> Engine2 ---> info depth 2 nodes 95 nps 0 hashfull 0 pv e7e5 c2c4 
-[Engine] [13:41:32.714800] <  2> Engine2 ---> info depth 3 nodes 1824 nps 0 hashfull 0 pv e7e5 c2c4 e5e4 
-[Engine] [13:41:32.746479] <  2> Engine2 ---> info depth 4 nodes 2687 nps 0 hashfull 0 pv e7e5 c2c4 e5e4 h2h4 
-[Engine] [13:41:35.854842] <  2> Engine2 ---> info depth 5 nodes 638953 nps 212984 hashfull 12 pv b7b6 a4a5 b6a5 a1a5 h7h5 
-[Engine] [13:41:35.854949] <  2> Engine2 ---> bestmove b7b6
-[Engine] [13:41:35.854990] <  2> Engine2 <--- isready
-[Engine] [13:41:35.855041] <  2> Engine2 ---> readyok
-[Engine] [13:41:35.855398] <  2> Engine1 <--- isready
-[Engine] [13:41:35.855489] <  2> Engine1 ---> readyok
-[Engine] [13:41:35.855515] <  2> Engine1 <--- position startpos moves a2a4 b7b6
-[Engine] [13:41:35.855541] <  2> Engine1 <--- isready
-[Engine] [13:41:35.855586] <  2> Engine1 ---> readyok
-[Engine] [13:41:35.855624] <  2> Engine1 <--- go wtime 10736 btime 7818 winc 500 binc 500
-[Engine] [13:41:35.868315] <  2> Engine1 ---> info depth 1 nodes 63 nps 0 hashfull 0 pv c2c4 
-[Engine] [13:41:35.880576] <  2> Engine1 ---> info depth 2 nodes 102 nps 0 hashfull 0 pv c2c4 b6b5 
-[Engine] [13:41:35.916192] <  2> Engine1 ---> info depth 3 nodes 5765 nps 0 hashfull 0 pv c2c4 e7e5 b2b4 
-[Engine] [13:41:36.238904] <  2> Engine1 ---> info depth 4 nodes 44035 nps 0 hashfull 2 pv a4a5 b6a5 a1a5 h7h5 
-[Engine] [13:41:36.239234] <  2> Engine1 ---> bestmove a4a5
-[Engine] [13:41:36.239288] <  2> Engine1 <--- isready
-[Engine] [13:41:36.239334] <  2> Engine1 ---> readyok
-[Engine] [13:41:36.239726] <  2> Engine2 <--- isready
-[Engine] [13:41:36.239890] <  2> Engine2 ---> readyok
-[Engine] [13:41:36.239966] <  2> Engine2 <--- position startpos moves a2a4 b7b6 a4a5
-[Engine] [13:41:36.239999] <  2> Engine2 <--- isready
-[Engine] [13:41:36.240043] <  2> Engine2 ---> readyok
-[Engine] [13:41:36.240067] <  2> Engine2 <--- go wtime 10853 btime 7818 winc 500 binc 500
-[Engine] [13:41:36.255799] <  2> Engine2 ---> info depth 1 nodes 63 nps 0 hashfull 0 pv b6a5 
-[Engine] [13:41:36.269272] <  2> Engine2 ---> info depth 2 nodes 86 nps 0 hashfull 0 pv b6a5 a1a5 
-[Engine] [13:41:36.288526] <  2> Engine2 ---> info depth 3 nodes 1486 nps 0 hashfull 0 pv b6a5 a1a5 h7h5 
-[Engine] [13:41:36.373858] <  2> Engine2 ---> info depth 4 nodes 15265 nps 0 hashfull 0 pv b6b5 g2g4 b5b4 e2e4 
-[Engine] [13:41:36.374000] <  2> Engine2 ---> bestmove b6b5
-[Engine] [13:41:36.374052] <  2> Engine2 <--- isready
-[Engine] [13:41:36.374101] <  2> Engine2 ---> readyok
-[Engine] [13:41:36.374448] <  2> Engine1 <--- isready
-[Engine] [13:41:36.374517] <  2> Engine1 ---> readyok
-[Engine] [13:41:36.374543] <  2> Engine1 <--- position startpos moves a2a4 b7b6 a4a5 b6b5
-[Engine] [13:41:36.374619] <  2> Engine1 <--- isready
-[Engine] [13:41:36.374656] <  2> Engine1 ---> readyok
-[Engine] [13:41:36.374680] <  2> Engine1 <--- go wtime 10853 btime 8185 winc 500 binc 500
-[Engine] [13:41:36.387885] <  2> Engine1 ---> info depth 1 nodes 66 nps 0 hashfull 0 pv g2g4 
-[Engine] [13:41:36.400225] <  2> Engine1 ---> info depth 2 nodes 100 nps 0 hashfull 0 pv g2g4 b5b4 
-[Engine] [13:41:36.420704] <  2> Engine1 ---> info depth 3 nodes 2006 nps 0 hashfull 0 pv g2g4 b5b4 e2e4 
-[Engine] [13:41:37.155070] <  2> Engine1 ---> info depth 4 nodes 152636 nps 0 hashfull 3 pv e2e3 b8c6 f1b5 c6a5 
-[Engine] [13:41:37.155410] <  2> Engine1 ---> bestmove e2e3
-[Engine] [13:41:37.155462] <  2> Engine1 <--- isready
-[Engine] [13:41:37.155518] <  2> Engine1 ---> readyok
-[Engine] [13:41:37.155872] <  2> Engine2 <--- isready
-[Engine] [13:41:37.155946] <  2> Engine2 ---> readyok
-[Engine] [13:41:37.155996] <  2> Engine2 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3
-[Engine] [13:41:37.156034] <  2> Engine2 <--- isready
-[Engine] [13:41:37.156071] <  2> Engine2 ---> readyok
-[Engine] [13:41:37.156091] <  2> Engine2 <--- go wtime 10573 btime 8185 winc 500 binc 500
-[Engine] [13:41:37.169530] <  2> Engine2 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv b5b4 
-[Engine] [13:41:37.182070] <  2> Engine2 ---> info depth 2 nodes 112 nps 0 hashfull 0 pv b5b4 e3e4 
-[Engine] [13:41:37.234049] <  2> Engine2 ---> info depth 3 nodes 9483 nps 0 hashfull 0 pv c7c6 d2d3 d8a5 
-[Engine] [13:41:37.334240] <  2> Engine2 ---> info depth 4 nodes 17998 nps 0 hashfull 0 pv b5b4 e3e4 g7g5 e4e5 
-[Engine] [13:41:37.334316] <  2> Engine2 ---> bestmove b5b4
-[Engine] [13:41:37.334350] <  2> Engine2 <--- isready
-[Engine] [13:41:37.334409] <  2> Engine2 ---> readyok
-[Engine] [13:41:37.334748] <  2> Engine1 <--- isready
-[Engine] [13:41:37.334825] <  2> Engine1 ---> readyok
-[Engine] [13:41:37.334872] <  2> Engine1 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3 b5b4
-[Engine] [13:41:37.334904] <  2> Engine1 <--- isready
-[Engine] [13:41:37.334941] <  2> Engine1 ---> readyok
-[Engine] [13:41:37.334992] <  2> Engine1 <--- go wtime 10573 btime 8507 winc 500 binc 500
-[Engine] [13:41:37.348759] <  2> Engine1 ---> info depth 1 nodes 99 nps 0 hashfull 0 pv a5b4 
-[Engine] [13:41:37.361899] <  2> Engine1 ---> info depth 2 nodes 92 nps 0 hashfull 0 pv a5b4 a7a5 
-[Engine] [13:41:37.384930] <  2> Engine1 ---> info depth 3 nodes 2486 nps 0 hashfull 0 pv a5b4 a7a5 b4a5 
-[Engine] [13:41:37.430648] <  2> Engine1 ---> info depth 4 nodes 2963 nps 0 hashfull 0 pv a5b4 a7a5 b4a5 a8a5 
-[Engine] [13:41:39.846414] <  2> Engine1 ---> info depth 5 nodes 440848 nps 220424 hashfull 13 pv a5b4 e7e5 b4c3 f7f5 c3e5 
-[Engine] [13:41:39.846561] <  2> Engine1 ---> bestmove a5b4
-[Engine] [13:41:39.846610] <  2> Engine1 <--- isready
-[Engine] [13:41:39.846661] <  2> Engine1 ---> readyok
-[Engine] [13:41:39.847509] <  2> Engine2 <--- ucinewgame
-[Engine] [13:41:39.847604] <  2> Engine2 <--- isready
-[Engine] [13:41:39.847657] <  2> Engine2 ---> readyok
-[Engine] [13:41:39.847695] <  2> Engine1 <--- ucinewgame
-[Engine] [13:41:39.847725] <  2> Engine1 <--- isready
-[Engine] [13:41:39.847766] <  2> Engine1 ---> readyok
-[Engine] [13:41:39.847790] <  2> Engine2 <--- isready
-[Engine] [13:41:39.847852] <  2> Engine2 ---> readyok
-[Engine] [13:41:39.847904] <  2> Engine2 <--- isready
-[Engine] [13:41:39.847977] <  2> Engine2 ---> readyok
-[Engine] [13:41:39.848011] <  2> Engine2 <--- position startpos
-[Engine] [13:41:39.848037] <  2> Engine2 <--- isready
-[Engine] [13:41:39.848090] <  2> Engine2 ---> readyok
-[Engine] [13:41:39.848121] <  2> Engine2 <--- go wtime 10500 btime 10500 winc 500 binc 500
-[Engine] [13:41:39.861883] <  2> Engine2 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv a2a4 
-[Engine] [13:41:39.879162] <  2> Engine2 ---> info depth 2 nodes 244 nps 0 hashfull 0 pv b1a3 a7a5 
-[Engine] [13:41:39.900453] <  2> Engine2 ---> info depth 3 nodes 1674 nps 0 hashfull 0 pv b1a3 a7a5 a3b5 
-[Engine] [13:41:40.131445] <  2> Engine2 ---> info depth 4 nodes 27319 nps 0 hashfull 0 pv b1a3 e7e5 a3b1 e5e4 
-[Engine] [13:41:40.131848] <  2> Engine2 ---> bestmove a2a4
-[Engine] [13:41:40.131897] <  2> Engine2 <--- isready
-[Engine] [13:41:40.131960] <  2> Engine2 ---> readyok
-[Engine] [13:41:40.132503] <  2> Engine1 <--- isready
-[Engine] [13:41:40.132625] <  2> Engine1 ---> readyok
-[Engine] [13:41:40.132656] <  2> Engine1 <--- position startpos moves a2a4
-[Engine] [13:41:40.132680] <  2> Engine1 <--- isready
-[Engine] [13:41:40.132713] <  2> Engine1 ---> readyok
-[Engine] [13:41:40.132734] <  2> Engine1 <--- go wtime 10717 btime 10500 winc 500 binc 500
-[Engine] [13:41:40.148988] <  2> Engine1 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv e7e5 
-[Engine] [13:41:40.162056] <  2> Engine1 ---> info depth 2 nodes 95 nps 0 hashfull 0 pv e7e5 c2c4 
-[Engine] [13:41:40.181898] <  2> Engine1 ---> info depth 3 nodes 1824 nps 0 hashfull 0 pv e7e5 c2c4 e5e4 
-[Engine] [13:41:40.213746] <  2> Engine1 ---> info depth 4 nodes 2687 nps 0 hashfull 0 pv e7e5 c2c4 e5e4 h2h4 
-[Engine] [13:41:43.277084] <  2> Engine1 ---> info depth 5 nodes 638953 nps 212984 hashfull 12 pv b7b6 a4a5 b6a5 a1a5 h7h5 
-[Engine] [13:41:43.277235] <  2> Engine1 ---> bestmove b7b6
-[Engine] [13:41:43.277272] <  2> Engine1 <--- isready
-[Engine] [13:41:43.277313] <  2> Engine1 ---> readyok
-[Engine] [13:41:43.277755] <  2> Engine2 <--- isready
-[Engine] [13:41:43.277856] <  2> Engine2 ---> readyok
-[Engine] [13:41:43.277901] <  2> Engine2 <--- position startpos moves a2a4 b7b6
-[Engine] [13:41:43.277925] <  2> Engine2 <--- isready
-[Engine] [13:41:43.277964] <  2> Engine2 ---> readyok
-[Engine] [13:41:43.278003] <  2> Engine2 <--- go wtime 10717 btime 7856 winc 500 binc 500
-[Engine] [13:41:43.290376] <  2> Engine2 ---> info depth 1 nodes 63 nps 0 hashfull 0 pv c2c4 
-[Engine] [13:41:43.302722] <  2> Engine2 ---> info depth 2 nodes 102 nps 0 hashfull 0 pv c2c4 b6b5 
-[Engine] [13:41:43.341153] <  2> Engine2 ---> info depth 3 nodes 5765 nps 0 hashfull 0 pv c2c4 e7e5 b2b4 
-[Engine] [13:41:43.663885] <  2> Engine2 ---> info depth 4 nodes 44035 nps 0 hashfull 2 pv a4a5 b6a5 a1a5 h7h5 
-[Engine] [13:41:43.663986] <  2> Engine2 ---> bestmove a4a5
-[Engine] [13:41:43.664031] <  2> Engine2 <--- isready
-[Engine] [13:41:43.664086] <  2> Engine2 ---> readyok
-[Engine] [13:41:43.664420] <  2> Engine1 <--- isready
-[Engine] [13:41:43.664509] <  2> Engine1 ---> readyok
-[Engine] [13:41:43.664550] <  2> Engine1 <--- position startpos moves a2a4 b7b6 a4a5
-[Engine] [13:41:43.664580] <  2> Engine1 <--- isready
-[Engine] [13:41:43.664625] <  2> Engine1 ---> readyok
-[Engine] [13:41:43.664664] <  2> Engine1 <--- go wtime 10832 btime 7856 winc 500 binc 500
-[Engine] [13:41:43.679969] <  2> Engine1 ---> info depth 1 nodes 63 nps 0 hashfull 0 pv b6a5 
-[Engine] [13:41:43.692264] <  2> Engine1 ---> info depth 2 nodes 86 nps 0 hashfull 0 pv b6a5 a1a5 
-[Engine] [13:41:43.711624] <  2> Engine1 ---> info depth 3 nodes 1486 nps 0 hashfull 0 pv b6a5 a1a5 h7h5 
-[Engine] [13:41:43.799362] <  2> Engine1 ---> info depth 4 nodes 15265 nps 0 hashfull 0 pv b6b5 g2g4 b5b4 e2e4 
-[Engine] [13:41:43.799482] <  2> Engine1 ---> bestmove b6b5
-[Engine] [13:41:43.799538] <  2> Engine1 <--- isready
-[Engine] [13:41:43.799589] <  2> Engine1 ---> readyok
-[Engine] [13:41:43.800024] <  2> Engine2 <--- isready
-[Engine] [13:41:43.800145] <  2> Engine2 ---> readyok
-[Engine] [13:41:43.800203] <  2> Engine2 <--- position startpos moves a2a4 b7b6 a4a5 b6b5
-[Engine] [13:41:43.800235] <  2> Engine2 <--- isready
-[Engine] [13:41:43.800279] <  2> Engine2 ---> readyok
-[Engine] [13:41:43.800371] <  2> Engine2 <--- go wtime 10832 btime 8222 winc 500 binc 500
-[Engine] [13:41:43.813136] <  2> Engine2 ---> info depth 1 nodes 66 nps 0 hashfull 0 pv g2g4 
-[Engine] [13:41:43.825891] <  2> Engine2 ---> info depth 2 nodes 100 nps 0 hashfull 0 pv g2g4 b5b4 
-[Engine] [13:41:43.846509] <  2> Engine2 ---> info depth 3 nodes 2006 nps 0 hashfull 0 pv g2g4 b5b4 e2e4 
-[Engine] [13:41:44.578393] <  2> Engine2 ---> info depth 4 nodes 152636 nps 0 hashfull 3 pv e2e3 b8c6 f1b5 c6a5 
-[Engine] [13:41:44.578724] <  2> Engine2 ---> bestmove e2e3
-[Engine] [13:41:44.578779] <  2> Engine2 <--- isready
-[Engine] [13:41:44.578829] <  2> Engine2 ---> readyok
-[Engine] [13:41:44.579206] <  2> Engine1 <--- isready
-[Engine] [13:41:44.579317] <  2> Engine1 ---> readyok
-[Engine] [13:41:44.579362] <  2> Engine1 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3
-[Engine] [13:41:44.579385] <  2> Engine1 <--- isready
-[Engine] [13:41:44.579432] <  2> Engine1 ---> readyok
-[Engine] [13:41:44.579451] <  2> Engine1 <--- go wtime 10554 btime 8222 winc 500 binc 500
-[Engine] [13:41:44.592138] <  2> Engine1 ---> info depth 1 nodes 60 nps 0 hashfull 0 pv b5b4 
-[Engine] [13:41:44.605143] <  2> Engine1 ---> info depth 2 nodes 112 nps 0 hashfull 0 pv b5b4 e3e4 
-[Engine] [13:41:44.657263] <  2> Engine1 ---> info depth 3 nodes 9483 nps 0 hashfull 0 pv c7c6 d2d3 d8a5 
-[Engine] [13:41:44.757692] <  2> Engine1 ---> info depth 4 nodes 17998 nps 0 hashfull 0 pv b5b4 e3e4 g7g5 e4e5 
-[Engine] [13:41:44.757787] <  2> Engine1 ---> bestmove b5b4
-[Engine] [13:41:44.757824] <  2> Engine1 <--- isready
-[Engine] [13:41:44.757871] <  2> Engine1 ---> readyok
-[Engine] [13:41:44.758322] <  2> Engine2 <--- isready
-[Engine] [13:41:44.758447] <  2> Engine2 ---> readyok
-[Engine] [13:41:44.758505] <  2> Engine2 <--- position startpos moves a2a4 b7b6 a4a5 b6b5 e2e3 b5b4
-[Engine] [13:41:44.758535] <  2> Engine2 <--- isready
-[Engine] [13:41:44.758578] <  2> Engine2 ---> readyok
-[Engine] [13:41:44.758608] <  2> Engine2 <--- go wtime 10554 btime 8544 winc 500 binc 500
-[Engine] [13:41:44.771891] <  2> Engine2 ---> info depth 1 nodes 99 nps 0 hashfull 0 pv a5b4 
-[Engine] [13:41:44.784734] <  2> Engine2 ---> info depth 2 nodes 92 nps 0 hashfull 0 pv a5b4 a7a5 
-[Engine] [13:41:44.808339] <  2> Engine2 ---> info depth 3 nodes 2486 nps 0 hashfull 0 pv a5b4 a7a5 b4a5 
-[Engine] [13:41:44.855095] <  2> Engine2 ---> info depth 4 nodes 2963 nps 0 hashfull 0 pv a5b4 a7a5 b4a5 a8a5 
-[Engine] [13:41:47.345588] <  2> Engine2 ---> info depth 5 nodes 440848 nps 220424 hashfull 13 pv a5b4 e7e5 b4c3 f7f5 c3e5 
-[Engine] [13:41:47.345924] <  2> Engine2 ---> bestmove a5b4
-[Engine] [13:41:47.345967] <  2> Engine2 <--- isready
-[Engine] [13:41:47.346029] <  2> Engine2 ---> readyok
-[Engine] [13:41:47.915593] <  1> Engine1 <--- quit
-[Engine] [13:41:47.915822] <  1> Engine2 <--- quit
-[INFO  ] [13:41:47.916122] <   > fastchess --- Finished match
-
-[INFO  ] [13:41:47.916203] <   > fastchess --- Total Time: 00:00:16 (hours:minutes:seconds)
+[INFO  ] [21:34:22.846596] <   > fastchess --- Total Time: 00:00:38 (hours:minutes:seconds)
 
 
