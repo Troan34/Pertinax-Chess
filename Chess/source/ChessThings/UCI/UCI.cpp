@@ -12,7 +12,7 @@ UCI::UCI(UciVars_p Vars)
 
 void UCI::RunCommand()
 {
-	if (Command.find("isready") != std::string::npos)
+	if ((Command.find("isready") != std::string::npos))
 		std::cout << "readyok\n";
 	else if (Command.find("setoption name") != std::string::npos)
 	{
@@ -64,37 +64,34 @@ void UCI::RunCommand()
 			Board board{ std::string(STARTPOS) };
 			*Vars_p.BoardSquare = board.GetPositionFromFEN();
 			*Vars_p.MoveNum = board.MoveNum();
+
 		}
-		else
-		{
-			if (Command.find(FEN_COMMAND, 8) != std::string::npos)
+		else if (Command.find(FEN_COMMAND, 8) != std::string::npos)
+		{	
+			auto Fen = Command.substr(Command.find(FEN_COMMAND, 8) + 4, std::string::npos);
+			Board board{ Fen };
+			*Vars_p.BoardSquare = board.GetPositionFromFEN();
+			*Vars_p.BoardSquare = board.GetPositionFromFEN();
+			*Vars_p.MoveNum = board.MoveNum();
+			if (board.GetPawnMoveSquare() != 65)
 			{
-				auto Fen = Command.substr(Command.find(FEN_COMMAND, 8) + 4, std::string::npos);
-				Board board{ Fen };
-				*Vars_p.BoardSquare = board.GetPositionFromFEN();
-				*Vars_p.BoardSquare = board.GetPositionFromFEN();
-				*Vars_p.MoveNum = board.MoveNum();
-				if (board.GetPawnMoveSquare() != 65)
-				{
-					*Vars_p.previousBoardSquare = Board::PrevBoardSquareFromEP(*Vars_p.BoardSquare, board.GetPawnMoveSquare());
-				}
-
-				if (Command.find("moves") != std::string::npos)
-				{
-					size_t Index = Command.find(' ', Command.find("moves"));
-
-					while (true)
-					{
-						if (Index > SIZE_MAX - 20)//if Index overflowed, it means we are at the end of string
-							break;
-						Move move = Board::LongALG2Move(Command.substr(Index + 1, Command.find(' ', Index + 1)));
-						Index = Command.find(' ', Index + 1);//will overflow when it reaches the end
-						Board::MakeMove(move, *Vars_p.BoardSquare, *Vars_p.previousBoardSquare, *Vars_p.CanCastle);
-						*Vars_p.MoveNum += 1;
-					}
-				}
+				*Vars_p.previousBoardSquare = Board::PrevBoardSquareFromEP(*Vars_p.BoardSquare, board.GetPawnMoveSquare());
 			}
+		}
 
+		if (Command.find("moves") != std::string::npos)
+		{
+			size_t Index = Command.find(' ', Command.find("moves"));
+
+			while (true)
+			{
+				if (Index > SIZE_MAX - 20)//if Index overflowed, it means we are at the end of string
+					break;
+				Move move = Board::LongALG2Move(Command.substr(Index + 1, Command.find(' ', Index + 1)));
+				Index = Command.find(' ', Index + 1);//will overflow when it reaches the end
+				Board::MakeMove(move, *Vars_p.BoardSquare, *Vars_p.previousBoardSquare, *Vars_p.CanCastle);
+				*Vars_p.MoveNum += 1;
+			}
 		}
 	}
 
@@ -123,22 +120,24 @@ void UCI::RunCommand()
 			*Vars_p.depth = UINT8_MAX;
 		}
 
-		
-		if(Command.find(WTIME, 2) != std::string::npos)
-			Vars_p.timer->WTime = static_cast<std::chrono::milliseconds>(stoi(Command.substr(Command.find(' ', Command.find(WTIME)) + 1, Command.find(' ', Command.find(' ', Command.find(WTIME)) + 1))));
-		if (Command.find(BTIME, 2) != std::string::npos)
-			Vars_p.timer->BTime = static_cast<std::chrono::milliseconds>(stoi(Command.substr(Command.find(' ', Command.find(BTIME)) + 1, Command.find(' ', Command.find(' ', Command.find(BTIME)) + 1))));
-		if (Command.find(WINC, 2) != std::string::npos)
-			Vars_p.timer->WIncrement = static_cast<std::chrono::milliseconds>(stoi(Command.substr(Command.find(' ', Command.find(WINC)) + 1, Command.find(' ', Command.find(' ', Command.find(WINC)) + 1))));
-		if (Command.find(BINC, 2) != std::string::npos)
-			Vars_p.timer->BIncrement = static_cast<std::chrono::milliseconds>(stoi(Command.substr(Command.find(' ', Command.find(BINC)) + 1, Command.find(' ', Command.find(' ', Command.find(BINC)) + 1))));
-		
+		//tc
+		{
+			if (Command.find(WTIME, 2) != std::string::npos)
+				Vars_p.timer->WTime = static_cast<std::chrono::milliseconds>(stoi(Command.substr(Command.find(' ', Command.find(WTIME)) + 1, Command.find(' ', Command.find(' ', Command.find(WTIME)) + 1))));
+			if (Command.find(BTIME, 2) != std::string::npos)
+				Vars_p.timer->BTime = static_cast<std::chrono::milliseconds>(stoi(Command.substr(Command.find(' ', Command.find(BTIME)) + 1, Command.find(' ', Command.find(' ', Command.find(BTIME)) + 1))));
+			if (Command.find(WINC, 2) != std::string::npos)
+				Vars_p.timer->WIncrement = static_cast<std::chrono::milliseconds>(stoi(Command.substr(Command.find(' ', Command.find(WINC)) + 1, Command.find(' ', Command.find(' ', Command.find(WINC)) + 1))));
+			if (Command.find(BINC, 2) != std::string::npos)
+				Vars_p.timer->BIncrement = static_cast<std::chrono::milliseconds>(stoi(Command.substr(Command.find(' ', Command.find(BINC)) + 1, Command.find(' ', Command.find(' ', Command.find(BINC)) + 1))));
+		}
+
 		if (stop)
 		{
 			std::cout << "Unable: Search running.\n";
 		}
 		std::thread Thread(&UCI::Go, this);
-		Thread.detach();
+		Thread.join();
 	}
 
 	if (Command.find(STOP_COMMAND) != std::string::npos)
@@ -153,7 +152,6 @@ void UCI::Go()
 	std::string Bestmove = Board::Move2ALG(ID.GetBestMove(true));
 	std::cout << "bestmove " << Bestmove << '\n';
 	auto PV = ID.GetPV();
-
 }
 
 

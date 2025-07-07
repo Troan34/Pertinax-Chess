@@ -50,6 +50,7 @@ private:
 	std::string Command;
 	UciVars_p Vars_p;
 	bool stop = false;
+	std::atomic<bool> IsReady = true;
 
 	void RunCommand();
 	void Go();

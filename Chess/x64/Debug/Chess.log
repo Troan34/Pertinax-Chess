@@ -1,3 +1,27 @@
-﻿  IterativeD.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(79,1): warning C4715: 'IterativeDeepening::GetPV': not all control paths return a value
+﻿  Board.cpp
+  RenderChesspcs.cpp
+  UCI.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\UCI\UCI.cpp(119,73): warning C4267: '=': conversion from 'size_t' to 'uint8_t', possible loss of data
+  Main.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
+  (compiling source file 'source/Main.cpp')
+      C:\Users\roanb\source\repos\Pertinax-Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,11):
+      see previous definition of 'APIENTRY'
+  
+  TestTexture2D.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+      C:\Users\roanb\source\repos\Pertinax-Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,11):
+      see previous definition of 'APIENTRY'
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3630,56): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3630,56):
+      the template instantiation context (the oldest one first) is
+          C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\tests\TestTexture2D.cpp(30,25):
+          see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,nullptr,unsigned __int64,0>(nullptr &&,unsigned __int64 &&)' being compiled
+  
+  Generating Code...
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(278,1): warning C4715: 'Board::GetPieceType2Uncolored': not all control paths return a value
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(342,1): warning C4715: 'Board::PieceType2letter': not all control paths return a value
   Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Debug\Chess.exe

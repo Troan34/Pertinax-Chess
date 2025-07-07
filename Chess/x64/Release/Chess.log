@@ -1,27 +1,10 @@
-﻿  Main.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
-  (compiling source file 'source/Main.cpp')
-      C:\Users\roanb\source\repos\Pertinax-Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,11):
-      see previous definition of 'APIENTRY'
-  
-  TestTexture2D.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
-  (compiling source file 'source/tests/TestTexture2D.cpp')
-      C:\Users\roanb\source\repos\Pertinax-Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,11):
-      see previous definition of 'APIENTRY'
-  
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3630,56): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
-  (compiling source file 'source/tests/TestTexture2D.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3630,56):
-      the template instantiation context (the oldest one first) is
-          C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\tests\TestTexture2D.cpp(30,25):
-          see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,nullptr,unsigned __int64,0>(nullptr &&,unsigned __int64 &&)' being compiled
-  
+﻿  UCI.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\UCI\UCI.cpp(116,73): warning C4267: '=': conversion from 'size_t' to 'uint8_t', possible loss of data
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  3 of 3424 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 3424 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    24 functions had inline decision re-evaluated but remain unchanged
+    15 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\vc120.pdb'; linking object as if no debug info
   Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Chess.exe

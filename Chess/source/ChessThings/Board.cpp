@@ -259,6 +259,10 @@ std::string Board::Move2ALG(Move move)
 	row = move.s_Move / 8 + '0' + 1;
 	ALG += column;
 	ALG += row;
+	if (move.s_PromotionType != 65)
+	{
+		ALG += PieceType2letter(move.s_PromotionType);
+	}
 
 	return ALG;
 }
