@@ -266,27 +266,25 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos)
 {
 	if (BoardSquarePos < 8 or BoardSquarePos > 55)
 	{
-		return;
+		return;//this should be made an assert
 	}
 	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
 	if (PieceType == WHITE_PAWN and isNextMoveForWhite)//White pawn
 	{
 		for (const int& Offset : OffsetForWhitePawn)
 		{
-			if (BoardSquarePos == 48 and Offset == 7 or BoardSquarePos == 55 and Offset == 9)
+			if ((BoardSquarePos == 48 and Offset == 7) or (BoardSquarePos == 55 and Offset == 9))
 				continue;
 
 			uint8_t BoardPosPlusOffset = BoardSquarePos + Offset;
 			uint8_t PieceTypeAtOffset = m_BoardSquare[BoardPosPlusOffset];
 
-			//promotion
-			if (BoardPosPlusOffset >= 56 and PieceTypeAtOffset == 0)
-			{
-				moves[BoardSquarePos].Promotion[Offset - 7] = BoardPosPlusOffset;
-			}
+
 
 			if (NumOfSquaresUntilEdge[BoardSquarePos][WhitePawnDirections[Offset-7]] != 0)
 			{
+				
+
 				if (PieceTypeAtOffset != 0 and Offset != 8)
 				{
 					AttackedSquares[BoardPosPlusOffset] = true;
@@ -294,6 +292,12 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos)
 					{
 						moves[BoardSquarePos].PieceType = PieceType;
 						moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
+
+						//promotion
+						if (BoardPosPlusOffset >= 56)
+						{
+							moves[BoardSquarePos].Promotion[Offset - 7] = BoardPosPlusOffset;
+						}
 					}
 					if (PieceTypeAtOffset == BLACK_KING)
 					{
@@ -344,17 +348,13 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos)
 	{
 		for (const int& Offset : OffsetForBlackPawn)
 		{
-			if (BoardSquarePos == 8 and Offset == -9 or BoardSquarePos == 15 and Offset == -7)
+			if ((BoardSquarePos == 8 and Offset == -9) or (BoardSquarePos == 15 and Offset == -7))
 				continue;
 
 			uint8_t BoardPosPlusOffset = BoardSquarePos + Offset;
 			uint8_t PieceTypeAtOffset = m_BoardSquare[BoardPosPlusOffset];
 
-			//promotion
-			if (BoardPosPlusOffset <= 7 and PieceTypeAtOffset == 0)
-			{
-				moves[BoardSquarePos].Promotion[Offset + 9] = BoardPosPlusOffset;
-			}
+			
 
 
 			if (NumOfSquaresUntilEdge[BoardSquarePos][BlackPawnDirections[Offset+9]] != 0)
@@ -366,6 +366,12 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos)
 					{
 						moves[BoardSquarePos].PieceType = PieceType;
 						moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
+
+						//promotion
+						if (BoardPosPlusOffset <= 7)
+						{
+							moves[BoardSquarePos].Promotion[Offset + 9] = BoardPosPlusOffset;
+						}
 					}
 					if (PieceTypeAtOffset == WHITE_KING)
 					{

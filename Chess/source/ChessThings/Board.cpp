@@ -261,7 +261,7 @@ std::string Board::Move2ALG(Move move)
 	ALG += row;
 	if (move.s_PromotionType != 65)
 	{
-		ALG += PieceType2letter(move.s_PromotionType);
+		ALG += PieceType2letter(GetPieceType2Uncolored(move.s_PromotionType) + 9);//This is some traduction gibberish for UCI
 	}
 
 	return ALG;
@@ -486,7 +486,7 @@ void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t En
 	*/
 }
 
-void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, std::array<uint8_t, 64>& previousBoardSquare, canCastle Castle)
+void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, std::array<uint8_t, 64>& previousBoardSquare, canCastle& Castle)
 {
 	previousBoardSquare = BoardSquare;
 	Board::WillCanCastleChange(BoardSquare[move.s_BoardSquare], move.s_BoardSquare, move.s_Move, Castle);

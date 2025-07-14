@@ -24,14 +24,21 @@ IterativeDeepening::IterativeDeepening(const std::array<uint8_t, 64>& BoardSquar
 
 Move IterativeDeepening::GetBestMove(bool RanWithGo)
 {
+
 	auto start = std::chrono::high_resolution_clock::now();
 
 	std::vector<Move> CurrentPV;
 	int32_t BestEval = -INT32_MAX;
 	Move BestMove;
 
-	while(Depth < m_MaxDepth and !(*stop))
+	while(Depth < m_MaxDepth)
 	{
+		if(*stop)
+		{
+			if(Depth > 0)
+				break;
+		}
+
 		auto LocalStart = std::chrono::high_resolution_clock::now();
 
 		Depth++;
@@ -41,7 +48,7 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 		BestEval = bestMove.second;
 		BestMove = bestMove.first;
 
-		auto stop = std::chrono::high_resolution_clock::now();
+		auto Stop = std::chrono::high_resolution_clock::now();
 		if (RanWithGo)
 		{
 			UCIInfoes Info;
@@ -49,7 +56,7 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 			auto Hashfullness = search.GetTTFullness();
 			Info.HashFull = &Hashfullness;
 
-			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(Stop - start);
 			auto Nps = uint32_t((float)search.GetNodesVisited() / (float)(duration.count() / 1000));
 			Info.NpS = &Nps;
 
@@ -61,7 +68,7 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 			PrintInfo(Info);
 		}
 		
-		if (std::chrono::duration_cast<std::chrono::milliseconds>(stop - start) >= TimeLeft(std::chrono::duration_cast<std::chrono::milliseconds>(stop - LocalStart)))
+		if (std::chrono::duration_cast<std::chrono::milliseconds>(Stop - start) >= TimeLeft(std::chrono::duration_cast<std::chrono::milliseconds>(Stop - LocalStart)))
 			break;
 	}
 
