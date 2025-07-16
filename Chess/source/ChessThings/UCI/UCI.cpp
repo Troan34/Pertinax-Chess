@@ -12,8 +12,12 @@ UCI::UCI(UciVars_p Vars)
 
 void UCI::RunCommand()
 {
+
 	if ((Command.find("isready") != std::string::npos))
+	{
+		//do { Sleep(20); } while (!(IsReady.load()));//something just small enough for the engine to be responsive but to not just waste cpu operations
 		std::cout << "readyok\n";
+	}
 	else if (Command.find("setoption name") != std::string::npos)
 	{
 		if (Command.substr(15, 5) == DEPTH_COMMAND)
@@ -73,10 +77,12 @@ void UCI::RunCommand()
 			*Vars_p.BoardSquare = board.GetPositionFromFEN();
 			*Vars_p.BoardSquare = board.GetPositionFromFEN();
 			*Vars_p.MoveNum = board.MoveNum();
+			*Vars_p.CanCastle = board.GetCanCastle();
 			if (board.GetPawnMoveSquare() != 65)
 			{
 				*Vars_p.previousBoardSquare = Board::PrevBoardSquareFromEP(*Vars_p.BoardSquare, board.GetPawnMoveSquare());
 			}
+
 		}
 
 		if (Command.find("moves") != std::string::npos)
@@ -148,10 +154,12 @@ void UCI::RunCommand()
 
 void UCI::Go()
 {
+	//IsReady.store(false);
 	IterativeDeepening ID(*Vars_p.BoardSquare, *Vars_p.previousBoardSquare, *Vars_p.CanCastle, *Vars_p.MoveNum, *Vars_p.SearchMoves, *Vars_p.HashSize, *Vars_p.timer, *Vars_p.depth, !((*Vars_p.MoveNum) % 2), &stop);
 	std::string Bestmove = Board::Move2ALG(ID.GetBestMove(true));
 	std::cout << "bestmove " << Bestmove << '\n';
 	auto PV = ID.GetPV();
+	//IsReady.store(true);
 }
 
 

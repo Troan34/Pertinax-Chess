@@ -142,6 +142,7 @@ struct UCIInfoes
 	uint64_t* NumOfNodes = nullptr;
 	uint32_t* NpS = nullptr;
 	uint16_t* HashFull = nullptr;
+	int32_t* Score = 0;
 	std::vector<Move>* PV;
 };
 

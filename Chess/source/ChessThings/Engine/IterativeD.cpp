@@ -13,7 +13,21 @@ void IterativeDeepening::PrintInfo(UCIInfoes Info)
 {
 	//waiting for this to work (i put the compiler to c++23)
 	//std::println("info depth {} nodes {} nps {} hashfull {} pv {}", *Info.Depth, *Info.NumOfNodes, *Info.NpS, *Info.HashFull, Board::GetPrintableFromVecOfMoves(*Info.PV));
-	std::cout << "info " << "depth " << *Info.Depth + '0' - 48 << " nodes " << *Info.NumOfNodes << " nps " << *Info.NpS << " hashfull " << *Info.HashFull
+	std::cout << "info " << "depth " << *Info.Depth + '0' - 48 <<
+		" score " << [&]()->std::string 
+		{
+			std::string str;
+			if (*Info.Score == INT32_MAX)
+				str = "mate " + std::to_string(Info.PV->size());
+			else if (*Info.Score == -INT32_MAX)
+				str = "mate -" + std::to_string(Info.PV->size());
+			else
+			{
+				str = "cp " + std::to_string(*Info.Score);
+			}
+			return str;
+		}() <<
+		" nodes " << *Info.NumOfNodes << " nps " << *Info.NpS << " hashfull " << *Info.HashFull
 		<< " pv " << Board::GetPrintableFromVecOfMoves(*Info.PV) << std::endl;
 }
 
@@ -46,7 +60,7 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 		auto bestMove = search.GetBestMoveWithEval(CurrentPV);
 
 		BestEval = bestMove.second;
-		BestMove = bestMove.first;
+		BestMove = CurrentPV.front();
 
 		auto Stop = std::chrono::high_resolution_clock::now();
 		if (RanWithGo)
@@ -64,12 +78,15 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 			Info.NumOfNodes = &NumOfNds;
 			std::vector<Move> PV = CurrentPV;
 			Info.PV = &PV;
+			Info.Score = &BestEval;
 
 			PrintInfo(Info);
 		}
 		
+#ifndef _DEBUG
 		if (std::chrono::duration_cast<std::chrono::milliseconds>(Stop - start) >= TimeLeft(std::chrono::duration_cast<std::chrono::milliseconds>(Stop - LocalStart)))
 			break;
+#endif
 	}
 
 	RanASearch = true;

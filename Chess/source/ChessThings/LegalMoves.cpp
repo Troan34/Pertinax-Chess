@@ -16,8 +16,6 @@ GenerateLegalMoves::GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardS
 	if (!isForOppositeMoves)
 	{
 		RemoveIllegalMoves();
-		//if (isItCheckmate)
-			//std::cout << "Checkmate" << '\n';
 	}
 
 }
