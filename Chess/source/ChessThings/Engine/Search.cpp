@@ -20,7 +20,6 @@ std::pair<Move, int32_t> Search::GetBestMoveWithEval(std::vector<Move>& PV)
 	ZobristHashing m_Hash(LegalMoves, m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum);
 
 	int32_t Eval = (NegaMax(m_Hash, m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum, m_depth, -INT32_MAX, INT32_MAX, PV)).Eval;
-
 	Move BestMove(m_BestBoardPos, m_BestMove, m_BestPromotion);
 
 	//auto stop = std::chrono::high_resolution_clock::now();
@@ -53,7 +52,7 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 		}
 	}
 	
-
+	const std::vector<Move> ConstPV = PreviousPV;//if we get mated we come back to these moves
 	int Evaluation = -INT32_MAX;
 	std::vector<Move> LocalPV;
 
@@ -150,6 +149,10 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 
 	if(depth == m_depth)
 		PreviousPV = LocalPV;
+	if (Evaluation == -INT32_MAX)
+	{
+		PreviousPV = ConstPV;
+	}
 	return { alpha, LocalPV };
 }
 
