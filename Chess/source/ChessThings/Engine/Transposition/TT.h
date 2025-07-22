@@ -41,5 +41,6 @@ public:
 	void AgeIncrementOnNewSearch();
 	size_t GetTTSize() const;
 	uint16_t GetTTFullness() const;
+	void ClearTT();
 };
 

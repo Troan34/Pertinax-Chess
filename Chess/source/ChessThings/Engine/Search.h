@@ -8,7 +8,6 @@
 #include <chrono>
 
 
-
 class Search {
 private:
 	const std::array<uint8_t, 64> m_BoardSquare;
@@ -40,5 +39,5 @@ public:
 	std::pair<Move, int32_t> GetBestMoveWithEval(std::vector<Move>& PV);
 	uint64_t GetNodesVisited() const;
 	uint16_t GetTTFullness() const;
-
+	static void ClearTT();
 };

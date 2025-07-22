@@ -83,6 +83,11 @@ uint16_t TranspositionTable::GetTTFullness() const
 	return 1000*(TT.size()*SIZE_OF_HASHMAP_ELEMENT)/(HashSize);
 }
 
+void TranspositionTable::ClearTT()
+{
+	TT.clear();
+}
+
 void TranspositionTable::ResizeTT()//Just age(no other strategies)
 {
 	uint16_t NumOfDeletedEntries = 0;

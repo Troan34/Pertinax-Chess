@@ -51,6 +51,7 @@ private:
 	UciVars_p Vars_p;
 	bool stop = false;
 	std::atomic<bool> IsReady = true;
+	std::atomic<bool> Outputting = false;
 
 	void RunCommand();
 	void Go();

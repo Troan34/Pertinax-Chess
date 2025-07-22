@@ -11,7 +11,6 @@ Search::~Search()
 {
 }
 
-
 std::pair<Move, int32_t> Search::GetBestMoveWithEval(std::vector<Move>& PV)
 {
 	//auto start = std::chrono::high_resolution_clock::now();
@@ -36,6 +35,12 @@ uint64_t Search::GetNodesVisited() const
 uint16_t Search::GetTTFullness() const
 {
 	return TT.GetTTFullness();
+}
+
+
+void Search::ClearTT()
+{
+	TT.ClearTT();
 }
 
 SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta, std::vector<Move>& PreviousPV)

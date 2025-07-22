@@ -3,19 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\IterativeD.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\Engine\\IterativeD.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\UCI\\UCI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\UCI\\UCI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\Transposition\\TT.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\Engine\\Transposition\\TT.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\UCI\\UCI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\UCI\\UCI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\Search.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\Engine\\Search.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\Search.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\Engine\\Search.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\UCI\\UCI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\UCI\\UCI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\Transposition\\TT.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\Engine\\Transposition\\TT.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector||{3B902123-F8A7-4915-9F01-361F908088D0}|"
+      "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\IterativeD.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\Engine\\IterativeD.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\IterativeD.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -26,23 +39,12 @@
       "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\LegalMoves.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\array||{3B902123-F8A7-4915-9F01-361F908088D0}|"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\RenderChesspcs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\RenderChesspcs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\UCI\\UCI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\UCI\\UCI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\RenderChesspcs.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\RenderChesspcs.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\Search.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1511B680-3D1B-4E01-A8C2-18F66B3E3CD5}|Chess\\Chess.vcxproj|solutionrelative:Chess\\source\\ChessThings\\Engine\\Search.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -52,38 +54,37 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Search.cpp",
               "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\Search.cpp",
               "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\Engine\\Search.cpp",
               "ToolTip": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\Search.cpp",
               "RelativeToolTip": "Chess\\source\\ChessThings\\Engine\\Search.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJgAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-06-14T14:48:56.595Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 3,
               "Title": "Search.h",
               "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\Search.h",
               "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\Engine\\Search.h",
               "ToolTip": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\Search.h",
               "RelativeToolTip": "Chess\\source\\ChessThings\\Engine\\Search.h",
-              "ViewState": "AgIAAAEAAAAAAAAAAIAwwBgAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAUwCkAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-05-09T15:04:18.434Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "RenderChesspcs.cpp",
               "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\RenderChesspcs.cpp",
               "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\RenderChesspcs.cpp",
@@ -96,7 +97,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "RenderChesspcs.h",
               "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\RenderChesspcs.h",
               "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\RenderChesspcs.h",
@@ -109,13 +110,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "UCI.cpp",
               "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\UCI\\UCI.cpp",
               "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\UCI\\UCI.cpp",
               "ToolTip": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\UCI\\UCI.cpp",
               "RelativeToolTip": "Chess\\source\\ChessThings\\UCI\\UCI.cpp",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAUwKIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-06-13T22:29:00.512Z",
               "IsPinned": true,
@@ -123,34 +124,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "UCI.h",
-              "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\UCI\\UCI.h",
-              "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\UCI\\UCI.h",
-              "ToolTip": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\UCI\\UCI.h",
-              "RelativeToolTip": "Chess\\source\\ChessThings\\UCI\\UCI.h",
-              "ViewState": "AgIAACMAAAAAAAAAAAAAADQAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-06-13T22:39:29.248Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "IterativeD.cpp",
               "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\IterativeD.cpp",
               "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\Engine\\IterativeD.cpp",
               "ToolTip": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\IterativeD.cpp",
               "RelativeToolTip": "Chess\\source\\ChessThings\\Engine\\IterativeD.cpp",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAlwDEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-06-22T22:59:42.661Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "IterativeD.h",
               "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\IterativeD.h",
               "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\Engine\\IterativeD.h",
@@ -159,8 +146,7 @@
               "ViewState": "AgIAAAkAAAAAAAAAAAAAABcAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-06-22T23:00:06.121Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -172,20 +158,43 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "vector",
-              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector",
-              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector",
-              "ViewState": "AgIAAJ8HAAAAAAAAAAAlwK8HAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-07-18T20:26:27.434Z",
-              "EditorCaption": ""
+              "DocumentIndex": 2,
+              "Title": "UCI.h",
+              "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\UCI\\UCI.h",
+              "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\UCI\\UCI.h",
+              "ToolTip": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\UCI\\UCI.h",
+              "RelativeToolTip": "Chess\\source\\ChessThings\\UCI\\UCI.h",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAADUAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-22T22:24:33.336Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TT.cpp",
+              "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\Transposition\\TT.cpp",
+              "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\Engine\\Transposition\\TT.cpp",
+              "ToolTip": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\Transposition\\TT.cpp",
+              "RelativeToolTip": "Chess\\source\\ChessThings\\Engine\\Transposition\\TT.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFUAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-07-22T21:55:41.625Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "TT.h",
+              "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\Transposition\\TT.h",
+              "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\Engine\\Transposition\\TT.h",
+              "ToolTip": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\Engine\\Transposition\\TT.h",
+              "RelativeToolTip": "Chess\\source\\ChessThings\\Engine\\Transposition\\TT.h",
+              "ViewState": "AgIAABoAAAAAAAAAAAAEwCsAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-22T21:55:21.686Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "LegalMoves.cpp",
               "DocumentMoniker": "C:\\Users\\roanb\\source\\repos\\Pertinax-Chess\\Chess\\source\\ChessThings\\LegalMoves.cpp",
               "RelativeDocumentMoniker": "Chess\\source\\ChessThings\\LegalMoves.cpp",
@@ -194,18 +203,6 @@
               "ViewState": "AgIAAAEAAAAAAAAAAAAlwAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-07-16T18:47:21.152Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "array",
-              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\array",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\array",
-              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\array",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\array",
-              "ViewState": "AgIAAAICAAAAAAAAAAAlwBICAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-07-16T18:47:17.811Z"
             }
           ]
         }
