@@ -1,12 +1,23 @@
 #include "ChessThings/Engine/IterativeD.h"
 
 
-std::chrono::milliseconds IterativeDeepening::TimeLeft(std::chrono::milliseconds TimeUsed)
+std::chrono::milliseconds IterativeDeepening::TimeForMove()
 {
 	std::chrono::milliseconds* TimeLeft = WhiteTurn ? &Time.WTime : &Time.BTime;
-	*TimeLeft += WhiteTurn ? Time.WIncrement : Time.BIncrement;
-	*TimeLeft -= TimeUsed;
-	return (*TimeLeft + TimeUsed) / (90 - m_MoveNum);//to algorithm-fy
+
+	return (*TimeLeft / 20) + ((WhiteTurn ? Time.WIncrement : Time.BIncrement)/2);//to algorithm-fy
+}
+
+void IterativeDeepening::UpdateTimeControl(std::chrono::milliseconds TimeUsed)
+{
+	if (WhiteTurn)
+	{
+		Time.WTime -= TimeUsed + Time.WIncrement;
+	}
+	else
+	{
+		Time.BTime -= TimeUsed + Time.BIncrement;
+	}
 }
 
 void IterativeDeepening::PrintInfo(UCIInfoes Info)
@@ -82,12 +93,15 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 
 			PrintInfo(Info);
 		}
-		
+
 #ifndef _DEBUG
-		if (std::chrono::duration_cast<std::chrono::milliseconds>(Stop - start) >= TimeLeft(std::chrono::duration_cast<std::chrono::milliseconds>(Stop - LocalStart)))
+		if (std::chrono::duration_cast<std::chrono::milliseconds>(Stop - start) >= TimeForMove())
 			break;
 #endif
+
 	}
+	auto Stop = std::chrono::high_resolution_clock::now();
+	UpdateTimeControl(std::chrono::duration_cast<std::chrono::milliseconds>(Stop - start));
 
 	RanASearch = true;
 	*stop = false;

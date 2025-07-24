@@ -20,7 +20,8 @@ private:
 
 	bool* stop;
 	bool WhiteTurn;
-	std::chrono::milliseconds TimeLeft(std::chrono::milliseconds TimeUsed);
+	std::chrono::milliseconds TimeForMove();
+	void UpdateTimeControl(std::chrono::milliseconds TimeUsed);
 	void PrintInfo(UCIInfoes Info);
 
 public:
