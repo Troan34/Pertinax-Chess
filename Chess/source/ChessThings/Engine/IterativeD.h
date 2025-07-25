@@ -20,8 +20,13 @@ private:
 
 	bool* stop;
 	bool WhiteTurn;
+
+
+
 	std::chrono::milliseconds TimeForMove();
+	std::chrono::milliseconds TimeForDepth(std::chrono::milliseconds DepthTime);
 	void UpdateTimeControl(std::chrono::milliseconds TimeUsed);
+	void UpdateEBF(double TimeUsedForDepth, double TimeUsedForLastDepth);
 	void PrintInfo(UCIInfoes Info);
 
 public:

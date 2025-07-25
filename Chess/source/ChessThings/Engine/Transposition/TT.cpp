@@ -98,7 +98,7 @@ void TranspositionTable::ResizeTT()//Just age(no other strategies)
 	{
 		for (auto& it : TT)
 		{
-			if (RelativeAge(it.second.AgeBound) > MinimumAgeDelta and (GetBound(it.second.AgeBound) != EXACT));//MIGHT BE A BUG, WITH A TT FULL OF PV
+			if (RelativeAge(it.second.AgeBound) > MinimumAgeDelta and (GetBound(it.second.AgeBound) != EXACT))//MIGHT BE A BUG, WITH A TT FULL OF PV
 			{
 				TT.erase(it.first);//This might be a bug, SAME bug as that one in LegalMoves(when i deleted the element i was iterating)
 				NumOfDeletedEntries++;

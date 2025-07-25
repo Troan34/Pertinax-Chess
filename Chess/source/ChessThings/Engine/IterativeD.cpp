@@ -1,11 +1,25 @@
 #include "ChessThings/Engine/IterativeD.h"
+using namespace std::chrono_literals;
+//time management
+/*
+	EBF does stand for effective branching factor, but for our use it better means time-to-search factor, although they do correlate
+*/
+static double PersistentEBF = 2.5f;
+double EBF = 2.5f;
 
 
 std::chrono::milliseconds IterativeDeepening::TimeForMove()
 {
 	std::chrono::milliseconds* TimeLeft = WhiteTurn ? &Time.WTime : &Time.BTime;
+	auto TimeForMove = (*TimeLeft / 20) + ((WhiteTurn ? Time.WIncrement : Time.BIncrement) / 2);//to algorithm-fy
+	return TimeForMove;
+}
 
-	return (*TimeLeft / 20) + ((WhiteTurn ? Time.WIncrement : Time.BIncrement)/2);//to algorithm-fy
+std::chrono::milliseconds IterativeDeepening::TimeForDepth(std::chrono::milliseconds DepthTime)
+{
+	double BlendedEBF = (0.8 * EBF) + (0.2 * PersistentEBF);
+	auto TimeForDepth = DepthTime.count() * BlendedEBF;
+	return std::chrono::milliseconds((int64_t)TimeForDepth);
 }
 
 void IterativeDeepening::UpdateTimeControl(std::chrono::milliseconds TimeUsed)
@@ -20,12 +34,24 @@ void IterativeDeepening::UpdateTimeControl(std::chrono::milliseconds TimeUsed)
 	}
 }
 
+void IterativeDeepening::UpdateEBF(double TimeUsedForDepth, double TimeUsedForLastDepth)
+{
+	constexpr double alpha = 0.7f; //smoothing factor, tunable
+	EBF = (alpha * (TimeUsedForDepth / TimeUsedForDepth)) + ((1 - alpha) * EBF);
+	EBF = std::clamp(EBF, (double)1.2f, (double)6.0f);
+
+	constexpr double beta = 0.1f; //smoothing factor, tunable
+	PersistentEBF = (beta * (TimeUsedForDepth / TimeUsedForDepth)) + ((1 - beta) * PersistentEBF);
+	PersistentEBF = std::clamp(PersistentEBF, (double)1.2f, (double)6.0f);
+}
+
 void IterativeDeepening::PrintInfo(UCIInfoes Info)
 {
 	//waiting for this to work (i put the compiler to c++23)
 	//std::println("info depth {} nodes {} nps {} hashfull {} pv {}", *Info.Depth, *Info.NumOfNodes, *Info.NpS, *Info.HashFull, Board::GetPrintableFromVecOfMoves(*Info.PV));
 	std::cout << "info " << "depth " << *Info.Depth + '0' - 48 <<
-		" score " << [&]()->std::string 
+		" score " << 
+		[&]()->std::string 
 		{
 			std::string str;
 			if (*Info.Score == INT32_MAX)
@@ -49,8 +75,9 @@ IterativeDeepening::IterativeDeepening(const std::array<uint8_t, 64>& BoardSquar
 
 Move IterativeDeepening::GetBestMove(bool RanWithGo)
 {
-
 	auto start = std::chrono::high_resolution_clock::now();
+	auto TimeForNextMove = TimeForMove();
+	std::chrono::milliseconds TimeForLastDepth(5); //just a number
 
 	std::vector<Move> CurrentPV;
 	int32_t BestEval = -INT32_MAX;
@@ -74,6 +101,9 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 		BestMove = CurrentPV.front();
 
 		auto Stop = std::chrono::high_resolution_clock::now();
+		TimeForNextMove -= std::chrono::duration_cast<std::chrono::milliseconds>(Stop - LocalStart);
+
+		//output things
 		if (RanWithGo)
 		{
 			UCIInfoes Info;
@@ -90,16 +120,22 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 			std::vector<Move> PV = CurrentPV;
 			Info.PV = &PV;
 			Info.Score = &BestEval;
-
+			
 			PrintInfo(Info);
 		}
 
+		UpdateEBF(std::chrono::duration_cast<std::chrono::milliseconds>(Stop - LocalStart).count(), TimeForLastDepth.count());
+
+		
 #ifndef _DEBUG
-		if (std::chrono::duration_cast<std::chrono::milliseconds>(Stop - start) >= TimeForMove())
+		if (TimeForDepth(std::chrono::duration_cast<std::chrono::milliseconds>(Stop - LocalStart)) > TimeForNextMove)
 			break;
 #endif
-
+		TimeForLastDepth = std::chrono::duration_cast<std::chrono::milliseconds>(Stop - LocalStart);
+		if (Depth == 5 and TimeForNextMove < 40000ms)
+			break;//my nodes visited shoot up harder than a factorial, TO BE REMOVED WHEN ENGINE IS BETTER
 	}
+
 	auto Stop = std::chrono::high_resolution_clock::now();
 	UpdateTimeControl(std::chrono::duration_cast<std::chrono::milliseconds>(Stop - start));
 
