@@ -3,12 +3,17 @@
 
 
 TranspositionTable::TranspositionTable(size_t TTSize)
-	:HashSize(TTSize)
+	:m_HashSize(TTSize)
 {
-	TT.reserve(floor(HashSize / SIZE_OF_HASHMAP_ELEMENT));
+	TT.reserve(floor(m_HashSize / SIZE_OF_HASHMAP_ELEMENT));
 }
 
 TranspositionTable::TranspositionTable()
+{
+	TT.reserve(floor(m_HashSize / SIZE_OF_HASHMAP_ELEMENT));
+}
+
+TranspositionTable::~TranspositionTable()
 {
 }
 
@@ -16,6 +21,7 @@ TranspositionTable::TranspositionTable()
 bool TranspositionTable::TTprobe(int32_t& alpha, int32_t& beta, int32_t& eval, const uint64_t& Hash, uint8_t& depth)
 {
 	auto TTentry = TT.find(Hash);
+	
 	if (TTentry != TT.end())
 	{
 		switch (GetBound(TTentry->second.AgeBound))
@@ -60,14 +66,16 @@ void TranspositionTable::AddEntry(Move BestMove, int32_t Eval, uint8_t Depth, ui
 	Entry.Depth = Depth;
 	Entry.Evaluation = Eval;
 
-	if (HashSize > (TT.size() * SIZE_OF_HASHMAP_ELEMENT))
+	if (m_HashSize > (TT.size() * SIZE_OF_HASHMAP_ELEMENT))
 	{
 		TT[Hash] = Entry;
+		std::println("added entry, hash: {}", Hash);
 	}
 	else
 	{
 		ResizeTT();
 		TT[Hash] = Entry;
+		std::println("added entry, hash: {}", Hash);
 	}
 }
 
@@ -80,12 +88,30 @@ size_t TranspositionTable::GetTTSize() const
 
 uint16_t TranspositionTable::GetTTFullness() const
 {
-	return 1000*(TT.size()*SIZE_OF_HASHMAP_ELEMENT)/(HashSize);
+	return 1000*(TT.size()*SIZE_OF_HASHMAP_ELEMENT)/(m_HashSize);
+}
+
+float inline TranspositionTable::GetTTSizeInMB() const
+{
+	return (TT.size() * static_cast<float>(SIZE_OF_HASHMAP_ELEMENT)) / 1000000;
 }
 
 void TranspositionTable::ClearTT()
 {
 	TT.clear();
+}
+
+void TranspositionTable::ChangeHashSize(const size_t& HashSize)
+{
+	if (HashSize < m_HashSize)
+	{
+		while ((GetTTSizeInMB() * 1000000) < HashSize)
+		{
+			ResizeTT();
+		}
+	}
+	m_HashSize = HashSize;
+	TT.reserve(floor(m_HashSize / SIZE_OF_HASHMAP_ELEMENT));
 }
 
 void TranspositionTable::ResizeTT()//Just age(no other strategies)

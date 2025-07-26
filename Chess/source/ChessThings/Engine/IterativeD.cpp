@@ -130,10 +130,11 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 #ifndef _DEBUG
 		if (TimeForDepth(std::chrono::duration_cast<std::chrono::milliseconds>(Stop - LocalStart)) > TimeForNextMove)
 			break;
-#endif
-		TimeForLastDepth = std::chrono::duration_cast<std::chrono::milliseconds>(Stop - LocalStart);
 		if (Depth == 5 and TimeForNextMove < 40000ms)
 			break;//my nodes visited shoot up harder than a factorial, TO BE REMOVED WHEN ENGINE IS BETTER
+#endif
+		TimeForLastDepth = std::chrono::duration_cast<std::chrono::milliseconds>(Stop - LocalStart);
+
 	}
 
 	auto Stop = std::chrono::high_resolution_clock::now();

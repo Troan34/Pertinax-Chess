@@ -6,6 +6,7 @@
 #include <cmath>
 #include <iostream>
 #include <chrono>
+#include <print>
 
 static constexpr unsigned int NONE = 0;
 static constexpr unsigned int PAWN = 1;
