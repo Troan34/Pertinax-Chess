@@ -36,11 +36,11 @@ static constexpr unsigned int BLACK_KING = BLACK + KING;     //14
 static constexpr unsigned int LOWER_BOUND = 0; //CUT-NODE (>=beta)
 static constexpr unsigned int UPPER_BOUND = 1; //ALL-NODE (<=alpha)
 static constexpr unsigned int EXACT = 2; //PV-NODE
-static constexpr unsigned int TIME_INTERVAL_IN_NODES = 2048;//optimizable 
-
-
+static constexpr unsigned int TIME_INTERVAL_IN_NODES = 2048;//tunable
 
 static constexpr std::string_view STARTPOS = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+static constexpr uint8_t NULL_OPTION = 65; //The number i use to mean 'not assigned' or 'doesn't exist'
 
 
 struct canCastle
@@ -80,9 +80,9 @@ struct CastlingAbility
 
 struct GuessStruct
 {
-	uint8_t BoardSquare;
-	uint8_t Move;
-	uint8_t PromotionType = 65;
+	uint8_t BoardSquare = NULL_OPTION;
+	uint8_t Move = NULL_OPTION;
+	uint8_t PromotionType = NULL_OPTION;
 	int16_t GuessedEval;
 
 	GuessStruct(uint8_t BoardSquare, uint8_t Move, uint8_t PromotionType, int32_t GuessedEval)
@@ -95,9 +95,9 @@ struct GuessStruct
 
 struct Move
 {
-	uint8_t s_BoardSquare;
-	uint8_t s_Move;
-	uint8_t s_PromotionType = 65;
+	uint8_t s_BoardSquare = NULL_OPTION;
+	uint8_t s_Move = NULL_OPTION;
+	uint8_t s_PromotionType = NULL_OPTION;
 
 	Move(const uint8_t& boardSquare, const uint8_t& move, const uint8_t& promotionType)
 		: s_BoardSquare(boardSquare), s_Move(move), s_PromotionType(promotionType)
@@ -140,7 +140,7 @@ struct UCIInfoes
 {
 	uint8_t* Depth = nullptr;
 	uint64_t* NumOfNodes = nullptr;
-	uint32_t* NpS = nullptr;
+	uint64_t* NpS = nullptr;
 	uint16_t* HashFull = nullptr;
 	int32_t* Score = 0;
 	std::vector<Move>* PV;

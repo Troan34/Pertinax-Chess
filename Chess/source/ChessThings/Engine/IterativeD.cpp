@@ -110,8 +110,8 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 			auto Hashfullness = search.GetTTFullness();
 			Info.HashFull = &Hashfullness;
 
-			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(Stop - start);
-			auto Nps = uint32_t((float)search.GetNodesVisited() / (float)(duration.count() / 1000));
+			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(Stop - LocalStart);
+			uint64_t Nps = (search.GetNodesVisited()*1000) / duration.count();
 			Info.NpS = &Nps;
 
 			auto NumOfNds = search.GetNodesVisited();
