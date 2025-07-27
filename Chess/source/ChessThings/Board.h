@@ -91,7 +91,6 @@ struct GuessStruct
 		PromotionType(PromotionType),
 		GuessedEval(GuessedEval) {
 	}
-
 };
 
 struct Move

@@ -1,25 +1,21 @@
-﻿  Board.cpp
-  Evaluation.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(56,56): warning C4244: '+=': conversion from 'double' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(60,56): warning C4244: '-=': conversion from 'double' to 'int32_t', possible loss of data
-  IterativeD.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(127,117): warning C4244: 'argument': conversion from '_Rep' to 'double', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(127,117): warning C4244:         with
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(127,117): warning C4244:         [
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(127,117): warning C4244:             _Rep=__int64
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(127,117): warning C4244:         ]
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(127,91): warning C4244: 'argument': conversion from '_Rep' to 'double', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(127,91): warning C4244:         with
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(127,91): warning C4244:         [
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(127,91): warning C4244:             _Rep=__int64
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(127,91): warning C4244:         ]
+﻿  IterativeD.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(126,117): warning C4244: 'argument': conversion from '_Rep' to 'double', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(126,117): warning C4244:         with
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(126,117): warning C4244:         [
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(126,117): warning C4244:             _Rep=__int64
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(126,117): warning C4244:         ]
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(126,91): warning C4244: 'argument': conversion from '_Rep' to 'double', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(126,91): warning C4244:         with
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(126,91): warning C4244:         [
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(126,91): warning C4244:             _Rep=__int64
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(126,91): warning C4244:         ]
   Search.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(21,85): warning C4244: 'argument': conversion from 'const uint16_t' to 'uint8_t', possible loss of data
   TT.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(8,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(88,49): warning C4267: 'return': conversion from 'size_t' to 'uint16_t', possible loss of data
-  ZobristHashing.cpp
-  LegalMoves.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(13,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(75,49): warning C4267: 'return': conversion from 'size_t' to 'uint16_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(98,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
   RenderChesspcs.cpp
   UCI.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\UCI\UCI.cpp(128,73): warning C4267: '=': conversion from 'size_t' to 'uint8_t', possible loss of data
@@ -44,9 +40,9 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.3520
   
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  167 of 3433 functions ( 4.9%) were compiled, the rest were copied from previous compilation.
-    2 functions were new in current compilation
-    32 functions had inline decision re-evaluated but remain unchanged
+  116 of 3470 functions ( 3.3%) were compiled, the rest were copied from previous compilation.
+    3 functions were new in current compilation
+    127 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\vc120.pdb'; linking object as if no debug info
   Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Chess.exe

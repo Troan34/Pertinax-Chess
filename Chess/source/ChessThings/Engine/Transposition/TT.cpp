@@ -18,31 +18,16 @@ TranspositionTable::~TranspositionTable()
 }
 
 
-bool TranspositionTable::TTprobe(int32_t& alpha, int32_t& beta, int32_t& eval, const uint64_t& Hash, uint8_t& depth)
+std::pair<bool, TTEntry> TranspositionTable::TTprobe(const uint64_t& Hash)
 {
 	auto TTentry = TT.find(Hash);
 	
 	if (TTentry != TT.end())
 	{
-		switch (GetBound(TTentry->second.AgeBound))
-		{
-		case(LOWER_BOUND):
-			alpha = max(alpha, TTentry->second.Evaluation);
-			break;
-		case(UPPER_BOUND):
-			beta = min(beta, TTentry->second.Evaluation);
-			break;
-		case(EXACT):
-			break;
-		default:
-			ASSERT(false)
-		}
-		eval = TTentry->second.Evaluation;
-		depth = TTentry->second.Depth;
-		return true;
+		return { true, TTentry->second } ;
 	}
 	else {
-		return false;
+		return { false, TTEntry{} };// look out for this, possible bug if not checked
 	}
 }
 
@@ -66,16 +51,15 @@ void TranspositionTable::AddEntry(Move BestMove, int32_t Eval, uint8_t Depth, ui
 	Entry.Depth = Depth;
 	Entry.Evaluation = Eval;
 
+
 	if (m_HashSize > (TT.size() * SIZE_OF_HASHMAP_ELEMENT))
 	{
 		TT[Hash] = Entry;
-		std::println("added entry, hash: {}", Hash);
 	}
 	else
 	{
 		ResizeTT();
 		TT[Hash] = Entry;
-		std::println("added entry, hash: {}", Hash);
 	}
 }
 

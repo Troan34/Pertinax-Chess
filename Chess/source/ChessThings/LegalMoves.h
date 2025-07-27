@@ -40,9 +40,9 @@ constexpr std::array<std::array<uint8_t, 8>, 64> fillNumOfSquaresUntilEdge()
 
 struct MOVE
 {
-	uint8_t PieceType;
 	std::vector<uint8_t> TargetSquares;
 	std::array<uint8_t, 3> Promotion{65, 65, 65};//which move lets PAWN promote
+	uint8_t PieceType;
 };
 
 class GenerateLegalMoves
@@ -98,5 +98,6 @@ public:
 	void KingMoveGen(const uint8_t& BoardSquarePos);
 	void RemoveIllegalMoves();
 	static void SetDoNotEnPassant(bool SetToThis);
+	bool IsMoveLegal(const Move& CheckedMove) const;
 
 };

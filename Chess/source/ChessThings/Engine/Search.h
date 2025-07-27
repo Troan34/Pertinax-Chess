@@ -19,11 +19,6 @@ private:
 	size_t HashSize;
 	std::vector<Move> m_PV;
 
-
-	uint8_t m_BestMove;
-	uint8_t m_BestBoardPos;
-	uint8_t m_BestPromotion = 65;
-	int32_t m_BestEvaluation = -INT32_MAX;
 	uint64_t NodesVisited = 0;
 
 	SearchResult NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle,uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta, std::vector<Move>& PreviousPV);
@@ -36,7 +31,7 @@ public:
 	Search(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint8_t& depth, const uint16_t& MoveNum,
 		std::vector<Move>& SearchMoves, const size_t& HashSize);
 	~Search();
-	std::pair<Move, int32_t> GetBestMoveWithEval(std::vector<Move>& PV);
+	int32_t GetBestMoveWithEval(std::vector<Move>& PV);
 	uint64_t GetNodesVisited() const;
 	uint16_t GetTTFullness() const;
 	static void ClearTT();

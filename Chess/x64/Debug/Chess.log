@@ -1,4 +1,4 @@
 ﻿  Search.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(21,85): warning C4244: 'argument': conversion from 'const uint16_t' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(20,85): warning C4244: 'argument': conversion from 'const uint16_t' to 'uint8_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.h(59,1): warning C4715: 'Evaluator::ConvertPieceTypeToMatValue': not all control paths return a value
   Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Debug\Chess.exe

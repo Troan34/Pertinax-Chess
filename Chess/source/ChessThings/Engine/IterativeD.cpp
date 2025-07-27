@@ -95,9 +95,8 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 
 		Depth++;
 		Search search(m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, Depth, m_MoveNum, m_SearchMoves, HashSize);
-		auto bestMove = search.GetBestMoveWithEval(CurrentPV);
+		BestEval = search.GetBestMoveWithEval(CurrentPV);
 
-		BestEval = bestMove.second;
 		BestMove = CurrentPV.front();
 
 		auto Stop = std::chrono::high_resolution_clock::now();

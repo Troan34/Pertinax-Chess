@@ -711,3 +711,22 @@ void GenerateLegalMoves::SetDoNotEnPassant(bool SetToThis)
 {
 	DoNotEnPassant = SetToThis;
 }
+
+bool GenerateLegalMoves::IsMoveLegal(const Move& CheckedMove) const
+{
+	bool MoveFound = false;
+	
+	for (uint8_t count = 0; count != 64; count++)
+	{
+		if (CheckedMove.s_BoardSquare != count)
+			continue;
+
+		if ((std::find(moves[count].TargetSquares.begin(), moves[count].TargetSquares.end(), CheckedMove.s_Move)) != moves[count].TargetSquares.end())
+		{
+			MoveFound = true;
+			break;
+		}
+	}
+
+	return MoveFound;
+}

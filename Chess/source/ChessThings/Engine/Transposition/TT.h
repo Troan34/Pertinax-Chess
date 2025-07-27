@@ -23,22 +23,23 @@ struct TTEntry
 	uint8_t Depth;
 };
 
+
 class TranspositionTable
 {
 private:
 	std::unordered_map<uint64_t, TTEntry> TT;
-	size_t m_HashSize = 64000000;
+	size_t m_HashSize = 8000000;
 	uint8_t CurrentAge = 0;
 
 	void ResizeTT();
 	uint8_t GetAge(const uint8_t& AgeBound);
-	uint8_t GetBound(const uint8_t& AgeBound);
+
 	uint8_t RelativeAge(const uint8_t& AgeBound);
 public:
 	TranspositionTable(size_t TTSize);
 	TranspositionTable();
 	~TranspositionTable();
-	bool TTprobe(int32_t& alpha, int32_t& beta, int32_t& eval, const uint64_t& Hash, uint8_t& depth);
+	std::pair<bool, TTEntry> TTprobe(const uint64_t& Hash);
 	void AddEntry(Move BestMove, int32_t Eval, uint8_t Depth, uint64_t Hash, const int32_t& alpha, const int32_t& beta);
 	void AgeIncrementOnNewSearch();
 	size_t GetTTSize() const;
@@ -46,5 +47,6 @@ public:
 	float GetTTSizeInMB() const;
 	void ClearTT();
 	void ChangeHashSize(const size_t& HashSize);
+	static uint8_t GetBound(const uint8_t& AgeBound);
 };
 
