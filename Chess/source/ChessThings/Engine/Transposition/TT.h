@@ -28,7 +28,7 @@ class TranspositionTable
 {
 private:
 	std::unordered_map<uint64_t, TTEntry> TT;
-	size_t m_HashSize = 8000000;
+	size_t m_HashSize = 32000000;
 	uint8_t CurrentAge = 0;
 
 	void ResizeTT();

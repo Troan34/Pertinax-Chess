@@ -19,7 +19,7 @@ int32_t Search::GetBestMoveWithEval(std::vector<Move>& PV)
 	ZobristHashing m_Hash(LegalMoves, m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum);
 
 	int32_t Eval = (NegaMax(m_Hash, m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum, m_depth, -INT32_MAX, INT32_MAX, PV)).Eval;
-	std::println("TT Cutoffs= {}", Cutoffs);
+	std::println("TT Hits / Cutoffs= {} / {}", TThits, Cutoffs);
 	//auto stop = std::chrono::high_resolution_clock::now();
 	//auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 	TT.AgeIncrementOnNewSearch();
@@ -45,7 +45,7 @@ void Search::ClearTT()
 
 SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta, std::vector<Move>& PreviousPV)
 {
-	
+	NodesVisited++;
 	Move BestMove;
 	Move CutOffMove;
 	int BestEvaluation = -INT32_MAX;
@@ -61,7 +61,6 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 		evaluator.SetParameters(BoardSquare, previousBoardSquare, CanCastle, MoveNum);
 		BestEvaluation = max(BestEvaluation, evaluator.Evaluate());//to change with a quiescent fun
 		alpha = max(alpha, BestEvaluation);
-		NodesVisited++;
 		return BestEvaluation;
 	}
 
@@ -70,6 +69,46 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 	auto const cCanCastle = CanCastle;
 	auto const cMoveNum = MoveNum;
 	auto const cHash = m_Hash.Hash;
+
+	//Probe TT and manage its bound
+	auto FoundTT = TT.TTprobe(m_Hash.Hash);
+	bool InsertTTMove = false;
+	if (FoundTT.first)
+	{
+		TThits++;
+		if (FoundTT.second.Depth >= depth)
+		{
+
+			if (LegalMoves.IsMoveLegal(FoundTT.second.BestMove))
+			{
+				auto Bound = TranspositionTable::GetBound(FoundTT.second.AgeBound);
+				if (Bound == EXACT)
+				{
+					Cutoffs++;
+					return { FoundTT.second.Evaluation, {FoundTT.second.BestMove} };
+				}
+				else if (Bound == LOWER_BOUND)
+				{
+					if (FoundTT.second.Evaluation >= beta)
+					{
+						Cutoffs++;
+						return FoundTT.second.Evaluation;
+					}
+					alpha = max(alpha, FoundTT.second.Evaluation);
+				}
+				else if (Bound == UPPER_BOUND)
+				{
+					if (FoundTT.second.Evaluation <= alpha)
+					{
+						Cutoffs++;
+						return FoundTT.second.Evaluation;
+					}
+					beta = min(beta, FoundTT.second.Evaluation);
+				}
+				InsertTTMove = true;
+			}
+		}
+	}
 
 	if (!PreviousPV.empty())
 	{
@@ -108,41 +147,10 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 
 	std::vector<GuessStruct> GuessedOrder = OrderMoves(LegalMoves, BoardSquare);
 
-
-	//Probe TT and manage its bound
-	auto FoundTT = TT.TTprobe(m_Hash.Hash);
-	if (FoundTT.first and FoundTT.second.Depth >= depth)
+	if (InsertTTMove)
 	{
-
-		if (LegalMoves.IsMoveLegal(FoundTT.second.BestMove))
-		{
-			auto Bound = TranspositionTable::GetBound(FoundTT.second.AgeBound);
-			if (Bound == EXACT)
-			{
-				Cutoffs++;
-				return { FoundTT.second.Evaluation, {FoundTT.second.BestMove} };
-			}
-			else if (Bound == LOWER_BOUND)
-			{
-				if (FoundTT.second.Evaluation >= beta)
-				{
-					Cutoffs++;
-					return FoundTT.second.Evaluation;
-				}
-				alpha = max(alpha, FoundTT.second.Evaluation);
-			}
-			else if (Bound == UPPER_BOUND)
-			{
-				if (FoundTT.second.Evaluation <= alpha)
-				{
-					Cutoffs++;
-					return FoundTT.second.Evaluation;
-				}
-				beta = min(beta, FoundTT.second.Evaluation);
-			}
-			//big line as compiler won't let me define a function
-			GuessedOrder.insert(GuessedOrder.begin(), GuessStruct(FoundTT.second.BestMove.s_BoardSquare, FoundTT.second.BestMove.s_Move, FoundTT.second.BestMove.s_PromotionType, FoundTT.second.Evaluation));
-		}
+		//big line as compiler won't let me define a function
+		GuessedOrder.insert(GuessedOrder.begin(), GuessStruct(FoundTT.second.BestMove.s_BoardSquare, FoundTT.second.BestMove.s_Move, FoundTT.second.BestMove.s_PromotionType, FoundTT.second.Evaluation));
 	}
 
 	for (const GuessStruct& Guess : GuessedOrder)
@@ -305,11 +313,11 @@ std::vector<GuessStruct> Search::OrderMoves(const GenerateLegalMoves& LegalMoves
 {
 	std::vector<GuessStruct> f_OrderedMoves;
 	uint8_t count = 0;
-	bool flag = false;
+	bool flag = true;
 
 	for (MOVE piece : LegalMoves.moves)
 	{
-
+		/*
 		if (!m_SearchMoves.empty())
 		{
 			for (Move move_ : m_SearchMoves)
@@ -317,15 +325,12 @@ std::vector<GuessStruct> Search::OrderMoves(const GenerateLegalMoves& LegalMoves
 				if (move_.s_BoardSquare == count)
 				{
 					count++;
-					flag = true;
+					flag = false;
 					break;
 				}
 			}
 		}
-		else {
-			flag = true;
-		}
-
+		*/
 		if (flag)
 		{
 			for (const uint8_t& move : piece.TargetSquares)
@@ -359,8 +364,11 @@ std::vector<GuessStruct> Search::OrderMoves(const GenerateLegalMoves& LegalMoves
 						f_OrderedMoves.emplace_back(count, move, (IsWhite ? i + 18 : i + 10), GuessedEval);
 						continue;
 					}
-
-					f_OrderedMoves.emplace_back(count, move, 65, GuessedEval);
+					else
+					{
+						f_OrderedMoves.emplace_back(count, move, 65, GuessedEval);
+						break;
+					}
 				}
 			}
 		}

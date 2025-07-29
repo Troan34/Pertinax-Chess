@@ -40,7 +40,7 @@ constexpr std::array<std::array<uint8_t, 8>, 64> fillNumOfSquaresUntilEdge()
 
 struct MOVE
 {
-	std::vector<uint8_t> TargetSquares;
+	std::vector<uint8_t> TargetSquares;//this has to be changed to something more bitboard-ish
 	std::array<uint8_t, 3> Promotion{65, 65, 65};//which move lets PAWN promote
 	uint8_t PieceType;
 };
@@ -48,7 +48,7 @@ struct MOVE
 class GenerateLegalMoves
 {
 private:
-	const int OffsetForDirections[8] = { 8, -8, -1, 1, 7, -7, 9, -9 };
+	static constexpr int OffsetForDirections[8] = { 8, -8, -1, 1, 7, -7, 9, -9 };
 	static constexpr std::array<std::array<uint8_t, 8>, 64>NumOfSquaresUntilEdge = fillNumOfSquaresUntilEdge();
 
 	std::array<uint8_t, 64> m_BoardSquare;
@@ -58,17 +58,17 @@ private:
 	uint8_t DoubleCheckBoardSquare = 65; //if two checks collide the last one that wants to modify the value will write to this
 	bool isNextMoveForWhite;
 
-	const uint8_t WhitePawnDirections[3] = { 4,0,6 };
-	const uint8_t BlackPawnDirections[3] = { 7,1,5 };
+	static constexpr uint8_t WhitePawnDirections[3] = { 4,0,6 };
+	static constexpr uint8_t BlackPawnDirections[3] = { 7,1,5 };
 
-	const int OffsetForWhitePawn[3] = { 7, 8, 9 };
-	const int OffsetForBlackPawn[3] = { -7, -8, -9 };
+	static constexpr int OffsetForWhitePawn[3] = { 7, 8, 9 };
+	static constexpr int OffsetForBlackPawn[3] = { -7, -8, -9 };
 
 	void CanKingCastle_LMoves(const GenerateLegalMoves& OppositeMoves, bool& isItCheckmate, std::vector<uint8_t>::iterator& it, const uint8_t& BoardSquareOfKingToMove, const uint8_t& KingMove);
 public:
 	std::array<MOVE, 64> moves;//array of Moves, every legal move
-	std::array<bool, 64> AttackedSquares;
-	std::array<bool, 64> PinnedSquaresWithTheKingBeingPinned;
+	BitBoard64 AttackedSquares;
+	BitBoard64 PinnedSquaresWithTheKingBeingPinned;
 
 	/**
 	* array with every abs pinned square(infront the piece pinned until the attacking piece + actual piece pinned + behind until the (included)king)

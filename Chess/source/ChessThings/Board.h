@@ -42,6 +42,58 @@ static constexpr std::string_view STARTPOS = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP
 
 static constexpr uint8_t NULL_OPTION = 65; //The number i use to mean 'not assigned' or 'doesn't exist'
 
+//this might be made strangely, but it's like this to achieve a kind of bit array (and to replace the array of bools without refactoring the code)
+struct BitBoard64 {
+	uint64_t Bits = 0;
+
+	class BitManager
+	{
+		uint64_t& m_Data;
+		uint8_t m_Index;
+	public:
+		BitManager(uint64_t& Data, uint8_t Index) : m_Data(Data), m_Index(Index){}
+
+		BitManager& operator=(bool value) {
+			if (value) {
+				m_Data |= (1ULL << m_Index);
+			}
+			else {
+				m_Data &= ~(1ULL << m_Index);
+			}
+			return *this;
+		}
+
+		operator bool() const {
+			return (m_Data >> m_Index) & 0b1;
+		}
+		
+		BitManager& operator=(const BitManager& a) = delete;
+	};
+
+	BitManager operator[](uint8_t Index)
+	{
+		if (Index > 63)
+		{
+			throw std::out_of_range("Indexed bit out of range");
+		}
+		return BitManager(Bits, Index);
+	}
+
+	bool operator[](uint8_t Index) const
+	{
+		if (Index > 63)
+		{
+			throw std::out_of_range("Indexed bit out of range");
+		}
+		return (Bits >> Index) & 0b1;
+	}
+
+	void fill(bool Value)
+	{
+		if (true) { Bits = UINT64_MAX; }
+		else { Bits = 0; }
+	}
+};
 
 struct canCastle
 {
