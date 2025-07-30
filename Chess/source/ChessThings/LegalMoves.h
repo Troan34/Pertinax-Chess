@@ -45,6 +45,13 @@ struct MOVE
 	uint8_t PieceType;
 };
 
+struct MOVE_BIT
+{
+	BitBoard64 TargetSquares;
+	std::array<uint8_t, 3> Promotion{ 65, 65, 65 };
+	uint8_t PieceType;
+};
+
 class GenerateLegalMoves
 {
 private:
@@ -52,6 +59,8 @@ private:
 	static constexpr std::array<std::array<uint8_t, 8>, 64>NumOfSquaresUntilEdge = fillNumOfSquaresUntilEdge();
 
 	std::array<uint8_t, 64> m_BoardSquare;
+	
+
 	canCastle CanCastle;
 
 	bool isItCheckmate = true;

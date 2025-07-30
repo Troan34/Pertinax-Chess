@@ -19,6 +19,11 @@ static constexpr unsigned int KING = 6;
 static constexpr unsigned int WHITE = 16;
 static constexpr unsigned int BLACK = 8;
 
+static std::unordered_map <char, unsigned int> PieceTypeFromChar =
+{
+	{'k', KING}, {'q', QUEEN}, {'b', BISHOP}, {'r', ROOK}, {'p', PAWN}, {'n', KNIGHT}
+};
+
 static constexpr unsigned int WHITE_PAWN = WHITE + PAWN;     //17
 static constexpr unsigned int WHITE_BISHOP = WHITE + BISHOP; //18
 static constexpr unsigned int WHITE_KNIGHT = WHITE + KNIGHT; //19
@@ -42,34 +47,11 @@ static constexpr std::string_view STARTPOS = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP
 
 static constexpr uint8_t NULL_OPTION = 65; //The number i use to mean 'not assigned' or 'doesn't exist'
 
-//this might be made strangely, but it's like this to achieve a kind of bit array (and to replace the array of bools without refactoring the code)
+//this might be made strange, but it's like this to achieve a kind of bit array (and to replace the array of bools without refactoring the code)
 struct BitBoard64 {
 	uint64_t Bits = 0;
 
-	class BitManager
-	{
-		uint64_t& m_Data;
-		uint8_t m_Index;
-	public:
-		BitManager(uint64_t& Data, uint8_t Index) : m_Data(Data), m_Index(Index){}
-
-		BitManager& operator=(bool value) {
-			if (value) {
-				m_Data |= (1ULL << m_Index);
-			}
-			else {
-				m_Data &= ~(1ULL << m_Index);
-			}
-			return *this;
-		}
-
-		operator bool() const {
-			return (m_Data >> m_Index) & 0b1;
-		}
-		
-		BitManager& operator=(const BitManager& a) = delete;
-	};
-
+	//set a bit, logic uses the BitManager operator=
 	BitManager operator[](uint8_t Index)
 	{
 		if (Index > 63)
@@ -79,6 +61,7 @@ struct BitBoard64 {
 		return BitManager(Bits, Index);
 	}
 
+	//get bit from index
 	bool operator[](uint8_t Index) const
 	{
 		if (Index > 63)
@@ -88,11 +71,102 @@ struct BitBoard64 {
 		return (Bits >> Index) & 0b1;
 	}
 
-	void fill(bool Value)
+	void fill(bool Value) noexcept
 	{
 		if (true) { Bits = UINT64_MAX; }
 		else { Bits = 0; }
 	}
+
+	//Sets the bit in the parameter as true
+	void SetToTrue(uint8_t Index)
+	{
+		if (Index > 63)
+		{
+			throw std::out_of_range("Indexed bit out of range");
+		}
+		Bits |= 1ULL << Index;
+	}
+	//this should be replaced with SetToTrue
+	inline void push_back(uint8_t Index) { SetToTrue(Index); }
+
+};
+
+struct BitPosition
+{
+	std::array<BitBoard64, 6> PiecePositions;//Ascending order: Pawn, Bishop, Knight, Rook, Queen, King (as defined)
+	std::array<BitBoard64, 2> ColorPositions;//0th is White, 1st is Black
+
+	//Get PieceType (normal standard way) from BoardSquare
+	uint8_t operator[](uint8_t BoardSquare) const
+	{
+		uint8_t PieceType = NONE;
+		uint8_t color = 16;
+
+		for (const BitBoard64& BitColor : ColorPositions)
+		{
+			if (BitColor[BoardSquare] == false) { color -= 8; continue; }
+			else
+			{
+				uint8_t count = 0;
+				for (const BitBoard64& BitPieceType : PiecePositions)
+				{
+					if (BitPieceType[BoardSquare] == false) { count++;  continue; }
+					else
+					{
+						PieceType = color | (++count);
+					}
+				}
+			}
+			
+		}
+
+		return PieceType;
+	}
+
+	BitManager operator[](uint8_t Index)
+	{
+		uint64_t Bits;
+		uint8_t color = 16;
+		for (BitBoard64& BitColor : ColorPositions)
+		{
+
+		}
+
+	}
+};
+
+class BitManager
+{
+	uint64_t& m_Data;
+	std::optional<uint64_t&> m_Data2;
+	uint8_t m_Index;
+public:
+	BitManager(uint64_t& Data, uint8_t Index) : m_Data(Data), m_Index(Index) {}
+	BitManager(uint64_t& Data, uint64_t& Data2, uint8_t Index) : m_Data(Data), m_Data2(Data2), m_Index(Index) {}
+
+	BitManager& operator=(bool value) {
+		if (value) {
+			m_Data |= (1ULL << m_Index);
+			if (m_Data2.has_value())
+			{
+				m_Data2.value() |= (1ULL << m_Index);
+			}
+		}
+		else {
+			m_Data &= ~(1ULL << m_Index);
+			if (m_Data2.has_value())
+			{
+				m_Data2.value() |= (1ULL << m_Index);
+			}
+		}
+		return *this;
+	}
+
+	operator bool() const {
+		return (m_Data >> m_Index) & 0b1;
+	}
+
+	BitManager& operator=(const BitManager& a) = delete;
 };
 
 struct canCastle
@@ -218,6 +292,7 @@ class Board
 {
 private:
 	std::array<uint8_t, 64> BoardSquare;
+	BitBoard64 BoardSquare_NEW;
 	const std::string FEN;
 	size_t IndexOfSideToMove;//before side to move
 	size_t IndexOfCastling;//before castling ability
@@ -229,6 +304,7 @@ private:
 public:
 	Board(const std::string& FenString);
 	std::array<uint8_t, 64> GetPositionFromFEN();
+	BitBoard64 GetBitBoardFromFEN();
 	static std::array<uint8_t, 64> GetPositionFromFEN(const std::string& FenString);
 	uint32_t MoveNum();
 	canCastle GetCanCastle();

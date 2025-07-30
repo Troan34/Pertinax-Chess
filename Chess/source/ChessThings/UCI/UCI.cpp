@@ -132,6 +132,12 @@ void UCI::RunCommand()
 			*Vars_p.depth = UINT8_MAX;
 		}
 
+		if (Command.find(INFINITE_COMMAND, 2) != std::string::npos)
+		{ 
+			Vars_p.timer->BTime = static_cast<std::chrono::milliseconds>(INT32_MAX);
+			Vars_p.timer->WTime = static_cast<std::chrono::milliseconds>(INT32_MAX);
+		}
+
 		//tc
 		{
 			if (Command.find(WTIME, 2) != std::string::npos)

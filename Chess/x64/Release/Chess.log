@@ -1,23 +1,162 @@
-﻿  IterativeD.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(121,18): warning C4244: 'initializing': conversion from 'float' to 'uint64_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,117): warning C4244: 'argument': conversion from '_Rep' to 'double', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,117): warning C4244:         with
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,117): warning C4244:         [
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,117): warning C4244:             _Rep=__int64
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,117): warning C4244:         ]
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,91): warning C4244: 'argument': conversion from '_Rep' to 'double', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,91): warning C4244:         with
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,91): warning C4244:         [
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,91): warning C4244:             _Rep=__int64
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,91): warning C4244:         ]
+﻿  Board.cpp
+  Evaluation.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(56,56): warning C4244: '+=': conversion from 'double' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(60,56): warning C4244: '-=': conversion from 'double' to 'int32_t', possible loss of data
+  IterativeD.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(122,36): warning C4244: '=': conversion from 'float' to 'uint64_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,117): warning C4244: 'argument': conversion from '_Rep' to 'double', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,117): warning C4244:         with
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,117): warning C4244:         [
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,117): warning C4244:             _Rep=__int64
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,117): warning C4244:         ]
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,91): warning C4244: 'argument': conversion from '_Rep' to 'double', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,91): warning C4244:         with
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,91): warning C4244:         [
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,91): warning C4244:             _Rep=__int64
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,91): warning C4244:         ]
   Search.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(21,85): warning C4244: 'argument': conversion from 'const uint16_t' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(336,36): error C3312: no callable 'begin' function found for type 'BitBoard64'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(336,36): error C3312: no callable 'end' function found for type 'BitBoard64'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(336,24): error C2530: 'move': references must be initialized
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(336,29): error C2143: syntax error: missing ';' before ':'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(336,50): error C2143: syntax error: missing ';' before ')'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(336,36): error C2451: a conditional expression of type 'BitBoard64' is not valid
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(336,36):
+      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  
   TT.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(8,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(13,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(71,49): warning C4267: 'return': conversion from 'size_t' to 'uint16_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(94,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
+  ZobristHashing.cpp
+  LegalMoves.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(93,37): error C2039: 'end': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(105,53): error C2039: 'capacity': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(119,41): error C2039: 'end': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(527,26): error C2039: 'clear': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(533,62): error C2039: 'begin': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(533,71): error C3536: 'it': cannot be used before it is initialized
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(533,122): error C2039: 'end': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(535,23): error C2100: you cannot dereference an operand of type '<error type>'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(539,55): error C2039: 'erase': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(545,55): error C2039: 'erase': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(575,25): error C2039: 'clear': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(581,40): error C2039: 'begin': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(581,49): error C3536: 'it': cannot be used before it is initialized
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(581,75): error C2039: 'end': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(583,21): error C2100: you cannot dereference an operand of type '<error type>'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(590,33): error C2039: 'erase': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(608,34): error C2039: 'erase': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(620,34): error C2039: 'erase': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(640,29): error C3312: no callable 'begin' function found for type 'BitBoard64'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(640,29): error C3312: no callable 'end' function found for type 'BitBoard64'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(640,17): error C2530: 'Move': references must be initialized
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(640,22): error C2143: syntax error: missing ';' before ':'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(640,43): error C2143: syntax error: missing ';' before ')'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(640,29): error C2451: a conditional expression of type 'BitBoard64' is not valid
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(640,29):
+      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(659,55): error C2039: 'erase': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(671,55): error C2039: 'erase': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(686,55): error C2039: 'erase': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(698,55): error C2039: 'erase': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(723,45): error C2039: 'begin': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(723,81): error C2039: 'end': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(723,13): error C2672: 'std::find': no matching overloaded function found
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(6181,19):
+      could be '_FwdIt std::find(_ExPo &&,_FwdIt,_FwdIt,const _Ty &) noexcept'
+          C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(723,13):
+          '_FwdIt std::find(_ExPo &&,_FwdIt,_FwdIt,const _Ty &) noexcept': expects 4 arguments - 2 provided
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(6169,31):
+      or       '_InIt std::find(_InIt,const _InIt,const _Ty &)'
+          C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(723,13):
+          '_InIt std::find(_InIt,const _InIt,const _Ty &)': expects 3 arguments - 2 provided
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(723,139): error C2039: 'end': is not a member of 'BitBoard64'
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(46,8):
+      see declaration of 'BitBoard64'
+  
   RenderChesspcs.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(254,62): error C3312: no callable 'begin' function found for type 'BitBoard64'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(254,62): error C3312: no callable 'end' function found for type 'BitBoard64'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(254,18): error C2143: syntax error: missing ';' before ':'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(254,76): error C2143: syntax error: missing ';' before ')'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(254,62): error C2451: a conditional expression of type 'BitBoard64' is not valid
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(254,62):
+      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(688,35): error C3312: no callable 'begin' function found for type 'BitBoard64'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(688,35): error C3312: no callable 'end' function found for type 'BitBoard64'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(688,23): error C2530: 'move': references must be initialized
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(688,28): error C2143: syntax error: missing ';' before ':'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(688,49): error C2143: syntax error: missing ';' before ')'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(688,35): error C2451: a conditional expression of type 'BitBoard64' is not valid
+      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(688,35):
+      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  
   UCI.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\UCI\UCI.cpp(128,73): warning C4267: '=': conversion from 'size_t' to 'uint8_t', possible loss of data
   Main.cpp
@@ -39,30 +178,3 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.3520
           C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\tests\TestTexture2D.cpp(30,25):
           see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,nullptr,unsigned __int64,0>(nullptr &&,unsigned __int64 &&)' being compiled
   
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  Generating code
-  50 of 4116 functions ( 1.2%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    20 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\vc120.pdb'; linking object as if no debug info
-  Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Chess.exe
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\shaders\Basic.shader
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\shaders\basicShader.shader
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\bb.png
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\bk.png
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\bn.png
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\bp.png
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\bq.png
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\br.png
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\Chessboard.png
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\Empty.png
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\PromotionSquare.png
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\Red.png
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\wb.png
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\wk.png
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\wn.png
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\wp.png
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\wq.png
-  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\wr.png
-  18 File(s) copied

@@ -60,7 +60,6 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos)
 	std::vector<uint8_t>::iterator iterator;
 	std::vector<uint8_t>::iterator absPin_iter;
 	MOVE& Piece = moves[BoardSquarePos];
-	Piece.TargetSquares.reserve(4);
 
 	for (uint8_t direction = 0; direction < 8; direction++)
 	{

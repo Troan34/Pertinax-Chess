@@ -24,6 +24,7 @@ static constexpr std::string_view WTIME = "wtime";
 static constexpr std::string_view BTIME = "btime";
 static constexpr std::string_view WINC = "winc";
 static constexpr std::string_view BINC = "binc";
+static constexpr std::string_view INFINITE_COMMAND = "infinite";
 
 static constexpr std::string_view STOP_COMMAND = "stop";
 
