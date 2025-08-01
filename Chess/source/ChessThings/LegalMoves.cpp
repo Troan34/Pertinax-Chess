@@ -32,8 +32,9 @@ void GenerateLegalMoves::GenerateMoves()
 	WhichBoardSquaresAreAbsPinned.fill(65);
 	CheckTargetSquares.fill(65);
 	uint8_t BoardSquarePos = 0;
-	for (const uint8_t& i : m_BoardSquare)
+	for (; BoardSquarePos <= 64; BoardSquarePos++)
 	{ 
+		uint8_t i = m_BoardSquare[BoardSquarePos];
 		if (((i == BLACK_BISHOP or i == BLACK_ROOK or i == BLACK_QUEEN) and !isNextMoveForWhite) or ((i == WHITE_BISHOP or i == WHITE_ROOK or i == WHITE_QUEEN) and isNextMoveForWhite))
 		{
 			SliderMoveGen(BoardSquarePos);
@@ -54,7 +55,7 @@ void GenerateLegalMoves::GenerateMoves()
 	}
 }
 
-void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos)
+void GenerateLegalMoves::SliderMoveGen(const uint8_t BoardSquarePos)
 {
 	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
 	std::vector<uint8_t>::iterator iterator;
@@ -154,7 +155,7 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t& BoardSquarePos)
 }
 
 //Knight
-void GenerateLegalMoves::KnightMoveGen(const uint8_t& BoardSquarePos)
+void GenerateLegalMoves::KnightMoveGen(const uint8_t BoardSquarePos)
 {
 	if ((m_BoardSquare[BoardSquarePos] == WHITE_KNIGHT and isNextMoveForWhite) or (m_BoardSquare[BoardSquarePos] == BLACK_KNIGHT and !isNextMoveForWhite))
 	{
@@ -183,7 +184,7 @@ void GenerateLegalMoves::KnightMoveGen(const uint8_t& BoardSquarePos)
 	}
 }
 
-std::array<uint8_t, 8>& GenerateLegalMoves::CreateOffesetsForKnight(const uint8_t & BoardSquarePos)
+std::array<uint8_t, 8>& GenerateLegalMoves::CreateOffesetsForKnight(const uint8_t BoardSquarePos)
 {
 	std::array<uint8_t, 8> OffsetsForKnight;
 	uint8_t count = 0;
@@ -259,7 +260,7 @@ std::array<uint8_t, 8>& GenerateLegalMoves::CreateOffesetsForKnight(const uint8_
 }
 
 //PAWN
-void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos)
+void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 {
 	if (BoardSquarePos < 8 or BoardSquarePos > 55)
 	{
@@ -415,7 +416,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t& BoardSquarePos)
 }
 
 //King
-void GenerateLegalMoves::KingMoveGen(const uint8_t& BoardSquarePos)
+void GenerateLegalMoves::KingMoveGen(const uint8_t BoardSquarePos)
 {
 	if ((m_BoardSquare[BoardSquarePos] == WHITE_KING and isNextMoveForWhite) or (m_BoardSquare[BoardSquarePos] == BLACK_KING and !isNextMoveForWhite))
 	{

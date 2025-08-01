@@ -47,128 +47,105 @@ static constexpr std::string_view STARTPOS = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP
 
 static constexpr uint8_t NULL_OPTION = 65; //The number i use to mean 'not assigned' or 'doesn't exist'
 
-//this might be made strange, but it's like this to achieve a kind of bit array (and to replace the array of bools without refactoring the code)
-struct BitBoard64 {
-	uint64_t Bits = 0;
-
-	//set a bit, logic uses the BitManager operator=
-	BitManager operator[](uint8_t Index)
-	{
-		if (Index > 63)
-		{
-			throw std::out_of_range("Indexed bit out of range");
-		}
-		return BitManager(Bits, Index);
-	}
-
-	//get bit from index
-	bool operator[](uint8_t Index) const
-	{
-		if (Index > 63)
-		{
-			throw std::out_of_range("Indexed bit out of range");
-		}
-		return (Bits >> Index) & 0b1;
-	}
-
-	void fill(bool Value) noexcept
-	{
-		if (true) { Bits = UINT64_MAX; }
-		else { Bits = 0; }
-	}
-
-	//Sets the bit in the parameter as true
-	void SetToTrue(uint8_t Index)
-	{
-		if (Index > 63)
-		{
-			throw std::out_of_range("Indexed bit out of range");
-		}
-		Bits |= 1ULL << Index;
-	}
-	//this should be replaced with SetToTrue
-	inline void push_back(uint8_t Index) { SetToTrue(Index); }
-
-};
-
-struct BitPosition
+namespace bit
 {
-	std::array<BitBoard64, 6> PiecePositions;//Ascending order: Pawn, Bishop, Knight, Rook, Queen, King (as defined)
-	std::array<BitBoard64, 2> ColorPositions;//0th is White, 1st is Black
 
-	//Get PieceType (normal standard way) from BoardSquare
-	uint8_t operator[](uint8_t BoardSquare) const
-	{
-		uint8_t PieceType = NONE;
-		uint8_t color = 16;
-
-		for (const BitBoard64& BitColor : ColorPositions)
+	//this might be made strange, but it's like this to achieve a kind of bit array (and to replace the array of bools without refactoring the code)
+	class BitBoard64 {
+		uint64_t Bits = 0;
+	public:
+		//set a bit, logic uses the BitManager operator=
+		BitManager operator[](uint8_t Index)
 		{
-			if (BitColor[BoardSquare] == false) { color -= 8; continue; }
-			else
+			if (Index > 63)
 			{
-				uint8_t count = 0;
-				for (const BitBoard64& BitPieceType : PiecePositions)
-				{
-					if (BitPieceType[BoardSquare] == false) { count++;  continue; }
-					else
-					{
-						PieceType = color | (++count);
-					}
-				}
+				throw std::out_of_range("Indexed bit out of range");
 			}
-			
+			return BitManager(Bits, Index);
 		}
 
-		return PieceType;
-	}
-
-	BitManager operator[](uint8_t Index)
-	{
-		uint64_t Bits;
-		uint8_t color = 16;
-		for (BitBoard64& BitColor : ColorPositions)
+		//get bit from index
+		bool operator[](uint8_t Index) const
 		{
-
-		}
-
-	}
-};
-
-class BitManager
-{
-	uint64_t& m_Data;
-	std::optional<uint64_t&> m_Data2;
-	uint8_t m_Index;
-public:
-	BitManager(uint64_t& Data, uint8_t Index) : m_Data(Data), m_Index(Index) {}
-	BitManager(uint64_t& Data, uint64_t& Data2, uint8_t Index) : m_Data(Data), m_Data2(Data2), m_Index(Index) {}
-
-	BitManager& operator=(bool value) {
-		if (value) {
-			m_Data |= (1ULL << m_Index);
-			if (m_Data2.has_value())
+			if (Index > 63)
 			{
-				m_Data2.value() |= (1ULL << m_Index);
+				throw std::out_of_range("Indexed bit out of range");
 			}
+			return (Bits >> Index) & 0b1;
 		}
-		else {
-			m_Data &= ~(1ULL << m_Index);
-			if (m_Data2.has_value())
+
+		void fill(bool Value) noexcept
+		{
+			if (true) { Bits = UINT64_MAX; }
+			else { Bits = 0; }
+		}
+
+		//Sets the bit in the parameter as true
+		void SetToTrue(uint8_t Index)
+		{
+			if (Index > 63)
 			{
-				m_Data2.value() |= (1ULL << m_Index);
+				throw std::out_of_range("Indexed bit out of range");
 			}
+			Bits |= 1ULL << Index;
 		}
-		return *this;
-	}
+		//this should be replaced with SetToTrue
+		inline void push_back(uint8_t Index) { SetToTrue(Index); }
 
-	operator bool() const {
-		return (m_Data >> m_Index) & 0b1;
-	}
+	};
 
-	BitManager& operator=(const BitManager& a) = delete;
-};
+	class BitPosition
+	{
+		std::array<BitBoard64, 6> PiecePositions;//Ascending order: Pawn, Bishop, Knight, Rook, Queen, King (as defined)
+		std::array<BitBoard64, 2> ColorPositions;//0th is White, 1st is Black
+	public:
+		//Get PieceType (standard way) from BoardSquare
+		uint8_t operator[](uint8_t BoardSquare) const;
 
+		BitPosManager operator[](uint8_t Index);
+
+	};
+
+	class BitManager
+	{
+	private:
+		uint64_t& m_Data;
+		uint8_t m_Index;
+	public:
+		BitManager(uint64_t& Data, uint8_t Index) : m_Data(Data), m_Index(Index) {}
+
+		//assignment operator
+		inline BitManager& operator=(bool value);
+
+		//read-only member
+		operator bool() const {
+			return (m_Data >> m_Index) & 0b1;
+		}
+
+		BitManager& operator=(const BitManager& a) = delete;
+	};
+
+	class BitPosManager
+	{
+	private:
+		std::array<BitBoard64, 6>& m_Positions;
+		std::array<BitBoard64, 2>& m_Colors;
+		uint8_t m_Index;
+	public:
+		BitPosManager(std::array<BitBoard64, 6>& PosBitBoards, std::array<BitBoard64, 2>& ColorBitBoards, uint8_t Index)
+			: m_Positions(PosBitBoards), m_Colors(ColorBitBoards) {
+		}
+
+		//assignment operator
+		BitPosManager& operator=(uint8_t PieceType);
+
+		//read-only member
+		operator uint8_t() const;
+
+		BitPosManager& operator=(const BitPosManager& a) = delete;
+	};
+
+}
 struct canCastle
 {
 	bool HasWhiteLongRookMoved = false, HasWhiteShortRookMoved = false, HasBlackLongRookMoved = false, HasBlackShortRookMoved = false, HasWhiteKingMoved = false, HasBlackKingMoved = false;
@@ -292,7 +269,6 @@ class Board
 {
 private:
 	std::array<uint8_t, 64> BoardSquare;
-	BitBoard64 BoardSquare_NEW;
 	const std::string FEN;
 	size_t IndexOfSideToMove;//before side to move
 	size_t IndexOfCastling;//before castling ability
@@ -304,7 +280,6 @@ private:
 public:
 	Board(const std::string& FenString);
 	std::array<uint8_t, 64> GetPositionFromFEN();
-	BitBoard64 GetBitBoardFromFEN();
 	static std::array<uint8_t, 64> GetPositionFromFEN(const std::string& FenString);
 	uint32_t MoveNum();
 	canCastle GetCanCastle();
@@ -312,9 +287,9 @@ public:
 	static uint8_t ALG2BoardSquareConverter(const std::string& ALG);
 	static Move LongALG2Move(const std::string& ALG);
 	static std::string Move2ALG(Move move);
-	static uint8_t GetPieceType2Uncolored(const uint8_t& PieceType);
+	static inline uint8_t GetPieceType2Uncolored(const uint8_t& PieceType);
 	static CastlingAbility canCastle2CastlingAbility(const canCastle& Castle);
-	static bool IsPieceColorWhite(const uint8_t& BoardSquareValue);
+	static inline bool IsPieceColorWhite(const uint8_t& BoardSquareValue);
 	static char PieceType2letter(const uint8_t& PieceType);
 	static void WillCanCastleChange(const uint8_t& PieceTypeThatMoved, const uint8_t& BoardSquareItMovedFrom, const uint8_t& BoardSquareItMovedTo, canCastle& Castle);
 	static bool WillCanCastleChange(const uint8_t& PieceTypeThatMoved, const uint8_t& BoardSquareItMovedFrom, const uint8_t& BoardSquareItMovedTo);

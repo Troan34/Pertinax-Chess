@@ -47,7 +47,7 @@ struct MOVE
 
 struct MOVE_BIT
 {
-	BitBoard64 TargetSquares;
+	bit::BitBoard64 TargetSquares;
 	std::array<uint8_t, 3> Promotion{ 65, 65, 65 };
 	uint8_t PieceType;
 };
@@ -58,7 +58,7 @@ private:
 	static constexpr int OffsetForDirections[8] = { 8, -8, -1, 1, 7, -7, 9, -9 };
 	static constexpr std::array<std::array<uint8_t, 8>, 64>NumOfSquaresUntilEdge = fillNumOfSquaresUntilEdge();
 
-	std::array<uint8_t, 64> m_BoardSquare;
+	bit::BitPosition m_BoardSquare;
 	
 
 	canCastle CanCastle;
@@ -76,8 +76,8 @@ private:
 	void CanKingCastle_LMoves(const GenerateLegalMoves& OppositeMoves, bool& isItCheckmate, std::vector<uint8_t>::iterator& it, const uint8_t& BoardSquareOfKingToMove, const uint8_t& KingMove);
 public:
 	std::array<MOVE, 64> moves;//array of Moves, every legal move
-	BitBoard64 AttackedSquares;
-	BitBoard64 PinnedSquaresWithTheKingBeingPinned;
+	bit::BitBoard64 AttackedSquares;
+	bit::BitBoard64 PinnedSquaresWithTheKingBeingPinned;
 
 	/**
 	* array with every abs pinned square(infront the piece pinned until the attacking piece + actual piece pinned + behind until the (included)king)
@@ -100,11 +100,11 @@ public:
 	GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
 	~GenerateLegalMoves();
 	void GenerateMoves();
-	void SliderMoveGen(const uint8_t& BoardSquarePos);
-	void KnightMoveGen(const uint8_t& BoardSquarePos);
-	std::array<uint8_t, 8>& CreateOffesetsForKnight(const uint8_t& BoardSquarePos);
-	void PawnMoveGen(const uint8_t& BoardSquarePos);
-	void KingMoveGen(const uint8_t& BoardSquarePos);
+	void SliderMoveGen(const uint8_t BoardSquarePos);
+	void KnightMoveGen(const uint8_t BoardSquarePos);
+	std::array<uint8_t, 8>& CreateOffesetsForKnight(const uint8_t BoardSquarePos);
+	void PawnMoveGen(const uint8_t BoardSquarePos);
+	void KingMoveGen(const uint8_t BoardSquarePos);
 	void RemoveIllegalMoves();
 	static void SetDoNotEnPassant(bool SetToThis);
 	bool IsMoveLegal(const Move& CheckedMove) const;

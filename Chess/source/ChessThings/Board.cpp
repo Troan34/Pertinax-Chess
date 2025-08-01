@@ -1,6 +1,7 @@
 #include "Board.h"
 #include <iostream>
 
+//vvv Board DEFINITIONS vvv//
 
 Board::Board(const std::string& FenString)
 	:BoardSquare(), FEN(FenString), IndexOfSideToMove(FEN.find(' ')),
@@ -12,8 +13,7 @@ Board::Board(const std::string& FenString)
 
 }
 
-
-//VV from fen to normal values funs VV
+//from fen to normal values funs
 std::array<uint8_t, 64> Board::GetPositionFromFEN()
 {
 	std::string FenPiecePlacement = FEN.substr(0, IndexOfSideToMove);
@@ -40,34 +40,6 @@ std::array<uint8_t, 64> Board::GetPositionFromFEN()
 		}
 	}
 	return BoardSquare;
-}
-
-BitBoard64 Board::GetBitBoardFromFEN()
-{
-	std::string FenPiecePlacement = FEN.substr(0, IndexOfSideToMove);
-
-	unsigned int file = 0, rank = 7;
-	for (char character : FenPiecePlacement)
-	{
-		if (character == '/')
-		{
-			file = 0;
-			rank -= 1;
-		}
-		else if (isdigit(character))
-		{
-			file += character - '0';
-		}
-		else
-		{
-			unsigned int PieceColor = isupper(character) ? WHITE : BLACK;
-			unsigned int PieceType = PieceTypeFromChar[tolower(character)];
-			BoardSquare_NEW[static_cast<std::array<unsigned int, 64Ui64>::size_type>(rank) * 8 + file] = PieceType | PieceColor;
-			file += 1;
-
-		}
-	}
-	return BoardSquare_NEW;
 }
 
 std::array<uint8_t, 64> Board::GetPositionFromFEN(const std::string& Fen)
@@ -198,7 +170,6 @@ uint8_t Board::GetPawnMoveSquare()
 	return ALG2BoardSquareConverter(PawnMove);
 }
 
-
 //VV general (mostly traduction) funs VV
 uint8_t Board::ALG2BoardSquareConverter(const std::string& ALG)
 {
@@ -288,7 +259,7 @@ std::string Board::Move2ALG(Move move)
 	return ALG;
 }
 
-uint8_t Board::GetPieceType2Uncolored(const uint8_t& PieceType)
+uint8_t inline Board::GetPieceType2Uncolored(const uint8_t& PieceType)
 {
 	if (PieceType > 16)
 		return(PieceType - 16);
@@ -310,7 +281,7 @@ CastlingAbility Board::canCastle2CastlingAbility(const canCastle& Castle)
 	return CastlingAbility;
 }
 
-bool Board::IsPieceColorWhite(const uint8_t& BoardSquareValue)
+bool inline Board::IsPieceColorWhite(const uint8_t& BoardSquareValue)
 {
 	if (BoardSquareValue == 0)
 		ASSERT(false);
@@ -632,6 +603,104 @@ std::string Board::GetPrintableFromVecOfMoves(std::vector<Move> Moves)
 	return print;
 }
 
+//^^^ Board DEFINITIONS ^^^//
+
 Move::Move()
 {
+}
+
+namespace bit {
+	inline BitManager& BitManager::operator=(bool value)
+	{
+		if (value) {
+			m_Data |= (1ULL << m_Index);
+		}
+		else {
+			m_Data &= ~(1ULL << m_Index);
+		}
+		return *this;
+	}
+
+	BitPosManager& BitPosManager::operator=(uint8_t PieceType)
+	{
+		if (PieceType == 0)//remove piece from certain position
+		{
+			for (auto& a : m_Colors) { a[m_Index] = 0; }
+			for (auto& a : m_Positions) { a[m_Index] = 0; }
+			return *this;
+		}
+
+		bool IsWhite = !Board::IsPieceColorWhite(PieceType);
+
+		m_Colors[IsWhite][m_Index] = true;//place piece in it's color
+		m_Colors[!IsWhite][m_Index] = false;//remove the opposite color piece that might've been there
+
+		for (auto& a : m_Positions)
+		{
+			a[m_Index] = false;//removes any piece that occupied the slot
+		}
+
+		m_Positions[Board::GetPieceType2Uncolored(PieceType)][m_Index] = true;
+
+		return *this;
+	}
+
+	BitPosManager::operator uint8_t() const
+	{
+		uint8_t PieceType = NONE;
+		uint8_t Color = NONE;
+
+		if (m_Colors[0][m_Index]) { Color = WHITE; }
+		else if (m_Colors[1][m_Index]) { Color = BLACK; }
+
+		for (; PieceType <= KING; PieceType++)
+		{
+			if (m_Positions[PieceType][m_Index])
+			{
+				PieceType++;
+				break;
+			}
+		}
+
+		return Color | PieceType;
+	}
+
+	uint8_t BitPosition::operator[](uint8_t BoardSquare) const
+	{
+		if (BoardSquare > 63)
+		{
+			throw std::out_of_range("Indexed bit out of range");
+		}
+		uint8_t PieceType = NONE;
+		uint8_t color = 16;
+
+		for (const BitBoard64& BitColor : ColorPositions)
+		{
+			if (BitColor[BoardSquare] == false) { color -= 8; continue; }
+			else
+			{
+				uint8_t count = 0;
+				for (const BitBoard64& BitPieceType : PiecePositions)
+				{
+					if (BitPieceType[BoardSquare] == false) { count++;  continue; }
+					else
+					{
+						PieceType = color | (++count);
+					}
+				}
+			}
+
+		}
+
+		return PieceType;
+	}
+
+	BitPosManager BitPosition::operator[](uint8_t Index)
+	{
+		if (Index > 63)
+		{
+			throw std::out_of_range("Indexed bit out of range");
+		}
+		return BitPosManager(PiecePositions, ColorPositions, Index);
+	}
 }
