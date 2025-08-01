@@ -1,10 +1,10 @@
 #include "LegalMoves.h"
-static std::array<uint8_t, 64> m_previousBoardSquare;
-static std::array<MOVE, 64> OppositeMoves;
+static bit::BitPosition m_previousBoardSquare;
+static std::array<MOVE_BIT, 64> OppositeMoves;
 static bool DoNotEnPassant; //for weird RemoveIllegalMoves things
 
 
-GenerateLegalMoves::GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
+GenerateLegalMoves::GenerateLegalMoves(const bit::BitPosition& BoardSquare, const bit::BitPosition* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
 	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum), isNextMoveForWhite(isNextMoveForWhite)
 {
 
@@ -60,7 +60,7 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t BoardSquarePos)
 	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
 	std::vector<uint8_t>::iterator iterator;
 	std::vector<uint8_t>::iterator absPin_iter;
-	MOVE& Piece = moves[BoardSquarePos];
+	MOVE_BIT& Piece = moves[BoardSquarePos];
 
 	for (uint8_t direction = 0; direction < 8; direction++)
 	{
@@ -103,7 +103,6 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t BoardSquarePos)
 				}
 
 				std::vector<uint8_t> PinnedTargetSquares;
-				PinnedTargetSquares.reserve(Piece.TargetSquares.capacity());
 
 				//calculate pinnable squares
 				for (uint8_t j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
@@ -466,9 +465,10 @@ void GenerateLegalMoves::KingMoveGen(const uint8_t BoardSquarePos)
 
 void GenerateLegalMoves::RemoveIllegalMoves()
 {	
-	std::vector<uint8_t> SquareWhichTargetSquaresThatAreChecking;
+	uint8_t IndexOfPieceChecking;
 	uint8_t BoardSquareOfKingToMove = 0;
 
+	//find out where the King is
 	if (isNextMoveForWhite)
 	{
 		for (BoardSquareOfKingToMove = 0; BoardSquareOfKingToMove < 64; BoardSquareOfKingToMove++)
@@ -495,9 +495,10 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 	GenerateLegalMoves OppositeMoves(m_BoardSquare,p_prevBoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true);
 
 
-	//fill SquareWhichTargetSquaresThatAreChecking
+	//fill IndexOfPieceChecking
 	uint8_t count = 0;
 	uint8_t CheckingSquare = 65;
+	size_t NumberOfChecks = 0;
 	for (const uint8_t& Square : OppositeMoves.CheckTargetSquares)
 	{
 		if (Square != 65)
@@ -508,20 +509,22 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 			}
 			else
 			{
-				SquareWhichTargetSquaresThatAreChecking.push_back(Square);
+				IndexOfPieceChecking = Square;
 				CheckingSquare = Square;
+				CheckingSquare++;
 			}
 		}
 	}
 
-	size_t NumberOfChecks = SquareWhichTargetSquaresThatAreChecking.size();
+
 
 	//moves for King
 	if (NumberOfChecks >= 0)
 	{
+		//when double checked only moves made by king can be legal, so clear the others
 		if (NumberOfChecks == 2)
 		{
-			for (MOVE& Piece : moves)
+			for (MOVE_BIT& Piece : moves)
 			{
 				if (Piece.PieceType != m_BoardSquare[BoardSquareOfKingToMove])
 				{
@@ -531,30 +534,30 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 		}
 
 
-		for(auto it = moves[BoardSquareOfKingToMove].TargetSquares.begin(); it != moves[BoardSquareOfKingToMove].TargetSquares.end();)
+		for (uint8_t KingMove = 0; KingMove <= MAX_SQUARE; KingMove++)
 		{
-			uint8_t KingMove = *it;
+			if (!moves[BoardSquareOfKingToMove].TargetSquares[KingMove]) { continue; }
+
 			//checks if possible move square is under attack
 			if (OppositeMoves.AttackedSquares[KingMove] == true)
 			{
-				it = moves[BoardSquareOfKingToMove].TargetSquares.erase(it);
+				moves[BoardSquareOfKingToMove].TargetSquares[KingMove] = false;
 				continue;
 			}
 			//checks if possible move is going to be under attack when it's made
 			else if (OppositeMoves.PinnedSquaresWithTheKingBeingPinned[KingMove] == true)
 			{
-				it = moves[BoardSquareOfKingToMove].TargetSquares.erase(it);
+				moves[BoardSquareOfKingToMove].TargetSquares[KingMove] = false;
 				continue;
 			}
 			//checks that it can castle
-			else if (BoardSquareOfKingToMove - KingMove == 2 or BoardSquareOfKingToMove - KingMove == -2)//checked for weird behaviours, rvalue(i think)
+			else if ((BoardSquareOfKingToMove - KingMove == 2) or (BoardSquareOfKingToMove - KingMove == -2))//checked for weird behaviours, rvalue(i think)
 			{
-				CanKingCastle_LMoves(OppositeMoves, isItCheckmate, it, BoardSquareOfKingToMove, KingMove);
+				CanKingCastle_LMoves(OppositeMoves, isItCheckmate, BoardSquareOfKingToMove, KingMove);
 			}
 			else
 			{
 				isItCheckmate = false;
-				++it;
 			}
 		}
 	}
@@ -562,7 +565,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 	if (NumberOfChecks < 2)
 	{
 		count = 0;
-		for (MOVE& Piece : moves)
+		for (MOVE_BIT& Piece : moves)
 		{//this Piece.PieceType == 0 might be risky, but only if piece has moves and Piecetype = 0 is either no piece or no moves for the piece
 			if (Piece.PieceType == WHITE_KING or Piece.PieceType == BLACK_KING or Piece.PieceType == 0)
 			{
@@ -579,16 +582,15 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 			}
 			else 
 			{
-				for (auto it = Piece.TargetSquares.begin(); it != Piece.TargetSquares.end();)
+				for (uint8_t Move = 0; Move <= MAX_SQUARE; Move++)
 				{
-					uint8_t Move = *it;
-
+					if (!Piece.TargetSquares[Move]) { continue; }
 					//for those things that happen with pawns
 					if (Piece.PieceType == BLACK_PAWN or Piece.PieceType == WHITE_PAWN)
 					{
 						if (DoNotEnPassant and m_BoardSquare[Move] == 0 and (abs(count - Move) == 7 or abs(count - Move) == 9))
 						{
-							it = Piece.TargetSquares.erase(it);
+							Piece.TargetSquares[Move] = false;
 							continue;
 						}
 					}
@@ -604,9 +606,9 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 						if (NumberOfChecks == 1)
 						{
 							//checks if Move neither captures piece nor doesn't block check
-							if (Move != SquareWhichTargetSquaresThatAreChecking[0] and OppositeMoves.CheckTargetSquares[Move] != SquareWhichTargetSquaresThatAreChecking[0])
+							if (Move != IndexOfPieceChecking and OppositeMoves.CheckTargetSquares[Move] != IndexOfPieceChecking)
 							{
-								it = Piece.TargetSquares.erase(it);
+								Piece.TargetSquares[Move] = false;
 								continue;
 							}
 							else
@@ -618,7 +620,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 						{	//checks if move causes an illegal check
 							if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != OppositeMoves.WhichBoardSquaresAreAbsPinned[Move] and OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != Move)
 							{
-								it = Piece.TargetSquares.erase(it);
+								Piece.TargetSquares[Move] = false;
 								continue;
 							}
 							else
@@ -627,7 +629,6 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 							}
 						}
 					}
-					it++;
 
 				}
 			}
@@ -636,45 +637,38 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 		}
 	}
 
-	for (MOVE& Piece : moves)
+	for (MOVE_BIT& Piece : moves)
 	{
-		for (uint8_t& Move : Piece.TargetSquares)
-		{
-			m_NumOfLegalMoves++;
-		}
+		m_NumOfLegalMoves += Piece.TargetSquares.popcnt();
 	}
-
-	SquareWhichTargetSquaresThatAreChecking.clear();
 	
 }
 
 //fun for LegalMoves, checks if castling is permitted
-void GenerateLegalMoves::CanKingCastle_LMoves(const GenerateLegalMoves& OppositeMoves, bool& isItCheckmate, std::vector<uint8_t>::iterator& it, const uint8_t& BoardSquareOfKingToMove, const uint8_t& KingMove)
+void GenerateLegalMoves::CanKingCastle_LMoves(const GenerateLegalMoves& OppositeMoves, bool& isItCheckmate, const uint8_t& BoardSquareOfKingToMove, const uint8_t KingMove)
 {
 	if (Board::IsPieceColorWhite(m_BoardSquare[BoardSquareOfKingToMove]))
 	{
 		if (BoardSquareOfKingToMove - KingMove == 2)
 		{
-			if (OppositeMoves.AttackedSquares[4] != false or OppositeMoves.AttackedSquares[3] != false or OppositeMoves.AttackedSquares[2] != false)//checked for weird behaviours
+			if ((OppositeMoves.AttackedSquares[4] != false) or (OppositeMoves.AttackedSquares[3] != false) or (OppositeMoves.AttackedSquares[2] != false))
 			{
-				it = moves[BoardSquareOfKingToMove].TargetSquares.erase(it);
+				moves[BoardSquareOfKingToMove].TargetSquares[KingMove] = false;
 			}
 			else
 			{
 				isItCheckmate = false;
-				++it;
 			}
 		}
 		else if (BoardSquareOfKingToMove - KingMove == -2)
 		{
-			if (OppositeMoves.AttackedSquares[4] != false or OppositeMoves.AttackedSquares[5] != false or OppositeMoves.AttackedSquares[6] != false)
+			if ((OppositeMoves.AttackedSquares[4] != false) or (OppositeMoves.AttackedSquares[5] != false) or (OppositeMoves.AttackedSquares[6] != false))
 			{
-				it = moves[BoardSquareOfKingToMove].TargetSquares.erase(it);
+				moves[BoardSquareOfKingToMove].TargetSquares[KingMove] = false;
 			}
 			else
 			{
 				isItCheckmate = false;
-				++it;
 			}
 		}
 	}
@@ -682,26 +676,24 @@ void GenerateLegalMoves::CanKingCastle_LMoves(const GenerateLegalMoves& Opposite
 	{
 		if (BoardSquareOfKingToMove - KingMove == 2)
 		{
-			if (OppositeMoves.AttackedSquares[58] != false or OppositeMoves.AttackedSquares[59] != false or OppositeMoves.AttackedSquares[60] != false)//checked for weird behaviours
+			if ((OppositeMoves.AttackedSquares[58] != false) or (OppositeMoves.AttackedSquares[59] != false) or (OppositeMoves.AttackedSquares[60] != false))
 			{
-				it = moves[BoardSquareOfKingToMove].TargetSquares.erase(it);
+				moves[BoardSquareOfKingToMove].TargetSquares[KingMove] = false;
 			}
 			else
 			{
 				isItCheckmate = false;
-				++it;
 			}
 		}
 		else if (BoardSquareOfKingToMove - KingMove == -2)
 		{
-			if (OppositeMoves.AttackedSquares[60] != false or OppositeMoves.AttackedSquares[61] != false or OppositeMoves.AttackedSquares[62] != false)
+			if ((OppositeMoves.AttackedSquares[60] != false) or (OppositeMoves.AttackedSquares[61] != false) or (OppositeMoves.AttackedSquares[62] != false))
 			{
-				it = moves[BoardSquareOfKingToMove].TargetSquares.erase(it);
+				moves[BoardSquareOfKingToMove].TargetSquares[KingMove] = false;
 			}
 			else
 			{
 				isItCheckmate = false;
-				++it;
 			}
 		}
 	}
@@ -721,7 +713,7 @@ bool GenerateLegalMoves::IsMoveLegal(const Move& CheckedMove) const
 		if (CheckedMove.s_BoardSquare != count)
 			continue;
 
-		if ((std::find(moves[count].TargetSquares.begin(), moves[count].TargetSquares.end(), CheckedMove.s_Move)) != moves[count].TargetSquares.end())
+		if (moves[count].TargetSquares[CheckedMove.s_Move] != 0)
 		{
 			MoveFound = true;
 			break;

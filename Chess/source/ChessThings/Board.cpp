@@ -695,6 +695,14 @@ namespace bit {
 		return PieceType;
 	}
 
+	uint8_t BitPosition::popcnt() const noexcept
+	{
+		uint8_t popcount = 0;
+		popcount += ColorPositions[0].popcnt();
+		popcount += ColorPositions[1].popcnt();
+		return popcount;
+	}
+
 	BitPosManager BitPosition::operator[](uint8_t Index)
 	{
 		if (Index > 63)

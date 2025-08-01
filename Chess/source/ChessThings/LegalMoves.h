@@ -73,9 +73,9 @@ private:
 	static constexpr int OffsetForWhitePawn[3] = { 7, 8, 9 };
 	static constexpr int OffsetForBlackPawn[3] = { -7, -8, -9 };
 
-	void CanKingCastle_LMoves(const GenerateLegalMoves& OppositeMoves, bool& isItCheckmate, std::vector<uint8_t>::iterator& it, const uint8_t& BoardSquareOfKingToMove, const uint8_t& KingMove);
+	void CanKingCastle_LMoves(const GenerateLegalMoves& OppositeMoves, bool& isItCheckmate, const uint8_t& BoardSquareOfKingToMove, const uint8_t KingMove);
 public:
-	std::array<MOVE, 64> moves;//array of Moves, every legal move
+	std::array<MOVE_BIT, 64> moves;//array of Moves, every legal move
 	bit::BitBoard64 AttackedSquares;
 	bit::BitBoard64 PinnedSquaresWithTheKingBeingPinned;
 
@@ -97,7 +97,7 @@ public:
 	unsigned int MoveNum;
 	std::array<bool, 8> EnPassantFiles{false};
 
-	GenerateLegalMoves(const std::array<uint8_t, 64Ui64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
+	GenerateLegalMoves(const bit::BitPosition& BoardSquare, const bit::BitPosition* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
 	~GenerateLegalMoves();
 	void GenerateMoves();
 	void SliderMoveGen(const uint8_t BoardSquarePos);

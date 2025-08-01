@@ -8,34 +8,36 @@
 #include <chrono>
 #include <print>
 
-static constexpr unsigned int NONE = 0;
-static constexpr unsigned int PAWN = 1;
-static constexpr unsigned int BISHOP = 2;
-static constexpr unsigned int KNIGHT = 3;
-static constexpr unsigned int ROOK = 4;
-static constexpr unsigned int QUEEN = 5;
-static constexpr unsigned int KING = 6;
+static constexpr uint8_t MAX_SQUARE = 63;
 
-static constexpr unsigned int WHITE = 16;
-static constexpr unsigned int BLACK = 8;
+static constexpr uint8_t NONE = 0;
+static constexpr uint8_t PAWN = 1;
+static constexpr uint8_t BISHOP = 2;
+static constexpr uint8_t KNIGHT = 3;
+static constexpr uint8_t ROOK = 4;
+static constexpr uint8_t QUEEN = 5;
+static constexpr uint8_t KING = 6;
+
+static constexpr uint8_t WHITE = 16;
+static constexpr uint8_t BLACK = 8;
 
 static std::unordered_map <char, unsigned int> PieceTypeFromChar =
 {
 	{'k', KING}, {'q', QUEEN}, {'b', BISHOP}, {'r', ROOK}, {'p', PAWN}, {'n', KNIGHT}
 };
 
-static constexpr unsigned int WHITE_PAWN = WHITE + PAWN;     //17
-static constexpr unsigned int WHITE_BISHOP = WHITE + BISHOP; //18
-static constexpr unsigned int WHITE_KNIGHT = WHITE + KNIGHT; //19
-static constexpr unsigned int WHITE_ROOK = WHITE + ROOK;     //20
-static constexpr unsigned int WHITE_QUEEN = WHITE + QUEEN;   //21
-static constexpr unsigned int WHITE_KING = WHITE + KING;     //22
-static constexpr unsigned int BLACK_PAWN = BLACK + PAWN;     //9
-static constexpr unsigned int BLACK_BISHOP = BLACK + BISHOP; //10
-static constexpr unsigned int BLACK_KNIGHT = BLACK + KNIGHT; //11
-static constexpr unsigned int BLACK_ROOK = BLACK + ROOK;     //12
-static constexpr unsigned int BLACK_QUEEN = BLACK + QUEEN;   //13
-static constexpr unsigned int BLACK_KING = BLACK + KING;     //14
+static constexpr uint8_t WHITE_PAWN = WHITE + PAWN;     //17
+static constexpr uint8_t WHITE_BISHOP = WHITE + BISHOP; //18
+static constexpr uint8_t WHITE_KNIGHT = WHITE + KNIGHT; //19
+static constexpr uint8_t WHITE_ROOK = WHITE + ROOK;     //20
+static constexpr uint8_t WHITE_QUEEN = WHITE + QUEEN;   //21
+static constexpr uint8_t WHITE_KING = WHITE + KING;     //22
+static constexpr uint8_t BLACK_PAWN = BLACK + PAWN;     //9
+static constexpr uint8_t BLACK_BISHOP = BLACK + BISHOP; //10
+static constexpr uint8_t BLACK_KNIGHT = BLACK + KNIGHT; //11
+static constexpr uint8_t BLACK_ROOK = BLACK + ROOK;     //12
+static constexpr uint8_t BLACK_QUEEN = BLACK + QUEEN;   //13
+static constexpr uint8_t BLACK_KING = BLACK + KING;     //14
 
 //ID, TT, search, time management...
 static constexpr unsigned int LOWER_BOUND = 0; //CUT-NODE (>=beta)
@@ -49,6 +51,12 @@ static constexpr uint8_t NULL_OPTION = 65; //The number i use to mean 'not assig
 
 namespace bit
 {
+	static constexpr uint8_t PAWN = 0;
+	static constexpr uint8_t BISHOP = 1;
+	static constexpr uint8_t KNIGHT = 2;
+	static constexpr uint8_t ROOK = 3;
+	static constexpr uint8_t QUEEN = 4;
+	static constexpr uint8_t KING = 5;
 
 	//this might be made strange, but it's like this to achieve a kind of bit array (and to replace the array of bools without refactoring the code)
 	class BitBoard64 {
@@ -64,7 +72,7 @@ namespace bit
 			return BitManager(Bits, Index);
 		}
 
-		//get bit from index
+		//get bit at index
 		bool operator[](uint8_t Index) const
 		{
 			if (Index > 63)
@@ -74,7 +82,7 @@ namespace bit
 			return (Bits >> Index) & 0b1;
 		}
 
-		void fill(bool Value) noexcept
+		inline void fill(bool Value) noexcept
 		{
 			if (true) { Bits = UINT64_MAX; }
 			else { Bits = 0; }
@@ -89,9 +97,24 @@ namespace bit
 			}
 			Bits |= 1ULL << Index;
 		}
+
 		//this should be replaced with SetToTrue
 		inline void push_back(uint8_t Index) { SetToTrue(Index); }
 
+		inline void clear() noexcept
+		{
+			fill(false);
+		}
+
+		inline uint8_t popcnt() const noexcept
+		{
+			return std::popcount(Bits);
+		}
+
+		inline bool empty() const noexcept
+		{
+			return (popcnt() == 0);
+		}
 	};
 
 	class BitPosition
@@ -104,6 +127,12 @@ namespace bit
 
 		BitPosManager operator[](uint8_t Index);
 
+		uint8_t popcnt() const noexcept;
+
+		inline bool empty() const noexcept
+		{
+			return (popcnt() == 0);
+		}
 	};
 
 	class BitManager
@@ -146,6 +175,7 @@ namespace bit
 	};
 
 }
+
 struct canCastle
 {
 	bool HasWhiteLongRookMoved = false, HasWhiteShortRookMoved = false, HasBlackLongRookMoved = false, HasBlackShortRookMoved = false, HasWhiteKingMoved = false, HasBlackKingMoved = false;
