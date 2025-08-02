@@ -8,55 +8,59 @@
 #include <chrono>
 #include <print>
 
-static constexpr uint8_t MAX_SQUARE = 63;
+constexpr uint8_t MAX_SQUARE = 63;
 
-static constexpr uint8_t NONE = 0;
-static constexpr uint8_t PAWN = 1;
-static constexpr uint8_t BISHOP = 2;
-static constexpr uint8_t KNIGHT = 3;
-static constexpr uint8_t ROOK = 4;
-static constexpr uint8_t QUEEN = 5;
-static constexpr uint8_t KING = 6;
+constexpr uint8_t NONE = 0;
+constexpr uint8_t PAWN = 1;
+constexpr uint8_t BISHOP = 2;
+constexpr uint8_t KNIGHT = 3;
+constexpr uint8_t ROOK = 4;
+constexpr uint8_t QUEEN = 5;
+constexpr uint8_t KING = 6;
 
-static constexpr uint8_t WHITE = 16;
-static constexpr uint8_t BLACK = 8;
+constexpr uint8_t WHITE = 16;
+constexpr uint8_t BLACK = 8;
 
-static std::unordered_map <char, unsigned int> PieceTypeFromChar =
+std::unordered_map <char, unsigned int> PieceTypeFromChar =
 {
 	{'k', KING}, {'q', QUEEN}, {'b', BISHOP}, {'r', ROOK}, {'p', PAWN}, {'n', KNIGHT}
 };
 
-static constexpr uint8_t WHITE_PAWN = WHITE + PAWN;     //17
-static constexpr uint8_t WHITE_BISHOP = WHITE + BISHOP; //18
-static constexpr uint8_t WHITE_KNIGHT = WHITE + KNIGHT; //19
-static constexpr uint8_t WHITE_ROOK = WHITE + ROOK;     //20
-static constexpr uint8_t WHITE_QUEEN = WHITE + QUEEN;   //21
-static constexpr uint8_t WHITE_KING = WHITE + KING;     //22
-static constexpr uint8_t BLACK_PAWN = BLACK + PAWN;     //9
-static constexpr uint8_t BLACK_BISHOP = BLACK + BISHOP; //10
-static constexpr uint8_t BLACK_KNIGHT = BLACK + KNIGHT; //11
-static constexpr uint8_t BLACK_ROOK = BLACK + ROOK;     //12
-static constexpr uint8_t BLACK_QUEEN = BLACK + QUEEN;   //13
-static constexpr uint8_t BLACK_KING = BLACK + KING;     //14
+constexpr uint8_t WHITE_PAWN = WHITE + PAWN;     //17
+constexpr uint8_t WHITE_BISHOP = WHITE + BISHOP; //18
+constexpr uint8_t WHITE_KNIGHT = WHITE + KNIGHT; //19
+constexpr uint8_t WHITE_ROOK = WHITE + ROOK;     //20
+constexpr uint8_t WHITE_QUEEN = WHITE + QUEEN;   //21
+constexpr uint8_t WHITE_KING = WHITE + KING;     //22
+constexpr uint8_t BLACK_PAWN = BLACK + PAWN;     //9
+constexpr uint8_t BLACK_BISHOP = BLACK + BISHOP; //10
+constexpr uint8_t BLACK_KNIGHT = BLACK + KNIGHT; //11
+constexpr uint8_t BLACK_ROOK = BLACK + ROOK;     //12
+constexpr uint8_t BLACK_QUEEN = BLACK + QUEEN;   //13
+constexpr uint8_t BLACK_KING = BLACK + KING;     //14
 
 //ID, TT, search, time management...
-static constexpr unsigned int LOWER_BOUND = 0; //CUT-NODE (>=beta)
-static constexpr unsigned int UPPER_BOUND = 1; //ALL-NODE (<=alpha)
-static constexpr unsigned int EXACT = 2; //PV-NODE
-static constexpr unsigned int TIME_INTERVAL_IN_NODES = 2048;//tunable
+constexpr unsigned int LOWER_BOUND = 0; //CUT-NODE (>=beta)
+constexpr unsigned int UPPER_BOUND = 1; //ALL-NODE (<=alpha)
+constexpr unsigned int EXACT = 2; //PV-NODE
+constexpr unsigned int TIME_INTERVAL_IN_NODES = 2048;//tunable
 
-static constexpr std::string_view STARTPOS = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+constexpr std::string_view STARTPOS = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
-static constexpr uint8_t NULL_OPTION = 65; //The number i use to mean 'not assigned' or 'doesn't exist'
+constexpr uint8_t NULL_OPTION = 65; //The number i use to mean 'not assigned' or 'doesn't exist'
+
+
+
 
 namespace bit
 {
-	static constexpr uint8_t PAWN = 0;
-	static constexpr uint8_t BISHOP = 1;
-	static constexpr uint8_t KNIGHT = 2;
-	static constexpr uint8_t ROOK = 3;
-	static constexpr uint8_t QUEEN = 4;
-	static constexpr uint8_t KING = 5;
+	constexpr uint8_t PAWN = 0;
+	constexpr uint8_t BISHOP = 1;
+	constexpr uint8_t KNIGHT = 2;
+	constexpr uint8_t ROOK = 3;
+	constexpr uint8_t QUEEN = 4;
+	constexpr uint8_t KING = 5;
+
 
 	//this might be made strange, but it's like this to achieve a kind of bit array (and to replace the array of bools without refactoring the code)
 	class BitBoard64 {

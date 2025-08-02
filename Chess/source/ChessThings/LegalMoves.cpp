@@ -722,3 +722,7 @@ bool GenerateLegalMoves::IsMoveLegal(const Move& CheckedMove) const
 
 	return MoveFound;
 }
+
+
+
+
