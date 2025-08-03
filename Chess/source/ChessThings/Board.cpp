@@ -712,15 +712,6 @@ namespace bit {
 		return BitPosManager(PiecePositions, ColorPositions, Index);
 	}
 
-	inline bool pop_lsb(uint64_t& Mask, uint8_t& Index)
-	{
-		unsigned long Index_;
-		if (_BitScanForward64(&Index_, Mask))
-		{
-			Mask ^= (1ULL << Index);
-			Index = Index_;
-		}
-		else { return false; }
-	}
+	
 
 }

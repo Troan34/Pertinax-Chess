@@ -7,6 +7,10 @@
 #include <unordered_set>
 
 constexpr int OffsetForDirections[8] = { 8, -8, -1, 1, 7, -7, 9, -9 };
+constexpr enum DIRECTIONS
+{
+	N,S,W,E,NW,SE,NE,SW
+};
 
 //precompute NumOfSquaresUntilEdge
 constexpr std::array<std::array<uint8_t, 8>, 64> fillNumOfSquaresUntilEdge()
@@ -117,13 +121,11 @@ constexpr std::array<uint64_t, 64> ROOK_MASKS = ComputeRookMasks();
 
 constexpr std::array<uint64_t, 64> BISHOP_MASKS = ComputeBishopMasks();
 
-/// <summary>
-/// Expands a compact bitboard representation into a full bitboard.
-/// </summary>
+/// <summary>Expands a compact bitboard representation into a full bitboard.</summary>
 /// <param name="bits">Compact blockers (technically the limit is 2^12, the fun may be used beyond it's limits)</param>
 /// <param name="mask">The mask on which the bits will be expanded</param>
 /// <returns>A uint64_t bitboard with blockers expanded to the positions specified by the mask.</returns>
-uint64_t expand_blockers(uint64_t bits, uint64_t mask) {
+constexpr uint64_t expand_bits_to_mask(uint64_t bits, uint64_t mask) {
 	uint64_t result = 0;
 	int i = 0;
 	while (mask) {
@@ -137,19 +139,64 @@ uint64_t expand_blockers(uint64_t bits, uint64_t mask) {
 	return result;
 }
 
+/// <summary>Computes every attack for the rook, MAKE SURE IT IS NEVER CALLED AT RUNTIME</summary>
+/// <returns>Value corresponding to ROOK_ATTACKS</returns>
 constexpr std::array<std::array<uint64_t, 4096>, 64> ComputeRookAttacks()
 {
 	std::array<std::array<uint64_t, 4096>, 64> RookAttacks{ 0 };
-	for (uint8_t Index = 0; Index <= MAX_SQUARE; Index++)
+	for (uint8_t BoardSquare = 0; BoardSquare <= MAX_SQUARE; BoardSquare++)
 	{
-
+		for (uint16_t Blocker = 0; Blocker < 4096; Blocker++)
+		{
+			uint64_t BlockerBitboard = expand_bits_to_mask(Blocker, ROOK_MASKS[BoardSquare]);
+			for (uint8_t Direction = 0; Direction < 4; Direction++)
+			{
+				for (uint8_t Scalar = 1; Scalar < NumOfSquaresUntilEdge[BoardSquare][Direction]; Scalar++)
+				{
+					uint64_t Bit_PositionBeingChecked = (1ULL << (BoardSquare + (Scalar * NumOfSquaresUntilEdge[BoardSquare][Direction])));
+					RookAttacks[BoardSquare][Blocker] |= Bit_PositionBeingChecked;
+					if ((BlockerBitboard & Bit_PositionBeingChecked) == Bit_PositionBeingChecked)
+					{
+						break;
+					}
+				}
+			}
+		}
 	}
+	return std::as_const(RookAttacks);
+}
+
+/// <summary>Computes every attack for the bishop, MAKE SURE IT IS NEVER CALLED AT RUNTIME</summary>
+/// <returns>Value corresponding to BISHOP_ATTACKS</returns>
+constexpr std::array<std::array<uint64_t, 512>, 64> ComputeBishopAttacks()
+{
+	std::array<std::array<uint64_t, 512>, 64> BishopAttacks{ 0 };
+	for (uint8_t BoardSquare = 0; BoardSquare <= MAX_SQUARE; BoardSquare++)
+	{
+		for (uint16_t Blocker = 0; Blocker < 4096; Blocker++)
+		{
+			uint64_t BlockerBitboard = expand_bits_to_mask(Blocker, BISHOP_MASKS[BoardSquare]);
+			for (uint8_t Direction = 4; Direction < 8; Direction++)
+			{
+				for (uint8_t Scalar = 1; Scalar < NumOfSquaresUntilEdge[BoardSquare][Direction]; Scalar++)
+				{
+					uint64_t Bit_PositionBeingChecked = (1ULL << (BoardSquare + (Scalar * NumOfSquaresUntilEdge[BoardSquare][Direction])));
+					BishopAttacks[BoardSquare][Blocker] |= Bit_PositionBeingChecked;
+					if ((BlockerBitboard & Bit_PositionBeingChecked) == Bit_PositionBeingChecked)
+					{
+						break;
+					}
+				}
+			}
+		}
+	}
+	return BishopAttacks;
 }
 
 //plain magic bitboard
 constexpr std::array<std::array<uint64_t, 4096>, 64> ROOK_ATTACKS = ComputeRookAttacks();
 //plain magic bitboard
-constexpr std::array<std::array<uint64_t, 512>, 64> BISHOP_ATTACKS;
+constexpr std::array<std::array<uint64_t, 512>, 64> BISHOP_ATTACKS = ComputeBishopAttacks();
 
 
 
