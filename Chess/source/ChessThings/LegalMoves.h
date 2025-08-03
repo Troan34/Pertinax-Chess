@@ -117,6 +117,26 @@ constexpr std::array<uint64_t, 64> ROOK_MASKS = ComputeRookMasks();
 
 constexpr std::array<uint64_t, 64> BISHOP_MASKS = ComputeBishopMasks();
 
+/// <summary>
+/// Expands a compact bitboard representation into a full bitboard.
+/// </summary>
+/// <param name="bits">Compact blockers (technically the limit is 2^12, the fun may be used beyond it's limits)</param>
+/// <param name="mask">The mask on which the bits will be expanded</param>
+/// <returns>A uint64_t bitboard with blockers expanded to the positions specified by the mask.</returns>
+uint64_t expand_blockers(uint64_t bits, uint64_t mask) {
+	uint64_t result = 0;
+	int i = 0;
+	while (mask) {
+		uint8_t Square;
+		bit::pop_lsb(mask, Square);
+		if (bits & (1ULL << i++))
+		{
+			result |= (1ULL << Square);
+		}
+	}
+	return result;
+}
+
 constexpr std::array<std::array<uint64_t, 4096>, 64> ComputeRookAttacks()
 {
 	std::array<std::array<uint64_t, 4096>, 64> RookAttacks{ 0 };
@@ -126,8 +146,9 @@ constexpr std::array<std::array<uint64_t, 4096>, 64> ComputeRookAttacks()
 	}
 }
 
+//plain magic bitboard
 constexpr std::array<std::array<uint64_t, 4096>, 64> ROOK_ATTACKS = ComputeRookAttacks();
-
+//plain magic bitboard
 constexpr std::array<std::array<uint64_t, 512>, 64> BISHOP_ATTACKS;
 
 

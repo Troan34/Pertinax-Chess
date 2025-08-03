@@ -52,7 +52,7 @@ constexpr uint8_t NULL_OPTION = 65; //The number i use to mean 'not assigned' or
 
 
 
-namespace bit
+namespace bit//bit management
 {
 	constexpr uint8_t PAWN = 0;
 	constexpr uint8_t BISHOP = 1;
@@ -61,6 +61,8 @@ namespace bit
 	constexpr uint8_t QUEEN = 4;
 	constexpr uint8_t KING = 5;
 
+	//pop least significant bit, return false if mask was empty
+	inline bool pop_lsb(uint64_t& mask, uint8_t& Index);
 
 	//this might be made strange, but it's like this to achieve a kind of bit array (and to replace the array of bools without refactoring the code)
 	class BitBoard64 {

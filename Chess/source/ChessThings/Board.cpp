@@ -159,7 +159,7 @@ canCastle Board::GetCanCastle()
 	return CanCastle;
 }
 
-//get the boardsquare where an e.p. is possible, 65 if not
+//get the boardsquare where an e.p. is possible, NULL_OPTION if not
 uint8_t Board::GetPawnMoveSquare()
 {
 	const std::string PawnMove = FEN.substr(++IndexOfEnPassant, IndexOfHalfmoveClock - IndexOfEnPassant - 1);
@@ -711,4 +711,16 @@ namespace bit {
 		}
 		return BitPosManager(PiecePositions, ColorPositions, Index);
 	}
+
+	inline bool pop_lsb(uint64_t& Mask, uint8_t& Index)
+	{
+		unsigned long Index_;
+		if (_BitScanForward64(&Index_, Mask))
+		{
+			Mask ^= (1ULL << Index);
+			Index = Index_;
+		}
+		else { return false; }
+	}
+
 }
