@@ -85,7 +85,7 @@ namespace bit//bit management
 		return true;
 	}
 
-	//this might be made strange, but it's like this to achieve a kind of bit array (and to replace the array of bools without refactoring the code)
+	//this class might be made strange, but it's like this to achieve a kind of bit array (and to replace the array of bools without refactoring the code)
 	class BitBoard64 {
 		uint64_t Bits = 0;
 	public:
@@ -98,6 +98,8 @@ namespace bit//bit management
 			}
 			return BitManager(Bits, Index);
 		}
+
+		BitBoard64(uint64_t bits) : Bits(bits){}
 
 		//get bit at index
 		bool operator[](uint8_t Index) const
@@ -142,13 +144,36 @@ namespace bit//bit management
 		{
 			return (popcnt() == 0);
 		}
+
+		inline uint64_t ReadBits() const
+		{
+			return Bits;
+		}
+
+		//vv Bitwise op vv
+
+		inline BitBoard64 operator|(BitBoard64 Operand)
+		{
+			return Bits | Operand.Bits;
+		}
+		inline BitBoard64 operator&(BitBoard64 Operand)
+		{
+			return Bits & Operand.Bits;
+		}
+		inline BitBoard64 operator^(BitBoard64 Operand)
+		{
+			return Bits ^ Operand.Bits;
+		}
+
+		inline operator uint64_t() { return Bits; }
 	};
 
 	class BitPosition
 	{
+	public:
 		std::array<BitBoard64, 6> PiecePositions;//Ascending order: Pawn, Bishop, Knight, Rook, Queen, King (as defined)
 		std::array<BitBoard64, 2> ColorPositions;//0th is White, 1st is Black
-	public:
+	
 		//Get PieceType (standard way) from BoardSquare
 		uint8_t operator[](uint8_t BoardSquare) const;
 

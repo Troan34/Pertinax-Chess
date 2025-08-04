@@ -153,6 +153,71 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t BoardSquarePos)
 	}
 }
 
+void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
+{
+	uint8_t PieceTypeUncolored = Board::GetPieceType2Uncolored(m_BoardSquare[BoardSquarePos]);
+	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
+	bool IsWhite = Board::IsPieceColorWhite(PieceType);
+
+	bit::BitBoard64 blockers = m_BoardSquare.ColorPositions[0] | m_BoardSquare.ColorPositions[1];
+
+	if ((PieceTypeUncolored == ROOK))
+	{
+		uint16_t RookAttackIndex = (blockers.ReadBits() * ROOK_MAGICS[BoardSquarePos]) >> (64 - 12);
+
+		uint64_t RookAttack = ROOK_ATTACKS[BoardSquarePos][RookAttackIndex];
+
+		if (IsWhite)
+		{
+			RookAttack ^= m_BoardSquare.ColorPositions[0];
+		}
+		else
+		{
+			RookAttack ^= m_BoardSquare.ColorPositions[1];
+		}
+
+		moves[BoardSquarePos].TargetSquares = RookAttack;
+	}
+	else if ((PieceTypeUncolored == BISHOP))
+	{
+		uint16_t BishopAttackIndex = (blockers.ReadBits() * BISHOP_MAGICS[BoardSquarePos]) >> (64 - 9);
+
+		uint64_t BishopAttack = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
+
+		if (IsWhite)
+		{
+			BishopAttack ^= m_BoardSquare.ColorPositions[0];
+		}
+		else
+		{
+			BishopAttack ^= m_BoardSquare.ColorPositions[1];
+		}
+
+		moves[BoardSquarePos].TargetSquares = BishopAttack;
+	}
+	else if ((PieceTypeUncolored == QUEEN))
+	{
+		uint16_t RookAttackIndex = (blockers.ReadBits() * ROOK_MAGICS[BoardSquarePos]) >> (64 - 12);
+		uint16_t BishopAttackIndex = (blockers.ReadBits() * BISHOP_MAGICS[BoardSquarePos]) >> (64 - 9);
+
+		uint64_t RookAttack = ROOK_ATTACKS[BoardSquarePos][RookAttackIndex];
+		uint64_t BishopAttack = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
+
+		if (IsWhite)
+		{
+			RookAttack ^= m_BoardSquare.ColorPositions[0];
+			BishopAttack ^= m_BoardSquare.ColorPositions[0];
+		}
+		else
+		{
+			RookAttack ^= m_BoardSquare.ColorPositions[1];
+			BishopAttack ^= m_BoardSquare.ColorPositions[1];
+		}
+
+		moves[BoardSquarePos].TargetSquares = RookAttack | BishopAttack;
+	}
+}
+
 //Knight
 void GenerateLegalMoves::KnightMoveGen(const uint8_t BoardSquarePos)
 {
@@ -723,6 +788,57 @@ bool GenerateLegalMoves::IsMoveLegal(const Move& CheckedMove) const
 	return MoveFound;
 }
 
+void ComputeHeavy()
+{
+	TCHAR exePath[MAX_PATH];
+	GetModuleFileName(NULL, exePath, MAX_PATH);
+	fs::path ExePath = fs::canonical(exePath);
+	fs::path PrecomputesPath = ExePath;
 
+	//searches and sets the Precompute dir path to PrecomputesPath
+	while (PrecomputesPath != PrecomputesPath.root_path())
+	{
+		for (const auto& DirEntry : fs::directory_iterator{ PrecomputesPath })
+		{
+			if (DirEntry.path().filename() == "Precomputes")
+			{
+				PrecomputesPath = DirEntry;
+			}
+		}
+		if (PrecomputesPath.filename() == "Precomputes")
+		{
+			break;
+		}
+	}
 
+	std::fstream RookPrecomputes;
+	if (!fs::exists(PrecomputesPath / "Rook_Attacks.bin"))//if ROOK_ATTACKS wasn't created
+	{
+		RookPrecomputes.open(PrecomputesPath / "Rook_Attacks.bin", std::ios::out | std::ios::binary);
 
+		ROOK_ATTACKS = ComputeRookAttacks();//compute ROOK_ATTACKS (slow)
+
+		RookPrecomputes.write(reinterpret_cast<const char*>(ROOK_ATTACKS.data()), sizeof(ROOK_ATTACKS));//save the table to the binary file
+	}
+	else
+	{
+		RookPrecomputes.open(PrecomputesPath / "Rook_Attacks.bin", std::ios::in | std::ios::binary);
+		RookPrecomputes.read(reinterpret_cast<char*>(ROOK_ATTACKS.data()), sizeof(ROOK_ATTACKS)); //set ROOK_ATTACKS from disk
+	}
+
+	std::fstream BishopPrecomputes;
+	if (!fs::exists(PrecomputesPath / "Bishop_Attacks.bin"))//if BISHOP_ATTACKS wasn't created
+	{
+		BishopPrecomputes.open(PrecomputesPath / "Bishop_Attacks.bin", std::ios::out | std::ios::binary);
+
+		BISHOP_ATTACKS = ComputeBishopAttacks();//compute BISHOP_ATTACKS (slow)
+
+		BishopPrecomputes.write(reinterpret_cast<const char*>(BISHOP_ATTACKS.data()), sizeof(BISHOP_ATTACKS));//save the table to the binary file
+	}
+	else
+	{
+		BishopPrecomputes.open(PrecomputesPath / "Bishop_Attacks.bin", std::ios::in | std::ios::binary);
+		BishopPrecomputes.read(reinterpret_cast<char*>(BISHOP_ATTACKS.data()), sizeof(BISHOP_ATTACKS)); //set BISHOP_ATTACKS from disk
+	}
+
+}

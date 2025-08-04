@@ -5,6 +5,10 @@
 #include "Board.h"
 #include <iostream>
 #include <unordered_set>
+#include <fstream>
+#include <filesystem>
+
+namespace fs = std::filesystem;
 
 constexpr int OffsetForDirections[8] = { 8, -8, -1, 1, 7, -7, 9, -9 };
 constexpr enum DIRECTIONS
@@ -141,7 +145,7 @@ constexpr uint64_t expand_bits_to_mask(uint64_t bits, uint64_t mask) {
 
 /// <summary>Computes every attack for the rook, MAKE SURE IT IS NEVER CALLED AT RUNTIME</summary>
 /// <returns>Value corresponding to ROOK_ATTACKS</returns>
-constexpr std::array<std::array<uint64_t, 4096>, 64> ComputeRookAttacks()
+std::array<std::array<uint64_t, 4096>, 64> ComputeRookAttacks()
 {
 	std::array<std::array<uint64_t, 4096>, 64> RookAttacks{ 0 };
 	for (uint8_t BoardSquare = 0; BoardSquare <= MAX_SQUARE; BoardSquare++)
@@ -168,7 +172,7 @@ constexpr std::array<std::array<uint64_t, 4096>, 64> ComputeRookAttacks()
 
 /// <summary>Computes every attack for the bishop, MAKE SURE IT IS NEVER CALLED AT RUNTIME</summary>
 /// <returns>Value corresponding to BISHOP_ATTACKS</returns>
-constexpr std::array<std::array<uint64_t, 512>, 64> ComputeBishopAttacks()
+std::array<std::array<uint64_t, 512>, 64> ComputeBishopAttacks()
 {
 	std::array<std::array<uint64_t, 512>, 64> BishopAttacks{ 0 };
 	for (uint8_t BoardSquare = 0; BoardSquare <= MAX_SQUARE; BoardSquare++)
@@ -194,11 +198,12 @@ constexpr std::array<std::array<uint64_t, 512>, 64> ComputeBishopAttacks()
 }
 
 //plain magic bitboard
-constexpr std::array<std::array<uint64_t, 4096>, 64> ROOK_ATTACKS = ComputeRookAttacks();
+std::array<std::array<uint64_t, 4096>, 64> ROOK_ATTACKS;
 //plain magic bitboard
-constexpr std::array<std::array<uint64_t, 512>, 64> BISHOP_ATTACKS = ComputeBishopAttacks();
+std::array<std::array<uint64_t, 512>, 64> BISHOP_ATTACKS;
 
-
+///<summary>Computes ATTACKS IF NOT found in disk, then saves it to disk</summary>
+void ComputeHeavy();
 
 struct MOVE
 {
@@ -261,6 +266,7 @@ public:
 	~GenerateLegalMoves();
 	void GenerateMoves();
 	void SliderMoveGen(const uint8_t BoardSquarePos);
+	void MagicSliderMoveGen(const uint8_t BoardSquarePos);
 	void KnightMoveGen(const uint8_t BoardSquarePos);
 	std::array<uint8_t, 8>& CreateOffesetsForKnight(const uint8_t BoardSquarePos);
 	void PawnMoveGen(const uint8_t BoardSquarePos);
