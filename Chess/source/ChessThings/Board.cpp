@@ -703,6 +703,11 @@ namespace bit {
 		return popcount;
 	}
 
+	inline BitBoard64 BitPosition::find(uint8_t PieceType)
+	{
+		return (Board::IsPieceColorWhite(PieceType) ? ColorPositions[0] : ColorPositions[1]) & PiecePositions[Board::GetPieceType2Uncolored(PieceType) - 1];//peak unreadability
+	}
+
 	BitPosManager BitPosition::operator[](uint8_t Index)
 	{
 		if (Index > 63)
@@ -711,7 +716,5 @@ namespace bit {
 		}
 		return BitPosManager(PiecePositions, ColorPositions, Index);
 	}
-
-	
 
 }

@@ -28,7 +28,7 @@ GenerateLegalMoves::~GenerateLegalMoves()
 void GenerateLegalMoves::GenerateMoves()
 {
 	AttackedSquares.fill(false);
-	PinnedSquaresWithTheKingBeingPinned.fill(false);
+	SquaresBehindCheckedKing.fill(false);
 	WhichBoardSquaresAreAbsPinned.fill(65);
 	CheckTargetSquares.fill(65);
 	uint8_t BoardSquarePos = 0;
@@ -111,7 +111,7 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t BoardSquarePos)
 
 					PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
 					if ((PieceTypeAtOffset == BLACK_KING and isNextMoveForWhite) or (PieceTypeAtOffset == WHITE_KING and !isNextMoveForWhite))
-						PinnedSquaresWithTheKingBeingPinned[BoardSquarePos + (OffsetForDirections[direction] * j)] = true;
+						SquaresBehindCheckedKing[BoardSquarePos + (OffsetForDirections[direction] * j)] = true;
 
 					//calculate abs pins
 					if ((PieceTypeAtOffsetBehind == BLACK_KING and isNextMoveForWhite) or (PieceTypeAtOffsetBehind == WHITE_KING and !isNextMoveForWhite))
@@ -155,45 +155,47 @@ void GenerateLegalMoves::SliderMoveGen(const uint8_t BoardSquarePos)
 
 void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 {
+	//NOTE: to simplify only the queen section is documented
+
+	//vv Declare Frequent use variables vv
 	uint8_t PieceTypeUncolored = Board::GetPieceType2Uncolored(m_BoardSquare[BoardSquarePos]);
 	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
 	bool IsWhite = Board::IsPieceColorWhite(PieceType);
+	uint8_t OpponentKingType = IsWhite ? BLACK_KING : WHITE_KING;
 
 	bit::BitBoard64 blockers = m_BoardSquare.ColorPositions[0] | m_BoardSquare.ColorPositions[1];
-
+	bit::BitBoard64 Attacks(0);
+	
 	if ((PieceTypeUncolored == ROOK))
 	{
 		uint16_t RookAttackIndex = (blockers.ReadBits() * ROOK_MAGICS[BoardSquarePos]) >> (64 - 12);
 
-		uint64_t RookAttack = ROOK_ATTACKS[BoardSquarePos][RookAttackIndex];
+		Attacks = ROOK_ATTACKS[BoardSquarePos][RookAttackIndex];
 
 		if (IsWhite)
 		{
-			RookAttack ^= m_BoardSquare.ColorPositions[0];
+			Attacks ^= m_BoardSquare.ColorPositions[0];
 		}
 		else
 		{
-			RookAttack ^= m_BoardSquare.ColorPositions[1];
+			Attacks ^= m_BoardSquare.ColorPositions[1];
 		}
-
-		moves[BoardSquarePos].TargetSquares = RookAttack;
 	}
 	else if ((PieceTypeUncolored == BISHOP))
 	{
 		uint16_t BishopAttackIndex = (blockers.ReadBits() * BISHOP_MAGICS[BoardSquarePos]) >> (64 - 9);
 
-		uint64_t BishopAttack = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
+		Attacks = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
 
 		if (IsWhite)
 		{
-			BishopAttack ^= m_BoardSquare.ColorPositions[0];
+			Attacks ^= m_BoardSquare.ColorPositions[0];
 		}
 		else
 		{
-			BishopAttack ^= m_BoardSquare.ColorPositions[1];
+			Attacks ^= m_BoardSquare.ColorPositions[1];
 		}
 
-		moves[BoardSquarePos].TargetSquares = BishopAttack;
 	}
 	else if ((PieceTypeUncolored == QUEEN))
 	{
@@ -203,6 +205,7 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 		uint64_t RookAttack = ROOK_ATTACKS[BoardSquarePos][RookAttackIndex];
 		uint64_t BishopAttack = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
 
+		//removes attacks to own pieces
 		if (IsWhite)
 		{
 			RookAttack ^= m_BoardSquare.ColorPositions[0];
@@ -213,9 +216,57 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 			RookAttack ^= m_BoardSquare.ColorPositions[1];
 			BishopAttack ^= m_BoardSquare.ColorPositions[1];
 		}
-
-		moves[BoardSquarePos].TargetSquares = RookAttack | BishopAttack;
+		Attacks = RookAttack | BishopAttack;
 	}
+
+	if ((Attacks & m_BoardSquare.find(OpponentKingType)) != 0)//found check
+	{
+		//These are here to not have nested control flow
+		uint8_t MaxDir;
+		uint8_t Direction = 0;
+		switch (PieceTypeUncolored)
+		{
+		case(ROOK):
+			MaxDir = 4;
+			break;
+		case(BISHOP):
+			MaxDir = 8;
+			Direction = 4;
+			break;
+		case(QUEEN):
+			MaxDir = 8;
+			break;
+		}
+
+		//Search for the xray attack that leads to check, add it to CheckTargetSquares (also do SquaresBehindCheckedKing)
+		for (; Direction < MaxDir; Direction++)
+		{
+			std::array<uint8_t, 7> GuessXrayCheck{0};//fill this with board squares of xray attack, if no king is found, revert it
+			for (uint8_t Scalar = 1; Scalar <= NumOfSquaresUntilEdge[BoardSquarePos][Direction]; Scalar++)
+			{
+				GuessXrayCheck[Scalar - 1] = BoardSquarePos + (Scalar * OffsetForDirections[Direction]);
+				if (m_BoardSquare[BoardSquarePos + (Scalar * OffsetForDirections[Direction])] == OpponentKingType)
+				{
+					Scalar += 1;
+					//finish the loop, fill SquaresBehindCheckedKing
+					for (; Scalar <= NumOfSquaresUntilEdge[BoardSquarePos][Direction]; Scalar++)
+					{
+						SquaresBehindCheckedKing[BoardSquarePos + (Scalar * OffsetForDirections[Direction])] = true;
+					}
+					goto OutsideLoop;//this will skip GuessXrayCheck reversal
+				}
+			}
+			GuessXrayCheck.fill(0);
+		}
+			
+	OutsideLoop:
+
+
+	}
+	//add else if for pins(use mask)
+
+	moves[BoardSquarePos].TargetSquares = Attacks;
+
 }
 
 //Knight
@@ -534,24 +585,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 	uint8_t BoardSquareOfKingToMove = 0;
 
 	//find out where the King is
-	if (isNextMoveForWhite)
-	{
-		for (BoardSquareOfKingToMove = 0; BoardSquareOfKingToMove < 64; BoardSquareOfKingToMove++)
-		{
-			if (m_BoardSquare[BoardSquareOfKingToMove] == WHITE_KING)
-				break;
-		}
-
-	}
-	else
-	{
-		for (BoardSquareOfKingToMove = 0; BoardSquareOfKingToMove < 64; BoardSquareOfKingToMove++)
-		{
-			if (m_BoardSquare[BoardSquareOfKingToMove] == BLACK_KING)
-				break;
-		}
-	}
-
+	bit::FindBit(m_BoardSquare.find(isNextMoveForWhite ? WHITE_KING : BLACK_KING), BoardSquareOfKingToMove);
 	
 	auto p_prevBoardSquare = &m_previousBoardSquare;
 	if (MoveNum == 0)
@@ -610,13 +644,13 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 				continue;
 			}
 			//checks if possible move is going to be under attack when it's made
-			else if (OppositeMoves.PinnedSquaresWithTheKingBeingPinned[KingMove] == true)
+			else if (OppositeMoves.SquaresBehindCheckedKing[KingMove] == true)
 			{
 				moves[BoardSquareOfKingToMove].TargetSquares[KingMove] = false;
 				continue;
 			}
 			//checks that it can castle
-			else if ((BoardSquareOfKingToMove - KingMove == 2) or (BoardSquareOfKingToMove - KingMove == -2))//checked for weird behaviours, rvalue(i think)
+			else if ((BoardSquareOfKingToMove - KingMove == 2) or (BoardSquareOfKingToMove - KingMove == -2))
 			{
 				CanKingCastle_LMoves(OppositeMoves, isItCheckmate, BoardSquareOfKingToMove, KingMove);
 			}

@@ -21,6 +21,8 @@ constexpr enum SQUARES
 };
 constexpr uint8_t MAX_SQUARE = 63;
 
+constexpr uint64_t BORDER_MASK = 0b1111111110000001100000011000000110000001100000011000000111111111;
+
 constexpr uint8_t NONE = 0;
 constexpr uint8_t PAWN = 1;
 constexpr uint8_t BISHOP = 2;
@@ -62,7 +64,6 @@ constexpr uint8_t NULL_OPTION = 65; //The number i use to mean 'not assigned' or
 
 
 
-
 namespace bit//bit management
 {
 	constexpr uint8_t PAWN = 0;
@@ -83,6 +84,21 @@ namespace bit//bit management
 		}
 		else { return false; }
 		return true;
+	}
+
+	/// <summary>
+	/// Just finds lsb, TO BE USED WITH A MASK WITH popcnt == 0, WILL ASSERT
+	/// </summary>
+	/// <param name="Mask">bitboard the set bit will be seached</param>
+	/// <param name="Index">bit index will be written to this</param>
+	/// <returns>false if Mask is empty</returns>
+	constexpr inline bool FindBit(const uint64_t& Mask, uint8_t& Index)
+	{
+		ASSERT(std::popcount(Mask) == 1);
+		Index = std::countr_zero(Mask);
+		if (Index < 64){ return true; }
+		else { return false; }
+
 	}
 
 	//this class might be made strange, but it's like this to achieve a kind of bit array (and to replace the array of bools without refactoring the code)
@@ -152,17 +168,33 @@ namespace bit//bit management
 
 		//vv Bitwise op vv
 
-		inline BitBoard64 operator|(BitBoard64 Operand)
+		inline BitBoard64 operator|(BitBoard64 Operand) const
 		{
 			return Bits | Operand.Bits;
 		}
-		inline BitBoard64 operator&(BitBoard64 Operand)
+		inline BitBoard64 operator&(BitBoard64 Operand) const
 		{
 			return Bits & Operand.Bits;
 		}
-		inline BitBoard64 operator^(BitBoard64 Operand)
+		inline BitBoard64 operator^(BitBoard64 Operand) const
 		{
 			return Bits ^ Operand.Bits;
+		}
+
+		inline BitBoard64& operator|=(BitBoard64 Operand)
+		{
+			Bits |= Operand.Bits;
+			return *this;
+		}
+		inline BitBoard64& operator&=(BitBoard64 Operand)
+		{
+			Bits &= Operand.Bits;
+			return *this;
+		}
+		inline BitBoard64& operator^=(BitBoard64 Operand)
+		{
+			Bits ^= Operand.Bits;
+			return *this;
 		}
 
 		inline operator uint64_t() { return Bits; }
@@ -185,6 +217,8 @@ namespace bit//bit management
 		{
 			return (popcnt() == 0);
 		}
+
+		inline BitBoard64 find(uint8_t PieceType);
 	};
 
 	class BitManager

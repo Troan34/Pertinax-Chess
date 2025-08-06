@@ -49,34 +49,56 @@ constexpr std::array<std::array<uint8_t, 8>, 64> fillNumOfSquaresUntilEdge()
 static constexpr std::array<std::array<uint8_t, 8>, 64>NumOfSquaresUntilEdge = fillNumOfSquaresUntilEdge();
 
 //precompute Rook and Bishop masks
-constexpr std::array<uint64_t, 64> ComputeRookMasks()
+constexpr std::array<uint64_t, 64> ComputeRookMasks(bool IncludeBorder)
 {
 	std::array<uint64_t, 64> RookMasks{ 0 };
 	for (uint8_t Index = 0; Index <= MAX_SQUARE; Index++)
 	{
 		for (uint8_t Direction = 0; Direction <= 3; Direction++)
 		{
-			if (NumOfSquaresUntilEdge[Index][Direction] <= 1) { continue; }
-			for (uint8_t Scalar = 1; Scalar < NumOfSquaresUntilEdge[Index][Direction]; Scalar++)
+			if (IncludeBorder)
 			{
-				RookMasks[Index] |= (1ULL << (Index + (OffsetForDirections[Direction] * Scalar)));
+				if (NumOfSquaresUntilEdge[Index][Direction] < 1) { continue; }
+				for (uint8_t Scalar = 1; Scalar <= NumOfSquaresUntilEdge[Index][Direction]; Scalar++)
+				{
+					RookMasks[Index] |= (1ULL << (Index + (OffsetForDirections[Direction] * Scalar)));
+				}
+			}
+			else
+			{
+				if (NumOfSquaresUntilEdge[Index][Direction] <= 1) { continue; }
+				for (uint8_t Scalar = 1; Scalar < NumOfSquaresUntilEdge[Index][Direction]; Scalar++)
+				{
+					RookMasks[Index] |= (1ULL << (Index + (OffsetForDirections[Direction] * Scalar)));
+				}
 			}
 		}
 	}
 	return RookMasks;
 }
 
-constexpr std::array<uint64_t, 64> ComputeBishopMasks()
+constexpr std::array<uint64_t, 64> ComputeBishopMasks(bool IncludeBorder)
 {
 	std::array<uint64_t, 64> BishopMasks{ 0 };
 	for (uint8_t Index = 0; Index <= MAX_SQUARE; Index++)
 	{
 		for (uint8_t Direction = 4; Direction <= 7; Direction++)
 		{
-			if (NumOfSquaresUntilEdge[Index][Direction] <= 1) { continue; }
-			for (uint8_t Scalar = 1; Scalar < NumOfSquaresUntilEdge[Index][Direction]; Scalar++)
+			if (IncludeBorder)
 			{
-				BishopMasks[Index] |= (1ULL << (Index + (OffsetForDirections[Direction] * Scalar)));
+				if (NumOfSquaresUntilEdge[Index][Direction] < 1) { continue; }
+				for (uint8_t Scalar = 1; Scalar <= NumOfSquaresUntilEdge[Index][Direction]; Scalar++)
+				{
+					BishopMasks[Index] |= (1ULL << (Index + (OffsetForDirections[Direction] * Scalar)));
+				}
+			}
+			else
+			{
+				if (NumOfSquaresUntilEdge[Index][Direction] <= 1) { continue; }
+				for (uint8_t Scalar = 1; Scalar < NumOfSquaresUntilEdge[Index][Direction]; Scalar++)
+				{
+					BishopMasks[Index] |= (1ULL << (Index + (OffsetForDirections[Direction] * Scalar)));
+				}
 			}
 		}
 	}
@@ -121,9 +143,12 @@ constexpr std::array<uint64_t, 64> BISHOP_MAGICS = {
 0x0100000000001010ULL, 0x0200000000000808ULL, 0x0400000000000404ULL, 0x0800000000000202ULL
 };
 
-constexpr std::array<uint64_t, 64> ROOK_MASKS = ComputeRookMasks();
+constexpr std::array<uint64_t, 64> ROOK_MASKS = ComputeRookMasks(false);
+constexpr std::array<uint64_t, 64> BISHOP_MASKS = ComputeBishopMasks(false);
 
-constexpr std::array<uint64_t, 64> BISHOP_MASKS = ComputeBishopMasks();
+//these just comprehend the last board square instead of ignoring it
+constexpr std::array<uint64_t, 64> ROOK_LEGAL_MASKS = ComputeRookMasks(true);
+constexpr std::array<uint64_t, 64> BISHOP_LEGAL_MASKS = ComputeBishopMasks(true);
 
 /// <summary>Expands a compact bitboard representation into a full bitboard.</summary>
 /// <param name="bits">Compact blockers (technically the limit is 2^12, the fun may be used beyond it's limits)</param>
@@ -224,7 +249,6 @@ class GenerateLegalMoves
 private:
 
 	bit::BitPosition m_BoardSquare;
-	
 
 	canCastle CanCastle;
 
@@ -242,10 +266,15 @@ private:
 public:
 	std::array<MOVE_BIT, 64> moves;//array of Moves, every legal move
 	bit::BitBoard64 AttackedSquares;
-	bit::BitBoard64 PinnedSquaresWithTheKingBeingPinned;
+
+	/*
+	Bit Board with the bits behind a king facing its checker
+	Used to stop king from walking behind himself and end up in check anyways
+	*/
+	bit::BitBoard64 SquaresBehindCheckedKing;
 
 	/**
-	* array with every abs pinned square(infront the piece pinned until the attacking piece + actual piece pinned + behind until the (included)king)
+	* array with every abs pinned square(whole xray attack until (included)king)
 	*
 	* The array is structured like a Board in which squares that are pinned
 	* receive the value of the pinning piece BoardSquarePos
@@ -253,7 +282,7 @@ public:
 	std::array<uint8_t, 64> WhichBoardSquaresAreAbsPinned;
 
 	/*
-	* BoardSquare where the square's value is the checking piece BoardSquarePos
+	* BoardSquare where the square's value is the checking piece's BoardSquarePos
 	* The king's BoardSquarePos is included
 	*/
 	std::array<uint8_t, 64> CheckTargetSquares;
