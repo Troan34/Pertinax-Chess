@@ -34,7 +34,7 @@ constexpr uint8_t KING = 6;
 constexpr uint8_t WHITE = 16;
 constexpr uint8_t BLACK = 8;
 
-std::unordered_map <char, unsigned int> PieceTypeFromChar =
+static std::unordered_map <char, unsigned int> PieceTypeFromChar =
 {
 	{'k', KING}, {'q', QUEEN}, {'b', BISHOP}, {'r', ROOK}, {'p', PAWN}, {'n', KNIGHT}
 };
@@ -62,215 +62,6 @@ constexpr std::string_view STARTPOS = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKB
 
 constexpr uint8_t NULL_OPTION = 65; //The number i use to mean 'not assigned' or 'doesn't exist'
 
-
-namespace bit//bit management
-{
-	constexpr uint8_t PAWN = 0;
-	constexpr uint8_t BISHOP = 1;
-	constexpr uint8_t KNIGHT = 2;
-	constexpr uint8_t ROOK = 3;
-	constexpr uint8_t QUEEN = 4;
-	constexpr uint8_t KING = 5;
-
-	//pop least significant bit, return false if mask was empty
-	constexpr inline bool pop_lsb(uint64_t& Mask, uint8_t& Index)
-	{
-		unsigned long Index_ = std::countr_zero(Mask);
-		if (Index_ < 64)
-		{
-			Mask ^= (1ULL << Index_);
-			Index = Index_;
-		}
-		else { return false; }
-		return true;
-	}
-
-	/// <summary>
-	/// Just finds lsb, TO BE USED WITH A MASK WITH popcnt == 0, WILL ASSERT
-	/// </summary>
-	/// <param name="Mask">bitboard the set bit will be seached</param>
-	/// <param name="Index">bit index will be written to this</param>
-	/// <returns>false if Mask is empty</returns>
-	constexpr inline bool FindBit(const uint64_t& Mask, uint8_t& Index)
-	{
-		ASSERT(std::popcount(Mask) == 1);
-		Index = std::countr_zero(Mask);
-		if (Index < 64){ return true; }
-		else { return false; }
-
-	}
-
-	class BitManager
-	{
-	private:
-		uint64_t& m_Data;
-		uint8_t m_Index;
-	public:
-		BitManager(uint64_t& Data, uint8_t Index) : m_Data(Data), m_Index(Index) {}
-
-		//assignment operator
-		inline BitManager& operator=(bool value);
-
-		//read-only member
-		operator bool() const {
-			return (m_Data >> m_Index) & 0b1;
-		}
-
-		BitManager& operator=(const BitManager& a) = delete;
-	};
-
-	//this class might be made strange, but it's like this to achieve a kind of bit array (and to replace the array of bools without refactoring the code)
-	class BitBoard64 {
-		uint64_t Bits = 0;
-	public:
-		//set a bit, logic uses the BitManager operator=
-		BitManager operator[](uint8_t Index)
-		{
-			if (Index > 63)
-			{
-				throw std::out_of_range("Indexed bit out of range");
-			}
-			return BitManager(Bits, Index);
-		}
-
-		BitBoard64(uint64_t bits) : Bits(bits) {}
-		BitBoard64() {}
-
-		//get bit at index
-		bool operator[](uint8_t Index) const
-		{
-			if (Index > 63)
-			{
-				throw std::out_of_range("Indexed bit out of range");
-			}
-			return (Bits >> Index) & 0b1;
-		}
-
-		inline void fill(bool Value) noexcept
-		{
-			if (true) { Bits = UINT64_MAX; }
-			else { Bits = 0; }
-		}
-
-		//Sets the bit in the parameter as true
-		void SetToTrue(uint8_t Index)
-		{
-			if (Index > 63)
-			{
-				throw std::out_of_range("Indexed bit out of range");
-			}
-			Bits |= 1ULL << Index;
-		}
-
-		//this should be replaced with SetToTrue
-		inline void push_back(uint8_t Index) { SetToTrue(Index); }
-
-		inline void clear() noexcept
-		{
-			fill(false);
-		}
-
-		inline uint8_t popcnt() const noexcept
-		{
-			return std::popcount(Bits);
-		}
-
-		inline bool empty() const noexcept
-		{
-			return (popcnt() == 0);
-		}
-
-		inline uint64_t ReadBits() const
-		{
-			return Bits;
-		}
-
-		//vv Bitwise op vv
-
-		inline BitBoard64 operator|(BitBoard64 Operand) const
-		{
-			return Bits | Operand.Bits;
-		}
-		inline BitBoard64 operator&(BitBoard64 Operand) const
-		{
-			return Bits & Operand.Bits;
-		}
-		inline BitBoard64 operator^(BitBoard64 Operand) const
-		{
-			return Bits ^ Operand.Bits;
-		}
-
-		inline BitBoard64& operator|=(BitBoard64 Operand)
-		{
-			Bits |= Operand.Bits;
-			return *this;
-		}
-		inline BitBoard64& operator&=(BitBoard64 Operand)
-		{
-			Bits &= Operand.Bits;
-			return *this;
-		}
-		inline BitBoard64& operator^=(BitBoard64 Operand)
-		{
-			Bits ^= Operand.Bits;
-			return *this;
-		}
-
-		inline operator uint64_t() { return Bits; }
-	};
-
-	class BitPosManager
-	{
-	private:
-		std::array<BitBoard64, 6>& m_Positions;
-		std::array<BitBoard64, 2>& m_Colors;
-		uint8_t m_Index;
-	public:
-		BitPosManager(std::array<BitBoard64, 6>& PosBitBoards, std::array<BitBoard64, 2>& ColorBitBoards, uint8_t Index)
-			: m_Positions(PosBitBoards), m_Colors(ColorBitBoards), m_Index(Index) {
-		}
-
-		//assignment operator
-		BitPosManager& operator=(uint8_t PieceType);
-
-		//read-only member
-		operator uint8_t() const;
-
-		BitPosManager& operator=(const BitPosManager& a) = delete;
-	};
-
-	class BitPosition
-	{
-	public:
-		std::array<BitBoard64, 6> PiecePositions;//Ascending order: Pawn, Bishop, Knight, Rook, Queen, King (as defined)
-		std::array<BitBoard64, 2> ColorPositions;//0th is White, 1st is Black
-		
-		BitPosition(){}
-		BitPosition(const std::array<uint8_t, 64>& OldBoardSquare);
-
-		//Get PieceType (standard way) from BoardSquare
-		uint8_t operator[](uint8_t BoardSquare) const;
-
-		BitPosManager operator[](uint8_t Index)
-		{
-			if (Index > 63)
-			{
-				throw std::out_of_range("Indexed bit out of range");
-			}
-			return BitPosManager(PiecePositions, ColorPositions, Index);
-		}
-
-		uint8_t popcnt() const noexcept;
-
-		inline bool empty() const noexcept
-		{
-			return (popcnt() == 0);
-		}
-
-		inline BitBoard64 find(uint8_t PieceType);
-	};
-
-}
 
 struct canCastle
 {
@@ -435,4 +226,210 @@ template<typename T> inline std::vector<T> GetVecTail(const std::vector<T>& Vec)
 template<typename T> inline void PushBackVec(std::vector<T>& Vec, const std::vector<T>& DataVec)
 {
 	return (void)Vec.insert(Vec.end(), DataVec.begin(), DataVec.end());
+}
+
+namespace bit//bit management
+{
+
+	//pop least significant bit, return false if mask was empty
+	constexpr inline bool pop_lsb(uint64_t& Mask, uint8_t& Index)
+	{
+		unsigned long Index_ = std::countr_zero(Mask);
+		if (Index_ < 64)
+		{
+			Mask ^= (1ULL << Index_);
+			Index = Index_;
+		}
+		else { return false; }
+		return true;
+	}
+
+	/// <summary>
+	/// Just finds lsb, TO BE USED WITH A MASK WITH popcnt == 0, WILL ASSERT
+	/// </summary>
+	/// <param name="Mask">bitboard the set bit will be seached</param>
+	/// <param name="Index">bit index will be written to this</param>
+	/// <returns>false if Mask is empty</returns>
+	constexpr inline bool FindBit(const uint64_t& Mask, uint8_t& Index)
+	{
+		ASSERT(std::popcount(Mask) == 1);
+		Index = std::countr_zero(Mask);
+		if (Index < 64) { return true; }
+		else { return false; }
+
+	}
+
+	class BitManager
+	{
+	private:
+		uint64_t& m_Data;
+		uint8_t m_Index;
+	public:
+		BitManager(uint64_t& Data, uint8_t Index) : m_Data(Data), m_Index(Index) {}
+
+		//assignment operator
+		inline BitManager& operator=(bool value);
+
+		//read-only member
+		operator bool() const {
+			return (m_Data >> m_Index) & 0b1;
+		}
+
+		BitManager& operator=(const BitManager& a) = delete;
+	};
+
+	//this class might be made strange, but it's like this to achieve a kind of bit array (and to replace the array of bools without refactoring the code)
+	class BitBoard64 {
+		uint64_t Bits = 0;
+	public:
+		//set a bit, logic uses the BitManager operator=
+		BitManager operator[](uint8_t Index)
+		{
+			if (Index > 63)
+			{
+				throw std::out_of_range("Indexed bit out of range");
+			}
+			return BitManager(Bits, Index);
+		}
+
+		BitBoard64(uint64_t bits) : Bits(bits) {}
+		BitBoard64() {}
+
+		//get bit at index
+		bool operator[](uint8_t Index) const
+		{
+			if (Index > 63)
+			{
+				throw std::out_of_range("Indexed bit out of range");
+			}
+			return (Bits >> Index) & 0b1;
+		}
+
+		inline void fill(bool Value) noexcept
+		{
+			if (true) { Bits = UINT64_MAX; }
+			else { Bits = 0; }
+		}
+
+		//Sets the bit in the parameter as true
+		void SetToTrue(uint8_t Index)
+		{
+			if (Index > 63)
+			{
+				throw std::out_of_range("Indexed bit out of range");
+			}
+			Bits |= 1ULL << Index;
+		}
+
+		//this should be replaced with SetToTrue
+		inline void push_back(uint8_t Index) { SetToTrue(Index); }
+
+		inline void clear() noexcept
+		{
+			fill(false);
+		}
+
+		inline uint8_t popcnt() const noexcept
+		{
+			return std::popcount(Bits);
+		}
+
+		inline bool empty() const noexcept
+		{
+			return (popcnt() == 0);
+		}
+
+		inline uint64_t ReadBits() const
+		{
+			return Bits;
+		}
+
+		//vv Bitwise op vv
+
+		inline BitBoard64 operator|(BitBoard64 Operand) const
+		{
+			return Bits | Operand.Bits;
+		}
+		inline BitBoard64 operator&(BitBoard64 Operand) const
+		{
+			return Bits & Operand.Bits;
+		}
+		inline BitBoard64 operator^(BitBoard64 Operand) const
+		{
+			return Bits ^ Operand.Bits;
+		}
+
+		inline BitBoard64& operator|=(BitBoard64 Operand)
+		{
+			Bits |= Operand.Bits;
+			return *this;
+		}
+		inline BitBoard64& operator&=(BitBoard64 Operand)
+		{
+			Bits &= Operand.Bits;
+			return *this;
+		}
+		inline BitBoard64& operator^=(BitBoard64 Operand)
+		{
+			Bits ^= Operand.Bits;
+			return *this;
+		}
+
+		inline operator uint64_t() { return Bits; }
+	};
+
+	class BitPosManager
+	{
+	private:
+		std::array<BitBoard64, 6>& m_Positions;
+		std::array<BitBoard64, 2>& m_Colors;
+		uint8_t m_Index;
+	public:
+		BitPosManager(std::array<BitBoard64, 6>& PosBitBoards, std::array<BitBoard64, 2>& ColorBitBoards, uint8_t Index)
+			: m_Positions(PosBitBoards), m_Colors(ColorBitBoards), m_Index(Index) {
+		}
+
+		//assignment operator
+		BitPosManager& operator=(uint8_t PieceType);
+
+		//read-only member
+		operator uint8_t() const;
+
+		BitPosManager& operator=(const BitPosManager& a) = delete;
+	};
+
+	class BitPosition
+	{
+	public:
+		std::array<BitBoard64, 6> PiecePositions;//Ascending order: Pawn, Bishop, Knight, Rook, Queen, King (as defined)
+		std::array<BitBoard64, 2> ColorPositions;//0th is White, 1st is Black
+
+		BitPosition() {}
+		BitPosition(const std::array<uint8_t, 64>& OldBoardSquare);
+
+		//Get PieceType (standard way) from BoardSquare
+		uint8_t operator[](uint8_t BoardSquare) const;
+
+		BitPosManager operator[](uint8_t Index)
+		{
+			if (Index > 63)
+			{
+				throw std::out_of_range("Indexed bit out of range");
+			}
+			return BitPosManager(PiecePositions, ColorPositions, Index);
+		}
+
+		uint8_t popcnt() const noexcept;
+
+		inline bool empty() const noexcept
+		{
+			return (popcnt() == 0);
+		}
+
+		BitBoard64 find(uint8_t PieceType)
+		{
+			return (Board::IsPieceColorWhite(PieceType) ? ColorPositions[0] : ColorPositions[1]) & PiecePositions[Board::GetPieceType2Uncolored(PieceType) - 1];//peak unreadability
+		}
+	};
+
 }

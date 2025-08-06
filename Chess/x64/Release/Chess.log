@@ -1,18 +1,21 @@
 ﻿  Board.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/Board.cpp')
   
   Evaluation.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(56,56): warning C4244: '+=': conversion from 'double' to 'int32_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(60,56): warning C4244: '-=': conversion from 'double' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(418,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
   (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
   
   IterativeD.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(122,36): warning C4244: '=': conversion from 'float' to 'uint64_t', possible loss of data
@@ -26,61 +29,91 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Itera
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,91): warning C4244:         [
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,91): warning C4244:             _Rep=__int64
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,91): warning C4244:         ]
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
+  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
+  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  
   Search.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/Engine/Search.cpp')
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(21,85): warning C4244: 'argument': conversion from 'const uint16_t' to 'uint8_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(418,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
   (compiling source file 'source/ChessThings/Engine/Search.cpp')
   
   TT.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/Engine/Transposition/TT.cpp')
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(8,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(13,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(71,49): warning C4267: 'return': conversion from 'size_t' to 'uint16_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(94,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
+  (compiling source file 'source/ChessThings/Engine/Transposition/TT.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
+  (compiling source file 'source/ChessThings/Engine/Transposition/TT.cpp')
+  
   ZobristHashing.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(416,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
   (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(418,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
   (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
   
   LegalMoves.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(416,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(418,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
   RenderChesspcs.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(418,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
+  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
   (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
   
   UCI.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/UCI/UCI.cpp')
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\UCI\UCI.cpp(128,73): warning C4267: '=': conversion from 'size_t' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
+  
   Main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
   (compiling source file 'source/Main.cpp')
       C:\Users\roanb\source\repos\Pertinax-Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,11):
       see previous definition of 'APIENTRY'
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+  (compiling source file 'source/Main.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
+  (compiling source file 'source/Main.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
   (compiling source file 'source/Main.cpp')
   
   TestTexture2D.cpp
@@ -89,7 +122,7 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(1
       C:\Users\roanb\source\repos\Pertinax-Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,11):
       see previous definition of 'APIENTRY'
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/tests/TestTexture2D.cpp')
   
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3630,56): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
@@ -99,48 +132,38 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.3520
           C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\tests\TestTexture2D.cpp(30,25):
           see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,nullptr,unsigned __int64,0>(nullptr &&,unsigned __int64 &&)' being compiled
   
-Search.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> BISHOP_ATTACKS" (?BISHOP_ATTACKS@@3V?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
-Search.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> ROOK_ATTACKS" (?ROOK_ATTACKS@@3V?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
-Search.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
-Search.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> __cdecl ComputeBishopAttacks(void)" (?ComputeBishopAttacks@@YA?AV?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
-Search.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> __cdecl ComputeRookAttacks(void)" (?ComputeRookAttacks@@YA?AV?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
-TT.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
-UCI.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> BISHOP_ATTACKS" (?BISHOP_ATTACKS@@3V?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
-UCI.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> ROOK_ATTACKS" (?ROOK_ATTACKS@@3V?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
-UCI.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
-UCI.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> __cdecl ComputeBishopAttacks(void)" (?ComputeBishopAttacks@@YA?AV?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
-UCI.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> __cdecl ComputeRookAttacks(void)" (?ComputeRookAttacks@@YA?AV?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
-Board.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
-Evaluation.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> BISHOP_ATTACKS" (?BISHOP_ATTACKS@@3V?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
-Evaluation.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> ROOK_ATTACKS" (?ROOK_ATTACKS@@3V?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
-Evaluation.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
-Evaluation.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> __cdecl ComputeBishopAttacks(void)" (?ComputeBishopAttacks@@YA?AV?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
-Evaluation.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> __cdecl ComputeRookAttacks(void)" (?ComputeRookAttacks@@YA?AV?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
-ZobristHashing.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> BISHOP_ATTACKS" (?BISHOP_ATTACKS@@3V?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
-ZobristHashing.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> ROOK_ATTACKS" (?ROOK_ATTACKS@@3V?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
-ZobristHashing.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
-ZobristHashing.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> __cdecl ComputeBishopAttacks(void)" (?ComputeBishopAttacks@@YA?AV?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
-ZobristHashing.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> __cdecl ComputeRookAttacks(void)" (?ComputeRookAttacks@@YA?AV?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
-LegalMoves.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> BISHOP_ATTACKS" (?BISHOP_ATTACKS@@3V?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
-LegalMoves.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> ROOK_ATTACKS" (?ROOK_ATTACKS@@3V?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
-LegalMoves.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
-LegalMoves.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> __cdecl ComputeBishopAttacks(void)" (?ComputeBishopAttacks@@YA?AV?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
-LegalMoves.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> __cdecl ComputeRookAttacks(void)" (?ComputeRookAttacks@@YA?AV?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
-RenderChesspcs.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> BISHOP_ATTACKS" (?BISHOP_ATTACKS@@3V?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
-RenderChesspcs.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> ROOK_ATTACKS" (?ROOK_ATTACKS@@3V?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
-RenderChesspcs.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
-RenderChesspcs.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> __cdecl ComputeBishopAttacks(void)" (?ComputeBishopAttacks@@YA?AV?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
-RenderChesspcs.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> __cdecl ComputeRookAttacks(void)" (?ComputeRookAttacks@@YA?AV?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
-Main.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> BISHOP_ATTACKS" (?BISHOP_ATTACKS@@3V?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
-Main.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> ROOK_ATTACKS" (?ROOK_ATTACKS@@3V?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
-Main.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
-Main.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> __cdecl ComputeBishopAttacks(void)" (?ComputeBishopAttacks@@YA?AV?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
-Main.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> __cdecl ComputeRookAttacks(void)" (?ComputeRookAttacks@@YA?AV?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
-TestTexture2D.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> BISHOP_ATTACKS" (?BISHOP_ATTACKS@@3V?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
-TestTexture2D.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> ROOK_ATTACKS" (?ROOK_ATTACKS@@3V?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
-TestTexture2D.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
-TestTexture2D.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> __cdecl ComputeBishopAttacks(void)" (?ComputeBishopAttacks@@YA?AV?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
-TestTexture2D.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> __cdecl ComputeRookAttacks(void)" (?ComputeRookAttacks@@YA?AV?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LegalMoves.obj : error LNK2001: unresolved external symbol "public: class bit::BitBoard64 __cdecl bit::BitPosition::find(unsigned char)" (?find@BitPosition@bit@@QEAA?AVBitBoard64@2@E@Z)
-C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Chess.exe : fatal error LNK1120: 1 unresolved externals
+  Generating code
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(270): warning C4715: 'Board::GetPieceType2Uncolored': not all control paths return a value
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(326): warning C4172: returning address of local variable or temporary : OffsetsForKnight
+  832 of 4272 functions (19.5%) were compiled, the rest were copied from previous compilation.
+    305 functions were new in current compilation
+    295 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\vc120.pdb'; linking object as if no debug info
+  Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Chess.exe
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\shaders\Basic.shader
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\shaders\basicShader.shader
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\bb.png
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\bk.png
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\bn.png
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\bp.png
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\bq.png
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\br.png
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\Chessboard.png
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\Empty.png
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\PromotionSquare.png
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\Red.png
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\wb.png
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\wk.png
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\wn.png
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\wp.png
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\wq.png
+  C:\Users\roanb\source\repos\Pertinax-Chess\Chess\res\textures\wr.png
+  18 File(s) copied

@@ -48,7 +48,7 @@ void GenerateLegalMoves::GenerateMoves()
 	WhichBoardSquaresAreAbsPinned.fill(65);
 	CheckTargetSquares.fill(65);
 	uint8_t BoardSquarePos = 0;
-	for (; BoardSquarePos <= 64; BoardSquarePos++)
+	for (; BoardSquarePos <= MAX_SQUARE; BoardSquarePos++)
 	{ 
 		uint8_t i = m_BoardSquare[BoardSquarePos];
 		if (((i == BLACK_BISHOP or i == BLACK_ROOK or i == BLACK_QUEEN) and !isNextMoveForWhite) or ((i == WHITE_BISHOP or i == WHITE_ROOK or i == WHITE_QUEEN) and isNextMoveForWhite))
@@ -774,15 +774,63 @@ bool GenerateLegalMoves::IsMoveLegal(const Move& CheckedMove) const
 	return MoveFound;
 }
 
+void ComputeRookAttacks(std::array<std::array<uint64_t, 4096>, 64>& RookAttacks)
+{
+	for (uint8_t BoardSquare = 0; BoardSquare <= MAX_SQUARE; BoardSquare++)
+	{
+		for (uint16_t Blocker = 0; Blocker < 4096; Blocker++)
+		{
+			uint64_t BlockerBitboard = expand_bits_to_mask(Blocker, ROOK_MASKS[BoardSquare]);
+			for (uint8_t Direction = 0; Direction < 4; Direction++)
+			{
+				for (uint8_t Scalar = 1; Scalar < NumOfSquaresUntilEdge[BoardSquare][Direction]; Scalar++)
+				{
+					uint64_t Bit_PositionBeingChecked = (1ULL << (BoardSquare + (Scalar * NumOfSquaresUntilEdge[BoardSquare][Direction])));
+					RookAttacks[BoardSquare][Blocker] |= Bit_PositionBeingChecked;
+					if ((BlockerBitboard & Bit_PositionBeingChecked) == Bit_PositionBeingChecked)
+					{
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+
+void ComputeBishopAttacks(std::array<std::array<uint64_t, 512>, 64>& BishopAttacks)
+{
+	for (uint8_t BoardSquare = 0; BoardSquare <= MAX_SQUARE; BoardSquare++)
+	{
+		for (uint16_t Blocker = 0; Blocker < 4096; Blocker++)
+		{
+			uint64_t BlockerBitboard = expand_bits_to_mask(Blocker, BISHOP_MASKS[BoardSquare]);
+			for (uint8_t Direction = 4; Direction < 8; Direction++)
+			{
+				for (uint8_t Scalar = 1; Scalar < NumOfSquaresUntilEdge[BoardSquare][Direction]; Scalar++)
+				{
+					uint64_t Bit_PositionBeingChecked = (1ULL << (BoardSquare + (Scalar * NumOfSquaresUntilEdge[BoardSquare][Direction])));
+					BishopAttacks[BoardSquare][Blocker] |= Bit_PositionBeingChecked;
+					if ((BlockerBitboard & Bit_PositionBeingChecked) == Bit_PositionBeingChecked)
+					{
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+
 void ComputeHeavy()
 {
+	static bool AlreadyRan = false;
+	if (AlreadyRan) { return; }
 	TCHAR exePath[MAX_PATH];
 	GetModuleFileName(NULL, exePath, MAX_PATH);
 	fs::path ExePath = fs::canonical(exePath);
 	fs::path PrecomputesPath = ExePath;
-
+	PrecomputesPath = PrecomputesPath.parent_path();
 	//searches and sets the Precompute dir path to PrecomputesPath
-	while (PrecomputesPath != PrecomputesPath.root_path())
+	while (fs::exists(PrecomputesPath) and PrecomputesPath != PrecomputesPath.root_path())
 	{
 		for (const auto& DirEntry : fs::directory_iterator{ PrecomputesPath })
 		{
@@ -795,6 +843,7 @@ void ComputeHeavy()
 		{
 			break;
 		}
+		PrecomputesPath = PrecomputesPath.parent_path();
 	}
 
 	std::fstream RookPrecomputes;
@@ -802,7 +851,7 @@ void ComputeHeavy()
 	{
 		RookPrecomputes.open(PrecomputesPath / "Rook_Attacks.bin", std::ios::out | std::ios::binary);
 
-		ROOK_ATTACKS = ComputeRookAttacks();//compute ROOK_ATTACKS (slow)
+		ComputeRookAttacks(ROOK_ATTACKS);//compute ROOK_ATTACKS (slow)
 
 		RookPrecomputes.write(reinterpret_cast<const char*>(ROOK_ATTACKS.data()), sizeof(ROOK_ATTACKS));//save the table to the binary file
 	}
@@ -817,7 +866,7 @@ void ComputeHeavy()
 	{
 		BishopPrecomputes.open(PrecomputesPath / "Bishop_Attacks.bin", std::ios::out | std::ios::binary);
 
-		BISHOP_ATTACKS = ComputeBishopAttacks();//compute BISHOP_ATTACKS (slow)
+		ComputeBishopAttacks(BISHOP_ATTACKS);//compute BISHOP_ATTACKS (slow)
 
 		BishopPrecomputes.write(reinterpret_cast<const char*>(BISHOP_ATTACKS.data()), sizeof(BISHOP_ATTACKS));//save the table to the binary file
 	}
@@ -826,5 +875,7 @@ void ComputeHeavy()
 		BishopPrecomputes.open(PrecomputesPath / "Bishop_Attacks.bin", std::ios::in | std::ios::binary);
 		BishopPrecomputes.read(reinterpret_cast<char*>(BISHOP_ATTACKS.data()), sizeof(BISHOP_ATTACKS)); //set BISHOP_ATTACKS from disk
 	}
+
+	AlreadyRan = true;
 
 }

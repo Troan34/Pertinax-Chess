@@ -1,6 +1,7 @@
 #pragma once
 #include "ChessThings/Board.h"
 #include "ChessThings/Engine/Search.h"
+#include "ChessThings/LegalMoves.h"
 
 class IterativeDeepening
 {

@@ -610,10 +610,7 @@ Move::Move()
 }
 
 namespace bit {
-	inline BitBoard64 BitPosition::find(uint8_t PieceType)
-	{
-		return (Board::IsPieceColorWhite(PieceType) ? ColorPositions[0] : ColorPositions[1]) & PiecePositions[Board::GetPieceType2Uncolored(PieceType) - 1];//peak unreadability
-	}
+	
 
 	inline BitManager& BitManager::operator=(bool value)
 	{
@@ -658,7 +655,7 @@ namespace bit {
 		if (m_Colors[0][m_Index]) { Color = WHITE; }
 		else if (m_Colors[1][m_Index]) { Color = BLACK; }
 
-		for (; PieceType <= KING; PieceType++)
+		for (; PieceType <= 5; PieceType++)
 		{
 			if (m_Positions[PieceType][m_Index])
 			{
