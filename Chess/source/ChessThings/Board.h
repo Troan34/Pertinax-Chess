@@ -63,7 +63,6 @@ constexpr std::string_view STARTPOS = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKB
 constexpr uint8_t NULL_OPTION = 65; //The number i use to mean 'not assigned' or 'doesn't exist'
 
 
-
 namespace bit//bit management
 {
 	constexpr uint8_t PAWN = 0;
@@ -101,6 +100,25 @@ namespace bit//bit management
 
 	}
 
+	class BitManager
+	{
+	private:
+		uint64_t& m_Data;
+		uint8_t m_Index;
+	public:
+		BitManager(uint64_t& Data, uint8_t Index) : m_Data(Data), m_Index(Index) {}
+
+		//assignment operator
+		inline BitManager& operator=(bool value);
+
+		//read-only member
+		operator bool() const {
+			return (m_Data >> m_Index) & 0b1;
+		}
+
+		BitManager& operator=(const BitManager& a) = delete;
+	};
+
 	//this class might be made strange, but it's like this to achieve a kind of bit array (and to replace the array of bools without refactoring the code)
 	class BitBoard64 {
 		uint64_t Bits = 0;
@@ -115,7 +133,8 @@ namespace bit//bit management
 			return BitManager(Bits, Index);
 		}
 
-		BitBoard64(uint64_t bits) : Bits(bits){}
+		BitBoard64(uint64_t bits) : Bits(bits) {}
+		BitBoard64() {}
 
 		//get bit at index
 		bool operator[](uint8_t Index) const
@@ -200,46 +219,6 @@ namespace bit//bit management
 		inline operator uint64_t() { return Bits; }
 	};
 
-	class BitPosition
-	{
-	public:
-		std::array<BitBoard64, 6> PiecePositions;//Ascending order: Pawn, Bishop, Knight, Rook, Queen, King (as defined)
-		std::array<BitBoard64, 2> ColorPositions;//0th is White, 1st is Black
-	
-		//Get PieceType (standard way) from BoardSquare
-		uint8_t operator[](uint8_t BoardSquare) const;
-
-		BitPosManager operator[](uint8_t Index);
-
-		uint8_t popcnt() const noexcept;
-
-		inline bool empty() const noexcept
-		{
-			return (popcnt() == 0);
-		}
-
-		inline BitBoard64 find(uint8_t PieceType);
-	};
-
-	class BitManager
-	{
-	private:
-		uint64_t& m_Data;
-		uint8_t m_Index;
-	public:
-		BitManager(uint64_t& Data, uint8_t Index) : m_Data(Data), m_Index(Index) {}
-
-		//assignment operator
-		inline BitManager& operator=(bool value);
-
-		//read-only member
-		operator bool() const {
-			return (m_Data >> m_Index) & 0b1;
-		}
-
-		BitManager& operator=(const BitManager& a) = delete;
-	};
-
 	class BitPosManager
 	{
 	private:
@@ -248,7 +227,7 @@ namespace bit//bit management
 		uint8_t m_Index;
 	public:
 		BitPosManager(std::array<BitBoard64, 6>& PosBitBoards, std::array<BitBoard64, 2>& ColorBitBoards, uint8_t Index)
-			: m_Positions(PosBitBoards), m_Colors(ColorBitBoards) {
+			: m_Positions(PosBitBoards), m_Colors(ColorBitBoards), m_Index(Index) {
 		}
 
 		//assignment operator
@@ -258,6 +237,37 @@ namespace bit//bit management
 		operator uint8_t() const;
 
 		BitPosManager& operator=(const BitPosManager& a) = delete;
+	};
+
+	class BitPosition
+	{
+	public:
+		std::array<BitBoard64, 6> PiecePositions;//Ascending order: Pawn, Bishop, Knight, Rook, Queen, King (as defined)
+		std::array<BitBoard64, 2> ColorPositions;//0th is White, 1st is Black
+		
+		BitPosition(){}
+		BitPosition(const std::array<uint8_t, 64>& OldBoardSquare);
+
+		//Get PieceType (standard way) from BoardSquare
+		uint8_t operator[](uint8_t BoardSquare) const;
+
+		BitPosManager operator[](uint8_t Index)
+		{
+			if (Index > 63)
+			{
+				throw std::out_of_range("Indexed bit out of range");
+			}
+			return BitPosManager(PiecePositions, ColorPositions, Index);
+		}
+
+		uint8_t popcnt() const noexcept;
+
+		inline bool empty() const noexcept
+		{
+			return (popcnt() == 0);
+		}
+
+		inline BitBoard64 find(uint8_t PieceType);
 	};
 
 }

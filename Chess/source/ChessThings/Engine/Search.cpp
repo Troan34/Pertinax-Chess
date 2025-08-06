@@ -315,7 +315,7 @@ std::vector<GuessStruct> Search::OrderMoves(const GenerateLegalMoves& LegalMoves
 	uint8_t count = 0;
 	bool flag = true;
 
-	for (MOVE piece : LegalMoves.moves)
+	for (MOVE_BIT piece : LegalMoves.moves)
 	{
 		/*
 		if (!m_SearchMoves.empty())
@@ -333,8 +333,9 @@ std::vector<GuessStruct> Search::OrderMoves(const GenerateLegalMoves& LegalMoves
 		*/
 		if (flag)
 		{
-			for (const uint8_t& move : piece.TargetSquares)
+			for(uint8_t move = 0; move <= MAX_SQUARE; move++)
 			{
+				if (piece.TargetSquares[move] == false) { continue; }
 				for (uint8_t i = 0; i != 3; ++i)
 				{
 					int16_t GuessedEval = 0;

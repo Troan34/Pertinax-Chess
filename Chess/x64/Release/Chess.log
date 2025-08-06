@@ -1,26 +1,18 @@
-﻿  IterativeD.cpp
+﻿  Board.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
-  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  (compiling source file 'source/ChessThings/Board.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  Evaluation.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(56,56): warning C4244: '+=': conversion from 'double' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(60,56): warning C4244: '-=': conversion from 'double' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(418,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(99,11): error C3861: 'BitManager': identifier not found
-  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  IterativeD.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(122,36): warning C4244: '=': conversion from 'float' to 'uint64_t', possible loss of data
@@ -38,360 +30,50 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Itera
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/Engine/Search.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/ChessThings/Engine/Search.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/Search.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/Search.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(99,11): error C3861: 'BitManager': identifier not found
-  (compiling source file 'source/ChessThings/Engine/Search.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/ChessThings/Engine/Search.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/Search.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/Search.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(18,31): error C2665: 'GenerateLegalMoves::GenerateLegalMoves': no overloaded function could convert all the argument types
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.h(265,2):
-      could be 'GenerateLegalMoves::GenerateLegalMoves(const bit::BitPosition &,const bit::BitPosition *,canCastle,bool,unsigned int,bool)'
-          C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(18,31):
-          'GenerateLegalMoves::GenerateLegalMoves(const bit::BitPosition &,const bit::BitPosition *,canCastle,bool,unsigned int,bool)': cannot convert argument 1 from 'const std::array<uint8_t,64>' to 'const bit::BitPosition &'
-              C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(18,32):
-              Reason: cannot convert from 'const std::array<uint8_t,64>' to 'const bit::BitPosition'
-              C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(18,32):
-              No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(18,31):
-      while trying to match the argument list '(const std::array<uint8_t,64>, const std::array<uint8_t,64> *, const canCastle, bool, const uint16_t, bool)'
-  
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(21,85): warning C4244: 'argument': conversion from 'const uint16_t' to 'uint8_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(56,31): error C2665: 'GenerateLegalMoves::GenerateLegalMoves': no overloaded function could convert all the argument types
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.h(265,2):
-      could be 'GenerateLegalMoves::GenerateLegalMoves(const bit::BitPosition &,const bit::BitPosition *,canCastle,bool,unsigned int,bool)'
-          C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(56,31):
-          'GenerateLegalMoves::GenerateLegalMoves(const bit::BitPosition &,const bit::BitPosition *,canCastle,bool,unsigned int,bool)': cannot convert argument 1 from 'std::array<uint8_t,64>' to 'const bit::BitPosition &'
-              C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(56,32):
-              Reason: cannot convert from 'std::array<uint8_t,64>' to 'const bit::BitPosition'
-              C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(56,32):
-              No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(56,31):
-      while trying to match the argument list '(std::array<uint8_t,64>, std::array<uint8_t,64> *, canCastle, bool, uint8_t, bool)'
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(318,36): error C2440: 'initializing': cannot convert from 'const _Ty' to 'MOVE'
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(318,36): error C2440:         with
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(318,36): error C2440:         [
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(318,36): error C2440:             _Ty=MOVE_BIT
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(318,36): error C2440:         ]
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(318,36):
-      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(318,36): error C2440: 'initializing': cannot convert from 'const _Ty' to 'std::vector<uint8_t,std::allocator<uint8_t>>'
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(318,36): error C2440:         with
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(318,36): error C2440:         [
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(318,36): error C2440:             _Ty=MOVE_BIT
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(318,36): error C2440:         ]
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(318,36):
-      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(418,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
   
   TT.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
-  (compiling source file 'source/ChessThings/Engine/Transposition/TT.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/ChessThings/Engine/Transposition/TT.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/Transposition/TT.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/Transposition/TT.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(99,11): error C3861: 'BitManager': identifier not found
-  (compiling source file 'source/ChessThings/Engine/Transposition/TT.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/ChessThings/Engine/Transposition/TT.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/Transposition/TT.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
   (compiling source file 'source/ChessThings/Engine/Transposition/TT.cpp')
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(8,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(13,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(71,49): warning C4267: 'return': conversion from 'size_t' to 'uint16_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(94,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
-  UCI.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
-  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(99,11): error C3861: 'BitManager': identifier not found
-  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\UCI\UCI.cpp(128,73): warning C4267: '=': conversion from 'size_t' to 'uint8_t', possible loss of data
-  Board.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
-  (compiling source file 'source/ChessThings/Board.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/ChessThings/Board.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Board.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Board.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(99,11): error C3861: 'BitManager': identifier not found
-  (compiling source file 'source/ChessThings/Board.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/ChessThings/Board.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Board.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Board.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(628,40): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(629,43): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(635,28): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(636,29): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(640,13): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(643,64): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(706,29): error C2556: 'bit::BitPosManager bit::BitPosition::operator [](uint8_t)': overloaded function differs only by return type from 'int bit::BitPosition::operator [](uint8_t)'
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17):
-      see declaration of 'bit::BitPosition::operator []'
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(706,29): error C2371: 'bit::BitPosition::operator []': redefinition; different basic types
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17):
-      see declaration of 'bit::BitPosition::operator []'
-  
-  Evaluation.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
-  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(99,11): error C3861: 'BitManager': identifier not found
-  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(56,56): warning C4244: '+=': conversion from 'double' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(60,56): warning C4244: '-=': conversion from 'double' to 'int32_t', possible loss of data
   ZobristHashing.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C2143: syntax error: missing ';' before '['
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(416,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
   (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(99,11): error C3861: 'BitManager': identifier not found
-  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(418,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
   (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
   
   LegalMoves.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C2143: syntax error: missing ';' before '['
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(416,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(418,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/LegalMoves.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(99,11): error C3861: 'BitManager': identifier not found
-  (compiling source file 'source/ChessThings/LegalMoves.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/ChessThings/LegalMoves.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/LegalMoves.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/LegalMoves.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(2,25): error C2280: 'bit::BitPosition::BitPosition(void)': attempting to reference a deleted function
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(188,2):
-      compiler has generated 'bit::BitPosition::BitPosition' here
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(188,2):
-      'bit::BitPosition::BitPosition(void)': function was implicitly deleted because a data member invokes a deleted or inaccessible function 'std::array<bit::BitBoard64,6>::array(void)'
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\array(576,1):
-      'std::array<bit::BitBoard64,6>::array(void)': function was implicitly deleted because a data member 'std::array<bit::BitBoard64,6>::_Elems' has either no appropriate default constructor or overload resolution was ambiguous
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\array(570,9):
-      see declaration of 'std::array<bit::BitBoard64,6>::_Elems'
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(3,33): error C2280: 'std::array<MOVE_BIT,64>::array(void)': attempting to reference a deleted function
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\array(576,1):
-      compiler has generated 'std::array<MOVE_BIT,64>::array' here
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\array(576,1):
-      'std::array<MOVE_BIT,64>::array(void)': function was implicitly deleted because a data member invokes a deleted or inaccessible function 'MOVE_BIT::MOVE_BIT(void)'
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.h(220,1):
-      'MOVE_BIT::MOVE_BIT(void)': function was implicitly deleted because a data member 'MOVE_BIT::TargetSquares' has either no appropriate default constructor or overload resolution was ambiguous
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.h(217,18):
-      see declaration of 'MOVE_BIT::TargetSquares'
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(9,1): error C2512: 'bit::BitBoard64': no appropriate default constructor available
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(89,8):
-      see declaration of 'bit::BitBoard64'
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(78,73): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(94,37): error C2039: 'end': is not a member of 'bit::BitBoard64'
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(89,8):
-      see declaration of 'bit::BitBoard64'
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(114,96): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(119,41): error C2039: 'end': is not a member of 'bit::BitBoard64'
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(89,8):
-      see declaration of 'bit::BitBoard64'
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(232,21): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(352,40): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(391,40): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(426,40): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(465,40): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(492,68): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(607,51): warning C4805: '==': unsafe mix of type 'int' and type 'bool' in operation
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(609,58): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(613,76): warning C4805: '==': unsafe mix of type 'int' and type 'bool' in operation
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(615,58): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(658,32): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(676,33): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(688,33): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(721,58): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(732,58): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(746,58): error C2106: '=': left operand must be l-value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(757,58): error C2106: '=': left operand must be l-value
   RenderChesspcs.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C2143: syntax error: missing ';' before '['
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(418,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
   (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
+  UCI.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(99,11): error C3861: 'BitManager': identifier not found
-  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(253,32): error C2665: 'GenerateLegalMoves::GenerateLegalMoves': no overloaded function could convert all the argument types
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.h(265,2):
-      could be 'GenerateLegalMoves::GenerateLegalMoves(const bit::BitPosition &,const bit::BitPosition *,canCastle,bool,unsigned int,bool)'
-          C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(253,32):
-          'GenerateLegalMoves::GenerateLegalMoves(const bit::BitPosition &,const bit::BitPosition *,canCastle,bool,unsigned int,bool)': cannot convert argument 1 from 'std::array<uint8_t,64>' to 'const bit::BitPosition &'
-              C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(253,33):
-              Reason: cannot convert from 'std::array<uint8_t,64>' to 'const bit::BitPosition'
-              C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(253,33):
-              No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(253,32):
-      while trying to match the argument list '(std::array<uint8_t,64>, std::array<uint8_t,64> *, canCastle, bool, unsigned int, bool)'
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(254,62): error C3312: no callable 'begin' function found for type 'bit::BitBoard64'
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(254,62): error C3312: no callable 'end' function found for type 'bit::BitBoard64'
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(254,18): error C2143: syntax error: missing ';' before ':'
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(254,76): error C2143: syntax error: missing ';' before ')'
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(278,32): error C2665: 'GenerateLegalMoves::GenerateLegalMoves': no overloaded function could convert all the argument types
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.h(265,2):
-      could be 'GenerateLegalMoves::GenerateLegalMoves(const bit::BitPosition &,const bit::BitPosition *,canCastle,bool,unsigned int,bool)'
-          C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(278,32):
-          'GenerateLegalMoves::GenerateLegalMoves(const bit::BitPosition &,const bit::BitPosition *,canCastle,bool,unsigned int,bool)': cannot convert argument 1 from 'std::array<uint8_t,64>' to 'const bit::BitPosition &'
-              C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(278,33):
-              Reason: cannot convert from 'std::array<uint8_t,64>' to 'const bit::BitPosition'
-              C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(278,33):
-              No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(278,32):
-      while trying to match the argument list '(std::array<uint8_t,64>, std::array<uint8_t,64> *, canCastle, bool, unsigned int, bool)'
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(678,31): error C2665: 'GenerateLegalMoves::GenerateLegalMoves': no overloaded function could convert all the argument types
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.h(265,2):
-      could be 'GenerateLegalMoves::GenerateLegalMoves(const bit::BitPosition &,const bit::BitPosition *,canCastle,bool,unsigned int,bool)'
-          C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(678,31):
-          'GenerateLegalMoves::GenerateLegalMoves(const bit::BitPosition &,const bit::BitPosition *,canCastle,bool,unsigned int,bool)': cannot convert argument 1 from 'std::array<uint8_t,64>' to 'const bit::BitPosition &'
-              C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(678,32):
-              Reason: cannot convert from 'std::array<uint8_t,64>' to 'const bit::BitPosition'
-              C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(678,32):
-              No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-      C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(678,31):
-      while trying to match the argument list '(std::array<uint8_t,64>, std::array<uint8_t,64> *, canCastle, bool, unsigned int, bool)'
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(686,37): error C2440: 'initializing': cannot convert from '_Ty' to 'MOVE &'
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(686,37): error C2440:         with
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(686,37): error C2440:         [
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(686,37): error C2440:             _Ty=MOVE_BIT
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\RenderChesspcs.cpp(686,37): error C2440:         ]
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\UCI\UCI.cpp(128,73): warning C4267: '=': conversion from 'size_t' to 'uint8_t', possible loss of data
   Main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
   (compiling source file 'source/Main.cpp')
@@ -399,27 +81,6 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(1
       see previous definition of 'APIENTRY'
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
-  (compiling source file 'source/Main.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/Main.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/Main.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/Main.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(99,11): error C3861: 'BitManager': identifier not found
-  (compiling source file 'source/Main.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/Main.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/Main.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
   (compiling source file 'source/Main.cpp')
   
   TestTexture2D.cpp
@@ -431,24 +92,55 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(1
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(82,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/tests/TestTexture2D.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C2143: syntax error: missing ';' before '['
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3630,56): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
   (compiling source file 'source/tests/TestTexture2D.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3630,56):
+      the template instantiation context (the oldest one first) is
+          C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\tests\TestTexture2D.cpp(30,25):
+          see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,nullptr,unsigned __int64,0>(nullptr &&,unsigned __int64 &&)' being compiled
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/tests/TestTexture2D.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(93,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/tests/TestTexture2D.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(99,11): error C3861: 'BitManager': identifier not found
-  (compiling source file 'source/tests/TestTexture2D.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C2143: syntax error: missing ';' before '['
-  (compiling source file 'source/tests/TestTexture2D.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,3): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/tests/TestTexture2D.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(180,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'source/tests/TestTexture2D.cpp')
-  
+Search.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> BISHOP_ATTACKS" (?BISHOP_ATTACKS@@3V?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
+Search.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> ROOK_ATTACKS" (?ROOK_ATTACKS@@3V?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
+Search.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
+Search.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> __cdecl ComputeBishopAttacks(void)" (?ComputeBishopAttacks@@YA?AV?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+Search.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> __cdecl ComputeRookAttacks(void)" (?ComputeRookAttacks@@YA?AV?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+TT.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
+UCI.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> BISHOP_ATTACKS" (?BISHOP_ATTACKS@@3V?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
+UCI.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> ROOK_ATTACKS" (?ROOK_ATTACKS@@3V?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
+UCI.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
+UCI.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> __cdecl ComputeBishopAttacks(void)" (?ComputeBishopAttacks@@YA?AV?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+UCI.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> __cdecl ComputeRookAttacks(void)" (?ComputeRookAttacks@@YA?AV?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+Board.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
+Evaluation.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> BISHOP_ATTACKS" (?BISHOP_ATTACKS@@3V?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
+Evaluation.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> ROOK_ATTACKS" (?ROOK_ATTACKS@@3V?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
+Evaluation.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
+Evaluation.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> __cdecl ComputeBishopAttacks(void)" (?ComputeBishopAttacks@@YA?AV?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+Evaluation.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> __cdecl ComputeRookAttacks(void)" (?ComputeRookAttacks@@YA?AV?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+ZobristHashing.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> BISHOP_ATTACKS" (?BISHOP_ATTACKS@@3V?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
+ZobristHashing.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> ROOK_ATTACKS" (?ROOK_ATTACKS@@3V?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
+ZobristHashing.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
+ZobristHashing.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> __cdecl ComputeBishopAttacks(void)" (?ComputeBishopAttacks@@YA?AV?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+ZobristHashing.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> __cdecl ComputeRookAttacks(void)" (?ComputeRookAttacks@@YA?AV?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+LegalMoves.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> BISHOP_ATTACKS" (?BISHOP_ATTACKS@@3V?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
+LegalMoves.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> ROOK_ATTACKS" (?ROOK_ATTACKS@@3V?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
+LegalMoves.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
+LegalMoves.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> __cdecl ComputeBishopAttacks(void)" (?ComputeBishopAttacks@@YA?AV?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+LegalMoves.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> __cdecl ComputeRookAttacks(void)" (?ComputeRookAttacks@@YA?AV?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+RenderChesspcs.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> BISHOP_ATTACKS" (?BISHOP_ATTACKS@@3V?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
+RenderChesspcs.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> ROOK_ATTACKS" (?ROOK_ATTACKS@@3V?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
+RenderChesspcs.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
+RenderChesspcs.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> __cdecl ComputeBishopAttacks(void)" (?ComputeBishopAttacks@@YA?AV?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+RenderChesspcs.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> __cdecl ComputeRookAttacks(void)" (?ComputeRookAttacks@@YA?AV?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+Main.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> BISHOP_ATTACKS" (?BISHOP_ATTACKS@@3V?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
+Main.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> ROOK_ATTACKS" (?ROOK_ATTACKS@@3V?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
+Main.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
+Main.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> __cdecl ComputeBishopAttacks(void)" (?ComputeBishopAttacks@@YA?AV?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+Main.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> __cdecl ComputeRookAttacks(void)" (?ComputeRookAttacks@@YA?AV?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+TestTexture2D.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> BISHOP_ATTACKS" (?BISHOP_ATTACKS@@3V?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
+TestTexture2D.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> ROOK_ATTACKS" (?ROOK_ATTACKS@@3V?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@A) already defined in IterativeD.obj
+TestTexture2D.obj : error LNK2005: "class std::unordered_map<char,unsigned int,struct std::hash<char>,struct std::equal_to<char>,class std::allocator<struct std::pair<char const ,unsigned int> > > PieceTypeFromChar" (?PieceTypeFromChar@@3V?$unordered_map@DIU?$hash@D@std@@U?$equal_to@D@2@V?$allocator@U?$pair@$$CBDI@std@@@2@@std@@A) already defined in IterativeD.obj
+TestTexture2D.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,512>,64> __cdecl ComputeBishopAttacks(void)" (?ComputeBishopAttacks@@YA?AV?$array@V?$array@_K$0CAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+TestTexture2D.obj : error LNK2005: "class std::array<class std::array<unsigned __int64,4096>,64> __cdecl ComputeRookAttacks(void)" (?ComputeRookAttacks@@YA?AV?$array@V?$array@_K$0BAAA@@std@@$0EA@@std@@XZ) already defined in IterativeD.obj
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LegalMoves.obj : error LNK2001: unresolved external symbol "public: class bit::BitBoard64 __cdecl bit::BitPosition::find(unsigned char)" (?find@BitPosition@bit@@QEAA?AVBitBoard64@2@E@Z)
+C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Chess.exe : fatal error LNK1120: 1 unresolved externals

@@ -146,7 +146,7 @@ constexpr std::array<uint64_t, 64> BISHOP_MAGICS = {
 constexpr std::array<uint64_t, 64> ROOK_MASKS = ComputeRookMasks(false);
 constexpr std::array<uint64_t, 64> BISHOP_MASKS = ComputeBishopMasks(false);
 
-//these just comprehend the last board square instead of ignoring it
+//these just include the last board square instead of ignoring it
 constexpr std::array<uint64_t, 64> ROOK_LEGAL_MASKS = ComputeRookMasks(true);
 constexpr std::array<uint64_t, 64> BISHOP_LEGAL_MASKS = ComputeBishopMasks(true);
 
@@ -276,8 +276,8 @@ public:
 	/**
 	* array with every abs pinned square(whole xray attack until (included)king)
 	*
-	* The array is structured like a Board in which squares that are pinned
-	* receive the value of the pinning piece BoardSquarePos
+	* The array is structured like a Board in which squares that are part of the pinning xray
+	* receive the value of the pinning piece's BoardSquarePos
 	*/
 	std::array<uint8_t, 64> WhichBoardSquaresAreAbsPinned;
 
@@ -292,9 +292,9 @@ public:
 	std::array<bool, 8> EnPassantFiles{false};
 
 	GenerateLegalMoves(const bit::BitPosition& BoardSquare, const bit::BitPosition* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
+	GenerateLegalMoves(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
 	~GenerateLegalMoves();
 	void GenerateMoves();
-	void SliderMoveGen(const uint8_t BoardSquarePos);
 	void MagicSliderMoveGen(const uint8_t BoardSquarePos);
 	void KnightMoveGen(const uint8_t BoardSquarePos);
 	std::array<uint8_t, 8>& CreateOffesetsForKnight(const uint8_t BoardSquarePos);

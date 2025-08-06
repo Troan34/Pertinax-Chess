@@ -251,8 +251,9 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 			p_prevBoardSquare = nullptr;
 
 		GenerateLegalMoves LegalMoves(static_BoardSquare, p_prevBoardSquare, CanCastle, isNextMoveForWhite, MoveNum, false);
-		for (uint8_t j : LegalMoves.moves[BoardSquareBeingSelected].TargetSquares)
+		for (uint8_t j = 0; j <= MAX_SQUARE; j++)
 		{
+			if (LegalMoves.moves[BoardSquareBeingSelected].TargetSquares[j] == false) { break; }
 			xxDifference = j * 87.5f;
 			yyDifference = 0;
 			while (xxDifference >= 650.0f)
@@ -683,11 +684,11 @@ uint32_t RenderChessPieces::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::
 	uint8_t count = 0;
 
 
-	for (MOVE& piece : LegalMoves.moves)
+	for (MOVE_BIT& piece : LegalMoves.moves)
 	{
-		for (const uint8_t& move : piece.TargetSquares)
+		for(uint8_t move = 0; move <= MAX_SQUARE; move++)
 		{
-
+			if (piece.TargetSquares[move] != false) { continue; }
 			//perft the promotions, this if is basically a blunt .find()
 			if (piece.Promotion[0] != 65 and piece.Promotion[0] == move or piece.Promotion[1] != 65 and piece.Promotion[1] == move or piece.Promotion[2] != 65 and piece.Promotion[2] == move)
 			{

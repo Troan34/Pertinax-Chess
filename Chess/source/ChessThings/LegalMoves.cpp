@@ -5,7 +5,23 @@ static bool DoNotEnPassant; //for weird RemoveIllegalMoves things
 
 
 GenerateLegalMoves::GenerateLegalMoves(const bit::BitPosition& BoardSquare, const bit::BitPosition* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
-	:moves(), m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum), isNextMoveForWhite(isNextMoveForWhite)
+	:m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum), isNextMoveForWhite(isNextMoveForWhite)
+{
+
+	if (previousBoardSquare != nullptr)
+		m_previousBoardSquare = *previousBoardSquare;
+
+
+	GenerateMoves();
+	if (!isForOppositeMoves)
+	{
+		RemoveIllegalMoves();
+	}
+
+}
+
+GenerateLegalMoves::GenerateLegalMoves(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
+	:m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum), isNextMoveForWhite(isNextMoveForWhite)
 {
 
 	if (previousBoardSquare != nullptr)
@@ -37,7 +53,7 @@ void GenerateLegalMoves::GenerateMoves()
 		uint8_t i = m_BoardSquare[BoardSquarePos];
 		if (((i == BLACK_BISHOP or i == BLACK_ROOK or i == BLACK_QUEEN) and !isNextMoveForWhite) or ((i == WHITE_BISHOP or i == WHITE_ROOK or i == WHITE_QUEEN) and isNextMoveForWhite))
 		{
-			SliderMoveGen(BoardSquarePos);
+			MagicSliderMoveGen(BoardSquarePos);
 		}
 		else if (i == WHITE_PAWN or i == BLACK_PAWN)
 		{
@@ -52,104 +68,6 @@ void GenerateLegalMoves::GenerateMoves()
 			KingMoveGen(BoardSquarePos);
 		}
 		BoardSquarePos++;
-	}
-}
-
-void GenerateLegalMoves::SliderMoveGen(const uint8_t BoardSquarePos)
-{
-	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
-	std::vector<uint8_t>::iterator iterator;
-	std::vector<uint8_t>::iterator absPin_iter;
-	MOVE_BIT& Piece = moves[BoardSquarePos];
-
-	for (uint8_t direction = 0; direction < 8; direction++)
-	{
-		if ((PieceType == WHITE_ROOK or PieceType == BLACK_ROOK) and direction > 3)
-			return;
-		else if ((PieceType == WHITE_BISHOP or PieceType == BLACK_BISHOP) and direction < 4)
-		{
-			continue;
-		}
-
-
-		for (uint8_t i = 1; i <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; i++)
-		{
-			uint8_t PieceTypeAtOffset = m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * i)];
-			AttackedSquares[BoardSquarePos + (OffsetForDirections[direction] * i)] = true;
-
-			if (PieceTypeAtOffset == 0)
-			{
-				Piece.PieceType = PieceType;
-				Piece.TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
-				continue;
-			}
-			else if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(PieceTypeAtOffset))
-			{
-				Piece.PieceType = PieceType;
-				Piece.TargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * i));
-
-				//calculate checking squares
-				if ((PieceTypeAtOffset == BLACK_KING and isNextMoveForWhite) or (PieceTypeAtOffset == WHITE_KING and !isNextMoveForWhite))
-				{
-					iterator = Piece.TargetSquares.end();
-
-					for (int j = 0; -i + j < 0; j++)
-					{
-						if (CheckTargetSquares[*(iterator - i + j)] != 65)
-							DoubleCheckBoardSquare = BoardSquarePos;
-						else
-							CheckTargetSquares[*(iterator - i + j)] = BoardSquarePos;
-					}
-				}
-
-				std::vector<uint8_t> PinnedTargetSquares;
-
-				//calculate pinnable squares
-				for (uint8_t j = i + 1; j <= NumOfSquaresUntilEdge[BoardSquarePos][direction]; j++)
-				{
-					uint8_t PieceTypeAtOffsetBehind = m_BoardSquare[BoardSquarePos + (OffsetForDirections[direction] * j)];
-
-					PinnedTargetSquares.push_back(BoardSquarePos + (OffsetForDirections[direction] * j));
-					if ((PieceTypeAtOffset == BLACK_KING and isNextMoveForWhite) or (PieceTypeAtOffset == WHITE_KING and !isNextMoveForWhite))
-						SquaresBehindCheckedKing[BoardSquarePos + (OffsetForDirections[direction] * j)] = true;
-
-					//calculate abs pins
-					if ((PieceTypeAtOffsetBehind == BLACK_KING and isNextMoveForWhite) or (PieceTypeAtOffsetBehind == WHITE_KING and !isNextMoveForWhite))
-					{
-						absPin_iter = Piece.TargetSquares.end();
-
-						bool DoNotRun = false;
-						for (auto k = PinnedTargetSquares.begin(); k < PinnedTargetSquares.end() - 1; k++)
-						{
-							if (m_BoardSquare[*(k)] != 0)
-							{
-								DoNotRun = true;
-							}
-						}
-
-						if (!DoNotRun)
-						{
-							WhichBoardSquaresAreAbsPinned[BoardSquarePos + (OffsetForDirections[direction] * i)] = BoardSquarePos;
-							for (uint8_t k = 0; k < i; k++)
-							{
-								WhichBoardSquaresAreAbsPinned[*(absPin_iter - k - 1)] = BoardSquarePos;
-							}
-							for (uint8_t PinnedSquare : PinnedTargetSquares)
-							{
-								WhichBoardSquaresAreAbsPinned[PinnedSquare] = BoardSquarePos;
-							}
-							DoNotRun = false;
-							break;
-						}
-
-					}
-
-				}
-				break;
-			}
-			else
-				break;
-		}
 	}
 }
 
@@ -172,14 +90,8 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 
 		Attacks = ROOK_ATTACKS[BoardSquarePos][RookAttackIndex];
 
-		if (IsWhite)
-		{
-			Attacks ^= m_BoardSquare.ColorPositions[0];
-		}
-		else
-		{
-			Attacks ^= m_BoardSquare.ColorPositions[1];
-		}
+		if (IsWhite){ Attacks ^= m_BoardSquare.ColorPositions[0]; }
+		else{ Attacks ^= m_BoardSquare.ColorPositions[1]; }
 	}
 	else if ((PieceTypeUncolored == BISHOP))
 	{
@@ -187,14 +99,8 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 
 		Attacks = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
 
-		if (IsWhite)
-		{
-			Attacks ^= m_BoardSquare.ColorPositions[0];
-		}
-		else
-		{
-			Attacks ^= m_BoardSquare.ColorPositions[1];
-		}
+		if (IsWhite){ Attacks ^= m_BoardSquare.ColorPositions[0]; }
+		else{ Attacks ^= m_BoardSquare.ColorPositions[1]; }
 
 	}
 	else if ((PieceTypeUncolored == QUEEN))
@@ -219,7 +125,8 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 		Attacks = RookAttack | BishopAttack;
 	}
 
-	if ((Attacks & m_BoardSquare.find(OpponentKingType)) != 0)//found check
+	//found check
+	if ((Attacks & m_BoardSquare.find(OpponentKingType)) != 0)
 	{
 		//These are here to not have nested control flow
 		uint8_t MaxDir;
@@ -238,10 +145,10 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 			break;
 		}
 
+		std::array<uint8_t, 7> GuessXrayCheck{ 65 };//fill this with board squares of xray attack, if no king is found, revert it
 		//Search for the xray attack that leads to check, add it to CheckTargetSquares (also do SquaresBehindCheckedKing)
 		for (; Direction < MaxDir; Direction++)
 		{
-			std::array<uint8_t, 7> GuessXrayCheck{0};//fill this with board squares of xray attack, if no king is found, revert it
 			for (uint8_t Scalar = 1; Scalar <= NumOfSquaresUntilEdge[BoardSquarePos][Direction]; Scalar++)
 			{
 				GuessXrayCheck[Scalar - 1] = BoardSquarePos + (Scalar * OffsetForDirections[Direction]);
@@ -253,20 +160,65 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 					{
 						SquaresBehindCheckedKing[BoardSquarePos + (Scalar * OffsetForDirections[Direction])] = true;
 					}
-					goto OutsideLoop;//this will skip GuessXrayCheck reversal
+					goto OutsideCheckLoop;//this will skip GuessXrayCheck reversal
 				}
 			}
-			GuessXrayCheck.fill(0);
+			GuessXrayCheck.fill(65);
 		}
 			
-	OutsideLoop:
+	OutsideCheckLoop://fill CheckTargetSquares from GuessXrayCheck
+		for (auto& CheckBoardSquare : GuessXrayCheck)
+		{
+			if (CheckBoardSquare == 65) { break; }
+			CheckTargetSquares[CheckBoardSquare] = BoardSquarePos;
+		}
 
 
 	}
-	//add else if for pins(use mask)
+	//possible pin, logic for finding and saving is the same as above, DO NOT LET CHECKS IN HERE
+	else if (((ROOK_LEGAL_MASKS[BoardSquarePos] | BISHOP_LEGAL_MASKS[BoardSquarePos]) & m_BoardSquare.find(OpponentKingType)) != 0)
+	{
+		//These are here to not have nested control flow
+		uint8_t MaxDir;
+		uint8_t Direction = 0;
+		switch (PieceTypeUncolored)
+		{
+		case(ROOK):
+			MaxDir = 4;
+			break;
+		case(BISHOP):
+			MaxDir = 8;
+			Direction = 4;
+			break;
+		case(QUEEN):
+			MaxDir = 8;
+			break;
+		}
+
+		std::array<uint8_t, 7> GuessPinBoardSquares{ 65 };
+		for (; Direction < MaxDir; Direction++)
+		{
+			for (uint8_t Scalar = 1; Scalar <= NumOfSquaresUntilEdge[BoardSquarePos][Direction]; Scalar++)
+			{
+				GuessPinBoardSquares[Scalar - 1] = BoardSquarePos + (Scalar * OffsetForDirections[Direction]);
+				if (m_BoardSquare[BoardSquarePos + (Scalar * OffsetForDirections[Direction])] == OpponentKingType)
+				{
+					goto OutsidePinLoop;
+				}
+			}
+			GuessPinBoardSquares.fill(65);
+		}
+
+	OutsidePinLoop:
+		for (auto& PinSquare : GuessPinBoardSquares)
+		{
+			if (PinSquare == 65) { break; }
+			WhichBoardSquaresAreAbsPinned[PinSquare] = BoardSquarePos;
+		}
+
+	}
 
 	moves[BoardSquarePos].TargetSquares = Attacks;
-
 }
 
 //Knight
