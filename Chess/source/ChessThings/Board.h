@@ -8,6 +8,8 @@
 #include <chrono>
 #include <print>
 #include <random> 
+#include <stdio.h>
+#include <stdlib.h>
 
 constexpr enum SQUARES
 {

@@ -1,11 +1,18 @@
 ﻿  LegalMoves.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(252,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(836,29): warning C4334: '<<': result of 32-bit shift implicitly converted to 64 bits (was 64-bit shift intended?)
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(845,53): warning C4334: '<<': result of 32-bit shift implicitly converted to 64 bits (was 64-bit shift intended?)
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(849,35): warning C4805: '!=': unsafe mix of type '_Ty' and type 'bool' in operation
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(849,35): warning C4805:         with
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(849,35): warning C4805:         [
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(849,35): warning C4805:             _Ty=uint64_t
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(849,35): warning C4805:         ]
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(218,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(220,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(327,1): warning C4172: returning address of local variable or temporary : OffsetsForKnight

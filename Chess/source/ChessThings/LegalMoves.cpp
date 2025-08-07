@@ -821,24 +821,42 @@ void ComputeBishopAttacks(std::array<std::array<uint64_t, 512>, 64>& BishopAttac
 	}
 }
 
+//Inspired by Tom Rastad's implementation
 uint64_t MagicFinder(uint8_t BoardSquare, bool IsRook)
 {
-	for (uint32_t TryNum = 0; TryNum < 10000000; TryNum++)
+	uint8_t shift = IsRook ? 12 : 9;
+	uint64_t mask = IsRook ? ROOK_MASKS[BoardSquare] : BISHOP_MASKS[BoardSquare];
+	std::array<uint64_t, 4096> used{};
+	std::array<uint64_t, 4096> BlockerBits{};
+	int AttackIndex;
+	uint8_t n = std::popcount(mask);
+	uint64_t count;
+	int fail;
+
+	for (count = 0; count < (1 << n); count++)
 	{
-		uint64_t magic = Random64Bit() & Random64Bit() & Random64Bit();
-		if (MagicValidator(magic, BoardSquare, IsRook))
-		{
-			return magic;
-		}
+		BlockerBits[count] = expand_bits_to_mask(count, mask);
 	}
 
+	for (uint32_t TryNum = 0; TryNum < 50000000; TryNum++)
+	{
+		uint64_t magic = Random64Bit() & Random64Bit() & Random64Bit();
+		if (std::popcount((mask * magic) & 0xFF00000000000000ULL) < 6) continue;//skip magics that don't give enough relevant bits
+		for (count = 0, fail = 0; (!fail) and (count < (1 << n)); count++)
+		{
+			AttackIndex = mult_rightShift(BlockerBits[count], magic, shift);
+			if (used[AttackIndex] == 0ULL) { used[AttackIndex] = (IsRook) ? ROOK_ATTACKS[BoardSquare][count] : BISHOP_ATTACKS[BoardSquare][count]; }
+			else if (used[AttackIndex] != (IsRook) ? ROOK_ATTACKS[BoardSquare][count] : BISHOP_ATTACKS[BoardSquare][count]) { fail = 1; }
+		}
+		if (!fail) return magic;
+	}
+	std::cout << "Failed to find magic for " << toascii(BoardSquare);
+	return 0ULL;
 }
 
-bool MagicValidator(uint64_t magic, uint8_t square, bool IsRook)
+int mult_rightShift(uint64_t BlockerBits, uint64_t Magic, uint8_t RelevantBitNum)
 {
-	uint8_t shift = IsRook ? 64 - 12 : 64 - 9;
-
-	return false;
+	return int((BlockerBits * Magic) >> (64 - RelevantBitNum));
 }
 
 void ComputeHeavy()

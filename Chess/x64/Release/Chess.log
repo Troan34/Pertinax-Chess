@@ -1,150 +1,25 @@
-﻿  Board.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
-  (compiling source file 'source/ChessThings/Board.cpp')
-  
-  Evaluation.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
-  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(56,56): warning C4244: '+=': conversion from 'double' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(60,56): warning C4244: '-=': conversion from 'double' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
-  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
-  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
-  
-  IterativeD.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
-  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(122,36): warning C4244: '=': conversion from 'float' to 'uint64_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,117): warning C4244: 'argument': conversion from '_Rep' to 'double', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,117): warning C4244:         with
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,117): warning C4244:         [
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,117): warning C4244:             _Rep=__int64
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,117): warning C4244:         ]
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,91): warning C4244: 'argument': conversion from '_Rep' to 'double', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,91): warning C4244:         with
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,91): warning C4244:         [
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,91): warning C4244:             _Rep=__int64
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(136,91): warning C4244:         ]
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
-  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
-  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
-  
-  Search.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
-  (compiling source file 'source/ChessThings/Engine/Search.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(21,85): warning C4244: 'argument': conversion from 'const uint16_t' to 'uint8_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
-  (compiling source file 'source/ChessThings/Engine/Search.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
-  (compiling source file 'source/ChessThings/Engine/Search.cpp')
-  
-  TT.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
-  (compiling source file 'source/ChessThings/Engine/Transposition/TT.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(8,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(13,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(71,49): warning C4267: 'return': conversion from 'size_t' to 'uint16_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(94,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
-  (compiling source file 'source/ChessThings/Engine/Transposition/TT.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
-  (compiling source file 'source/ChessThings/Engine/Transposition/TT.cpp')
-  
-  ZobristHashing.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
-  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
-  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
-  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
-  
-  LegalMoves.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+﻿  LegalMoves.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(252,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(836,29): warning C4334: '<<': result of 32-bit shift implicitly converted to 64 bits (was 64-bit shift intended?)
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(845,53): warning C4334: '<<': result of 32-bit shift implicitly converted to 64 bits (was 64-bit shift intended?)
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(849,35): warning C4805: '!=': unsafe mix of type '_Ty' and type 'bool' in operation
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(849,35): warning C4805:         with
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(849,35): warning C4805:         [
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(849,35): warning C4805:             _Ty=uint64_t
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(849,35): warning C4805:         ]
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(218,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(220,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
-  
-  RenderChesspcs.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
-  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
-  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
-  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
-  
-  UCI.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
-  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\UCI\UCI.cpp(128,73): warning C4267: '=': conversion from 'size_t' to 'uint8_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
-  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
-  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
-  
-  Main.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
-  (compiling source file 'source/Main.cpp')
-      C:\Users\roanb\source\repos\Pertinax-Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,11):
-      see previous definition of 'APIENTRY'
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
-  (compiling source file 'source/Main.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
-  (compiling source file 'source/Main.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
-  (compiling source file 'source/Main.cpp')
-  
-  TestTexture2D.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
-  (compiling source file 'source/tests/TestTexture2D.cpp')
-      C:\Users\roanb\source\repos\Pertinax-Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,11):
-      see previous definition of 'APIENTRY'
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
-  (compiling source file 'source/tests/TestTexture2D.cpp')
-  
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3630,56): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
-  (compiling source file 'source/tests/TestTexture2D.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3630,56):
-      the template instantiation context (the oldest one first) is
-          C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\tests\TestTexture2D.cpp(30,25):
-          see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,nullptr,unsigned __int64,0>(nullptr &&,unsigned __int64 &&)' being compiled
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
-  (compiling source file 'source/tests/TestTexture2D.cpp')
-  
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
-  (compiling source file 'source/tests/TestTexture2D.cpp')
   
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(270): warning C4715: 'Board::GetPieceType2Uncolored': not all control paths return a value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(326): warning C4172: returning address of local variable or temporary : OffsetsForKnight
-  832 of 4272 functions (19.5%) were compiled, the rest were copied from previous compilation.
-    305 functions were new in current compilation
-    295 functions had inline decision re-evaluated but remain unchanged
+  7 of 4296 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    23 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\vc120.pdb'; linking object as if no debug info
   Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Chess.exe

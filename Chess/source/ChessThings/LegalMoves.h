@@ -175,7 +175,7 @@ void ComputeBishopAttacks(std::array<std::array<uint64_t, 512>, 64>& BishopAttac
 
 uint64_t MagicFinder(uint8_t BoardSquare, bool IsRook);
 
-bool MagicValidator(uint64_t magic, uint8_t square, bool IsRook);
+int mult_rightShift(uint64_t BlockerBits, uint64_t Magic, uint8_t RelevantBitNum);
 
 //plain magic bitboard
 static std::array<std::array<uint64_t, 4096>, 64> ROOK_ATTACKS{};

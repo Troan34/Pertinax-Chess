@@ -104,6 +104,17 @@ static std::thread CommandThread(GetCommand);
 std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObjects()
 {
 	ComputeHeavy();
+	int square;
+	/*
+	printf("const uint64 RMagic[64] = {\n");
+	for (square = 0; square < 64; square++)
+		printf("0x%llxULL,\n", MagicFinder(square, 0));
+	printf("};\n\n");*/
+
+	printf("const uint64 BMagic[64] = {\n");
+	for (square = 0; square < 64; square++)
+		printf("  0x%llxULL,\n", MagicFinder(square, 1));
+	printf("};\n\n");
 
 	//Console Commands and threads
 	if (!IsGetCommandRunning and !UCImode)
