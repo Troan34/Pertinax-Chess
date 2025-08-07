@@ -8,5 +8,5 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(207,
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(209,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(326,1): warning C4172: returning address of local variable or temporary : OffsetsForKnight
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(327,1): warning C4172: returning address of local variable or temporary : OffsetsForKnight
   Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Debug\Chess.exe

@@ -67,7 +67,6 @@ void GenerateLegalMoves::GenerateMoves()
 		{
 			KingMoveGen(BoardSquarePos);
 		}
-		BoardSquarePos++;
 	}
 }
 
@@ -89,9 +88,9 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 		uint16_t RookAttackIndex = (blockers.ReadBits() * ROOK_MAGICS[BoardSquarePos]) >> (64 - 12);
 
 		Attacks = ROOK_ATTACKS[BoardSquarePos][RookAttackIndex];
-
-		if (IsWhite){ Attacks ^= m_BoardSquare.ColorPositions[0]; }
-		else{ Attacks ^= m_BoardSquare.ColorPositions[1]; }
+		
+		if (IsWhite){ Attacks ^= (Attacks & m_BoardSquare.ColorPositions[0]); }
+		else{ Attacks ^= (Attacks & m_BoardSquare.ColorPositions[1]); }
 	}
 	else if ((PieceTypeUncolored == BISHOP))
 	{
@@ -99,12 +98,13 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 
 		Attacks = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
 
-		if (IsWhite){ Attacks ^= m_BoardSquare.ColorPositions[0]; }
-		else{ Attacks ^= m_BoardSquare.ColorPositions[1]; }
+		if (IsWhite){ Attacks ^= (Attacks & m_BoardSquare.ColorPositions[0]); }
+		else{ Attacks ^= (Attacks & m_BoardSquare.ColorPositions[1]); }
 
 	}
 	else if ((PieceTypeUncolored == QUEEN))
 	{
+		//Get Indeces from the mult-right shift
 		uint16_t RookAttackIndex = (blockers.ReadBits() * ROOK_MAGICS[BoardSquarePos]) >> (64 - 12);
 		uint16_t BishopAttackIndex = (blockers.ReadBits() * BISHOP_MAGICS[BoardSquarePos]) >> (64 - 9);
 
@@ -114,13 +114,13 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 		//removes attacks to own pieces
 		if (IsWhite)
 		{
-			RookAttack ^= m_BoardSquare.ColorPositions[0];
-			BishopAttack ^= m_BoardSquare.ColorPositions[0];
+			RookAttack ^= RookAttack & m_BoardSquare.ColorPositions[0];
+			BishopAttack ^= BishopAttack & m_BoardSquare.ColorPositions[0];
 		}
 		else
 		{
-			RookAttack ^= m_BoardSquare.ColorPositions[1];
-			BishopAttack ^= m_BoardSquare.ColorPositions[1];
+			RookAttack ^= RookAttack & m_BoardSquare.ColorPositions[1];
+			BishopAttack ^= BishopAttack & m_BoardSquare.ColorPositions[1];
 		}
 		Attacks = RookAttack | BishopAttack;
 	}
@@ -219,6 +219,7 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 	}
 
 	moves[BoardSquarePos].TargetSquares = Attacks;
+	moves[BoardSquarePos].PieceType = PieceType;
 }
 
 //Knight
@@ -785,7 +786,7 @@ void ComputeRookAttacks(std::array<std::array<uint64_t, 4096>, 64>& RookAttacks)
 			{
 				for (uint8_t Scalar = 1; Scalar < NumOfSquaresUntilEdge[BoardSquare][Direction]; Scalar++)
 				{
-					uint64_t Bit_PositionBeingChecked = (1ULL << (BoardSquare + (Scalar * NumOfSquaresUntilEdge[BoardSquare][Direction])));
+					uint64_t Bit_PositionBeingChecked = (1ULL << (BoardSquare + (Scalar * OffsetForDirections[Direction])));
 					RookAttacks[BoardSquare][Blocker] |= Bit_PositionBeingChecked;
 					if ((BlockerBitboard & Bit_PositionBeingChecked) == Bit_PositionBeingChecked)
 					{
@@ -801,14 +802,14 @@ void ComputeBishopAttacks(std::array<std::array<uint64_t, 512>, 64>& BishopAttac
 {
 	for (uint8_t BoardSquare = 0; BoardSquare <= MAX_SQUARE; BoardSquare++)
 	{
-		for (uint16_t Blocker = 0; Blocker < 4096; Blocker++)
+		for (uint16_t Blocker = 0; Blocker < 512; Blocker++)
 		{
 			uint64_t BlockerBitboard = expand_bits_to_mask(Blocker, BISHOP_MASKS[BoardSquare]);
 			for (uint8_t Direction = 4; Direction < 8; Direction++)
 			{
 				for (uint8_t Scalar = 1; Scalar < NumOfSquaresUntilEdge[BoardSquare][Direction]; Scalar++)
 				{
-					uint64_t Bit_PositionBeingChecked = (1ULL << (BoardSquare + (Scalar * NumOfSquaresUntilEdge[BoardSquare][Direction])));
+					uint64_t Bit_PositionBeingChecked = (1ULL << (BoardSquare + (Scalar * OffsetForDirections[Direction])));
 					BishopAttacks[BoardSquare][Blocker] |= Bit_PositionBeingChecked;
 					if ((BlockerBitboard & Bit_PositionBeingChecked) == Bit_PositionBeingChecked)
 					{
@@ -818,6 +819,26 @@ void ComputeBishopAttacks(std::array<std::array<uint64_t, 512>, 64>& BishopAttac
 			}
 		}
 	}
+}
+
+uint64_t MagicFinder(uint8_t BoardSquare, bool IsRook)
+{
+	for (uint32_t TryNum = 0; TryNum < 10000000; TryNum++)
+	{
+		uint64_t magic = Random64Bit() & Random64Bit() & Random64Bit();
+		if (MagicValidator(magic, BoardSquare, IsRook))
+		{
+			return magic;
+		}
+	}
+
+}
+
+bool MagicValidator(uint64_t magic, uint8_t square, bool IsRook)
+{
+	uint8_t shift = IsRook ? 64 - 12 : 64 - 9;
+
+	return false;
 }
 
 void ComputeHeavy()
@@ -849,10 +870,8 @@ void ComputeHeavy()
 	std::fstream RookPrecomputes;
 	if (!fs::exists(PrecomputesPath / "Rook_Attacks.bin"))//if ROOK_ATTACKS wasn't created
 	{
-		RookPrecomputes.open(PrecomputesPath / "Rook_Attacks.bin", std::ios::out | std::ios::binary);
-
 		ComputeRookAttacks(ROOK_ATTACKS);//compute ROOK_ATTACKS (slow)
-
+		RookPrecomputes.open(PrecomputesPath / "Rook_Attacks.bin", std::ios::out | std::ios::binary);
 		RookPrecomputes.write(reinterpret_cast<const char*>(ROOK_ATTACKS.data()), sizeof(ROOK_ATTACKS));//save the table to the binary file
 	}
 	else
@@ -864,10 +883,8 @@ void ComputeHeavy()
 	std::fstream BishopPrecomputes;
 	if (!fs::exists(PrecomputesPath / "Bishop_Attacks.bin"))//if BISHOP_ATTACKS wasn't created
 	{
-		BishopPrecomputes.open(PrecomputesPath / "Bishop_Attacks.bin", std::ios::out | std::ios::binary);
-
 		ComputeBishopAttacks(BISHOP_ATTACKS);//compute BISHOP_ATTACKS (slow)
-
+		BishopPrecomputes.open(PrecomputesPath / "Bishop_Attacks.bin", std::ios::out | std::ios::binary);
 		BishopPrecomputes.write(reinterpret_cast<const char*>(BISHOP_ATTACKS.data()), sizeof(BISHOP_ATTACKS));//save the table to the binary file
 	}
 	else

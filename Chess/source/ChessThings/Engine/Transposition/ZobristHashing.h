@@ -1,7 +1,6 @@
 #pragma once  
 #include <cstdint>  
-#include <array>  
-#include <random>  
+#include <array>   
 #include "ChessThings/LegalMoves.h"
 
 class ZobristHashing  

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <chrono>
 #include <print>
+#include <random> 
 
 constexpr enum SQUARES
 {
@@ -62,6 +63,14 @@ constexpr std::string_view STARTPOS = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKB
 
 constexpr uint8_t NULL_OPTION = 65; //The number i use to mean 'not assigned' or 'doesn't exist'
 
+static std::random_device seed;
+static std::default_random_engine rng(seed());
+static std::uniform_int_distribution<uint64_t> dist;
+
+static uint64_t Random64Bit()
+{
+	return dist(rng);
+}
 
 struct canCastle
 {
@@ -307,7 +316,7 @@ namespace bit//bit management
 
 		inline void fill(bool Value) noexcept
 		{
-			if (true) { Bits = UINT64_MAX; }
+			if (Value) { Bits = UINT64_MAX; }
 			else { Bits = 0; }
 		}
 
@@ -410,14 +419,7 @@ namespace bit//bit management
 		//Get PieceType (standard way) from BoardSquare
 		uint8_t operator[](uint8_t BoardSquare) const;
 
-		BitPosManager operator[](uint8_t Index)
-		{
-			if (Index > 63)
-			{
-				throw std::out_of_range("Indexed bit out of range");
-			}
-			return BitPosManager(PiecePositions, ColorPositions, Index);
-		}
+		BitPosManager operator[](uint8_t Index);
 
 		uint8_t popcnt() const noexcept;
 
@@ -425,11 +427,9 @@ namespace bit//bit management
 		{
 			return (popcnt() == 0);
 		}
+		
+		BitBoard64 find(uint8_t PieceType);
 
-		BitBoard64 find(uint8_t PieceType)
-		{
-			return (Board::IsPieceColorWhite(PieceType) ? ColorPositions[0] : ColorPositions[1]) & PiecePositions[Board::GetPieceType2Uncolored(PieceType) - 1];//peak unreadability
-		}
 	};
 
 }

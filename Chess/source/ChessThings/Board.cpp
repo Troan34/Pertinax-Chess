@@ -667,6 +667,15 @@ namespace bit {
 		return Color | PieceType;
 	}
 
+	BitPosManager BitPosition::operator[](uint8_t Index)
+	{
+		if (Index > 63)
+		{
+			throw std::out_of_range("Indexed bit out of range");
+		}
+		return BitPosManager(PiecePositions, ColorPositions, Index);
+	}
+
 	uint8_t BitPosition::operator[](uint8_t BoardSquare) const
 	{
 		if (BoardSquare > 63)
@@ -705,6 +714,11 @@ namespace bit {
 		return popcount;
 	}
 
+	BitBoard64 BitPosition::find(uint8_t PieceType)
+	{
+		return (Board::IsPieceColorWhite(PieceType) ? ColorPositions[0] : ColorPositions[1]) & PiecePositions[Board::GetPieceType2Uncolored(PieceType) - 1];//peak unreadability
+	}
+
 	BitPosition::BitPosition(const std::array<uint8_t, 64>& OldBoardSquare)
 	{
 		for (uint8_t BoardSquarePos = 0; BoardSquarePos <= MAX_SQUARE; BoardSquarePos++)
@@ -712,8 +726,8 @@ namespace bit {
 			uint8_t PieceType = OldBoardSquare[BoardSquarePos];
 			if (PieceType == 0) { continue; }
 
-			ColorPositions[!Board::IsPieceColorWhite(PieceType)] = true;
-			PiecePositions[Board::GetPieceType2Uncolored(PieceType) - 1] = true;
+			ColorPositions[!Board::IsPieceColorWhite(PieceType)][BoardSquarePos] = true;
+			PiecePositions[Board::GetPieceType2Uncolored(PieceType) - 1][BoardSquarePos] = true;
 		}
 	}
 
