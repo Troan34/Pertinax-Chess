@@ -105,16 +105,28 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 {
 	ComputeHeavy();
 	int square;
-	/*
-	printf("const uint64 RMagic[64] = {\n");
+	std::array<uint64_t, 64> RookMagics{};
 	for (square = 0; square < 64; square++)
-		printf("0x%llxULL,\n", MagicFinder(square, 0));
-	printf("};\n\n");*/
-
+	{
+		if (RookMagics[square] != 0)
+		{
+			RookMagics[square] = MagicFinder(square, true);
+		}
+		if (square == 63 and (std::find(RookMagics.begin(), RookMagics.end(), 0) != RookMagics.end()))
+		{
+			square = 0;
+		}
+	}
+	for (square = 0; square < 64; square++)
+	{
+		std::println("Val= {}, for {}", RookMagics[square], square);
+	}
+		
+	/*
 	printf("const uint64 BMagic[64] = {\n");
 	for (square = 0; square < 64; square++)
 		printf("  0x%llxULL,\n", MagicFinder(square, 1));
-	printf("};\n\n");
+	printf("};\n\n");*/
 
 	//Console Commands and threads
 	if (!IsGetCommandRunning and !UCImode)
