@@ -838,7 +838,7 @@ uint64_t MagicFinder(uint8_t BoardSquare, bool IsRook)
 		BlockerBits[count] = expand_bits_to_mask(count, mask);
 	}
 
-	for (uint32_t TryNum = 0; TryNum < 50000000; TryNum++)
+	for (uint32_t TryNum = 0; TryNum < 10000000; TryNum++)
 	{
 		uint64_t magic = Random64Bit() & Random64Bit() & Random64Bit();
 		if (std::popcount((mask * magic) & 0xFF00000000000000ULL) < 6) continue;//skip magics that don't give enough relevant bits
@@ -848,9 +848,12 @@ uint64_t MagicFinder(uint8_t BoardSquare, bool IsRook)
 			if (used[AttackIndex] == 0ULL) { used[AttackIndex] = (IsRook) ? ROOK_ATTACKS[BoardSquare][count] : BISHOP_ATTACKS[BoardSquare][count]; }
 			else if (used[AttackIndex] != (IsRook) ? ROOK_ATTACKS[BoardSquare][count] : BISHOP_ATTACKS[BoardSquare][count]) { fail = 1; }
 		}
-		if (!fail) return magic;
+		if (!fail)
+		{
+			return magic;
+		}
 	}
-	std::cout << "Failed to find magic for " << toascii(BoardSquare);
+	//std::cout << "Failed to find magic for " << toascii(BoardSquare);
 	return 0ULL;
 }
 
