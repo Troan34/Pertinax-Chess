@@ -3,7 +3,7 @@
 static float RememberTexID;
 static bool wasStatic_BoardSquareCreated = false;
 static bool wasStatic_previousBoardsquareCreated = false;
-
+static bool ComputeMagic = false;
 //(mostly) Drop fun vars
 static int BoardSquareBeingSelected = -1;
 int AttackedSquare = -1;
@@ -104,42 +104,37 @@ static std::thread CommandThread(GetCommand);
 std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObjects()
 {
 	ComputeHeavy();
-	int square;
-	uint64_t ComputedSquares = 0;
-	std::array<uint64_t, 64> RookMagics{};
 
-	while (RookMagics[0] == 0)
+	if (!ComputeMagic)
 	{
-		auto Magic = MagicFinder(0, true);
-		if (Magic != 0) { RookMagics[0] = Magic; }
-		ComputedSquares++;
-		std::cout << "\rTries: " << ComputedSquares << std::flush;
-	}
-	std::cout << RookMagics[0];
-	/*
-	for (square = 0; square < 64; square++)
-	{
-		if (RookMagics[square] == 0)
+		int square;
+		uint8_t ComputedSquares = 0;
+		std::array<uint64_t, 64> RookMagics{};
+
+		for (square = 0; square < 64; square++)
 		{
-			auto Magic = MagicFinder(square, true);
-			RookMagics[square] = Magic;
-			if (Magic != 0) 
+			if (RookMagics[square] == 0)
 			{
-				ComputedSquares++;
-				std::println("\rMagics Found ({}/64), Last Square found: {}, Magic: {}", ComputedSquares, square, Magic);
+				auto Magic = MagicFinder(square, false);
+				RookMagics[square] = Magic;
+				if (Magic != 0)
+				{
+					ComputedSquares++;
+					std::println("\rMagics Found ({}/64), Last Square found: {}, Magic: {}", ComputedSquares, square, Magic);
+				}
+
 			}
-			
+			if (square == 63 and (std::find(RookMagics.begin(), RookMagics.end(), 0) != RookMagics.end()))
+			{
+				square = 0;
+			}
 		}
-		if (square == 63 and (std::find(RookMagics.begin(), RookMagics.end(), 0) != RookMagics.end()))
+		for (square = 0; square < 64; square++)
 		{
-			square = 0;
+			std::print("{}, ", RookMagics[square]);
 		}
+		ComputeMagic = true;
 	}
-	for (square = 0; square < 64; square++)
-	{
-		std::println("Val= {}, for {}", RookMagics[square], square);
-	}*/
-		
 	/*
 	printf("const uint64 BMagic[64] = {\n");
 	for (square = 0; square < 64; square++)

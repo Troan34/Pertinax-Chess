@@ -82,31 +82,31 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 
 	bit::BitBoard64 blockers = m_BoardSquare.ColorPositions[0] | m_BoardSquare.ColorPositions[1];
 	bit::BitBoard64 Attacks(0);
-	
+
 	if ((PieceTypeUncolored == ROOK))
 	{
-		uint16_t RookAttackIndex = (blockers.ReadBits() * ROOK_MAGICS[BoardSquarePos]) >> (64 - 12);
+		uint16_t RookAttackIndex = mult_rightShift(blockers.ReadBits() & ROOK_MASKS[BoardSquarePos], ROOK_MAGICS[BoardSquarePos], 12);
 
 		Attacks = ROOK_ATTACKS[BoardSquarePos][RookAttackIndex];
-		
-		if (IsWhite){ Attacks ^= (Attacks & m_BoardSquare.ColorPositions[0]); }
-		else{ Attacks ^= (Attacks & m_BoardSquare.ColorPositions[1]); }
+
+		if (IsWhite) { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[0]); }
+		else { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[1]); }
 	}
 	else if ((PieceTypeUncolored == BISHOP))
 	{
-		uint16_t BishopAttackIndex = (blockers.ReadBits() * BISHOP_MAGICS[BoardSquarePos]) >> (64 - 9);
+		uint16_t BishopAttackIndex = mult_rightShift(blockers.ReadBits() & BISHOP_MASKS[BoardSquarePos], BISHOP_MAGICS[BoardSquarePos], 9);
 
 		Attacks = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
 
-		if (IsWhite){ Attacks ^= (Attacks & m_BoardSquare.ColorPositions[0]); }
-		else{ Attacks ^= (Attacks & m_BoardSquare.ColorPositions[1]); }
+		if (IsWhite) { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[0]); }
+		else { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[1]); }
 
 	}
 	else if ((PieceTypeUncolored == QUEEN))
 	{
 		//Get Indeces from the mult-right shift
-		uint16_t RookAttackIndex = (blockers.ReadBits() * ROOK_MAGICS[BoardSquarePos]) >> (64 - 12);
-		uint16_t BishopAttackIndex = (blockers.ReadBits() * BISHOP_MAGICS[BoardSquarePos]) >> (64 - 9);
+		uint16_t RookAttackIndex = mult_rightShift(blockers.ReadBits() & ROOK_MASKS[BoardSquarePos], ROOK_MAGICS[BoardSquarePos], 12);
+		uint16_t BishopAttackIndex = mult_rightShift(blockers.ReadBits() & BISHOP_MASKS[BoardSquarePos], BISHOP_MAGICS[BoardSquarePos], 9);
 
 		uint64_t RookAttack = ROOK_ATTACKS[BoardSquarePos][RookAttackIndex];
 		uint64_t BishopAttack = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
@@ -165,7 +165,7 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 			}
 			GuessXrayCheck.fill(65);
 		}
-			
+
 	OutsideCheckLoop://fill CheckTargetSquares from GuessXrayCheck
 		for (auto& CheckBoardSquare : GuessXrayCheck)
 		{
@@ -821,45 +821,43 @@ void ComputeBishopAttacks(std::array<std::array<uint64_t, 512>, 64>& BishopAttac
 	}
 }
 
-//Inspired by Tom Rastad's implementation
 uint64_t MagicFinder(uint8_t BoardSquare, bool IsRook)
 {
 	uint8_t shift = IsRook ? 12 : 9;
-	uint64_t mask = IsRook ? ROOK_MASKS[BoardSquare] : BISHOP_MASKS[BoardSquare];
-	std::array<uint64_t, 4096> used{};
-	std::array<uint64_t, 4096> BlockerBits{};
-	int AttackIndex;
-	uint8_t n = std::popcount(mask);
-	uint64_t count;
-	int fail;
+	bool Failed = false;
+	uint64_t MagicNum;
+	uint16_t NumOfEntries = 1ULL << shift;
+	std::array<uint64_t, 4096> SeenAttacks{};
+	uint64_t Mask = IsRook ? ROOK_MASKS[BoardSquare] : BISHOP_MASKS[BoardSquare];
 
-	for (count = 0; count < (1 << n); count++)
+	for (uint32_t Tries = 0; Tries < 10000000; Tries++)
 	{
-		BlockerBits[count] = expand_bits_to_mask(count, mask);
+		MagicNum = Random64Bit() & Random64Bit() & Random64Bit();
+		for (uint16_t Blocker = 0; Blocker < (IsRook ? 4096 : 512); Blocker++)
+		{
+			auto Key = mult_rightShift(expand_bits_to_mask(Blocker, Mask),
+				MagicNum, shift);//Get index for accessing the attack
+			if (SeenAttacks[Blocker] == 0)
+			{
+				SeenAttacks[Blocker] = IsRook ? ROOK_ATTACKS[BoardSquare][Key] : BISHOP_ATTACKS[BoardSquare][Key];
+			}
+			else if(SeenAttacks[Blocker] != (IsRook ? ROOK_ATTACKS[BoardSquare][Blocker] : BISHOP_ATTACKS[BoardSquare][Blocker])) {//Magic doesn't perfect hash
+				Failed = true;
+				break;
+			}
+		}
+		if (!Failed)
+		{
+			return MagicNum;
+		}
 	}
 
-	for (uint32_t TryNum = 0; TryNum < 10000000; TryNum++)
-	{
-		uint64_t magic = Random64Bit() & Random64Bit() & Random64Bit();
-		if (std::popcount((mask * magic) & 0xFF00000000000000ULL) < 6) continue;//skip magics that don't give enough relevant bits
-		for (count = 0, fail = 0; (!fail) and (count < (1 << n)); count++)
-		{
-			AttackIndex = mult_rightShift(BlockerBits[count], magic, shift);
-			if (used[AttackIndex] == 0ULL) { used[AttackIndex] = (IsRook) ? ROOK_ATTACKS[BoardSquare][count] : BISHOP_ATTACKS[BoardSquare][count]; }
-			else if (used[AttackIndex] != (IsRook) ? ROOK_ATTACKS[BoardSquare][count] : BISHOP_ATTACKS[BoardSquare][count]) { fail = 1; }
-		}
-		if (!fail)
-		{
-			return magic;
-		}
-	}
-	//std::cout << "Failed to find magic for " << toascii(BoardSquare);
 	return 0ULL;
 }
 
-int mult_rightShift(uint64_t BlockerBits, uint64_t Magic, uint8_t RelevantBitNum)
+uint16_t mult_rightShift(uint64_t BlockerBits, uint64_t Magic, uint8_t RelevantBitNum)
 {
-	return int((BlockerBits * Magic) >> (64 - RelevantBitNum));
+	return (BlockerBits * Magic) >> (64 - RelevantBitNum);
 }
 
 void ComputeHeavy()
