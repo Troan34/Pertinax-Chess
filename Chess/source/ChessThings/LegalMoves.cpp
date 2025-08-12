@@ -775,81 +775,129 @@ bool GenerateLegalMoves::IsMoveLegal(const Move& CheckedMove) const
 	return MoveFound;
 }
 
-void ComputeRookAttacks(std::array<std::array<uint64_t, 4096>, 64>& RookAttacks)
+uint64_t ComputeRookAttacks(uint8_t BoardSquare, uint16_t Blocker)
 {
-	for (uint8_t BoardSquare = 0; BoardSquare <= MAX_SQUARE; BoardSquare++)
+	uint64_t Attacks = 0;
+	uint64_t BlockerBitboard = expand_bits_to_mask(Blocker, ROOK_MASKS[BoardSquare]);//expand pattern to Bitboard
+	for (uint8_t Direction = 0; Direction < 4; Direction++)//for every direction
 	{
-		for (uint16_t Blocker = 0; Blocker < 4096; Blocker++)
+		for (uint8_t Scalar = 1; Scalar < NumOfSquaresUntilEdge[BoardSquare][Direction]; Scalar++)//for every bsquare along the direction
 		{
-			uint64_t BlockerBitboard = expand_bits_to_mask(Blocker, ROOK_MASKS[BoardSquare]);
-			for (uint8_t Direction = 0; Direction < 4; Direction++)
+			uint64_t Bit_PositionBeingChecked = (1ULL << (BoardSquare + (Scalar * OffsetForDirections[Direction])));
+			Attacks |= Bit_PositionBeingChecked;
+			if ((BlockerBitboard & Bit_PositionBeingChecked) == Bit_PositionBeingChecked)
 			{
-				for (uint8_t Scalar = 1; Scalar < NumOfSquaresUntilEdge[BoardSquare][Direction]; Scalar++)
-				{
-					uint64_t Bit_PositionBeingChecked = (1ULL << (BoardSquare + (Scalar * OffsetForDirections[Direction])));
-					RookAttacks[BoardSquare][Blocker] |= Bit_PositionBeingChecked;
-					if ((BlockerBitboard & Bit_PositionBeingChecked) == Bit_PositionBeingChecked)
-					{
-						break;
-					}
-				}
+				break;
 			}
 		}
 	}
+	return Attacks;
 }
 
-void ComputeBishopAttacks(std::array<std::array<uint64_t, 512>, 64>& BishopAttacks)
+uint64_t ComputeBishopAttacks(uint8_t BoardSquare, uint16_t Blocker)
 {
-	for (uint8_t BoardSquare = 0; BoardSquare <= MAX_SQUARE; BoardSquare++)
+	uint64_t Attacks = 0;
+	uint64_t BlockerBitboard = expand_bits_to_mask(Blocker, BISHOP_MASKS[BoardSquare]);
+	for (uint8_t Direction = 4; Direction < 8; Direction++)
 	{
-		for (uint16_t Blocker = 0; Blocker < 512; Blocker++)
+		for (uint8_t Scalar = 1; Scalar < NumOfSquaresUntilEdge[BoardSquare][Direction]; Scalar++)
 		{
-			uint64_t BlockerBitboard = expand_bits_to_mask(Blocker, BISHOP_MASKS[BoardSquare]);
-			for (uint8_t Direction = 4; Direction < 8; Direction++)
+			uint64_t Bit_PositionBeingChecked = (1ULL << (BoardSquare + (Scalar * OffsetForDirections[Direction])));
+			Attacks |= Bit_PositionBeingChecked;
+			if ((BlockerBitboard & Bit_PositionBeingChecked) == Bit_PositionBeingChecked)
 			{
-				for (uint8_t Scalar = 1; Scalar < NumOfSquaresUntilEdge[BoardSquare][Direction]; Scalar++)
-				{
-					uint64_t Bit_PositionBeingChecked = (1ULL << (BoardSquare + (Scalar * OffsetForDirections[Direction])));
-					BishopAttacks[BoardSquare][Blocker] |= Bit_PositionBeingChecked;
-					if ((BlockerBitboard & Bit_PositionBeingChecked) == Bit_PositionBeingChecked)
-					{
-						break;
-					}
-				}
+				break;
 			}
 		}
 	}
+	return Attacks;
 }
 
-uint64_t MagicFinder(uint8_t BoardSquare, bool IsRook)
+uint64_t MagicRookFinder(uint8_t BoardSquare, uint64_t& Attack)
 {
-	uint8_t shift = IsRook ? 12 : 9;
+	uint8_t shift = 12;
 	bool Failed = false;
 	uint64_t MagicNum;
 	uint16_t NumOfEntries = 1ULL << shift;
-	std::array<uint64_t, 4096> SeenAttacks{};
-	uint64_t Mask = IsRook ? ROOK_MASKS[BoardSquare] : BISHOP_MASKS[BoardSquare];
+	uint64_t Mask = ROOK_MASKS[BoardSquare];
+	std::array<uint64_t, 4096> AttackTable{};
+	std::array<bool, 4096> IndexUsed{};
 
 	for (uint32_t Tries = 0; Tries < 10000000; Tries++)
 	{
 		MagicNum = Random64Bit() & Random64Bit() & Random64Bit();
-		for (uint16_t Blocker = 0; Blocker < (IsRook ? 4096 : 512); Blocker++)
+		for (uint16_t Blocker = 0; Blocker < 4096; Blocker++)
 		{
 			auto Key = mult_rightShift(expand_bits_to_mask(Blocker, Mask),
 				MagicNum, shift);//Get index for accessing the attack
-			if (SeenAttacks[Blocker] == 0)
-			{
-				SeenAttacks[Blocker] = IsRook ? ROOK_ATTACKS[BoardSquare][Key] : BISHOP_ATTACKS[BoardSquare][Key];
+			uint64_t Attack = ComputeRookAttacks(BoardSquare, Blocker);
+
+			if (!IndexUsed[Key]) {
+				AttackTable[Key] = Attack;
+				IndexUsed[Key] = true;
 			}
-			else if(SeenAttacks[Blocker] != (IsRook ? ROOK_ATTACKS[BoardSquare][Blocker] : BISHOP_ATTACKS[BoardSquare][Blocker])) {//Magic doesn't perfect hash
+			else if (AttackTable[Key] != Attack) {
 				Failed = true;
 				break;
 			}
 		}
 		if (!Failed)
 		{
+			for (uint16_t Blocker = 0; Blocker < 4096; Blocker++)
+			{
+				auto Key = mult_rightShift(expand_bits_to_mask(Blocker, Mask), MagicNum, shift);
+
+				ROOK_ATTACKS[BoardSquare][Key] = ComputeRookAttacks(BoardSquare, expand_bits_to_mask(Blocker, Mask));
+			}
 			return MagicNum;
 		}
+		AttackTable.fill(0);
+		IndexUsed.fill(0);
+	}
+
+	return 0ULL;
+}
+
+uint64_t MagicBishopFinder(uint8_t BoardSquare, uint64_t& Attack)
+{
+	uint8_t shift = 9;
+	bool Failed = false;
+	uint64_t MagicNum;
+	uint16_t NumOfEntries = 1ULL << shift;
+	uint64_t Mask = BISHOP_MASKS[BoardSquare];
+	std::array<uint64_t, 4096> AttackTable{};
+	std::array<bool, 4096> IndexUsed{};
+
+	for (uint32_t Tries = 0; Tries < 10000000; Tries++)
+	{
+		MagicNum = Random64Bit() & Random64Bit() & Random64Bit();
+		for (uint16_t Blocker = 0; Blocker < 512; Blocker++)
+		{
+			auto Key = mult_rightShift(expand_bits_to_mask(Blocker, Mask),
+				MagicNum, shift);//Get index for accessing the attack
+			uint64_t Attack = ComputeRookAttacks(BoardSquare, Blocker);
+
+			if (!IndexUsed[Key]) {
+				AttackTable[Key] = Attack;
+				IndexUsed[Key] = true;
+			}
+			else if (AttackTable[Key] != Attack) {
+				Failed = true;
+				break;
+			}
+		}
+		if (!Failed)
+		{
+			for (uint16_t Blocker = 0; Blocker < 512; Blocker++)
+			{
+				auto Key = mult_rightShift(expand_bits_to_mask(Blocker, Mask), MagicNum, shift);
+
+				BISHOP_ATTACKS[BoardSquare][Key] = ComputeBishopAttacks(BoardSquare, expand_bits_to_mask(Blocker, Mask));
+			}
+			return MagicNum;
+		}
+		AttackTable.fill(0);
+		IndexUsed.fill(0);
 	}
 
 	return 0ULL;
@@ -864,6 +912,7 @@ void ComputeHeavy()
 {
 	static bool AlreadyRan = false;
 	if (AlreadyRan) { return; }
+
 	TCHAR exePath[MAX_PATH];
 	GetModuleFileName(NULL, exePath, MAX_PATH);
 	fs::path ExePath = fs::canonical(exePath);

@@ -134,13 +134,14 @@ constexpr uint64_t expand_bits_to_mask(uint64_t bits, uint64_t mask) {
 }
 
 /// <summary>Computes every attack for the rook, MAKE SURE IT IS NEVER CALLED AT RUNTIME</summary>
-void ComputeRookAttacks(std::array<std::array<uint64_t, 4096>, 64>& RookAttacks);
+uint64_t ComputeRookAttacks(uint8_t BoardSquare, uint16_t Blocker);
 
 /// <summary>Computes every attack for the bishop, MAKE SURE IT IS NEVER CALLED AT RUNTIME</summary>
 /// <returns>Value corresponding to BISHOP_ATTACKS</returns>
-void ComputeBishopAttacks(std::array<std::array<uint64_t, 512>, 64>& BishopAttacks);
+uint64_t ComputeBishopAttacks(uint8_t BoardSquare, uint16_t Blocker);
 
-uint64_t MagicFinder(uint8_t BoardSquare, bool IsRook);
+uint64_t MagicRookFinder(uint8_t BoardSquare, uint64_t& Attack);
+uint64_t MagicBishopFinder(uint8_t BoardSquare, uint64_t& Attack);
 
 uint16_t mult_rightShift(uint64_t BlockerBits, uint64_t Magic, uint8_t RelevantBitNum);
 
