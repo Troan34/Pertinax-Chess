@@ -813,95 +813,81 @@ uint64_t ComputeBishopAttacks(uint8_t BoardSquare, uint16_t Blocker)
 	return Attacks;
 }
 
-uint64_t MagicRookFinder(uint8_t BoardSquare, uint64_t& Attack)
+void MagicRookFinder(uint8_t BoardSquare)
 {
-	uint8_t shift = 12;
-	bool Failed = false;
 	uint64_t MagicNum;
-	uint16_t NumOfEntries = 1ULL << shift;
-	uint64_t Mask = ROOK_MASKS[BoardSquare];
-	std::array<uint64_t, 4096> AttackTable{};
-	std::array<bool, 4096> IndexUsed{};
-
-	for (uint32_t Tries = 0; Tries < 10000000; Tries++)
+	bool Failed = false;
+	std::array<uint16_t, 4096> SeenKeys{};
+	for (uint64_t Try = 0; Try < UINT64_MAX; Try++)
 	{
-		MagicNum = Random64Bit() & Random64Bit() & Random64Bit();
+		MagicNum = Random64Bit() & Random64Bit();
+		SeenKeys.fill(UINT16_MAX);
+		Failed = false;
 		for (uint16_t Blocker = 0; Blocker < 4096; Blocker++)
 		{
-			auto Key = mult_rightShift(expand_bits_to_mask(Blocker, Mask),
-				MagicNum, shift);//Get index for accessing the attack
-			uint64_t Attack = ComputeRookAttacks(BoardSquare, Blocker);
-
-			if (!IndexUsed[Key]) {
-				AttackTable[Key] = Attack;
-				IndexUsed[Key] = true;
+			auto Key = mult_rightShift(expand_bits_to_mask(Blocker, ROOK_MASKS[BoardSquare]), MagicNum, 12);
+			if (std::find(SeenKeys.begin(), SeenKeys.end(), Key) == SeenKeys.end())//if key is not found
+			{
+				SeenKeys[Blocker] = Key;
 			}
-			else if (AttackTable[Key] != Attack) {
+			else
+			{
 				Failed = true;
 				break;
 			}
 		}
-		if (!Failed)
+		if (Failed == false)//found magic num
 		{
+			std::cout << "Found\n";
 			for (uint16_t Blocker = 0; Blocker < 4096; Blocker++)
 			{
-				auto Key = mult_rightShift(expand_bits_to_mask(Blocker, Mask), MagicNum, shift);
-
-				ROOK_ATTACKS[BoardSquare][Key] = ComputeRookAttacks(BoardSquare, expand_bits_to_mask(Blocker, Mask));
+				auto Key = mult_rightShift(expand_bits_to_mask(Blocker, ROOK_MASKS[BoardSquare]), MagicNum, 12);
+				ROOK_ATTACKS[BoardSquare][Key] = ComputeRookAttacks(BoardSquare, Blocker);
 			}
-			return MagicNum;
+			ROOK_MAGICS[BoardSquare] = MagicNum;
+			break;
 		}
-		AttackTable.fill(0);
-		IndexUsed.fill(0);
 	}
 
-	return 0ULL;
 }
 
-uint64_t MagicBishopFinder(uint8_t BoardSquare, uint64_t& Attack)
+void MagicBishopFinder(uint8_t BoardSquare)
 {
-	uint8_t shift = 9;
-	bool Failed = false;
 	uint64_t MagicNum;
-	uint16_t NumOfEntries = 1ULL << shift;
-	uint64_t Mask = BISHOP_MASKS[BoardSquare];
-	std::array<uint64_t, 4096> AttackTable{};
-	std::array<bool, 4096> IndexUsed{};
-
-	for (uint32_t Tries = 0; Tries < 10000000; Tries++)
+	bool Failed = false;
+	std::array<uint16_t, 512> SeenKeys{};
+	for (uint64_t Try = 0; Try < UINT64_MAX; Try++)
 	{
-		MagicNum = Random64Bit() & Random64Bit() & Random64Bit();
+		MagicNum = Random64Bit() & Random64Bit();
+		SeenKeys.fill(UINT16_MAX);
+		Failed = false;
 		for (uint16_t Blocker = 0; Blocker < 512; Blocker++)
 		{
-			auto Key = mult_rightShift(expand_bits_to_mask(Blocker, Mask),
-				MagicNum, shift);//Get index for accessing the attack
-			uint64_t Attack = ComputeRookAttacks(BoardSquare, Blocker);
-
-			if (!IndexUsed[Key]) {
-				AttackTable[Key] = Attack;
-				IndexUsed[Key] = true;
+			auto Key = mult_rightShift(expand_bits_to_mask(Blocker, BISHOP_MASKS[BoardSquare]), MagicNum, 9);
+			if (std::find(SeenKeys.begin(), SeenKeys.end(), Key) == SeenKeys.end())//if key is not found
+			{
+				SeenKeys[Blocker] = Key;
 			}
-			else if (AttackTable[Key] != Attack) {
+			else
+			{
 				Failed = true;
 				break;
 			}
 		}
-		if (!Failed)
+		if (Failed == false)//found magic num
 		{
+			std::cout << "Found\n";
 			for (uint16_t Blocker = 0; Blocker < 512; Blocker++)
 			{
-				auto Key = mult_rightShift(expand_bits_to_mask(Blocker, Mask), MagicNum, shift);
-
-				BISHOP_ATTACKS[BoardSquare][Key] = ComputeBishopAttacks(BoardSquare, expand_bits_to_mask(Blocker, Mask));
+				auto Key = mult_rightShift(expand_bits_to_mask(Blocker, BISHOP_MASKS[BoardSquare]), MagicNum, 9);
+				BISHOP_ATTACKS[BoardSquare][Key] = ComputeBishopAttacks(BoardSquare, Blocker);
 			}
-			return MagicNum;
+			BISHOP_MAGICS[BoardSquare] = MagicNum;
 		}
-		AttackTable.fill(0);
-		IndexUsed.fill(0);
 	}
 
-	return 0ULL;
 }
+
 
 uint16_t mult_rightShift(uint64_t BlockerBits, uint64_t Magic, uint8_t RelevantBitNum)
 {
@@ -936,29 +922,49 @@ void ComputeHeavy()
 	}
 
 	std::fstream RookPrecomputes;
-	if (!fs::exists(PrecomputesPath / "Rook_Attacks.bin"))//if ROOK_ATTACKS wasn't created
+	if (!fs::exists(PrecomputesPath / "Rook_Attacks.bin") or !fs::exists(PrecomputesPath / "Rook_Magics.bin"))//if ROOK_ATTACKS or magics wasn't created
 	{
-		ComputeRookAttacks(ROOK_ATTACKS);//compute ROOK_ATTACKS (slow)
+		for (uint8_t BoardSquare = 0; BoardSquare <= MAX_SQUARE; BoardSquare++)
+		{
+			MagicRookFinder(BoardSquare);//compute magics and attacks
+			std::cout << "Found Bsquare: " << toascii(BoardSquare) << " with magic " << ROOK_MAGICS[BoardSquare] << std::endl;
+		}
 		RookPrecomputes.open(PrecomputesPath / "Rook_Attacks.bin", std::ios::out | std::ios::binary);
-		RookPrecomputes.write(reinterpret_cast<const char*>(ROOK_ATTACKS.data()), sizeof(ROOK_ATTACKS));//save the table to the binary file
+		RookPrecomputes.write(reinterpret_cast<const char*>(ROOK_ATTACKS.data()), sizeof(ROOK_ATTACKS));//save the attacks to the binary file
+		RookPrecomputes.close();
+		RookPrecomputes.open(PrecomputesPath / "Rook_Magics", std::ios::out | std::ios::binary);
+		RookPrecomputes.write(reinterpret_cast<const char*>(ROOK_MAGICS.data()), sizeof(ROOK_MAGICS));//save the magics to the binary file
 	}
 	else
 	{
 		RookPrecomputes.open(PrecomputesPath / "Rook_Attacks.bin", std::ios::in | std::ios::binary);
 		RookPrecomputes.read(reinterpret_cast<char*>(ROOK_ATTACKS.data()), sizeof(ROOK_ATTACKS)); //set ROOK_ATTACKS from disk
+		RookPrecomputes.close();
+		RookPrecomputes.open(PrecomputesPath / "Rook_Magics", std::ios::in | std::ios::binary);
+		RookPrecomputes.read(reinterpret_cast<char*>(ROOK_MAGICS.data()), sizeof(ROOK_MAGICS));
 	}
 
 	std::fstream BishopPrecomputes;
-	if (!fs::exists(PrecomputesPath / "Bishop_Attacks.bin"))//if BISHOP_ATTACKS wasn't created
+	if (!fs::exists(PrecomputesPath / "Bishop_Attacks.bin") or !fs::exists(PrecomputesPath / "Bishop_Magics.bin"))//if BISHOP_ATTACKS or magics wasn't created
 	{
-		ComputeBishopAttacks(BISHOP_ATTACKS);//compute BISHOP_ATTACKS (slow)
+		for (uint8_t BoardSquare = 0; BoardSquare <= MAX_SQUARE; BoardSquare++)
+		{
+			MagicBishopFinder(BoardSquare);//compute magics and attacks
+			std::cout << "Found Bsquare: " << toascii(BoardSquare) << " with magic " << BISHOP_MAGICS[BoardSquare];
+		}
 		BishopPrecomputes.open(PrecomputesPath / "Bishop_Attacks.bin", std::ios::out | std::ios::binary);
 		BishopPrecomputes.write(reinterpret_cast<const char*>(BISHOP_ATTACKS.data()), sizeof(BISHOP_ATTACKS));//save the table to the binary file
+		BishopPrecomputes.close();
+		BishopPrecomputes.open(PrecomputesPath / "Bishop_Magics", std::ios::out | std::ios::binary);
+		BishopPrecomputes.write(reinterpret_cast<const char*>(BISHOP_MAGICS.data()), sizeof(BISHOP_MAGICS));//save the magics to the binary file
 	}
 	else
 	{
 		BishopPrecomputes.open(PrecomputesPath / "Bishop_Attacks.bin", std::ios::in | std::ios::binary);
 		BishopPrecomputes.read(reinterpret_cast<char*>(BISHOP_ATTACKS.data()), sizeof(BISHOP_ATTACKS)); //set BISHOP_ATTACKS from disk
+		BishopPrecomputes.close();
+		BishopPrecomputes.open(PrecomputesPath / "Bishop_Magics", std::ios::in | std::ios::binary);
+		BishopPrecomputes.read(reinterpret_cast<char*>(BISHOP_MAGICS.data()), sizeof(BISHOP_MAGICS));
 	}
 
 	AlreadyRan = true;

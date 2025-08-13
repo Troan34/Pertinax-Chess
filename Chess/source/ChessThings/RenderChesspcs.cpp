@@ -104,7 +104,7 @@ static std::thread CommandThread(GetCommand);
 std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObjects()
 {
 	ComputeHeavy();
-
+	/**
 	if (!ComputeMagic)
 	{
 		int square;
@@ -134,7 +134,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 			std::print("{}, ", RookMagics[square]);
 		}
 		ComputeMagic = true;
-	}
+	}*/
 	/*
 	printf("const uint64 BMagic[64] = {\n");
 	for (square = 0; square < 64; square++)
