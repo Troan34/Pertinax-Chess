@@ -386,6 +386,18 @@ namespace bit//bit management
 			return *this;
 		}
 
+		inline BitBoard64 operator|(uint64_t Operand) const
+		{
+			return Bits | Operand;
+		}
+		inline BitBoard64 operator&(uint64_t Operand) const
+		{
+			return Bits & Operand;
+		}
+		inline BitBoard64 operator^(uint64_t Operand) const
+		{
+			return Bits ^ Operand;
+		}
 		inline operator uint64_t() { return Bits; }
 	};
 

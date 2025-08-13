@@ -654,6 +654,7 @@ namespace bit {
 
 		if (m_Colors[0][m_Index]) { Color = WHITE; }
 		else if (m_Colors[1][m_Index]) { Color = BLACK; }
+		else { return 0; }//There is no piece at that index
 
 		for (; PieceType <= 5; PieceType++)
 		{

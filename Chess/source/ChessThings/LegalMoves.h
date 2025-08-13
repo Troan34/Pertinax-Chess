@@ -110,6 +110,20 @@ static std::array<uint64_t, 64> BISHOP_MAGICS;
 static constexpr std::array<uint64_t, 64> ROOK_MASKS = ComputeRookMasks(false);
 static constexpr std::array<uint64_t, 64> BISHOP_MASKS = ComputeBishopMasks(false);
 
+static constexpr std::array<uint8_t, 64> ROOK_SHIFTS = {
+  12, 11, 11, 11, 11, 11, 11, 12, 11, 10, 10, 10, 10, 10, 10, 11,
+  11, 10, 10, 10, 10, 10, 10, 11, 11, 10, 10, 10, 10, 10, 10, 11,
+  11, 10, 10, 10, 10, 10, 10, 11, 11, 10, 10, 10, 10, 10, 10, 11,
+  11, 10, 10, 10, 10, 10, 10, 11, 12, 11, 11, 11, 11, 11, 11, 12
+};
+
+static constexpr std::array<uint8_t, 64> BISHOP_SHIFTS = {
+  6, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 5, 5, 5, 5,
+  5, 5, 7, 7, 7, 7, 5, 5, 5, 5, 7, 9, 9, 7, 5, 5,
+  5, 5, 7, 9, 9, 7, 5, 5, 5, 5, 7, 7, 7, 7, 5, 5,
+  5, 5, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 5, 5, 6
+};
+
 //these just include the last board square instead of ignoring it
 static constexpr std::array<uint64_t, 64> ROOK_LEGAL_MASKS = ComputeRookMasks(true);
 static constexpr std::array<uint64_t, 64> BISHOP_LEGAL_MASKS = ComputeBishopMasks(true);
