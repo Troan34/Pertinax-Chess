@@ -309,10 +309,12 @@ namespace bit//bit management
 		//get bit at index
 		bool operator[](uint8_t Index) const
 		{
+#ifdef _DEBUG
 			if (Index > 63)
 			{
 				throw std::out_of_range("Indexed bit out of range");
 			}
+#endif
 			return (Bits >> Index) & 0b1;
 		}
 
@@ -325,10 +327,12 @@ namespace bit//bit management
 		//Sets the bit in the parameter as true
 		void SetToTrue(uint8_t Index)
 		{
+#ifdef _DEBUG
 			if (Index > 63)
 			{
 				throw std::out_of_range("Indexed bit out of range");
 			}
+#endif
 			Bits |= 1ULL << Index;
 		}
 
@@ -447,3 +451,38 @@ namespace bit//bit management
 	};
 
 }
+
+/*
+/// <summary>
+/// Type that lets the user easily create a 2D array with custom sizes for each sub array
+/// </summary>
+/// <typeparam name="Typ">Type of stored objects in sub arrays</typeparam>
+/// <typeparam name="Size">Size of the array</typeparam>
+/// <typeparam name="SecondSizes">Sizes of the sub arrays</typeparam>
+template<typename Typ, const size_t Size, const size_t SecondSizes[Size]>
+class Custom2DArray
+{
+private:
+	struct RecursiveArray
+	{
+		size_t ArrSize;
+		std::array<Typ, SecondSizes[ArrSize]> m_Array;
+
+		auto& operator[](size_t Index) { return m_Array[Index]; }
+		const auto& operator[](size_t Index) const { return m_Array[Index]; }
+	public:
+		RecursiveArray(size_t Size):ArrSize(Size){}
+	};
+
+	std::array<RecursiveArray, Size> m_Array;
+
+	for (size_t Count = 0; Count < Size; Count++)
+	{
+		m_Array[Count] = RecursiveArray(SecondSizes[Count]);
+	}
+
+	Typ* data() noexcept
+	{
+		return m_Array.data();
+	}
+};*/

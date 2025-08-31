@@ -90,6 +90,7 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 		auto Key = mult_rightShift(blockers.ReadBits() & ROOK_MASKS[BoardSquarePos], ROOK_MAGICS[BoardSquarePos], RookShift);
 
 		Attacks = ROOK_ATTACKS[BoardSquarePos][Key];
+		AttackedSquares |= Attacks;
 
 		if (IsWhite) { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[0]); }
 		else { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[1]); }
@@ -99,6 +100,7 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 		uint16_t BishopAttackIndex = mult_rightShift(blockers.ReadBits() & BISHOP_MASKS[BoardSquarePos], BISHOP_MAGICS[BoardSquarePos], BishopShift);
 
 		Attacks = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
+		AttackedSquares |= Attacks;
 
 		if (IsWhite) { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[0]); }
 		else { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[1]); }
@@ -113,6 +115,8 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 
 		uint64_t RookAttack = ROOK_ATTACKS[BoardSquarePos][RookAttackIndex];
 		uint64_t BishopAttack = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
+
+		AttackedSquares |= (RookAttack | BishopAttack);
 
 		//removes attacks to own pieces
 		if (IsWhite)
@@ -845,7 +849,7 @@ void MagicRookFinder(uint8_t BoardSquare)
 			for (uint16_t Blocker = 0; Blocker < (1ULL << shift); Blocker++)
 			{
 				auto Key = mult_rightShift(expand_bits_to_mask(Blocker, ROOK_MASKS[BoardSquare]), MagicNum, shift);
-				ROOK_ATTACKS[BoardSquare][Key] = ComputeRookAttacks(BoardSquare, Blocker);
+				ROOK_ATTACKS[BoardSquare][Key] = ComputeRookAttacks(BoardSquare, Blocker) & ROOK_MASKS[BoardSquare];
 			}
 			ROOK_MAGICS[BoardSquare] = MagicNum;
 			break;
@@ -883,7 +887,7 @@ void MagicBishopFinder(uint8_t BoardSquare)
 			for (uint16_t Blocker = 0; Blocker < (1ULL << shift); Blocker++)
 			{
 				auto Key = mult_rightShift(expand_bits_to_mask(Blocker, BISHOP_MASKS[BoardSquare]), MagicNum, shift);
-				BISHOP_ATTACKS[BoardSquare][Key] = ComputeBishopAttacks(BoardSquare, Blocker);
+				BISHOP_ATTACKS[BoardSquare][Key] = ComputeBishopAttacks(BoardSquare, Blocker) & BISHOP_MASKS[BoardSquare];
 			}
 			BISHOP_MAGICS[BoardSquare] = MagicNum;
 			break;

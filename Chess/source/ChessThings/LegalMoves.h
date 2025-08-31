@@ -202,6 +202,8 @@ private:
 	void CanKingCastle_LMoves(const GenerateLegalMoves& OppositeMoves, bool& isItCheckmate, const uint8_t& BoardSquareOfKingToMove, const uint8_t KingMove);
 public:
 	std::array<MOVE_BIT, 64> moves;//array of Moves, every legal move
+
+	//Bitboard with squares under attack set
 	bit::BitBoard64 AttackedSquares;
 
 	/*
