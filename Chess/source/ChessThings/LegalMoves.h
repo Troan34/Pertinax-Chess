@@ -11,9 +11,14 @@
 namespace fs = std::filesystem;
 
 constexpr int OffsetForDirections[8] = { 8, -8, -1, 1, 7, -7, 9, -9 };
+constexpr enum offDIRECTIONS
+{
+	offN,offS,offW,offE,offNW,offSE,offNE,offSW
+};
+
 constexpr enum DIRECTIONS
 {
-	N,S,W,E,NW,SE,NE,SW
+	N = 8, S = -8, W = -1, E = 1, NW = 7, SE = -9, NE = 9, SW = -7
 };
 
 //precompute NumOfSquaresUntilEdge
@@ -176,9 +181,9 @@ struct MOVE
 
 struct MOVE_BIT
 {
-	bit::BitBoard64 TargetSquares;
+	bit::BitBoard64 TargetSquares{};
 	std::array<uint8_t, 3> Promotion{ 65, 65, 65 };
-	uint8_t PieceType;
+	uint8_t PieceType = 0;
 };
 
 class GenerateLegalMoves

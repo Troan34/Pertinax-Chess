@@ -179,8 +179,6 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 			if (CheckBoardSquare == 65) { break; }
 			CheckTargetSquares[CheckBoardSquare] = BoardSquarePos;
 		}
-
-
 	}
 	//possible pin, logic for finding and saving is the same as above, DO NOT LET CHECKS IN HERE
 	else if (((ROOK_LEGAL_MASKS[BoardSquarePos] | BISHOP_LEGAL_MASKS[BoardSquarePos]) & m_BoardSquare.find(OpponentKingType)) != 0)
@@ -222,7 +220,6 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 			if (PinSquare == 65) { break; }
 			WhichBoardSquaresAreAbsPinned[PinSquare] = BoardSquarePos;
 		}
-
 	}
 
 	moves[BoardSquarePos].TargetSquares = Attacks;
@@ -558,7 +555,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 	uint8_t count = 0;
 	uint8_t CheckingSquare = 65;
 	size_t NumberOfChecks = 0;
-	for (const uint8_t& Square : OppositeMoves.CheckTargetSquares)
+ 	for (const uint8_t& Square : OppositeMoves.CheckTargetSquares)
 	{
 		if (Square != 65)
 		{
@@ -570,11 +567,10 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 			{
 				IndexOfPieceChecking = Square;
 				CheckingSquare = Square;
-				CheckingSquare++;
+				NumberOfChecks++;
 			}
 		}
 	}
-
 
 
 	//moves for King
@@ -632,7 +628,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 				continue;
 			}
 
-			//checks if under abs pin
+			//if in check and count is under abs pin, unable to move
 			if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 65 and NumberOfChecks == 1)
 			{
 				Piece.TargetSquares.clear();
@@ -641,13 +637,16 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 			}
 			else 
 			{
-				for (uint8_t Move = 0; Move <= MAX_SQUARE; Move++)
+				uint8_t Move = 0;
+				while (true)
 				{
-					if (!Piece.TargetSquares[Move]) { continue; }
+					Move = bit::lsb(Piece.TargetSquares, Move + 1);
+					if (Move == 64) break;//moves finished
+
 					//for those things that happen with pawns
 					if (Piece.PieceType == BLACK_PAWN or Piece.PieceType == WHITE_PAWN)
 					{
-						if (DoNotEnPassant and m_BoardSquare[Move] == 0 and (abs(count - Move) == 7 or abs(count - Move) == 9))
+						if (DoNotEnPassant and m_BoardSquare[Move] == 0 and (abs(count - Move) == NW or abs(count - Move) == NE))
 						{
 							Piece.TargetSquares[Move] = false;
 							continue;
@@ -657,7 +656,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 					if ((OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 65 and NumberOfChecks == 0) or NumberOfChecks == 1)
 					{
 						//change the for loop Move so that en passant makes sense
-						if ((Piece.PieceType == BLACK_PAWN or Piece.PieceType == WHITE_PAWN) and (abs(count - Move) == 7 or abs(count - Move) == 9) and m_BoardSquare[Move] == 0)
+						if ((Piece.PieceType == BLACK_PAWN or Piece.PieceType == WHITE_PAWN) and (abs(count - Move) == NW or abs(count - Move) == NE) and m_BoardSquare[Move] == 0)
 						{
 							Piece.PieceType == WHITE_PAWN ? Move -= 8 : Move += 8;
 						}
@@ -687,8 +686,8 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 								isItCheckmate = false;
 							}
 						}
-					}
 
+					}
 				}
 			}
 

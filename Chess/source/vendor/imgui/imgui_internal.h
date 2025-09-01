@@ -635,7 +635,7 @@ struct ImSpan
 
 // Helper: ImSpanAllocator<>
 // Facilitate storing multiple chunks into a single large block (the "arena")
-// - Usage: call Reserve() N times, allocate GetArenaSizeInBytes() worth, pass it to SetArenaBasePtr(), call GetSpan() N times to retrieve the aligned ranges.
+// - Usage: call Reserve() offN times, allocate GetArenaSizeInBytes() worth, pass it to SetArenaBasePtr(), call GetSpan() offN times to retrieve the aligned ranges.
 template<int CHUNKS>
 struct ImSpanAllocator
 {
@@ -656,7 +656,7 @@ struct ImSpanAllocator
 };
 
 // Helper: ImPool<>
-// Basic keyed storage for contiguous instances, slow/amortized insertion, O(1) indexable, O(Log N) queries by ID over a dense/hot buffer,
+// Basic keyed storage for contiguous instances, slow/amortized insertion, O(1) indexable, O(Log offN) queries by ID over a dense/hot buffer,
 // Honor constructor/destructor. Add/remove invalidate all pointers. Indexes have the same lifetime as the associated object.
 typedef int ImPoolIdx;
 template<typename T>
@@ -733,14 +733,14 @@ IMGUI_API ImGuiStoragePair* ImLowerBound(ImGuiStoragePair* in_begin, ImGuiStorag
 
 // ImDrawList: Helper function to calculate a circle's segment count given its radius and a "maximum error" value.
 // Estimation of number of circle segment based on error is derived using method described in https://stackoverflow.com/a/2244088/15194693
-// Number of segments (N) is calculated using equation:
-//   N = ceil ( pi / acos(1 - error / r) )     where r > 0, error <= r
+// Number of segments (offN) is calculated using equation:
+//   offN = ceil ( pi / acos(1 - error / r) )     where r > 0, error <= r
 // Our equation is significantly simpler that one in the post thanks for choosing segment that is
 // perpendicular to X axis. Follow steps in the article from this starting condition and you will
 // will get this result.
 //
 // Rendering circles with an odd number of segments, while mathematically correct will produce
-// asymmetrical results on the raster grid. Therefore we're rounding N to next even number (7->8, 8->8, 9->10 etc.)
+// asymmetrical results on the raster grid. Therefore we're rounding offN to next even number (7->8, 8->8, 9->10 etc.)
 #define IM_ROUNDUP_TO_EVEN(_V)                                  ((((_V) + 1) / 2) * 2)
 #define IM_DRAWLIST_CIRCLE_AUTO_SEGMENT_MIN                     4
 #define IM_DRAWLIST_CIRCLE_AUTO_SEGMENT_MAX                     512
@@ -2652,10 +2652,10 @@ struct IMGUI_API ImGuiWindow
     ImS8                    AutoFitFramesX, AutoFitFramesY;
     bool                    AutoFitOnlyGrows;
     ImGuiDir                AutoPosLastDirection;
-    ImS8                    HiddenFramesCanSkipItems;           // Hide the window for N frames
-    ImS8                    HiddenFramesCannotSkipItems;        // Hide the window for N frames while allowing items to be submitted so we can measure their size
-    ImS8                    HiddenFramesForRenderOnly;          // Hide the window until frame N at Render() time only
-    ImS8                    DisableInputsFrames;                // Disable window interactions for N frames
+    ImS8                    HiddenFramesCanSkipItems;           // Hide the window for offN frames
+    ImS8                    HiddenFramesCannotSkipItems;        // Hide the window for offN frames while allowing items to be submitted so we can measure their size
+    ImS8                    HiddenFramesForRenderOnly;          // Hide the window until frame offN at Render() time only
+    ImS8                    DisableInputsFrames;                // Disable window interactions for offN frames
     ImGuiCond               SetWindowPosAllowFlags : 8;         // store acceptable condition flags for SetNextWindowPos() use.
     ImGuiCond               SetWindowSizeAllowFlags : 8;        // store acceptable condition flags for SetNextWindowSize() use.
     ImGuiCond               SetWindowCollapsedAllowFlags : 8;   // store acceptable condition flags for SetNextWindowCollapsed() use.
@@ -3078,7 +3078,7 @@ struct ImGuiTableColumnSettings
     }
 };
 
-// This is designed to be stored in a single ImChunkStream (1 header followed by N ImGuiTableColumnSettings, etc.)
+// This is designed to be stored in a single ImChunkStream (1 header followed by offN ImGuiTableColumnSettings, etc.)
 struct ImGuiTableSettings
 {
     ImGuiID                     ID;                     // Set to 0 to invalidate/delete the setting

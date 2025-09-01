@@ -4,7 +4,7 @@ namespace glm{
 namespace detail
 {
 	// Internal class for implementing swizzle operators
-	template<typename T, int N>
+	template<typename T, int offN>
 	struct _swizzle_base0
 	{
 	protected:
@@ -17,8 +17,8 @@ namespace detail
 		char    _buffer[1];
 	};
 
-	template<int N, typename T, qualifier Q, int E0, int E1, int E2, int E3, bool Aligned>
-	struct _swizzle_base1 : public _swizzle_base0<T, N>
+	template<int offN, typename T, qualifier Q, int E0, int E1, int E2, int E3, bool Aligned>
+	struct _swizzle_base1 : public _swizzle_base0<T, offN>
 	{
 	};
 
@@ -45,14 +45,14 @@ namespace detail
 		Template parameters:
 
 		T			= type of scalar values (e.g. float, double)
-		N			= number of components in the vector (e.g. 3)
+		offN			= number of components in the vector (e.g. 3)
 		E0...3		= what index the n-th element of this swizzle refers to in the unswizzled vec
 
 		DUPLICATE_ELEMENTS = 1 if there is a repeated element, 0 otherwise (used to specialize swizzles
 			containing duplicate elements so that they cannot be used as r-values).
 	*/
-	template<int N, typename T, qualifier Q, int E0, int E1, int E2, int E3, int DUPLICATE_ELEMENTS>
-	struct _swizzle_base2 : public _swizzle_base1<N, T, Q, E0,E1,E2,E3, detail::is_aligned<Q>::value>
+	template<int offN, typename T, qualifier Q, int E0, int E1, int E2, int E3, int DUPLICATE_ELEMENTS>
+	struct _swizzle_base2 : public _swizzle_base1<offN, T, Q, E0,E1,E2,E3, detail::is_aligned<Q>::value>
 	{
 		struct op_equal
 		{
@@ -82,33 +82,33 @@ namespace detail
 	public:
 		GLM_FUNC_QUALIFIER _swizzle_base2& operator= (const T& t)
 		{
-			for (int i = 0; i < N; ++i)
+			for (int i = 0; i < offN; ++i)
 				(*this)[i] = t;
 			return *this;
 		}
 
-		GLM_FUNC_QUALIFIER _swizzle_base2& operator= (vec<N, T, Q> const& that)
+		GLM_FUNC_QUALIFIER _swizzle_base2& operator= (vec<offN, T, Q> const& that)
 		{
 			_apply_op(that, op_equal());
 			return *this;
 		}
 
-		GLM_FUNC_QUALIFIER void operator -= (vec<N, T, Q> const& that)
+		GLM_FUNC_QUALIFIER void operator -= (vec<offN, T, Q> const& that)
 		{
 			_apply_op(that, op_minus());
 		}
 
-		GLM_FUNC_QUALIFIER void operator += (vec<N, T, Q> const& that)
+		GLM_FUNC_QUALIFIER void operator += (vec<offN, T, Q> const& that)
 		{
 			_apply_op(that, op_plus());
 		}
 
-		GLM_FUNC_QUALIFIER void operator *= (vec<N, T, Q> const& that)
+		GLM_FUNC_QUALIFIER void operator *= (vec<offN, T, Q> const& that)
 		{
 			_apply_op(that, op_mul());
 		}
 
-		GLM_FUNC_QUALIFIER void operator /= (vec<N, T, Q> const& that)
+		GLM_FUNC_QUALIFIER void operator /= (vec<offN, T, Q> const& that)
 		{
 			_apply_op(that, op_div());
 		}
@@ -126,22 +126,22 @@ namespace detail
 
 	protected:
 		template<typename U>
-		GLM_FUNC_QUALIFIER void _apply_op(vec<N, T, Q> const& that, const U& op)
+		GLM_FUNC_QUALIFIER void _apply_op(vec<offN, T, Q> const& that, const U& op)
 		{
 			// Make a copy of the data in this == &that.
 			// The copier should optimize out the copy in cases where the function is
 			// properly inlined and the copy is not necessary.
-			T t[N];
-			for (int i = 0; i < N; ++i)
+			T t[offN];
+			for (int i = 0; i < offN; ++i)
 				t[i] = that[i];
-			for (int i = 0; i < N; ++i)
+			for (int i = 0; i < offN; ++i)
 				op( (*this)[i], t[i] );
 		}
 	};
 
 	// Specialization for swizzles containing duplicate elements.  These cannot be modified.
-	template<int N, typename T, qualifier Q, int E0, int E1, int E2, int E3>
-	struct _swizzle_base2<N, T, Q, E0,E1,E2,E3, 1> : public _swizzle_base1<N, T, Q, E0,E1,E2,E3, detail::is_aligned<Q>::value>
+	template<int offN, typename T, qualifier Q, int E0, int E1, int E2, int E3>
+	struct _swizzle_base2<offN, T, Q, E0,E1,E2,E3, 1> : public _swizzle_base1<offN, T, Q, E0,E1,E2,E3, detail::is_aligned<Q>::value>
 	{
 		struct Stub {};
 
@@ -154,40 +154,40 @@ namespace detail
 		}
 	};
 
-	template<int N, typename T, qualifier Q, int E0, int E1, int E2, int E3>
-	struct _swizzle : public _swizzle_base2<N, T, Q, E0, E1, E2, E3, (E0 == E1 || E0 == E2 || E0 == E3 || E1 == E2 || E1 == E3 || E2 == E3)>
+	template<int offN, typename T, qualifier Q, int E0, int E1, int E2, int E3>
+	struct _swizzle : public _swizzle_base2<offN, T, Q, E0, E1, E2, E3, (E0 == E1 || E0 == E2 || E0 == E3 || E1 == E2 || E1 == E3 || E2 == E3)>
 	{
-		typedef _swizzle_base2<N, T, Q, E0, E1, E2, E3, (E0 == E1 || E0 == E2 || E0 == E3 || E1 == E2 || E1 == E3 || E2 == E3)> base_type;
+		typedef _swizzle_base2<offN, T, Q, E0, E1, E2, E3, (E0 == E1 || E0 == E2 || E0 == E3 || E1 == E2 || E1 == E3 || E2 == E3)> base_type;
 
 		using base_type::operator=;
 
-		GLM_FUNC_QUALIFIER operator vec<N, T, Q> () const { return (*this)(); }
+		GLM_FUNC_QUALIFIER operator vec<offN, T, Q> () const { return (*this)(); }
 	};
 
 //
 // To prevent the C++ syntax from getting entirely overwhelming, define some alias macros
 //
-#define GLM_SWIZZLE_TEMPLATE1   template<int N, typename T, qualifier Q, int E0, int E1, int E2, int E3>
-#define GLM_SWIZZLE_TEMPLATE2   template<int N, typename T, qualifier Q, int E0, int E1, int E2, int E3, int F0, int F1, int F2, int F3>
-#define GLM_SWIZZLE_TYPE1       _swizzle<N, T, Q, E0, E1, E2, E3>
-#define GLM_SWIZZLE_TYPE2       _swizzle<N, T, Q, F0, F1, F2, F3>
+#define GLM_SWIZZLE_TEMPLATE1   template<int offN, typename T, qualifier Q, int E0, int E1, int E2, int E3>
+#define GLM_SWIZZLE_TEMPLATE2   template<int offN, typename T, qualifier Q, int E0, int E1, int E2, int E3, int F0, int F1, int F2, int F3>
+#define GLM_SWIZZLE_TYPE1       _swizzle<offN, T, Q, E0, E1, E2, E3>
+#define GLM_SWIZZLE_TYPE2       _swizzle<offN, T, Q, F0, F1, F2, F3>
 
 //
 // Wrapper for a binary operator (e.g. u.yy + v.zy)
 //
 #define GLM_SWIZZLE_VECTOR_BINARY_OPERATOR_IMPLEMENTATION(OPERAND)                 \
 	GLM_SWIZZLE_TEMPLATE2                                                          \
-	GLM_FUNC_QUALIFIER vec<N, T, Q> operator OPERAND ( const GLM_SWIZZLE_TYPE1& a, const GLM_SWIZZLE_TYPE2& b)  \
+	GLM_FUNC_QUALIFIER vec<offN, T, Q> operator OPERAND ( const GLM_SWIZZLE_TYPE1& a, const GLM_SWIZZLE_TYPE2& b)  \
 	{                                                                               \
 		return a() OPERAND b();                                                     \
 	}                                                                               \
 	GLM_SWIZZLE_TEMPLATE1                                                          \
-	GLM_FUNC_QUALIFIER vec<N, T, Q> operator OPERAND ( const GLM_SWIZZLE_TYPE1& a, const vec<N, T, Q>& b)                   \
+	GLM_FUNC_QUALIFIER vec<offN, T, Q> operator OPERAND ( const GLM_SWIZZLE_TYPE1& a, const vec<offN, T, Q>& b)                   \
 	{                                                                               \
 		return a() OPERAND b;                                                       \
 	}                                                                               \
 	GLM_SWIZZLE_TEMPLATE1                                                          \
-	GLM_FUNC_QUALIFIER vec<N, T, Q> operator OPERAND ( const vec<N, T, Q>& a, const GLM_SWIZZLE_TYPE1& b)                   \
+	GLM_FUNC_QUALIFIER vec<offN, T, Q> operator OPERAND ( const vec<offN, T, Q>& a, const GLM_SWIZZLE_TYPE1& b)                   \
 	{                                                                               \
 		return a OPERAND b();                                                       \
 	}
@@ -197,12 +197,12 @@ namespace detail
 //
 #define GLM_SWIZZLE_SCALAR_BINARY_OPERATOR_IMPLEMENTATION(OPERAND)								\
 	GLM_SWIZZLE_TEMPLATE1																		\
-	GLM_FUNC_QUALIFIER vec<N, T, Q> operator OPERAND ( const GLM_SWIZZLE_TYPE1& a, const T& b)	\
+	GLM_FUNC_QUALIFIER vec<offN, T, Q> operator OPERAND ( const GLM_SWIZZLE_TYPE1& a, const T& b)	\
 	{																							\
 		return a() OPERAND b;																	\
 	}																							\
 	GLM_SWIZZLE_TEMPLATE1																		\
-	GLM_FUNC_QUALIFIER vec<N, T, Q> operator OPERAND ( const T& a, const GLM_SWIZZLE_TYPE1& b)	\
+	GLM_FUNC_QUALIFIER vec<offN, T, Q> operator OPERAND ( const T& a, const GLM_SWIZZLE_TYPE1& b)	\
 	{																							\
 		return a OPERAND b();																	\
 	}

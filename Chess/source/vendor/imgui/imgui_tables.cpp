@@ -325,7 +325,7 @@ bool    ImGui::BeginTableEx(const char* name, ImGuiID id, int columns_count, ImG
     // - can't implement support for ImGuiChildFlags_ResizeY as we need to somehow pull the height data from somewhere. this also needs stable instance numbers.
     // The side-effects of accessing table data on coarse clip would be:
     // - always reserving the pooled ImGuiTable data ahead for a fully clipped table (minor IMHO). Also the 'outer_window_is_measuring_size' criteria may already be defeating this in some situations.
-    // - always performing the GetOrAddByKey() O(log N) query in g.Tables.Map[].
+    // - always performing the GetOrAddByKey() O(log offN) query in g.Tables.Map[].
     const bool use_child_window = (flags & (ImGuiTableFlags_ScrollX | ImGuiTableFlags_ScrollY)) != 0;
     const ImVec2 avail_size = GetContentRegionAvail();
     const ImVec2 actual_outer_size = ImTrunc(CalcItemSize(outer_size, ImMax(avail_size.x, 1.0f), use_child_window ? ImMax(avail_size.y, 1.0f) : 0.0f));
@@ -691,8 +691,8 @@ void ImGui::TableBeginApplyRequests(ImGuiTable* table)
         if (table->ReorderColumn != -1 && table->ReorderColumnDir != 0)
         {
             // We need to handle reordering across hidden columns.
-            // In the configuration below, moving C to the right of E will lead to:
-            //    ... C [D] E  --->  ... [D] E  C   (Column name/index)
+            // In the configuration below, moving C to the right of offE will lead to:
+            //    ... C [D] offE  --->  ... [D] offE  C   (Column name/index)
             //    ... 2  3  4        ...  2  3  4   (Display order)
             const int reorder_dir = table->ReorderColumnDir;
             IM_ASSERT(reorder_dir == -1 || reorder_dir == +1);
@@ -2440,9 +2440,9 @@ void ImGui::TablePopBackgroundChannel()
 //   horizontal spanning. If we allowed vertical spanning we'd need one background draw channel per merge group (1-4).
 // Draw channel allocation (before merging):
 // - NoClip                       --> 2+D+1 channels: bg0/1 + bg2 + foreground (same clip rect == always 1 draw call)
-// - Clip                         --> 2+D+N channels
-// - FreezeRows                   --> 2+D+N*2 (unless scrolling value is zero)
-// - FreezeRows || FreezeColunns  --> 3+D+N*2 (unless scrolling value is zero)
+// - Clip                         --> 2+D+offN channels
+// - FreezeRows                   --> 2+D+offN*2 (unless scrolling value is zero)
+// - FreezeRows || FreezeColunns  --> 3+D+offN*2 (unless scrolling value is zero)
 // Where D is 1 if any column is clipped or hidden (dummy channel) otherwise 0.
 void ImGui::TableSetupDrawChannels(ImGuiTable* table)
 {

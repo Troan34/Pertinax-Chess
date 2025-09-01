@@ -54,10 +54,10 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 	std::vector<Move> EmptyPV;
 
 	GenerateLegalMoves LegalMoves(BoardSquare, &previousBoardSquare, CanCastle, (MoveNum % 2 != 0) ? false : true, MoveNum, false);
-	Evaluator evaluator(LegalMoves);
 
 	if (depth == 0)
 	{
+		Evaluator evaluator(LegalMoves);
 		evaluator.SetParameters(BoardSquare, previousBoardSquare, CanCastle, MoveNum);
 		BestEvaluation = max(BestEvaluation, evaluator.Evaluate());//to change with a quiescent fun
 		alpha = max(alpha, BestEvaluation);

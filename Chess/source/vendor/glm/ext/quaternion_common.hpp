@@ -86,10 +86,10 @@ namespace glm
     /// @param k Additional spin count. If Value is negative interpolation will be on "long" path.
     ///
     /// @tparam T A floating-point scalar type
-    /// @tparam S An integer scalar type
+    /// @tparam offS An integer scalar type
     /// @tparam Q A value from qualifier enum
-    template<typename T, typename S, qualifier Q>
-    GLM_FUNC_DECL qua<T, Q> slerp(qua<T, Q> const& x, qua<T, Q> const& y, T a, S k);
+    template<typename T, typename offS, qualifier Q>
+    GLM_FUNC_DECL qua<T, Q> slerp(qua<T, Q> const& x, qua<T, Q> const& y, T a, offS k);
 
 	/// Returns the q conjugate.
 	///

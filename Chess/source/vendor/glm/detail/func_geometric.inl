@@ -92,32 +92,32 @@ namespace detail
 	template<length_t L, typename T, qualifier Q, bool Aligned>
 	struct compute_faceforward
 	{
-		GLM_FUNC_QUALIFIER static vec<L, T, Q> call(vec<L, T, Q> const& N, vec<L, T, Q> const& I, vec<L, T, Q> const& Nref)
+		GLM_FUNC_QUALIFIER static vec<L, T, Q> call(vec<L, T, Q> const& offN, vec<L, T, Q> const& I, vec<L, T, Q> const& Nref)
 		{
 			GLM_STATIC_ASSERT(std::numeric_limits<T>::is_iec559, "'normalize' accepts only floating-point inputs");
 
-			return dot(Nref, I) < static_cast<T>(0) ? N : -N;
+			return dot(Nref, I) < static_cast<T>(0) ? offN : -offN;
 		}
 	};
 
 	template<length_t L, typename T, qualifier Q, bool Aligned>
 	struct compute_reflect
 	{
-		GLM_FUNC_QUALIFIER static vec<L, T, Q> call(vec<L, T, Q> const& I, vec<L, T, Q> const& N)
+		GLM_FUNC_QUALIFIER static vec<L, T, Q> call(vec<L, T, Q> const& I, vec<L, T, Q> const& offN)
 		{
-			return I - N * dot(N, I) * static_cast<T>(2);
+			return I - offN * dot(offN, I) * static_cast<T>(2);
 		}
 	};
 
 	template<length_t L, typename T, qualifier Q, bool Aligned>
 	struct compute_refract
 	{
-		GLM_FUNC_QUALIFIER static vec<L, T, Q> call(vec<L, T, Q> const& I, vec<L, T, Q> const& N, T eta)
+		GLM_FUNC_QUALIFIER static vec<L, T, Q> call(vec<L, T, Q> const& I, vec<L, T, Q> const& offN, T eta)
 		{
-			T const dotValue(dot(N, I));
+			T const dotValue(dot(offN, I));
 			T const k(static_cast<T>(1) - eta * eta * (static_cast<T>(1) - dotValue * dotValue));
 			vec<L, T, Q> const Result =
-                (k >= static_cast<T>(0)) ? (eta * I - (eta * dotValue + std::sqrt(k)) * N) : vec<L, T, Q>(0);
+                (k >= static_cast<T>(0)) ? (eta * I - (eta * dotValue + std::sqrt(k)) * offN) : vec<L, T, Q>(0);
 			return Result;
 		}
 	};
@@ -196,45 +196,45 @@ namespace detail
 
 	// faceforward
 	template<typename genType>
-	GLM_FUNC_QUALIFIER genType faceforward(genType const& N, genType const& I, genType const& Nref)
+	GLM_FUNC_QUALIFIER genType faceforward(genType const& offN, genType const& I, genType const& Nref)
 	{
-		return dot(Nref, I) < static_cast<genType>(0) ? N : -N;
+		return dot(Nref, I) < static_cast<genType>(0) ? offN : -offN;
 	}
 
 	template<length_t L, typename T, qualifier Q>
-	GLM_FUNC_QUALIFIER vec<L, T, Q> faceforward(vec<L, T, Q> const& N, vec<L, T, Q> const& I, vec<L, T, Q> const& Nref)
+	GLM_FUNC_QUALIFIER vec<L, T, Q> faceforward(vec<L, T, Q> const& offN, vec<L, T, Q> const& I, vec<L, T, Q> const& Nref)
 	{
-		return detail::compute_faceforward<L, T, Q, detail::is_aligned<Q>::value>::call(N, I, Nref);
+		return detail::compute_faceforward<L, T, Q, detail::is_aligned<Q>::value>::call(offN, I, Nref);
 	}
 
 	// reflect
 	template<typename genType>
-	GLM_FUNC_QUALIFIER genType reflect(genType const& I, genType const& N)
+	GLM_FUNC_QUALIFIER genType reflect(genType const& I, genType const& offN)
 	{
-		return I - N * dot(N, I) * genType(2);
+		return I - offN * dot(offN, I) * genType(2);
 	}
 
 	template<length_t L, typename T, qualifier Q>
-	GLM_FUNC_QUALIFIER vec<L, T, Q> reflect(vec<L, T, Q> const& I, vec<L, T, Q> const& N)
+	GLM_FUNC_QUALIFIER vec<L, T, Q> reflect(vec<L, T, Q> const& I, vec<L, T, Q> const& offN)
 	{
-		return detail::compute_reflect<L, T, Q, detail::is_aligned<Q>::value>::call(I, N);
+		return detail::compute_reflect<L, T, Q, detail::is_aligned<Q>::value>::call(I, offN);
 	}
 
 	// refract
 	template<typename genType>
-	GLM_FUNC_QUALIFIER genType refract(genType const& I, genType const& N, genType eta)
+	GLM_FUNC_QUALIFIER genType refract(genType const& I, genType const& offN, genType eta)
 	{
 		GLM_STATIC_ASSERT(std::numeric_limits<genType>::is_iec559, "'refract' accepts only floating-point inputs");
-		genType const dotValue(dot(N, I));
+		genType const dotValue(dot(offN, I));
 		genType const k(static_cast<genType>(1) - eta * eta * (static_cast<genType>(1) - dotValue * dotValue));
-		return (eta * I - (eta * dotValue + sqrt(k)) * N) * static_cast<genType>(k >= static_cast<genType>(0));
+		return (eta * I - (eta * dotValue + sqrt(k)) * offN) * static_cast<genType>(k >= static_cast<genType>(0));
 	}
 
 	template<length_t L, typename T, qualifier Q>
-	GLM_FUNC_QUALIFIER vec<L, T, Q> refract(vec<L, T, Q> const& I, vec<L, T, Q> const& N, T eta)
+	GLM_FUNC_QUALIFIER vec<L, T, Q> refract(vec<L, T, Q> const& I, vec<L, T, Q> const& offN, T eta)
 	{
 		GLM_STATIC_ASSERT(std::numeric_limits<T>::is_iec559, "'refract' accepts only floating-point inputs");
-		return detail::compute_refract<L, T, Q, detail::is_aligned<Q>::value>::call(I, N, eta);
+		return detail::compute_refract<L, T, Q, detail::is_aligned<Q>::value>::call(I, offN, eta);
 	}
 }//namespace glm
 

@@ -72,11 +72,11 @@ namespace glm
 		}
 	}
 
-    template<typename T, typename S, qualifier Q>
-    GLM_FUNC_QUALIFIER qua<T, Q> slerp(qua<T, Q> const& x, qua<T, Q> const& y, T a, S k)
+    template<typename T, typename offS, qualifier Q>
+    GLM_FUNC_QUALIFIER qua<T, Q> slerp(qua<T, Q> const& x, qua<T, Q> const& y, T a, offS k)
     {
         GLM_STATIC_ASSERT(std::numeric_limits<T>::is_iec559 || GLM_CONFIG_UNRESTRICTED_FLOAT, "'slerp' only accept floating-point inputs");
-        GLM_STATIC_ASSERT(std::numeric_limits<S>::is_integer, "'slerp' only accept integer for spin count");
+        GLM_STATIC_ASSERT(std::numeric_limits<offS>::is_integer, "'slerp' only accept integer for spin count");
 
         qua<T, Q> z = y;
 

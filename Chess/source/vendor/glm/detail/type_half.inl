@@ -131,7 +131,7 @@ namespace detail
 			if(e < -10)
 			{
 				//
-				// E is less than -10.  The absolute value of f is
+				// offE is less than -10.  The absolute value of f is
 				// less than half_MIN (f may be a small normalized
 				// float, a denormalized float or a zero).
 				//
@@ -142,7 +142,7 @@ namespace detail
 			}
 
 			//
-			// E is between -10 and 0.  F is a normalized float,
+			// offE is between -10 and 0.  F is a normalized float,
 			// whose magnitude is less than __half_NRM_MIN.
 			//
 			// We convert f to a denormalized half.
@@ -198,7 +198,7 @@ namespace detail
 		else
 		{
 			//
-			// E is greater than zero.  F is a normalized float.
+			// offE is greater than zero.  F is a normalized float.
 			// We try to convert f to a normalized half.
 			//
 

@@ -46,10 +46,10 @@ namespace glm
 
 		// -- Conversions --
 
-		template<typename U, typename V, typename M, typename N>
+		template<typename U, typename V, typename M, typename offN>
 		GLM_CTOR_DECL mat(
 			U const& x1, V const& y1,
-			M const& x2, N const& y2);
+			M const& x2, offN const& y2);
 
 		template<typename U, typename V>
 		GLM_CTOR_DECL mat(

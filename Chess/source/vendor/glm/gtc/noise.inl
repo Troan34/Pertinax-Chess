@@ -683,7 +683,7 @@ namespace detail
 		vec<4, T, Q> j(p - T(49) * floor(p * ns.z * ns.z));  //  mod(p,7*7)
 
 		vec<4, T, Q> x_(floor(j * ns.z));
-		vec<4, T, Q> y_(floor(j - T(7) * x_));    // mod(j,N)
+		vec<4, T, Q> y_(floor(j - T(7) * x_));    // mod(j,offN)
 
 		vec<4, T, Q> x(x_ * ns.x + ns.y);
 		vec<4, T, Q> y(y_ * ns.x + ns.y);

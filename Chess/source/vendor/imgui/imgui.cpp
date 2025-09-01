@@ -214,7 +214,7 @@ CODE
    If you get an assert, read the messages and comments around the assert.
  - This codebase aims to be highly optimized:
    - A typical idle frame should never call malloc/free.
-   - We rely on a maximum of constant-time or O(N) algorithms. Limiting searches/scans as much as possible.
+   - We rely on a maximum of constant-time or O(offN) algorithms. Limiting searches/scans as much as possible.
    - We put particular energy in making sure performances are decent with typical "Debug" build settings as well.
      Which mean we tend to avoid over-relying on "zero-cost abstraction" as they aren't zero-cost at all.
  - This codebase aims to be both highly opinionated and highly flexible:
@@ -729,7 +729,7 @@ CODE
                        - ImFont::Glyph                       -> use ImFontGlyph
  - 2019/10/14 (1.74) - inputs: Fixed a miscalculation in the keyboard/mouse "typematic" repeat delay/rate calculation, used by keys and e.g. repeating mouse buttons as well as the GetKeyPressedAmount() function.
                        if you were using a non-default value for io.KeyRepeatRate (previous default was 0.250), you can add +io.KeyRepeatDelay to it to compensate for the fix.
-                       The function was triggering on: 0.0 and (delay+rate*N) where (N>=1). Fixed formula responds to (N>=0). Effectively it made io.KeyRepeatRate behave like it was set to (io.KeyRepeatRate + io.KeyRepeatDelay).
+                       The function was triggering on: 0.0 and (delay+rate*offN) where (offN>=1). Fixed formula responds to (offN>=0). Effectively it made io.KeyRepeatRate behave like it was set to (io.KeyRepeatRate + io.KeyRepeatDelay).
                        If you never altered io.KeyRepeatRate nor used GetKeyPressedAmount() this won't affect you.
  - 2019/07/15 (1.72) - removed TreeAdvanceToLabelPos() which is rarely used and only does SetCursorPosX(GetCursorPosX() + GetTreeNodeToLabelSpacing()). Kept redirection function (will obsolete).
  - 2019/07/12 (1.72) - renamed ImFontAtlas::CustomRect to ImFontAtlasCustomRect. Kept redirection typedef (will obsolete).
@@ -1231,7 +1231,7 @@ static void             UpdateViewportsNewFrame();
 // - ImGui::CreateContext() will automatically set this pointer if it is NULL.
 //   Change to a different context by calling ImGui::SetCurrentContext().
 // - Important: Dear ImGui functions are not thread-safe because of this pointer.
-//   If you want thread-safety to allow N threads to access N different contexts:
+//   If you want thread-safety to allow offN threads to access offN different contexts:
 //   - Change this variable to use thread local storage so each thread can refer to a different context, in your imconfig.h:
 //         struct ImGuiContext;
 //         extern thread_local ImGuiContext* MyImGuiTLS;
@@ -7211,7 +7211,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
             bool render_decorations_in_parent = false;
             if ((flags & ImGuiWindowFlags_ChildWindow) && !(flags & ImGuiWindowFlags_Popup) && !window_is_child_tooltip)
             {
-                // - We test overlap with the previous child window only (testing all would end up being O(log N) not a good investment here)
+                // - We test overlap with the previous child window only (testing all would end up being O(log offN) not a good investment here)
                 // - We disable this when the parent window has zero vertices, which is a common pattern leading to laying out multiple overlapping childs
                 ImGuiWindow* previous_child = parent_window->DC.ChildWindows.Size >= 2 ? parent_window->DC.ChildWindows[parent_window->DC.ChildWindows.Size - 2] : NULL;
                 bool previous_child_overlapping = previous_child ? previous_child->Rect().Overlaps(window->Rect()) : false;
@@ -8724,7 +8724,7 @@ const char* ImGui::GetKeyChordName(ImGuiKeyChord key_chord)
 // t0 = previous time (e.g.: g.Time - g.IO.DeltaTime)
 // t1 = current time (e.g.: g.Time)
 // An event is triggered at:
-//  t = 0.0f     t = repeat_delay,    t = repeat_delay + repeat_rate*N
+//  t = 0.0f     t = repeat_delay,    t = repeat_delay + repeat_rate*offN
 int ImGui::CalcTypematicRepeatAmount(float t0, float t1, float repeat_delay, float repeat_rate)
 {
     if (t1 == 0.0f)
@@ -10052,7 +10052,7 @@ bool ImGui::Shortcut(ImGuiKeyChord key_chord, ImGuiInputFlags flags, ImGuiID own
         return false;
 
     // Default repeat behavior for Shortcut()
-    // So e.g. pressing Ctrl+W and releasing Ctrl while holding W will not trigger the W shortcut.
+    // So e.g. pressing Ctrl+offW and releasing Ctrl while holding offW will not trigger the offW shortcut.
     if ((flags & ImGuiInputFlags_Repeat) != 0 && (flags & ImGuiInputFlags_RepeatUntilMask_) == 0)
         flags |= ImGuiInputFlags_RepeatUntilKeyModsChange;
 
@@ -10403,7 +10403,7 @@ bool ImGui::ItemAdd(const ImRect& bb, ImGuiID id, const ImRect* nav_bb_arg, ImGu
         // Directional navigation processing
         // Runs prior to clipping early-out
         //  (a) So that NavInitRequest can be honored, for newly opened windows to select a default widget
-        //  (b) So that we can scroll up/down past clipped items. This adds a small O(N) cost to regular navigation requests
+        //  (b) So that we can scroll up/down past clipped items. This adds a small O(offN) cost to regular navigation requests
         //      unfortunately, but it is still limited to one window. It may not scale very well for windows with ten of
         //      thousands of item, but at least NavMoveRequest is only set on user interaction, aka maximum once a frame.
         //      We could early out with "if (is_clipped && !g.NavInitRequest) return false;" but when we wouldn't be able
@@ -13113,7 +13113,7 @@ static int ImGui::FindWindowFocusIndex(ImGuiWindow* window)
     return order;
 }
 
-static ImGuiWindow* FindWindowNavFocusable(int i_start, int i_stop, int dir) // FIXME-OPT O(N)
+static ImGuiWindow* FindWindowNavFocusable(int i_start, int i_stop, int dir) // FIXME-OPT O(offN)
 {
     ImGuiContext& g = *GImGui;
     for (int i = i_start; i >= 0 && i < g.WindowsFocusOrder.Size && i != i_stop; i += dir)

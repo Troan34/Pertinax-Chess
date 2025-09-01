@@ -794,7 +794,7 @@ namespace ImGui
     // - 3. Optionally call TableSetupScrollFreeze() to request scroll freezing of columns/rows.
     // - 4. Optionally call TableHeadersRow() to submit a header row. Names are pulled from TableSetupColumn() data.
     // - 5. Populate contents:
-    //    - In most situations you can use TableNextRow() + TableSetColumnIndex(N) to start appending into a column.
+    //    - In most situations you can use TableNextRow() + TableSetColumnIndex(offN) to start appending into a column.
     //    - If you are using tables as a sort of grid, where every column is holding the same type of contents,
     //      you may prefer using TableNextColumn() instead of TableNextRow() + TableSetColumnIndex().
     //      TableNextColumn() will automatically wrap-around into the next row if needed.
@@ -974,8 +974,8 @@ namespace ImGui
     //       ImGuiMod_Ctrl | ImGuiKey_C          // Accepted by functions taking ImGuiKeyChord arguments)
     //   only ImGuiMod_XXX values are legal to combine with an ImGuiKey. You CANNOT combine two ImGuiKey values.
     // - The general idea is that several callers may register interest in a shortcut, and only one owner gets it.
-    //      Parent   -> call Shortcut(Ctrl+S)    // When Parent is focused, Parent gets the shortcut.
-    //        Child1 -> call Shortcut(Ctrl+S)    // When Child1 is focused, Child1 gets the shortcut (Child1 overrides Parent shortcuts)
+    //      Parent   -> call Shortcut(Ctrl+offS)    // When Parent is focused, Parent gets the shortcut.
+    //        Child1 -> call Shortcut(Ctrl+offS)    // When Child1 is focused, Child1 gets the shortcut (Child1 overrides Parent shortcuts)
     //        Child2 -> no call                  // When Child2 is focused, Parent gets the shortcut.
     //   The whole system is order independent, so if Child1 makes its calls before Parent, results will be identical.
     //   This is an important property as it facilitate working with foreign code or larger codebase.
@@ -2583,7 +2583,7 @@ struct ImGuiStorage
     // [Internal]
     ImVector<ImGuiStoragePair>      Data;
 
-    // - Get***() functions find pair, never add/allocate. Pairs are sorted so a query is O(log N)
+    // - Get***() functions find pair, never add/allocate. Pairs are sorted so a query is O(log offN)
     // - Set***() functions find pair, insertion on demand if missing.
     // - Sorted insertion is costly, paid once. A typical frame shouldn't need to insert any new pair.
     void                Clear() { Data.clear(); }
@@ -3090,7 +3090,7 @@ struct ImDrawList
 
     // General polygon
     // - Only simple polygons are supported by filling functions (no self-intersections, no holes).
-    // - Concave polygon fill is more expensive than convex one: it has O(N^2) complexity. Provided as a convenience fo user but not used by main library.
+    // - Concave polygon fill is more expensive than convex one: it has O(offN^2) complexity. Provided as a convenience fo user but not used by main library.
     IMGUI_API void  AddPolyline(const ImVec2* points, int num_points, ImU32 col, ImDrawFlags flags, float thickness);
     IMGUI_API void  AddConvexPolyFilled(const ImVec2* points, int num_points, ImU32 col);
     IMGUI_API void  AddConcavePolyFilled(const ImVec2* points, int num_points, ImU32 col);

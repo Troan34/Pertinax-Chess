@@ -270,6 +270,20 @@ namespace bit//bit management
 
 	}
 
+	/// <summary>
+	/// Uses tzcnt to give the index of the lsb
+	/// </summary>
+	/// <param name="Index">Setting this means that it will search for the least significant bit AFTER the index, NOT ZERO INCLUDED (e.g. bit[1] is actually bit[0])</param>
+	/// <param name="Bits">bits to be scanned</param>
+	/// <returns>The least significant bit index, returns 64 if not set</returns>
+	constexpr inline uint8_t lsb(size_t Bits, uint8_t Index = 0) noexcept
+	{
+		ASSERT(Index < 64);
+		register size_t Mask = (1ULL << Index) - 1;
+		Bits = Mask ^ (Bits | Mask);
+ 		return std::countr_zero(Bits);
+	}
+
 	class BitManager
 	{
 	private:

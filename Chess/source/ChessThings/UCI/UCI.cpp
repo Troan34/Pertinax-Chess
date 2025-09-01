@@ -81,7 +81,6 @@ void UCI::RunCommand()
 			auto Fen = Command.substr(Command.find(FEN_COMMAND, 8) + 4, std::string::npos);
 			Board board{ Fen };
 			*Vars_p.BoardSquare = board.GetPositionFromFEN();
-			*Vars_p.BoardSquare = board.GetPositionFromFEN();
 			*Vars_p.MoveNum = board.MoveNum();
 			*Vars_p.CanCastle = board.GetCanCastle();
 			if (board.GetPawnMoveSquare() != 65)

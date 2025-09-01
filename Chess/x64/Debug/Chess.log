@@ -1,5 +1,15 @@
-﻿  Evaluation.cpp
+﻿  Board.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(252,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+  (compiling source file 'source/ChessThings/Board.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(282,3): warning C5033: 'register' is no longer a supported storage class
+  (compiling source file 'source/ChessThings/Board.cpp')
+  
+  Evaluation.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(252,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(282,3): warning C5033: 'register' is no longer a supported storage class
   (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(56,56): warning C4244: '+=': conversion from 'double' to 'int32_t', possible loss of data
@@ -9,6 +19,9 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(220,
   
   IterativeD.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(252,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(282,3): warning C5033: 'register' is no longer a supported storage class
   (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(122,36): warning C4244: '=': conversion from 'float' to 'uint64_t', possible loss of data
@@ -26,12 +39,29 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Itera
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(252,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/Engine/Search.cpp')
   
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(282,3): warning C5033: 'register' is no longer a supported storage class
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(21,85): warning C4244: 'argument': conversion from 'const uint16_t' to 'uint8_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(220,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
   (compiling source file 'source/ChessThings/Engine/Search.cpp')
   
+  TT.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(252,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+  (compiling source file 'source/ChessThings/Engine/Transposition/TT.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(282,3): warning C5033: 'register' is no longer a supported storage class
+  (compiling source file 'source/ChessThings/Engine/Transposition/TT.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(8,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(13,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(71,49): warning C4267: 'return': conversion from 'size_t' to 'uint16_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp(94,18): warning C4244: 'argument': conversion from 'double' to 'unsigned __int64', possible loss of data
   ZobristHashing.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(252,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(282,3): warning C5033: 'register' is no longer a supported storage class
   (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(218,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
@@ -44,13 +74,16 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(220,
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(252,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(865,38): warning C4838: conversion from 'unsigned __int64' to '_Ty' requires a narrowing conversion
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(865,38): warning C4838:         with
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(865,38): warning C4838:         [
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(865,38): warning C4838:             _Ty=uint16_t
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(865,38): warning C4838:         ]
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(865,38): warning C4309: 'initializing': truncation of constant value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(901,31): warning C4244: 'return': conversion from 'uint64_t' to 'uint16_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(282,3): warning C5033: 'register' is no longer a supported storage class
+  (compiling source file 'source/ChessThings/LegalMoves.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(864,38): warning C4838: conversion from 'unsigned __int64' to '_Ty' requires a narrowing conversion
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(864,38): warning C4838:         with
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(864,38): warning C4838:         [
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(864,38): warning C4838:             _Ty=uint16_t
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(864,38): warning C4838:         ]
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(864,38): warning C4309: 'initializing': truncation of constant value
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(900,31): warning C4244: 'return': conversion from 'uint64_t' to 'uint16_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(218,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
@@ -61,6 +94,9 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(220,
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(252,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
   
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(282,3): warning C5033: 'register' is no longer a supported storage class
+  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
+  
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(220,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
   (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
   
@@ -68,7 +104,10 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(220,
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(252,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/ChessThings/UCI/UCI.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\UCI\UCI.cpp(128,73): warning C4267: '=': conversion from 'size_t' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(282,3): warning C5033: 'register' is no longer a supported storage class
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\UCI\UCI.cpp(127,73): warning C4267: '=': conversion from 'size_t' to 'uint8_t', possible loss of data
   Main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
   (compiling source file 'source/Main.cpp')
@@ -76,6 +115,9 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(1
       see previous definition of 'APIENTRY'
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(252,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
+  (compiling source file 'source/Main.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(282,3): warning C5033: 'register' is no longer a supported storage class
   (compiling source file 'source/Main.cpp')
   
   TestTexture2D.cpp
@@ -87,6 +129,9 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(1
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(252,12): warning C4244: '=': conversion from 'unsigned long' to 'uint8_t', possible loss of data
   (compiling source file 'source/tests/TestTexture2D.cpp')
   
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(282,3): warning C5033: 'register' is no longer a supported storage class
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3630,56): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
   (compiling source file 'source/tests/TestTexture2D.cpp')
       C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3630,56):
@@ -95,12 +140,11 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.3520
           see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,nullptr,unsigned __int64,0>(nullptr &&,unsigned __int64 &&)' being compiled
   
   Generating Code...
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(334,1): warning C4172: returning address of local variable or temporary : OffsetsForKnight
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(331,1): warning C4172: returning address of local variable or temporary : OffsetsForKnight
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(109,1): warning C4715: 'CastlingAbility::at': not all control paths return a value
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.h(59,1): warning C4715: 'Evaluator::ConvertPieceTypeToMatValue': not all control paths return a value
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(163,1): warning C4715: 'IterativeDeepening::GetPV': not all control paths return a value
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.h(59,1): warning C4715: 'Evaluator::ConvertPieceTypeToMatValue': not all control paths return a value
-glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\roanb\source\repos\Pertinax-Chess\x64\Debug\vc120.pdb'; linking object as if no debug info
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(334,1): warning C4715: 'Board::PieceType2letter': not all control paths return a value
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(270,1): warning C4715: 'Board::GetPieceType2Uncolored': not all control paths return a value
   Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Debug\Chess.exe

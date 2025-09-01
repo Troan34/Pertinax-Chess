@@ -537,7 +537,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 				}
 				else if (-g_mouseInput.yPos + 360.0f <= 175.0f and -g_mouseInput.yPos + 360.0f >= 87.5f)//the 'top' ones
 				{
-					if (g_mouseInput.xPos - 350.0f < 0.0f and g_mouseInput.xPos - 350.0f > -87.5f)//N
+					if (g_mouseInput.xPos - 350.0f < 0.0f and g_mouseInput.xPos - 350.0f > -87.5f)//offN
 					{
 						static_BoardSquare[rememberAttackedSquareForUserPromotion] = WHITE_KNIGHT;
 						WaitingForUserPromotion = false;
@@ -641,7 +641,7 @@ float RenderChessPieces::GetPieceTextureID(const std::array<uint8_t, 64>& BoardS
 		case WHITE_BISHOP:
 			return 8.0f;//B
 		case WHITE_KNIGHT:
-			return 9.0f;//N
+			return 9.0f;//offN
 		case WHITE_ROOK:
 			return 10.0f;//R
 		case WHITE_QUEEN:

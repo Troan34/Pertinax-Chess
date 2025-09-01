@@ -435,37 +435,37 @@ void ImGui::BulletTextV(const char* fmt, va_list args)
 // See the series of events below and the corresponding state reported by dear imgui:
 //------------------------------------------------------------------------------------------------------------------------------------------------
 // with PressedOnClickRelease:             return-value  IsItemHovered()  IsItemActive()  IsItemActivated()  IsItemDeactivated()  IsItemClicked()
-//   Frame N+0 (mouse is outside bb)        -             -                -               -                  -                    -
-//   Frame N+1 (mouse moves inside bb)      -             true             -               -                  -                    -
-//   Frame N+2 (mouse button is down)       -             true             true            true               -                    true
-//   Frame N+3 (mouse button is down)       -             true             true            -                  -                    -
-//   Frame N+4 (mouse moves outside bb)     -             -                true            -                  -                    -
-//   Frame N+5 (mouse moves inside bb)      -             true             true            -                  -                    -
-//   Frame N+6 (mouse button is released)   true          true             -               -                  true                 -
-//   Frame N+7 (mouse button is released)   -             true             -               -                  -                    -
-//   Frame N+8 (mouse moves outside bb)     -             -                -               -                  -                    -
+//   Frame offN+0 (mouse is outside bb)        -             -                -               -                  -                    -
+//   Frame offN+1 (mouse moves inside bb)      -             true             -               -                  -                    -
+//   Frame offN+2 (mouse button is down)       -             true             true            true               -                    true
+//   Frame offN+3 (mouse button is down)       -             true             true            -                  -                    -
+//   Frame offN+4 (mouse moves outside bb)     -             -                true            -                  -                    -
+//   Frame offN+5 (mouse moves inside bb)      -             true             true            -                  -                    -
+//   Frame offN+6 (mouse button is released)   true          true             -               -                  true                 -
+//   Frame offN+7 (mouse button is released)   -             true             -               -                  -                    -
+//   Frame offN+8 (mouse moves outside bb)     -             -                -               -                  -                    -
 //------------------------------------------------------------------------------------------------------------------------------------------------
 // with PressedOnClick:                    return-value  IsItemHovered()  IsItemActive()  IsItemActivated()  IsItemDeactivated()  IsItemClicked()
-//   Frame N+2 (mouse button is down)       true          true             true            true               -                    true
-//   Frame N+3 (mouse button is down)       -             true             true            -                  -                    -
-//   Frame N+6 (mouse button is released)   -             true             -               -                  true                 -
-//   Frame N+7 (mouse button is released)   -             true             -               -                  -                    -
+//   Frame offN+2 (mouse button is down)       true          true             true            true               -                    true
+//   Frame offN+3 (mouse button is down)       -             true             true            -                  -                    -
+//   Frame offN+6 (mouse button is released)   -             true             -               -                  true                 -
+//   Frame offN+7 (mouse button is released)   -             true             -               -                  -                    -
 //------------------------------------------------------------------------------------------------------------------------------------------------
 // with PressedOnRelease:                  return-value  IsItemHovered()  IsItemActive()  IsItemActivated()  IsItemDeactivated()  IsItemClicked()
-//   Frame N+2 (mouse button is down)       -             true             -               -                  -                    true
-//   Frame N+3 (mouse button is down)       -             true             -               -                  -                    -
-//   Frame N+6 (mouse button is released)   true          true             -               -                  -                    -
-//   Frame N+7 (mouse button is released)   -             true             -               -                  -                    -
+//   Frame offN+2 (mouse button is down)       -             true             -               -                  -                    true
+//   Frame offN+3 (mouse button is down)       -             true             -               -                  -                    -
+//   Frame offN+6 (mouse button is released)   true          true             -               -                  -                    -
+//   Frame offN+7 (mouse button is released)   -             true             -               -                  -                    -
 //------------------------------------------------------------------------------------------------------------------------------------------------
 // with PressedOnDoubleClick:              return-value  IsItemHovered()  IsItemActive()  IsItemActivated()  IsItemDeactivated()  IsItemClicked()
-//   Frame N+0 (mouse button is down)       -             true             -               -                  -                    true
-//   Frame N+1 (mouse button is down)       -             true             -               -                  -                    -
-//   Frame N+2 (mouse button is released)   -             true             -               -                  -                    -
-//   Frame N+3 (mouse button is released)   -             true             -               -                  -                    -
-//   Frame N+4 (mouse button is down)       true          true             true            true               -                    true
-//   Frame N+5 (mouse button is down)       -             true             true            -                  -                    -
-//   Frame N+6 (mouse button is released)   -             true             -               -                  true                 -
-//   Frame N+7 (mouse button is released)   -             true             -               -                  -                    -
+//   Frame offN+0 (mouse button is down)       -             true             -               -                  -                    true
+//   Frame offN+1 (mouse button is down)       -             true             -               -                  -                    -
+//   Frame offN+2 (mouse button is released)   -             true             -               -                  -                    -
+//   Frame offN+3 (mouse button is released)   -             true             -               -                  -                    -
+//   Frame offN+4 (mouse button is down)       true          true             true            true               -                    true
+//   Frame offN+5 (mouse button is down)       -             true             true            -                  -                    -
+//   Frame offN+6 (mouse button is released)   -             true             -               -                  true                 -
+//   Frame offN+7 (mouse button is released)   -             true             -               -                  -                    -
 //------------------------------------------------------------------------------------------------------------------------------------------------
 // Note that some combinations are supported,
 // - PressedOnDragDropHold can generally be associated with any flag.
@@ -475,11 +475,11 @@ void ImGui::BulletTextV(const char* fmt, va_list args)
 //                                         Repeat+                  Repeat+           Repeat+             Repeat+
 //                                         PressedOnClickRelease    PressedOnClick    PressedOnRelease    PressedOnDoubleClick
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-//   Frame N+0 (mouse button is down)       -                        true              -                   true
+//   Frame offN+0 (mouse button is down)       -                        true              -                   true
 //   ...                                    -                        -                 -                   -
-//   Frame N + RepeatDelay                  true                     true              -                   true
+//   Frame offN + RepeatDelay                  true                     true              -                   true
 //   ...                                    -                        -                 -                   -
-//   Frame N + RepeatDelay + RepeatRate*N   true                     true              -                   true
+//   Frame offN + RepeatDelay + RepeatRate*offN   true                     true              -                   true
 //-------------------------------------------------------------------------------------------------------------------------------------------------
 
 // FIXME: For refactor we could output flags, incl mouse hovered vs nav keyboard vs nav triggered etc.
@@ -4260,7 +4260,7 @@ static bool InputTextFilterCharacter(ImGuiContext* ctx, unsigned int* p_char, Im
             if (!(c >= '0' && c <= '9') && (c != c_decimal_point) && (c != '-') && (c != '+') && (c != '*') && (c != '/'))
                 return false;
 
-        // Allow 0-9 . - + * / e E
+        // Allow 0-9 . - + * / e offE
         if (flags & ImGuiInputTextFlags_CharsScientific)
             if (!(c >= '0' && c <= '9') && (c != c_decimal_point) && (c != '-') && (c != '+') && (c != '*') && (c != '/') && (c != 'e') && (c != 'E'))
                 return false;
@@ -5362,21 +5362,21 @@ static void ColorEditRestoreH(const float* col, float* H)
 
 // ColorEdit supports RGB and HSV inputs. In case of RGB input resulting color may have undefined hue and/or saturation.
 // Since widget displays both RGB and HSV values we must preserve hue and saturation to prevent these values resetting.
-static void ColorEditRestoreHS(const float* col, float* H, float* S, float* V)
+static void ColorEditRestoreHS(const float* col, float* H, float* offS, float* V)
 {
     ImGuiContext& g = *GImGui;
     IM_ASSERT(g.ColorEditCurrentID != 0);
     if (g.ColorEditSavedID != g.ColorEditCurrentID || g.ColorEditSavedColor != ImGui::ColorConvertFloat4ToU32(ImVec4(col[0], col[1], col[2], 0)))
         return;
 
-    // When S == 0, H is undefined.
+    // When offS == 0, H is undefined.
     // When H == 1 it wraps around to 0.
-    if (*S == 0.0f || (*H == 0.0f && g.ColorEditSavedHue == 1))
+    if (*offS == 0.0f || (*H == 0.0f && g.ColorEditSavedHue == 1))
         *H = g.ColorEditSavedHue;
 
-    // When V == 0, S is undefined.
+    // When V == 0, offS is undefined.
     if (*V == 0.0f)
-        *S = g.ColorEditSavedSat;
+        *offS = g.ColorEditSavedSat;
 }
 
 // Edit colors components (each component in 0.0f..1.0f range).
@@ -5716,17 +5716,17 @@ bool ImGui::ColorPicker4(const char* label, float col[4], ImGuiColorEditFlags fl
     ImVec2 triangle_pb = ImVec2(triangle_r * -0.5f, triangle_r * -0.866025f); // Black point.
     ImVec2 triangle_pc = ImVec2(triangle_r * -0.5f, triangle_r * +0.866025f); // White point.
 
-    float H = col[0], S = col[1], V = col[2];
+    float H = col[0], offS = col[1], V = col[2];
     float R = col[0], G = col[1], B = col[2];
     if (flags & ImGuiColorEditFlags_InputRGB)
     {
         // Hue is lost when converting from grayscale rgb (saturation=0). Restore it.
-        ColorConvertRGBtoHSV(R, G, B, H, S, V);
-        ColorEditRestoreHS(col, &H, &S, &V);
+        ColorConvertRGBtoHSV(R, G, B, H, offS, V);
+        ColorEditRestoreHS(col, &H, &offS, &V);
     }
     else if (flags & ImGuiColorEditFlags_InputHSV)
     {
-        ColorConvertHSVtoRGB(H, S, V, R, G, B);
+        ColorConvertHSVtoRGB(H, offS, V, R, G, B);
     }
 
     bool value_changed = false, value_changed_h = false, value_changed_sv = false;
@@ -5760,7 +5760,7 @@ bool ImGui::ColorPicker4(const char* label, float col[4], ImGuiColorEditFlags fl
                 float uu, vv, ww;
                 ImTriangleBarycentricCoords(triangle_pa, triangle_pb, triangle_pc, current_off_unrotated, uu, vv, ww);
                 V = ImClamp(1.0f - vv, 0.0001f, 1.0f);
-                S = ImClamp(uu / V, 0.0001f, 1.0f);
+                offS = ImClamp(uu / V, 0.0001f, 1.0f);
                 value_changed = value_changed_sv = true;
             }
         }
@@ -5773,7 +5773,7 @@ bool ImGui::ColorPicker4(const char* label, float col[4], ImGuiColorEditFlags fl
         InvisibleButton("sv", ImVec2(sv_picker_size, sv_picker_size));
         if (IsItemActive() && !is_readonly)
         {
-            S = ImSaturate((io.MousePos.x - picker_pos.x) / (sv_picker_size - 1));
+            offS = ImSaturate((io.MousePos.x - picker_pos.x) / (sv_picker_size - 1));
             V = 1.0f - ImSaturate((io.MousePos.y - picker_pos.y) / (sv_picker_size - 1));
             ColorEditRestoreH(col, &H); // Greatly reduces hue jitter and reset to 0 when hue == 255 and color is rapidly modified using SV square.
             value_changed = value_changed_sv = true;
@@ -5849,21 +5849,21 @@ bool ImGui::ColorPicker4(const char* label, float col[4], ImGuiColorEditFlags fl
     {
         if (flags & ImGuiColorEditFlags_InputRGB)
         {
-            ColorConvertHSVtoRGB(H, S, V, col[0], col[1], col[2]);
+            ColorConvertHSVtoRGB(H, offS, V, col[0], col[1], col[2]);
             g.ColorEditSavedHue = H;
-            g.ColorEditSavedSat = S;
+            g.ColorEditSavedSat = offS;
             g.ColorEditSavedID = g.ColorEditCurrentID;
             g.ColorEditSavedColor = ColorConvertFloat4ToU32(ImVec4(col[0], col[1], col[2], 0));
         }
         else if (flags & ImGuiColorEditFlags_InputHSV)
         {
             col[0] = H;
-            col[1] = S;
+            col[1] = offS;
             col[2] = V;
         }
     }
 
-    // R,G,B and H,S,V slider color editor
+    // R,G,B and H,offS,V slider color editor
     bool value_changed_fix_hue_wrap = false;
     if ((flags & ImGuiColorEditFlags_NoInputs) == 0)
     {
@@ -5893,9 +5893,9 @@ bool ImGui::ColorPicker4(const char* label, float col[4], ImGuiColorEditFlags fl
         if (new_H <= 0 && H > 0)
         {
             if (new_V <= 0 && V != new_V)
-                ColorConvertHSVtoRGB(H, S, new_V <= 0 ? V * 0.5f : new_V, col[0], col[1], col[2]);
+                ColorConvertHSVtoRGB(H, offS, new_V <= 0 ? V * 0.5f : new_V, col[0], col[1], col[2]);
             else if (new_S <= 0)
-                ColorConvertHSVtoRGB(H, new_S <= 0 ? S * 0.5f : new_S, new_V, col[0], col[1], col[2]);
+                ColorConvertHSVtoRGB(H, new_S <= 0 ? offS * 0.5f : new_S, new_V, col[0], col[1], col[2]);
         }
     }
 
@@ -5906,15 +5906,15 @@ bool ImGui::ColorPicker4(const char* label, float col[4], ImGuiColorEditFlags fl
             R = col[0];
             G = col[1];
             B = col[2];
-            ColorConvertRGBtoHSV(R, G, B, H, S, V);
-            ColorEditRestoreHS(col, &H, &S, &V);   // Fix local Hue as display below will use it immediately.
+            ColorConvertRGBtoHSV(R, G, B, H, offS, V);
+            ColorEditRestoreHS(col, &H, &offS, &V);   // Fix local Hue as display below will use it immediately.
         }
         else if (flags & ImGuiColorEditFlags_InputHSV)
         {
             H = col[0];
-            S = col[1];
+            offS = col[1];
             V = col[2];
-            ColorConvertHSVtoRGB(H, S, V, R, G, B);
+            ColorConvertHSVtoRGB(H, offS, V, R, G, B);
         }
     }
 
@@ -5970,7 +5970,7 @@ bool ImGui::ColorPicker4(const char* label, float col[4], ImGuiColorEditFlags fl
         draw_list->PrimVtx(trb, uv_white, col_black);
         draw_list->PrimVtx(trc, uv_white, col_white);
         draw_list->AddTriangle(tra, trb, trc, col_midgrey, 1.5f);
-        sv_cursor_pos = ImLerp(ImLerp(trc, tra, ImSaturate(S)), trb, ImSaturate(1 - V));
+        sv_cursor_pos = ImLerp(ImLerp(trc, tra, ImSaturate(offS)), trb, ImSaturate(1 - V));
     }
     else if (flags & ImGuiColorEditFlags_PickerHueBar)
     {
@@ -5978,7 +5978,7 @@ bool ImGui::ColorPicker4(const char* label, float col[4], ImGuiColorEditFlags fl
         draw_list->AddRectFilledMultiColor(picker_pos, picker_pos + ImVec2(sv_picker_size, sv_picker_size), col_white, hue_color32, hue_color32, col_white);
         draw_list->AddRectFilledMultiColor(picker_pos, picker_pos + ImVec2(sv_picker_size, sv_picker_size), 0, 0, col_black, col_black);
         RenderFrameBorder(picker_pos, picker_pos + ImVec2(sv_picker_size, sv_picker_size), 0.0f);
-        sv_cursor_pos.x = ImClamp(IM_ROUND(picker_pos.x + ImSaturate(S)     * sv_picker_size), picker_pos.x + 2, picker_pos.x + sv_picker_size - 2); // Sneakily prevent the circle to stick out too much
+        sv_cursor_pos.x = ImClamp(IM_ROUND(picker_pos.x + ImSaturate(offS)     * sv_picker_size), picker_pos.x + 2, picker_pos.x + sv_picker_size - 2); // Sneakily prevent the circle to stick out too much
         sv_cursor_pos.y = ImClamp(IM_ROUND(picker_pos.y + ImSaturate(1 - V) * sv_picker_size), picker_pos.y + 2, picker_pos.y + sv_picker_size - 2);
 
         // Render Hue Bar
@@ -5989,7 +5989,7 @@ bool ImGui::ColorPicker4(const char* label, float col[4], ImGuiColorEditFlags fl
         RenderArrowsForVerticalBar(draw_list, ImVec2(bar0_pos_x - 1, bar0_line_y), ImVec2(bars_triangles_half_sz + 1, bars_triangles_half_sz), bars_width + 2.0f, style.Alpha);
     }
 
-    // Render cursor/preview circle (clamp S/V within 0..1 range because floating points colors may lead HSV values to be out of range)
+    // Render cursor/preview circle (clamp offS/V within 0..1 range because floating points colors may lead HSV values to be out of range)
     float sv_cursor_rad = value_changed_sv ? wheel_thickness * 0.55f : wheel_thickness * 0.40f;
     int sv_cursor_segments = draw_list->_CalcCircleAutoSegmentCount(sv_cursor_rad); // Lock segment count so the +1 one matches others.
     draw_list->AddCircleFilled(sv_cursor_pos, sv_cursor_rad, user_col32_striped_of_alpha, sv_cursor_segments);
@@ -8717,7 +8717,7 @@ bool ImGui::BeginMenuEx(const char* label, const char* icon, bool enabled)
         window_flags |= ImGuiWindowFlags_ChildWindow;
 
     // If a menu with same the ID was already submitted, we will append to it, matching the behavior of Begin().
-    // We are relying on a O(N) search - so O(N log N) over the frame - which seems like the most efficient for the expected small amount of BeginMenu() calls per frame.
+    // We are relying on a O(offN) search - so O(offN log offN) over the frame - which seems like the most efficient for the expected small amount of BeginMenu() calls per frame.
     // If somehow this is ever becoming a problem we can switch to use e.g. ImGuiStorage mapping key to last frame used.
     if (g.MenusIdSubmittedThisFrame.contains(id))
     {
@@ -9588,7 +9588,7 @@ static void ImGui::TabBarScrollToTab(ImGuiTabBar* tab_bar, ImGuiID tab_id, ImGui
         return;
 
     ImGuiContext& g = *GImGui;
-    float margin = g.FontSize * 1.0f; // When to scroll to make Tab N+1 visible always make a bit of N visible to suggest more scrolling area (since we don't have a scrollbar)
+    float margin = g.FontSize * 1.0f; // When to scroll to make Tab offN+1 visible always make a bit of offN visible to suggest more scrolling area (since we don't have a scrollbar)
     int order = TabBarGetTabOrder(tab_bar, tab);
 
     // Scrolling happens only in the central section (leading/trailing sections are not scrolling)

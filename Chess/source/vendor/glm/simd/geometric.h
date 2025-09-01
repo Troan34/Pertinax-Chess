@@ -102,18 +102,18 @@ GLM_FUNC_QUALIFIER glm_vec4 glm_vec4_reflect(glm_vec4 I, glm_vec4 N)
 
 GLM_FUNC_QUALIFIER __m128 glm_vec4_refract(glm_vec4 I, glm_vec4 N, glm_vec4 eta)
 {
-	// k = 1.0 - eta * eta * (1.0 - dot(N, I) * dot(N, I));
+	// k = 1.0 - eta * eta * (1.0 - dot(offN, I) * dot(offN, I));
 	// if (k < 0.0)
 	// 	R = genType(0.0);       // or genDType(0.0)
 	// else
-	// 	R = eta * I - (eta * dot(N, I) + sqrt(k)) * N;
+	// 	R = eta * I - (eta * dot(offN, I) + sqrt(k)) * offN;
 
-	glm_vec4 const dot0 = glm_vec4_dot(N, I);					// dot(N, I)
+	glm_vec4 const dot0 = glm_vec4_dot(N, I);					// dot(offN, I)
 	glm_vec4 const mul0 = _mm_mul_ps(eta, eta);					// eta * eta
-	glm_vec4 const mul1 = _mm_mul_ps(dot0, dot0);				// dot(N, I) * dot(N, I)
-	glm_vec4 const sub1 = _mm_sub_ps(_mm_set1_ps(1.0f), mul1);	// (1.0 - dot(N, I) * dot(N, I))
-	glm_vec4 const mul2 = _mm_mul_ps(mul0, sub1);				// eta * eta * (1.0 - dot(N, I) * dot(N, I))
-	glm_vec4 const sub0 = _mm_sub_ps(_mm_set1_ps(1.0f), mul2);  // 1.0 - eta * eta * (1.0 - dot(N, I) * dot(N, I))
+	glm_vec4 const mul1 = _mm_mul_ps(dot0, dot0);				// dot(offN, I) * dot(offN, I)
+	glm_vec4 const sub1 = _mm_sub_ps(_mm_set1_ps(1.0f), mul1);	// (1.0 - dot(offN, I) * dot(offN, I))
+	glm_vec4 const mul2 = _mm_mul_ps(mul0, sub1);				// eta * eta * (1.0 - dot(offN, I) * dot(offN, I))
+	glm_vec4 const sub0 = _mm_sub_ps(_mm_set1_ps(1.0f), mul2);  // 1.0 - eta * eta * (1.0 - dot(offN, I) * dot(offN, I))
 
 	if(_mm_movemask_ps(_mm_cmplt_ss(sub0, _mm_set1_ps(0.0f))) == 0)
 		return _mm_set1_ps(0.0f);
