@@ -312,6 +312,7 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash
 std::vector<GuessStruct> Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& fun_BoardSquare)
 {
 	std::vector<GuessStruct> f_OrderedMoves;
+	f_OrderedMoves.reserve(LegalMoves.m_NumOfLegalMoves);
 	uint8_t count = 0;
 	bool flag = true;
 

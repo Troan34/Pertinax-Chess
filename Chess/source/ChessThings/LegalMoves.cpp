@@ -113,8 +113,8 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 		uint16_t RookAttackIndex = mult_rightShift(blockers.ReadBits() & ROOK_MASKS[BoardSquarePos], ROOK_MAGICS[BoardSquarePos], RookShift);
 		uint16_t BishopAttackIndex = mult_rightShift(blockers.ReadBits() & BISHOP_MASKS[BoardSquarePos], BISHOP_MAGICS[BoardSquarePos], BishopShift);
 
-		uint64_t RookAttack = ROOK_ATTACKS[BoardSquarePos][RookAttackIndex];
-		uint64_t BishopAttack = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
+		bit::BitBoard64 RookAttack = ROOK_ATTACKS[BoardSquarePos][RookAttackIndex];
+		bit::BitBoard64 BishopAttack = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
 
 		AttackedSquares |= (RookAttack | BishopAttack);
 
@@ -588,10 +588,11 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 			}
 		}
 
-
-		for (uint8_t KingMove = 0; KingMove <= MAX_SQUARE; KingMove++)
+		auto MovesCopy = moves[BoardSquareOfKingToMove].TargetSquares;
+		uint8_t KingMove = 0;
+		while (true)
 		{
-			if (!moves[BoardSquareOfKingToMove].TargetSquares[KingMove]) { continue; }
+			if (!bit::pop_lsb(MovesCopy, KingMove)) { break; }
 
 			//checks if possible move square is under attack
 			if (OppositeMoves.AttackedSquares[KingMove] == true)
@@ -628,6 +629,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 				continue;
 			}
 
+			auto MovesCopy = Piece.TargetSquares;
 			//if in check and count is under abs pin, unable to move
 			if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 65 and NumberOfChecks == 1)
 			{
@@ -640,9 +642,8 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 				uint8_t Move = 0;
 				while (true)
 				{
-					Move = bit::lsb(Piece.TargetSquares, Move + 1);
-					if (Move == 64) break;//moves finished
-
+					if (!bit::pop_lsb(MovesCopy, Move)) { break; }
+					
 					//for those things that happen with pawns
 					if (Piece.PieceType == BLACK_PAWN or Piece.PieceType == WHITE_PAWN)
 					{
@@ -655,7 +656,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 
 					if ((OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 65 and NumberOfChecks == 0) or NumberOfChecks == 1)
 					{
-						//change the for loop Move so that en passant makes sense
+						//if move is an en passant add +-8 to move
 						if ((Piece.PieceType == BLACK_PAWN or Piece.PieceType == WHITE_PAWN) and (abs(count - Move) == NW or abs(count - Move) == NE) and m_BoardSquare[Move] == 0)
 						{
 							Piece.PieceType == WHITE_PAWN ? Move -= 8 : Move += 8;

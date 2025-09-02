@@ -1,0 +1,1782 @@
+[INFO  ] [15:23:08.180238] <   > fastchess --- fastchess alpha 1.4.0 20250702-2a80921
+[INFO  ] [15:23:08.180416] <   > fastchess --- Setting seed to: 4382511928488263131
+[INFO  ] [15:23:08.181053] <   > fastchess --- Starting tournament...
+[Engine] [15:23:08.314526] <  6> Engine1 <--- uci
+[Engine] [15:23:08.544363] <  6> Engine1 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:23:08.544434] <  6> Engine1 ---> 'help' for commands
+[Engine] [15:23:08.544462] <  6> Engine1 ---> id name Pertinax Chess 0.1
+[Engine] [15:23:08.544481] <  6> Engine1 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:23:08.544522] <  6> Engine1 ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:23:08.544538] <  6> Engine1 ---> option name type button EngineOn default On
+[Engine] [15:23:08.544554] <  6> Engine1 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:23:08.544570] <  6> Engine1 ---> option name type button Gui default Off
+[Engine] [15:23:08.544586] <  6> Engine1 ---> uciok
+[Engine] [15:23:08.587526] <  7> Engine1 <--- uci
+[Engine] [15:23:08.831727] <  7> Engine1 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:23:08.831787] <  7> Engine1 ---> 'help' for commands
+[Engine] [15:23:08.831815] <  7> Engine1 ---> id name Pertinax Chess 0.1
+[Engine] [15:23:08.831833] <  7> Engine1 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:23:08.831849] <  7> Engine1 ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:23:08.831865] <  7> Engine1 ---> option name type button EngineOn default On
+[Engine] [15:23:08.831881] <  7> Engine1 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:23:08.831896] <  7> Engine1 ---> option name type button Gui default Off
+[Engine] [15:23:08.831911] <  7> Engine1 ---> uciok
+[Engine] [15:23:08.898030] <  5> EngineOld <--- uci
+[Engine] [15:23:09.126715] <  5> EngineOld ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:23:09.126791] <  5> EngineOld ---> 'help' for commands
+[Engine] [15:23:09.126836] <  5> EngineOld ---> id name Pertinax Chess 0.1
+[Engine] [15:23:09.126870] <  5> EngineOld ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:23:09.126899] <  5> EngineOld ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:23:09.126923] <  5> EngineOld ---> option name type button EngineOn default On
+[Engine] [15:23:09.126949] <  5> EngineOld ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:23:09.126979] <  5> EngineOld ---> option name type button Gui default Off
+[Engine] [15:23:09.127008] <  5> EngineOld ---> uciok
+[Engine] [15:23:09.201421] <  8> EngineOld <--- uci
+[Engine] [15:23:09.449272] <  8> EngineOld ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:23:09.449340] <  8> EngineOld ---> 'help' for commands
+[Engine] [15:23:09.449370] <  8> EngineOld ---> id name Pertinax Chess 0.1
+[Engine] [15:23:09.449390] <  8> EngineOld ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:23:09.449420] <  8> EngineOld ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:23:09.449442] <  8> EngineOld ---> option name type button EngineOn default On
+[Engine] [15:23:09.449458] <  8> EngineOld ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:23:09.449474] <  8> EngineOld ---> option name type button Gui default Off
+[Engine] [15:23:09.449489] <  8> EngineOld ---> uciok
+[Engine] [15:23:09.574231] <  3> Engine1 <--- uci
+[Engine] [15:23:09.832384] <  3> Engine1 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:23:09.832461] <  3> Engine1 ---> 'help' for commands
+[Engine] [15:23:09.832488] <  3> Engine1 ---> id name Pertinax Chess 0.1
+[Engine] [15:23:09.832507] <  3> Engine1 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:23:09.832524] <  3> Engine1 ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:23:09.832540] <  3> Engine1 ---> option name type button EngineOn default On
+[Engine] [15:23:09.832555] <  3> Engine1 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:23:09.832619] <  3> Engine1 ---> option name type button Gui default Off
+[Engine] [15:23:09.832641] <  3> Engine1 ---> uciok
+[Engine] [15:23:09.970719] <  4> EngineOld <--- uci
+[Engine] [15:23:10.233067] <  4> EngineOld ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:23:10.233125] <  4> EngineOld ---> 'help' for commands
+[Engine] [15:23:10.233151] <  4> EngineOld ---> id name Pertinax Chess 0.1
+[Engine] [15:23:10.233174] <  4> EngineOld ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:23:10.233208] <  4> EngineOld ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:23:10.233226] <  4> EngineOld ---> option name type button EngineOn default On
+[Engine] [15:23:10.233242] <  4> EngineOld ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:23:10.233261] <  4> EngineOld ---> option name type button Gui default Off
+[Engine] [15:23:10.233277] <  4> EngineOld ---> uciok
+[Engine] [15:23:10.371294] <  6> EngineOld <--- uci
+[Engine] [15:23:10.622440] <  6> EngineOld ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:23:10.622519] <  6> EngineOld ---> 'help' for commands
+[Engine] [15:23:10.622549] <  6> EngineOld ---> id name Pertinax Chess 0.1
+[Engine] [15:23:10.622584] <  6> EngineOld ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:23:10.622617] <  6> EngineOld ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:23:10.622642] <  6> EngineOld ---> option name type button EngineOn default On
+[Engine] [15:23:10.622660] <  6> EngineOld ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:23:10.622679] <  6> EngineOld ---> option name type button Gui default Off
+[Engine] [15:23:10.622700] <  6> EngineOld ---> uciok
+[Engine] [15:23:10.622727] <  6> Engine1 <--- ucinewgame
+[Engine] [15:23:10.622761] <  6> Engine1 <--- isready
+[Engine] [15:23:10.630979] <  6> Engine1 ---> readyok
+[Engine] [15:23:10.631077] <  6> EngineOld <--- ucinewgame
+[Engine] [15:23:10.631120] <  6> EngineOld <--- isready
+[Engine] [15:23:10.647028] <  6> EngineOld ---> readyok
+[Engine] [15:23:10.647141] <  6> Engine1 <--- isready
+[Engine] [15:23:10.662549] <  6> Engine1 ---> readyok
+[Engine] [15:23:10.662656] <  6> Engine1 <--- isready
+[Engine] [15:23:10.678048] <  6> Engine1 ---> readyok
+[Engine] [15:23:10.678138] <  6> Engine1 <--- position startpos
+[Engine] [15:23:10.678194] <  6> Engine1 <--- isready
+[Engine] [15:23:10.693561] <  6> Engine1 ---> readyok
+[Engine] [15:23:10.693655] <  6> Engine1 <--- go wtime 62000 btime 62000 winc 2000 binc 2000
+[Engine] [15:23:10.706868] <  6> Engine1 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:23:10.706959] <  6> Engine1 ---> info depth 1 score cp 0 nodes 21 nps 21 hashfull 0 pv a2a4 
+[Engine] [15:23:10.707275] <  6> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:10.707320] <  6> Engine1 ---> info depth 2 score cp 0 nodes 100 nps 100 hashfull 0 pv b1a3 a7a5 
+[Engine] [15:23:10.717991] <  6> Engine1 ---> TT Hits / Cutoffs= 25 / 1
+[Engine] [15:23:10.718071] <  6> Engine1 ---> info depth 3 score cp -10 nodes 2021 nps 2021 hashfull 0 pv b1a3 c7c5 b2b4 
+[Engine] [15:23:10.733223] <  6> Engine1 ---> TT Hits / Cutoffs= 91 / 2
+[Engine] [15:23:10.733281] <  6> Engine1 ---> info depth 4 score cp -8 nodes 2849 nps 2849 hashfull 0 pv b1a3 c7c5 b2b3 d8a5 
+[Engine] [15:23:10.851800] <  7> EngineOld <--- uci
+[Engine] [15:23:11.117794] <  7> EngineOld ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:23:11.117854] <  7> EngineOld ---> 'help' for commands
+[Engine] [15:23:11.117904] <  7> EngineOld ---> id name Pertinax Chess 0.1
+[Engine] [15:23:11.117936] <  7> EngineOld ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:23:11.117957] <  7> EngineOld ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:23:11.117973] <  7> EngineOld ---> option name type button EngineOn default On
+[Engine] [15:23:11.117989] <  7> EngineOld ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:23:11.118045] <  7> EngineOld ---> option name type button Gui default Off
+[Engine] [15:23:11.118067] <  7> EngineOld ---> uciok
+[Engine] [15:23:11.118094] <  7> Engine1 <--- ucinewgame
+[Engine] [15:23:11.118123] <  7> Engine1 <--- isready
+[Engine] [15:23:11.129464] <  7> Engine1 ---> readyok
+[Engine] [15:23:11.129514] <  7> EngineOld <--- ucinewgame
+[Engine] [15:23:11.129562] <  7> EngineOld <--- isready
+[Engine] [15:23:11.137874] <  6> Engine1 ---> TT Hits / Cutoffs= 1003 / 58
+[Engine] [15:23:11.137935] <  6> Engine1 ---> info depth 5 score cp 93 nodes 79313 nps 79313 hashfull 1 pv e2e4 a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:23:11.137965] <  6> Engine1 ---> bestmove e2e4
+[Engine] [15:23:11.137990] <  6> Engine1 <--- isready
+[Engine] [15:23:11.145532] <  7> EngineOld ---> readyok
+[Engine] [15:23:11.145630] <  7> Engine1 <--- isready
+[Engine] [15:23:11.161055] <  7> Engine1 ---> readyok
+[Engine] [15:23:11.161164] <  7> Engine1 <--- isready
+[Engine] [15:23:11.176628] <  7> Engine1 ---> readyok
+[Engine] [15:23:11.176659] <  6> Engine1 ---> readyok
+[Engine] [15:23:11.176720] <  7> Engine1 <--- position startpos
+[Engine] [15:23:11.176758] <  7> Engine1 <--- isready
+[Engine] [15:23:11.176832] <  6> EngineOld <--- isready
+[Engine] [15:23:11.192172] <  6> EngineOld ---> readyok
+[Engine] [15:23:11.192174] <  7> Engine1 ---> readyok
+[Engine] [15:23:11.192260] <  6> EngineOld <--- position startpos moves e2e4
+[Engine] [15:23:11.192298] <  7> Engine1 <--- go wtime 62000 btime 62000 winc 2000 binc 2000
+[Engine] [15:23:11.192353] <  6> EngineOld <--- isready
+[Engine] [15:23:11.205011] <  7> Engine1 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:23:11.205081] <  7> Engine1 ---> info depth 1 score cp 0 nodes 21 nps 21 hashfull 0 pv a2a4 
+[Engine] [15:23:11.205399] <  7> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:11.205418] <  7> Engine1 ---> info depth 2 score cp 0 nodes 100 nps 100 hashfull 0 pv b1a3 a7a5 
+[Engine] [15:23:11.207783] <  6> EngineOld ---> readyok
+[Engine] [15:23:11.207825] <  6> EngineOld <--- go wtime 63556 btime 62000 winc 2000 binc 2000
+[Engine] [15:23:11.214778] <  7> Engine1 ---> TT Hits / Cutoffs= 25 / 1
+[Engine] [15:23:11.214906] <  7> Engine1 ---> info depth 3 score cp -10 nodes 2021 nps 2021 hashfull 0 pv b1a3 c7c5 b2b4 
+[Engine] [15:23:11.220619] <  6> EngineOld ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:23:11.220685] <  6> EngineOld ---> info depth 1 score cp 10 nodes 21 nps 21 hashfull 0 pv a7a5 
+[Engine] [15:23:11.221322] <  6> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:11.221341] <  6> EngineOld ---> info depth 2 score cp 10 nodes 177 nps 177 hashfull 0 pv e7e5 a2a4 
+[Engine] [15:23:11.227412] <  6> EngineOld ---> TT Hits / Cutoffs= 22 / 1
+[Engine] [15:23:11.227503] <  6> EngineOld ---> info depth 3 score cp 12 nodes 963 nps 963 hashfull 0 pv g8f6 e4e5 d7d5 
+[Engine] [15:23:11.231253] <  7> Engine1 ---> TT Hits / Cutoffs= 91 / 2
+[Engine] [15:23:11.231320] <  7> Engine1 ---> info depth 4 score cp -8 nodes 2849 nps 2849 hashfull 0 pv b1a3 c7c5 b2b3 d8a5 
+[Engine] [15:23:11.323965] <  5> Engine1 <--- uci
+[Engine] [15:23:11.496034] <  6> EngineOld ---> TT Hits / Cutoffs= 215 / 3
+[Engine] [15:23:11.496110] <  6> EngineOld ---> info depth 4 score cp -93 nodes 45874 nps 45874 hashfull 1 pv a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:23:11.599287] <  5> Engine1 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:23:11.599360] <  5> Engine1 ---> 'help' for commands
+[Engine] [15:23:11.599395] <  5> Engine1 ---> id name Pertinax Chess 0.1
+[Engine] [15:23:11.599422] <  5> Engine1 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:23:11.599446] <  5> Engine1 ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:23:11.599470] <  5> Engine1 ---> option name type button EngineOn default On
+[Engine] [15:23:11.599493] <  5> Engine1 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:23:11.599517] <  5> Engine1 ---> option name type button Gui default Off
+[Engine] [15:23:11.599603] <  5> Engine1 ---> uciok
+[Engine] [15:23:11.599647] <  5> EngineOld <--- ucinewgame
+[Engine] [15:23:11.599687] <  5> EngineOld <--- isready
+[Engine] [15:23:11.612952] <  5> EngineOld ---> readyok
+[Engine] [15:23:11.613031] <  5> Engine1 <--- ucinewgame
+[Engine] [15:23:11.613078] <  5> Engine1 <--- isready
+[Engine] [15:23:11.629442] <  5> Engine1 ---> readyok
+[Engine] [15:23:11.629546] <  5> EngineOld <--- isready
+[Engine] [15:23:11.644559] <  5> EngineOld ---> readyok
+[Engine] [15:23:11.644634] <  5> EngineOld <--- isready
+[Engine] [15:23:11.660047] <  5> EngineOld ---> readyok
+[Engine] [15:23:11.660113] <  5> EngineOld <--- position startpos
+[Engine] [15:23:11.660147] <  5> EngineOld <--- isready
+[Engine] [15:23:11.676172] <  5> EngineOld ---> readyok
+[Engine] [15:23:11.676252] <  5> EngineOld <--- go wtime 62000 btime 62000 winc 2000 binc 2000
+[Engine] [15:23:11.678675] <  7> Engine1 ---> TT Hits / Cutoffs= 1003 / 58
+[Engine] [15:23:11.678728] <  7> Engine1 ---> info depth 5 score cp 93 nodes 79313 nps 79313 hashfull 1 pv e2e4 a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:23:11.678752] <  7> Engine1 ---> bestmove e2e4
+[Engine] [15:23:11.678772] <  7> Engine1 <--- isready
+[Engine] [15:23:11.691057] <  5> EngineOld ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:23:11.691138] <  5> EngineOld ---> info depth 1 score cp 0 nodes 21 nps 21 hashfull 0 pv a2a4 
+[Engine] [15:23:11.691461] <  5> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:11.691482] <  5> EngineOld ---> info depth 2 score cp 0 nodes 100 nps 100 hashfull 0 pv b1a3 a7a5 
+[Engine] [15:23:11.701460] <  5> EngineOld ---> TT Hits / Cutoffs= 25 / 1
+[Engine] [15:23:11.701568] <  5> EngineOld ---> info depth 3 score cp -10 nodes 2021 nps 2021 hashfull 0 pv b1a3 c7c5 b2b4 
+[Engine] [15:23:11.718997] <  5> EngineOld ---> TT Hits / Cutoffs= 91 / 2
+[Engine] [15:23:11.719063] <  5> EngineOld ---> info depth 4 score cp -8 nodes 2849 nps 2849 hashfull 0 pv b1a3 c7c5 b2b3 d8a5 
+[Engine] [15:23:11.722816] <  7> Engine1 ---> readyok
+[Engine] [15:23:11.722950] <  7> EngineOld <--- isready
+[Engine] [15:23:11.737759] <  7> EngineOld ---> readyok
+[Engine] [15:23:11.737831] <  7> EngineOld <--- position startpos moves e2e4
+[Engine] [15:23:11.737868] <  7> EngineOld <--- isready
+[Engine] [15:23:11.753805] <  7> EngineOld ---> readyok
+[Engine] [15:23:11.753896] <  7> EngineOld <--- go wtime 63514 btime 62000 winc 2000 binc 2000
+[Engine] [15:23:11.769198] <  7> EngineOld ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:23:11.769275] <  7> EngineOld ---> info depth 1 score cp 10 nodes 21 nps 21 hashfull 0 pv a7a5 
+[Engine] [15:23:11.770024] <  7> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:11.770059] <  7> EngineOld ---> info depth 2 score cp 10 nodes 177 nps 177 hashfull 0 pv e7e5 a2a4 
+[Engine] [15:23:11.776972] <  7> EngineOld ---> TT Hits / Cutoffs= 22 / 1
+[Engine] [15:23:11.777034] <  7> EngineOld ---> info depth 3 score cp 12 nodes 963 nps 963 hashfull 0 pv g8f6 e4e5 d7d5 
+[Engine] [15:23:11.902312] <  8> Engine1 <--- uci
+[Engine] [15:23:12.032242] <  7> EngineOld ---> TT Hits / Cutoffs= 215 / 3
+[Engine] [15:23:12.032320] <  7> EngineOld ---> info depth 4 score cp -93 nodes 45874 nps 45874 hashfull 1 pv a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:23:12.154705] <  5> EngineOld ---> TT Hits / Cutoffs= 1003 / 58
+[Engine] [15:23:12.154760] <  5> EngineOld ---> info depth 5 score cp 93 nodes 79313 nps 79313 hashfull 1 pv e2e4 a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:23:12.154784] <  5> EngineOld ---> bestmove e2e4
+[Engine] [15:23:12.154803] <  5> EngineOld <--- isready
+[Engine] [15:23:12.166675] <  8> Engine1 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:23:12.166734] <  8> Engine1 ---> 'help' for commands
+[Engine] [15:23:12.166761] <  8> Engine1 ---> id name Pertinax Chess 0.1
+[Engine] [15:23:12.166791] <  8> Engine1 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:23:12.166807] <  8> Engine1 ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:23:12.166825] <  8> Engine1 ---> option name type button EngineOn default On
+[Engine] [15:23:12.166846] <  8> Engine1 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:23:12.166866] <  8> Engine1 ---> option name type button Gui default Off
+[Engine] [15:23:12.166881] <  8> Engine1 ---> uciok
+[Engine] [15:23:12.166906] <  8> EngineOld <--- ucinewgame
+[Engine] [15:23:12.166931] <  8> EngineOld <--- isready
+[Engine] [15:23:12.173635] <  5> EngineOld ---> readyok
+[Engine] [15:23:12.173645] <  8> EngineOld ---> readyok
+[Engine] [15:23:12.173729] <  8> Engine1 <--- ucinewgame
+[Engine] [15:23:12.173775] <  8> Engine1 <--- isready
+[Engine] [15:23:12.173787] <  5> Engine1 <--- isready
+[Engine] [15:23:12.189695] <  5> Engine1 ---> readyok
+[Engine] [15:23:12.189695] <  8> Engine1 ---> readyok
+[Engine] [15:23:12.189796] <  5> Engine1 <--- position startpos moves e2e4
+[Engine] [15:23:12.189817] <  8> EngineOld <--- isready
+[Engine] [15:23:12.189843] <  5> Engine1 <--- isready
+[Engine] [15:23:12.205703] <  5> Engine1 ---> readyok
+[Engine] [15:23:12.205705] <  8> EngineOld ---> readyok
+[Engine] [15:23:12.205773] <  5> Engine1 <--- go wtime 63522 btime 62000 winc 2000 binc 2000
+[Engine] [15:23:12.205813] <  8> EngineOld <--- isready
+[Engine] [15:23:12.217986] <  5> Engine1 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:23:12.218056] <  5> Engine1 ---> info depth 1 score cp 10 nodes 21 nps 21 hashfull 0 pv a7a5 
+[Engine] [15:23:12.219247] <  5> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:12.219270] <  5> Engine1 ---> info depth 2 score cp 10 nodes 177 nps 177 hashfull 0 pv e7e5 a2a4 
+[Engine] [15:23:12.221851] <  8> EngineOld ---> readyok
+[Engine] [15:23:12.221910] <  8> EngineOld <--- position startpos
+[Engine] [15:23:12.221959] <  8> EngineOld <--- isready
+[Engine] [15:23:12.225811] <  5> Engine1 ---> TT Hits / Cutoffs= 22 / 1
+[Engine] [15:23:12.225888] <  5> Engine1 ---> info depth 3 score cp 12 nodes 963 nps 963 hashfull 0 pv g8f6 e4e5 d7d5 
+[Engine] [15:23:12.237925] <  8> EngineOld ---> readyok
+[Engine] [15:23:12.238020] <  8> EngineOld <--- go wtime 62000 btime 62000 winc 2000 binc 2000
+[Engine] [15:23:12.251655] <  8> EngineOld ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:23:12.251717] <  8> EngineOld ---> info depth 1 score cp 0 nodes 21 nps 21 hashfull 0 pv a2a4 
+[Engine] [15:23:12.252043] <  8> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:12.252063] <  8> EngineOld ---> info depth 2 score cp 0 nodes 100 nps 100 hashfull 0 pv b1a3 a7a5 
+[Engine] [15:23:12.261872] <  8> EngineOld ---> TT Hits / Cutoffs= 25 / 1
+[Engine] [15:23:12.261924] <  8> EngineOld ---> info depth 3 score cp -10 nodes 2021 nps 2021 hashfull 0 pv b1a3 c7c5 b2b4 
+[Engine] [15:23:12.277775] <  8> EngineOld ---> TT Hits / Cutoffs= 91 / 2
+[Engine] [15:23:12.277832] <  8> EngineOld ---> info depth 4 score cp -8 nodes 2849 nps 2849 hashfull 0 pv b1a3 c7c5 b2b3 d8a5 
+[Engine] [15:23:12.425923] <  6> EngineOld ---> TT Hits / Cutoffs= 3507 / 95
+[Engine] [15:23:12.425981] <  6> EngineOld ---> info depth 5 score cp 100 nodes 162390 nps 162390 hashfull 5 pv e7e5 g1f3 d8f6 f3g1 f6f2 
+[Engine] [15:23:12.426006] <  6> EngineOld ---> bestmove e7e5
+[Engine] [15:23:12.426025] <  6> EngineOld <--- isready
+[Engine] [15:23:12.433815] <  3> EngineOld <--- uci
+[Engine] [15:23:12.444736] <  6> EngineOld ---> readyok
+[Engine] [15:23:12.444943] <  6> Engine1 <--- isready
+[Engine] [15:23:12.460167] <  6> Engine1 ---> readyok
+[Engine] [15:23:12.460245] <  6> Engine1 <--- position startpos moves e2e4 e7e5
+[Engine] [15:23:12.460287] <  6> Engine1 <--- isready
+[Engine] [15:23:12.475760] <  6> Engine1 ---> readyok
+[Engine] [15:23:12.475841] <  6> Engine1 <--- go wtime 63556 btime 62782 winc 2000 binc 2000
+[Engine] [15:23:12.476442] <  6> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:12.476481] <  6> Engine1 ---> info depth 1 score cp -10 nodes 29 nps 29 hashfull 1 pv a2a4 
+[Engine] [15:23:12.476820] <  6> Engine1 ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:23:12.476865] <  6> Engine1 ---> info depth 2 score cp -10 nodes 67 nps 67 hashfull 1 pv a2a4 a7a6 
+[Engine] [15:23:12.487983] <  6> Engine1 ---> TT Hits / Cutoffs= 42 / 2
+[Engine] [15:23:12.488059] <  6> Engine1 ---> info depth 3 score cp 100 nodes 2161 nps 2161 hashfull 1 pv d1h5 a7a5 h5e5 
+[Engine] [15:23:12.500178] <  5> Engine1 ---> TT Hits / Cutoffs= 215 / 3
+[Engine] [15:23:12.500255] <  5> Engine1 ---> info depth 4 score cp -93 nodes 45874 nps 45874 hashfull 1 pv a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:23:12.536102] <  6> Engine1 ---> TT Hits / Cutoffs= 269 / 1
+[Engine] [15:23:12.536176] <  6> Engine1 ---> info depth 4 score cp 0 nodes 7313 nps 7313 hashfull 2 pv b2b3 c7c6 
+[Engine] [15:23:12.709076] <  3> EngineOld ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:23:12.709131] <  3> EngineOld ---> 'help' for commands
+[Engine] [15:23:12.709164] <  3> EngineOld ---> id name Pertinax Chess 0.1
+[Engine] [15:23:12.709191] <  3> EngineOld ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:23:12.709206] <  3> EngineOld ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:23:12.709227] <  3> EngineOld ---> option name type button EngineOn default On
+[Engine] [15:23:12.709242] <  3> EngineOld ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:23:12.709255] <  3> EngineOld ---> option name type button Gui default Off
+[Engine] [15:23:12.709269] <  3> EngineOld ---> uciok
+[Engine] [15:23:12.709296] <  3> Engine1 <--- ucinewgame
+[Engine] [15:23:12.709322] <  3> Engine1 <--- isready
+[Engine] [15:23:12.711031] <  3> Engine1 ---> readyok
+[Engine] [15:23:12.711082] <  3> EngineOld <--- ucinewgame
+[Engine] [15:23:12.711124] <  3> EngineOld <--- isready
+[Engine] [15:23:12.727021] <  3> EngineOld ---> readyok
+[Engine] [15:23:12.727102] <  3> Engine1 <--- isready
+[Engine] [15:23:12.728346] <  8> EngineOld ---> TT Hits / Cutoffs= 1003 / 58
+[Engine] [15:23:12.728382] <  8> EngineOld ---> info depth 5 score cp 93 nodes 79313 nps 79313 hashfull 1 pv e2e4 a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:23:12.728405] <  8> EngineOld ---> bestmove e2e4
+[Engine] [15:23:12.728422] <  8> EngineOld <--- isready
+[Engine] [15:23:12.742443] <  3> Engine1 ---> readyok
+[Engine] [15:23:12.742525] <  3> Engine1 <--- isready
+[Engine] [15:23:12.758109] <  3> Engine1 ---> readyok
+[Engine] [15:23:12.758109] <  8> EngineOld ---> readyok
+[Engine] [15:23:12.758192] <  3> Engine1 <--- position startpos
+[Engine] [15:23:12.758239] <  3> Engine1 <--- isready
+[Engine] [15:23:12.758300] <  8> Engine1 <--- isready
+[Engine] [15:23:12.773604] <  3> Engine1 ---> readyok
+[Engine] [15:23:12.773615] <  8> Engine1 ---> readyok
+[Engine] [15:23:12.773684] <  3> Engine1 <--- go wtime 62000 btime 62000 winc 2000 binc 2000
+[Engine] [15:23:12.773707] <  8> Engine1 <--- position startpos moves e2e4
+[Engine] [15:23:12.773756] <  8> Engine1 <--- isready
+[Engine] [15:23:12.787319] <  3> Engine1 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:23:12.787417] <  3> Engine1 ---> info depth 1 score cp 0 nodes 21 nps 21 hashfull 0 pv a2a4 
+[Engine] [15:23:12.787851] <  3> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:12.787894] <  3> Engine1 ---> info depth 2 score cp 0 nodes 100 nps 100 hashfull 0 pv b1a3 a7a5 
+[Engine] [15:23:12.789391] <  8> Engine1 ---> readyok
+[Engine] [15:23:12.789450] <  8> Engine1 <--- go wtime 63510 btime 62000 winc 2000 binc 2000
+[Engine] [15:23:12.798925] <  3> Engine1 ---> TT Hits / Cutoffs= 25 / 1
+[Engine] [15:23:12.799016] <  3> Engine1 ---> info depth 3 score cp -10 nodes 2021 nps 2021 hashfull 0 pv b1a3 c7c5 b2b4 
+[Engine] [15:23:12.801968] <  8> Engine1 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:23:12.802019] <  8> Engine1 ---> info depth 1 score cp 10 nodes 21 nps 21 hashfull 0 pv a7a5 
+[Engine] [15:23:12.802677] <  8> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:12.802699] <  8> Engine1 ---> info depth 2 score cp 10 nodes 177 nps 177 hashfull 0 pv e7e5 a2a4 
+[Engine] [15:23:12.807277] <  8> Engine1 ---> TT Hits / Cutoffs= 22 / 1
+[Engine] [15:23:12.807326] <  8> Engine1 ---> info depth 3 score cp 12 nodes 963 nps 963 hashfull 0 pv g8f6 e4e5 d7d5 
+[Engine] [15:23:12.816576] <  3> Engine1 ---> TT Hits / Cutoffs= 91 / 2
+[Engine] [15:23:12.816635] <  3> Engine1 ---> info depth 4 score cp -8 nodes 2849 nps 2849 hashfull 0 pv b1a3 c7c5 b2b3 d8a5 
+[Engine] [15:23:12.980585] <  7> EngineOld ---> TT Hits / Cutoffs= 3507 / 95
+[Engine] [15:23:12.980645] <  7> EngineOld ---> info depth 5 score cp 100 nodes 162390 nps 162390 hashfull 5 pv e7e5 g1f3 d8f6 f3g1 f6f2 
+[Engine] [15:23:12.980670] <  7> EngineOld ---> bestmove e7e5
+[Engine] [15:23:12.980689] <  7> EngineOld <--- isready
+[Engine] [15:23:13.011055] <  4> Engine1 <--- uci
+[Engine] [15:23:13.026334] <  7> EngineOld ---> readyok
+[Engine] [15:23:13.026508] <  7> Engine1 <--- isready
+[Engine] [15:23:13.042013] <  7> Engine1 ---> readyok
+[Engine] [15:23:13.042102] <  7> Engine1 <--- position startpos moves e2e4 e7e5
+[Engine] [15:23:13.042144] <  7> Engine1 <--- isready
+[Engine] [15:23:13.057571] <  7> Engine1 ---> readyok
+[Engine] [15:23:13.057649] <  7> Engine1 <--- go wtime 63514 btime 62774 winc 2000 binc 2000
+[Engine] [15:23:13.058175] <  7> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:13.058210] <  7> Engine1 ---> info depth 1 score cp -10 nodes 29 nps 29 hashfull 1 pv a2a4 
+[Engine] [15:23:13.058742] <  7> Engine1 ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:23:13.058774] <  7> Engine1 ---> info depth 2 score cp -10 nodes 67 nps 67 hashfull 1 pv a2a4 a7a6 
+[Engine] [15:23:13.072735] <  7> Engine1 ---> TT Hits / Cutoffs= 42 / 2
+[Engine] [15:23:13.072790] <  7> Engine1 ---> info depth 3 score cp 100 nodes 2161 nps 2161 hashfull 1 pv d1h5 a7a5 h5e5 
+[Engine] [15:23:13.080329] <  8> Engine1 ---> TT Hits / Cutoffs= 215 / 3
+[Engine] [15:23:13.080388] <  8> Engine1 ---> info depth 4 score cp -93 nodes 45874 nps 45874 hashfull 1 pv a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:23:13.126003] <  7> Engine1 ---> TT Hits / Cutoffs= 269 / 1
+[Engine] [15:23:13.126060] <  7> Engine1 ---> info depth 4 score cp 0 nodes 7313 nps 7313 hashfull 2 pv b2b3 c7c6 
+[Engine] [15:23:13.274926] <  3> Engine1 ---> TT Hits / Cutoffs= 1003 / 58
+[Engine] [15:23:13.274997] <  3> Engine1 ---> info depth 5 score cp 93 nodes 79313 nps 79313 hashfull 1 pv e2e4 a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:23:13.275034] <  3> Engine1 ---> bestmove e2e4
+[Engine] [15:23:13.275064] <  3> Engine1 <--- isready
+[Engine] [15:23:13.291780] <  3> Engine1 ---> readyok
+[Engine] [15:23:13.292073] <  3> EngineOld <--- isready
+[Engine] [15:23:13.300932] <  4> Engine1 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:23:13.300995] <  4> Engine1 ---> 'help' for commands
+[Engine] [15:23:13.301023] <  4> Engine1 ---> id name Pertinax Chess 0.1
+[Engine] [15:23:13.301055] <  4> Engine1 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:23:13.301071] <  4> Engine1 ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:23:13.301085] <  4> Engine1 ---> option name type button EngineOn default On
+[Engine] [15:23:13.301099] <  4> Engine1 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:23:13.301114] <  4> Engine1 ---> option name type button Gui default Off
+[Engine] [15:23:13.301128] <  4> Engine1 ---> uciok
+[Engine] [15:23:13.301152] <  4> EngineOld <--- ucinewgame
+[Engine] [15:23:13.301180] <  4> EngineOld <--- isready
+[Engine] [15:23:13.307792] <  3> EngineOld ---> readyok
+[Engine] [15:23:13.307805] <  4> EngineOld ---> readyok
+[Engine] [15:23:13.307883] <  3> EngineOld <--- position startpos moves e2e4
+[Engine] [15:23:13.307903] <  4> Engine1 <--- ucinewgame
+[Engine] [15:23:13.307925] <  3> EngineOld <--- isready
+[Engine] [15:23:13.307937] <  4> Engine1 <--- isready
+[Engine] [15:23:13.323868] <  3> EngineOld ---> readyok
+[Engine] [15:23:13.323868] <  4> Engine1 ---> readyok
+[Engine] [15:23:13.323962] <  3> EngineOld <--- go wtime 63499 btime 62000 winc 2000 binc 2000
+[Engine] [15:23:13.323985] <  4> EngineOld <--- isready
+[Engine] [15:23:13.338020] <  3> EngineOld ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:23:13.338095] <  3> EngineOld ---> info depth 1 score cp 10 nodes 21 nps 21 hashfull 0 pv a7a5 
+[Engine] [15:23:13.338965] <  3> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:13.339002] <  3> EngineOld ---> info depth 2 score cp 10 nodes 177 nps 177 hashfull 0 pv e7e5 a2a4 
+[Engine] [15:23:13.339538] <  4> EngineOld ---> readyok
+[Engine] [15:23:13.339585] <  4> EngineOld <--- isready
+[Engine] [15:23:13.345060] <  3> EngineOld ---> TT Hits / Cutoffs= 22 / 1
+[Engine] [15:23:13.345113] <  3> EngineOld ---> info depth 3 score cp 12 nodes 963 nps 963 hashfull 0 pv g8f6 e4e5 d7d5 
+[Engine] [15:23:13.354687] <  4> EngineOld ---> readyok
+[Engine] [15:23:13.354759] <  4> EngineOld <--- position startpos
+[Engine] [15:23:13.354812] <  4> EngineOld <--- isready
+[Engine] [15:23:13.370150] <  4> EngineOld ---> readyok
+[Engine] [15:23:13.370202] <  4> EngineOld <--- go wtime 62000 btime 62000 winc 2000 binc 2000
+[Engine] [15:23:13.383019] <  4> EngineOld ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:23:13.383094] <  4> EngineOld ---> info depth 1 score cp 0 nodes 21 nps 21 hashfull 0 pv a2a4 
+[Engine] [15:23:13.383423] <  4> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:13.383442] <  4> EngineOld ---> info depth 2 score cp 0 nodes 100 nps 100 hashfull 0 pv b1a3 a7a5 
+[Engine] [15:23:13.393887] <  4> EngineOld ---> TT Hits / Cutoffs= 25 / 1
+[Engine] [15:23:13.393933] <  4> EngineOld ---> info depth 3 score cp -10 nodes 2021 nps 2021 hashfull 0 pv b1a3 c7c5 b2b4 
+[Engine] [15:23:13.408513] <  4> EngineOld ---> TT Hits / Cutoffs= 91 / 2
+[Engine] [15:23:13.408549] <  4> EngineOld ---> info depth 4 score cp -8 nodes 2849 nps 2849 hashfull 0 pv b1a3 c7c5 b2b3 d8a5 
+[Engine] [15:23:13.474146] <  5> Engine1 ---> TT Hits / Cutoffs= 3507 / 95
+[Engine] [15:23:13.474206] <  5> Engine1 ---> info depth 5 score cp 100 nodes 162390 nps 162390 hashfull 5 pv e7e5 g1f3 d8f6 f3g1 f6f2 
+[Engine] [15:23:13.474233] <  5> Engine1 ---> bestmove e7e5
+[Engine] [15:23:13.474254] <  5> Engine1 <--- isready
+[Engine] [15:23:13.510749] <  5> Engine1 ---> readyok
+[Engine] [15:23:13.510910] <  5> EngineOld <--- isready
+[Engine] [15:23:13.526776] <  5> EngineOld ---> readyok
+[Engine] [15:23:13.526828] <  5> EngineOld <--- position startpos moves e2e4 e7e5
+[Engine] [15:23:13.526866] <  5> EngineOld <--- isready
+[Engine] [15:23:13.542800] <  5> EngineOld ---> readyok
+[Engine] [15:23:13.542846] <  5> EngineOld <--- go wtime 63522 btime 62732 winc 2000 binc 2000
+[Engine] [15:23:13.543681] <  5> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:13.543730] <  5> EngineOld ---> info depth 1 score cp -10 nodes 29 nps 29 hashfull 1 pv a2a4 
+[Engine] [15:23:13.544298] <  5> EngineOld ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:23:13.544330] <  5> EngineOld ---> info depth 2 score cp -10 nodes 67 nps 67 hashfull 1 pv a2a4 a7a6 
+[Engine] [15:23:13.557235] <  5> EngineOld ---> TT Hits / Cutoffs= 42 / 2
+[Engine] [15:23:13.557267] <  5> EngineOld ---> info depth 3 score cp 100 nodes 2161 nps 2161 hashfull 1 pv d1h5 a7a5 h5e5 
+[Engine] [15:23:13.599442] <  5> EngineOld ---> TT Hits / Cutoffs= 269 / 1
+[Engine] [15:23:13.599506] <  5> EngineOld ---> info depth 4 score cp 0 nodes 7313 nps 7313 hashfull 2 pv b2b3 c7c6 
+[Engine] [15:23:13.606796] <  3> EngineOld ---> TT Hits / Cutoffs= 215 / 3
+[Engine] [15:23:13.606828] <  3> EngineOld ---> info depth 4 score cp -93 nodes 45874 nps 45874 hashfull 1 pv a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:23:13.839714] <  4> EngineOld ---> TT Hits / Cutoffs= 1003 / 58
+[Engine] [15:23:13.839774] <  4> EngineOld ---> info depth 5 score cp 93 nodes 79313 nps 79313 hashfull 1 pv e2e4 a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:23:13.839799] <  4> EngineOld ---> bestmove e2e4
+[Engine] [15:23:13.839818] <  4> EngineOld <--- isready
+[Engine] [15:23:13.875740] <  4> EngineOld ---> readyok
+[Engine] [15:23:13.875893] <  4> Engine1 <--- isready
+[Engine] [15:23:13.890808] <  4> Engine1 ---> readyok
+[Engine] [15:23:13.890885] <  4> Engine1 <--- position startpos moves e2e4
+[Engine] [15:23:13.890927] <  4> Engine1 <--- isready
+[Engine] [15:23:13.906351] <  4> Engine1 ---> readyok
+[Engine] [15:23:13.906405] <  4> Engine1 <--- go wtime 63531 btime 62000 winc 2000 binc 2000
+[Engine] [15:23:13.918685] <  4> Engine1 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:23:13.918760] <  4> Engine1 ---> info depth 1 score cp 10 nodes 21 nps 21 hashfull 0 pv a7a5 
+[Engine] [15:23:13.919398] <  4> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:13.919432] <  4> Engine1 ---> info depth 2 score cp 10 nodes 177 nps 177 hashfull 0 pv e7e5 a2a4 
+[Engine] [15:23:13.925512] <  4> Engine1 ---> TT Hits / Cutoffs= 22 / 1
+[Engine] [15:23:13.925543] <  4> Engine1 ---> info depth 3 score cp 12 nodes 963 nps 963 hashfull 0 pv g8f6 e4e5 d7d5 
+[Engine] [15:23:14.044644] <  8> Engine1 ---> TT Hits / Cutoffs= 3507 / 95
+[Engine] [15:23:14.044716] <  8> Engine1 ---> info depth 5 score cp 100 nodes 162390 nps 162390 hashfull 5 pv e7e5 g1f3 d8f6 f3g1 f6f2 
+[Engine] [15:23:14.044752] <  8> Engine1 ---> bestmove e7e5
+[Engine] [15:23:14.044781] <  8> Engine1 <--- isready
+[Engine] [15:23:14.079772] <  8> Engine1 ---> readyok
+[Engine] [15:23:14.079942] <  8> EngineOld <--- isready
+[Engine] [15:23:14.095374] <  8> EngineOld ---> readyok
+[Engine] [15:23:14.095443] <  8> EngineOld <--- position startpos moves e2e4 e7e5
+[Engine] [15:23:14.095483] <  8> EngineOld <--- isready
+[Engine] [15:23:14.110873] <  8> EngineOld ---> readyok
+[Engine] [15:23:14.110927] <  8> EngineOld <--- go wtime 63510 btime 62745 winc 2000 binc 2000
+[Engine] [15:23:14.111513] <  8> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:14.111560] <  8> EngineOld ---> info depth 1 score cp -10 nodes 29 nps 29 hashfull 1 pv a2a4 
+[Engine] [15:23:14.111934] <  8> EngineOld ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:23:14.111966] <  8> EngineOld ---> info depth 2 score cp -10 nodes 67 nps 67 hashfull 1 pv a2a4 a7a6 
+[Engine] [15:23:14.123956] <  8> EngineOld ---> TT Hits / Cutoffs= 42 / 2
+[Engine] [15:23:14.123993] <  8> EngineOld ---> info depth 3 score cp 100 nodes 2161 nps 2161 hashfull 1 pv d1h5 a7a5 h5e5 
+[Engine] [15:23:14.170234] <  8> EngineOld ---> TT Hits / Cutoffs= 269 / 1
+[Engine] [15:23:14.170303] <  8> EngineOld ---> info depth 4 score cp 0 nodes 7313 nps 7313 hashfull 2 pv b2b3 c7c6 
+[Engine] [15:23:14.188952] <  4> Engine1 ---> TT Hits / Cutoffs= 215 / 3
+[Engine] [15:23:14.189012] <  4> Engine1 ---> info depth 4 score cp -93 nodes 45874 nps 45874 hashfull 1 pv a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:23:14.453877] <  6> Engine1 ---> TT Hits / Cutoffs= 5096 / 163
+[Engine] [15:23:14.453945] <  6> Engine1 ---> info depth 5 score cp 100 nodes 317743 nps 317743 hashfull 6 pv f1c4 g8h6 d1h5 h6g8 c4f7 
+[Engine] [15:23:14.453980] <  6> Engine1 ---> bestmove f1c4
+[Engine] [15:23:14.454010] <  6> Engine1 <--- isready
+[Engine] [15:23:14.489421] <  6> Engine1 ---> readyok
+[Engine] [15:23:14.489581] <  6> EngineOld <--- isready
+[Engine] [15:23:14.504964] <  6> EngineOld ---> readyok
+[Engine] [15:23:14.505012] <  6> EngineOld <--- position startpos moves e2e4 e7e5 f1c4
+[Engine] [15:23:14.505041] <  6> EngineOld <--- isready
+[Engine] [15:23:14.521063] <  6> EngineOld ---> readyok
+[Engine] [15:23:14.521114] <  6> EngineOld <--- go wtime 63578 btime 62782 winc 2000 binc 2000
+[Engine] [15:23:14.521937] <  6> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:14.521982] <  6> EngineOld ---> info depth 1 score cp 12 nodes 29 nps 29 hashfull 5 pv a7a5 
+[Engine] [15:23:14.522339] <  6> EngineOld ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:23:14.522373] <  6> EngineOld ---> info depth 2 score cp 10 nodes 62 nps 62 hashfull 5 pv a7a6 f2f4 
+[Engine] [15:23:14.527506] <  6> EngineOld ---> TT Hits / Cutoffs= 43 / 2
+[Engine] [15:23:14.527537] <  6> EngineOld ---> info depth 3 score cp 100 nodes 958 nps 958 hashfull 5 pv d8f6 a2a4 f6f2 
+[Engine] [15:23:14.559646] <  3> EngineOld ---> TT Hits / Cutoffs= 3507 / 95
+[Engine] [15:23:14.559703] <  3> EngineOld ---> info depth 5 score cp 100 nodes 162390 nps 162390 hashfull 5 pv e7e5 g1f3 d8f6 f3g1 f6f2 
+[Engine] [15:23:14.559735] <  3> EngineOld ---> bestmove e7e5
+[Engine] [15:23:14.559789] <  3> EngineOld <--- isready
+[Engine] [15:23:14.568258] <  6> EngineOld ---> TT Hits / Cutoffs= 151 / 22
+[Engine] [15:23:14.568294] <  6> EngineOld ---> info depth 4 score cp -100 nodes 6378 nps 6378 hashfull 6 pv d8f6 d1e2 b7b6 c4f7 
+[Engine] [15:23:14.599957] <  3> EngineOld ---> readyok
+[Engine] [15:23:14.600063] <  3> Engine1 <--- isready
+[Engine] [15:23:14.615959] <  3> Engine1 ---> readyok
+[Engine] [15:23:14.616007] <  3> Engine1 <--- position startpos moves e2e4 e7e5
+[Engine] [15:23:14.616048] <  3> Engine1 <--- isready
+[Engine] [15:23:14.631461] <  3> Engine1 ---> readyok
+[Engine] [15:23:14.631511] <  3> Engine1 <--- go wtime 63499 btime 62765 winc 2000 binc 2000
+[Engine] [15:23:14.631905] <  3> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:14.631938] <  3> Engine1 ---> info depth 1 score cp -10 nodes 29 nps 29 hashfull 1 pv a2a4 
+[Engine] [15:23:14.632234] <  3> Engine1 ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:23:14.632256] <  3> Engine1 ---> info depth 2 score cp -10 nodes 67 nps 67 hashfull 1 pv a2a4 a7a6 
+[Engine] [15:23:14.643880] <  3> Engine1 ---> TT Hits / Cutoffs= 42 / 2
+[Engine] [15:23:14.643919] <  3> Engine1 ---> info depth 3 score cp 100 nodes 2161 nps 2161 hashfull 1 pv d1h5 a7a5 h5e5 
+[Engine] [15:23:14.687468] <  3> Engine1 ---> TT Hits / Cutoffs= 269 / 1
+[Engine] [15:23:14.687532] <  3> Engine1 ---> info depth 4 score cp 0 nodes 7313 nps 7313 hashfull 2 pv b2b3 c7c6 
+[Engine] [15:23:14.829850] <  6> EngineOld ---> TT Hits / Cutoffs= 800 / 4
+[Engine] [15:23:14.829905] <  6> EngineOld ---> info depth 5 score cp 103 nodes 44316 nps 44316 hashfull 6 pv d8f6 g1h3 f6g6 c2c3 g6g2 
+[Engine] [15:23:14.829931] <  6> EngineOld ---> bestmove d8f6
+[Engine] [15:23:14.829950] <  6> EngineOld <--- isready
+[Engine] [15:23:14.866873] <  6> EngineOld ---> readyok
+[Engine] [15:23:14.867023] <  6> Engine1 <--- isready
+[Engine] [15:23:14.882380] <  6> Engine1 ---> readyok
+[Engine] [15:23:14.882437] <  6> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6
+[Engine] [15:23:14.882481] <  6> Engine1 <--- isready
+[Engine] [15:23:14.897917] <  6> Engine1 ---> readyok
+[Engine] [15:23:14.897977] <  6> Engine1 <--- go wtime 63578 btime 64474 winc 2000 binc 2000
+[Engine] [15:23:14.898497] <  6> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:14.898525] <  6> Engine1 ---> info depth 1 score cp 100 nodes 32 nps 32 hashfull 6 pv c4f7 
+[Engine] [15:23:14.899619] <  6> Engine1 ---> TT Hits / Cutoffs= 8 / 0
+[Engine] [15:23:14.899652] <  6> Engine1 ---> info depth 2 score cp 0 nodes 184 nps 184 hashfull 6 pv b1a3 c7c5 
+[Engine] [15:23:14.907826] <  6> Engine1 ---> TT Hits / Cutoffs= 105 / 12
+[Engine] [15:23:14.907857] <  6> Engine1 ---> info depth 3 score cp 100 nodes 1443 nps 1443 hashfull 6 pv g1f3 b7b6 c4f7 
+[Engine] [15:23:14.943188] <  7> Engine1 ---> TT Hits / Cutoffs= 5096 / 163
+[Engine] [15:23:14.943236] <  7> Engine1 ---> info depth 5 score cp 100 nodes 317743 nps 317743 hashfull 6 pv f1c4 g8h6 d1h5 h6g8 c4f7 
+[Engine] [15:23:14.943260] <  7> Engine1 ---> bestmove f1c4
+[Engine] [15:23:14.943280] <  7> Engine1 <--- isready
+[Engine] [15:23:14.958712] <  6> Engine1 ---> TT Hits / Cutoffs= 464 / 16
+[Engine] [15:23:14.958769] <  6> Engine1 ---> info depth 4 score cp 0 nodes 8548 nps 8548 hashfull 7 pv b2b3 c7c6 
+[Engine] [15:23:14.977799] <  7> Engine1 ---> readyok
+[Engine] [15:23:14.977974] <  7> EngineOld <--- isready
+[Engine] [15:23:14.993809] <  7> EngineOld ---> readyok
+[Engine] [15:23:14.993875] <  7> EngineOld <--- position startpos moves e2e4 e7e5 f1c4
+[Engine] [15:23:14.993910] <  7> EngineOld <--- isready
+[Engine] [15:23:15.009287] <  7> EngineOld ---> readyok
+[Engine] [15:23:15.009344] <  7> EngineOld <--- go wtime 63629 btime 62774 winc 2000 binc 2000
+[Engine] [15:23:15.010162] <  7> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:15.010198] <  7> EngineOld ---> info depth 1 score cp 12 nodes 29 nps 29 hashfull 5 pv a7a5 
+[Engine] [15:23:15.010678] <  7> EngineOld ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:23:15.010711] <  7> EngineOld ---> info depth 2 score cp 10 nodes 62 nps 62 hashfull 5 pv a7a6 f2f4 
+[Engine] [15:23:15.015281] <  7> EngineOld ---> TT Hits / Cutoffs= 43 / 2
+[Engine] [15:23:15.015323] <  7> EngineOld ---> info depth 3 score cp 100 nodes 958 nps 958 hashfull 5 pv d8f6 a2a4 f6f2 
+[Engine] [15:23:15.055678] <  7> EngineOld ---> TT Hits / Cutoffs= 151 / 22
+[Engine] [15:23:15.055740] <  7> EngineOld ---> info depth 4 score cp -100 nodes 6378 nps 6378 hashfull 6 pv d8f6 d1e2 b7b6 c4f7 
+[Engine] [15:23:15.110231] <  4> Engine1 ---> TT Hits / Cutoffs= 3507 / 95
+[Engine] [15:23:15.110288] <  4> Engine1 ---> info depth 5 score cp 100 nodes 162390 nps 162390 hashfull 5 pv e7e5 g1f3 d8f6 f3g1 f6f2 
+[Engine] [15:23:15.110314] <  4> Engine1 ---> bestmove e7e5
+[Engine] [15:23:15.110333] <  4> Engine1 <--- isready
+[Engine] [15:23:15.151006] <  4> Engine1 ---> readyok
+[Engine] [15:23:15.151159] <  4> EngineOld <--- isready
+[Engine] [15:23:15.167098] <  4> EngineOld ---> readyok
+[Engine] [15:23:15.167154] <  4> EngineOld <--- position startpos moves e2e4 e7e5
+[Engine] [15:23:15.167199] <  4> EngineOld <--- isready
+[Engine] [15:23:15.182619] <  4> EngineOld ---> readyok
+[Engine] [15:23:15.182667] <  4> EngineOld <--- go wtime 63531 btime 62797 winc 2000 binc 2000
+[Engine] [15:23:15.183435] <  4> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:15.183470] <  4> EngineOld ---> info depth 1 score cp -10 nodes 29 nps 29 hashfull 1 pv a2a4 
+[Engine] [15:23:15.184018] <  4> EngineOld ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:23:15.184050] <  4> EngineOld ---> info depth 2 score cp -10 nodes 67 nps 67 hashfull 1 pv a2a4 a7a6 
+[Engine] [15:23:15.197244] <  4> EngineOld ---> TT Hits / Cutoffs= 42 / 2
+[Engine] [15:23:15.197280] <  4> EngineOld ---> info depth 3 score cp 100 nodes 2161 nps 2161 hashfull 1 pv d1h5 a7a5 h5e5 
+[Engine] [15:23:15.237677] <  4> EngineOld ---> TT Hits / Cutoffs= 269 / 1
+[Engine] [15:23:15.237734] <  4> EngineOld ---> info depth 4 score cp 0 nodes 7313 nps 7313 hashfull 2 pv b2b3 c7c6 
+[Engine] [15:23:15.311706] <  7> EngineOld ---> TT Hits / Cutoffs= 800 / 4
+[Engine] [15:23:15.311765] <  7> EngineOld ---> info depth 5 score cp 103 nodes 44316 nps 44316 hashfull 6 pv d8f6 g1h3 f6g6 c2c3 g6g2 
+[Engine] [15:23:15.311790] <  7> EngineOld ---> bestmove d8f6
+[Engine] [15:23:15.311808] <  7> EngineOld <--- isready
+[Engine] [15:23:15.355767] <  7> EngineOld ---> readyok
+[Engine] [15:23:15.355897] <  7> Engine1 <--- isready
+[Engine] [15:23:15.371814] <  7> Engine1 ---> readyok
+[Engine] [15:23:15.371872] <  7> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6
+[Engine] [15:23:15.371921] <  7> Engine1 <--- isready
+[Engine] [15:23:15.387007] <  7> Engine1 ---> readyok
+[Engine] [15:23:15.387057] <  7> Engine1 <--- go wtime 63629 btime 64472 winc 2000 binc 2000
+[Engine] [15:23:15.387611] <  7> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:15.387642] <  7> Engine1 ---> info depth 1 score cp 100 nodes 32 nps 32 hashfull 6 pv c4f7 
+[Engine] [15:23:15.388927] <  7> Engine1 ---> TT Hits / Cutoffs= 8 / 0
+[Engine] [15:23:15.388946] <  7> Engine1 ---> info depth 2 score cp 0 nodes 184 nps 184 hashfull 6 pv b1a3 c7c5 
+[Engine] [15:23:15.393037] <  5> EngineOld ---> TT Hits / Cutoffs= 5096 / 163
+[Engine] [15:23:15.393078] <  5> EngineOld ---> info depth 5 score cp 100 nodes 317743 nps 317743 hashfull 6 pv f1c4 g8h6 d1h5 h6g8 c4f7 
+[Engine] [15:23:15.393106] <  5> EngineOld ---> bestmove f1c4
+[Engine] [15:23:15.393127] <  5> EngineOld <--- isready
+[Engine] [15:23:15.398960] <  7> Engine1 ---> TT Hits / Cutoffs= 105 / 12
+[Engine] [15:23:15.398991] <  7> Engine1 ---> info depth 3 score cp 100 nodes 1443 nps 1443 hashfull 6 pv g1f3 b7b6 c4f7 
+[Engine] [15:23:15.433661] <  5> EngineOld ---> readyok
+[Engine] [15:23:15.433804] <  5> Engine1 <--- isready
+[Engine] [15:23:15.445323] <  6> Engine1 ---> TT Hits / Cutoffs= 2246 / 38
+[Engine] [15:23:15.445369] <  6> Engine1 ---> info depth 5 score cp 100 nodes 80141 nps 80141 hashfull 9 pv c4f1 g8h6 
+[Engine] [15:23:15.445404] <  6> Engine1 ---> bestmove c4f1
+[Engine] [15:23:15.445429] <  6> Engine1 <--- isready
+[Engine] [15:23:15.449479] <  7> Engine1 ---> TT Hits / Cutoffs= 464 / 16
+[Engine] [15:23:15.449517] <  7> Engine1 ---> info depth 4 score cp 0 nodes 8548 nps 8548 hashfull 7 pv b2b3 c7c6 
+[Engine] [15:23:15.449708] <  5> Engine1 ---> readyok
+[Engine] [15:23:15.449752] <  5> Engine1 <--- position startpos moves e2e4 e7e5 f1c4
+[Engine] [15:23:15.449790] <  5> Engine1 <--- isready
+[Engine] [15:23:15.465829] <  5> Engine1 ---> readyok
+[Engine] [15:23:15.465878] <  5> Engine1 <--- go wtime 63672 btime 62732 winc 2000 binc 2000
+[Engine] [15:23:15.466653] <  5> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:15.466706] <  5> Engine1 ---> info depth 1 score cp 12 nodes 29 nps 29 hashfull 5 pv a7a5 
+[Engine] [15:23:15.467176] <  5> Engine1 ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:23:15.467204] <  5> Engine1 ---> info depth 2 score cp 10 nodes 62 nps 62 hashfull 5 pv a7a6 f2f4 
+[Engine] [15:23:15.473005] <  5> Engine1 ---> TT Hits / Cutoffs= 43 / 2
+[Engine] [15:23:15.473040] <  5> Engine1 ---> info depth 3 score cp 100 nodes 958 nps 958 hashfull 5 pv d8f6 a2a4 f6f2 
+[Engine] [15:23:15.481326] <  6> Engine1 ---> readyok
+[Engine] [15:23:15.481420] <  6> EngineOld <--- isready
+[Engine] [15:23:15.496911] <  6> EngineOld ---> readyok
+[Engine] [15:23:15.496966] <  6> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1
+[Engine] [15:23:15.497020] <  6> EngineOld <--- isready
+[Engine] [15:23:15.512397] <  6> EngineOld ---> readyok
+[Engine] [15:23:15.512449] <  6> EngineOld <--- go wtime 65031 btime 64474 winc 2000 binc 2000
+[Engine] [15:23:15.513007] <  6> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:15.513040] <  6> EngineOld ---> info depth 1 score cp 100 nodes 37 nps 37 hashfull 6 pv f6f2 
+[Engine] [15:23:15.513062] <  6> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:15.513078] <  6> EngineOld ---> info depth 2 score mate 1 nodes 4 nps 4 hashfull 6 pv f6f2 
+[Engine] [15:23:15.513120] <  6> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:15.513138] <  6> EngineOld ---> info depth 3 score mate 1 nodes 5 nps 5 hashfull 6 pv f6f2 
+[Engine] [15:23:15.513190] <  6> EngineOld ---> TT Hits / Cutoffs= 3 / 0
+[Engine] [15:23:15.513208] <  6> EngineOld ---> info depth 4 score mate 1 nodes 6 nps 6 hashfull 6 pv f6f2 
+[Engine] [15:23:15.513268] <  6> EngineOld ---> TT Hits / Cutoffs= 4 / 0
+[Engine] [15:23:15.513285] <  6> EngineOld ---> info depth 5 score mate 1 nodes 7 nps 7 hashfull 6 pv f6f2 
+[Engine] [15:23:15.513302] <  6> EngineOld ---> bestmove f6f2
+[Engine] [15:23:15.513319] <  6> EngineOld <--- isready
+[Engine] [15:23:15.513374] <  5> Engine1 ---> TT Hits / Cutoffs= 151 / 22
+[Engine] [15:23:15.513397] <  5> Engine1 ---> info depth 4 score cp -100 nodes 6378 nps 6378 hashfull 6 pv d8f6 d1e2 b7b6 c4f7 
+[Engine] [15:23:15.558761] <  6> EngineOld ---> readyok
+[Engine] [15:23:15.558913] <  6> Engine1 <--- isready
+[Engine] [15:23:15.574767] <  6> Engine1 ---> readyok
+[Engine] [15:23:15.574818] <  6> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1 f6f2
+[Engine] [15:23:15.574857] <  6> Engine1 <--- isready
+[Engine] [15:23:15.590807] <  6> Engine1 ---> readyok
+[Engine] [15:23:15.590850] <  6> Engine1 <--- go wtime 65031 btime 66474 winc 2000 binc 2000
+[Engine] [15:23:15.787633] <  5> Engine1 ---> TT Hits / Cutoffs= 800 / 4
+[Engine] [15:23:15.787689] <  5> Engine1 ---> info depth 5 score cp 103 nodes 44316 nps 44316 hashfull 6 pv d8f6 g1h3 f6g6 c2c3 g6g2 
+[Engine] [15:23:15.787715] <  5> Engine1 ---> bestmove d8f6
+[Engine] [15:23:15.787733] <  5> Engine1 <--- isready
+[Engine] [15:23:15.826646] <  5> Engine1 ---> readyok
+[Engine] [15:23:15.826796] <  5> EngineOld <--- isready
+[Engine] [15:23:15.842618] <  5> EngineOld ---> readyok
+[Engine] [15:23:15.842671] <  5> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6
+[Engine] [15:23:15.842714] <  5> EngineOld <--- isready
+[Engine] [15:23:15.857768] <  5> EngineOld ---> readyok
+[Engine] [15:23:15.857843] <  5> EngineOld <--- go wtime 63672 btime 64411 winc 2000 binc 2000
+[Engine] [15:23:15.858323] <  5> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:15.858356] <  5> EngineOld ---> info depth 1 score cp 100 nodes 32 nps 32 hashfull 6 pv c4f7 
+[Engine] [15:23:15.859311] <  5> EngineOld ---> TT Hits / Cutoffs= 8 / 0
+[Engine] [15:23:15.859345] <  5> EngineOld ---> info depth 2 score cp 0 nodes 184 nps 184 hashfull 6 pv b1a3 c7c5 
+[Engine] [15:23:15.869415] <  5> EngineOld ---> TT Hits / Cutoffs= 105 / 12
+[Engine] [15:23:15.869486] <  5> EngineOld ---> info depth 3 score cp 100 nodes 1443 nps 1443 hashfull 6 pv g1f3 b7b6 c4f7 
+[Engine] [15:23:15.917780] <  7> Engine1 ---> TT Hits / Cutoffs= 2246 / 38
+[Engine] [15:23:15.917845] <  7> Engine1 ---> info depth 5 score cp 100 nodes 80141 nps 80141 hashfull 9 pv c4f1 g8h6 
+[Engine] [15:23:15.917874] <  7> Engine1 ---> bestmove c4f1
+[Engine] [15:23:15.917898] <  7> Engine1 <--- isready
+[Engine] [15:23:15.923086] <  5> EngineOld ---> TT Hits / Cutoffs= 464 / 16
+[Engine] [15:23:15.923123] <  5> EngineOld ---> info depth 4 score cp 0 nodes 8548 nps 8548 hashfull 7 pv b2b3 c7c6 
+[Engine] [15:23:15.937119] <  7> Engine1 ---> readyok
+[Engine] [15:23:15.937278] <  7> EngineOld <--- isready
+[Engine] [15:23:15.952635] <  7> EngineOld ---> readyok
+[Engine] [15:23:15.952711] <  7> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1
+[Engine] [15:23:15.952754] <  7> EngineOld <--- isready
+[Engine] [15:23:15.968741] <  7> EngineOld ---> readyok
+[Engine] [15:23:15.968822] <  7> EngineOld <--- go wtime 65099 btime 64472 winc 2000 binc 2000
+[Engine] [15:23:15.969532] <  7> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:15.969566] <  7> EngineOld ---> info depth 1 score cp 100 nodes 37 nps 37 hashfull 6 pv f6f2 
+[Engine] [15:23:15.969591] <  7> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:15.969607] <  7> EngineOld ---> info depth 2 score mate 1 nodes 4 nps 4 hashfull 6 pv f6f2 
+[Engine] [15:23:15.969643] <  7> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:15.969662] <  7> EngineOld ---> info depth 3 score mate 1 nodes 5 nps 5 hashfull 6 pv f6f2 
+[Engine] [15:23:15.969721] <  7> EngineOld ---> TT Hits / Cutoffs= 3 / 0
+[Engine] [15:23:15.969739] <  7> EngineOld ---> info depth 4 score mate 1 nodes 6 nps 6 hashfull 6 pv f6f2 
+[Engine] [15:23:15.969801] <  7> EngineOld ---> TT Hits / Cutoffs= 4 / 0
+[Engine] [15:23:15.969842] <  7> EngineOld ---> info depth 5 score mate 1 nodes 7 nps 7 hashfull 6 pv f6f2 
+[Engine] [15:23:15.969875] <  7> EngineOld ---> bestmove f6f2
+[Engine] [15:23:15.969903] <  7> EngineOld <--- isready
+[Engine] [15:23:16.016265] <  7> EngineOld ---> readyok
+[Engine] [15:23:16.016418] <  7> Engine1 <--- isready
+[Engine] [15:23:16.031764] <  7> Engine1 ---> readyok
+[Engine] [15:23:16.031822] <  7> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1 f6f2
+[Engine] [15:23:16.031863] <  7> Engine1 <--- isready
+[Engine] [15:23:16.040596] <  8> EngineOld ---> TT Hits / Cutoffs= 5096 / 163
+[Engine] [15:23:16.040662] <  8> EngineOld ---> info depth 5 score cp 100 nodes 317743 nps 317743 hashfull 6 pv f1c4 g8h6 d1h5 h6g8 c4f7 
+[Engine] [15:23:16.040691] <  8> EngineOld ---> bestmove f1c4
+[Engine] [15:23:16.040714] <  8> EngineOld <--- isready
+[Engine] [15:23:16.047862] <  7> Engine1 ---> readyok
+[Engine] [15:23:16.047955] <  7> Engine1 <--- go wtime 65099 btime 66471 winc 2000 binc 2000
+[Engine] [15:23:16.079967] <  8> EngineOld ---> readyok
+[Engine] [15:23:16.080137] <  8> Engine1 <--- isready
+[Engine] [15:23:16.095995] <  8> Engine1 ---> readyok
+[Engine] [15:23:16.096076] <  8> Engine1 <--- position startpos moves e2e4 e7e5 f1c4
+[Engine] [15:23:16.096125] <  8> Engine1 <--- isready
+[Engine] [15:23:16.112098] <  8> Engine1 ---> readyok
+[Engine] [15:23:16.112153] <  8> Engine1 <--- go wtime 63581 btime 62745 winc 2000 binc 2000
+[Engine] [15:23:16.112552] <  8> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:16.112596] <  8> Engine1 ---> info depth 1 score cp 12 nodes 29 nps 29 hashfull 5 pv a7a5 
+[Engine] [15:23:16.112868] <  8> Engine1 ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:23:16.112903] <  8> Engine1 ---> info depth 2 score cp 10 nodes 62 nps 62 hashfull 5 pv a7a6 f2f4 
+[Engine] [15:23:16.119632] <  8> Engine1 ---> TT Hits / Cutoffs= 43 / 2
+[Engine] [15:23:16.119670] <  8> Engine1 ---> info depth 3 score cp 100 nodes 958 nps 958 hashfull 5 pv d8f6 a2a4 f6f2 
+[Engine] [15:23:16.158075] <  8> Engine1 ---> TT Hits / Cutoffs= 151 / 22
+[Engine] [15:23:16.158128] <  8> Engine1 ---> info depth 4 score cp -100 nodes 6378 nps 6378 hashfull 6 pv d8f6 d1e2 b7b6 c4f7 
+[Engine] [15:23:16.418037] <  5> EngineOld ---> TT Hits / Cutoffs= 2246 / 38
+[Engine] [15:23:16.418094] <  5> EngineOld ---> info depth 5 score cp 100 nodes 80141 nps 80141 hashfull 9 pv c4f1 g8h6 
+[Engine] [15:23:16.418121] <  5> EngineOld ---> bestmove c4f1
+[Engine] [15:23:16.418143] <  5> EngineOld <--- isready
+[Engine] [15:23:16.431750] <  8> Engine1 ---> TT Hits / Cutoffs= 800 / 4
+[Engine] [15:23:16.431799] <  8> Engine1 ---> info depth 5 score cp 103 nodes 44316 nps 44316 hashfull 6 pv d8f6 g1h3 f6g6 c2c3 g6g2 
+[Engine] [15:23:16.431859] <  8> Engine1 ---> bestmove d8f6
+[Engine] [15:23:16.431894] <  8> Engine1 <--- isready
+[Engine] [15:23:16.457682] <  5> EngineOld ---> readyok
+[Engine] [15:23:16.457809] <  5> Engine1 <--- isready
+[Engine] [15:23:16.473792] <  5> Engine1 ---> readyok
+[Engine] [15:23:16.473799] <  8> Engine1 ---> readyok
+[Engine] [15:23:16.474046] <  5> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1
+[Engine] [15:23:16.474156] <  5> Engine1 <--- isready
+[Engine] [15:23:16.474201] <  8> EngineOld <--- isready
+[Engine] [15:23:16.489084] <  5> Engine1 ---> readyok
+[Engine] [15:23:16.489085] <  8> EngineOld ---> readyok
+[Engine] [15:23:16.489141] <  5> Engine1 <--- go wtime 65112 btime 64411 winc 2000 binc 2000
+[Engine] [15:23:16.489169] <  8> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6
+[Engine] [15:23:16.489226] <  8> EngineOld <--- isready
+[Engine] [15:23:16.489909] <  5> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:16.489949] <  5> Engine1 ---> info depth 1 score cp 100 nodes 37 nps 37 hashfull 6 pv f6f2 
+[Engine] [15:23:16.489988] <  5> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:16.490018] <  5> Engine1 ---> info depth 2 score mate 1 nodes 4 nps 4 hashfull 6 pv f6f2 
+[Engine] [15:23:16.490049] <  5> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:16.490077] <  5> Engine1 ---> info depth 3 score mate 1 nodes 5 nps 5 hashfull 6 pv f6f2 
+[Engine] [15:23:16.490110] <  5> Engine1 ---> TT Hits / Cutoffs= 3 / 0
+[Engine] [15:23:16.490161] <  5> Engine1 ---> info depth 4 score mate 1 nodes 6 nps 6 hashfull 6 pv f6f2 
+[Engine] [15:23:16.490180] <  5> Engine1 ---> TT Hits / Cutoffs= 4 / 0
+[Engine] [15:23:16.490195] <  5> Engine1 ---> info depth 5 score mate 1 nodes 7 nps 7 hashfull 6 pv f6f2 
+[Engine] [15:23:16.490209] <  5> Engine1 ---> bestmove f6f2
+[Engine] [15:23:16.490224] <  5> Engine1 <--- isready
+[Engine] [15:23:16.504666] <  8> EngineOld ---> readyok
+[Engine] [15:23:16.504754] <  8> EngineOld <--- go wtime 63581 btime 64426 winc 2000 binc 2000
+[Engine] [15:23:16.505144] <  8> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:16.505176] <  8> EngineOld ---> info depth 1 score cp 100 nodes 32 nps 32 hashfull 6 pv c4f7 
+[Engine] [15:23:16.506049] <  8> EngineOld ---> TT Hits / Cutoffs= 8 / 0
+[Engine] [15:23:16.506081] <  8> EngineOld ---> info depth 2 score cp 0 nodes 184 nps 184 hashfull 6 pv b1a3 c7c5 
+[Engine] [15:23:16.514583] <  8> EngineOld ---> TT Hits / Cutoffs= 105 / 12
+[Engine] [15:23:16.514615] <  8> EngineOld ---> info depth 3 score cp 100 nodes 1443 nps 1443 hashfull 6 pv g1f3 b7b6 c4f7 
+[Engine] [15:23:16.536807] <  5> Engine1 ---> readyok
+[Engine] [15:23:16.536956] <  5> EngineOld <--- isready
+[Engine] [15:23:16.538624] <  3> Engine1 ---> TT Hits / Cutoffs= 5096 / 163
+[Engine] [15:23:16.538669] <  3> Engine1 ---> info depth 5 score cp 100 nodes 317743 nps 317743 hashfull 6 pv f1c4 g8h6 d1h5 h6g8 c4f7 
+[Engine] [15:23:16.538706] <  3> Engine1 ---> bestmove f1c4
+[Engine] [15:23:16.538730] <  3> Engine1 <--- isready
+[Engine] [15:23:16.552870] <  5> EngineOld ---> readyok
+[Engine] [15:23:16.552930] <  5> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1 f6f2
+[Engine] [15:23:16.552973] <  5> EngineOld <--- isready
+[Engine] [15:23:16.559932] <  8> EngineOld ---> TT Hits / Cutoffs= 464 / 16
+[Engine] [15:23:16.559979] <  8> EngineOld ---> info depth 4 score cp 0 nodes 8548 nps 8548 hashfull 7 pv b2b3 c7c6 
+[Engine] [15:23:16.568971] <  5> EngineOld ---> readyok
+[Engine] [15:23:16.569043] <  5> EngineOld <--- go wtime 65112 btime 66410 winc 2000 binc 2000
+[Engine] [15:23:16.584531] <  3> Engine1 ---> readyok
+[Engine] [15:23:16.584704] <  3> EngineOld <--- isready
+[Engine] [15:23:16.600063] <  3> EngineOld ---> readyok
+[Engine] [15:23:16.600159] <  3> EngineOld <--- position startpos moves e2e4 e7e5 f1c4
+[Engine] [15:23:16.600208] <  3> EngineOld <--- isready
+[Engine] [15:23:16.615661] <  3> EngineOld ---> readyok
+[Engine] [15:23:16.615747] <  3> EngineOld <--- go wtime 63592 btime 62765 winc 2000 binc 2000
+[Engine] [15:23:16.616670] <  3> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:16.616708] <  3> EngineOld ---> info depth 1 score cp 12 nodes 29 nps 29 hashfull 5 pv a7a5 
+[Engine] [15:23:16.617225] <  3> EngineOld ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:23:16.617246] <  3> EngineOld ---> info depth 2 score cp 10 nodes 62 nps 62 hashfull 5 pv a7a6 f2f4 
+[Engine] [15:23:16.623081] <  3> EngineOld ---> TT Hits / Cutoffs= 43 / 2
+[Engine] [15:23:16.623133] <  3> EngineOld ---> info depth 3 score cp 100 nodes 958 nps 958 hashfull 5 pv d8f6 a2a4 f6f2 
+[Engine] [15:23:16.658760] <  3> EngineOld ---> TT Hits / Cutoffs= 151 / 22
+[Engine] [15:23:16.658823] <  3> EngineOld ---> info depth 4 score cp -100 nodes 6378 nps 6378 hashfull 6 pv d8f6 d1e2 b7b6 c4f7 
+[Engine] [15:23:16.908336] <  3> EngineOld ---> TT Hits / Cutoffs= 800 / 4
+[Engine] [15:23:16.908395] <  3> EngineOld ---> info depth 5 score cp 103 nodes 44316 nps 44316 hashfull 6 pv d8f6 g1h3 f6g6 c2c3 g6g2 
+[Engine] [15:23:16.908420] <  3> EngineOld ---> bestmove d8f6
+[Engine] [15:23:16.908438] <  3> EngineOld <--- isready
+[Engine] [15:23:16.931196] <  3> EngineOld ---> readyok
+[Engine] [15:23:16.931325] <  3> Engine1 <--- isready
+[Engine] [15:23:16.947257] <  3> Engine1 ---> readyok
+[Engine] [15:23:16.947310] <  3> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6
+[Engine] [15:23:16.947350] <  3> Engine1 <--- isready
+[Engine] [15:23:16.962766] <  3> Engine1 ---> readyok
+[Engine] [15:23:16.962834] <  3> Engine1 <--- go wtime 63592 btime 64473 winc 2000 binc 2000
+[Engine] [15:23:16.963233] <  3> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:16.963265] <  3> Engine1 ---> info depth 1 score cp 100 nodes 32 nps 32 hashfull 6 pv c4f7 
+[Engine] [15:23:16.964120] <  3> Engine1 ---> TT Hits / Cutoffs= 8 / 0
+[Engine] [15:23:16.964148] <  3> Engine1 ---> info depth 2 score cp 0 nodes 184 nps 184 hashfull 6 pv b1a3 c7c5 
+[Engine] [15:23:16.971590] <  3> Engine1 ---> TT Hits / Cutoffs= 105 / 12
+[Engine] [15:23:16.971625] <  3> Engine1 ---> info depth 3 score cp 100 nodes 1443 nps 1443 hashfull 6 pv g1f3 b7b6 c4f7 
+[Engine] [15:23:17.012642] <  4> EngineOld ---> TT Hits / Cutoffs= 5096 / 163
+[Engine] [15:23:17.012708] <  4> EngineOld ---> info depth 5 score cp 100 nodes 317743 nps 317743 hashfull 6 pv f1c4 g8h6 d1h5 h6g8 c4f7 
+[Engine] [15:23:17.012738] <  4> EngineOld ---> bestmove f1c4
+[Engine] [15:23:17.012761] <  4> EngineOld <--- isready
+[Engine] [15:23:17.019562] <  3> Engine1 ---> TT Hits / Cutoffs= 464 / 16
+[Engine] [15:23:17.019597] <  3> Engine1 ---> info depth 4 score cp 0 nodes 8548 nps 8548 hashfull 7 pv b2b3 c7c6 
+[Engine] [15:23:17.033746] <  8> EngineOld ---> TT Hits / Cutoffs= 2246 / 38
+[Engine] [15:23:17.033782] <  8> EngineOld ---> info depth 5 score cp 100 nodes 80141 nps 80141 hashfull 9 pv c4f1 g8h6 
+[Engine] [15:23:17.033804] <  8> EngineOld ---> bestmove c4f1
+[Engine] [15:23:17.033827] <  8> EngineOld <--- isready
+[Engine] [15:23:17.056981] <  4> EngineOld ---> readyok
+[Engine] [15:23:17.056993] <  8> EngineOld ---> readyok
+[Engine] [15:23:17.057121] <  4> Engine1 <--- isready
+[Engine] [15:23:17.057157] <  8> Engine1 <--- isready
+[Engine] [15:23:17.073031] <  4> Engine1 ---> readyok
+[Engine] [15:23:17.073031] <  8> Engine1 ---> readyok
+[Engine] [15:23:17.073124] <  4> Engine1 <--- position startpos moves e2e4 e7e5 f1c4
+[Engine] [15:23:17.073137] <  8> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1
+[Engine] [15:23:17.073170] <  4> Engine1 <--- isready
+[Engine] [15:23:17.073187] <  8> Engine1 <--- isready
+[Engine] [15:23:17.088710] <  4> Engine1 ---> readyok
+[Engine] [15:23:17.088710] <  8> Engine1 ---> readyok
+[Engine] [15:23:17.088790] <  4> Engine1 <--- go wtime 63701 btime 62797 winc 2000 binc 2000
+[Engine] [15:23:17.088805] <  8> Engine1 <--- go wtime 65052 btime 64426 winc 2000 binc 2000
+[Engine] [15:23:17.089234] <  4> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:17.089267] <  4> Engine1 ---> info depth 1 score cp 12 nodes 29 nps 29 hashfull 5 pv a7a5 
+[Engine] [15:23:17.089277] <  8> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:17.089317] <  8> Engine1 ---> info depth 1 score cp 100 nodes 37 nps 37 hashfull 6 pv f6f2 
+[Engine] [15:23:17.089346] <  8> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:17.089366] <  8> Engine1 ---> info depth 2 score mate 1 nodes 4 nps 4 hashfull 6 pv f6f2 
+[Engine] [15:23:17.089388] <  8> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:17.089407] <  8> Engine1 ---> info depth 3 score mate 1 nodes 5 nps 5 hashfull 6 pv f6f2 
+[Engine] [15:23:17.089428] <  8> Engine1 ---> TT Hits / Cutoffs= 3 / 0
+[Engine] [15:23:17.089444] <  8> Engine1 ---> info depth 4 score mate 1 nodes 6 nps 6 hashfull 6 pv f6f2 
+[Engine] [15:23:17.089470] <  8> Engine1 ---> TT Hits / Cutoffs= 4 / 0
+[Engine] [15:23:17.089491] <  8> Engine1 ---> info depth 5 score mate 1 nodes 7 nps 7 hashfull 6 pv f6f2 
+[Engine] [15:23:17.089511] <  8> Engine1 ---> bestmove f6f2
+[Engine] [15:23:17.089528] <  8> Engine1 <--- isready
+[Engine] [15:23:17.089590] <  4> Engine1 ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:23:17.089609] <  4> Engine1 ---> info depth 2 score cp 10 nodes 62 nps 62 hashfull 5 pv a7a6 f2f4 
+[Engine] [15:23:17.093857] <  4> Engine1 ---> TT Hits / Cutoffs= 43 / 2
+[Engine] [15:23:17.093889] <  4> Engine1 ---> info depth 3 score cp 100 nodes 958 nps 958 hashfull 5 pv d8f6 a2a4 f6f2 
+[Engine] [15:23:17.129375] <  4> Engine1 ---> TT Hits / Cutoffs= 151 / 22
+[Engine] [15:23:17.129433] <  4> Engine1 ---> info depth 4 score cp -100 nodes 6378 nps 6378 hashfull 6 pv d8f6 d1e2 b7b6 c4f7 
+[Engine] [15:23:17.135790] <  8> Engine1 ---> readyok
+[Engine] [15:23:17.135899] <  8> EngineOld <--- isready
+[Engine] [15:23:17.151306] <  8> EngineOld ---> readyok
+[Engine] [15:23:17.151356] <  8> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1 f6f2
+[Engine] [15:23:17.151386] <  8> EngineOld <--- isready
+[Engine] [15:23:17.167331] <  8> EngineOld ---> readyok
+[Engine] [15:23:17.167379] <  8> EngineOld <--- go wtime 65052 btime 66426 winc 2000 binc 2000
+[Engine] [15:23:17.371991] <  4> Engine1 ---> TT Hits / Cutoffs= 800 / 4
+[Engine] [15:23:17.372047] <  4> Engine1 ---> info depth 5 score cp 103 nodes 44316 nps 44316 hashfull 6 pv d8f6 g1h3 f6g6 c2c3 g6g2 
+[Engine] [15:23:17.372073] <  4> Engine1 ---> bestmove d8f6
+[Engine] [15:23:17.372091] <  4> Engine1 <--- isready
+[Engine] [15:23:17.402920] <  4> Engine1 ---> readyok
+[Engine] [15:23:17.403079] <  4> EngineOld <--- isready
+[Engine] [15:23:17.419013] <  4> EngineOld ---> readyok
+[Engine] [15:23:17.419094] <  4> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6
+[Engine] [15:23:17.419142] <  4> EngineOld <--- isready
+[Engine] [15:23:17.435417] <  4> EngineOld ---> readyok
+[Engine] [15:23:17.435486] <  4> EngineOld <--- go wtime 63701 btime 64514 winc 2000 binc 2000
+[Engine] [15:23:17.436205] <  4> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:17.436286] <  4> EngineOld ---> info depth 1 score cp 100 nodes 32 nps 32 hashfull 6 pv c4f7 
+[Engine] [15:23:17.437147] <  4> EngineOld ---> TT Hits / Cutoffs= 8 / 0
+[Engine] [15:23:17.437179] <  4> EngineOld ---> info depth 2 score cp 0 nodes 184 nps 184 hashfull 6 pv b1a3 c7c5 
+[Engine] [15:23:17.444731] <  4> EngineOld ---> TT Hits / Cutoffs= 105 / 12
+[Engine] [15:23:17.444774] <  4> EngineOld ---> info depth 3 score cp 100 nodes 1443 nps 1443 hashfull 6 pv g1f3 b7b6 c4f7 
+[Engine] [15:23:17.478776] <  3> Engine1 ---> TT Hits / Cutoffs= 2246 / 38
+[Engine] [15:23:17.478830] <  3> Engine1 ---> info depth 5 score cp 100 nodes 80141 nps 80141 hashfull 9 pv c4f1 g8h6 
+[Engine] [15:23:17.478856] <  3> Engine1 ---> bestmove c4f1
+[Engine] [15:23:17.478876] <  3> Engine1 <--- isready
+[Engine] [15:23:17.489451] <  4> EngineOld ---> TT Hits / Cutoffs= 464 / 16
+[Engine] [15:23:17.489506] <  4> EngineOld ---> info depth 4 score cp 0 nodes 8548 nps 8548 hashfull 7 pv b2b3 c7c6 
+[Engine] [15:23:17.512703] <  3> Engine1 ---> readyok
+[Engine] [15:23:17.512869] <  3> EngineOld <--- isready
+[Engine] [15:23:17.528722] <  3> EngineOld ---> readyok
+[Engine] [15:23:17.528796] <  3> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1
+[Engine] [15:23:17.528848] <  3> EngineOld <--- isready
+[Engine] [15:23:17.544861] <  3> EngineOld ---> readyok
+[Engine] [15:23:17.544951] <  3> EngineOld <--- go wtime 65076 btime 64473 winc 2000 binc 2000
+[Engine] [15:23:17.545411] <  3> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:17.545447] <  3> EngineOld ---> info depth 1 score cp 100 nodes 37 nps 37 hashfull 6 pv f6f2 
+[Engine] [15:23:17.545470] <  3> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:17.545486] <  3> EngineOld ---> info depth 2 score mate 1 nodes 4 nps 4 hashfull 6 pv f6f2 
+[Engine] [15:23:17.545503] <  3> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:17.545517] <  3> EngineOld ---> info depth 3 score mate 1 nodes 5 nps 5 hashfull 6 pv f6f2 
+[Engine] [15:23:17.545536] <  3> EngineOld ---> TT Hits / Cutoffs= 3 / 0
+[Engine] [15:23:17.545553] <  3> EngineOld ---> info depth 4 score mate 1 nodes 6 nps 6 hashfull 6 pv f6f2 
+[Engine] [15:23:17.545586] <  3> EngineOld ---> TT Hits / Cutoffs= 4 / 0
+[Engine] [15:23:17.545604] <  3> EngineOld ---> info depth 5 score mate 1 nodes 7 nps 7 hashfull 6 pv f6f2 
+[Engine] [15:23:17.545623] <  3> EngineOld ---> bestmove f6f2
+[Engine] [15:23:17.545643] <  3> EngineOld <--- isready
+[Engine] [15:23:17.590877] <  3> EngineOld ---> readyok
+[Engine] [15:23:17.591030] <  3> Engine1 <--- isready
+[Engine] [15:23:17.606000] <  3> Engine1 ---> readyok
+[Engine] [15:23:17.606074] <  3> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1 f6f2
+[Engine] [15:23:17.606122] <  3> Engine1 <--- isready
+[Engine] [15:23:17.622052] <  3> Engine1 ---> readyok
+[Engine] [15:23:17.622123] <  3> Engine1 <--- go wtime 65076 btime 66473 winc 2000 binc 2000
+[Engine] [15:23:17.943230] <  4> EngineOld ---> TT Hits / Cutoffs= 2246 / 38
+[Engine] [15:23:17.943284] <  4> EngineOld ---> info depth 5 score cp 100 nodes 80141 nps 80141 hashfull 9 pv c4f1 g8h6 
+[Engine] [15:23:17.943309] <  4> EngineOld ---> bestmove c4f1
+[Engine] [15:23:17.943328] <  4> EngineOld <--- isready
+[Engine] [15:23:17.983731] <  4> EngineOld ---> readyok
+[Engine] [15:23:17.983871] <  4> Engine1 <--- isready
+[Engine] [15:23:17.999309] <  4> Engine1 ---> readyok
+[Engine] [15:23:17.999375] <  4> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1
+[Engine] [15:23:17.999402] <  4> Engine1 <--- isready
+[Engine] [15:23:18.015132] <  4> Engine1 ---> readyok
+[Engine] [15:23:18.015189] <  4> Engine1 <--- go wtime 65194 btime 64514 winc 2000 binc 2000
+[Engine] [15:23:18.015681] <  4> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:18.015714] <  4> Engine1 ---> info depth 1 score cp 100 nodes 37 nps 37 hashfull 6 pv f6f2 
+[Engine] [15:23:18.015737] <  4> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:23:18.015753] <  4> Engine1 ---> info depth 2 score mate 1 nodes 4 nps 4 hashfull 6 pv f6f2 
+[Engine] [15:23:18.015809] <  4> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:23:18.015830] <  4> Engine1 ---> info depth 3 score mate 1 nodes 5 nps 5 hashfull 6 pv f6f2 
+[Engine] [15:23:18.015844] <  4> Engine1 ---> TT Hits / Cutoffs= 3 / 0
+[Engine] [15:23:18.015859] <  4> Engine1 ---> info depth 4 score mate 1 nodes 6 nps 6 hashfull 6 pv f6f2 
+[Engine] [15:23:18.015876] <  4> Engine1 ---> TT Hits / Cutoffs= 4 / 0
+[Engine] [15:23:18.015890] <  4> Engine1 ---> info depth 5 score mate 1 nodes 7 nps 7 hashfull 6 pv f6f2 
+[Engine] [15:23:18.015904] <  4> Engine1 ---> bestmove f6f2
+[Engine] [15:23:18.015920] <  4> Engine1 <--- isready
+[Engine] [15:23:18.046793] <  4> Engine1 ---> readyok
+[Engine] [15:23:18.046903] <  4> EngineOld <--- isready
+[Engine] [15:23:18.062273] <  4> EngineOld ---> readyok
+[Engine] [15:23:18.062351] <  4> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1 f6f2
+[Engine] [15:23:18.062406] <  4> EngineOld <--- isready
+[Engine] [15:23:18.078169] <  4> EngineOld ---> readyok
+[Engine] [15:23:18.078244] <  4> EngineOld <--- go wtime 65194 btime 66514 winc 2000 binc 2000
+[Engine] [15:24:20.733176] <  6> Engine1 <--- quit
+[Engine] [15:24:20.733254] <  6> EngineOld <--- isready
+[Engine] [15:24:20.748559] <  6> EngineOld ---> readyok
+[Engine] [15:24:20.955506] <  6> Engine1 <--- uci
+[Engine] [15:24:21.208928] <  6> Engine1 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:24:21.208991] <  6> Engine1 ---> 'help' for commands
+[Engine] [15:24:21.209016] <  6> Engine1 ---> id name Pertinax Chess 0.1
+[Engine] [15:24:21.209044] <  6> Engine1 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:24:21.209068] <  6> Engine1 ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:24:21.209083] <  6> Engine1 ---> option name type button EngineOn default On
+[Engine] [15:24:21.209097] <  6> Engine1 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:24:21.209122] <  6> Engine1 ---> option name type button Gui default Off
+[Engine] [15:24:21.209136] <  6> Engine1 ---> uciok
+[Engine] [15:24:21.209161] <  6> Engine1 <--- ucinewgame
+[Engine] [15:24:21.209186] <  6> Engine1 <--- isready
+[Engine] [15:24:21.220087] <  6> Engine1 ---> readyok
+[Engine] [15:24:21.220176] <  6> EngineOld <--- ucinewgame
+[Engine] [15:24:21.220219] <  6> EngineOld <--- isready
+[Engine] [15:24:21.236093] <  6> EngineOld ---> readyok
+[Engine] [15:24:21.236188] <  6> Engine1 <--- isready
+[Engine] [15:24:21.251907] <  6> Engine1 ---> readyok
+[Engine] [15:24:21.252000] <  7> Engine1 <--- quit
+[Engine] [15:24:21.252013] <  6> Engine1 <--- isready
+[Engine] [15:24:21.252076] <  7> EngineOld <--- isready
+[Engine] [15:24:21.267946] <  7> EngineOld ---> readyok
+[Engine] [15:24:21.267946] <  6> Engine1 ---> readyok
+[Engine] [15:24:21.268074] <  6> Engine1 <--- position startpos
+[Engine] [15:24:21.268124] <  6> Engine1 <--- isready
+[Engine] [15:24:21.283477] <  6> Engine1 ---> readyok
+[Engine] [15:24:21.283547] <  6> Engine1 <--- go wtime 62000 btime 62000 winc 2000 binc 2000
+[Engine] [15:24:21.296289] <  6> Engine1 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:24:21.296357] <  6> Engine1 ---> info depth 1 score cp 0 nodes 21 nps 21 hashfull 0 pv a2a4 
+[Engine] [15:24:21.296779] <  6> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:21.296813] <  6> Engine1 ---> info depth 2 score cp 0 nodes 100 nps 100 hashfull 0 pv b1a3 a7a5 
+[Engine] [15:24:21.306527] <  6> Engine1 ---> TT Hits / Cutoffs= 25 / 1
+[Engine] [15:24:21.306580] <  6> Engine1 ---> info depth 3 score cp -10 nodes 2021 nps 2021 hashfull 0 pv b1a3 c7c5 b2b4 
+[Engine] [15:24:21.320530] <  6> Engine1 ---> TT Hits / Cutoffs= 91 / 2
+[Engine] [15:24:21.320589] <  6> Engine1 ---> info depth 4 score cp -8 nodes 2849 nps 2849 hashfull 0 pv b1a3 c7c5 b2b3 d8a5 
+[Engine] [15:24:21.566718] <  7> Engine1 <--- uci
+[Engine] [15:24:21.690075] <  6> Engine1 ---> TT Hits / Cutoffs= 1003 / 58
+[Engine] [15:24:21.690137] <  6> Engine1 ---> info depth 5 score cp 93 nodes 79313 nps 79313 hashfull 1 pv e2e4 a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:24:21.690205] <  6> Engine1 ---> bestmove e2e4
+[Engine] [15:24:21.690233] <  6> Engine1 <--- isready
+[Engine] [15:24:21.738352] <  6> Engine1 ---> readyok
+[Engine] [15:24:21.738486] <  6> EngineOld <--- isready
+[Engine] [15:24:21.754397] <  6> EngineOld ---> readyok
+[Engine] [15:24:21.754502] <  6> EngineOld <--- position startpos moves e2e4
+[Engine] [15:24:21.754554] <  6> EngineOld <--- isready
+[Engine] [15:24:21.770422] <  6> EngineOld ---> readyok
+[Engine] [15:24:21.770517] <  6> EngineOld <--- go wtime 63594 btime 62000 winc 2000 binc 2000
+[Engine] [15:24:21.770965] <  6> EngineOld ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:24:21.771000] <  6> EngineOld ---> info depth 1 score cp 10 nodes 21 nps 21 hashfull 0 pv a7a5 
+[Engine] [15:24:21.771780] <  6> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:21.771799] <  6> EngineOld ---> info depth 2 score cp 10 nodes 177 nps 177 hashfull 0 pv e7e5 a2a4 
+[Engine] [15:24:21.776891] <  6> EngineOld ---> TT Hits / Cutoffs= 22 / 1
+[Engine] [15:24:21.776934] <  6> EngineOld ---> info depth 3 score cp 12 nodes 963 nps 963 hashfull 0 pv g8f6 e4e5 d7d5 
+[Engine] [15:24:21.786491] <  5> EngineOld <--- quit
+[Engine] [15:24:21.786603] <  5> Engine1 <--- isready
+[Engine] [15:24:21.802520] <  5> Engine1 ---> readyok
+[Engine] [15:24:21.822424] <  7> Engine1 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:24:21.822475] <  7> Engine1 ---> 'help' for commands
+[Engine] [15:24:21.822498] <  7> Engine1 ---> id name Pertinax Chess 0.1
+[Engine] [15:24:21.822514] <  7> Engine1 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:24:21.822544] <  7> Engine1 ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:24:21.822558] <  7> Engine1 ---> option name type button EngineOn default On
+[Engine] [15:24:21.822572] <  7> Engine1 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:24:21.822586] <  7> Engine1 ---> option name type button Gui default Off
+[Engine] [15:24:21.822600] <  7> Engine1 ---> uciok
+[Engine] [15:24:21.822624] <  7> EngineOld <--- ucinewgame
+[Engine] [15:24:21.822649] <  7> EngineOld <--- isready
+[Engine] [15:24:21.833593] <  7> EngineOld ---> readyok
+[Engine] [15:24:21.833655] <  7> Engine1 <--- ucinewgame
+[Engine] [15:24:21.833684] <  7> Engine1 <--- isready
+[Engine] [15:24:21.849153] <  7> Engine1 ---> readyok
+[Engine] [15:24:21.849252] <  7> EngineOld <--- isready
+[Engine] [15:24:21.865174] <  7> EngineOld ---> readyok
+[Engine] [15:24:21.865278] <  7> EngineOld <--- isready
+[Engine] [15:24:21.880706] <  7> EngineOld ---> readyok
+[Engine] [15:24:21.880789] <  7> EngineOld <--- position startpos
+[Engine] [15:24:21.880839] <  7> EngineOld <--- isready
+[Engine] [15:24:21.896763] <  7> EngineOld ---> readyok
+[Engine] [15:24:21.896854] <  7> EngineOld <--- go wtime 62000 btime 62000 winc 2000 binc 2000
+[Engine] [15:24:21.897395] <  7> EngineOld ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:24:21.897437] <  7> EngineOld ---> info depth 1 score cp 0 nodes 21 nps 21 hashfull 0 pv a2a4 
+[Engine] [15:24:21.897841] <  7> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:21.897881] <  7> EngineOld ---> info depth 2 score cp 0 nodes 100 nps 100 hashfull 0 pv b1a3 a7a5 
+[Engine] [15:24:21.905849] <  7> EngineOld ---> TT Hits / Cutoffs= 25 / 1
+[Engine] [15:24:21.905893] <  7> EngineOld ---> info depth 3 score cp -10 nodes 2021 nps 2021 hashfull 0 pv b1a3 c7c5 b2b4 
+[Engine] [15:24:21.921451] <  7> EngineOld ---> TT Hits / Cutoffs= 91 / 2
+[Engine] [15:24:21.921509] <  7> EngineOld ---> info depth 4 score cp -8 nodes 2849 nps 2849 hashfull 0 pv b1a3 c7c5 b2b3 d8a5 
+[Engine] [15:24:22.014272] <  6> EngineOld ---> TT Hits / Cutoffs= 215 / 3
+[Engine] [15:24:22.014328] <  6> EngineOld ---> info depth 4 score cp -93 nodes 45874 nps 45874 hashfull 1 pv a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:24:22.048680] <  5> EngineOld <--- uci
+[Engine] [15:24:22.311180] <  5> EngineOld ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:24:22.311286] <  5> EngineOld ---> 'help' for commands
+[Engine] [15:24:22.311317] <  5> EngineOld ---> id name Pertinax Chess 0.1
+[Engine] [15:24:22.311335] <  5> EngineOld ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:24:22.311349] <  5> EngineOld ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:24:22.311364] <  5> EngineOld ---> option name type button EngineOn default On
+[Engine] [15:24:22.311377] <  5> EngineOld ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:24:22.311392] <  5> EngineOld ---> option name type button Gui default Off
+[Engine] [15:24:22.311406] <  5> EngineOld ---> uciok
+[Engine] [15:24:22.311429] <  5> Engine1 <--- ucinewgame
+[Engine] [15:24:22.311455] <  5> Engine1 <--- isready
+[Engine] [15:24:22.321388] <  5> Engine1 ---> readyok
+[Engine] [15:24:22.321450] <  8> EngineOld <--- quit
+[Engine] [15:24:22.321461] <  5> EngineOld <--- ucinewgame
+[Engine] [15:24:22.321506] <  8> Engine1 <--- isready
+[Engine] [15:24:22.321521] <  5> EngineOld <--- isready
+[Engine] [15:24:22.323492] <  7> EngineOld ---> TT Hits / Cutoffs= 1003 / 58
+[Engine] [15:24:22.323533] <  7> EngineOld ---> info depth 5 score cp 93 nodes 79313 nps 79313 hashfull 1 pv e2e4 a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:24:22.323563] <  7> EngineOld ---> bestmove e2e4
+[Engine] [15:24:22.323584] <  7> EngineOld <--- isready
+[Engine] [15:24:22.336924] <  8> Engine1 ---> readyok
+[Engine] [15:24:22.336926] <  5> EngineOld ---> readyok
+[Engine] [15:24:22.337016] <  5> Engine1 <--- isready
+[Engine] [15:24:22.352553] <  5> Engine1 ---> readyok
+[Engine] [15:24:22.352637] <  5> Engine1 <--- isready
+[Engine] [15:24:22.367584] <  5> Engine1 ---> readyok
+[Engine] [15:24:22.367588] <  7> EngineOld ---> readyok
+[Engine] [15:24:22.367636] <  5> Engine1 <--- position startpos
+[Engine] [15:24:22.367684] <  5> Engine1 <--- isready
+[Engine] [15:24:22.367734] <  7> Engine1 <--- isready
+[Engine] [15:24:22.383108] <  5> Engine1 ---> readyok
+[Engine] [15:24:22.383108] <  7> Engine1 ---> readyok
+[Engine] [15:24:22.383203] <  5> Engine1 <--- go wtime 62000 btime 62000 winc 2000 binc 2000
+[Engine] [15:24:22.383230] <  7> Engine1 <--- position startpos moves e2e4
+[Engine] [15:24:22.383283] <  7> Engine1 <--- isready
+[Engine] [15:24:22.383557] <  5> Engine1 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:24:22.383586] <  5> Engine1 ---> info depth 1 score cp 0 nodes 21 nps 21 hashfull 0 pv a2a4 
+[Engine] [15:24:22.383956] <  5> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:22.383988] <  5> Engine1 ---> info depth 2 score cp 0 nodes 100 nps 100 hashfull 0 pv b1a3 a7a5 
+[Engine] [15:24:22.392365] <  5> Engine1 ---> TT Hits / Cutoffs= 25 / 1
+[Engine] [15:24:22.392436] <  5> Engine1 ---> info depth 3 score cp -10 nodes 2021 nps 2021 hashfull 0 pv b1a3 c7c5 b2b4 
+[Engine] [15:24:22.398304] <  7> Engine1 ---> readyok
+[Engine] [15:24:22.398406] <  7> Engine1 <--- go wtime 63574 btime 62000 winc 2000 binc 2000
+[Engine] [15:24:22.405547] <  5> Engine1 ---> TT Hits / Cutoffs= 91 / 2
+[Engine] [15:24:22.405622] <  5> Engine1 ---> info depth 4 score cp -8 nodes 2849 nps 2849 hashfull 0 pv b1a3 c7c5 b2b3 d8a5 
+[Engine] [15:24:22.410987] <  7> Engine1 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:24:22.411056] <  7> Engine1 ---> info depth 1 score cp 10 nodes 21 nps 21 hashfull 0 pv a7a5 
+[Engine] [15:24:22.412093] <  7> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:22.412127] <  7> Engine1 ---> info depth 2 score cp 10 nodes 177 nps 177 hashfull 0 pv e7e5 a2a4 
+[Engine] [15:24:22.417113] <  7> Engine1 ---> TT Hits / Cutoffs= 22 / 1
+[Engine] [15:24:22.417153] <  7> Engine1 ---> info depth 3 score cp 12 nodes 963 nps 963 hashfull 0 pv g8f6 e4e5 d7d5 
+[Engine] [15:24:22.598342] <  8> EngineOld <--- uci
+[Engine] [15:24:22.660663] <  7> Engine1 ---> TT Hits / Cutoffs= 215 / 3
+[Engine] [15:24:22.660719] <  7> Engine1 ---> info depth 4 score cp -93 nodes 45874 nps 45874 hashfull 1 pv a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:24:22.806805] <  3> Engine1 <--- quit
+[Engine] [15:24:22.806893] <  3> EngineOld <--- isready
+[Engine] [15:24:22.807213] <  5> Engine1 ---> TT Hits / Cutoffs= 1003 / 58
+[Engine] [15:24:22.807249] <  5> Engine1 ---> info depth 5 score cp 93 nodes 79313 nps 79313 hashfull 1 pv e2e4 a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:24:22.807272] <  5> Engine1 ---> bestmove e2e4
+[Engine] [15:24:22.807290] <  5> Engine1 <--- isready
+[Engine] [15:24:22.822293] <  3> EngineOld ---> readyok
+[Engine] [15:24:22.838315] <  5> Engine1 ---> readyok
+[Engine] [15:24:22.838467] <  5> EngineOld <--- isready
+[Engine] [15:24:22.853890] <  5> EngineOld ---> readyok
+[Engine] [15:24:22.853979] <  5> EngineOld <--- position startpos moves e2e4
+[Engine] [15:24:22.854021] <  5> EngineOld <--- isready
+[Engine] [15:24:22.869912] <  5> EngineOld ---> readyok
+[Engine] [15:24:22.870006] <  5> EngineOld <--- go wtime 63576 btime 62000 winc 2000 binc 2000
+[Engine] [15:24:22.872480] <  8> EngineOld ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:24:22.872537] <  8> EngineOld ---> 'help' for commands
+[Engine] [15:24:22.872564] <  8> EngineOld ---> id name Pertinax Chess 0.1
+[Engine] [15:24:22.872581] <  8> EngineOld ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:24:22.872604] <  8> EngineOld ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:24:22.872630] <  8> EngineOld ---> option name type button EngineOn default On
+[Engine] [15:24:22.872645] <  8> EngineOld ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:24:22.872661] <  8> EngineOld ---> option name type button Gui default Off
+[Engine] [15:24:22.872675] <  8> EngineOld ---> uciok
+[Engine] [15:24:22.872701] <  8> EngineOld <--- ucinewgame
+[Engine] [15:24:22.872726] <  8> EngineOld <--- isready
+[Engine] [15:24:22.883136] <  5> EngineOld ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:24:22.883211] <  5> EngineOld ---> info depth 1 score cp 10 nodes 21 nps 21 hashfull 0 pv a7a5 
+[Engine] [15:24:22.883836] <  5> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:22.883869] <  5> EngineOld ---> info depth 2 score cp 10 nodes 177 nps 177 hashfull 0 pv e7e5 a2a4 
+[Engine] [15:24:22.885411] <  8> EngineOld ---> readyok
+[Engine] [15:24:22.885461] <  8> Engine1 <--- ucinewgame
+[Engine] [15:24:22.885511] <  8> Engine1 <--- isready
+[Engine] [15:24:22.888319] <  5> EngineOld ---> TT Hits / Cutoffs= 22 / 1
+[Engine] [15:24:22.888354] <  5> EngineOld ---> info depth 3 score cp 12 nodes 963 nps 963 hashfull 0 pv g8f6 e4e5 d7d5 
+[Engine] [15:24:22.901036] <  8> Engine1 ---> readyok
+[Engine] [15:24:22.901127] <  8> EngineOld <--- isready
+[Engine] [15:24:22.914952] <  6> EngineOld ---> TT Hits / Cutoffs= 3507 / 95
+[Engine] [15:24:22.914999] <  6> EngineOld ---> info depth 5 score cp 100 nodes 162390 nps 162390 hashfull 5 pv e7e5 g1f3 d8f6 f3g1 f6f2 
+[Engine] [15:24:22.915028] <  6> EngineOld ---> bestmove e7e5
+[Engine] [15:24:22.915050] <  6> EngineOld <--- isready
+[Engine] [15:24:22.916141] <  8> EngineOld ---> readyok
+[Engine] [15:24:22.916200] <  8> EngineOld <--- isready
+[Engine] [15:24:22.931668] <  8> EngineOld ---> readyok
+[Engine] [15:24:22.931759] <  8> EngineOld <--- position startpos
+[Engine] [15:24:22.931805] <  8> EngineOld <--- isready
+[Engine] [15:24:22.947441] <  6> EngineOld ---> readyok
+[Engine] [15:24:22.947441] <  8> EngineOld ---> readyok
+[Engine] [15:24:22.947542] <  8> EngineOld <--- go wtime 62000 btime 62000 winc 2000 binc 2000
+[Engine] [15:24:22.947577] <  6> Engine1 <--- isready
+[Engine] [15:24:22.960247] <  8> EngineOld ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:24:22.960311] <  8> EngineOld ---> info depth 1 score cp 0 nodes 21 nps 21 hashfull 0 pv a2a4 
+[Engine] [15:24:22.960635] <  8> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:22.960653] <  8> EngineOld ---> info depth 2 score cp 0 nodes 100 nps 100 hashfull 0 pv b1a3 a7a5 
+[Engine] [15:24:22.962959] <  6> Engine1 ---> readyok
+[Engine] [15:24:22.963015] <  6> Engine1 <--- position startpos moves e2e4 e7e5
+[Engine] [15:24:22.963066] <  6> Engine1 <--- isready
+[Engine] [15:24:22.968678] <  8> EngineOld ---> TT Hits / Cutoffs= 25 / 1
+[Engine] [15:24:22.968736] <  8> EngineOld ---> info depth 3 score cp -10 nodes 2021 nps 2021 hashfull 0 pv b1a3 c7c5 b2b4 
+[Engine] [15:24:22.978756] <  6> Engine1 ---> readyok
+[Engine] [15:24:22.978845] <  6> Engine1 <--- go wtime 63594 btime 62856 winc 2000 binc 2000
+[Engine] [15:24:22.979677] <  6> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:22.979724] <  6> Engine1 ---> info depth 1 score cp -10 nodes 29 nps 29 hashfull 1 pv a2a4 
+[Engine] [15:24:22.980240] <  6> Engine1 ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:24:22.980271] <  6> Engine1 ---> info depth 2 score cp -10 nodes 67 nps 67 hashfull 1 pv a2a4 a7a6 
+[Engine] [15:24:22.984449] <  8> EngineOld ---> TT Hits / Cutoffs= 91 / 2
+[Engine] [15:24:22.984490] <  8> EngineOld ---> info depth 4 score cp -8 nodes 2849 nps 2849 hashfull 0 pv b1a3 c7c5 b2b3 d8a5 
+[Engine] [15:24:22.991692] <  6> Engine1 ---> TT Hits / Cutoffs= 42 / 2
+[Engine] [15:24:22.991751] <  6> Engine1 ---> info depth 3 score cp 100 nodes 2161 nps 2161 hashfull 1 pv d1h5 a7a5 h5e5 
+[Engine] [15:24:23.034729] <  6> Engine1 ---> TT Hits / Cutoffs= 269 / 1
+[Engine] [15:24:23.034798] <  6> Engine1 ---> info depth 4 score cp 0 nodes 7313 nps 7313 hashfull 2 pv b2b3 c7c6 
+[Engine] [15:24:23.125679] <  5> EngineOld ---> TT Hits / Cutoffs= 215 / 3
+[Engine] [15:24:23.125734] <  5> EngineOld ---> info depth 4 score cp -93 nodes 45874 nps 45874 hashfull 1 pv a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:24:23.174328] <  3> Engine1 <--- uci
+[Engine] [15:24:23.372944] <  4> EngineOld <--- quit
+[Engine] [15:24:23.373034] <  4> Engine1 <--- isready
+[Engine] [15:24:23.388943] <  4> Engine1 ---> readyok
+[Engine] [15:24:23.411642] <  8> EngineOld ---> TT Hits / Cutoffs= 1003 / 58
+[Engine] [15:24:23.411708] <  8> EngineOld ---> info depth 5 score cp 93 nodes 79313 nps 79313 hashfull 1 pv e2e4 a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:24:23.411746] <  8> EngineOld ---> bestmove e2e4
+[Engine] [15:24:23.411776] <  8> EngineOld <--- isready
+[Engine] [15:24:23.451312] <  8> EngineOld ---> readyok
+[Engine] [15:24:23.451481] <  8> Engine1 <--- isready
+[Engine] [15:24:23.453817] <  3> Engine1 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:24:23.453854] <  3> Engine1 ---> 'help' for commands
+[Engine] [15:24:23.453879] <  3> Engine1 ---> id name Pertinax Chess 0.1
+[Engine] [15:24:23.453895] <  3> Engine1 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:24:23.453909] <  3> Engine1 ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:24:23.453925] <  3> Engine1 ---> option name type button EngineOn default On
+[Engine] [15:24:23.453951] <  3> Engine1 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:24:23.453980] <  3> Engine1 ---> option name type button Gui default Off
+[Engine] [15:24:23.454008] <  3> Engine1 ---> uciok
+[Engine] [15:24:23.454031] <  3> Engine1 <--- ucinewgame
+[Engine] [15:24:23.454058] <  3> Engine1 <--- isready
+[Engine] [15:24:23.466828] <  8> Engine1 ---> readyok
+[Engine] [15:24:23.466848] <  3> Engine1 ---> readyok
+[Engine] [15:24:23.466925] <  8> Engine1 <--- position startpos moves e2e4
+[Engine] [15:24:23.466975] <  3> EngineOld <--- ucinewgame
+[Engine] [15:24:23.466999] <  8> Engine1 <--- isready
+[Engine] [15:24:23.467017] <  3> EngineOld <--- isready
+[Engine] [15:24:23.482379] <  8> Engine1 ---> readyok
+[Engine] [15:24:23.482379] <  3> EngineOld ---> readyok
+[Engine] [15:24:23.482518] <  8> Engine1 <--- go wtime 63536 btime 62000 winc 2000 binc 2000
+[Engine] [15:24:23.482538] <  3> Engine1 <--- isready
+[Engine] [15:24:23.483096] <  8> Engine1 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:24:23.483132] <  8> Engine1 ---> info depth 1 score cp 10 nodes 21 nps 21 hashfull 0 pv a7a5 
+[Engine] [15:24:23.484211] <  8> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:23.484247] <  8> Engine1 ---> info depth 2 score cp 10 nodes 177 nps 177 hashfull 0 pv e7e5 a2a4 
+[Engine] [15:24:23.489499] <  8> Engine1 ---> TT Hits / Cutoffs= 22 / 1
+[Engine] [15:24:23.489533] <  8> Engine1 ---> info depth 3 score cp 12 nodes 963 nps 963 hashfull 0 pv g8f6 e4e5 d7d5 
+[Engine] [15:24:23.498362] <  3> Engine1 ---> readyok
+[Engine] [15:24:23.498430] <  3> Engine1 <--- isready
+[Engine] [15:24:23.513554] <  3> Engine1 ---> readyok
+[Engine] [15:24:23.513599] <  3> Engine1 <--- position startpos
+[Engine] [15:24:23.513636] <  3> Engine1 <--- isready
+[Engine] [15:24:23.529623] <  3> Engine1 ---> readyok
+[Engine] [15:24:23.529722] <  3> Engine1 <--- go wtime 62000 btime 62000 winc 2000 binc 2000
+[Engine] [15:24:23.543350] <  3> Engine1 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:24:23.543423] <  3> Engine1 ---> info depth 1 score cp 0 nodes 21 nps 21 hashfull 0 pv a2a4 
+[Engine] [15:24:23.543758] <  3> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:23.543786] <  3> Engine1 ---> info depth 2 score cp 0 nodes 100 nps 100 hashfull 0 pv b1a3 a7a5 
+[Engine] [15:24:23.556236] <  3> Engine1 ---> TT Hits / Cutoffs= 25 / 1
+[Engine] [15:24:23.556331] <  3> Engine1 ---> info depth 3 score cp -10 nodes 2021 nps 2021 hashfull 0 pv b1a3 c7c5 b2b4 
+[Engine] [15:24:23.571964] <  3> Engine1 ---> TT Hits / Cutoffs= 91 / 2
+[Engine] [15:24:23.572023] <  3> Engine1 ---> info depth 4 score cp -8 nodes 2849 nps 2849 hashfull 0 pv b1a3 c7c5 b2b3 d8a5 
+[Engine] [15:24:23.595852] <  7> Engine1 ---> TT Hits / Cutoffs= 3507 / 95
+[Engine] [15:24:23.595907] <  7> Engine1 ---> info depth 5 score cp 100 nodes 162390 nps 162390 hashfull 5 pv e7e5 g1f3 d8f6 f3g1 f6f2 
+[Engine] [15:24:23.595931] <  7> Engine1 ---> bestmove e7e5
+[Engine] [15:24:23.595949] <  7> Engine1 <--- isready
+[Engine] [15:24:23.639259] <  7> Engine1 ---> readyok
+[Engine] [15:24:23.639445] <  7> EngineOld <--- isready
+[Engine] [15:24:23.655420] <  7> EngineOld ---> readyok
+[Engine] [15:24:23.655509] <  7> EngineOld <--- position startpos moves e2e4 e7e5
+[Engine] [15:24:23.655554] <  7> EngineOld <--- isready
+[Engine] [15:24:23.670944] <  7> EngineOld ---> readyok
+[Engine] [15:24:23.671037] <  7> EngineOld <--- go wtime 63574 btime 62803 winc 2000 binc 2000
+[Engine] [15:24:23.671689] <  7> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:23.671728] <  7> EngineOld ---> info depth 1 score cp -10 nodes 29 nps 29 hashfull 1 pv a2a4 
+[Engine] [15:24:23.672004] <  7> EngineOld ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:24:23.672041] <  7> EngineOld ---> info depth 2 score cp -10 nodes 67 nps 67 hashfull 1 pv a2a4 a7a6 
+[Engine] [15:24:23.683279] <  7> EngineOld ---> TT Hits / Cutoffs= 42 / 2
+[Engine] [15:24:23.683337] <  7> EngineOld ---> info depth 3 score cp 100 nodes 2161 nps 2161 hashfull 1 pv d1h5 a7a5 h5e5 
+[Engine] [15:24:23.729816] <  7> EngineOld ---> TT Hits / Cutoffs= 269 / 1
+[Engine] [15:24:23.729883] <  7> EngineOld ---> info depth 4 score cp 0 nodes 7313 nps 7313 hashfull 2 pv b2b3 c7c6 
+[Engine] [15:24:23.755901] <  8> Engine1 ---> TT Hits / Cutoffs= 215 / 3
+[Engine] [15:24:23.755959] <  8> Engine1 ---> info depth 4 score cp -93 nodes 45874 nps 45874 hashfull 1 pv a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:24:23.784542] <  4> EngineOld <--- uci
+[Engine] [15:24:24.013475] <  3> Engine1 ---> TT Hits / Cutoffs= 1003 / 58
+[Engine] [15:24:24.013552] <  3> Engine1 ---> info depth 5 score cp 93 nodes 79313 nps 79313 hashfull 1 pv e2e4 a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:24:24.013622] <  3> Engine1 ---> bestmove e2e4
+[Engine] [15:24:24.013653] <  3> Engine1 <--- isready
+[Engine] [15:24:24.048498] <  3> Engine1 ---> readyok
+[Engine] [15:24:24.048667] <  3> EngineOld <--- isready
+[Engine] [15:24:24.064544] <  3> EngineOld ---> readyok
+[Engine] [15:24:24.064642] <  3> EngineOld <--- position startpos moves e2e4
+[Engine] [15:24:24.064691] <  3> EngineOld <--- isready
+[Engine] [15:24:24.070460] <  4> EngineOld ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:24:24.070524] <  4> EngineOld ---> 'help' for commands
+[Engine] [15:24:24.070551] <  4> EngineOld ---> id name Pertinax Chess 0.1
+[Engine] [15:24:24.070581] <  4> EngineOld ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:24:24.070603] <  4> EngineOld ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:24:24.070619] <  4> EngineOld ---> option name type button EngineOn default On
+[Engine] [15:24:24.070633] <  4> EngineOld ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:24:24.070647] <  4> EngineOld ---> option name type button Gui default Off
+[Engine] [15:24:24.070661] <  4> EngineOld ---> uciok
+[Engine] [15:24:24.070685] <  4> EngineOld <--- ucinewgame
+[Engine] [15:24:24.070710] <  4> EngineOld <--- isready
+[Engine] [15:24:24.079746] <  3> EngineOld ---> readyok
+[Engine] [15:24:24.079746] <  4> EngineOld ---> readyok
+[Engine] [15:24:24.079882] <  3> EngineOld <--- go wtime 63517 btime 62000 winc 2000 binc 2000
+[Engine] [15:24:24.079890] <  4> Engine1 <--- ucinewgame
+[Engine] [15:24:24.079943] <  4> Engine1 <--- isready
+[Engine] [15:24:24.080375] <  3> EngineOld ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:24:24.080408] <  3> EngineOld ---> info depth 1 score cp 10 nodes 21 nps 21 hashfull 0 pv a7a5 
+[Engine] [15:24:24.081402] <  3> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:24.081446] <  3> EngineOld ---> info depth 2 score cp 10 nodes 177 nps 177 hashfull 0 pv e7e5 a2a4 
+[Engine] [15:24:24.086154] <  3> EngineOld ---> TT Hits / Cutoffs= 22 / 1
+[Engine] [15:24:24.086232] <  3> EngineOld ---> info depth 3 score cp 12 nodes 963 nps 963 hashfull 0 pv g8f6 e4e5 d7d5 
+[Engine] [15:24:24.095211] <  4> Engine1 ---> readyok
+[Engine] [15:24:24.095300] <  4> EngineOld <--- isready
+[Engine] [15:24:24.110267] <  4> EngineOld ---> readyok
+[Engine] [15:24:24.110346] <  4> EngineOld <--- isready
+[Engine] [15:24:24.113207] <  5> EngineOld ---> TT Hits / Cutoffs= 3507 / 95
+[Engine] [15:24:24.113248] <  5> EngineOld ---> info depth 5 score cp 100 nodes 162390 nps 162390 hashfull 5 pv e7e5 g1f3 d8f6 f3g1 f6f2 
+[Engine] [15:24:24.113277] <  5> EngineOld ---> bestmove e7e5
+[Engine] [15:24:24.113299] <  5> EngineOld <--- isready
+[Engine] [15:24:24.126466] <  4> EngineOld ---> readyok
+[Engine] [15:24:24.126516] <  4> EngineOld <--- position startpos
+[Engine] [15:24:24.126568] <  4> EngineOld <--- isready
+[Engine] [15:24:24.141969] <  4> EngineOld ---> readyok
+[Engine] [15:24:24.142028] <  4> EngineOld <--- go wtime 62000 btime 62000 winc 2000 binc 2000
+[Engine] [15:24:24.154025] <  4> EngineOld ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:24:24.154112] <  4> EngineOld ---> info depth 1 score cp 0 nodes 21 nps 21 hashfull 0 pv a2a4 
+[Engine] [15:24:24.154415] <  4> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:24.154444] <  4> EngineOld ---> info depth 2 score cp 0 nodes 100 nps 100 hashfull 0 pv b1a3 a7a5 
+[Engine] [15:24:24.157499] <  5> EngineOld ---> readyok
+[Engine] [15:24:24.157638] <  5> Engine1 <--- isready
+[Engine] [15:24:24.162940] <  4> EngineOld ---> TT Hits / Cutoffs= 25 / 1
+[Engine] [15:24:24.162974] <  4> EngineOld ---> info depth 3 score cp -10 nodes 2021 nps 2021 hashfull 0 pv b1a3 c7c5 b2b4 
+[Engine] [15:24:24.172982] <  5> Engine1 ---> readyok
+[Engine] [15:24:24.173025] <  5> Engine1 <--- position startpos moves e2e4 e7e5
+[Engine] [15:24:24.173062] <  5> Engine1 <--- isready
+[Engine] [15:24:24.177537] <  4> EngineOld ---> TT Hits / Cutoffs= 91 / 2
+[Engine] [15:24:24.177570] <  4> EngineOld ---> info depth 4 score cp -8 nodes 2849 nps 2849 hashfull 0 pv b1a3 c7c5 b2b3 d8a5 
+[Engine] [15:24:24.188119] <  5> Engine1 ---> readyok
+[Engine] [15:24:24.188176] <  5> Engine1 <--- go wtime 63576 btime 62757 winc 2000 binc 2000
+[Engine] [15:24:24.189009] <  5> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:24.189054] <  5> Engine1 ---> info depth 1 score cp -10 nodes 29 nps 29 hashfull 1 pv a2a4 
+[Engine] [15:24:24.189531] <  5> Engine1 ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:24:24.189573] <  5> Engine1 ---> info depth 2 score cp -10 nodes 67 nps 67 hashfull 1 pv a2a4 a7a6 
+[Engine] [15:24:24.201194] <  5> Engine1 ---> TT Hits / Cutoffs= 42 / 2
+[Engine] [15:24:24.201231] <  5> Engine1 ---> info depth 3 score cp 100 nodes 2161 nps 2161 hashfull 1 pv d1h5 a7a5 h5e5 
+[Engine] [15:24:24.249868] <  5> Engine1 ---> TT Hits / Cutoffs= 269 / 1
+[Engine] [15:24:24.249927] <  5> Engine1 ---> info depth 4 score cp 0 nodes 7313 nps 7313 hashfull 2 pv b2b3 c7c6 
+[Engine] [15:24:24.350691] <  3> EngineOld ---> TT Hits / Cutoffs= 215 / 3
+[Engine] [15:24:24.350757] <  3> EngineOld ---> info depth 4 score cp -93 nodes 45874 nps 45874 hashfull 1 pv a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:24:24.627948] <  4> EngineOld ---> TT Hits / Cutoffs= 1003 / 58
+[Engine] [15:24:24.628010] <  4> EngineOld ---> info depth 5 score cp 93 nodes 79313 nps 79313 hashfull 1 pv e2e4 a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:24:24.628038] <  4> EngineOld ---> bestmove e2e4
+[Engine] [15:24:24.628057] <  4> EngineOld <--- isready
+[Engine] [15:24:24.674176] <  4> EngineOld ---> readyok
+[Engine] [15:24:24.674350] <  4> Engine1 <--- isready
+[Engine] [15:24:24.690171] <  4> Engine1 ---> readyok
+[Engine] [15:24:24.690221] <  4> Engine1 <--- position startpos moves e2e4
+[Engine] [15:24:24.690248] <  4> Engine1 <--- isready
+[Engine] [15:24:24.706217] <  4> Engine1 ---> readyok
+[Engine] [15:24:24.706262] <  4> Engine1 <--- go wtime 63515 btime 62000 winc 2000 binc 2000
+[Engine] [15:24:24.706988] <  4> Engine1 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:24:24.707031] <  4> Engine1 ---> info depth 1 score cp 10 nodes 21 nps 21 hashfull 0 pv a7a5 
+[Engine] [15:24:24.707850] <  4> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:24.707880] <  4> Engine1 ---> info depth 2 score cp 10 nodes 177 nps 177 hashfull 0 pv e7e5 a2a4 
+[Engine] [15:24:24.712921] <  4> Engine1 ---> TT Hits / Cutoffs= 22 / 1
+[Engine] [15:24:24.712954] <  4> Engine1 ---> info depth 3 score cp 12 nodes 963 nps 963 hashfull 0 pv g8f6 e4e5 d7d5 
+[Engine] [15:24:24.722571] <  8> Engine1 ---> TT Hits / Cutoffs= 3507 / 95
+[Engine] [15:24:24.722602] <  8> Engine1 ---> info depth 5 score cp 100 nodes 162390 nps 162390 hashfull 5 pv e7e5 g1f3 d8f6 f3g1 f6f2 
+[Engine] [15:24:24.722624] <  8> Engine1 ---> bestmove e7e5
+[Engine] [15:24:24.722641] <  8> Engine1 <--- isready
+[Engine] [15:24:24.768449] <  8> Engine1 ---> readyok
+[Engine] [15:24:24.768601] <  8> EngineOld <--- isready
+[Engine] [15:24:24.784512] <  8> EngineOld ---> readyok
+[Engine] [15:24:24.784586] <  8> EngineOld <--- position startpos moves e2e4 e7e5
+[Engine] [15:24:24.784633] <  8> EngineOld <--- isready
+[Engine] [15:24:24.800082] <  8> EngineOld ---> readyok
+[Engine] [15:24:24.800151] <  8> EngineOld <--- go wtime 63536 btime 62760 winc 2000 binc 2000
+[Engine] [15:24:24.800885] <  8> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:24.800924] <  8> EngineOld ---> info depth 1 score cp -10 nodes 29 nps 29 hashfull 1 pv a2a4 
+[Engine] [15:24:24.801512] <  8> EngineOld ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:24:24.801544] <  8> EngineOld ---> info depth 2 score cp -10 nodes 67 nps 67 hashfull 1 pv a2a4 a7a6 
+[Engine] [15:24:24.815648] <  8> EngineOld ---> TT Hits / Cutoffs= 42 / 2
+[Engine] [15:24:24.815683] <  8> EngineOld ---> info depth 3 score cp 100 nodes 2161 nps 2161 hashfull 1 pv d1h5 a7a5 h5e5 
+[Engine] [15:24:24.839681] <  6> Engine1 ---> TT Hits / Cutoffs= 5096 / 163
+[Engine] [15:24:24.839730] <  6> Engine1 ---> info depth 5 score cp 100 nodes 317743 nps 317743 hashfull 6 pv f1c4 g8h6 d1h5 h6g8 c4f7 
+[Engine] [15:24:24.839783] <  6> Engine1 ---> bestmove f1c4
+[Engine] [15:24:24.839817] <  6> Engine1 <--- isready
+[Engine] [15:24:24.857625] <  8> EngineOld ---> TT Hits / Cutoffs= 269 / 1
+[Engine] [15:24:24.857677] <  8> EngineOld ---> info depth 4 score cp 0 nodes 7313 nps 7313 hashfull 2 pv b2b3 c7c6 
+[Engine] [15:24:24.863947] <  6> Engine1 ---> readyok
+[Engine] [15:24:24.864112] <  6> EngineOld <--- isready
+[Engine] [15:24:24.879609] <  6> EngineOld ---> readyok
+[Engine] [15:24:24.879683] <  6> EngineOld <--- position startpos moves e2e4 e7e5 f1c4
+[Engine] [15:24:24.879721] <  6> EngineOld <--- isready
+[Engine] [15:24:24.895083] <  6> EngineOld ---> readyok
+[Engine] [15:24:24.895138] <  6> EngineOld <--- go wtime 63734 btime 62856 winc 2000 binc 2000
+[Engine] [15:24:24.895884] <  6> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:24.895933] <  6> EngineOld ---> info depth 1 score cp 12 nodes 29 nps 29 hashfull 5 pv a7a5 
+[Engine] [15:24:24.896563] <  6> EngineOld ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:24:24.896601] <  6> EngineOld ---> info depth 2 score cp 10 nodes 62 nps 62 hashfull 5 pv a7a6 f2f4 
+[Engine] [15:24:24.901642] <  6> EngineOld ---> TT Hits / Cutoffs= 43 / 2
+[Engine] [15:24:24.901675] <  6> EngineOld ---> info depth 3 score cp 100 nodes 958 nps 958 hashfull 5 pv d8f6 a2a4 f6f2 
+[Engine] [15:24:24.940768] <  6> EngineOld ---> TT Hits / Cutoffs= 151 / 22
+[Engine] [15:24:24.940818] <  6> EngineOld ---> info depth 4 score cp -100 nodes 6378 nps 6378 hashfull 6 pv d8f6 d1e2 b7b6 c4f7 
+[Engine] [15:24:24.975243] <  4> Engine1 ---> TT Hits / Cutoffs= 215 / 3
+[Engine] [15:24:24.975308] <  4> Engine1 ---> info depth 4 score cp -93 nodes 45874 nps 45874 hashfull 1 pv a7a6 d1f3 f7f5 e4f5 
+[Engine] [15:24:25.216899] <  6> EngineOld ---> TT Hits / Cutoffs= 800 / 4
+[Engine] [15:24:25.216966] <  6> EngineOld ---> info depth 5 score cp 103 nodes 44316 nps 44316 hashfull 6 pv d8f6 g1h3 f6g6 c2c3 g6g2 
+[Engine] [15:24:25.216998] <  6> EngineOld ---> bestmove d8f6
+[Engine] [15:24:25.217021] <  6> EngineOld <--- isready
+[Engine] [15:24:25.241770] <  6> EngineOld ---> readyok
+[Engine] [15:24:25.241916] <  6> Engine1 <--- isready
+[Engine] [15:24:25.257298] <  6> Engine1 ---> readyok
+[Engine] [15:24:25.257359] <  6> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6
+[Engine] [15:24:25.257398] <  6> Engine1 <--- isready
+[Engine] [15:24:25.272831] <  6> Engine1 ---> readyok
+[Engine] [15:24:25.272892] <  6> Engine1 <--- go wtime 63734 btime 64535 winc 2000 binc 2000
+[Engine] [15:24:25.273924] <  6> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:25.273960] <  6> Engine1 ---> info depth 1 score cp 100 nodes 32 nps 32 hashfull 6 pv c4f7 
+[Engine] [15:24:25.275477] <  6> Engine1 ---> TT Hits / Cutoffs= 8 / 0
+[Engine] [15:24:25.275507] <  6> Engine1 ---> info depth 2 score cp 0 nodes 184 nps 184 hashfull 6 pv b1a3 c7c5 
+[Engine] [15:24:25.283199] <  6> Engine1 ---> TT Hits / Cutoffs= 105 / 12
+[Engine] [15:24:25.283239] <  6> Engine1 ---> info depth 3 score cp 100 nodes 1443 nps 1443 hashfull 6 pv g1f3 b7b6 c4f7 
+[Engine] [15:24:25.286196] <  3> EngineOld ---> TT Hits / Cutoffs= 3507 / 95
+[Engine] [15:24:25.286232] <  3> EngineOld ---> info depth 5 score cp 100 nodes 162390 nps 162390 hashfull 5 pv e7e5 g1f3 d8f6 f3g1 f6f2 
+[Engine] [15:24:25.286255] <  3> EngineOld ---> bestmove e7e5
+[Engine] [15:24:25.286272] <  3> EngineOld <--- isready
+[Engine] [15:24:25.319666] <  3> EngineOld ---> readyok
+[Engine] [15:24:25.319805] <  3> Engine1 <--- isready
+[Engine] [15:24:25.334091] <  6> Engine1 ---> TT Hits / Cutoffs= 464 / 16
+[Engine] [15:24:25.334132] <  6> Engine1 ---> info depth 4 score cp 0 nodes 8548 nps 8548 hashfull 7 pv b2b3 c7c6 
+[Engine] [15:24:25.335180] <  3> Engine1 ---> readyok
+[Engine] [15:24:25.335224] <  3> Engine1 <--- position startpos moves e2e4 e7e5
+[Engine] [15:24:25.335349] <  3> Engine1 <--- isready
+[Engine] [15:24:25.350799] <  3> Engine1 ---> readyok
+[Engine] [15:24:25.350860] <  3> Engine1 <--- go wtime 63517 btime 62794 winc 2000 binc 2000
+[Engine] [15:24:25.351367] <  3> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:25.351405] <  3> Engine1 ---> info depth 1 score cp -10 nodes 29 nps 29 hashfull 1 pv a2a4 
+[Engine] [15:24:25.351882] <  3> Engine1 ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:24:25.351923] <  3> Engine1 ---> info depth 2 score cp -10 nodes 67 nps 67 hashfull 1 pv a2a4 a7a6 
+[Engine] [15:24:25.364608] <  3> Engine1 ---> TT Hits / Cutoffs= 42 / 2
+[Engine] [15:24:25.364654] <  3> Engine1 ---> info depth 3 score cp 100 nodes 2161 nps 2161 hashfull 1 pv d1h5 a7a5 h5e5 
+[Engine] [15:24:25.408599] <  3> Engine1 ---> TT Hits / Cutoffs= 269 / 1
+[Engine] [15:24:25.408655] <  3> Engine1 ---> info depth 4 score cp 0 nodes 7313 nps 7313 hashfull 2 pv b2b3 c7c6 
+[Engine] [15:24:25.516686] <  7> EngineOld ---> TT Hits / Cutoffs= 5093 / 163
+[Engine] [15:24:25.516745] <  7> EngineOld ---> info depth 5 score cp 100 nodes 317743 nps 317743 hashfull 6 pv f1c4 g8h6 d1h5 h6g8 c4f7 
+[Engine] [15:24:25.516771] <  7> EngineOld ---> bestmove f1c4
+[Engine] [15:24:25.516789] <  7> EngineOld <--- isready
+[Engine] [15:24:25.539220] <  7> EngineOld ---> readyok
+[Engine] [15:24:25.539357] <  7> Engine1 <--- isready
+[Engine] [15:24:25.555261] <  7> Engine1 ---> readyok
+[Engine] [15:24:25.555317] <  7> Engine1 <--- position startpos moves e2e4 e7e5 f1c4
+[Engine] [15:24:25.555367] <  7> Engine1 <--- isready
+[Engine] [15:24:25.571278] <  7> Engine1 ---> readyok
+[Engine] [15:24:25.571347] <  7> Engine1 <--- go wtime 63729 btime 62803 winc 2000 binc 2000
+[Engine] [15:24:25.571743] <  7> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:25.571785] <  7> Engine1 ---> info depth 1 score cp 12 nodes 29 nps 29 hashfull 5 pv a7a5 
+[Engine] [15:24:25.572074] <  7> Engine1 ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:24:25.572096] <  7> Engine1 ---> info depth 2 score cp 10 nodes 62 nps 62 hashfull 5 pv a7a6 f2f4 
+[Engine] [15:24:25.578302] <  7> Engine1 ---> TT Hits / Cutoffs= 43 / 2
+[Engine] [15:24:25.578335] <  7> Engine1 ---> info depth 3 score cp 100 nodes 958 nps 958 hashfull 5 pv d8f6 a2a4 f6f2 
+[Engine] [15:24:25.616429] <  7> Engine1 ---> TT Hits / Cutoffs= 151 / 22
+[Engine] [15:24:25.616478] <  7> Engine1 ---> info depth 4 score cp -100 nodes 6378 nps 6378 hashfull 6 pv d8f6 d1e2 b7b6 c4f7 
+[Engine] [15:24:25.840514] <  6> Engine1 ---> TT Hits / Cutoffs= 2246 / 38
+[Engine] [15:24:25.840566] <  6> Engine1 ---> info depth 5 score cp 100 nodes 80141 nps 80141 hashfull 9 pv c4f1 g8h6 
+[Engine] [15:24:25.840591] <  6> Engine1 ---> bestmove c4f1
+[Engine] [15:24:25.840609] <  6> Engine1 <--- isready
+[Engine] [15:24:25.885215] <  6> Engine1 ---> readyok
+[Engine] [15:24:25.885379] <  6> EngineOld <--- isready
+[Engine] [15:24:25.890543] <  7> Engine1 ---> TT Hits / Cutoffs= 800 / 4
+[Engine] [15:24:25.890579] <  7> Engine1 ---> info depth 5 score cp 103 nodes 44316 nps 44316 hashfull 6 pv d8f6 g1h3 f6g6 c2c3 g6g2 
+[Engine] [15:24:25.890601] <  7> Engine1 ---> bestmove d8f6
+[Engine] [15:24:25.890618] <  7> Engine1 <--- isready
+[Engine] [15:24:25.901227] <  6> EngineOld ---> readyok
+[Engine] [15:24:25.901270] <  6> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1
+[Engine] [15:24:25.901307] <  6> EngineOld <--- isready
+[Engine] [15:24:25.917085] <  6> EngineOld ---> readyok
+[Engine] [15:24:25.917138] <  6> EngineOld <--- go wtime 65167 btime 64535 winc 2000 binc 2000
+[Engine] [15:24:25.917529] <  6> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:25.917562] <  6> EngineOld ---> info depth 1 score cp 100 nodes 37 nps 37 hashfull 6 pv f6f2 
+[Engine] [15:24:25.917584] <  6> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:25.917600] <  6> EngineOld ---> info depth 2 score mate 1 nodes 4 nps 4 hashfull 6 pv f6f2 
+[Engine] [15:24:25.917616] <  6> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:25.917631] <  6> EngineOld ---> info depth 3 score mate 1 nodes 5 nps 5 hashfull 6 pv f6f2 
+[Engine] [15:24:25.917647] <  6> EngineOld ---> TT Hits / Cutoffs= 3 / 0
+[Engine] [15:24:25.917661] <  6> EngineOld ---> info depth 4 score mate 1 nodes 6 nps 6 hashfull 6 pv f6f2 
+[Engine] [15:24:25.917678] <  6> EngineOld ---> TT Hits / Cutoffs= 4 / 0
+[Engine] [15:24:25.917692] <  6> EngineOld ---> info depth 5 score mate 1 nodes 7 nps 7 hashfull 6 pv f6f2 
+[Engine] [15:24:25.917708] <  6> EngineOld ---> bestmove f6f2
+[Engine] [15:24:25.917724] <  6> EngineOld <--- isready
+[Engine] [15:24:25.923820] <  4> Engine1 ---> TT Hits / Cutoffs= 3507 / 95
+[Engine] [15:24:25.923850] <  4> Engine1 ---> info depth 5 score cp 100 nodes 162390 nps 162390 hashfull 5 pv e7e5 g1f3 d8f6 f3g1 f6f2 
+[Engine] [15:24:25.923872] <  4> Engine1 ---> bestmove e7e5
+[Engine] [15:24:25.923888] <  4> Engine1 <--- isready
+[Engine] [15:24:25.933183] <  7> Engine1 ---> readyok
+[Engine] [15:24:25.933309] <  7> EngineOld <--- isready
+[Engine] [15:24:25.949178] <  7> EngineOld ---> readyok
+[Engine] [15:24:25.949178] <  6> EngineOld ---> readyok
+[Engine] [15:24:25.949234] <  7> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6
+[Engine] [15:24:25.949289] <  7> EngineOld <--- isready
+[Engine] [15:24:25.949304] <  6> Engine1 <--- isready
+[Engine] [15:24:25.965214] <  7> EngineOld ---> readyok
+[Engine] [15:24:25.965214] <  6> Engine1 ---> readyok
+[Engine] [15:24:25.965285] <  4> Engine1 ---> readyok
+[Engine] [15:24:25.965292] <  7> EngineOld <--- go wtime 63729 btime 64484 winc 2000 binc 2000
+[Engine] [15:24:25.965312] <  6> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1 f6f2
+[Engine] [15:24:25.965423] <  6> Engine1 <--- isready
+[Engine] [15:24:25.965426] <  4> EngineOld <--- isready
+[Engine] [15:24:25.966307] <  7> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:25.966395] <  7> EngineOld ---> info depth 1 score cp 100 nodes 32 nps 32 hashfull 6 pv c4f7 
+[Engine] [15:24:25.967843] <  7> EngineOld ---> TT Hits / Cutoffs= 8 / 0
+[Engine] [15:24:25.967876] <  7> EngineOld ---> info depth 2 score cp 0 nodes 184 nps 184 hashfull 6 pv b1a3 c7c5 
+[Engine] [15:24:25.971119] <  5> Engine1 ---> TT Hits / Cutoffs= 5093 / 163
+[Engine] [15:24:25.971151] <  5> Engine1 ---> info depth 5 score cp 100 nodes 317743 nps 317743 hashfull 6 pv f1c4 g8h6 d1h5 h6g8 c4f7 
+[Engine] [15:24:25.971202] <  5> Engine1 ---> bestmove f1c4
+[Engine] [15:24:25.971246] <  5> Engine1 <--- isready
+[Engine] [15:24:25.976227] <  7> EngineOld ---> TT Hits / Cutoffs= 105 / 12
+[Engine] [15:24:25.976259] <  7> EngineOld ---> info depth 3 score cp 100 nodes 1443 nps 1443 hashfull 6 pv g1f3 b7b6 c4f7 
+[Engine] [15:24:25.980719] <  6> Engine1 ---> readyok
+[Engine] [15:24:25.980725] <  4> EngineOld ---> readyok
+[Engine] [15:24:25.980769] <  6> Engine1 <--- go wtime 65167 btime 66535 winc 2000 binc 2000
+[Engine] [15:24:25.980798] <  4> EngineOld <--- position startpos moves e2e4 e7e5
+[Engine] [15:24:25.980851] <  4> EngineOld <--- isready
+[Engine] [15:24:25.996780] <  4> EngineOld ---> readyok
+[Engine] [15:24:25.996795] <  5> Engine1 ---> readyok
+[Engine] [15:24:25.996862] <  4> EngineOld <--- go wtime 63515 btime 62783 winc 2000 binc 2000
+[Engine] [15:24:25.997046] <  5> EngineOld <--- isready
+[Engine] [15:24:25.997901] <  4> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:25.997945] <  4> EngineOld ---> info depth 1 score cp -10 nodes 29 nps 29 hashfull 1 pv a2a4 
+[Engine] [15:24:25.998353] <  4> EngineOld ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:24:25.998386] <  4> EngineOld ---> info depth 2 score cp -10 nodes 67 nps 67 hashfull 1 pv a2a4 a7a6 
+[Engine] [15:24:26.009189] <  4> EngineOld ---> TT Hits / Cutoffs= 42 / 2
+[Engine] [15:24:26.009266] <  4> EngineOld ---> info depth 3 score cp 100 nodes 2161 nps 2161 hashfull 1 pv d1h5 a7a5 h5e5 
+[Engine] [15:24:26.012276] <  5> EngineOld ---> readyok
+[Engine] [15:24:26.012321] <  5> EngineOld <--- position startpos moves e2e4 e7e5 f1c4
+[Engine] [15:24:26.012358] <  5> EngineOld <--- isready
+[Engine] [15:24:26.022885] <  7> EngineOld ---> TT Hits / Cutoffs= 464 / 16
+[Engine] [15:24:26.022942] <  7> EngineOld ---> info depth 4 score cp 0 nodes 8548 nps 8548 hashfull 7 pv b2b3 c7c6 
+[Engine] [15:24:26.027838] <  5> EngineOld ---> readyok
+[Engine] [15:24:26.027907] <  5> EngineOld <--- go wtime 63793 btime 62757 winc 2000 binc 2000
+[Engine] [15:24:26.028871] <  5> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:26.028918] <  5> EngineOld ---> info depth 1 score cp 12 nodes 29 nps 29 hashfull 5 pv a7a5 
+[Engine] [15:24:26.029442] <  5> EngineOld ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:24:26.029473] <  5> EngineOld ---> info depth 2 score cp 10 nodes 62 nps 62 hashfull 5 pv a7a6 f2f4 
+[Engine] [15:24:26.036076] <  5> EngineOld ---> TT Hits / Cutoffs= 43 / 2
+[Engine] [15:24:26.036109] <  5> EngineOld ---> info depth 3 score cp 100 nodes 958 nps 958 hashfull 5 pv d8f6 a2a4 f6f2 
+[Engine] [15:24:26.054865] <  4> EngineOld ---> TT Hits / Cutoffs= 269 / 1
+[Engine] [15:24:26.054914] <  4> EngineOld ---> info depth 4 score cp 0 nodes 7313 nps 7313 hashfull 2 pv b2b3 c7c6 
+[Engine] [15:24:26.079009] <  5> EngineOld ---> TT Hits / Cutoffs= 151 / 22
+[Engine] [15:24:26.079061] <  5> EngineOld ---> info depth 4 score cp -100 nodes 6378 nps 6378 hashfull 6 pv d8f6 d1e2 b7b6 c4f7 
+[Engine] [15:24:26.337776] <  5> EngineOld ---> TT Hits / Cutoffs= 800 / 4
+[Engine] [15:24:26.337848] <  5> EngineOld ---> info depth 5 score cp 103 nodes 44316 nps 44316 hashfull 6 pv d8f6 g1h3 f6g6 c2c3 g6g2 
+[Engine] [15:24:26.337883] <  5> EngineOld ---> bestmove d8f6
+[Engine] [15:24:26.337912] <  5> EngineOld <--- isready
+[Engine] [15:24:26.371878] <  5> EngineOld ---> readyok
+[Engine] [15:24:26.372032] <  5> Engine1 <--- isready
+[Engine] [15:24:26.387884] <  5> Engine1 ---> readyok
+[Engine] [15:24:26.387943] <  5> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6
+[Engine] [15:24:26.387993] <  5> Engine1 <--- isready
+[Engine] [15:24:26.403387] <  5> Engine1 ---> readyok
+[Engine] [15:24:26.403443] <  5> Engine1 <--- go wtime 63793 btime 64448 winc 2000 binc 2000
+[Engine] [15:24:26.404102] <  5> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:26.404142] <  5> Engine1 ---> info depth 1 score cp 100 nodes 32 nps 32 hashfull 6 pv c4f7 
+[Engine] [15:24:26.405646] <  5> Engine1 ---> TT Hits / Cutoffs= 8 / 0
+[Engine] [15:24:26.405674] <  5> Engine1 ---> info depth 2 score cp 0 nodes 184 nps 184 hashfull 6 pv b1a3 c7c5 
+[Engine] [15:24:26.413691] <  5> Engine1 ---> TT Hits / Cutoffs= 105 / 12
+[Engine] [15:24:26.413732] <  5> Engine1 ---> info depth 3 score cp 100 nodes 1443 nps 1443 hashfull 6 pv g1f3 b7b6 c4f7 
+[Engine] [15:24:26.464891] <  5> Engine1 ---> TT Hits / Cutoffs= 464 / 16
+[Engine] [15:24:26.464946] <  5> Engine1 ---> info depth 4 score cp 0 nodes 8548 nps 8548 hashfull 7 pv b2b3 c7c6 
+[Engine] [15:24:26.533284] <  7> EngineOld ---> TT Hits / Cutoffs= 2246 / 38
+[Engine] [15:24:26.533340] <  7> EngineOld ---> info depth 5 score cp 100 nodes 80141 nps 80141 hashfull 9 pv c4f1 g8h6 
+[Engine] [15:24:26.533366] <  7> EngineOld ---> bestmove c4f1
+[Engine] [15:24:26.533385] <  7> EngineOld <--- isready
+[Engine] [15:24:26.576308] <  7> EngineOld ---> readyok
+[Engine] [15:24:26.576467] <  7> Engine1 <--- isready
+[Engine] [15:24:26.591809] <  7> Engine1 ---> readyok
+[Engine] [15:24:26.591856] <  7> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1
+[Engine] [15:24:26.591901] <  7> Engine1 <--- isready
+[Engine] [15:24:26.607421] <  7> Engine1 ---> readyok
+[Engine] [15:24:26.607483] <  7> Engine1 <--- go wtime 65162 btime 64484 winc 2000 binc 2000
+[Engine] [15:24:26.607931] <  7> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:26.607969] <  7> Engine1 ---> info depth 1 score cp 100 nodes 37 nps 37 hashfull 6 pv f6f2 
+[Engine] [15:24:26.607996] <  7> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:26.608012] <  7> Engine1 ---> info depth 2 score mate 1 nodes 4 nps 4 hashfull 6 pv f6f2 
+[Engine] [15:24:26.608029] <  7> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:26.608044] <  7> Engine1 ---> info depth 3 score mate 1 nodes 5 nps 5 hashfull 6 pv f6f2 
+[Engine] [15:24:26.608060] <  7> Engine1 ---> TT Hits / Cutoffs= 3 / 0
+[Engine] [15:24:26.608074] <  7> Engine1 ---> info depth 4 score mate 1 nodes 6 nps 6 hashfull 6 pv f6f2 
+[Engine] [15:24:26.608091] <  7> Engine1 ---> TT Hits / Cutoffs= 4 / 0
+[Engine] [15:24:26.608105] <  7> Engine1 ---> info depth 5 score mate 1 nodes 7 nps 7 hashfull 6 pv f6f2 
+[Engine] [15:24:26.608119] <  7> Engine1 ---> bestmove f6f2
+[Engine] [15:24:26.608134] <  7> Engine1 <--- isready
+[Engine] [15:24:26.639460] <  7> Engine1 ---> readyok
+[Engine] [15:24:26.639625] <  7> EngineOld <--- isready
+[Engine] [15:24:26.655563] <  7> EngineOld ---> readyok
+[Engine] [15:24:26.655619] <  7> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1 f6f2
+[Engine] [15:24:26.655660] <  7> EngineOld <--- isready
+[Engine] [15:24:26.670716] <  7> EngineOld ---> readyok
+[Engine] [15:24:26.670782] <  7> EngineOld <--- go wtime 65162 btime 66484 winc 2000 binc 2000
+[Engine] [15:24:26.768268] <  8> EngineOld ---> TT Hits / Cutoffs= 5096 / 163
+[Engine] [15:24:26.768355] <  8> EngineOld ---> info depth 5 score cp 100 nodes 317743 nps 317743 hashfull 6 pv f1c4 g8h6 d1h5 h6g8 c4f7 
+[Engine] [15:24:26.768404] <  8> EngineOld ---> bestmove f1c4
+[Engine] [15:24:26.768435] <  8> EngineOld <--- isready
+[Engine] [15:24:26.795389] <  8> EngineOld ---> readyok
+[Engine] [15:24:26.795533] <  8> Engine1 <--- isready
+[Engine] [15:24:26.811437] <  8> Engine1 ---> readyok
+[Engine] [15:24:26.811501] <  8> Engine1 <--- position startpos moves e2e4 e7e5 f1c4
+[Engine] [15:24:26.811543] <  8> Engine1 <--- isready
+[Engine] [15:24:26.827429] <  8> Engine1 ---> readyok
+[Engine] [15:24:26.827505] <  8> Engine1 <--- go wtime 63568 btime 62760 winc 2000 binc 2000
+[Engine] [15:24:26.827952] <  8> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:26.827992] <  8> Engine1 ---> info depth 1 score cp 12 nodes 29 nps 29 hashfull 5 pv a7a5 
+[Engine] [15:24:26.828268] <  8> Engine1 ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:24:26.828294] <  8> Engine1 ---> info depth 2 score cp 10 nodes 62 nps 62 hashfull 5 pv a7a6 f2f4 
+[Engine] [15:24:26.832671] <  8> Engine1 ---> TT Hits / Cutoffs= 43 / 2
+[Engine] [15:24:26.832703] <  8> Engine1 ---> info depth 3 score cp 100 nodes 958 nps 958 hashfull 5 pv d8f6 a2a4 f6f2 
+[Engine] [15:24:26.873523] <  8> Engine1 ---> TT Hits / Cutoffs= 151 / 22
+[Engine] [15:24:26.873580] <  8> Engine1 ---> info depth 4 score cp -100 nodes 6378 nps 6378 hashfull 6 pv d8f6 d1e2 b7b6 c4f7 
+[Engine] [15:24:26.964228] <  5> Engine1 ---> TT Hits / Cutoffs= 2246 / 38
+[Engine] [15:24:26.964283] <  5> Engine1 ---> info depth 5 score cp 100 nodes 80141 nps 80141 hashfull 9 pv c4f1 g8h6 
+[Engine] [15:24:26.964307] <  5> Engine1 ---> bestmove c4f1
+[Engine] [15:24:26.964326] <  5> Engine1 <--- isready
+[Engine] [15:24:26.985235] <  5> Engine1 ---> readyok
+[Engine] [15:24:26.985386] <  5> EngineOld <--- isready
+[Engine] [15:24:27.001312] <  5> EngineOld ---> readyok
+[Engine] [15:24:27.001380] <  5> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1
+[Engine] [15:24:27.001422] <  5> EngineOld <--- isready
+[Engine] [15:24:27.017349] <  5> EngineOld ---> readyok
+[Engine] [15:24:27.017409] <  5> EngineOld <--- go wtime 65233 btime 64448 winc 2000 binc 2000
+[Engine] [15:24:27.018027] <  5> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:27.018057] <  5> EngineOld ---> info depth 1 score cp 100 nodes 37 nps 37 hashfull 6 pv f6f2 
+[Engine] [15:24:27.018078] <  5> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:27.018093] <  5> EngineOld ---> info depth 2 score mate 1 nodes 4 nps 4 hashfull 6 pv f6f2 
+[Engine] [15:24:27.018154] <  5> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:27.018193] <  5> EngineOld ---> info depth 3 score mate 1 nodes 5 nps 5 hashfull 6 pv f6f2 
+[Engine] [15:24:27.018233] <  5> EngineOld ---> TT Hits / Cutoffs= 3 / 0
+[Engine] [15:24:27.018256] <  5> EngineOld ---> info depth 4 score mate 1 nodes 6 nps 6 hashfull 6 pv f6f2 
+[Engine] [15:24:27.018323] <  5> EngineOld ---> TT Hits / Cutoffs= 4 / 0
+[Engine] [15:24:27.018344] <  5> EngineOld ---> info depth 5 score mate 1 nodes 7 nps 7 hashfull 6 pv f6f2 
+[Engine] [15:24:27.018366] <  5> EngineOld ---> bestmove f6f2
+[Engine] [15:24:27.018386] <  5> EngineOld <--- isready
+[Engine] [15:24:27.048479] <  5> EngineOld ---> readyok
+[Engine] [15:24:27.048602] <  5> Engine1 <--- isready
+[Engine] [15:24:27.064483] <  5> Engine1 ---> readyok
+[Engine] [15:24:27.064534] <  5> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1 f6f2
+[Engine] [15:24:27.064576] <  5> Engine1 <--- isready
+[Engine] [15:24:27.080113] <  5> Engine1 ---> readyok
+[Engine] [15:24:27.080172] <  5> Engine1 <--- go wtime 65233 btime 66448 winc 2000 binc 2000
+[Engine] [15:24:27.129269] <  8> Engine1 ---> TT Hits / Cutoffs= 800 / 4
+[Engine] [15:24:27.129330] <  8> Engine1 ---> info depth 5 score cp 103 nodes 44316 nps 44316 hashfull 6 pv d8f6 g1h3 f6g6 c2c3 g6g2 
+[Engine] [15:24:27.129356] <  8> Engine1 ---> bestmove d8f6
+[Engine] [15:24:27.129375] <  8> Engine1 <--- isready
+[Engine] [15:24:27.173648] <  8> Engine1 ---> readyok
+[Engine] [15:24:27.173833] <  8> EngineOld <--- isready
+[Engine] [15:24:27.189337] <  8> EngineOld ---> readyok
+[Engine] [15:24:27.189461] <  8> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6
+[Engine] [15:24:27.189516] <  8> EngineOld <--- isready
+[Engine] [15:24:27.205364] <  8> EngineOld ---> readyok
+[Engine] [15:24:27.205469] <  8> EngineOld <--- go wtime 63568 btime 64459 winc 2000 binc 2000
+[Engine] [15:24:27.205955] <  8> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:27.205985] <  8> EngineOld ---> info depth 1 score cp 100 nodes 32 nps 32 hashfull 6 pv c4f7 
+[Engine] [15:24:27.206932] <  8> EngineOld ---> TT Hits / Cutoffs= 8 / 0
+[Engine] [15:24:27.206960] <  8> EngineOld ---> info depth 2 score cp 0 nodes 184 nps 184 hashfull 6 pv b1a3 c7c5 
+[Engine] [15:24:27.214207] <  8> EngineOld ---> TT Hits / Cutoffs= 105 / 12
+[Engine] [15:24:27.214247] <  8> EngineOld ---> info depth 3 score cp 100 nodes 1443 nps 1443 hashfull 6 pv g1f3 b7b6 c4f7 
+[Engine] [15:24:27.233232] <  3> Engine1 ---> TT Hits / Cutoffs= 5096 / 163
+[Engine] [15:24:27.233295] <  3> Engine1 ---> info depth 5 score cp 100 nodes 317743 nps 317743 hashfull 6 pv f1c4 g8h6 d1h5 h6g8 c4f7 
+[Engine] [15:24:27.233379] <  3> Engine1 ---> bestmove f1c4
+[Engine] [15:24:27.233417] <  3> Engine1 <--- isready
+[Engine] [15:24:27.261994] <  8> EngineOld ---> TT Hits / Cutoffs= 464 / 16
+[Engine] [15:24:27.262055] <  8> EngineOld ---> info depth 4 score cp 0 nodes 8548 nps 8548 hashfull 7 pv b2b3 c7c6 
+[Engine] [15:24:27.268505] <  3> Engine1 ---> readyok
+[Engine] [15:24:27.268628] <  3> EngineOld <--- isready
+[Engine] [15:24:27.284023] <  3> EngineOld ---> readyok
+[Engine] [15:24:27.284118] <  3> EngineOld <--- position startpos moves e2e4 e7e5 f1c4
+[Engine] [15:24:27.284167] <  3> EngineOld <--- isready
+[Engine] [15:24:27.300029] <  3> EngineOld ---> readyok
+[Engine] [15:24:27.300088] <  3> EngineOld <--- go wtime 63635 btime 62794 winc 2000 binc 2000
+[Engine] [15:24:27.300475] <  3> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:27.300507] <  3> EngineOld ---> info depth 1 score cp 12 nodes 29 nps 29 hashfull 5 pv a7a5 
+[Engine] [15:24:27.300792] <  3> EngineOld ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:24:27.300811] <  3> EngineOld ---> info depth 2 score cp 10 nodes 62 nps 62 hashfull 5 pv a7a6 f2f4 
+[Engine] [15:24:27.305098] <  3> EngineOld ---> TT Hits / Cutoffs= 43 / 2
+[Engine] [15:24:27.305130] <  3> EngineOld ---> info depth 3 score cp 100 nodes 958 nps 958 hashfull 5 pv d8f6 a2a4 f6f2 
+[Engine] [15:24:27.344839] <  3> EngineOld ---> TT Hits / Cutoffs= 151 / 22
+[Engine] [15:24:27.344893] <  3> EngineOld ---> info depth 4 score cp -100 nodes 6378 nps 6378 hashfull 6 pv d8f6 d1e2 b7b6 c4f7 
+[Engine] [15:24:27.590113] <  3> EngineOld ---> TT Hits / Cutoffs= 800 / 4
+[Engine] [15:24:27.590175] <  3> EngineOld ---> info depth 5 score cp 103 nodes 44316 nps 44316 hashfull 6 pv d8f6 g1h3 f6g6 c2c3 g6g2 
+[Engine] [15:24:27.590207] <  3> EngineOld ---> bestmove d8f6
+[Engine] [15:24:27.590229] <  3> EngineOld <--- isready
+[Engine] [15:24:27.628780] <  3> EngineOld ---> readyok
+[Engine] [15:24:27.628924] <  3> Engine1 <--- isready
+[Engine] [15:24:27.644257] <  3> Engine1 ---> readyok
+[Engine] [15:24:27.644311] <  3> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6
+[Engine] [15:24:27.644349] <  3> Engine1 <--- isready
+[Engine] [15:24:27.660359] <  3> Engine1 ---> readyok
+[Engine] [15:24:27.660420] <  3> Engine1 <--- go wtime 63635 btime 64504 winc 2000 binc 2000
+[Engine] [15:24:27.661208] <  3> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:27.661245] <  3> Engine1 ---> info depth 1 score cp 100 nodes 32 nps 32 hashfull 6 pv c4f7 
+[Engine] [15:24:27.662072] <  3> Engine1 ---> TT Hits / Cutoffs= 8 / 0
+[Engine] [15:24:27.662110] <  3> Engine1 ---> info depth 2 score cp 0 nodes 184 nps 184 hashfull 6 pv b1a3 c7c5 
+[Engine] [15:24:27.669270] <  3> Engine1 ---> TT Hits / Cutoffs= 105 / 12
+[Engine] [15:24:27.669302] <  3> Engine1 ---> info depth 3 score cp 100 nodes 1443 nps 1443 hashfull 6 pv g1f3 b7b6 c4f7 
+[Engine] [15:24:27.718997] <  3> Engine1 ---> TT Hits / Cutoffs= 464 / 16
+[Engine] [15:24:27.719059] <  3> Engine1 ---> info depth 4 score cp 0 nodes 8548 nps 8548 hashfull 7 pv b2b3 c7c6 
+[Engine] [15:24:27.730326] <  8> EngineOld ---> TT Hits / Cutoffs= 2246 / 38
+[Engine] [15:24:27.730386] <  8> EngineOld ---> info depth 5 score cp 100 nodes 80141 nps 80141 hashfull 9 pv c4f1 g8h6 
+[Engine] [15:24:27.730416] <  8> EngineOld ---> bestmove c4f1
+[Engine] [15:24:27.730439] <  8> EngineOld <--- isready
+[Engine] [15:24:27.770916] <  8> EngineOld ---> readyok
+[Engine] [15:24:27.771038] <  8> Engine1 <--- isready
+[Engine] [15:24:27.786922] <  8> Engine1 ---> readyok
+[Engine] [15:24:27.786983] <  8> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1
+[Engine] [15:24:27.787039] <  8> Engine1 <--- isready
+[Engine] [15:24:27.802440] <  8> Engine1 ---> readyok
+[Engine] [15:24:27.802496] <  8> Engine1 <--- go wtime 65044 btime 64459 winc 2000 binc 2000
+[Engine] [15:24:27.802908] <  8> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:27.802948] <  8> Engine1 ---> info depth 1 score cp 100 nodes 37 nps 37 hashfull 6 pv f6f2 
+[Engine] [15:24:27.802982] <  8> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:27.803012] <  8> Engine1 ---> info depth 2 score mate 1 nodes 4 nps 4 hashfull 6 pv f6f2 
+[Engine] [15:24:27.803031] <  8> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:27.803049] <  8> Engine1 ---> info depth 3 score mate 1 nodes 5 nps 5 hashfull 6 pv f6f2 
+[Engine] [15:24:27.803070] <  8> Engine1 ---> TT Hits / Cutoffs= 3 / 0
+[Engine] [15:24:27.803089] <  8> Engine1 ---> info depth 4 score mate 1 nodes 6 nps 6 hashfull 6 pv f6f2 
+[Engine] [15:24:27.803107] <  8> Engine1 ---> TT Hits / Cutoffs= 4 / 0
+[Engine] [15:24:27.803125] <  8> Engine1 ---> info depth 5 score mate 1 nodes 7 nps 7 hashfull 6 pv f6f2 
+[Engine] [15:24:27.803143] <  8> Engine1 ---> bestmove f6f2
+[Engine] [15:24:27.803162] <  8> Engine1 <--- isready
+[Engine] [15:24:27.823127] <  4> EngineOld ---> TT Hits / Cutoffs= 5096 / 163
+[Engine] [15:24:27.823188] <  4> EngineOld ---> info depth 5 score cp 100 nodes 317743 nps 317743 hashfull 6 pv f1c4 g8h6 d1h5 h6g8 c4f7 
+[Engine] [15:24:27.823219] <  4> EngineOld ---> bestmove f1c4
+[Engine] [15:24:27.823241] <  4> EngineOld <--- isready
+[Engine] [15:24:27.848272] <  8> Engine1 ---> readyok
+[Engine] [15:24:27.848416] <  8> EngineOld <--- isready
+[Engine] [15:24:27.864315] <  4> EngineOld ---> readyok
+[Engine] [15:24:27.864315] <  8> EngineOld ---> readyok
+[Engine] [15:24:27.864425] <  8> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1 f6f2
+[Engine] [15:24:27.864463] <  8> EngineOld <--- isready
+[Engine] [15:24:27.864475] <  4> Engine1 <--- isready
+[Engine] [15:24:27.880317] <  4> Engine1 ---> readyok
+[Engine] [15:24:27.880317] <  8> EngineOld ---> readyok
+[Engine] [15:24:27.880400] <  4> Engine1 <--- position startpos moves e2e4 e7e5 f1c4
+[Engine] [15:24:27.880417] <  8> EngineOld <--- go wtime 65044 btime 66459 winc 2000 binc 2000
+[Engine] [15:24:27.880451] <  4> Engine1 <--- isready
+[Engine] [15:24:27.896375] <  4> Engine1 ---> readyok
+[Engine] [15:24:27.896449] <  4> Engine1 <--- go wtime 63689 btime 62783 winc 2000 binc 2000
+[Engine] [15:24:27.896816] <  4> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:27.896850] <  4> Engine1 ---> info depth 1 score cp 12 nodes 29 nps 29 hashfull 5 pv a7a5 
+[Engine] [15:24:27.897132] <  4> Engine1 ---> TT Hits / Cutoffs= 7 / 0
+[Engine] [15:24:27.897155] <  4> Engine1 ---> info depth 2 score cp 10 nodes 62 nps 62 hashfull 5 pv a7a6 f2f4 
+[Engine] [15:24:27.901975] <  4> Engine1 ---> TT Hits / Cutoffs= 43 / 2
+[Engine] [15:24:27.902016] <  4> Engine1 ---> info depth 3 score cp 100 nodes 958 nps 958 hashfull 5 pv d8f6 a2a4 f6f2 
+[Engine] [15:24:27.938379] <  4> Engine1 ---> TT Hits / Cutoffs= 151 / 22
+[Engine] [15:24:27.938437] <  4> Engine1 ---> info depth 4 score cp -100 nodes 6378 nps 6378 hashfull 6 pv d8f6 d1e2 b7b6 c4f7 
+[Engine] [15:24:28.148074] <  3> Engine1 ---> TT Hits / Cutoffs= 2246 / 38
+[Engine] [15:24:28.148129] <  3> Engine1 ---> info depth 5 score cp 100 nodes 80141 nps 80141 hashfull 9 pv c4f1 g8h6 
+[Engine] [15:24:28.148160] <  3> Engine1 ---> bestmove c4f1
+[Engine] [15:24:28.148179] <  3> Engine1 <--- isready
+[Engine] [15:24:28.181253] <  3> Engine1 ---> readyok
+[Engine] [15:24:28.181430] <  3> EngineOld <--- isready
+[Engine] [15:24:28.184762] <  4> Engine1 ---> TT Hits / Cutoffs= 800 / 4
+[Engine] [15:24:28.184793] <  4> Engine1 ---> info depth 5 score cp 103 nodes 44316 nps 44316 hashfull 6 pv d8f6 g1h3 f6g6 c2c3 g6g2 
+[Engine] [15:24:28.184815] <  4> Engine1 ---> bestmove d8f6
+[Engine] [15:24:28.184836] <  4> Engine1 <--- isready
+[Engine] [15:24:28.197247] <  3> EngineOld ---> readyok
+[Engine] [15:24:28.197292] <  3> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1
+[Engine] [15:24:28.197329] <  3> EngineOld <--- isready
+[Engine] [15:24:28.212456] <  3> EngineOld ---> readyok
+[Engine] [15:24:28.212530] <  3> EngineOld <--- go wtime 65148 btime 64504 winc 2000 binc 2000
+[Engine] [15:24:28.213008] <  3> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:28.213035] <  3> EngineOld ---> info depth 1 score cp 100 nodes 37 nps 37 hashfull 6 pv f6f2 
+[Engine] [15:24:28.213059] <  3> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:28.213078] <  3> EngineOld ---> info depth 2 score mate 1 nodes 4 nps 4 hashfull 6 pv f6f2 
+[Engine] [15:24:28.213099] <  3> EngineOld ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:28.213116] <  3> EngineOld ---> info depth 3 score mate 1 nodes 5 nps 5 hashfull 6 pv f6f2 
+[Engine] [15:24:28.213163] <  3> EngineOld ---> TT Hits / Cutoffs= 3 / 0
+[Engine] [15:24:28.213203] <  3> EngineOld ---> info depth 4 score mate 1 nodes 6 nps 6 hashfull 6 pv f6f2 
+[Engine] [15:24:28.213230] <  3> EngineOld ---> TT Hits / Cutoffs= 4 / 0
+[Engine] [15:24:28.213249] <  3> EngineOld ---> info depth 5 score mate 1 nodes 7 nps 7 hashfull 6 pv f6f2 
+[Engine] [15:24:28.213267] <  3> EngineOld ---> bestmove f6f2
+[Engine] [15:24:28.213287] <  3> EngineOld <--- isready
+[Engine] [15:24:28.227660] <  4> Engine1 ---> readyok
+[Engine] [15:24:28.227852] <  4> EngineOld <--- isready
+[Engine] [15:24:28.243112] <  4> EngineOld ---> readyok
+[Engine] [15:24:28.243209] <  4> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6
+[Engine] [15:24:28.243247] <  4> EngineOld <--- isready
+[Engine] [15:24:28.258683] <  4> EngineOld ---> readyok
+[Engine] [15:24:28.258683] <  3> EngineOld ---> readyok
+[Engine] [15:24:28.258772] <  4> EngineOld <--- go wtime 63689 btime 64495 winc 2000 binc 2000
+[Engine] [15:24:28.258904] <  3> Engine1 <--- isready
+[Engine] [15:24:28.259726] <  4> EngineOld ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:28.259765] <  4> EngineOld ---> info depth 1 score cp 100 nodes 32 nps 32 hashfull 6 pv c4f7 
+[Engine] [15:24:28.260551] <  4> EngineOld ---> TT Hits / Cutoffs= 8 / 0
+[Engine] [15:24:28.260582] <  4> EngineOld ---> info depth 2 score cp 0 nodes 184 nps 184 hashfull 6 pv b1a3 c7c5 
+[Engine] [15:24:28.267595] <  4> EngineOld ---> TT Hits / Cutoffs= 105 / 12
+[Engine] [15:24:28.267628] <  4> EngineOld ---> info depth 3 score cp 100 nodes 1443 nps 1443 hashfull 6 pv g1f3 b7b6 c4f7 
+[Engine] [15:24:28.274192] <  3> Engine1 ---> readyok
+[Engine] [15:24:28.274249] <  3> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1 f6f2
+[Engine] [15:24:28.274290] <  3> Engine1 <--- isready
+[Engine] [15:24:28.289346] <  3> Engine1 ---> readyok
+[Engine] [15:24:28.289462] <  3> Engine1 <--- go wtime 65148 btime 66504 winc 2000 binc 2000
+[Engine] [15:24:28.312893] <  4> EngineOld ---> TT Hits / Cutoffs= 464 / 16
+[Engine] [15:24:28.312961] <  4> EngineOld ---> info depth 4 score cp 0 nodes 8548 nps 8548 hashfull 7 pv b2b3 c7c6 
+[Engine] [15:24:28.746781] <  4> EngineOld ---> TT Hits / Cutoffs= 2246 / 38
+[Engine] [15:24:28.746844] <  4> EngineOld ---> info depth 5 score cp 100 nodes 80141 nps 80141 hashfull 9 pv c4f1 g8h6 
+[Engine] [15:24:28.746869] <  4> EngineOld ---> bestmove c4f1
+[Engine] [15:24:28.746891] <  4> EngineOld <--- isready
+[Engine] [15:24:28.791287] <  4> EngineOld ---> readyok
+[Engine] [15:24:28.791461] <  4> Engine1 <--- isready
+[Engine] [15:24:28.806707] <  4> Engine1 ---> readyok
+[Engine] [15:24:28.806767] <  4> Engine1 <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1
+[Engine] [15:24:28.806818] <  4> Engine1 <--- isready
+[Engine] [15:24:28.822216] <  4> Engine1 ---> readyok
+[Engine] [15:24:28.822271] <  4> Engine1 <--- go wtime 65201 btime 64495 winc 2000 binc 2000
+[Engine] [15:24:28.822800] <  4> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:28.822839] <  4> Engine1 ---> info depth 1 score cp 100 nodes 37 nps 37 hashfull 6 pv f6f2 
+[Engine] [15:24:28.822866] <  4> Engine1 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:24:28.822884] <  4> Engine1 ---> info depth 2 score mate 1 nodes 4 nps 4 hashfull 6 pv f6f2 
+[Engine] [15:24:28.822903] <  4> Engine1 ---> TT Hits / Cutoffs= 2 / 0
+[Engine] [15:24:28.822919] <  4> Engine1 ---> info depth 3 score mate 1 nodes 5 nps 5 hashfull 6 pv f6f2 
+[Engine] [15:24:28.822936] <  4> Engine1 ---> TT Hits / Cutoffs= 3 / 0
+[Engine] [15:24:28.822950] <  4> Engine1 ---> info depth 4 score mate 1 nodes 6 nps 6 hashfull 6 pv f6f2 
+[Engine] [15:24:28.822982] <  4> Engine1 ---> TT Hits / Cutoffs= 4 / 0
+[Engine] [15:24:28.823000] <  4> Engine1 ---> info depth 5 score mate 1 nodes 7 nps 7 hashfull 6 pv f6f2 
+[Engine] [15:24:28.823017] <  4> Engine1 ---> bestmove f6f2
+[Engine] [15:24:28.823033] <  4> Engine1 <--- isready
+[Engine] [15:24:28.853765] <  4> Engine1 ---> readyok
+[Engine] [15:24:28.853920] <  4> EngineOld <--- isready
+[Engine] [15:24:28.869784] <  4> EngineOld ---> readyok
+[Engine] [15:24:28.869885] <  4> EngineOld <--- position startpos moves e2e4 e7e5 f1c4 d8f6 c4f1 f6f2
+[Engine] [15:24:28.869934] <  4> EngineOld <--- isready
+[Engine] [15:24:28.885303] <  4> EngineOld ---> readyok
+[Engine] [15:24:28.885395] <  4> EngineOld <--- go wtime 65201 btime 66495 winc 2000 binc 2000
+[Engine] [15:25:31.255646] <  6> Engine1 <--- quit
+[Engine] [15:25:31.255730] <  6> EngineOld <--- isready
+[Engine] [15:25:31.270881] <  6> EngineOld ---> readyok
+[Engine] [15:25:31.943093] <  7> EngineOld <--- quit
+[Engine] [15:25:31.943184] <  7> Engine1 <--- isready
+[Engine] [15:25:31.958669] <  7> Engine1 ---> readyok
+[Engine] [15:25:32.415110] <  5> Engine1 <--- quit
+[Engine] [15:25:32.415196] <  5> EngineOld <--- isready
+[Engine] [15:25:32.430723] <  5> EngineOld ---> readyok
+[Engine] [15:25:33.025183] <  8> EngineOld <--- quit
+[Engine] [15:25:33.025268] <  8> Engine1 <--- isready
+[Engine] [15:25:33.040643] <  8> Engine1 ---> readyok
+[Engine] [15:25:33.539695] <  3> Engine1 <--- quit
+[Engine] [15:25:33.539773] <  3> EngineOld <--- isready
+[Engine] [15:25:33.555817] <  3> EngineOld ---> readyok
+[Engine] [15:25:34.195212] <  4> EngineOld <--- quit
+[Engine] [15:25:34.195310] <  4> Engine1 <--- isready
+[Engine] [15:25:34.211147] <  4> Engine1 ---> readyok
+[INFO  ] [15:25:35.176240] <   > fastchess --- 
+
+[INFO  ] [15:25:35.176372] <   > fastchess --- Player: EngineOld
+
+[INFO  ] [15:25:35.176471] <   > fastchess ---   Timeouts: 0
+
+[INFO  ] [15:25:35.176560] <   > fastchess ---   Crashed: 6
+
+[INFO  ] [15:25:35.176669] <   > fastchess --- Player: Engine1
+
+[INFO  ] [15:25:35.176775] <   > fastchess ---   Timeouts: 0
+
+[INFO  ] [15:25:35.176859] <   > fastchess ---   Crashed: 6
+
+[INFO  ] [15:25:35.176938] <   > fastchess --- 
+
+[Engine] [15:25:35.177660] <  1> EngineOld <--- quit
+[Engine] [15:25:35.177847] <  1> Engine1 <--- quit
+[Engine] [15:25:35.178004] <  1> EngineOld <--- quit
+[Engine] [15:25:35.178152] <  1> EngineOld <--- quit
+[Engine] [15:25:35.178330] <  1> Engine1 <--- quit
+[Engine] [15:25:35.178504] <  1> Engine1 <--- quit
+[INFO  ] [15:25:35.178779] <   > fastchess --- Finished match
+
+[INFO  ] [15:25:35.178841] <   > fastchess --- Total Time: 00:02:27 (hours:minutes:seconds)
+
+

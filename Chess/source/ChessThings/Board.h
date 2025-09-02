@@ -245,11 +245,10 @@ namespace bit//bit management
 	//pop least significant bit, return false if mask was empty
 	constexpr inline bool pop_lsb(uint64_t& Mask, uint8_t& Index)
 	{
-		unsigned long Index_ = std::countr_zero(Mask);
-		if (Index_ < 64)
+		Index = std::countr_zero(Mask);
+		if (Index < 64)
 		{
-			Mask ^= (1ULL << Index_);
-			Index = Index_;
+			Mask ^= (1ULL << Index);
 		}
 		else { return false; }
 		return true;
@@ -279,7 +278,7 @@ namespace bit//bit management
 	constexpr inline uint8_t lsb(size_t Bits, uint8_t Index = 0) noexcept
 	{
 		ASSERT(Index < 64);
-		register size_t Mask = (1ULL << Index) - 1;
+		size_t Mask = (1ULL << Index) - 1;
 		Bits = Mask ^ (Bits | Mask);
  		return std::countr_zero(Bits);
 	}
@@ -296,7 +295,7 @@ namespace bit//bit management
 		inline BitManager& operator=(bool value);
 
 		//read-only member
-		operator bool() const {
+		inline operator bool() const {
 			return (m_Data >> m_Index) & 0b1;
 		}
 
@@ -310,10 +309,12 @@ namespace bit//bit management
 		//set a bit, logic uses the BitManager operator=
 		BitManager operator[](uint8_t Index)
 		{
+#ifdef _DEBUG
 			if (Index > 63)
 			{
 				throw std::out_of_range("Indexed bit out of range");
 			}
+#endif
 			return BitManager(Bits, Index);
 		}
 
@@ -321,7 +322,7 @@ namespace bit//bit management
 		BitBoard64() {}
 
 		//get bit at index
-		bool operator[](uint8_t Index) const
+		bool inline operator[](uint8_t Index) const
 		{
 #ifdef _DEBUG
 			if (Index > 63)
@@ -339,7 +340,7 @@ namespace bit//bit management
 		}
 
 		//Sets the bit in the parameter as true
-		void SetToTrue(uint8_t Index)
+		void inline SetToTrue(uint8_t Index)
 		{
 #ifdef _DEBUG
 			if (Index > 63)
@@ -416,7 +417,8 @@ namespace bit//bit management
 		{
 			return Bits ^ Operand;
 		}
-		inline operator uint64_t() { return Bits; }
+		inline operator uint64_t() const { return Bits; }
+		inline operator uint64_t&() { return Bits; }
 	};
 
 	class BitPosManager
