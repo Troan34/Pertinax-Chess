@@ -3,7 +3,7 @@
 UCI::UCI(UciVars_p Vars)
 	:Vars_p(Vars)
 {
-	while (true)
+	while (!exit)
 	{
 		std::getline(std::cin, Command);
 		RunCommand();
@@ -47,16 +47,24 @@ void UCI::RunCommand()
 			*Vars_p.GUI = !*Vars_p.GUI;
 		}
 	}
-	else if (Command == "uci") //UCI mode
+	else if (Command.find("uci") != std::string::npos) //UCI mode
 	{
-		std::cout <<
-			"id name Pertinax Chess 0.1\n" <<
-			"id author R.Bukaci (github.com/Troan34)\n\n" <<
-			"option name type spin Depth default " << static_cast<int>(*Vars_p.depth) << " min 2 max 255\n" <<
-			"option name type button EngineOn default On\n" <<
-			"option name type spin Hash default " << *Vars_p.HashSize / 1000000 << " min 1 max 512\n" <<
-			"option name type button Gui default Off\n" << 
-			"uciok\n" << std::endl;
+		if(Command.find("off") != std::string::npos)
+		{
+			exit = true;
+			std::cout << "You left uci, type 'help'\n";
+		}
+		else
+		{
+			std::cout <<
+				"id name Pertinax Chess 0.1\n" <<
+				"id author R.Bukaci (github.com/Troan34)\n\n" <<
+				"option name type spin Depth default " << static_cast<int>(*Vars_p.depth) << " min 2 max 255\n" <<
+				"option name type button EngineOn default On\n" <<
+				"option name type spin Hash default " << *Vars_p.HashSize / 1000000 << " min 1 max 512\n" <<
+				"option name type button Gui default Off\n" <<
+				"uciok\n" << std::endl;
+		}
 	}
 
 	if (Command.find(UCINEWGAME_COMMAND) != std::string::npos)//this should do other things, but i will work on that later
@@ -108,6 +116,7 @@ void UCI::RunCommand()
 
 	if (Command.find(GO_COMMAND) != std::string::npos)
 	{
+		bool RunGo = true;
 		if (Command.find(SEARCHMOVES_COMMAND, 2) != std::string::npos)
 		{
 			size_t Index = Command.find(' ', Command.find(SEARCHMOVES_COMMAND));
@@ -137,6 +146,18 @@ void UCI::RunCommand()
 			Vars_p.timer->WTime = static_cast<std::chrono::milliseconds>(INT32_MAX);
 		}
 
+		if (Command.find(PERFT_COMMAND, 2) != std::string::npos)
+		{
+			std::string depth = Command.substr(9, std::string::npos);
+			if (!IsStringANum(depth))
+			{
+				std::cout << "Wrong syntax: depth wasn't a digit\n" << std::endl;
+			}
+			uint8_t depthNum = std::stoi(depth);
+			auto result = Perft(*Vars_p.BoardSquare, *Vars_p.previousBoardSquare, *Vars_p.CanCastle, WHITE_TURN(*Vars_p.MoveNum), depthNum, true, *Vars_p.MoveNum);
+			std::cout << "\nNodes searched: " << result << "\n\n";
+			RunGo = false;
+		}
 		//tc
 		{
 			if (Command.find(WTIME, 2) != std::string::npos)
@@ -153,14 +174,19 @@ void UCI::RunCommand()
 		{
 			while (!(IsReady.load())) { Sleep(20); };
 		}
-		std::thread Thread(&UCI::Go, this);
-		Thread.detach();
+		if (RunGo)
+		{
+			std::thread Thread(&UCI::Go, this);
+			Thread.detach();
+		}
 	}
 
 	if (Command.find(STOP_COMMAND) != std::string::npos)
 	{
 		stop = true;
 	}
+
+
 }
 
 void UCI::Go()
@@ -181,4 +207,113 @@ void UCI::Go()
 	IsReady.store(true);
 }
 
+uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> perftPreviousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int& PerftMoveNum)
+{
+	uint32_t NumOfMoves = 0;
 
+	GenerateLegalMoves LegalMoves(BoardSquare, &perftPreviousBoardSquare, CanCastle, isNextMoveForWhite, PerftMoveNum, false);
+
+	const auto ConstBoardSquare = BoardSquare;
+	const auto ConstPreviousBoardSquare = perftPreviousBoardSquare;
+	const canCastle ConstCanCastle = CanCastle;
+	uint8_t count = 0;
+
+
+	for (MOVE_BIT& piece : LegalMoves.moves)
+	{
+		uint8_t move = 0;
+		auto TargetSquaresCopy = piece.TargetSquares;
+		while (true)
+		{
+			if (!bit::pop_lsb(TargetSquaresCopy, move)) { break; }
+			//perft the promotions, this if is basically a blunt .find()
+			if (piece.Promotion[0] != 65 and piece.Promotion[0] == move or piece.Promotion[1] != 65 and piece.Promotion[1] == move or piece.Promotion[2] != 65 and piece.Promotion[2] == move)
+			{
+				bool IsWhite = Board::IsPieceColorWhite(BoardSquare[count]);
+
+				for (uint8_t i = 0; i != 4; ++i)
+				{
+					if (depth == 1)
+					{
+						if (DivideFunON)
+						{
+							if (IsWhite)
+								std::cout << +count << " " << +move << " to " << Board::PieceType2letter(i + 18) << ": 1" << '\n';
+							else
+								std::cout << +count << " " << +move << " to " << Board::PieceType2letter(i + 10) << ": 1" << '\n';
+						}
+						NumOfMoves++;
+					}
+					else
+					{
+						Move Move_(count, move);
+
+						if (IsWhite)
+							Move_.s_PromotionType = i + 18;
+						else
+							Move_.s_PromotionType = i + 10;
+
+						Board::MakeMove(Move_, BoardSquare, perftPreviousBoardSquare, CanCastle);
+						if (DivideFunON)
+						{
+							uint32_t DivideFunNum = 0;
+							DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+							NumOfMoves += DivideFunNum;
+							if (IsWhite)
+								std::cout << +count << " " << +move << ": " << DivideFunNum << " to " << Board::PieceType2letter(i + 18) << '\n';
+							else
+								std::cout << +count << " " << +move << ": " << DivideFunNum << " to " << Board::PieceType2letter(i + 10) << '\n';
+						}
+						else
+							NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+
+						BoardSquare = perftPreviousBoardSquare;
+					}
+				}
+
+				if (depth != 1)
+				{
+					BoardSquare = ConstBoardSquare;
+					perftPreviousBoardSquare = ConstPreviousBoardSquare;
+					CanCastle = ConstCanCastle;
+				}
+
+				if (IsWhite)
+					piece.Promotion[move - count - 7] = 65;
+				else
+					piece.Promotion[move - count + 9] = 65;
+
+				continue;
+			}
+
+			if (depth == 1)
+			{
+				if (DivideFunON)
+					std::cout << +count << " " << +move << ": 1" << '\n';
+				NumOfMoves++;
+			}
+			else
+			{
+				Move Move_(count, move);
+
+				Board::MakeMove(Move_, BoardSquare, perftPreviousBoardSquare, CanCastle);
+				if (DivideFunON)
+				{
+					uint32_t DivideFunNum = 0;
+					DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+					NumOfMoves += DivideFunNum;
+					std::cout << +count << " " << +move << ": " << DivideFunNum << '\n';
+				}
+				else
+					NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+
+				BoardSquare = ConstBoardSquare;
+				perftPreviousBoardSquare = ConstPreviousBoardSquare;
+				CanCastle = ConstCanCastle;
+			}
+		}
+		count++;
+	}
+
+	return NumOfMoves;
+}

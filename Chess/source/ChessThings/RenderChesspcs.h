@@ -53,8 +53,7 @@ public:
 	float GetPieceTextureID(const std::array<uint8_t, 64>& BoardSquare, unsigned int i);
 	void SetStaticBoardSquare(const std::array<uint8_t, 64>& BoardSquare);
 	void GetMouseInput();
-	
-	static uint32_t Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int& PerftMoveNum);
+
 	static void MakeMove(const GenerateLegalMoves& LegalMoves,Move move, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle);
 	void CreatePerft(uint8_t PerftDepth);
 	

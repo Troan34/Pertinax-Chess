@@ -31,13 +31,14 @@ static std::array<uint8_t, 64Ui64> previousBoardsquare;
 static bool StartEngine = false;
 static bool GUI = false;
 static bool PreviousGuiOption = true;
-	//Engine vars
-	static bool EngineOn = false;
-	static uint8_t EngineDepth = 10;
-	static std::vector<Move> SearchMoves{};
-	static std::chrono::milliseconds WTime(999999);
-	static Timer timer(WTime, WTime, static_cast<std::chrono::milliseconds>(0), static_cast<std::chrono::milliseconds>(0));//max(for now)
-	static size_t HashSize = 64000000;//default 64MB
+
+//Engine vars
+static bool EngineOn = false;
+static uint8_t EngineDepth = 10;
+static std::vector<Move> SearchMoves{};
+static std::chrono::milliseconds WTime(999999);
+static Timer timer(WTime, WTime, static_cast<std::chrono::milliseconds>(0), static_cast<std::chrono::milliseconds>(0));//max(for now)
+static size_t HashSize = 64000000;//default 64MB
 
 static void RunUCI()//this is a workaround
 {
@@ -53,6 +54,9 @@ static void RunUCI()//this is a workaround
 	Vars_p.HashSize = &HashSize;
 	Vars_p.GUI = &GUI;
 	UCI uci(Vars_p);
+	UCImode = false;
+	IsGetCommandRunning = false;
+	RunCommandThread = true;
 }
 
 RenderChessPieces::RenderChessPieces(GLFWwindow* window)
@@ -104,42 +108,6 @@ static std::thread CommandThread(GetCommand);
 std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObjects()
 {
 	ComputeHeavy();
-	/**
-	if (!ComputeMagic)
-	{
-		int square;
-		uint8_t ComputedSquares = 0;
-		std::array<uint64_t, 64> RookMagics{};
-
-		for (square = 0; square < 64; square++)
-		{
-			if (RookMagics[square] == 0)
-			{
-				auto Magic = MagicFinder(square, false);
-				RookMagics[square] = Magic;
-				if (Magic != 0)
-				{
-					ComputedSquares++;
-					std::println("\rMagics Found ({}/64), Last Square found: {}, Magic: {}", ComputedSquares, square, Magic);
-				}
-
-			}
-			if (square == 63 and (std::find(RookMagics.begin(), RookMagics.end(), 0) != RookMagics.end()))
-			{
-				square = 0;
-			}
-		}
-		for (square = 0; square < 64; square++)
-		{
-			std::print("{}, ", RookMagics[square]);
-		}
-		ComputeMagic = true;
-	}*/
-	/*
-	printf("const uint64 BMagic[64] = {\n");
-	for (square = 0; square < 64; square++)
-		printf("  0x%llxULL,\n", MagicFinder(square, 1));
-	printf("};\n\n");*/
 
 	//Console Commands and threads
 	if (!IsGetCommandRunning and !UCImode)
@@ -166,15 +134,15 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 		}
 		else if (Command.find("perft") != std::string::npos)//perft command
 		{
-			char depth = Command.at(6);
-			if (!isdigit(depth))
+			std::string depth = Command.substr(6, Command.find(' ', 6));
+			if (!IsStringANum(depth))
 			{
 				std::cout << "Wrong syntax: depth wasn't a digit\n" << std::endl;
 			}
 			else
 			{
-				depth = (uint8_t)depth - '0';
-				void_Futures.push_back(std::async(std::launch::async, &RenderChessPieces::CreatePerft, this, depth));
+				uint8_t depthNum = std::stoi(depth);
+				void_Futures.push_back(std::async(std::launch::async, &RenderChessPieces::CreatePerft, this, depthNum));
 				//std::cout << "Main CPU: " << GetCurrentProcessorNumber() << std::endl;
 			}
 		}
@@ -709,115 +677,6 @@ void RenderChessPieces::SetStaticBoardSquare(const std::array<uint8_t, 64>& Boar
 	}
 }
 
-uint32_t RenderChessPieces::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> perftPreviousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int& PerftMoveNum)
-{
-	uint32_t NumOfMoves = 0;
-
-	GenerateLegalMoves LegalMoves(BoardSquare, &perftPreviousBoardSquare, CanCastle, isNextMoveForWhite, MoveNum, false);
-
-	const auto ConstBoardSquare = BoardSquare;
-	const auto ConstPreviousBoardSquare = perftPreviousBoardSquare;
-	const canCastle ConstCanCastle = CanCastle;
-	uint8_t count = 0;
-
-
-	for (MOVE_BIT& piece : LegalMoves.moves)
-	{
-		for(uint8_t move = 0; move <= MAX_SQUARE; move++)
-		{
-			if (piece.TargetSquares[move] != false) { continue; }
-			//perft the promotions, this if is basically a blunt .find()
-			if (piece.Promotion[0] != 65 and piece.Promotion[0] == move or piece.Promotion[1] != 65 and piece.Promotion[1] == move or piece.Promotion[2] != 65 and piece.Promotion[2] == move)
-			{
-				bool IsWhite = Board::IsPieceColorWhite(BoardSquare[count]);
-
-				for (uint8_t i = 0; i != 4; ++i)
-				{
-					if (depth == 1)
-					{
-						if (DivideFunON)
-						{
-							if (IsWhite)
-								std::cout << +count << " " << +move << " to " << Board::PieceType2letter(i + 18) << ": 1" << '\n';
-							else
-								std::cout << +count << " " << +move << " to " << Board::PieceType2letter(i + 10) << ": 1" << '\n';
-						}
-						NumOfMoves++;
-					}
-					else
-					{
-						Move Move_(count, move);
-
-						if (IsWhite)
-							Move_.s_PromotionType = i + 18;
-						else
-							Move_.s_PromotionType = i + 10;
-
-						MakeMove(LegalMoves, Move_ , BoardSquare, perftPreviousBoardSquare, CanCastle);
-						if (DivideFunON)
-						{
-							uint32_t DivideFunNum = 0;
-							DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
-							NumOfMoves += DivideFunNum;
-							if (IsWhite)
-								std::cout << +count << " " << +move << ": " << DivideFunNum << " to " << Board::PieceType2letter(i + 18) << '\n';
-							else
-								std::cout << +count << " " << +move << ": " << DivideFunNum << " to " << Board::PieceType2letter(i + 10) << '\n';
-						}
-						else
-							NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
-
-						BoardSquare = perftPreviousBoardSquare;
-					}
-				}
-
-				if (depth != 1)
-				{
-					BoardSquare = ConstBoardSquare;
-					perftPreviousBoardSquare = ConstPreviousBoardSquare;
-					CanCastle = ConstCanCastle;
-				}
-
-				if (IsWhite)
-					piece.Promotion[move - count - 7] = 65;
-				else
-					piece.Promotion[move - count + 9] = 65;
-
-				continue;
-			}
-
-			if (depth == 1)
-			{
-				if(DivideFunON)
-					std::cout << +count << " " << +move << ": 1" << '\n';
-				NumOfMoves++;
-			}
-			else
-			{
-				Move Move_(count, move);
-				
-				MakeMove(LegalMoves, Move_, BoardSquare, perftPreviousBoardSquare, CanCastle);
-				if (DivideFunON)
-				{
-					uint32_t DivideFunNum = 0;
-					DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
-					NumOfMoves += DivideFunNum;
-					std::cout << +count << " " << +move << ": " << DivideFunNum << '\n';
-				}
-				else
-					NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
-
-				BoardSquare = ConstBoardSquare;
-				perftPreviousBoardSquare = ConstPreviousBoardSquare;
-				CanCastle = ConstCanCastle;
-			}
-		}
-		count++;
-	}
-
-	return NumOfMoves;
-}
-
 void RenderChessPieces::MakeMove(const GenerateLegalMoves& LegalMoves, Move move, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle)
 {
 	fun_previousBoardSquare = fun_BoardSquare;
@@ -923,7 +782,7 @@ void RenderChessPieces::CreatePerft(uint8_t PerftDepth)
 		isNextMoveForWhite = false;
 
 	auto start = std::chrono::high_resolution_clock::now();
-	uint32_t result = Perft(perftBoardsquare, perftPreviousBoardsquare, perftCastle, isNextMoveForWhite, PerftDepth, true, Movenum);
+	uint32_t result = UCI::Perft(perftBoardsquare, perftPreviousBoardsquare, perftCastle, isNextMoveForWhite, PerftDepth, true, Movenum);
 	std::cout << "Nodes searched: " << result << '\n';
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);

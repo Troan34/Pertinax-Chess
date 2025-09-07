@@ -247,6 +247,5 @@ public:
 	void RemoveIllegalMoves();
 	static void SetDoNotEnPassant(bool SetToThis);
 	bool IsMoveLegal(const Move& CheckedMove) const;
-
 };
 

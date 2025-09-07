@@ -25,6 +25,7 @@ static constexpr std::string_view BTIME = "btime";
 static constexpr std::string_view WINC = "winc";
 static constexpr std::string_view BINC = "binc";
 static constexpr std::string_view INFINITE_COMMAND = "infinite";
+static constexpr std::string_view PERFT_COMMAND = "perft";
 
 static constexpr std::string_view STOP_COMMAND = "stop";
 
@@ -42,6 +43,7 @@ struct UciVars_p
 	std::vector<Move>* SearchMoves;
 	Timer* timer;
 	size_t* HashSize;
+	
 };
 
 class UCI
@@ -51,6 +53,7 @@ private:
 	std::string Command;
 	UciVars_p Vars_p;
 	bool stop = false;
+	bool exit = false;
 	std::atomic<bool> IsReady = true;
 	std::atomic<bool> Outputting = false;
 
@@ -60,5 +63,5 @@ private:
 public:
 
 	UCI(UciVars_p Vars);
-
+	static uint32_t Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int& PerftMoveNum);
 };

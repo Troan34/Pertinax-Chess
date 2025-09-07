@@ -11,6 +11,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifndef WHITE_TURN
+#define WHITE_TURN(x) ((x % 2) == 0)
+#endif
+
 constexpr enum SQUARES
 {
 	a1, a2, a3, a4, a5, a6, a7, a8,
@@ -237,6 +241,33 @@ template<typename T> inline std::vector<T> GetVecTail(const std::vector<T>& Vec)
 template<typename T> inline void PushBackVec(std::vector<T>& Vec, const std::vector<T>& DataVec)
 {
 	return (void)Vec.insert(Vec.end(), DataVec.begin(), DataVec.end());
+}
+
+inline bool IsStringANum(std::string& String)
+{
+	bool NumStarted = false;
+	bool Warning = false;
+	for (auto Char : String)
+	{
+		if (!isdigit(Char))
+		{
+			if (Char == ' ' and NumStarted)
+			{
+				if (!Warning)
+				{
+					Warning = true;
+				}
+				else {
+					return false;
+				}
+			}
+		}
+		else
+		{
+			NumStarted = true;
+		}
+	}
+	return true;
 }
 
 namespace bit//bit management
@@ -468,37 +499,3 @@ namespace bit//bit management
 
 }
 
-/*
-/// <summary>
-/// Type that lets the user easily create a 2D array with custom sizes for each sub array
-/// </summary>
-/// <typeparam name="Typ">Type of stored objects in sub arrays</typeparam>
-/// <typeparam name="Size">Size of the array</typeparam>
-/// <typeparam name="SecondSizes">Sizes of the sub arrays</typeparam>
-template<typename Typ, const size_t Size, const size_t SecondSizes[Size]>
-class Custom2DArray
-{
-private:
-	struct RecursiveArray
-	{
-		size_t ArrSize;
-		std::array<Typ, SecondSizes[ArrSize]> m_Array;
-
-		auto& operator[](size_t Index) { return m_Array[Index]; }
-		const auto& operator[](size_t Index) const { return m_Array[Index]; }
-	public:
-		RecursiveArray(size_t Size):ArrSize(Size){}
-	};
-
-	std::array<RecursiveArray, Size> m_Array;
-
-	for (size_t Count = 0; Count < Size; Count++)
-	{
-		m_Array[Count] = RecursiveArray(SecondSizes[Count]);
-	}
-
-	Typ* data() noexcept
-	{
-		return m_Array.data();
-	}
-};*/
