@@ -17,10 +17,28 @@ static constexpr uint8_t BOUND_MASK = 0b00000011;
 
 struct TTEntry
 {
-	Move BestMove;
-	uint8_t AgeBound;
-	int32_t Evaluation;
-	uint8_t Depth;
+	Move BestMove{};
+	uint8_t AgeBound = 0xFF;
+	int32_t Evaluation = 0;
+	uint8_t Depth = 0xFF;
+
+	bool operator==(const TTEntry& Entry) const
+	{
+		if (BestMove == Entry.BestMove and AgeBound == Entry.AgeBound and Evaluation == Entry.Evaluation and Depth == Entry.Depth)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	bool IsNull() const noexcept
+	{
+		if (BestMove.IsNull())
+		{
+			return true;
+		}
+		return false;
+	}
 };
 
 

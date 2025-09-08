@@ -765,21 +765,14 @@ void GenerateLegalMoves::SetDoNotEnPassant(bool SetToThis)
 
 bool GenerateLegalMoves::IsMoveLegal(const Move& CheckedMove) const
 {
-	bool MoveFound = false;
-	
-	for (uint8_t count = 0; count != 64; count++)
+	if (moves[CheckedMove.s_BoardSquare].TargetSquares[CheckedMove.s_Move] == true and
+		(moves[CheckedMove.s_BoardSquare].Promotion[0] == CheckedMove.s_PromotionType or
+		moves[CheckedMove.s_BoardSquare].Promotion[1] == CheckedMove.s_PromotionType or
+		moves[CheckedMove.s_BoardSquare].Promotion[2] == CheckedMove.s_PromotionType))
 	{
-		if (CheckedMove.s_BoardSquare != count)
-			continue;
-
-		if (moves[count].TargetSquares[CheckedMove.s_Move] != 0)
-		{
-			MoveFound = true;
-			break;
-		}
+		return true;
 	}
-
-	return MoveFound;
+	return false;
 }
 
 uint64_t ComputeRookAttacks(uint8_t BoardSquare, uint16_t Blocker)
@@ -788,7 +781,7 @@ uint64_t ComputeRookAttacks(uint8_t BoardSquare, uint16_t Blocker)
 	uint64_t BlockerBitboard = expand_bits_to_mask(Blocker, ROOK_MASKS[BoardSquare]);//expand pattern to Bitboard
 	for (uint8_t Direction = 0; Direction < 4; Direction++)//for every direction
 	{
-		for (uint8_t Scalar = 1; Scalar < NumOfSquaresUntilEdge[BoardSquare][Direction]; Scalar++)//for every bsquare along the direction
+		for (uint8_t Scalar = 1; Scalar <= NumOfSquaresUntilEdge[BoardSquare][Direction]; Scalar++)//for every bsquare along the direction
 		{
 			uint64_t Bit_PositionBeingChecked = (1ULL << (BoardSquare + (Scalar * OffsetForDirections[Direction])));
 			Attacks |= Bit_PositionBeingChecked;
@@ -807,7 +800,7 @@ uint64_t ComputeBishopAttacks(uint8_t BoardSquare, uint16_t Blocker)
 	uint64_t BlockerBitboard = expand_bits_to_mask(Blocker, BISHOP_MASKS[BoardSquare]);
 	for (uint8_t Direction = 4; Direction < 8; Direction++)
 	{
-		for (uint8_t Scalar = 1; Scalar < NumOfSquaresUntilEdge[BoardSquare][Direction]; Scalar++)
+		for (uint8_t Scalar = 1; Scalar <= NumOfSquaresUntilEdge[BoardSquare][Direction]; Scalar++)
 		{
 			uint64_t Bit_PositionBeingChecked = (1ULL << (BoardSquare + (Scalar * OffsetForDirections[Direction])));
 			Attacks |= Bit_PositionBeingChecked;
@@ -849,7 +842,7 @@ void MagicRookFinder(uint8_t BoardSquare)
 			for (uint16_t Blocker = 0; Blocker < (1ULL << shift); Blocker++)
 			{
 				auto Key = mult_rightShift(expand_bits_to_mask(Blocker, ROOK_MASKS[BoardSquare]), MagicNum, shift);
-				ROOK_ATTACKS[BoardSquare][Key] = ComputeRookAttacks(BoardSquare, Blocker) & ROOK_MASKS[BoardSquare];
+				ROOK_ATTACKS[BoardSquare][Key] = ComputeRookAttacks(BoardSquare, Blocker) & ROOK_LEGAL_MASKS[BoardSquare];
 			}
 			ROOK_MAGICS[BoardSquare] = MagicNum;
 			break;
@@ -887,7 +880,7 @@ void MagicBishopFinder(uint8_t BoardSquare)
 			for (uint16_t Blocker = 0; Blocker < (1ULL << shift); Blocker++)
 			{
 				auto Key = mult_rightShift(expand_bits_to_mask(Blocker, BISHOP_MASKS[BoardSquare]), MagicNum, shift);
-				BISHOP_ATTACKS[BoardSquare][Key] = ComputeBishopAttacks(BoardSquare, Blocker) & BISHOP_MASKS[BoardSquare];
+				BISHOP_ATTACKS[BoardSquare][Key] = ComputeBishopAttacks(BoardSquare, Blocker) & BISHOP_LEGAL_MASKS[BoardSquare];
 			}
 			BISHOP_MAGICS[BoardSquare] = MagicNum;
 			break;

@@ -155,6 +155,15 @@ struct Move
 	explicit Move(const GuessStruct& a)
 		:s_BoardSquare(a.BoardSquare), s_Move(a.Move), s_PromotionType(a.PromotionType)
 	{ }
+
+	bool IsNull() const noexcept
+	{
+		if (s_BoardSquare == NULL_OPTION and s_Move == NULL_OPTION and s_PromotionType == NULL_OPTION)
+		{
+			return true;
+		}
+		return false;
+	}
 };
 
 struct Timer
@@ -301,7 +310,8 @@ namespace bit//bit management
 	}
 
 	/// <summary>
-	/// Uses tzcnt to give the index of the lsb
+	/// Uses tzcnt to give the index of the lsb, use this if you NEED to search after the Index,
+	/// you should instead make a copy of Bits and use pop_lsb
 	/// </summary>
 	/// <param name="Index">Setting this means that it will search for the least significant bit AFTER the index, NOT ZERO INCLUDED (e.g. bit[1] is actually bit[0])</param>
 	/// <param name="Bits">bits to be scanned</param>
