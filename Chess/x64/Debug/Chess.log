@@ -1,5 +1,7 @@
 ﻿  Search.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(21,85): warning C4244: 'argument': conversion from 'const uint16_t' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(345,13): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(350,49): warning C4018: '>': signed/unsigned mismatch
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(233,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
   (compiling source file 'source/ChessThings/Engine/Search.cpp')
   

@@ -46,19 +46,19 @@ int32_t Evaluator::BoardMatValue()
 
 int32_t Evaluator::MobilityEval()
 {
-	int32_t MovilityEval = 0;
+	int32_t MobilityEval = 0;
 	for (uint8_t i = 0; i != 64; ++i)
 	{
 		if (m_BoardSquare[i] == 0)
 			continue;
 		if (Board::IsPieceColorWhite(m_BoardSquare[i]))
 		{
-			MovilityEval += (int)m_LegalMoves.m_NumOfLegalMoves * 0.1;
+			MobilityEval += (int)(m_LegalMoves.m_NumOfLegalMoves * 0.1);
 		}
 		else
 		{
-			MovilityEval -= (int)m_LegalMoves.m_NumOfLegalMoves * 0.1;
+			MobilityEval -= (int)(m_LegalMoves.m_NumOfLegalMoves * 0.1);
 		}
 	}
-	return MovilityEval;
+	return MobilityEval;
 }

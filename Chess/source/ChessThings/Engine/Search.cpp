@@ -54,6 +54,10 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 	std::vector<Move> EmptyPV;
 
 	GenerateLegalMoves LegalMoves(BoardSquare, &previousBoardSquare, CanCastle, (MoveNum % 2 != 0) ? false : true, MoveNum, false);
+	if (LegalMoves.m_NumOfLegalMoves == 0) [[unlikely]]
+	{
+		return { INT32_MAX, {} };
+	}
 
 	if (depth == 0)
 	{
@@ -150,7 +154,7 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 	OrderMoves(LegalMoves, BoardSquare, GuessedOrder, InsertTTMove ? FoundTT.second : TTEntry());
 
 
-	for (uint8_t MoveIndex = 0; MoveIndex < (LegalMoves.m_NumOfLegalMoves - ((FoundTT.second.IsNull()) ? 1 : 0)); MoveIndex++)
+	for (uint8_t MoveIndex = 0; MoveIndex <= (LegalMoves.m_NumOfLegalMoves - ((InsertTTMove) ? 0 : 1)); MoveIndex++)
 	{
 		GuessStruct Guess = GuessedOrder[MoveIndex];
 		if (!PreviousPV.empty() and Move(Guess.BoardSquare, Guess.Move, Guess.PromotionType) == PreviousPV[0])
@@ -310,7 +314,7 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash
 //sorted best to worst
 void Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& fun_BoardSquare, GuessStruct* GuessedOrder, TTEntry TTMove)
 {
-	const int64_t MAX_INDEX = LegalMoves.m_NumOfLegalMoves - ((TTMove == TTEntry()) ? 1 : 0);//IF IGNORED -> SEGFAULT;
+	const int32_t MAX_INDEX = LegalMoves.m_NumOfLegalMoves - ((TTMove.IsNull()) ? 1 : 0);//IF IGNORED -> SEGFAULT;
 	uint32_t Index = 0;
 	uint8_t count = 0;
 	//bool flag = true; use when implementing go search
