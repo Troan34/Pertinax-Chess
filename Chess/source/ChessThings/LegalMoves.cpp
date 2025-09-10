@@ -549,7 +549,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 		p_prevBoardSquare = nullptr;
 
 	GenerateLegalMoves OppositeMoves(m_BoardSquare,p_prevBoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true);
-
+	OppositeAttackedSquares = OppositeMoves.AttackedSquares;
 
 	//fill IndexOfPieceChecking
 	uint8_t count = 0;

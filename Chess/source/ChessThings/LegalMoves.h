@@ -210,6 +210,8 @@ public:
 
 	//Bitboard with squares under attack set
 	bit::BitBoard64 AttackedSquares;
+	//Bitboard with Opposite Attacks
+	bit::BitBoard64 OppositeAttackedSquares;
 
 	/*
 	Bit Board with the bits behind a king facing its checker

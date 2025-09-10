@@ -354,12 +354,12 @@ void Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<u
 				bool IsWhite = Board::IsPieceColorWhite(fun_BoardSquare[count]);
 				if (fun_BoardSquare[move] != NONE)
 				{
-					GuessedEval += (10 * Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[move])) - Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[count]);
+					GuessedEval += (2 * Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[move])) - 0.2*Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[count]);
 				}
 
-				if (LegalMoves.AttackedSquares[move])
+				if (LegalMoves.OppositeAttackedSquares[move])
 				{
-					GuessedEval -= Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[count]);
+					GuessedEval -= (2/3)*Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[count]);
 				}
 
 				if ((piece.Promotion[0] != 65 and piece.Promotion[0] == move) or (piece.Promotion[1] != 65 and piece.Promotion[1] == move) or (piece.Promotion[2] != 65 and piece.Promotion[2] == move))
