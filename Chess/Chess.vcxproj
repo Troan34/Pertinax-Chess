@@ -139,6 +139,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLEW\lib\Release\x64;$(SolutionDir)Dependencies\GLFW\lib-vc2022</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32s.lib;opengl32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies);glfw3.lib</AdditionalDependencies>
+      <AdditionalOptions>/PROFILE %(AdditionalOptions)</AdditionalOptions>
+      <Profile>true</Profile>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y /E "$(ProjectDir)res" "$(OutDir)res\"</Command>

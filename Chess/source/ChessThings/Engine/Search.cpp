@@ -261,19 +261,11 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash
 
 	}
 
-	uint8_t PieceTypeToPromoteTo = 65;
-	if (Move_.s_PromotionType < 9)//put this so ALG2MOVE doesn't break anything
-	{
-		if (Board::IsPieceColorWhite(fun_BoardSquare[Move_.s_BoardSquare]) and Move_.s_PromotionType != 65)
-			PieceTypeToPromoteTo = Move_.s_PromotionType + WHITE;
-		else
-			PieceTypeToPromoteTo = Move_.s_PromotionType + BLACK;
-	}
 
 	//promoting and en passant
-	if (PieceTypeToPromoteTo != 65)
+	if (Move_.s_PromotionType != NULL_OPTION)
 	{
-		fun_BoardSquare[Move_.s_Move] = PieceTypeToPromoteTo;
+		fun_BoardSquare[Move_.s_Move] = Move_.s_PromotionType;
 	}
 	else//optimization
 	{
@@ -319,7 +311,7 @@ void Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<u
 	uint8_t count = 0;
 	//bool flag = true; use when implementing go search
 
-	if ((TTMove == TTEntry()) == false)//there is a ttmove
+	if (!TTMove.IsNull())//there is a ttmove
 	{
 		GuessedOrder[0] = GuessStruct(TTMove.BestMove.s_BoardSquare, TTMove.BestMove.s_Move, TTMove.BestMove.s_PromotionType, TTMove.Evaluation);
 		Index++;

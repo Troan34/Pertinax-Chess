@@ -63,7 +63,7 @@ void GenerateLegalMoves::GenerateMoves()
 		{
 			KnightMoveGen(BoardSquarePos);
 		}
-		else if (i == WHITE_KING or i == BLACK_KING)
+		else if (i == WHITE_KING or i == BLACK_KING)[[unlikely]]
 		{
 			KingMoveGen(BoardSquarePos);
 		}
@@ -334,10 +334,12 @@ std::array<uint8_t, 8>& GenerateLegalMoves::CreateOffesetsForKnight(const uint8_
 //PAWN
 void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 {
+#ifdef _DEBUG
 	if (BoardSquarePos < 8 or BoardSquarePos > 55)
 	{
-		return;//this should be made an assert
+		ASSERT(false);//this should be made an assert
 	}
+#endif
 	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
 	if (PieceType == WHITE_PAWN and isNextMoveForWhite)//White pawn
 	{
@@ -413,8 +415,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 			}
 		}
 	}
-
-	if (PieceType == BLACK_PAWN and !isNextMoveForWhite)//Black pawn
+	else if (PieceType == BLACK_PAWN and !isNextMoveForWhite)//Black pawn
 	{
 		for (const int& Offset : OffsetForBlackPawn)
 		{

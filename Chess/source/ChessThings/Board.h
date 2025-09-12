@@ -10,6 +10,7 @@
 #include <random> 
 #include <stdio.h>
 #include <stdlib.h>
+#include <Windows.h>
 
 #ifndef WHITE_TURN
 #define WHITE_TURN(x) ((x % 2) == 0)
@@ -238,6 +239,7 @@ public:
 	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, std::array<uint8_t, 64>& previousBoardSquare, canCastle& Castle);
 	static std::array<uint8_t, 64> PrevBoardSquareFromEP(const std::array<uint8_t, 64>& BoardSquare, uint8_t EPBoardsquare);
 	static std::string GetPrintableFromVecOfMoves(std::vector<Move> Moves);
+	static uint8_t PieceType2Compact(uint8_t PieceType);
 };
 
 template<typename T> inline std::vector<T> GetVecTail(const std::vector<T>& Vec)

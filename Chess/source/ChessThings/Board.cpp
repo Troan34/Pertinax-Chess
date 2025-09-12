@@ -603,6 +603,22 @@ std::string Board::GetPrintableFromVecOfMoves(std::vector<Move> Moves)
 	return print;
 }
 
+uint8_t Board::PieceType2Compact(uint8_t PieceType)
+{
+	if (PieceType < WHITE)
+	{
+		return PieceType - 9;
+	}
+	else if (PieceType < 23)
+	{
+		return PieceType - 11;
+	}
+	else
+	{
+		ASSERT(false);
+	}
+}
+
 //^^^ Board DEFINITIONS ^^^//
 
 Move::Move()
