@@ -21,6 +21,13 @@ constexpr enum DIRECTIONS
 	N = 8, S = -8, W = -1, E = 1, NW = 7, SE = -9, NE = 9, SW = -7
 };
 
+//These are the masks for the Promotion var, 0bSSSSSPPP | S = Square, P = PromotionSide
+constexpr uint8_t LeftPromotionMask = 0b00000100;
+constexpr uint8_t CenterPromotionMask = 0b00000010;
+constexpr uint8_t RightPromotionMask = 0b00000001;
+constexpr uint8_t PromotionMask = 0b00000111;
+constexpr uint8_t PromotionTypeMask = 0b11111000;
+
 //precompute NumOfSquaresUntilEdge
 constexpr std::array<std::array<uint8_t, 8>, 64> fillNumOfSquaresUntilEdge()
 {
@@ -171,20 +178,68 @@ static std::array<std::array<uint64_t, 512>, 64> BISHOP_ATTACKS{};
 ///<summary>Computes ATTACKS IF NOT found in disk, then saves it to disk</summary>
 void ComputeHeavy();
 
+struct PromotionByte
+{
+	uint8_t Promotion = 0;
+
+	void SetPromotionSide(uint8_t Side, uint8_t BoardSquare)
+	{
+		switch (Side)
+		{
+		case 0:
+			Promotion |= LeftPromotionMask;
+			break;
+		case 1:
+			Promotion |= CenterPromotionMask;
+			break;
+		case 2:
+			Promotion |= RightPromotionMask;
+			break;
+		default:
+			ASSERT(false);
+		}
+		Promotion |= BoardSquare << 3;
+	}
+
+	void ResetPromotionSide(uint8_t Side, uint8_t BoardSquare)
+	{
+		switch (Side)
+		{
+		case 0:
+			Promotion |= LeftPromotionMask;
+			Promotion ^= LeftPromotionMask;
+			break;
+		case 1:
+			Promotion |= CenterPromotionMask;
+			Promotion ^= CenterPromotionMask;
+			break;
+		case 2:
+			Promotion |= RightPromotionMask;
+			Promotion ^= RightPromotionMask;
+			break;
+		default:
+			ASSERT(false);
+		}
+		Promotion |= BoardSquare << 3;
+
+	}
+};
 
 struct MOVE
 {
 	std::vector<uint8_t> TargetSquares;//this has to be changed to something more bitboard-ish
-	std::array<uint8_t, 3> Promotion{65, 65, 65};//which move lets PAWN promote
+	PromotionByte Promotion;//which move lets PAWN promote
 	uint8_t PieceType;
 };
 
 struct MOVE_BIT
 {
 	bit::BitBoard64 TargetSquares{};
-	std::array<uint8_t, 3> Promotion{ 65, 65, 65 };
+	PromotionByte Promotion;
 	uint8_t PieceType = 0;
 };
+
+
 
 class GenerateLegalMoves
 {

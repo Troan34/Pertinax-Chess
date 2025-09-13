@@ -90,21 +90,22 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 		auto Key = mult_rightShift(blockers.ReadBits() & ROOK_MASKS[BoardSquarePos], ROOK_MAGICS[BoardSquarePos], RookShift);
 
 		Attacks = ROOK_ATTACKS[BoardSquarePos][Key];
-		AttackedSquares |= Attacks;
 
 		if (IsWhite) { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[0]); }
 		else { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[1]); }
+
+		AttackedSquares |= Attacks;
 	}
 	else if ((PieceTypeUncolored == BISHOP))
 	{
 		uint16_t BishopAttackIndex = mult_rightShift(blockers.ReadBits() & BISHOP_MASKS[BoardSquarePos], BISHOP_MAGICS[BoardSquarePos], BishopShift);
 
 		Attacks = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
-		AttackedSquares |= Attacks;
 
 		if (IsWhite) { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[0]); }
 		else { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[1]); }
 
+		AttackedSquares |= Attacks;
 	}
 	else if ((PieceTypeUncolored == QUEEN))
 	{
@@ -115,8 +116,6 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 
 		bit::BitBoard64 RookAttack = ROOK_ATTACKS[BoardSquarePos][RookAttackIndex];
 		bit::BitBoard64 BishopAttack = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
-
-		AttackedSquares |= (RookAttack | BishopAttack);
 
 		//removes attacks to own pieces
 		if (IsWhite)
@@ -129,6 +128,9 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 			RookAttack ^= RookAttack & m_BoardSquare.ColorPositions[1];
 			BishopAttack ^= BishopAttack & m_BoardSquare.ColorPositions[1];
 		}
+
+		AttackedSquares |= (RookAttack | BishopAttack);
+
 		Attacks = RookAttack | BishopAttack;
 	}
 
@@ -152,7 +154,8 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 			break;
 		}
 
-		std::array<uint8_t, 7> GuessXrayCheck{ 65 };//fill this with board squares of xray attack, if no king is found, revert it
+		std::array<uint8_t, 7> GuessXrayCheck;//fill this with board squares of xray attack, if no king is found, revert it
+		GuessXrayCheck.fill(65);
 		//Search for the xray attack that leads to check, add it to CheckTargetSquares (also do SquaresBehindCheckedKing)
 		for (; Direction < MaxDir; Direction++)
 		{
@@ -200,7 +203,8 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 			break;
 		}
 
-		std::array<uint8_t, 7> GuessPinBoardSquares{ 65 };
+		std::array<uint8_t, 7> GuessPinBoardSquares;
+		GuessPinBoardSquares.fill(65);
 		for (; Direction < MaxDir; Direction++)
 		{
 			for (uint8_t Scalar = 1; Scalar <= NumOfSquaresUntilEdge[BoardSquarePos][Direction]; Scalar++)
@@ -352,10 +356,8 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 			uint8_t PieceTypeAtOffset = m_BoardSquare[BoardPosPlusOffset];
 
 
-
 			if (NumOfSquaresUntilEdge[BoardSquarePos][WhitePawnDirections[Offset-7]] != 0)
 			{
-				
 
 				if (PieceTypeAtOffset != 0 and Offset != 8)
 				{
@@ -368,7 +370,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 						//promotion
 						if (BoardPosPlusOffset >= 56)
 						{
-							moves[BoardSquarePos].Promotion[Offset - 7] = BoardPosPlusOffset;
+							moves[BoardSquarePos].Promotion.SetPromotionSide(Offset - 7, BoardSquarePos);
 						}
 					}
 					if (PieceTypeAtOffset == BLACK_KING)
@@ -393,7 +395,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 
 					//promotion
 					if (BoardPosPlusOffset >= 56)
-						moves[BoardSquarePos].Promotion[1] = BoardPosPlusOffset;
+						moves[BoardSquarePos].Promotion.SetPromotionSide(1, BoardSquarePos);
 				}
 				else if (PieceTypeAtOffset == 0 and Offset != 8)
 				{
@@ -441,7 +443,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 						//promotion
 						if (BoardPosPlusOffset <= 7)
 						{
-							moves[BoardSquarePos].Promotion[Offset + 9] = BoardPosPlusOffset;
+							moves[BoardSquarePos].Promotion.SetPromotionSide(Offset + 9, BoardSquarePos);
 						}
 					}
 					if (PieceTypeAtOffset == WHITE_KING)
@@ -466,7 +468,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 
 					//promotion
 					if (BoardPosPlusOffset <= 7)
-						moves[BoardSquarePos].Promotion[1] = BoardPosPlusOffset;
+						moves[BoardSquarePos].Promotion.SetPromotionSide(1, BoardSquarePos);
 				}
 				else if (PieceTypeAtOffset == 0 and Offset != -8)
 				{
@@ -699,7 +701,14 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 
 	for (MOVE_BIT& Piece : moves)
 	{
-		m_NumOfLegalMoves += Piece.TargetSquares.popcnt();
+		if ((Piece.PieceType == WHITE_PAWN or Piece.PieceType == BLACK_PAWN) and ((Piece.Promotion.Promotion & PromotionMask) != 0))[[unlikely]]
+		{
+			m_NumOfLegalMoves += std::popcount((uint8_t)(Piece.Promotion.Promotion & PromotionMask)) * 4;
+		}
+		else
+		{
+			m_NumOfLegalMoves += Piece.TargetSquares.popcnt();
+		}
 	}
 	
 }
@@ -766,10 +775,7 @@ void GenerateLegalMoves::SetDoNotEnPassant(bool SetToThis)
 
 bool GenerateLegalMoves::IsMoveLegal(const Move& CheckedMove) const
 {
-	if (moves[CheckedMove.s_BoardSquare].TargetSquares[CheckedMove.s_Move] == true and
-		(moves[CheckedMove.s_BoardSquare].Promotion[0] == CheckedMove.s_PromotionType or
-		moves[CheckedMove.s_BoardSquare].Promotion[1] == CheckedMove.s_PromotionType or
-		moves[CheckedMove.s_BoardSquare].Promotion[2] == CheckedMove.s_PromotionType))
+	if (moves[CheckedMove.s_BoardSquare].TargetSquares[CheckedMove.s_Move] == true and (moves[CheckedMove.s_BoardSquare].Promotion.Promotion == 0 and CheckedMove.s_PromotionType != NULL_OPTION))
 	{
 		return true;
 	}

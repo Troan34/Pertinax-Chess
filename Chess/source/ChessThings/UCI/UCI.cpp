@@ -227,7 +227,7 @@ uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 		{
 			if (!bit::pop_lsb(TargetSquaresCopy, move)) { break; }
 			//perft the promotions, this if is basically a blunt .find()
-			if (piece.Promotion[0] != 65 and piece.Promotion[0] == move or piece.Promotion[1] != 65 and piece.Promotion[1] == move or piece.Promotion[2] != 65 and piece.Promotion[2] == move)
+			if (piece.Promotion.Promotion != 0 and (piece.Promotion.Promotion & PromotionMask) != 0)
 			{
 				bool IsWhite = Board::IsPieceColorWhite(BoardSquare[count]);
 
@@ -279,9 +279,9 @@ uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 				}
 
 				if (IsWhite)
-					piece.Promotion[move - count - 7] = 65;
+					piece.Promotion.ResetPromotionSide(move - count - 7, count);
 				else
-					piece.Promotion[move - count + 9] = 65;
+					piece.Promotion.ResetPromotionSide(move - count + 9, count);
 
 				continue;
 			}
