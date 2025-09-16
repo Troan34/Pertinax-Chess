@@ -91,10 +91,10 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 
 		Attacks = ROOK_ATTACKS[BoardSquarePos][Key];
 
+		AttackedSquares |= Attacks;
+
 		if (IsWhite) { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[0]); }
 		else { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[1]); }
-
-		AttackedSquares |= Attacks;
 	}
 	else if ((PieceTypeUncolored == BISHOP))
 	{
@@ -102,10 +102,10 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 
 		Attacks = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
 
+		AttackedSquares |= Attacks;
+
 		if (IsWhite) { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[0]); }
 		else { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[1]); }
-
-		AttackedSquares |= Attacks;
 	}
 	else if ((PieceTypeUncolored == QUEEN))
 	{
@@ -116,6 +116,8 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 
 		bit::BitBoard64 RookAttack = ROOK_ATTACKS[BoardSquarePos][RookAttackIndex];
 		bit::BitBoard64 BishopAttack = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
+
+		AttackedSquares |= (RookAttack | BishopAttack);
 
 		//removes attacks to own pieces
 		if (IsWhite)
@@ -128,8 +130,6 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 			RookAttack ^= RookAttack & m_BoardSquare.ColorPositions[1];
 			BishopAttack ^= BishopAttack & m_BoardSquare.ColorPositions[1];
 		}
-
-		AttackedSquares |= (RookAttack | BishopAttack);
 
 		Attacks = RookAttack | BishopAttack;
 	}
@@ -701,6 +701,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 
 	for (MOVE_BIT& Piece : moves)
 	{
+		if (Piece.TargetSquares == 0) { continue; }
 		if ((Piece.PieceType == WHITE_PAWN or Piece.PieceType == BLACK_PAWN) and ((Piece.Promotion.Promotion & PromotionMask) != 0))[[unlikely]]
 		{
 			m_NumOfLegalMoves += std::popcount((uint8_t)(Piece.Promotion.Promotion & PromotionMask)) * 4;

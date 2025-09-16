@@ -189,7 +189,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 		else if (Command == "uci") //UCI mode
 		{
 			std::cout <<
-				"id name Pertinax Chess 0.2.2\n" <<
+				"id name Pertinax Chess 0.2.5\n" <<
 				"id author R.Bukaci (github.com/Troan34)\n\n" <<
 				"option name type spin Depth default " << static_cast<int>(EngineDepth) << " min 2 max 255\n" <<
 				"option name type button EngineOn default On\n" <<
