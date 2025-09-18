@@ -45,6 +45,8 @@ void Search::ClearTT()
 
 SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta, std::vector<Move>& PreviousPV)
 {
+	TT.ResizeTT();
+	TT.AgeIncrementOnNewSearch();
 	NodesVisited++;
 	Move BestMove;
 	Move CutOffMove;
@@ -82,32 +84,26 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 		TThits++;
 		if (FoundTT.second.Depth >= depth)
 		{
-
 			if (LegalMoves.IsMoveLegal(FoundTT.second.BestMove))
 			{
 				auto Bound = TranspositionTable::GetBound(FoundTT.second.AgeBound);
-				if (Bound == EXACT)
+				switch (Bound)
 				{
-					Cutoffs++;
-					return { FoundTT.second.Evaluation, {FoundTT.second.BestMove} };
-				}
-				else if (Bound == LOWER_BOUND)
-				{
-					if (FoundTT.second.Evaluation >= beta)
+					case (EXACT):
 					{
-						Cutoffs++;
-						return FoundTT.second.Evaluation;
+						return { FoundTT.second.Evaluation, {FoundTT.second.BestMove} };
+						break;
 					}
-					alpha = max(alpha, FoundTT.second.Evaluation);
-				}
-				else if (Bound == UPPER_BOUND)
-				{
-					if (FoundTT.second.Evaluation <= alpha)
+					case (LOWER_BOUND):
 					{
-						Cutoffs++;
-						return FoundTT.second.Evaluation;
+						alpha = max(alpha, FoundTT.second.Evaluation);
+						break;
 					}
-					beta = min(beta, FoundTT.second.Evaluation);
+					case (UPPER_BOUND):
+					{
+						beta = min(beta, FoundTT.second.Evaluation);
+						break;
+					}
 				}
 				InsertTTMove = true;
 			}
@@ -183,6 +179,7 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 
 		if (alpha >= beta)
 		{ 
+			Cutoffs++;
 			CutOffMove = Move_;
 			break;//prune
 		}

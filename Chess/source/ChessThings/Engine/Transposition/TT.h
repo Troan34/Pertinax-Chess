@@ -48,11 +48,10 @@ private:
 	std::unordered_map<uint64_t, TTEntry> TT;
 	size_t m_HashSize = 32000000;
 	uint8_t CurrentAge = 0;
+	
+	uint8_t GetAge(const uint8_t AgeBound);
 
-	void ResizeTT();
-	uint8_t GetAge(const uint8_t& AgeBound);
-
-	uint8_t RelativeAge(const uint8_t& AgeBound);
+	uint8_t RelativeAge(const uint8_t AgeBound);
 public:
 	TranspositionTable(size_t TTSize);
 	TranspositionTable();
@@ -65,6 +64,7 @@ public:
 	float GetTTSizeInMB() const;
 	void ClearTT();
 	void ChangeHashSize(const size_t& HashSize);
-	static uint8_t GetBound(const uint8_t& AgeBound);
+	static uint8_t GetBound(const uint8_t AgeBound);
+	void ResizeTT();
 };
 

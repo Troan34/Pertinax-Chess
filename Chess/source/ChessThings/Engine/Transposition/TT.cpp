@@ -1,7 +1,6 @@
 #include "ChessThings/Engine/Transposition/TT.h"
 
 
-
 TranspositionTable::TranspositionTable(size_t TTSize)
 	:m_HashSize(TTSize)
 {
@@ -85,7 +84,7 @@ void TranspositionTable::ChangeHashSize(const size_t& HashSize)
 {
 	if (HashSize < m_HashSize)
 	{
-		while ((GetTTSizeInMB() * 1000000) < HashSize)
+		while ((GetTTSizeInMB() * 1000000) < HashSize and TT.size() > NUM_OF_ENTRIES_TO_BE_DELETED)
 		{
 			ResizeTT();
 		}
@@ -96,17 +95,18 @@ void TranspositionTable::ChangeHashSize(const size_t& HashSize)
 
 void TranspositionTable::ResizeTT()//Just age(no other strategies)
 {
+	if (GetTTFullness() < 980) { return; }
 	uint16_t NumOfDeletedEntries = 0;
 	uint8_t MinimumAgeDelta = 100; //SIMULATE (or whatever else) TO GET A BETTER NUMBER
 	uint8_t MinAgeDeltaIncrement = 9; //THIS TOO
 
 	while (NumOfDeletedEntries < NUM_OF_ENTRIES_TO_BE_DELETED)
 	{
-		for (auto& it : TT)
+		for (auto it = TT.begin(); it != TT.end(); it++)
 		{
-			if (RelativeAge(it.second.AgeBound) > MinimumAgeDelta and (GetBound(it.second.AgeBound) != EXACT))//MIGHT BE A BUG, WITH A TT FULL OF PV
+			if (RelativeAge(it->second.AgeBound) >= MinimumAgeDelta and (GetBound(it->second.AgeBound) != EXACT))//MIGHT BE A BUG, WITH A TT FULL OF PV
 			{
-				TT.erase(it.first);//This might be a bug, SAME bug as that one in LegalMoves(when i deleted the element i was iterating)
+				it = TT.erase(it);//This might be a bug, SAME bug as that one in LegalMoves(when i deleted the element i was iterating)
 				NumOfDeletedEntries++;
 				if (NumOfDeletedEntries < NUM_OF_ENTRIES_TO_BE_DELETED)
 					continue;
@@ -114,16 +114,23 @@ void TranspositionTable::ResizeTT()//Just age(no other strategies)
 					break;
 			}
 		}
-		MinimumAgeDelta -= MinAgeDeltaIncrement;
+		if (MinimumAgeDelta < MinAgeDeltaIncrement) [[unlikely]]
+		{
+			MinimumAgeDelta = 0;
+		}
+		else
+		{
+			MinimumAgeDelta -= MinAgeDeltaIncrement;
+		}
 	}
 	
 }
 
-uint8_t inline TranspositionTable::GetAge(const uint8_t& AgeBound) { return AgeBound & AGE_MASK; }
+uint8_t inline TranspositionTable::GetAge(const uint8_t AgeBound) { return AgeBound & AGE_MASK; }
 
-uint8_t inline TranspositionTable::GetBound(const uint8_t& AgeBound) { return AgeBound & BOUND_MASK; }
+uint8_t inline TranspositionTable::GetBound(const uint8_t AgeBound) { return AgeBound & BOUND_MASK; }
 
-uint8_t TranspositionTable::RelativeAge(const uint8_t& AgeBound)
+uint8_t TranspositionTable::RelativeAge(const uint8_t AgeBound)
 {
 	return abs(CurrentAge - GetAge(AgeBound));
 }

@@ -496,6 +496,7 @@ void GenerateLegalMoves::KingMoveGen(const uint8_t BoardSquarePos)
 	if ((m_BoardSquare[BoardSquarePos] == WHITE_KING and isNextMoveForWhite) or (m_BoardSquare[BoardSquarePos] == BLACK_KING and !isNextMoveForWhite))
 	{
 		uint8_t PieceType = m_BoardSquare[BoardSquarePos];
+
 		for (uint8_t direction = 0; direction < 8; direction++)
 		{
 			if (NumOfSquaresUntilEdge[BoardSquarePos][direction] > 0)
