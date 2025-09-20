@@ -70,7 +70,6 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 		return BestEvaluation;
 	}
 
-	auto const cBoardSquare = BoardSquare;
 	auto const cPreviousBoardSquare = previousBoardSquare;
 	auto const cCanCastle = CanCastle;
 	auto const cMoveNum = MoveNum;
@@ -79,6 +78,7 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 	//Probe TT and manage its bound
 	auto FoundTT = TT.TTprobe(m_Hash.Hash);
 	bool InsertTTMove = false;
+
 	if (FoundTT.first)
 	{
 		TThits++;
@@ -110,6 +110,10 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 		}
 	}
 
+	//make a variable size array, for SEGFAULT or STACK OVERFLOW check here first
+	GuessStruct* GuessedOrder = static_cast<GuessStruct*>(alloca((LegalMoves.m_NumOfLegalMoves + (InsertTTMove ? 1 : 0)) * sizeof(GuessStruct)));
+	OrderMoves(LegalMoves, BoardSquare, GuessedOrder, InsertTTMove ? FoundTT.second : TTEntry());
+
 	if (!PreviousPV.empty())
 	{
 		Move PVMove = PreviousPV.front();
@@ -133,7 +137,7 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 			}
 		}
 
-		BoardSquare = cBoardSquare;
+		BoardSquare = previousBoardSquare;
 		previousBoardSquare = cPreviousBoardSquare;
 		CanCastle = cCanCastle;
 		MoveNum = cMoveNum;
@@ -142,13 +146,9 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 		if (alpha >= beta)
 		{
 			CutOffMove = PVMove;
+			goto after_search;
 		}
 	}
-
-	//make a variable size array, for SEGFAULT or STACK OVERFLOW check here first
-	GuessStruct* GuessedOrder = static_cast<GuessStruct*>(alloca((LegalMoves.m_NumOfLegalMoves + (InsertTTMove ? 1 : 0)) * sizeof(GuessStruct)));
-	OrderMoves(LegalMoves, BoardSquare, GuessedOrder, InsertTTMove ? FoundTT.second : TTEntry());
-
 
 	for (uint8_t MoveIndex = 0; MoveIndex < (LegalMoves.m_NumOfLegalMoves + ((InsertTTMove) ? 1 : 0)); MoveIndex++)
 	{
@@ -177,36 +177,25 @@ SearchResult Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64>
 			}
 		}
 
-		if (alpha >= beta)
+		if (alpha >= beta)//prune
 		{ 
 			Cutoffs++;
 			CutOffMove = Move_;
-			break;//prune
+			goto after_search;
 		}
 
 
 		//undo move
-		BoardSquare = cBoardSquare;
+		BoardSquare = previousBoardSquare;
 		previousBoardSquare = cPreviousBoardSquare;
 		CanCastle = cCanCastle;
 		MoveNum = cMoveNum;
 		m_Hash.Hash = cHash;
 	}
 
+	after_search:
 	//Make a TT entry
-	Move StoreMove{};
-
-	if (BestEvaluation >= beta) {
-		StoreMove = CutOffMove;
-	}
-	else {
-		StoreMove = BestMove;
-	}
-
-	if (StoreMove.s_BoardSquare != NULL_OPTION)
-	{
-		TT.AddEntry(StoreMove, BestEvaluation, depth, m_Hash.Hash, alpha, beta);
-	}
+	TT.AddEntry(BestMove, BestEvaluation, depth, m_Hash.Hash, alpha, beta);
 
 
 	if(depth == m_depth)
