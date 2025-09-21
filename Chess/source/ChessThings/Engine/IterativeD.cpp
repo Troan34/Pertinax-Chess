@@ -55,9 +55,9 @@ void IterativeDeepening::PrintInfo(UCIInfoes Info)
 		{
 			std::string str;
 			if (*Info.Score == INT32_MAX)
-				str = "mate " + std::to_string(Info.PV->size());
+				str = "mate " + std::to_string(Info.PV->NumOfMoves);
 			else if (*Info.Score == -INT32_MAX)
-				str = "mate -" + std::to_string(Info.PV->size());
+				str = "mate -" + std::to_string(Info.PV->NumOfMoves);
 			else
 			{
 				str = "cp " + std::to_string(*Info.Score);
@@ -65,7 +65,7 @@ void IterativeDeepening::PrintInfo(UCIInfoes Info)
 			return str;
 		}() <<
 		" nodes " << *Info.NumOfNodes << " nps " << *Info.NpS << " hashfull " << *Info.HashFull
-		<< " pv " << Board::GetPrintableFromVecOfMoves(*Info.PV) << std::endl;
+		<< " pv " << Board::GetPrintableFromArrayOfMoves(Info.PV->moves) << std::endl;
 }
 
 IterativeDeepening::IterativeDeepening(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint16_t& MoveNum, std::vector<Move>& SearchMoves, const size_t& HashSize, Timer& Time, int16_t MaxDepth, bool WhiteTurn, bool* stop)
@@ -79,7 +79,7 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 	auto TimeForNextMove = TimeForMove();
 	std::chrono::milliseconds TimeForLastDepth(5); //just a number
 
-	std::vector<Move> CurrentPV;
+	pv_line CurrentPV;
 	int32_t BestEval = -INT32_MAX;
 	Move BestMove;
 
@@ -97,7 +97,7 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 		Search search(m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, Depth, m_MoveNum, m_SearchMoves, HashSize);
 		BestEval = search.GetBestMoveWithEval(CurrentPV);
 
-		BestMove = CurrentPV.front();
+		BestMove = CurrentPV.moves[0];
 
 		auto Stop = std::chrono::high_resolution_clock::now();
 		TimeForNextMove -= std::chrono::duration_cast<std::chrono::milliseconds>(Stop - LocalStart);
@@ -126,8 +126,7 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 
 			auto NumOfNds = search.GetNodesVisited();
 			Info.NumOfNodes = &NumOfNds;
-			std::vector<Move> PV = CurrentPV;
-			Info.PV = &PV;
+			Info.PV = &CurrentPV;
 			Info.Score = &BestEval;
 			
 			PrintInfo(Info);

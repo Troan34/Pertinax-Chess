@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <Windows.h>
+#include <algorithm>
 
 #ifndef WHITE_TURN
 #define WHITE_TURN(x) ((x % 2) == 0)
@@ -69,6 +70,8 @@ constexpr unsigned int TIME_INTERVAL_IN_NODES = 2048;//tunable
 constexpr std::string_view STARTPOS = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 constexpr uint8_t NULL_OPTION = 65; //The number i use to mean 'not assigned' or 'doesn't exist'
+
+constexpr int MAX_PV_LENGTH = 50;
 
 static std::random_device seed;
 static std::default_random_engine rng(seed());
@@ -181,6 +184,12 @@ struct Timer
 	Timer(){}
 };
 
+struct pv_line
+{
+	uint8_t NumOfMoves = 0; //Number of moves on line
+	std::array<Move, MAX_PV_LENGTH> moves; //the moves
+};
+
 struct UCIInfoes
 {
 	uint8_t* Depth = nullptr;
@@ -188,7 +197,7 @@ struct UCIInfoes
 	uint64_t* NpS = nullptr;
 	uint16_t* HashFull = nullptr;
 	int32_t* Score = 0;
-	std::vector<Move>* PV;
+	pv_line* PV;
 };
 
 struct SearchResult
@@ -238,7 +247,7 @@ public:
 	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t EnpassantIndex, canCastle Castle);
 	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, std::array<uint8_t, 64>& previousBoardSquare, canCastle& Castle);
 	static std::array<uint8_t, 64> PrevBoardSquareFromEP(const std::array<uint8_t, 64>& BoardSquare, uint8_t EPBoardsquare);
-	static std::string GetPrintableFromVecOfMoves(std::vector<Move> Moves);
+	static std::string GetPrintableFromArrayOfMoves(const std::array<Move, MAX_PV_LENGTH>& Moves);
 	static uint8_t PieceType2Compact(uint8_t PieceType);
 };
 

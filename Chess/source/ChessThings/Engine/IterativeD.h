@@ -3,6 +3,7 @@
 #include "ChessThings/Engine/Search.h"
 #include "ChessThings/LegalMoves.h"
 
+
 class IterativeDeepening
 {
 private:
@@ -18,6 +19,7 @@ private:
 	uint8_t Depth = 0;
 	bool RanASearch = false;//exception handling
 	uint64_t NumOfNodesSearched;
+
 
 	bool* stop;
 	bool WhiteTurn;

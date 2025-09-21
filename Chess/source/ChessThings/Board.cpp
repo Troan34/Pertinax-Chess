@@ -590,12 +590,13 @@ std::array<uint8_t, 64> Board::PrevBoardSquareFromEP(const std::array<uint8_t, 6
 	return previousBoardSquare;
 }
 
-std::string Board::GetPrintableFromVecOfMoves(std::vector<Move> Moves)
+std::string Board::GetPrintableFromArrayOfMoves(const std::array<Move, MAX_PV_LENGTH>& Moves)
 {
 	std::string print;
 
 	for (Move MOVE : Moves)
 	{
+		if (MOVE.IsNull()) { break; }
 		print += Move2ALG(MOVE);
 		print += ' ';
 	}
