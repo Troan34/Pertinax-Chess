@@ -1,10 +1,16 @@
-﻿  Search.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(21,84): warning C4244: 'argument': conversion from 'const uint16_t' to 'uint8_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(309,13): warning C4018: '>': signed/unsigned mismatch
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(314,49): warning C4018: '>': signed/unsigned mismatch
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(319,87): warning C4244: '+=': conversion from 'double' to 'int16_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(243,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
-  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+﻿  LegalMoves.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(867,38): warning C4838: conversion from 'unsigned __int64' to '_Ty' requires a narrowing conversion
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(867,38): warning C4838:         with
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(867,38): warning C4838:         [
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(867,38): warning C4838:             _Ty=uint16_t
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(867,38): warning C4838:         ]
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(867,38): warning C4309: 'initializing': truncation of constant value
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(903,31): warning C4244: 'return': conversion from 'uint64_t' to 'uint16_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(241,24): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(const uint8_t &)'
+  (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.h(59,1): warning C4715: 'Evaluator::ConvertPieceTypeToMatValue': not all control paths return a value
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(243,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
+  (compiling source file 'source/ChessThings/LegalMoves.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(335,1): warning C4172: returning address of local variable or temporary : OffsetsForKnight
   Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Debug\Chess.exe

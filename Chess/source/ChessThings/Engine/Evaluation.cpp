@@ -27,20 +27,21 @@ int Evaluator::Evaluate()
 int32_t Evaluator::BoardMatValue()
 {
 	int32_t MatEval = 0;
-	for (uint8_t i = 0; i != 64; ++i)
+	
+	for (const auto& Piece : m_BoardSquare)
 	{
-		if (m_BoardSquare[i] == 0)
+		if (Piece == 0)
 			continue;
-		if (Board::IsPieceColorWhite(m_BoardSquare[i]))
+		if (Board::IsPieceColorWhite(Piece))
 		{
-			MatEval += ConvertPieceTypeToMatValue(m_BoardSquare[i]);
+			MatEval += ConvertPieceTypeToMatValue(Piece);
 		}
 		else
 		{
-			MatEval -= ConvertPieceTypeToMatValue(m_BoardSquare[i]);
+			MatEval -= ConvertPieceTypeToMatValue(Piece);
 		}
 	}
-	
+
 	return MatEval;
 }
 

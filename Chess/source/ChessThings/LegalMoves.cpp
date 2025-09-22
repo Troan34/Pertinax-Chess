@@ -777,7 +777,7 @@ void GenerateLegalMoves::SetDoNotEnPassant(bool SetToThis)
 
 bool GenerateLegalMoves::IsMoveLegal(const Move& CheckedMove) const
 {
-	if (moves[CheckedMove.s_BoardSquare].TargetSquares[CheckedMove.s_Move] == true and (moves[CheckedMove.s_BoardSquare].Promotion.Promotion == 0 and CheckedMove.s_PromotionType != NULL_OPTION))
+	if (moves[CheckedMove.s_BoardSquare].TargetSquares[CheckedMove.s_Move] == true and (moves[CheckedMove.s_BoardSquare].Promotion.Promotion == 0 and (CheckedMove.s_PromotionType != 65 and moves[CheckedMove.s_BoardSquare].Promotion.Promotion != 0) or (CheckedMove.s_PromotionType == 65 and moves[CheckedMove.s_BoardSquare].Promotion.Promotion == 0)))
 	{
 		return true;
 	}

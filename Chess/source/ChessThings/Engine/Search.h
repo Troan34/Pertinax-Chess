@@ -17,7 +17,7 @@ private:
 	const uint16_t m_MoveNum;
 	const std::vector<Move> m_SearchMoves; //Moves selected by go
 	size_t HashSize;
-	pv_line m_PV;
+	pv_line* m_PreviousPV;
 
 	uint64_t NodesVisited = 0;
 	uint64_t Cutoffs = 0;
@@ -26,10 +26,9 @@ private:
 	int32_t NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle,uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta, pv_line* PVLine);
 	void MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash, Move Move_, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle);
 	//218 is the maximum amount of legal moves for a position
-	void OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& fun_BoardSquare, GuessStruct* GuessedOrder, TTEntry TTMove);
+	void OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& fun_BoardSquare, GuessStruct* GuessedOrder, TTEntry TTMove, uint8_t depth);
 
 public:
-	pv_line m_PreviousPV;
 
 	Search(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint8_t& depth, const uint16_t& MoveNum,
 		std::vector<Move>& SearchMoves, const size_t& HashSize);
