@@ -41,7 +41,6 @@ uint16_t Search::GetTTFullness() const
 	return TT.GetTTFullness();
 }
 
-
 void Search::ClearTT()
 {
 	TT.ClearTT();
@@ -144,6 +143,7 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 		{
 			if(Move_ == m_PreviousPV->moves[m_PreviousPV->NumOfMoves - depth + 1]){ FollowPV = false; }
 			Cutoffs++;
+			m_Hash.Hash = cHash;//make sure we give the tt the right hash
 			goto after_search;
 		}
 
@@ -267,7 +267,7 @@ void Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<u
 		while(true)
 		{
 			if (!bit::pop_lsb(Moves_Copy, move) or Index > MAX_INDEX) { break; }
-			int16_t GuessedEval = 0;
+			int32_t GuessedEval = 0;
 			bool IsWhite = Board::IsPieceColorWhite(fun_BoardSquare[count]);
 			if (fun_BoardSquare[move] != NONE)
 			{
@@ -282,7 +282,7 @@ void Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<u
 			//Is Pv move
 			if (FollowPV and !m_PreviousPV->moves[m_PreviousPV->NumOfMoves - depth + 1].IsNull() and m_PreviousPV->moves[m_PreviousPV->NumOfMoves - depth + 1].s_BoardSquare == count and m_PreviousPV->moves[m_PreviousPV->NumOfMoves - depth + 1].s_Move == move and LegalMoves.IsMoveLegal(m_PreviousPV->moves[m_PreviousPV->NumOfMoves - depth + 1]))
 			{
-				GuessedEval = 500000;//IS pv move, make the guessed eval big, just to simulate a good move
+				GuessedEval = 5000000;//IS pv move, make the guessed eval big, just to simulate a good move
 			}
 
 			if (piece.Promotion.Promotion != 0 and (piece.Promotion.Promotion & PromotionMask) != 0)
