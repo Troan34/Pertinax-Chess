@@ -189,6 +189,7 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 		//These are here to not have nested control flow
 		uint8_t MaxDir;
 		uint8_t Direction = 0;
+		uint8_t PiecesEncoutered = 0; //keeps count of how many non-OppositeKing pieces we scanned, if > 1 stop direction and reset
 		switch (PieceTypeUncolored)
 		{
 		case(ROOK):
@@ -210,11 +211,22 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 			for (uint8_t Scalar = 1; Scalar <= NumOfSquaresUntilEdge[BoardSquarePos][Direction]; Scalar++)
 			{
 				GuessPinBoardSquares[Scalar - 1] = BoardSquarePos + (Scalar * OffsetForDirections[Direction]);
+
+				if (PiecesEncoutered > 1)
+				{
+					break;
+				}
+
 				if (m_BoardSquare[BoardSquarePos + (Scalar * OffsetForDirections[Direction])] == OpponentKingType)
 				{
 					goto OutsidePinLoop;
 				}
+				else if (m_BoardSquare[BoardSquarePos + (Scalar * OffsetForDirections[Direction])] != 0)
+				{
+					PiecesEncoutered++;
+				}
 			}
+			PiecesEncoutered = 0;
 			GuessPinBoardSquares.fill(65);
 		}
 
