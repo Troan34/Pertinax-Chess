@@ -248,9 +248,8 @@ private:
 	bit::BitPosition m_BoardSquare;
 
 	canCastle CanCastle;
-
-	bool isItCheckmate = true;
-	uint8_t DoubleCheckBoardSquare = 65; //if two checks collide the last one that wants to modify the value will write to this
+	
+	
 	bool isNextMoveForWhite;
 
 	static constexpr uint8_t WhitePawnDirections[3] = { 4,0,6 };
@@ -260,6 +259,12 @@ private:
 	static constexpr int OffsetForBlackPawn[3] = { -7, -8, -9 };
 
 	void CanKingCastle_LMoves(const GenerateLegalMoves& OppositeMoves, bool& isItCheckmate, const uint8_t& BoardSquareOfKingToMove, const uint8_t KingMove);
+
+protected:
+	//if two checks collide the last one that wants to modify the value will write to this
+	//>2 checks is impossible
+	uint8_t DoubleCheckBoardSquare = NULL_OPTION;
+
 public:
 	std::array<MOVE_BIT, 64> moves;//array of Moves, every legal move
 
@@ -288,9 +293,12 @@ public:
 	*/
 	std::array<uint8_t, 64> CheckTargetSquares;
 
+	
+
 	uint32_t m_NumOfLegalMoves = 0;
 	unsigned int MoveNum;
 	std::array<bool, 8> EnPassantFiles{false};
+	bool isItCheckmate = true;
 
 	GenerateLegalMoves(const bit::BitPosition& BoardSquare, const bit::BitPosition* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
 	GenerateLegalMoves(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);

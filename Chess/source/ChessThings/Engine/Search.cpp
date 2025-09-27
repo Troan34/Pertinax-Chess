@@ -50,14 +50,11 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 {
 	TT.ResizeTT();
 	TT.AgeIncrementOnNewSearch();
-	NodesVisited++;
-	Move BestMove;
-	Move CutOffMove;
 	int BestEvaluation = -INT32_MAX;
-	pv_line PVLine;
+	NodesVisited++;
 
 	GenerateLegalMoves LegalMoves(BoardSquare, &previousBoardSquare, CanCastle, (MoveNum % 2 != 0) ? false : true, MoveNum, false);
-	if (LegalMoves.m_NumOfLegalMoves == 0) [[unlikely]]
+	if (LegalMoves.isItCheckmate == true) [[unlikely]]
 	{
 		return -INT32_MAX;
 	}
@@ -71,6 +68,11 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 		previousPVLine->NumOfMoves = 0;
 		return BestEvaluation;
 	}
+
+
+	Move BestMove;
+	Move CutOffMove;
+	pv_line PVLine;
 
 	auto const cPreviousBoardSquare = previousBoardSquare;
 	auto const cCanCastle = CanCastle;

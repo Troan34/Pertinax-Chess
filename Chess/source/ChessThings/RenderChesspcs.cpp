@@ -34,7 +34,7 @@ static bool PreviousGuiOption = true;
 
 //Engine vars
 static bool EngineOn = false;
-static uint8_t EngineDepth = 10;
+static uint8_t EngineDepth = 8;
 static std::vector<Move> SearchMoves{};
 static std::chrono::milliseconds WTime(999999);
 static Timer timer(WTime, WTime, static_cast<std::chrono::milliseconds>(0), static_cast<std::chrono::milliseconds>(0));//max(for now)
@@ -189,7 +189,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 		else if (Command == "uci") //UCI mode
 		{
 			std::cout <<
-				"id name Pertinax Chess 0.2.5\n" <<
+				"id name Pertinax Chess 0.2.8\n" <<
 				"id author R.Bukaci (github.com/Troan34)\n\n" <<
 				"option name type spin Depth default " << static_cast<int>(EngineDepth) << " min 2 max 255\n" <<
 				"option name type button EngineOn default On\n" <<
@@ -258,7 +258,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 		GenerateLegalMoves LegalMoves(static_BoardSquare, p_prevBoardSquare, CanCastle, isNextMoveForWhite, MoveNum, false);
 		for (uint8_t j = 0; j <= MAX_SQUARE; j++)
 		{
-			if (LegalMoves.moves[BoardSquareBeingSelected].TargetSquares[j] == false) { break; }
+			if (LegalMoves.moves[BoardSquareBeingSelected].TargetSquares[j] == false) { continue; }
 			xxDifference = j * 87.5f;
 			yyDifference = 0;
 			while (xxDifference >= 650.0f)

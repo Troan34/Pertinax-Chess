@@ -569,11 +569,11 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 
 	//fill IndexOfPieceChecking
 	uint8_t count = 0;
-	uint8_t CheckingSquare = 65;
+	uint8_t CheckingSquare = NULL_OPTION;
 	size_t NumberOfChecks = 0;
  	for (const uint8_t& Square : OppositeMoves.CheckTargetSquares)
 	{
-		if (Square != 65)
+		if (Square != NULL_OPTION)
 		{
 			if (CheckingSquare == Square)
 			{
@@ -586,6 +586,10 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 				NumberOfChecks++;
 			}
 		}
+	}
+	if (NumberOfChecks == 1 and OppositeMoves.DoubleCheckBoardSquare != NULL_OPTION)//makes sure that double checks are not ignored
+	{
+		NumberOfChecks++;
 	}
 
 
@@ -725,6 +729,10 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 		}
 	}
 	
+	if (isItCheckmate == true and NumberOfChecks == 0)//stalemate
+	{
+		isItCheckmate = false;
+	}
 }
 
 //fun for LegalMoves, checks if castling is permitted

@@ -54,11 +54,11 @@ int32_t Evaluator::MobilityEval()
 			continue;
 		if (Board::IsPieceColorWhite(m_BoardSquare[i]))
 		{
-			MobilityEval += (int)(m_LegalMoves.m_NumOfLegalMoves * 0.1);
+			MobilityEval += m_LegalMoves.m_NumOfLegalMoves * 0.1;
 		}
 		else
 		{
-			MobilityEval -= (int)(m_LegalMoves.m_NumOfLegalMoves * 0.1);
+			MobilityEval -= m_LegalMoves.m_NumOfLegalMoves * 0.1;
 		}
 	}
 	return MobilityEval;
