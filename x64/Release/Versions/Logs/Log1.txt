@@ -1,0 +1,1939 @@
+[INFO  ] [15:54:12.030080] <   > fastchess --- fastchess alpha 1.4.0 20250702-2a80921
+[INFO  ] [15:54:12.030324] <   > fastchess --- Setting seed to: 10316302285710872881
+[TRACE ] [15:54:12.030351] <   > fastchess --- Creating tournament...
+[TRACE ] [15:54:12.030435] <   > fastchess --- Setting results...
+[TRACE ] [15:54:12.191286] <   > fastchess --- Initialized valid SPRT configuration.
+[INFO  ] [15:54:12.191398] <   > fastchess --- Starting tournament...
+[TRACE ] [15:54:12.191432] <   > fastchess --- Starting round robin tournament...
+[TRACE ] [15:54:12.191451] <   > fastchess --- Starting tournament...
+[TRACE ] [15:54:12.191469] <   > fastchess --- Creating matches...
+[TRACE ] [15:54:12.191547] <   > fastchess --- Setting affinity mask for process handle: 0xfffffffffffffffe
+[TRACE ] [15:54:12.191623] <  2> fastchess --- Game 1 between Pertinax0_2_10 and Pertinax0_2_9 starting
+[TRACE ] [15:54:12.191781] <  2> fastchess --- Starting engine Pertinax0_2_10 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Version\Pertinax0_2_10.exe
+[FATAL ] [15:54:12.192102] <   > fastchess --- Fatal; Pertinax0_2_10 engine startup failure: Couldn't start engine process
+
+[TRACE ] [15:54:12.192148] <  2> fastchess --- Game 1 between Pertinax0_2_10 and Pertinax0_2_9 finished
+[TRACE ] [15:54:13.203564] <   > fastchess --- ~BaseTournament()
+[TRACE ] [15:54:13.203663] <   > fastchess --- Instructing engines to stop...
+[TRACE ] [15:54:13.203798] <   > fastchess --- Saving results...
+[TRACE ] [15:54:13.204227] <   > fastchess --- Saved results to.
+[TRACE ] [15:54:13.204314] <  1> fastchess --- Process destructor called for Pertinax0_2_10 with pid 0
+[TRACE ] [15:54:13.204358] <  1> fastchess --- Process destructor called for  with pid 0
+[INFO  ] [15:54:13.204548] <   > fastchess --- Tournament was interrupted. To resume the tournament, run: C:\Users\roanb\fastchess\fastchess.exe -config file=config.json
+
+[TRACE ] [15:54:13.204577] <   > fastchess --- ~TournamentManager()
+[INFO  ] [15:54:13.204624] <   > fastchess --- Finished match
+
+[INFO  ] [15:54:13.204710] <   > fastchess --- Total Time: 00:00:01 (hours:minutes:seconds)
+
+
+[INFO  ] [15:56:32.167965] <   > fastchess --- fastchess alpha 1.4.0 20250702-2a80921
+[INFO  ] [15:56:32.168118] <   > fastchess --- Setting seed to: 8973770429803835453
+[TRACE ] [15:56:32.168142] <   > fastchess --- Creating tournament...
+[TRACE ] [15:56:32.168210] <   > fastchess --- Setting results...
+[TRACE ] [15:56:32.328617] <   > fastchess --- Initialized valid SPRT configuration.
+[INFO  ] [15:56:32.328703] <   > fastchess --- Starting tournament...
+[TRACE ] [15:56:32.328727] <   > fastchess --- Starting round robin tournament...
+[TRACE ] [15:56:32.328743] <   > fastchess --- Starting tournament...
+[TRACE ] [15:56:32.328757] <   > fastchess --- Creating matches...
+[TRACE ] [15:56:32.328831] <   > fastchess --- Setting affinity mask for process handle: 0xfffffffffffffffe
+[TRACE ] [15:56:32.328904] <  2> fastchess --- Game 1 between Pertinax0_2_9 and Pertinax0_2_8 starting
+[TRACE ] [15:56:32.329046] <  2> fastchess --- Starting engine Pertinax0_2_9 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Version\Pertinax0_2_9.exe
+[FATAL ] [15:56:32.329363] <   > fastchess --- Fatal; Pertinax0_2_9 engine startup failure: Couldn't start engine process
+
+[TRACE ] [15:56:32.329396] <  2> fastchess --- Game 1 between Pertinax0_2_9 and Pertinax0_2_8 finished
+[TRACE ] [15:56:33.336681] <   > fastchess --- ~BaseTournament()
+[TRACE ] [15:56:33.336741] <   > fastchess --- Instructing engines to stop...
+[TRACE ] [15:56:33.336861] <   > fastchess --- Saving results...
+[TRACE ] [15:56:33.337335] <   > fastchess --- Saved results to.
+[TRACE ] [15:56:33.337421] <  1> fastchess --- Process destructor called for Pertinax0_2_9 with pid 0
+[TRACE ] [15:56:33.337464] <  1> fastchess --- Process destructor called for  with pid 0
+[INFO  ] [15:56:33.337652] <   > fastchess --- Tournament was interrupted. To resume the tournament, run: C:\Users\roanb\fastchess\fastchess.exe -config file=config.json
+
+[TRACE ] [15:56:33.337711] <   > fastchess --- ~TournamentManager()
+[INFO  ] [15:56:33.337764] <   > fastchess --- Finished match
+
+[INFO  ] [15:56:33.337822] <   > fastchess --- Total Time: 00:00:01 (hours:minutes:seconds)
+
+
+[INFO  ] [15:57:14.269452] <   > fastchess --- fastchess alpha 1.4.0 20250702-2a80921
+[INFO  ] [15:57:14.269589] <   > fastchess --- Setting seed to: 10139064299071597395
+[TRACE ] [15:57:14.269612] <   > fastchess --- Creating tournament...
+[TRACE ] [15:57:14.269682] <   > fastchess --- Setting results...
+[TRACE ] [15:57:14.430332] <   > fastchess --- Initialized valid SPRT configuration.
+[INFO  ] [15:57:14.430409] <   > fastchess --- Starting tournament...
+[TRACE ] [15:57:14.430437] <   > fastchess --- Starting round robin tournament...
+[TRACE ] [15:57:14.430456] <   > fastchess --- Starting tournament...
+[TRACE ] [15:57:14.430474] <   > fastchess --- Creating matches...
+[TRACE ] [15:57:14.430553] <   > fastchess --- Setting affinity mask for process handle: 0xfffffffffffffffe
+[TRACE ] [15:57:14.430640] <  2> fastchess --- Game 1 between Pertinax0_2_9 and Pertinax0_2_8 starting
+[TRACE ] [15:57:14.430784] <  2> fastchess --- Starting engine Pertinax0_2_9 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Versions\Pertinax0_2_9.exe.exe
+[TRACE ] [15:57:14.434506] <  2> fastchess --- Sending uci to engine Pertinax0_2_9
+[Engine] [15:57:14.434550] <  2> Pertinax0_2_9 <--- uci
+[TRACE ] [15:57:14.434575] <  2> fastchess --- Waiting for uciok from engine Pertinax0_2_9
+[Engine] [15:57:14.709552] <  2> Pertinax0_2_9 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:57:14.709625] <  2> Pertinax0_2_9 ---> 'help' for commands
+[Engine] [15:57:14.713353] <  2> Pertinax0_2_9 ---> id name Pertinax Chess 0.2.8
+[Engine] [15:57:14.713405] <  2> Pertinax0_2_9 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:57:14.713426] <  2> Pertinax0_2_9 ---> option name type spin Depth default 8 min 2 max 255
+[Engine] [15:57:14.713445] <  2> Pertinax0_2_9 ---> option name type button EngineOn default On
+[Engine] [15:57:14.713462] <  2> Pertinax0_2_9 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:57:14.713479] <  2> Pertinax0_2_9 ---> option name type button Gui default Off
+[Engine] [15:57:14.713497] <  2> Pertinax0_2_9 ---> uciok
+[TRACE ] [15:57:14.713543] <  2> fastchess --- Starting engine Pertinax0_2_8 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Versions\Pertinax0_2_8.exe
+[TRACE ] [15:57:14.746793] <  2> fastchess --- Sending uci to engine Pertinax0_2_8
+[Engine] [15:57:14.746836] <  2> Pertinax0_2_8 <--- uci
+[TRACE ] [15:57:14.746858] <  2> fastchess --- Waiting for uciok from engine Pertinax0_2_8
+[Engine] [15:57:15.155901] <  2> Pertinax0_2_8 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:57:15.155956] <  2> Pertinax0_2_8 ---> 'help' for commands
+[Engine] [15:57:15.161217] <  2> Pertinax0_2_8 ---> id name Pertinax Chess 0.2.5
+[Engine] [15:57:15.161275] <  2> Pertinax0_2_8 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:57:15.161293] <  2> Pertinax0_2_8 ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:57:15.161308] <  2> Pertinax0_2_8 ---> option name type button EngineOn default On
+[Engine] [15:57:15.161323] <  2> Pertinax0_2_8 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:57:15.161337] <  2> Pertinax0_2_8 ---> option name type button Gui default Off
+[Engine] [15:57:15.161351] <  2> Pertinax0_2_8 ---> uciok
+[TRACE ] [15:57:15.161378] <  2> fastchess --- Refreshing engine Pertinax0_2_9
+[TRACE ] [15:57:15.161394] <  2> fastchess --- Sending ucinewgame to engine Pertinax0_2_9
+[Engine] [15:57:15.161408] <  2> Pertinax0_2_9 <--- ucinewgame
+[TRACE ] [15:57:15.161442] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:15.161457] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:15.161482] <  2> Pertinax0_2_9 ---> id name Pertinax Chess 0.1
+[Engine] [15:57:15.161498] <  2> Pertinax0_2_9 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:57:15.161565] <  2> Pertinax0_2_9 ---> option name type spin Depth default 8 min 2 max 255
+[Engine] [15:57:15.161587] <  2> Pertinax0_2_9 ---> option name type button EngineOn default On
+[Engine] [15:57:15.161602] <  2> Pertinax0_2_9 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:57:15.161616] <  2> Pertinax0_2_9 ---> option name type button Gui default Off
+[Engine] [15:57:15.161630] <  2> Pertinax0_2_9 ---> uciok
+[Engine] [15:57:15.169883] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:15.169975] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:15.170026] <  2> fastchess --- Engine Pertinax0_2_9 refreshed.
+[TRACE ] [15:57:15.170065] <  2> fastchess --- Refreshing engine Pertinax0_2_8
+[TRACE ] [15:57:15.170101] <  2> fastchess --- Sending ucinewgame to engine Pertinax0_2_8
+[Engine] [15:57:15.170136] <  2> Pertinax0_2_8 <--- ucinewgame
+[TRACE ] [15:57:15.170185] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:15.170221] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:15.170270] <  2> Pertinax0_2_8 ---> id name Pertinax Chess 0.1
+[Engine] [15:57:15.170308] <  2> Pertinax0_2_8 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:57:15.170344] <  2> Pertinax0_2_8 ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:57:15.170382] <  2> Pertinax0_2_8 ---> option name type button EngineOn default On
+[Engine] [15:57:15.170417] <  2> Pertinax0_2_8 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:57:15.170453] <  2> Pertinax0_2_8 ---> option name type button Gui default Off
+[Engine] [15:57:15.170489] <  2> Pertinax0_2_8 ---> uciok
+[Engine] [15:57:15.185474] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:15.185547] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:57:15.185582] <  2> fastchess --- Engine Pertinax0_2_8 refreshed.
+[TRACE ] [15:57:15.185619] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:15.185650] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:15.200658] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:15.200724] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:15.200763] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:15.200791] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:15.216625] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:15.216709] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:57:15.216738] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2
+[TRACE ] [15:57:15.216778] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:15.216808] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:15.232893] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:15.232963] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:15.232983] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:57:15.233006] <  2> Pertinax0_2_9 <--- go wtime 60500 btime 60500 winc 500 binc 500
+[Engine] [15:57:15.252018] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:57:15.252087] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 5 nps 277 hashfull 0 pv e1f1 
+[Engine] [15:57:15.252528] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:57:15.252550] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 131 nps 13100 hashfull 0 pv e1d2 f6e4 
+[Engine] [15:57:15.253146] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 5 / 30
+[Engine] [15:57:15.253176] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1219 nodes 188 nps 18800 hashfull 0 pv e1f1 h5f3 b1a3 
+[Engine] [15:57:15.370132] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 10 / 13
+[Engine] [15:57:15.370189] <  2> Pertinax0_2_9 ---> info depth 4 score cp 200 nodes 49005 nps 422456 hashfull 0 pv f3d2 h5e2 e1e2 d5d4 
+[Engine] [15:57:15.385342] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 304 / 846
+[Engine] [15:57:15.385399] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1532 nodes 6730 nps 448666 hashfull 0 pv e1f1 h5f3 b1a3 f3g2 f1g1 
+[Engine] [15:57:15.385461] <  2> Pertinax0_2_9 ---> bestmove e1f1
+[TRACE ] [15:57:15.385483] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:57:15.385499] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:57:15.385515] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:15.385529] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:15.404718] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:15.404801] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:15.404829] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:57:15.404934] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:15.404952] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:15.420697] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:15.420776] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:57:15.420796] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1
+[TRACE ] [15:57:15.420822] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:15.420838] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:15.436469] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:15.436557] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:57:15.436594] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:57:15.436629] <  2> Pertinax0_2_8 <--- go wtime 60848 btime 60500 winc 500 binc 500
+[Engine] [15:57:15.454878] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:57:15.454937] <  2> Pertinax0_2_8 ---> info depth 1 score cp -900 nodes 42 nps 2470 hashfull 0 pv d2c1 
+[Engine] [15:57:15.455076] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 40
+[Engine] [15:57:15.455094] <  2> Pertinax0_2_8 ---> info depth 2 score cp 1006 nodes 84 nps 8400 hashfull 0 pv d2e2 f1g1 
+[Engine] [15:57:15.562470] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 42 / 0
+[Engine] [15:57:15.562534] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 46106 nps 430897 hashfull 0 pv d2c1 b2c1 d5d4 
+[Engine] [15:57:15.568725] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 505 / 1282
+[Engine] [15:57:15.568775] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1112 nodes 2629 nps 438166 hashfull 0 pv d2e2 f1g1 e2f2 g1h2 
+[Engine] [15:57:15.983441] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1833 / 1531
+[Engine] [15:57:15.983507] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 189262 nps 457154 hashfull 2 pv f6e4 b1d2 g7g5 b2h8 e4c3 
+[Engine] [15:57:15.983531] <  2> Pertinax0_2_8 ---> bestmove f6e4
+[TRACE ] [15:57:15.983549] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:57:15.983564] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:57:15.983580] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:15.983595] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:16.024344] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:16.024447] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:57:16.024483] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:57:16.024602] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:16.024625] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:16.040403] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:16.040471] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:57:16.040492] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4
+[TRACE ] [15:57:16.040517] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:16.040533] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:16.055619] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:16.055709] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:16.055734] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:57:16.055754] <  2> Pertinax0_2_9 <--- go wtime 60848 btime 60454 winc 500 binc 500
+[Engine] [15:57:16.056062] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:57:16.056099] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 33 nps 3300 hashfull 0 pv b1a3 
+[Engine] [15:57:16.059344] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 32 / 0
+[Engine] [15:57:16.059384] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1448 nps 482666 hashfull 0 pv f3d2 e4f6 
+[Engine] [15:57:16.061645] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 32 / 64
+[Engine] [15:57:16.061700] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1231 nodes 959 nps 479500 hashfull 0 pv b2a3 f8a3 f1g1 
+[Engine] [15:57:16.549476] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1312 / 81
+[Engine] [15:57:16.549531] <  2> Pertinax0_2_9 ---> info depth 4 score cp 88 nodes 212079 nps 435480 hashfull 1 pv f3d2 e4f2 f1f2 h5e2 
+[Engine] [15:57:16.584331] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1237 / 1944
+[Engine] [15:57:16.584383] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1625 nodes 15407 nps 453147 hashfull 2 pv a2a4 h5f3 a1a3 f8a3 f1g1 
+[Engine] [15:57:16.584411] <  2> Pertinax0_2_9 ---> bestmove a2a4
+[TRACE ] [15:57:16.584433] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:57:16.584452] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:57:16.584472] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:16.584489] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:16.616559] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:16.616644] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:16.616681] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:57:16.616787] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:16.616812] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:16.631942] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:16.631984] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:57:16.632006] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4
+[TRACE ] [15:57:16.632036] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:16.632055] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:16.647571] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:16.647617] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:57:16.647639] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:57:16.647659] <  2> Pertinax0_2_8 <--- go wtime 60820 btime 60454 winc 500 binc 500
+[Engine] [15:57:16.648072] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:57:16.648110] <  2> Pertinax0_2_8 ---> info depth 1 score cp -900 nodes 48 nps 4800 hashfull 2 pv d2c1 
+[Engine] [15:57:16.648368] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 45
+[Engine] [15:57:16.648407] <  2> Pertinax0_2_8 ---> info depth 2 score cp 1008 nodes 94 nps 9400 hashfull 2 pv d2e2 f1g1 
+[Engine] [15:57:16.784242] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 50 / 1
+[Engine] [15:57:16.784307] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 59125 nps 437962 hashfull 2 pv d2c1 b2c1 e4d2 
+[Engine] [15:57:16.792098] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 589 / 1651
+[Engine] [15:57:16.792159] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1112 nodes 3327 nps 475285 hashfull 2 pv d2e2 f1g1 e2f2 g1h2 
+[Engine] [15:57:17.350595] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 2271 / 1926
+[Engine] [15:57:17.350658] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 257996 nps 462358 hashfull 4 pv d2e3 f2e3 g7g5 b2h8 e4f2 
+[Engine] [15:57:17.350712] <  2> Pertinax0_2_8 ---> bestmove d2e3
+[TRACE ] [15:57:17.350755] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:57:17.350777] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:57:17.350797] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:17.350815] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:17.384015] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:17.384081] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:57:17.384120] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:57:17.384240] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:17.384278] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:17.399641] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:17.399685] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:57:17.399708] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3
+[TRACE ] [15:57:17.399737] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:17.399755] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:17.415501] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:17.415552] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:17.415585] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:57:17.415616] <  2> Pertinax0_2_9 <--- go wtime 60820 btime 60251 winc 500 binc 500
+[Engine] [15:57:17.415987] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:57:17.416027] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 34 nps 3400 hashfull 2 pv b1d2 
+[Engine] [15:57:17.419738] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:57:17.419771] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1531 nps 510333 hashfull 2 pv f2e3 e4d2 
+[Engine] [15:57:17.421838] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 34 / 65
+[Engine] [15:57:17.421877] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1321 nodes 859 nps 429500 hashfull 2 pv a1a3 f8a3 b2a1 
+[Engine] [15:57:18.073779] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1809 / 86
+[Engine] [15:57:18.073851] <  2> Pertinax0_2_9 ---> info depth 4 score cp 10 nodes 279988 nps 430089 hashfull 3 pv f2e3 h5f3 e2f3 e4d2 
+[Engine] [15:57:18.102718] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1229 / 1889
+[Engine] [15:57:18.102790] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1635 nodes 12505 nps 446607 hashfull 4 pv b2c3 e4c3 a1a3 f8a3 b1d2 
+[Engine] [15:57:18.102819] <  2> Pertinax0_2_9 ---> bestmove b2c3
+[TRACE ] [15:57:18.102841] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:57:18.102859] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:57:18.102879] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:18.102897] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:18.132572] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:18.132677] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:18.132721] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:57:18.132802] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:18.132823] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:18.148658] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:18.148744] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:57:18.148779] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3
+[TRACE ] [15:57:18.148829] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:18.148861] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:18.164073] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:18.164175] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:57:18.164201] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:57:18.164233] <  2> Pertinax0_2_8 <--- go wtime 60633 btime 60251 winc 500 binc 500
+[Engine] [15:57:18.164624] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:57:18.164663] <  2> Pertinax0_2_8 ---> info depth 1 score cp -900 nodes 48 nps 4800 hashfull 4 pv e3c1 
+[Engine] [15:57:18.164951] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 5 / 44
+[Engine] [15:57:18.164976] <  2> Pertinax0_2_8 ---> info depth 2 score cp 1008 nodes 93 nps 9300 hashfull 5 pv e3e2 f1g1 
+[Engine] [15:57:18.297898] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 75 / 2
+[Engine] [15:57:18.297964] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 58434 nps 442681 hashfull 5 pv e3d2 b1d2 e4c5 
+[Engine] [15:57:18.307225] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 680 / 1654
+[Engine] [15:57:18.307255] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1310 nodes 4028 nps 447555 hashfull 5 pv e3d2 a1a3 f8a3 c3a1 
+[Engine] [15:57:19.290341] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 3523 / 1937
+[Engine] [15:57:19.290398] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 439922 nps 447530 hashfull 8 pv e3f4 g3f4 g7g5 c3h8 e4c3 
+[Engine] [15:57:19.290420] <  2> Pertinax0_2_8 ---> bestmove e3f4
+[TRACE ] [15:57:19.290436] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:57:19.290450] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:57:19.290465] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:19.290477] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:19.324040] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:19.324113] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:57:19.324135] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:57:19.324216] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:19.324234] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:19.339677] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:19.339721] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:57:19.339747] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4
+[TRACE ] [15:57:19.339780] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:19.339804] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:19.355511] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:19.355566] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:19.355597] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:57:19.355627] <  2> Pertinax0_2_9 <--- go wtime 60633 btime 59625 winc 500 binc 500
+[Engine] [15:57:19.355999] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:57:19.356034] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 34 nps 3400 hashfull 4 pv b1a3 
+[Engine] [15:57:19.360112] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 4 / 0
+[Engine] [15:57:19.360140] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1589 nps 397250 hashfull 4 pv g3f4 e4d2 
+[Engine] [15:57:19.362804] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 34 / 65
+[Engine] [15:57:19.362836] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1321 nodes 1001 nps 500500 hashfull 4 pv a1a3 f8a3 b1d2 
+[Engine] [15:57:20.213839] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 2536 / 92
+[Engine] [15:57:20.213920] <  2> Pertinax0_2_9 ---> info depth 4 score cp 10 nodes 367298 nps 431607 hashfull 5 pv g3f4 h5f3 e2f3 e4d2 
+[Engine] [15:57:20.249642] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1427 / 2072
+[Engine] [15:57:20.249703] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1635 nodes 15476 nps 442171 hashfull 6 pv b1a3 e4c3 a1d1 c3d1 f3e1 
+[Engine] [15:57:20.249725] <  2> Pertinax0_2_9 ---> bestmove b1a3
+[TRACE ] [15:57:20.249741] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:57:20.249755] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:57:20.249770] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:20.249783] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:20.294005] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:20.294085] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:20.294104] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:57:20.294172] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:20.294186] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:20.309678] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:20.309749] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:57:20.309773] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3
+[TRACE ] [15:57:20.309805] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:20.309822] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:20.325534] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:20.325577] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:57:20.325597] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:57:20.325615] <  2> Pertinax0_2_8 <--- go wtime 60239 btime 59625 winc 500 binc 500
+[Engine] [15:57:20.326027] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:57:20.326064] <  2> Pertinax0_2_8 ---> info depth 1 score cp -900 nodes 50 nps 5000 hashfull 8 pv e4d2 
+[Engine] [15:57:20.326268] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 5 / 47
+[Engine] [15:57:20.326287] <  2> Pertinax0_2_8 ---> info depth 2 score cp 904 nodes 100 nps 10000 hashfull 8 pv e4d2 f1e1 
+[Engine] [15:57:20.503066] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 63 / 1
+[Engine] [15:57:20.503121] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 76364 nps 433886 hashfull 9 pv e4g5 g3f4 d5d4 
+[Engine] [15:57:20.513779] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 694 / 1741
+[Engine] [15:57:20.513832] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1306 nodes 4563 nps 456300 hashfull 9 pv e4g5 a1c1 f4c1 c3e1 
+[Engine] [15:57:21.907157] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 5884 / 2047
+[Engine] [15:57:21.907221] <  2> Pertinax0_2_8 ---> info depth 5 score cp 404 nodes 625537 nps 449057 hashfull 13 pv f4g4 h3g4 g7g6 c3h8 b7b5 
+[Engine] [15:57:21.907243] <  2> Pertinax0_2_8 ---> bestmove f4g4
+[TRACE ] [15:57:21.907259] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:57:21.907274] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:57:21.907289] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:21.907302] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:21.952166] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:21.952231] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:57:21.952252] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:57:21.952330] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:21.952348] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:21.967851] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:21.967942] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:57:21.967977] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4
+[TRACE ] [15:57:21.968019] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:21.968049] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:21.983026] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:21.983116] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:21.983135] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:57:21.983151] <  2> Pertinax0_2_9 <--- go wtime 60239 btime 58544 winc 500 binc 500
+[Engine] [15:57:21.983509] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:57:21.983544] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 37 nps 3700 hashfull 6 pv a3c4 
+[Engine] [15:57:21.986865] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:57:21.986903] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1456 nps 485333 hashfull 6 pv h3g4 e4c5 
+[Engine] [15:57:21.989655] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 37 / 67
+[Engine] [15:57:21.989704] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1229 nodes 1218 nps 609000 hashfull 6 pv a1e1 e4c3 e1a1 
+[Engine] [15:57:22.934437] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 3460 / 81
+[Engine] [15:57:22.934502] <  2> Pertinax0_2_9 ---> info depth 4 score cp 1 nodes 416805 nps 441530 hashfull 8 pv h3g4 f8a3 g4h5 a3c1 
+[Engine] [15:57:22.984993] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1790 / 2325
+[Engine] [15:57:22.985055] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1632 nodes 22374 nps 447480 hashfull 8 pv a1a2 e4c3 f1e1 c3a2 f3g1 
+[Engine] [15:57:22.985081] <  2> Pertinax0_2_9 ---> bestmove a1a2
+[TRACE ] [15:57:22.985101] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:57:22.985118] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:57:22.985136] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:22.985151] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:23.031409] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:23.031470] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:23.031488] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:57:23.031570] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:23.031600] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:23.046653] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:23.046731] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:57:23.046756] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2
+[TRACE ] [15:57:23.046786] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:23.046804] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:23.062686] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:23.062758] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:57:23.062781] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:57:23.062800] <  2> Pertinax0_2_8 <--- go wtime 59738 btime 58544 winc 500 binc 500
+[Engine] [15:57:23.063139] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:57:23.063177] <  2> Pertinax0_2_8 ---> info depth 1 score cp -900 nodes 41 nps 4100 hashfull 13 pv e4d2 
+[Engine] [15:57:23.063387] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 39
+[Engine] [15:57:23.063407] <  2> Pertinax0_2_8 ---> info depth 2 score cp 904 nodes 84 nps 8400 hashfull 13 pv e4d2 f1e1 
+[Engine] [15:57:23.182630] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 41 / 0
+[Engine] [15:57:23.182699] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 52992 nps 445310 hashfull 13 pv e4g5 h3g4 d5d4 
+[Engine] [15:57:23.191490] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 561 / 1409
+[Engine] [15:57:23.191543] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1218 nodes 3774 nps 471750 hashfull 14 pv e4g5 c3b4 f8b4 f1g1 
+[Engine] [15:57:24.095454] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 4697 / 1808
+[Engine] [15:57:24.095519] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 409779 nps 453797 hashfull 16 pv e4c5 h3g4 g7g5 c3h8 c5e4 
+[Engine] [15:57:24.095542] <  2> Pertinax0_2_8 ---> bestmove e4c5
+[TRACE ] [15:57:24.095558] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:57:24.095572] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:57:24.095586] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:24.095599] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:24.143098] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:24.143209] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:57:24.143250] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:57:24.143334] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:24.143350] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:24.158660] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:24.158733] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:57:24.158758] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5
+[TRACE ] [15:57:24.158788] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:24.158805] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:24.174628] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:24.174725] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:24.174749] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:57:24.174768] <  2> Pertinax0_2_9 <--- go wtime 59738 btime 58012 winc 500 binc 500
+[Engine] [15:57:24.175080] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:57:24.175111] <  2> Pertinax0_2_9 ---> info depth 1 score cp 914 nodes 35 nps 3500 hashfull 8 pv h1g1 
+[Engine] [15:57:24.178139] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:57:24.178199] <  2> Pertinax0_2_9 ---> info depth 2 score cp -11 nodes 1328 nps 442666 hashfull 8 pv h3g4 c5e4 
+[Engine] [15:57:24.180622] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 35 / 59
+[Engine] [15:57:24.180654] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1229 nodes 1174 nps 587000 hashfull 8 pv c3b4 g4b4 f1g1 
+[Engine] [15:57:24.473043] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 682 / 107
+[Engine] [15:57:24.473099] <  2> Pertinax0_2_9 ---> info depth 4 score cp 201 nodes 129072 nps 442027 hashfull 9 pv h3g4 c5b3 g4h5 b3a1 
+[Engine] [15:57:24.518368] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1587 / 1899
+[Engine] [15:57:24.518426] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1632 nodes 20128 nps 447288 hashfull 10 pv c3d4 g4d4 a2b2 d4b2 c2c4 
+[Engine] [15:57:24.518452] <  2> Pertinax0_2_9 ---> bestmove c3d4
+[TRACE ] [15:57:24.518472] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:57:24.518489] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:57:24.518506] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:24.518522] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:24.549694] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:24.549769] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:24.549795] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:57:24.549901] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:24.549922] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:24.565503] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:24.565565] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:57:24.565586] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4
+[TRACE ] [15:57:24.565611] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:24.565635] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:24.580866] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:24.580919] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:57:24.580943] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:57:24.580968] <  2> Pertinax0_2_8 <--- go wtime 59895 btime 58012 winc 500 binc 500
+[Engine] [15:57:24.581394] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:57:24.581432] <  2> Pertinax0_2_8 ---> info depth 1 score cp -903 nodes 37 nps 3700 hashfull 16 pv g4e4 
+[Engine] [15:57:24.581819] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 34
+[Engine] [15:57:24.581845] <  2> Pertinax0_2_8 ---> info depth 2 score cp 904 nodes 102 nps 10200 hashfull 16 pv g4e4 d4a1 
+[Engine] [15:57:24.675709] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 39 / 0
+[Engine] [15:57:24.675766] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 42770 nps 459892 hashfull 16 pv g4e4 d3e4 c5d3 
+[Engine] [15:57:24.681980] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 418 / 1032
+[Engine] [15:57:24.682051] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1218 nodes 2810 nps 468333 hashfull 17 pv g4e4 g3g4 e4d4 f1e1 
+[Engine] [15:57:25.172634] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 2479 / 1321
+[Engine] [15:57:25.172694] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 219471 nps 447900 hashfull 18 pv g4f4 g3f4 g7g5 d4h8 c5e4 
+[Engine] [15:57:25.172722] <  2> Pertinax0_2_8 ---> bestmove g4f4
+[TRACE ] [15:57:25.172740] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:57:25.172754] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:57:25.172769] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:25.172781] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:25.218797] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:25.218876] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:57:25.218907] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:57:25.218984] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:25.218999] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:25.234082] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:25.234155] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:57:25.234192] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4
+[TRACE ] [15:57:25.234218] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:25.234232] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:25.249731] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:25.249812] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:25.249833] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:57:25.249850] <  2> Pertinax0_2_9 <--- go wtime 59895 btime 57921 winc 500 binc 500
+[Engine] [15:57:25.250160] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:57:25.250191] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 34 nps 3400 hashfull 10 pv h1h2 
+[Engine] [15:57:25.253679] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 3 / 0
+[Engine] [15:57:25.253715] <  2> Pertinax0_2_9 ---> info depth 2 score cp -11 nodes 1461 nps 487000 hashfull 10 pv g3f4 c5e4 
+[Engine] [15:57:25.256188] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 42 / 58
+[Engine] [15:57:25.256251] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1229 nodes 1083 nps 541500 hashfull 10 pv f3e1 f4d4 e1f3 
+[Engine] [15:57:26.203942] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 3146 / 87
+[Engine] [15:57:26.204043] <  2> Pertinax0_2_9 ---> info depth 4 score cp 1 nodes 410739 nps 433726 hashfull 12 pv g3f4 h5f3 e2f3 c5e4 
+[Engine] [15:57:26.239572] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1445 / 1812
+[Engine] [15:57:26.239631] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1632 nodes 15354 nps 438685 hashfull 12 pv f3e1 f4d4 a2b2 d4b2 c2c4 
+[Engine] [15:57:26.239693] <  2> Pertinax0_2_9 ---> bestmove f3e1
+[TRACE ] [15:57:26.239716] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:57:26.239734] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:57:26.239752] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:26.239767] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:26.280874] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:26.280948] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:26.280966] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:57:26.281034] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:26.281048] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:26.296560] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:26.296655] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:57:26.296688] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1
+[TRACE ] [15:57:26.296730] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:26.296747] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:26.311919] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:26.311997] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:57:26.312034] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:57:26.312067] <  2> Pertinax0_2_8 <--- go wtime 59406 btime 57921 winc 500 binc 500
+[Engine] [15:57:26.312452] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:57:26.312483] <  2> Pertinax0_2_8 ---> info depth 1 score cp -902 nodes 47 nps 4700 hashfull 18 pv f4e3 
+[Engine] [15:57:26.312805] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 7 / 44
+[Engine] [15:57:26.312826] <  2> Pertinax0_2_8 ---> info depth 2 score cp 1114 nodes 119 nps 11900 hashfull 18 pv f4d4 g2d5 
+[Engine] [15:57:26.437998] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 83 / 2
+[Engine] [15:57:26.438065] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 56640 nps 453120 hashfull 19 pv f4e3 f2e3 c5e4 
+[Engine] [15:57:26.446438] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 553 / 1446
+[Engine] [15:57:26.446475] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1428 nodes 3661 nps 457625 hashfull 19 pv f4d4 g2d5 c6d5 e1g2 
+[Engine] [15:57:29.085011] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 12016 / 1802
+[Engine] [15:57:29.085074] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 1183226 nps 448531 hashfull 25 pv f4e4 d3e4 g7g5 d4h8 c5d3 
+[Engine] [15:57:29.085097] <  2> Pertinax0_2_8 ---> bestmove f4e4
+[TRACE ] [15:57:29.085113] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:57:29.085127] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:57:29.085141] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:29.085154] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:29.124151] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:29.124233] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:57:29.124269] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:57:29.124388] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:29.124423] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:29.139746] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:29.139812] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:57:29.139835] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4
+[TRACE ] [15:57:29.139874] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:29.139889] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:29.155419] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:29.155496] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:29.155523] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:57:29.155556] <  2> Pertinax0_2_9 <--- go wtime 59406 btime 55648 winc 500 binc 500
+[Engine] [15:57:29.155890] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:57:29.155918] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 31 nps 3100 hashfull 12 pv d4a1 
+[Engine] [15:57:29.159329] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 30 / 0
+[Engine] [15:57:29.159477] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1181 nps 393666 hashfull 12 pv d3e4 h5g4 
+[Engine] [15:57:29.160331] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 31 / 56
+[Engine] [15:57:29.160374] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1229 nodes 438 nps 438000 hashfull 12 pv f2f3 e4d4 h1g1 
+[Engine] [15:57:29.737938] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1909 / 83
+[Engine] [15:57:29.737995] <  2> Pertinax0_2_9 ---> info depth 4 score cp 100 nodes 250145 nps 433526 hashfull 14 pv d3e4 d5e4 d4c5 h5e2 
+[Engine] [15:57:29.759583] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 550 / 1077
+[Engine] [15:57:29.759644] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1632 nodes 8810 nps 419523 hashfull 14 pv f2f3 e4d4 a2b2 d4b2 c2c4 
+[Engine] [15:57:29.759666] <  2> Pertinax0_2_9 ---> bestmove f2f3
+[TRACE ] [15:57:29.759750] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:57:29.759787] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:57:29.759826] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:57:29.759855] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:57:29.794636] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:57:29.794734] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:57:29.794769] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:57:29.794872] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:29.794901] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:29.810530] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:29.810610] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:57:29.810631] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3
+[TRACE ] [15:57:29.810656] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:57:29.810670] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:57:29.826389] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:57:29.826472] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:57:29.826493] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:57:29.826513] <  2> Pertinax0_2_8 <--- go wtime 59302 btime 55648 winc 500 binc 500
+[Engine] [15:57:29.826889] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:57:29.826924] <  2> Pertinax0_2_8 ---> info depth 1 score cp -902 nodes 38 nps 3800 hashfull 25 pv e4e3 
+[Engine] [15:57:29.827118] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 10 / 37
+[Engine] [15:57:29.827148] <  2> Pertinax0_2_8 ---> info depth 2 score cp 1218 nodes 75 nps 7500 hashfull 25 pv e4d4 h1g1 
+[Engine] [15:57:29.919828] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 151 / 18
+[Engine] [15:57:29.919886] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 39059 nps 424554 hashfull 25 pv e4e3 d4e3 c5e4 
+[Engine] [15:57:29.926241] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 473 / 1153
+[Engine] [15:57:29.926343] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1312 nodes 2745 nps 457500 hashfull 25 pv e4e2 f1g1 e2e1 g1h2 
+[INFO  ] [15:57:56.320030] <   > fastchess --- fastchess alpha 1.4.0 20250702-2a80921
+[INFO  ] [15:57:56.320209] <   > fastchess --- Setting seed to: 7415133918756643441
+[TRACE ] [15:57:56.320237] <   > fastchess --- Creating tournament...
+[TRACE ] [15:57:56.320301] <   > fastchess --- Setting results...
+[TRACE ] [15:57:56.478310] <   > fastchess --- Initialized valid SPRT configuration.
+[INFO  ] [15:57:56.478355] <   > fastchess --- Starting tournament...
+[TRACE ] [15:57:56.478379] <   > fastchess --- Starting round robin tournament...
+[TRACE ] [15:57:56.478394] <   > fastchess --- Starting tournament...
+[TRACE ] [15:57:56.478408] <   > fastchess --- Creating matches...
+[TRACE ] [15:57:56.478543] <   > fastchess --- Setting affinity mask for process handle: 0xfffffffffffffffe
+[TRACE ] [15:57:56.478563] <   > fastchess --- Setting affinity mask for process handle: 0xfffffffffffffffe
+[TRACE ] [15:57:56.478548] <   > fastchess --- Setting affinity mask for process handle: 0xfffffffffffffffe
+[TRACE ] [15:57:56.478545] <   > fastchess --- Setting affinity mask for process handle: 0xfffffffffffffffe
+[TRACE ] [15:57:56.478554] <   > fastchess --- Setting affinity mask for process handle: 0xfffffffffffffffe
+[TRACE ] [15:57:56.478556] <   > fastchess --- Setting affinity mask for process handle: 0xfffffffffffffffe
+[TRACE ] [15:57:56.478560] <   > fastchess --- Setting affinity mask for process handle: 0xfffffffffffffffe
+[TRACE ] [15:57:56.478543] <   > fastchess --- Setting affinity mask for process handle: 0xfffffffffffffffe
+[TRACE ] [15:57:56.478565] <   > fastchess --- Setting affinity mask for process handle: 0xfffffffffffffffe
+[TRACE ] [15:57:56.478566] <   > fastchess --- Setting affinity mask for process handle: 0xfffffffffffffffe
+[TRACE ] [15:57:56.478570] <   > fastchess --- Setting affinity mask for process handle: 0xfffffffffffffffe
+[TRACE ] [15:57:56.478578] <   > fastchess --- Setting affinity mask for process handle: 0xfffffffffffffffe
+[TRACE ] [15:57:56.478642] <  4> fastchess --- Game 1 between Pertinax0_2_10 and Pertinax0_2_9 starting
+[TRACE ] [15:57:56.478709] < 14> fastchess --- Game 12 between Pertinax0_2_9 and Pertinax0_2_10 starting
+[TRACE ] [15:57:56.478683] <  8> fastchess --- Game 9 between Pertinax0_2_10 and Pertinax0_2_9 starting
+[TRACE ] [15:57:56.478659] < 10> fastchess --- Game 7 between Pertinax0_2_10 and Pertinax0_2_9 starting
+[TRACE ] [15:57:56.478918] <  6> fastchess --- Game 5 between Pertinax0_2_10 and Pertinax0_2_9 starting
+[TRACE ] [15:57:56.478759] <  9> fastchess --- Game 6 between Pertinax0_2_9 and Pertinax0_2_10 starting
+[TRACE ] [15:57:56.478861] <  7> fastchess --- Game 3 between Pertinax0_2_10 and Pertinax0_2_9 starting
+[TRACE ] [15:57:56.478800] < 12> fastchess --- Game 10 between Pertinax0_2_9 and Pertinax0_2_10 starting
+[TRACE ] [15:57:56.478788] <  5> fastchess --- Game 2 between Pertinax0_2_9 and Pertinax0_2_10 starting
+[TRACE ] [15:57:56.478864] <  3> fastchess --- Game 4 between Pertinax0_2_9 and Pertinax0_2_10 starting
+[TRACE ] [15:57:56.478909] < 11> fastchess --- Game 8 between Pertinax0_2_9 and Pertinax0_2_10 starting
+[TRACE ] [15:57:56.478724] < 13> fastchess --- Game 11 between Pertinax0_2_10 and Pertinax0_2_9 starting
+[TRACE ] [15:57:56.479124] <  4> fastchess --- Starting engine Pertinax0_2_10 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Version\Pertinax0_2_10.exe.exe
+[TRACE ] [15:57:56.479139] <  8> fastchess --- Starting engine Pertinax0_2_10 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Version\Pertinax0_2_10.exe.exe
+[TRACE ] [15:57:56.479104] < 14> fastchess --- Starting engine Pertinax0_2_9 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Versions\Pertinax0_2_9.exe.exe
+[TRACE ] [15:57:56.479188] < 10> fastchess --- Starting engine Pertinax0_2_10 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Version\Pertinax0_2_10.exe.exe
+[TRACE ] [15:57:56.479237] <  9> fastchess --- Starting engine Pertinax0_2_9 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Versions\Pertinax0_2_9.exe.exe
+[TRACE ] [15:57:56.479263] <  6> fastchess --- Starting engine Pertinax0_2_10 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Version\Pertinax0_2_10.exe.exe
+[TRACE ] [15:57:56.479404] <  5> fastchess --- Starting engine Pertinax0_2_9 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Versions\Pertinax0_2_9.exe.exe
+[TRACE ] [15:57:56.479354] <  7> fastchess --- Starting engine Pertinax0_2_10 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Version\Pertinax0_2_10.exe.exe
+[TRACE ] [15:57:56.479503] <  3> fastchess --- Starting engine Pertinax0_2_9 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Versions\Pertinax0_2_9.exe.exe
+[TRACE ] [15:57:56.479514] < 12> fastchess --- Starting engine Pertinax0_2_9 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Versions\Pertinax0_2_9.exe.exe
+[FATAL ] [15:57:56.479528] <   > fastchess --- Fatal; Pertinax0_2_10 engine startup failure: Couldn't start engine process
+
+[TRACE ] [15:57:56.479496] <  8> fastchess --- Game 9 between Pertinax0_2_10 and Pertinax0_2_9 finished
+[TRACE ] [15:57:56.479654] <  4> fastchess --- Game 1 between Pertinax0_2_10 and Pertinax0_2_9 finished
+[TRACE ] [15:57:56.479508] < 10> fastchess --- Game 7 between Pertinax0_2_10 and Pertinax0_2_9 finished
+[TRACE ] [15:57:56.479569] < 11> fastchess --- Starting engine Pertinax0_2_9 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Versions\Pertinax0_2_9.exe.exe
+[TRACE ] [15:57:56.479590] <  6> fastchess --- Game 5 between Pertinax0_2_10 and Pertinax0_2_9 finished
+[TRACE ] [15:57:56.479544] < 13> fastchess --- Starting engine Pertinax0_2_10 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Version\Pertinax0_2_10.exe.exe
+[TRACE ] [15:57:56.479679] <  7> fastchess --- Game 3 between Pertinax0_2_10 and Pertinax0_2_9 finished
+[TRACE ] [15:57:56.479912] < 13> fastchess --- Game 11 between Pertinax0_2_10 and Pertinax0_2_9 finished
+[TRACE ] [15:57:56.484767] < 12> fastchess --- Sending uci to engine Pertinax0_2_9
+[TRACE ] [15:57:56.484815] <  3> fastchess --- Sending uci to engine Pertinax0_2_9
+[Engine] [15:57:56.484832] < 12> Pertinax0_2_9 <--- uci
+[TRACE ] [15:57:56.484843] < 11> fastchess --- Sending uci to engine Pertinax0_2_9
+[Engine] [15:57:56.484855] <  3> Pertinax0_2_9 <--- uci
+[TRACE ] [15:57:56.484895] < 12> fastchess --- Waiting for uciok from engine Pertinax0_2_9
+[Engine] [15:57:56.484906] < 11> Pertinax0_2_9 <--- uci
+[TRACE ] [15:57:56.484937] <  3> fastchess --- Waiting for uciok from engine Pertinax0_2_9
+[TRACE ] [15:57:56.484987] <  5> fastchess --- Sending uci to engine Pertinax0_2_9
+[TRACE ] [15:57:56.484977] < 11> fastchess --- Waiting for uciok from engine Pertinax0_2_9
+[WARN  ] [15:57:56.484965] < 12> fastchess --- Engine Pertinax0_2_9 did not respond to uciok in time.
+[TRACE ] [15:57:56.484990] <  9> fastchess --- Sending uci to engine Pertinax0_2_9
+[TRACE ] [15:57:56.485074] < 12> fastchess --- Game 10 between Pertinax0_2_9 and Pertinax0_2_10 finished
+[Engine] [15:57:56.485092] <  9> Pertinax0_2_9 <--- uci
+[Engine] [15:57:56.485023] <  5> Pertinax0_2_9 <--- uci
+[TRACE ] [15:57:56.485123] <  9> fastchess --- Waiting for uciok from engine Pertinax0_2_9
+[TRACE ] [15:57:56.485145] <  5> fastchess --- Waiting for uciok from engine Pertinax0_2_9
+[TRACE ] [15:57:56.485021] < 14> fastchess --- Sending uci to engine Pertinax0_2_9
+[WARN  ] [15:57:56.485049] < 11> fastchess --- Engine Pertinax0_2_9 did not respond to uciok in time.
+[WARN  ] [15:57:56.485010] <  3> fastchess --- Engine Pertinax0_2_9 did not respond to uciok in time.
+[WARN  ] [15:57:56.485155] <  9> fastchess --- Engine Pertinax0_2_9 did not respond to uciok in time.
+[WARN  ] [15:57:56.485175] <  5> fastchess --- Engine Pertinax0_2_9 did not respond to uciok in time.
+[TRACE ] [15:57:56.485293] <  5> fastchess --- Game 2 between Pertinax0_2_9 and Pertinax0_2_10 finished
+[Engine] [15:57:56.485207] < 14> Pertinax0_2_9 <--- uci
+[TRACE ] [15:57:56.485243] <  3> fastchess --- Game 4 between Pertinax0_2_9 and Pertinax0_2_10 finished
+[TRACE ] [15:57:56.485257] <  9> fastchess --- Game 6 between Pertinax0_2_9 and Pertinax0_2_10 finished
+[TRACE ] [15:57:56.485226] < 11> fastchess --- Game 8 between Pertinax0_2_9 and Pertinax0_2_10 finished
+[TRACE ] [15:57:56.485347] < 14> fastchess --- Waiting for uciok from engine Pertinax0_2_9
+[WARN  ] [15:57:56.485411] < 14> fastchess --- Engine Pertinax0_2_9 did not respond to uciok in time.
+[TRACE ] [15:57:56.485433] < 14> fastchess --- Game 12 between Pertinax0_2_9 and Pertinax0_2_10 finished
+[TRACE ] [15:57:57.489324] <   > fastchess --- ~BaseTournament()
+[TRACE ] [15:57:57.489395] <   > fastchess --- Instructing engines to stop...
+[TRACE ] [15:57:57.489420] <   > fastchess --- Writing to process with pid/handle: 0x27c
+[TRACE ] [15:57:57.489447] <   > fastchess --- Writing to process with pid/handle: 0x248
+[TRACE ] [15:57:57.489469] <   > fastchess --- Writing to process with pid/handle: 0x258
+[TRACE ] [15:57:57.489491] <   > fastchess --- Writing to process with pid/handle: 0x288
+[TRACE ] [15:57:57.489515] <   > fastchess --- Writing to process with pid/handle: 0x26c
+[TRACE ] [15:57:57.489536] <   > fastchess --- Writing to process with pid/handle: 0x290
+[TRACE ] [15:57:57.489850] <   > fastchess --- Saving results...
+[TRACE ] [15:57:57.490218] <   > fastchess --- Saved results to.
+[TRACE ] [15:57:57.490337] <  1> fastchess --- Process destructor called for Pertinax0_2_10 with pid 0
+[TRACE ] [15:57:57.490383] <  1> fastchess --- Process destructor called for  with pid 0
+[TRACE ] [15:57:57.490413] <  1> fastchess --- Process destructor called for Pertinax0_2_10 with pid 0
+[TRACE ] [15:57:57.490438] <  1> fastchess --- Process destructor called for  with pid 0
+[TRACE ] [15:57:57.490452] <  1> fastchess --- Process destructor called for Pertinax0_2_10 with pid 0
+[TRACE ] [15:57:57.490473] <  1> fastchess --- Process destructor called for  with pid 0
+[TRACE ] [15:57:57.490518] <  1> fastchess --- Process destructor called for Pertinax0_2_9 with pid 12472
+[TRACE ] [15:57:57.490667] <  1> fastchess --- Process destructor called for  with pid 0
+[TRACE ] [15:57:57.490702] <  1> fastchess --- Process destructor called for Pertinax0_2_10 with pid 0
+[TRACE ] [15:57:57.490737] <  1> fastchess --- Process destructor called for  with pid 0
+[TRACE ] [15:57:57.490772] <  1> fastchess --- Process destructor called for Pertinax0_2_9 with pid 10316
+[TRACE ] [15:57:57.490919] <  1> fastchess --- Process destructor called for  with pid 0
+[TRACE ] [15:57:57.490983] <  1> fastchess --- Process destructor called for Pertinax0_2_9 with pid 16324
+[TRACE ] [15:57:57.491153] <  1> fastchess --- Process destructor called for  with pid 0
+[TRACE ] [15:57:57.491188] <  1> fastchess --- Process destructor called for Pertinax0_2_9 with pid 5380
+[TRACE ] [15:57:57.491373] <  1> fastchess --- Process destructor called for  with pid 0
+[TRACE ] [15:57:57.491423] <  1> fastchess --- Process destructor called for Pertinax0_2_9 with pid 15980
+[TRACE ] [15:57:57.491588] <  1> fastchess --- Process destructor called for Pertinax0_2_10 with pid 0
+[TRACE ] [15:57:57.491638] <  1> fastchess --- Process destructor called for  with pid 0
+[TRACE ] [15:57:57.491654] <  1> fastchess --- Process destructor called for  with pid 0
+[TRACE ] [15:57:57.491667] <  1> fastchess --- Process destructor called for Pertinax0_2_9 with pid 8676
+[TRACE ] [15:57:57.491832] <  1> fastchess --- Process destructor called for  with pid 0
+[TRACE ] [15:57:57.491875] <  1> fastchess --- Process destructor called for Pertinax0_2_10 with pid 0
+[TRACE ] [15:57:57.491900] <  1> fastchess --- Process destructor called for  with pid 0
+[INFO  ] [15:57:57.492118] <   > fastchess --- Tournament was interrupted. To resume the tournament, run: C:\Users\roanb\fastchess\fastchess.exe -config file=config.json
+
+[TRACE ] [15:57:57.492162] <   > fastchess --- ~TournamentManager()
+[INFO  ] [15:57:57.492213] <   > fastchess --- Finished match
+
+[INFO  ] [15:57:57.492287] <   > fastchess --- Total Time: 00:00:01 (hours:minutes:seconds)
+
+
+[INFO  ] [15:58:09.562873] <   > fastchess --- fastchess alpha 1.4.0 20250702-2a80921
+[INFO  ] [15:58:09.563006] <   > fastchess --- Setting seed to: 7788549996722388907
+[TRACE ] [15:58:09.563029] <   > fastchess --- Creating tournament...
+[TRACE ] [15:58:09.563090] <   > fastchess --- Setting results...
+[TRACE ] [15:58:09.725259] <   > fastchess --- Initialized valid SPRT configuration.
+[INFO  ] [15:58:09.725312] <   > fastchess --- Starting tournament...
+[TRACE ] [15:58:09.725334] <   > fastchess --- Starting round robin tournament...
+[TRACE ] [15:58:09.725349] <   > fastchess --- Starting tournament...
+[TRACE ] [15:58:09.725362] <   > fastchess --- Creating matches...
+[TRACE ] [15:58:09.725429] <   > fastchess --- Setting affinity mask for process handle: 0xfffffffffffffffe
+[TRACE ] [15:58:09.725506] <  2> fastchess --- Game 1 between Pertinax0_2_9 and Pertinax0_2_8 starting
+[TRACE ] [15:58:09.725677] <  2> fastchess --- Starting engine Pertinax0_2_9 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Versions\Pertinax0_2_9.exe.exe
+[TRACE ] [15:58:09.729485] <  2> fastchess --- Sending uci to engine Pertinax0_2_9
+[Engine] [15:58:09.729541] <  2> Pertinax0_2_9 <--- uci
+[TRACE ] [15:58:09.729578] <  2> fastchess --- Waiting for uciok from engine Pertinax0_2_9
+[Engine] [15:58:09.943304] <  2> Pertinax0_2_9 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:58:09.943366] <  2> Pertinax0_2_9 ---> 'help' for commands
+[Engine] [15:58:09.947092] <  2> Pertinax0_2_9 ---> id name Pertinax Chess 0.2.8
+[Engine] [15:58:09.947170] <  2> Pertinax0_2_9 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:58:09.947204] <  2> Pertinax0_2_9 ---> option name type spin Depth default 8 min 2 max 255
+[Engine] [15:58:09.947234] <  2> Pertinax0_2_9 ---> option name type button EngineOn default On
+[Engine] [15:58:09.947249] <  2> Pertinax0_2_9 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:58:09.947323] <  2> Pertinax0_2_9 ---> option name type button Gui default Off
+[Engine] [15:58:09.947354] <  2> Pertinax0_2_9 ---> uciok
+[TRACE ] [15:58:09.947387] <  2> fastchess --- Starting engine Pertinax0_2_8 at C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Versions\Pertinax0_2_8.exe
+[TRACE ] [15:58:09.951258] <  2> fastchess --- Sending uci to engine Pertinax0_2_8
+[Engine] [15:58:09.951305] <  2> Pertinax0_2_8 <--- uci
+[TRACE ] [15:58:09.951330] <  2> fastchess --- Waiting for uciok from engine Pertinax0_2_8
+[Engine] [15:58:10.164974] <  2> Pertinax0_2_8 ---> Welcome to Pertinax by R.Bukaci (github.com/Troan34)
+[Engine] [15:58:10.165033] <  2> Pertinax0_2_8 ---> 'help' for commands
+[Engine] [15:58:10.168546] <  2> Pertinax0_2_8 ---> id name Pertinax Chess 0.2.5
+[Engine] [15:58:10.168625] <  2> Pertinax0_2_8 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:58:10.168662] <  2> Pertinax0_2_8 ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:58:10.168683] <  2> Pertinax0_2_8 ---> option name type button EngineOn default On
+[Engine] [15:58:10.168701] <  2> Pertinax0_2_8 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:58:10.168718] <  2> Pertinax0_2_8 ---> option name type button Gui default Off
+[Engine] [15:58:10.168735] <  2> Pertinax0_2_8 ---> uciok
+[TRACE ] [15:58:10.168765] <  2> fastchess --- Refreshing engine Pertinax0_2_9
+[TRACE ] [15:58:10.168780] <  2> fastchess --- Sending ucinewgame to engine Pertinax0_2_9
+[Engine] [15:58:10.168794] <  2> Pertinax0_2_9 <--- ucinewgame
+[TRACE ] [15:58:10.168824] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:10.168839] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:10.168863] <  2> Pertinax0_2_9 ---> id name Pertinax Chess 0.1
+[Engine] [15:58:10.168877] <  2> Pertinax0_2_9 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:58:10.168891] <  2> Pertinax0_2_9 ---> option name type spin Depth default 8 min 2 max 255
+[Engine] [15:58:10.168905] <  2> Pertinax0_2_9 ---> option name type button EngineOn default On
+[Engine] [15:58:10.168919] <  2> Pertinax0_2_9 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:58:10.168932] <  2> Pertinax0_2_9 ---> option name type button Gui default Off
+[Engine] [15:58:10.168946] <  2> Pertinax0_2_9 ---> uciok
+[Engine] [15:58:10.177608] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:10.177687] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:10.177706] <  2> fastchess --- Engine Pertinax0_2_9 refreshed.
+[TRACE ] [15:58:10.177721] <  2> fastchess --- Refreshing engine Pertinax0_2_8
+[TRACE ] [15:58:10.177734] <  2> fastchess --- Sending ucinewgame to engine Pertinax0_2_8
+[Engine] [15:58:10.177749] <  2> Pertinax0_2_8 <--- ucinewgame
+[TRACE ] [15:58:10.177774] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:10.177791] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:10.177819] <  2> Pertinax0_2_8 ---> id name Pertinax Chess 0.1
+[Engine] [15:58:10.177837] <  2> Pertinax0_2_8 ---> id author R.Bukaci (github.com/Troan34)
+[Engine] [15:58:10.177855] <  2> Pertinax0_2_8 ---> option name type spin Depth default 10 min 2 max 255
+[Engine] [15:58:10.177873] <  2> Pertinax0_2_8 ---> option name type button EngineOn default On
+[Engine] [15:58:10.177890] <  2> Pertinax0_2_8 ---> option name type spin Hash default 64 min 1 max 512
+[Engine] [15:58:10.177907] <  2> Pertinax0_2_8 ---> option name type button Gui default Off
+[Engine] [15:58:10.177923] <  2> Pertinax0_2_8 ---> uciok
+[Engine] [15:58:10.192834] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:10.192914] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:10.192937] <  2> fastchess --- Engine Pertinax0_2_8 refreshed.
+[TRACE ] [15:58:10.192963] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:10.192985] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:10.208512] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:10.208638] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:10.208678] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:10.208697] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:10.224465] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:10.224560] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:10.224584] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2
+[TRACE ] [15:58:10.224614] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:10.224633] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:10.240250] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:10.240310] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:10.240327] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:10.240349] <  2> Pertinax0_2_9 <--- go wtime 60500 btime 60500 winc 500 binc 500
+[Engine] [15:58:10.251827] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:58:10.251885] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 5 nps 454 hashfull 0 pv e1f1 
+[Engine] [15:58:10.252111] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:10.252128] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 131 nps 13100 hashfull 0 pv e1d2 f6e4 
+[Engine] [15:58:10.252518] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 5 / 30
+[Engine] [15:58:10.252534] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1219 nodes 188 nps 18800 hashfull 0 pv e1f1 h5f3 b1a3 
+[Engine] [15:58:10.363934] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 10 / 13
+[Engine] [15:58:10.363995] <  2> Pertinax0_2_9 ---> info depth 4 score cp 200 nodes 49005 nps 441486 hashfull 0 pv f3d2 h5e2 e1e2 d5d4 
+[Engine] [15:58:10.378231] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 304 / 846
+[Engine] [15:58:10.378271] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1532 nodes 6730 nps 480714 hashfull 0 pv e1f1 h5f3 b1a3 f3g2 f1g1 
+[Engine] [15:58:10.378298] <  2> Pertinax0_2_9 ---> bestmove e1f1
+[TRACE ] [15:58:10.378319] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:10.378337] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:10.378356] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:10.378373] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:10.425424] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:10.425480] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:10.425502] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:10.425599] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:10.425619] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:10.440774] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:10.440830] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:10.440852] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1
+[TRACE ] [15:58:10.440880] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:10.440898] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:10.456415] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:10.456471] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:10.456505] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:10.456536] <  2> Pertinax0_2_8 <--- go wtime 60863 btime 60500 winc 500 binc 500
+[Engine] [15:58:10.467526] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:58:10.467601] <  2> Pertinax0_2_8 ---> info depth 1 score cp -900 nodes 42 nps 4200 hashfull 0 pv d2c1 
+[Engine] [15:58:10.467717] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 40
+[Engine] [15:58:10.467735] <  2> Pertinax0_2_8 ---> info depth 2 score cp 1006 nodes 84 nps 8400 hashfull 0 pv d2e2 f1g1 
+[Engine] [15:58:10.570466] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 42 / 0
+[Engine] [15:58:10.570520] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 46106 nps 452019 hashfull 0 pv d2c1 b2c1 d5d4 
+[Engine] [15:58:10.576654] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 505 / 1282
+[Engine] [15:58:10.576688] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1112 nodes 2629 nps 438166 hashfull 0 pv d2e2 f1g1 e2f2 g1h2 
+[Engine] [15:58:10.980941] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1833 / 1531
+[Engine] [15:58:10.981010] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 189262 nps 468470 hashfull 2 pv f6e4 b1d2 g7g5 b2h8 e4c3 
+[Engine] [15:58:10.981038] <  2> Pertinax0_2_8 ---> bestmove f6e4
+[TRACE ] [15:58:10.981058] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:10.981077] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:10.981096] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:10.981113] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:11.003149] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:11.003238] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:11.003270] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:11.003355] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:11.003374] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:11.019369] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:11.019439] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:11.019458] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4
+[TRACE ] [15:58:11.019482] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:11.019497] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:11.035434] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:11.035499] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:11.035517] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:11.035533] <  2> Pertinax0_2_9 <--- go wtime 60863 btime 60476 winc 500 binc 500
+[Engine] [15:58:11.035836] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:11.035870] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 33 nps 3300 hashfull 0 pv b1a3 
+[Engine] [15:58:11.039266] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 32 / 0
+[Engine] [15:58:11.039320] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1448 nps 482666 hashfull 0 pv f3d2 e4f6 
+[Engine] [15:58:11.041494] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 32 / 64
+[Engine] [15:58:11.041528] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1231 nodes 959 nps 479500 hashfull 0 pv b2a3 f8a3 f1g1 
+[Engine] [15:58:11.529516] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1312 / 81
+[Engine] [15:58:11.529578] <  2> Pertinax0_2_9 ---> info depth 4 score cp 88 nodes 212079 nps 435480 hashfull 1 pv f3d2 e4f2 f1f2 h5e2 
+[Engine] [15:58:11.563822] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1237 / 1944
+[Engine] [15:58:11.563865] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1625 nodes 15407 nps 453147 hashfull 2 pv a2a4 h5f3 a1a3 f8a3 f1g1 
+[Engine] [15:58:11.563888] <  2> Pertinax0_2_9 ---> bestmove a2a4
+[TRACE ] [15:58:11.563904] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:11.563919] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:11.563934] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:11.563948] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:11.582882] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:11.582933] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:11.582954] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:11.583031] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:11.583049] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:11.598643] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:11.598716] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:11.598739] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4
+[TRACE ] [15:58:11.598774] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:11.598795] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:11.613856] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:11.613907] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:11.613928] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:11.613946] <  2> Pertinax0_2_8 <--- go wtime 60835 btime 60476 winc 500 binc 500
+[Engine] [15:58:11.614338] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:11.614377] <  2> Pertinax0_2_8 ---> info depth 1 score cp -900 nodes 48 nps 4800 hashfull 2 pv d2c1 
+[Engine] [15:58:11.614611] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 45
+[Engine] [15:58:11.614632] <  2> Pertinax0_2_8 ---> info depth 2 score cp 1008 nodes 94 nps 9400 hashfull 2 pv d2e2 f1g1 
+[Engine] [15:58:11.750216] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 50 / 1
+[Engine] [15:58:11.750300] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 59125 nps 437962 hashfull 2 pv d2c1 b2c1 e4d2 
+[Engine] [15:58:11.757862] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 589 / 1651
+[Engine] [15:58:11.757931] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1112 nodes 3327 nps 475285 hashfull 2 pv d2e2 f1g1 e2f2 g1h2 
+[Engine] [15:58:12.313466] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 2271 / 1926
+[Engine] [15:58:12.313522] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 257996 nps 464857 hashfull 4 pv d2e3 f2e3 g7g5 b2h8 e4f2 
+[Engine] [15:58:12.313545] <  2> Pertinax0_2_8 ---> bestmove d2e3
+[TRACE ] [15:58:12.313562] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:12.313577] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:12.313593] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:12.313607] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:12.331811] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:12.331870] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:12.331887] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:12.331954] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:12.331974] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:12.347486] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:12.347559] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:12.347582] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3
+[TRACE ] [15:58:12.347613] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:12.347632] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:12.362938] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:12.362994] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:12.363015] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:12.363034] <  2> Pertinax0_2_9 <--- go wtime 60835 btime 60277 winc 500 binc 500
+[Engine] [15:58:12.363345] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:58:12.363378] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 34 nps 3400 hashfull 2 pv b1d2 
+[Engine] [15:58:12.366875] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:12.366931] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1531 nps 510333 hashfull 2 pv f2e3 e4d2 
+[Engine] [15:58:12.368871] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 34 / 65
+[Engine] [15:58:12.368904] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1321 nodes 859 nps 859000 hashfull 2 pv a1a3 f8a3 b2a1 
+[Engine] [15:58:13.010029] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1809 / 86
+[Engine] [15:58:13.010096] <  2> Pertinax0_2_9 ---> info depth 4 score cp 10 nodes 279988 nps 436798 hashfull 3 pv f2e3 h5f3 e2f3 e4d2 
+[Engine] [15:58:13.037820] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1229 / 1889
+[Engine] [15:58:13.037885] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1635 nodes 12505 nps 463148 hashfull 4 pv b2c3 e4c3 a1a3 f8a3 b1d2 
+[Engine] [15:58:13.037967] <  2> Pertinax0_2_9 ---> bestmove b2c3
+[TRACE ] [15:58:13.037995] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:13.038014] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:13.038033] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:13.038049] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:13.080894] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:13.080970] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:13.080992] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:13.081068] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:13.081088] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:13.096441] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:13.096534] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:13.096558] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3
+[TRACE ] [15:58:13.096589] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:13.096607] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:13.112489] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:13.112560] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:13.112578] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:13.112599] <  2> Pertinax0_2_8 <--- go wtime 60661 btime 60277 winc 500 binc 500
+[Engine] [15:58:13.112953] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:13.112985] <  2> Pertinax0_2_8 ---> info depth 1 score cp -900 nodes 48 nps 4800 hashfull 4 pv e3c1 
+[Engine] [15:58:13.113175] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 5 / 44
+[Engine] [15:58:13.113191] <  2> Pertinax0_2_8 ---> info depth 2 score cp 1008 nodes 93 nps 9300 hashfull 5 pv e3e2 f1g1 
+[Engine] [15:58:13.247035] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 75 / 2
+[Engine] [15:58:13.247114] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 58434 nps 439353 hashfull 5 pv e3d2 b1d2 e4c5 
+[Engine] [15:58:13.256920] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 680 / 1654
+[Engine] [15:58:13.256977] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1310 nodes 4028 nps 447555 hashfull 5 pv e3d2 a1a3 f8a3 c3a1 
+[Engine] [15:58:14.230970] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 3523 / 1937
+[Engine] [15:58:14.231027] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 439922 nps 451665 hashfull 8 pv e3f4 g3f4 g7g5 c3h8 e4c3 
+[Engine] [15:58:14.231054] <  2> Pertinax0_2_8 ---> bestmove e3f4
+[TRACE ] [15:58:14.231074] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:14.231091] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:14.231109] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:14.231124] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:14.273906] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:14.273989] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:14.274010] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:14.274098] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:14.274116] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:14.289572] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:14.289633] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:14.289651] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4
+[TRACE ] [15:58:14.289675] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:14.289688] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:14.305394] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:14.305456] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:14.305476] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:14.305499] <  2> Pertinax0_2_9 <--- go wtime 60661 btime 59659 winc 500 binc 500
+[Engine] [15:58:14.305808] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:58:14.305839] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 34 nps 3400 hashfull 4 pv b1a3 
+[Engine] [15:58:14.309803] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 4 / 0
+[Engine] [15:58:14.309837] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1589 nps 529666 hashfull 4 pv g3f4 e4d2 
+[Engine] [15:58:14.312393] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 34 / 65
+[Engine] [15:58:14.312425] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1321 nodes 1001 nps 500500 hashfull 4 pv a1a3 f8a3 b1d2 
+[Engine] [15:58:15.166021] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 2536 / 92
+[Engine] [15:58:15.166079] <  2> Pertinax0_2_9 ---> info depth 4 score cp 10 nodes 367298 nps 430595 hashfull 5 pv g3f4 h5f3 e2f3 e4d2 
+[Engine] [15:58:15.203325] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1427 / 2072
+[Engine] [15:58:15.203385] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1635 nodes 15476 nps 418270 hashfull 6 pv b1a3 e4c3 a1d1 c3d1 f3e1 
+[Engine] [15:58:15.203413] <  2> Pertinax0_2_9 ---> bestmove b1a3
+[TRACE ] [15:58:15.203432] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:15.203449] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:15.203467] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:15.203482] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:15.239634] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:15.239724] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:15.239746] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:15.239825] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:15.239843] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:15.255094] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:15.255178] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:15.255209] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3
+[TRACE ] [15:58:15.255246] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:15.255269] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:15.270296] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:15.270360] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:15.270380] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:15.270399] <  2> Pertinax0_2_8 <--- go wtime 60264 btime 59659 winc 500 binc 500
+[Engine] [15:58:15.270792] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:15.270823] <  2> Pertinax0_2_8 ---> info depth 1 score cp -900 nodes 50 nps 5000 hashfull 8 pv e4d2 
+[Engine] [15:58:15.271142] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 5 / 47
+[Engine] [15:58:15.271168] <  2> Pertinax0_2_8 ---> info depth 2 score cp 904 nodes 100 nps 10000 hashfull 8 pv e4d2 f1e1 
+[Engine] [15:58:15.443555] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 63 / 1
+[Engine] [15:58:15.443630] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 76364 nps 443976 hashfull 9 pv e4g5 g3f4 d5d4 
+[Engine] [15:58:15.454148] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 694 / 1741
+[Engine] [15:58:15.454198] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1306 nodes 4563 nps 456300 hashfull 9 pv e4g5 a1c1 f4c1 c3e1 
+[Engine] [15:58:16.824579] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 5884 / 2047
+[Engine] [15:58:16.824642] <  2> Pertinax0_2_8 ---> info depth 5 score cp 404 nodes 625537 nps 456596 hashfull 13 pv f4g4 h3g4 g7g6 c3h8 b7b5 
+[Engine] [15:58:16.824664] <  2> Pertinax0_2_8 ---> bestmove f4g4
+[TRACE ] [15:58:16.824680] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:16.824695] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:16.824709] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:16.824726] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:16.866579] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:16.866661] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:16.866689] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:16.866766] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:16.866783] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:16.882273] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:16.882370] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:16.882406] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4
+[TRACE ] [15:58:16.882434] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:16.882451] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:16.897474] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:16.897560] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:16.897581] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:16.897599] <  2> Pertinax0_2_9 <--- go wtime 60264 btime 58605 winc 500 binc 500
+[Engine] [15:58:16.897918] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:58:16.897956] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 37 nps 3700 hashfull 6 pv a3c4 
+[Engine] [15:58:16.901234] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:16.901282] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1456 nps 485333 hashfull 6 pv h3g4 e4c5 
+[Engine] [15:58:16.904162] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 37 / 67
+[Engine] [15:58:16.904197] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1229 nodes 1218 nps 609000 hashfull 6 pv a1e1 e4c3 e1a1 
+[Engine] [15:58:17.874522] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 3460 / 81
+[Engine] [15:58:17.874575] <  2> Pertinax0_2_9 ---> info depth 4 score cp 1 nodes 416805 nps 429695 hashfull 8 pv h3g4 f8a3 g4h5 a3c1 
+[Engine] [15:58:17.936984] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1790 / 2325
+[Engine] [15:58:17.937040] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1632 nodes 22374 nps 360870 hashfull 8 pv a1a2 e4c3 f1e1 c3a2 f3g1 
+[Engine] [15:58:17.937063] <  2> Pertinax0_2_9 ---> bestmove a1a2
+[TRACE ] [15:58:17.937080] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:17.937094] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:17.937108] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:17.937120] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:17.976384] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:17.976461] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:17.976480] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:17.976647] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:17.976677] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:17.991910] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:17.991991] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:17.992022] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2
+[TRACE ] [15:58:17.992061] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:17.992089] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:18.007391] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:18.007468] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:18.007515] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:18.007548] <  2> Pertinax0_2_8 <--- go wtime 59725 btime 58605 winc 500 binc 500
+[Engine] [15:58:18.007897] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:58:18.007958] <  2> Pertinax0_2_8 ---> info depth 1 score cp -900 nodes 41 nps 4100 hashfull 13 pv e4d2 
+[Engine] [15:58:18.008161] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 39
+[Engine] [15:58:18.008190] <  2> Pertinax0_2_8 ---> info depth 2 score cp 904 nodes 84 nps 8400 hashfull 13 pv e4d2 f1e1 
+[Engine] [15:58:18.157346] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 41 / 0
+[Engine] [15:58:18.157402] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 52992 nps 355651 hashfull 13 pv e4g5 h3g4 d5d4 
+[Engine] [15:58:18.166519] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 561 / 1409
+[Engine] [15:58:18.166591] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1218 nodes 3774 nps 419333 hashfull 14 pv e4g5 c3b4 f8b4 f1g1 
+[Engine] [15:58:19.106611] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 4697 / 1808
+[Engine] [15:58:19.106673] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 409779 nps 435935 hashfull 16 pv e4c5 h3g4 g7g5 c3h8 c5e4 
+[Engine] [15:58:19.106696] <  2> Pertinax0_2_8 ---> bestmove e4c5
+[TRACE ] [15:58:19.106712] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:19.106726] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:19.106740] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:19.106753] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:19.132893] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:19.132966] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:19.132994] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:19.133084] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:19.133108] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:19.148482] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:19.148550] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:19.148572] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5
+[TRACE ] [15:58:19.148596] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:19.148610] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:19.163897] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:19.163991] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:19.164025] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:19.164043] <  2> Pertinax0_2_9 <--- go wtime 59725 btime 58006 winc 500 binc 500
+[Engine] [15:58:19.164328] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:58:19.164359] <  2> Pertinax0_2_9 ---> info depth 1 score cp 914 nodes 35 nps 3500 hashfull 8 pv h1g1 
+[Engine] [15:58:19.167989] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:19.168048] <  2> Pertinax0_2_9 ---> info depth 2 score cp -11 nodes 1328 nps 442666 hashfull 8 pv h3g4 c5e4 
+[Engine] [15:58:19.170599] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 35 / 59
+[Engine] [15:58:19.170629] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1229 nodes 1174 nps 587000 hashfull 8 pv c3b4 g4b4 f1g1 
+[Engine] [15:58:19.464364] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 682 / 107
+[Engine] [15:58:19.464420] <  2> Pertinax0_2_9 ---> info depth 4 score cp 201 nodes 129072 nps 440518 hashfull 9 pv h3g4 c5b3 g4h5 b3a1 
+[Engine] [15:58:19.509270] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1587 / 1899
+[Engine] [15:58:19.509325] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1632 nodes 20128 nps 457454 hashfull 10 pv c3d4 g4d4 a2b2 d4b2 c2c4 
+[Engine] [15:58:19.509348] <  2> Pertinax0_2_9 ---> bestmove c3d4
+[TRACE ] [15:58:19.509364] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:19.509378] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:19.509392] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:19.509405] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:19.538489] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:19.538550] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:19.538570] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:19.538690] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:19.538712] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:19.553872] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:19.553913] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:19.553935] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4
+[TRACE ] [15:58:19.553963] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:19.553979] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:19.569524] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:19.569571] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:19.569589] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:19.569608] <  2> Pertinax0_2_8 <--- go wtime 59880 btime 58006 winc 500 binc 500
+[Engine] [15:58:19.569989] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:19.570026] <  2> Pertinax0_2_8 ---> info depth 1 score cp -903 nodes 37 nps 3700 hashfull 16 pv g4e4 
+[Engine] [15:58:19.570273] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 34
+[Engine] [15:58:19.570323] <  2> Pertinax0_2_8 ---> info depth 2 score cp 904 nodes 102 nps 10200 hashfull 16 pv g4e4 d4a1 
+[Engine] [15:58:19.666093] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 39 / 0
+[Engine] [15:58:19.666150] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 42770 nps 450210 hashfull 16 pv g4e4 d3e4 c5d3 
+[Engine] [15:58:19.672386] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 418 / 1032
+[Engine] [15:58:19.672419] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1218 nodes 2810 nps 468333 hashfull 17 pv g4e4 g3g4 e4d4 f1e1 
+[Engine] [15:58:20.161511] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 2479 / 1321
+[Engine] [15:58:20.161574] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 219471 nps 448815 hashfull 18 pv g4f4 g3f4 g7g5 d4h8 c5e4 
+[Engine] [15:58:20.161596] <  2> Pertinax0_2_8 ---> bestmove g4f4
+[TRACE ] [15:58:20.161613] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:20.161627] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:20.161642] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:20.161655] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:20.193379] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:20.193466] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:20.193488] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:20.193595] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:20.193635] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:20.209506] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:20.209572] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:20.209595] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4
+[TRACE ] [15:58:20.209625] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:20.209656] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:20.225407] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:20.225501] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:20.225523] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:20.225541] <  2> Pertinax0_2_9 <--- go wtime 59880 btime 57915 winc 500 binc 500
+[Engine] [15:58:20.225882] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:58:20.225921] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 34 nps 3400 hashfull 10 pv h1h2 
+[Engine] [15:58:20.229470] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 3 / 0
+[Engine] [15:58:20.229535] <  2> Pertinax0_2_9 ---> info depth 2 score cp -11 nodes 1461 nps 487000 hashfull 10 pv g3f4 c5e4 
+[Engine] [15:58:20.232378] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 42 / 58
+[Engine] [15:58:20.232426] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1229 nodes 1083 nps 541500 hashfull 10 pv f3e1 f4d4 e1f3 
+[Engine] [15:58:21.186149] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 3146 / 87
+[Engine] [15:58:21.186219] <  2> Pertinax0_2_9 ---> info depth 4 score cp 1 nodes 410739 nps 430995 hashfull 12 pv g3f4 h5f3 e2f3 c5e4 
+[Engine] [15:58:21.221877] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1445 / 1812
+[Engine] [15:58:21.221937] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1632 nodes 15354 nps 438685 hashfull 12 pv f3e1 f4d4 a2b2 d4b2 c2c4 
+[Engine] [15:58:21.221960] <  2> Pertinax0_2_9 ---> bestmove f3e1
+[TRACE ] [15:58:21.221976] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:21.221991] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:21.222016] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:21.222041] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:21.256362] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:21.256436] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:21.256453] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:21.256536] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:21.256553] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:21.271880] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:21.271961] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:21.271985] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1
+[TRACE ] [15:58:21.272018] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:21.272047] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:21.287497] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:21.287577] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:21.287598] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:21.287617] <  2> Pertinax0_2_8 <--- go wtime 59384 btime 57915 winc 500 binc 500
+[Engine] [15:58:21.288049] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:21.288096] <  2> Pertinax0_2_8 ---> info depth 1 score cp -902 nodes 47 nps 4700 hashfull 18 pv f4e3 
+[Engine] [15:58:21.288397] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 7 / 44
+[Engine] [15:58:21.288425] <  2> Pertinax0_2_8 ---> info depth 2 score cp 1114 nodes 119 nps 11900 hashfull 18 pv f4d4 g2d5 
+[Engine] [15:58:21.416305] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 83 / 2
+[Engine] [15:58:21.416375] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 56640 nps 445984 hashfull 19 pv f4e3 f2e3 c5e4 
+[Engine] [15:58:21.424585] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 553 / 1446
+[Engine] [15:58:21.424631] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1428 nodes 3661 nps 457625 hashfull 19 pv f4d4 g2d5 c6d5 e1g2 
+[Engine] [15:58:24.109754] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 12016 / 1802
+[Engine] [15:58:24.109811] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 1183226 nps 440680 hashfull 25 pv f4e4 d3e4 g7g5 d4h8 c5d3 
+[Engine] [15:58:24.109833] <  2> Pertinax0_2_8 ---> bestmove f4e4
+[TRACE ] [15:58:24.109849] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:24.109863] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:24.109877] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:24.109890] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:24.145460] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:24.145530] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:24.145547] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:24.145625] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:24.145644] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:24.160741] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:24.160825] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:24.160863] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4
+[TRACE ] [15:58:24.160904] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:24.160920] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:24.176399] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:24.176476] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:24.176497] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:24.176515] <  2> Pertinax0_2_9 <--- go wtime 59384 btime 55593 winc 500 binc 500
+[Engine] [15:58:24.176856] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:24.176903] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 31 nps 3100 hashfull 12 pv d4a1 
+[Engine] [15:58:24.179746] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 30 / 0
+[Engine] [15:58:24.179817] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1181 nps 590500 hashfull 12 pv d3e4 h5g4 
+[Engine] [15:58:24.180896] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 31 / 56
+[Engine] [15:58:24.180934] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1229 nodes 438 nps 438000 hashfull 12 pv f2f3 e4d4 h1g1 
+[Engine] [15:58:24.753873] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1909 / 83
+[Engine] [15:58:24.753938] <  2> Pertinax0_2_9 ---> info depth 4 score cp 100 nodes 250145 nps 437316 hashfull 14 pv d3e4 d5e4 d4c5 h5e2 
+[Engine] [15:58:24.774769] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 550 / 1077
+[Engine] [15:58:24.774820] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1632 nodes 8810 nps 440500 hashfull 14 pv f2f3 e4d4 a2b2 d4b2 c2c4 
+[Engine] [15:58:24.774843] <  2> Pertinax0_2_9 ---> bestmove f2f3
+[TRACE ] [15:58:24.774860] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:24.774873] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:24.774888] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:24.774900] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:24.813251] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:24.813309] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:24.813326] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:24.813394] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:24.813409] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:24.828604] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:24.828690] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:24.828728] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3
+[TRACE ] [15:58:24.828774] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:24.828801] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:24.844065] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:24.844131] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:24.844156] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:24.844185] <  2> Pertinax0_2_8 <--- go wtime 59286 btime 55593 winc 500 binc 500
+[Engine] [15:58:24.844507] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:24.844547] <  2> Pertinax0_2_8 ---> info depth 1 score cp -902 nodes 38 nps 3800 hashfull 25 pv e4e3 
+[Engine] [15:58:24.844748] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 10 / 37
+[Engine] [15:58:24.844780] <  2> Pertinax0_2_8 ---> info depth 2 score cp 1218 nodes 75 nps 7500 hashfull 25 pv e4d4 h1g1 
+[Engine] [15:58:24.939408] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 151 / 18
+[Engine] [15:58:24.939473] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 39059 nps 415521 hashfull 25 pv e4e3 d4e3 c5e4 
+[Engine] [15:58:24.946325] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 473 / 1153
+[Engine] [15:58:24.946390] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1312 nodes 2745 nps 457500 hashfull 25 pv e4e2 f1g1 e2e1 g1h2 
+[Engine] [15:58:26.257377] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 7553 / 1350
+[Engine] [15:58:26.257464] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 578574 nps 441322 hashfull 28 pv e4g4 f3g4 g7g5 d4h8 b7b5 
+[Engine] [15:58:26.257502] <  2> Pertinax0_2_8 ---> bestmove e4g4
+[TRACE ] [15:58:26.257523] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:26.257540] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:26.257559] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:26.257574] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:26.296404] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:26.296477] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:26.296498] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:26.296578] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:26.296607] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:26.311751] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:26.311799] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:26.311820] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4
+[TRACE ] [15:58:26.311847] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:26.311876] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:26.327387] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:26.327444] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:26.327476] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:26.327508] <  2> Pertinax0_2_9 <--- go wtime 59286 btime 54680 winc 500 binc 500
+[Engine] [15:58:26.327761] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 1
+[Engine] [15:58:26.327799] <  2> Pertinax0_2_9 ---> info depth 1 score cp 10 nodes 2 nps 200 hashfull 14 pv f3g4 
+[Engine] [15:58:26.330125] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 30 / 0
+[Engine] [15:58:26.330161] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1086 nps 543000 hashfull 14 pv f3g4 e6e5 
+[Engine] [15:58:26.331944] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 41 / 53
+[Engine] [15:58:26.331981] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1229 nodes 832 nps 832000 hashfull 14 pv f1g1 g4d4 g1f1 
+[Engine] [15:58:26.518250] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 407 / 147
+[Engine] [15:58:26.518316] <  2> Pertinax0_2_9 ---> info depth 4 score cp 201 nodes 81942 nps 440548 hashfull 14 pv f3g4 c5b3 g4h5 b3a1 
+[Engine] [15:58:26.554196] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1085 / 1422
+[Engine] [15:58:26.554244] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1632 nodes 15675 nps 447857 hashfull 15 pv h1h2 g4d4 a2b2 d4b2 c2c4 
+[Engine] [15:58:26.554267] <  2> Pertinax0_2_9 ---> bestmove h1h2
+[TRACE ] [15:58:26.554283] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:26.554297] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:26.554311] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:26.554323] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:26.592984] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:26.593074] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:26.593098] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:26.593236] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:26.593276] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:26.608626] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:26.608698] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:26.608718] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2
+[TRACE ] [15:58:26.608749] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:26.608790] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:26.623833] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:26.623897] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:26.623918] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:26.623936] <  2> Pertinax0_2_8 <--- go wtime 59560 btime 54680 winc 500 binc 500
+[Engine] [15:58:26.624292] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:58:26.624348] <  2> Pertinax0_2_8 ---> info depth 1 score cp -902 nodes 36 nps 3600 hashfull 28 pv g4e4 
+[Engine] [15:58:26.624597] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 34
+[Engine] [15:58:26.624628] <  2> Pertinax0_2_8 ---> info depth 2 score cp 1218 nodes 99 nps 9900 hashfull 28 pv g4d4 a2a1 
+[Engine] [15:58:26.706933] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 36 / 0
+[Engine] [15:58:26.707007] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 37328 nps 455219 hashfull 28 pv g4e4 d3e4 c5d3 
+[Engine] [15:58:26.713607] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 445 / 1061
+[Engine] [15:58:26.713678] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1619 nodes 2768 nps 461333 hashfull 28 pv g4d4 a2a1 d4a1 f1g1 
+[Engine] [15:58:28.454386] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 7622 / 1319
+[Engine] [15:58:28.454444] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 785624 nps 451508 hashfull 32 pv c5e4 f3g4 g7g6 d4h8 e4f2 
+[Engine] [15:58:28.454473] <  2> Pertinax0_2_8 ---> bestmove c5e4
+[TRACE ] [15:58:28.454492] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:28.454509] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:28.454527] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:28.454542] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:28.497222] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:28.497300] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:28.497334] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:28.497453] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:28.497478] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:28.512806] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:28.512865] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:28.512898] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4
+[TRACE ] [15:58:28.512940] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:28.512969] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:28.528439] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:28.528496] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:28.528527] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:28.528557] <  2> Pertinax0_2_9 <--- go wtime 59560 btime 53350 winc 500 binc 500
+[Engine] [15:58:28.528931] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:58:28.528979] <  2> Pertinax0_2_9 ---> info depth 1 score cp 914 nodes 32 nps 3200 hashfull 15 pv f1g1 
+[Engine] [15:58:28.531787] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:28.531851] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1218 nps 609000 hashfull 15 pv f3g4 e4d2 
+[Engine] [15:58:28.533848] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 32 / 61
+[Engine] [15:58:28.533887] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1229 nodes 952 nps 476000 hashfull 15 pv d4f2 e4f2 f1g1 
+[Engine] [15:58:29.007297] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1451 / 101
+[Engine] [15:58:29.007361] <  2> Pertinax0_2_9 ---> info depth 4 score cp 10 nodes 207093 nps 437828 hashfull 16 pv f3g4 f8a3 g4h5 a3c1 
+[Engine] [15:58:29.038864] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1452 / 1980
+[Engine] [15:58:29.038928] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1632 nodes 13881 nps 447774 hashfull 16 pv d4c3 e4c3 f3f4 c3a2 f4f5 
+[Engine] [15:58:29.038956] <  2> Pertinax0_2_9 ---> bestmove d4c3
+[TRACE ] [15:58:29.038974] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:29.038988] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:29.039003] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:29.039016] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:29.076613] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:29.076688] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:29.076708] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:29.076776] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:29.076790] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:29.091931] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:29.092017] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:29.092061] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3
+[TRACE ] [15:58:29.092112] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:29.092136] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:29.107430] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:29.107514] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:29.107550] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:29.107580] <  2> Pertinax0_2_8 <--- go wtime 59550 btime 53350 winc 500 binc 500
+[Engine] [15:58:29.107948] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:29.107992] <  2> Pertinax0_2_8 ---> info depth 1 score cp -900 nodes 42 nps 4200 hashfull 32 pv e4d2 
+[Engine] [15:58:29.108234] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 39
+[Engine] [15:58:29.108267] <  2> Pertinax0_2_8 ---> info depth 2 score cp 1008 nodes 83 nps 8300 hashfull 32 pv e4g3 f1g1 
+[Engine] [15:58:29.196801] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 42 / 0
+[Engine] [15:58:29.196867] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 39918 nps 453613 hashfull 33 pv e4f2 f3g4 f2d1 
+[Engine] [15:58:29.205047] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 569 / 1418
+[Engine] [15:58:29.205121] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1306 nodes 3564 nps 445500 hashfull 33 pv e4f2 h2h1 f2h1 f1g1 
+[Engine] [15:58:30.261658] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 3948 / 1775
+[Engine] [15:58:30.261717] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 447256 nps 423537 hashfull 36 pv e4c5 f3g4 g7g5 c3h8 b7b5 
+[Engine] [15:58:30.261740] <  2> Pertinax0_2_8 ---> bestmove e4c5
+[TRACE ] [15:58:30.261756] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:30.261770] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:30.261785] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:30.261797] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:30.306440] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:30.306508] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:30.306529] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:30.306607] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:30.306625] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:30.321829] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:30.321881] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:30.321903] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5
+[TRACE ] [15:58:30.321935] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:30.321965] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:30.337450] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:30.337525] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:30.337558] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:30.337589] <  2> Pertinax0_2_9 <--- go wtime 59550 btime 52696 winc 500 binc 500
+[Engine] [15:58:30.337978] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:58:30.338024] <  2> Pertinax0_2_9 ---> info depth 1 score cp 914 nodes 28 nps 2800 hashfull 16 pv f1g1 
+[Engine] [15:58:30.340373] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 4 / 0
+[Engine] [15:58:30.340412] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1035 nps 517500 hashfull 16 pv f3g4 c5a6 
+[Engine] [15:58:30.342501] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 28 / 52
+[Engine] [15:58:30.342540] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1229 nodes 890 nps 445000 hashfull 16 pv c3b4 g4b4 f1g1 
+[Engine] [15:58:30.494626] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 294 / 134
+[Engine] [15:58:30.494699] <  2> Pertinax0_2_9 ---> info depth 4 score cp 202 nodes 65768 nps 432684 hashfull 17 pv f3g4 c5b3 g4h5 b3a1 
+[Engine] [15:58:30.533260] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1214 / 1585
+[Engine] [15:58:30.533318] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1632 nodes 17137 nps 450973 hashfull 17 pv c3d4 g4d4 a2b2 d4b2 c2c4 
+[Engine] [15:58:30.533345] <  2> Pertinax0_2_9 ---> bestmove c3d4
+[TRACE ] [15:58:30.533365] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:30.533383] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:30.533400] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:30.533415] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:30.557409] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:30.557469] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:30.557497] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:30.557599] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:30.557621] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:30.572800] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:30.572848] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:30.572873] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4
+[TRACE ] [15:58:30.572901] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:30.572930] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:30.588443] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:30.588490] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:30.588529] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:30.588565] <  2> Pertinax0_2_8 <--- go wtime 59855 btime 52696 winc 500 binc 500
+[Engine] [15:58:30.588940] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:30.588985] <  2> Pertinax0_2_8 ---> info depth 1 score cp -902 nodes 37 nps 3700 hashfull 36 pv g4e4 
+[Engine] [15:58:30.589273] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 36 / 34
+[Engine] [15:58:30.589307] <  2> Pertinax0_2_8 ---> info depth 2 score cp 1218 nodes 100 nps 10000 hashfull 36 pv g4d4 a2a1 
+[Engine] [15:58:30.675281] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1018 / 2
+[Engine] [15:58:30.675334] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 38170 nps 449058 hashfull 36 pv g4e4 d3e4 g7g5 
+[Engine] [15:58:30.682048] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1125 / 1061
+[Engine] [15:58:30.682096] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1619 nodes 2805 nps 467500 hashfull 36 pv g4d4 a2a1 d4a1 f1g1 
+[Engine] [15:58:32.496387] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 21607 / 1374
+[Engine] [15:58:32.496444] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 822030 nps 453158 hashfull 36 pv c5e4 f3g4 g7g6 d4h8 c5d3 
+[Engine] [15:58:32.496472] <  2> Pertinax0_2_8 ---> bestmove c5e4
+[TRACE ] [15:58:32.496490] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:32.496504] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:32.496518] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:32.496532] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:32.515354] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:32.515419] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:32.515440] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[WARN  ] [15:58:32.515601] <   > fastchess --- Warning; Illegal PV move - move c5d3 from Pertinax0_2_8
+Info; info depth 5 score cp 403 nodes 822030 nps 453158 hashfull 36 pv c5e4 f3g4 g7g6 d4h8 c5d3 
+Position; startpos
+Moves; g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 
+
+[TRACE ] [15:58:32.515644] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:32.515662] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:32.530754] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:32.530816] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:32.530840] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4
+[TRACE ] [15:58:32.530872] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:32.530902] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:32.546455] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:32.546498] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:32.546518] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:32.546535] <  2> Pertinax0_2_9 <--- go wtime 59855 btime 51289 winc 500 binc 500
+[Engine] [15:58:32.546879] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:32.546923] <  2> Pertinax0_2_9 ---> info depth 1 score cp 914 nodes 33 nps 3300 hashfull 17 pv f1g1 
+[Engine] [15:58:32.549917] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 32 / 0
+[Engine] [15:58:32.549960] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1249 nps 416333 hashfull 17 pv f3g4 e4d2 
+[Engine] [15:58:32.552155] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 94 / 61
+[Engine] [15:58:32.552196] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1229 nodes 908 nps 454000 hashfull 17 pv d4f2 e4f2 h2h1 
+[Engine] [15:58:33.047708] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 5491 / 127
+[Engine] [15:58:33.047787] <  2> Pertinax0_2_9 ---> info depth 4 score cp 10 nodes 215167 nps 434680 hashfull 17 pv f3g4 f8a3 g4h5 a3c1 
+[Engine] [15:58:33.079342] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 2651 / 1998
+[Engine] [15:58:33.079404] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1632 nodes 14289 nps 460935 hashfull 17 pv d4c3 e4c3 f3f4 c3a2 f4f5 
+[Engine] [15:58:33.079426] <  2> Pertinax0_2_9 ---> bestmove d4c3
+[TRACE ] [15:58:33.079442] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:33.079456] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:33.079470] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:33.079483] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:33.123983] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:33.124070] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:33.124091] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:33.124169] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:33.124186] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:33.139662] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:33.139728] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:33.139749] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3
+[TRACE ] [15:58:33.139824] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:33.139855] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:33.155084] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:33.155151] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:33.155171] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:33.155188] <  2> Pertinax0_2_8 <--- go wtime 59823 btime 51289 winc 500 binc 500
+[Engine] [15:58:33.155679] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:33.155716] <  2> Pertinax0_2_8 ---> info depth 1 score cp -900 nodes 42 nps 4200 hashfull 36 pv e4d2 
+[Engine] [15:58:33.156025] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 41 / 39
+[Engine] [15:58:33.156045] <  2> Pertinax0_2_8 ---> info depth 2 score cp 1008 nodes 84 nps 8400 hashfull 36 pv e4g3 f1g1 
+[Engine] [15:58:33.247575] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1019 / 0
+[Engine] [15:58:33.247650] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 40879 nps 449219 hashfull 36 pv e4f2 f3g4 e4d2 
+[Engine] [15:58:33.255709] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1452 / 1410
+[Engine] [15:58:33.255773] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1622 nodes 3148 nps 393500 hashfull 36 pv e4c3 f1g1 c3a2 g1f1 
+[Engine] [15:58:35.036650] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 13239 / 1697
+[Engine] [15:58:35.036701] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 806598 nps 453144 hashfull 39 pv e4f2 f3g4 g7g5 c3h8 b7b5 
+[Engine] [15:58:35.036724] <  2> Pertinax0_2_8 ---> bestmove e4f2
+[TRACE ] [15:58:35.036740] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:35.036755] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:35.036769] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:35.036781] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:35.080698] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:35.080770] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:35.080790] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[WARN  ] [15:58:35.080913] <   > fastchess --- Warning; Illegal PV move - move e4d2 from Pertinax0_2_8
+Info; info depth 3 score cp 0 nodes 40879 nps 449219 hashfull 36 pv e4f2 f3g4 e4d2 
+Position; startpos
+Moves; g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 
+
+[TRACE ] [15:58:35.080979] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:35.080998] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:35.096517] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:35.096591] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:35.096611] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 e4f2
+[TRACE ] [15:58:35.096636] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:35.096650] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:35.111990] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:35.112059] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:35.112075] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:35.112090] <  2> Pertinax0_2_9 <--- go wtime 59823 btime 49908 winc 500 binc 500
+[Engine] [15:58:35.112379] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:35.112412] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 28 nps 2800 hashfull 17 pv f1g1 
+[Engine] [15:58:35.114792] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 28 / 0
+[Engine] [15:58:35.114826] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1133 nps 566500 hashfull 17 pv f3g4 c6c5 
+[Engine] [15:58:35.116994] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 30 / 56
+[Engine] [15:58:35.117042] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1316 nodes 887 nps 443500 hashfull 17 pv h2h1 f2h1 f1g1 
+[Engine] [15:58:35.672829] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 2035 / 101
+[Engine] [15:58:35.672890] <  2> Pertinax0_2_9 ---> info depth 4 score cp 2 nodes 247754 nps 446403 hashfull 18 pv f3g4 f8a3 g4h5 f2d1 
+[Engine] [15:58:35.707830] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1365 / 1765
+[Engine] [15:58:35.707894] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1632 nodes 15800 nps 464705 hashfull 19 pv g2h1 f2h1 h2f2 h1f2 e1g2 
+[Engine] [15:58:35.707920] <  2> Pertinax0_2_9 ---> bestmove g2h1
+[TRACE ] [15:58:35.707940] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:35.707957] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:35.707976] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:35.707991] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:35.738448] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:35.738540] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:35.738578] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:35.738705] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:35.738742] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:35.753701] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:35.753770] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:35.753794] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 e4f2 g2h1
+[TRACE ] [15:58:35.753824] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:35.753841] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:35.769555] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:35.769634] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:35.769655] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:35.769672] <  2> Pertinax0_2_8 <--- go wtime 59728 btime 49908 winc 500 binc 500
+[Engine] [15:58:35.770014] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:35.770044] <  2> Pertinax0_2_8 ---> info depth 1 score cp -902 nodes 44 nps 4400 hashfull 39 pv f2d1 
+[Engine] [15:58:35.770220] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 11 / 42
+[Engine] [15:58:35.770255] <  2> Pertinax0_2_8 ---> info depth 2 score cp 704 nodes 85 nps 8500 hashfull 39 pv g4g3 h2f2 
+[Engine] [15:58:35.882980] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 336 / 12
+[Engine] [15:58:35.883072] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 50760 nps 453214 hashfull 39 pv f2d1 f3g4 d1e3 
+[Engine] [15:58:35.891029] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 566 / 1434
+[Engine] [15:58:35.891085] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1308 nodes 3521 nps 440125 hashfull 39 pv f2d1 a2b2 d1b2 e1g2 
+[Engine] [15:58:36.373867] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 2439 / 1754
+[Engine] [15:58:36.373922] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 225394 nps 467622 hashfull 41 pv g4c4 b3c4 g7g5 c3h8 b7b5 
+[Engine] [15:58:36.373944] <  2> Pertinax0_2_8 ---> bestmove g4c4
+[TRACE ] [15:58:36.373961] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:36.373975] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:36.373989] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:36.374001] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:36.408468] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:36.408531] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:36.408562] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:36.408656] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:36.408725] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:36.423822] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:36.423878] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:36.423913] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 e4f2 g2h1 g4c4
+[TRACE ] [15:58:36.423940] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:36.423957] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:36.440243] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:36.440282] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:36.440302] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:36.440319] <  2> Pertinax0_2_9 <--- go wtime 59728 btime 49804 winc 500 binc 500
+[Engine] [15:58:36.440650] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:58:36.440687] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 32 nps 3200 hashfull 19 pv e1g2 
+[Engine] [15:58:36.443703] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 3 / 1
+[Engine] [15:58:36.443733] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1330 nps 443333 hashfull 19 pv b3c4 h5g4 
+[Engine] [15:58:36.446589] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 32 / 62
+[Engine] [15:58:36.446622] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1316 nodes 1119 nps 559500 hashfull 19 pv b3b4 c4a2 e1g2 
+[Engine] [15:58:37.301646] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 2733 / 106
+[Engine] [15:58:37.301707] <  2> Pertinax0_2_9 ---> info depth 4 score cp 2 nodes 367636 nps 429983 hashfull 21 pv b3c4 f8a3 a2a3 f2d1 
+[Engine] [15:58:37.347153] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1588 / 2157
+[Engine] [15:58:37.347211] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1632 nodes 20500 nps 455555 hashfull 21 pv f1g1 f2h1 h2f2 h1f2 e1g2 
+[Engine] [15:58:37.347239] <  2> Pertinax0_2_9 ---> bestmove f1g1
+[TRACE ] [15:58:37.347258] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:37.347275] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:37.347292] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:37.347307] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:37.390728] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:37.390779] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:37.390799] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:37.390875] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:37.390893] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:37.406379] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:37.406429] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:37.406460] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 e4f2 g2h1 g4c4 f1g1
+[TRACE ] [15:58:37.406501] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:37.406528] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:37.421754] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:37.421795] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:37.421817] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:37.421834] <  2> Pertinax0_2_8 <--- go wtime 59322 btime 49804 winc 500 binc 500
+[Engine] [15:58:37.422220] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:37.422256] <  2> Pertinax0_2_8 ---> info depth 1 score cp -902 nodes 47 nps 4700 hashfull 41 pv c4b4 
+[Engine] [15:58:37.422562] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 7 / 44
+[Engine] [15:58:37.422597] <  2> Pertinax0_2_8 ---> info depth 2 score cp 914 nodes 117 nps 11700 hashfull 41 pv c4c3 h2f2 
+[Engine] [15:58:37.553968] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 72 / 1
+[Engine] [15:58:37.554031] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 58065 nps 443244 hashfull 41 pv f2e4 b3c4 e4f2 
+[Engine] [15:58:37.563003] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 627 / 1593
+[Engine] [15:58:37.563035] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1308 nodes 3994 nps 443777 hashfull 42 pv f2e4 h2f2 e4f2 e1g2 
+[Engine] [15:58:38.142152] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 3174 / 1993
+[Engine] [15:58:38.142215] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 268506 nps 463740 hashfull 43 pv f2g4 b3c4 g7g5 c3h8 b7b5 
+[Engine] [15:58:38.142237] <  2> Pertinax0_2_8 ---> bestmove f2g4
+[TRACE ] [15:58:38.142253] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:38.142267] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:38.142282] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:38.142294] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:38.170694] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:38.170760] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:38.170780] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:38.170861] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:38.170879] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:38.186278] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:38.186345] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:38.186367] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 e4f2 g2h1 g4c4 f1g1 f2g4
+[TRACE ] [15:58:38.186396] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:38.186412] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:38.201646] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:38.201719] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:38.201736] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:38.201750] <  2> Pertinax0_2_9 <--- go wtime 59322 btime 49584 winc 500 binc 500
+[Engine] [15:58:38.202072] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:58:38.202103] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 32 nps 3200 hashfull 21 pv e1g2 
+[Engine] [15:58:38.204779] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 3 / 0
+[Engine] [15:58:38.204812] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1258 nps 629000 hashfull 21 pv b3c4 g7g5 
+[Engine] [15:58:38.207172] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 33 / 60
+[Engine] [15:58:38.207218] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1319 nodes 1001 nps 500500 hashfull 21 pv e1g2 g4h2 g1f2 
+[Engine] [15:58:38.789200] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1890 / 74
+[Engine] [15:58:38.789265] <  2> Pertinax0_2_9 ---> info depth 4 score cp 1 nodes 261715 nps 449682 hashfull 23 pv b3c4 f8a3 a2a3 g4f2 
+[Engine] [15:58:38.828700] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1531 / 2101
+[Engine] [15:58:38.828761] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1722 nodes 17920 nps 459487 hashfull 23 pv a3b1 g4h2 a2a3 f8a3 b1d2 
+[Engine] [15:58:38.828784] <  2> Pertinax0_2_9 ---> bestmove a3b1
+[TRACE ] [15:58:38.828800] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:38.828813] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:38.828828] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:38.828840] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:38.871748] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:38.871818] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:38.871839] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:38.871920] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:38.871943] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:38.887401] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:38.887489] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:38.887519] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 e4f2 g2h1 g4c4 f1g1 f2g4 a3b1
+[TRACE ] [15:58:38.887547] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:38.887564] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:38.902589] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:38.902671] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:38.902702] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:38.902731] <  2> Pertinax0_2_8 <--- go wtime 59195 btime 49584 winc 500 binc 500
+[Engine] [15:58:38.903212] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:38.903249] <  2> Pertinax0_2_8 ---> info depth 1 score cp -900 nodes 43 nps 4300 hashfull 43 pv c4d4 
+[Engine] [15:58:38.903462] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 40
+[Engine] [15:58:38.903481] <  2> Pertinax0_2_8 ---> info depth 2 score cp 904 nodes 87 nps 8700 hashfull 43 pv c4d4 g1f1 
+[Engine] [15:58:39.009237] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 50 / 1
+[Engine] [15:58:39.009299] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 48033 nps 457457 hashfull 44 pv c4d4 c3d4 g4f2 
+[Engine] [15:58:39.016655] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 516 / 1354
+[Engine] [15:58:39.016726] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1308 nodes 2887 nps 412428 hashfull 44 pv c4d4 g1g2 g4h2 b1d2 
+[Engine] [15:58:39.293657] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1858 / 1663
+[Engine] [15:58:39.293714] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 128294 nps 464833 hashfull 45 pv c4e4 d3e4 g7g5 c3h8 g4f2 
+[Engine] [15:58:39.293736] <  2> Pertinax0_2_8 ---> bestmove c4e4
+[TRACE ] [15:58:39.293752] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:39.293766] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:39.293780] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:39.293793] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:39.322784] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:39.322832] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:39.322851] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:39.322928] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:39.322945] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:39.338413] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:39.338455] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:39.338475] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 e4f2 g2h1 g4c4 f1g1 f2g4 a3b1 c4e4
+[TRACE ] [15:58:39.338504] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:39.338536] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:39.353803] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:39.353857] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:39.353877] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:39.353895] <  2> Pertinax0_2_9 <--- go wtime 59195 btime 49694 winc 500 binc 500
+[Engine] [15:58:39.354230] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:58:39.354268] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 31 nps 3100 hashfull 23 pv b1d2 
+[Engine] [15:58:39.357142] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 6 / 0
+[Engine] [15:58:39.357175] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1249 nps 624500 hashfull 23 pv d3e4 g4f2 
+[Engine] [15:58:39.359169] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 31 / 59
+[Engine] [15:58:39.359199] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1319 nodes 921 nps 460500 hashfull 23 pv b1d2 g4h2 e1g2 
+[Engine] [15:58:39.877037] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1759 / 79
+[Engine] [15:58:39.877103] <  2> Pertinax0_2_9 ---> info depth 4 score cp 97 nodes 233060 nps 450793 hashfull 24 pv d3e4 d5e4 f3g4 h5g4 
+[Engine] [15:58:39.911706] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1438 / 1971
+[Engine] [15:58:39.911793] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1725 nodes 15294 nps 449823 hashfull 25 pv h2f2 g4f2 a2a3 f8a3 f3f4 
+[Engine] [15:58:39.911821] <  2> Pertinax0_2_9 ---> bestmove h2f2
+[TRACE ] [15:58:39.911838] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:39.911852] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:39.911867] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:39.911879] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:39.931289] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:39.931347] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:39.931364] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:39.931431] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:39.931445] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:39.947313] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:39.947400] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:39.947435] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 e4f2 g2h1 g4c4 f1g1 f2g4 a3b1 c4e4 h2f2
+[TRACE ] [15:58:39.947461] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:39.947475] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:39.962316] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:39.962402] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:39.962433] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:39.962460] <  2> Pertinax0_2_8 <--- go wtime 59138 btime 49694 winc 500 binc 500
+[Engine] [15:58:39.962791] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:39.962917] <  2> Pertinax0_2_8 ---> info depth 1 score cp -902 nodes 44 nps 4400 hashfull 45 pv e4e3 
+[Engine] [15:58:39.963072] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 6 / 41
+[Engine] [15:58:39.963094] <  2> Pertinax0_2_8 ---> info depth 2 score cp 904 nodes 109 nps 10900 hashfull 45 pv e4e3 b1d2 
+[Engine] [15:58:40.086441] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 57 / 0
+[Engine] [15:58:40.086496] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 52878 nps 429902 hashfull 46 pv e4b4 c3b4 g4h2 
+[Engine] [15:58:40.094278] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 583 / 1403
+[Engine] [15:58:40.094346] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1308 nodes 3610 nps 515714 hashfull 46 pv e4b4 b1d2 g4f2 e1g2 
+[Engine] [15:58:40.501170] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 2572 / 1831
+[Engine] [15:58:40.501233] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 188926 nps 465334 hashfull 47 pv e4c4 b3c4 g7g5 c3h8 g4h2 
+[Engine] [15:58:40.501261] <  2> Pertinax0_2_8 ---> bestmove e4c4
+[TRACE ] [15:58:40.501281] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:40.501350] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:40.501384] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:40.501403] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:40.527373] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:40.527420] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:40.527440] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:40.527521] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:40.527544] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:40.543281] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:40.543350] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:40.543373] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 e4f2 g2h1 g4c4 f1g1 f2g4 a3b1 c4e4 h2f2 e4c4
+[TRACE ] [15:58:40.543402] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:40.543419] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:40.559389] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:40.559429] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:40.559452] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:40.559484] <  2> Pertinax0_2_9 <--- go wtime 59138 btime 49656 winc 500 binc 500
+[Engine] [15:58:40.559836] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 0 / 0
+[Engine] [15:58:40.559866] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 33 nps 3300 hashfull 25 pv b1d2 
+[Engine] [15:58:40.562823] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 10 / 0
+[Engine] [15:58:40.562856] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1318 nps 659000 hashfull 25 pv b3c4 g4h2 
+[Engine] [15:58:40.565241] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 37 / 61
+[Engine] [15:58:40.565273] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1319 nodes 1051 nps 525500 hashfull 25 pv b1d2 g4f2 e1g2 
+[Engine] [15:58:41.155575] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 2357 / 81
+[Engine] [15:58:41.155634] <  2> Pertinax0_2_9 ---> info depth 4 score cp 97 nodes 266027 nps 450893 hashfull 26 pv d3c4 d5c4 h3g4 c4b3 
+[Engine] [15:58:41.202981] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1655 / 2152
+[Engine] [15:58:41.203058] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1725 nodes 21354 nps 454340 hashfull 26 pv b1d2 g4f2 a2a3 f8a3 c3a1 
+[Engine] [15:58:41.203083] <  2> Pertinax0_2_9 ---> bestmove b1d2
+[TRACE ] [15:58:41.203099] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:41.203113] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:41.203128] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:41.203140] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:41.248703] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:41.248774] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:41.248794] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:41.248942] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:41.248967] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:41.264148] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:41.264233] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:41.264263] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 e4f2 g2h1 g4c4 f1g1 f2g4 a3b1 c4e4 h2f2 e4c4 b1d2
+[TRACE ] [15:58:41.264297] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:41.264318] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:41.280193] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:41.280284] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:41.280304] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:41.280322] <  2> Pertinax0_2_8 <--- go wtime 58995 btime 49656 winc 500 binc 500
+[Engine] [15:58:41.280632] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:41.280662] <  2> Pertinax0_2_8 ---> info depth 1 score cp -902 nodes 42 nps 4200 hashfull 47 pv c4b4 
+[Engine] [15:58:41.280898] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 11 / 40
+[Engine] [15:58:41.280913] <  2> Pertinax0_2_8 ---> info depth 2 score cp 913 nodes 111 nps 11100 hashfull 47 pv c4c3 f3g4 
+[Engine] [15:58:41.399998] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 339 / 2
+[Engine] [15:58:41.400054] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 53852 nps 452537 hashfull 47 pv c4b4 c3b4 g4h2 
+[Engine] [15:58:41.408122] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 636 / 1370
+[Engine] [15:58:41.408158] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1308 nodes 3603 nps 450375 hashfull 48 pv c4b4 e1g2 g4f2 g1f1 
+[Engine] [15:58:41.938607] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 2867 / 1790
+[Engine] [15:58:41.938674] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 246565 nps 465216 hashfull 49 pv c4d4 c3d4 g7g5 d4h8 g4h2 
+[Engine] [15:58:41.938714] <  2> Pertinax0_2_8 ---> bestmove c4d4
+[TRACE ] [15:58:41.938747] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:41.938779] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:41.938811] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:41.938843] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:41.970723] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:41.970804] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:41.970836] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:41.970955] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:41.970981] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:41.986316] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:41.986398] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:41.986434] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 e4f2 g2h1 g4c4 f1g1 f2g4 a3b1 c4e4 h2f2 e4c4 b1d2 c4d4
+[TRACE ] [15:58:41.986463] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:41.986479] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:42.001639] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:42.001703] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:42.001720] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:42.001735] <  2> Pertinax0_2_9 <--- go wtime 58995 btime 49498 winc 500 binc 500
+[Engine] [15:58:42.002021] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:42.002053] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 26 nps 2600 hashfull 26 pv e1g2 
+[Engine] [15:58:42.004247] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 25 / 1
+[Engine] [15:58:42.004283] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1004 nps 502000 hashfull 26 pv c3d4 g4e3 
+[Engine] [15:58:42.006051] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 25 / 51
+[Engine] [15:58:42.006106] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1319 nodes 699 nps 699000 hashfull 26 pv e1g2 g4f2 g1f1 
+[Engine] [15:58:42.275350] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 689 / 80
+[Engine] [15:58:42.275415] <  2> Pertinax0_2_9 ---> info depth 4 score cp 190 nodes 118833 nps 441758 hashfull 27 pv c3d4 g4h2 f2h2 h5f3 
+[Engine] [15:58:42.296944] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1018 / 1524
+[Engine] [15:58:42.297004] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1725 nodes 9640 nps 459047 hashfull 27 pv e1g2 g4f2 a2a3 f8a3 c3a1 
+[Engine] [15:58:42.297026] <  2> Pertinax0_2_9 ---> bestmove e1g2
+[TRACE ] [15:58:42.297043] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:42.297056] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:42.297071] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:42.297083] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:42.315305] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:42.315367] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:42.315389] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:42.315466] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:42.315487] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:42.330706] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:42.330747] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:42.330769] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 e4f2 g2h1 g4c4 f1g1 f2g4 a3b1 c4e4 h2f2 e4c4 b1d2 c4d4 e1g2
+[TRACE ] [15:58:42.330797] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:42.330814] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:42.346395] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:42.346451] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:42.346471] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:42.346488] <  2> Pertinax0_2_8 <--- go wtime 59200 btime 49498 winc 500 binc 500
+[Engine] [15:58:42.346847] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:42.346882] <  2> Pertinax0_2_8 ---> info depth 1 score cp -902 nodes 43 nps 4300 hashfull 49 pv d4e3 
+[Engine] [15:58:42.347142] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 10 / 40
+[Engine] [15:58:42.347157] <  2> Pertinax0_2_8 ---> info depth 2 score cp 913 nodes 110 nps 11000 hashfull 49 pv d4c3 f3g4 
+[Engine] [15:58:42.448863] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 256 / 4
+[Engine] [15:58:42.448921] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 45386 nps 449366 hashfull 50 pv d4e3 g2e3 g4h2 
+[Engine] [15:58:42.456946] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 610 / 1315
+[Engine] [15:58:42.456988] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1308 nodes 3411 nps 426375 hashfull 50 pv d4e3 g1f1 g4f2 f1e1 
+[Engine] [15:58:42.893036] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 2569 / 1671
+[Engine] [15:58:42.893097] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 201534 nps 462233 hashfull 51 pv d4c4 b3c4 g7g5 c3h8 g4h2 
+[Engine] [15:58:42.893124] <  2> Pertinax0_2_8 ---> bestmove d4c4
+[TRACE ] [15:58:42.893144] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:42.893160] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:42.893178] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:42.893193] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:42.940795] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:42.940864] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:42.940882] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:42.940948] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:42.940963] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:42.956564] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:42.956640] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:42.956661] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 e4f2 g2h1 g4c4 f1g1 f2g4 a3b1 c4e4 h2f2 e4c4 b1d2 c4d4 e1g2 d4c4
+[TRACE ] [15:58:42.956685] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:42.956699] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:42.971807] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:42.971886] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:42.971907] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:42.971925] <  2> Pertinax0_2_9 <--- go wtime 59200 btime 49452 winc 500 binc 500
+[Engine] [15:58:42.972302] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:42.972341] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 34 nps 3400 hashfull 27 pv g1f1 
+[Engine] [15:58:42.975404] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 31 / 1
+[Engine] [15:58:42.975446] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1297 nps 432333 hashfull 27 pv b3c4 g4h2 
+[Engine] [15:58:42.978262] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 38 / 61
+[Engine] [15:58:42.978317] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1319 nodes 1129 nps 564500 hashfull 27 pv g1f1 g4f2 f1e1 
+[Engine] [15:58:43.585097] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 2349 / 79
+[Engine] [15:58:43.585156] <  2> Pertinax0_2_9 ---> info depth 4 score cp 97 nodes 269295 nps 444381 hashfull 29 pv d3c4 d5c4 h3g4 c4b3 
+[Engine] [15:58:43.639738] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1783 / 2272
+[Engine] [15:58:43.639795] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1725 nodes 24739 nps 458129 hashfull 29 pv g1f1 g4f2 a2a3 f8a3 c3a1 
+[Engine] [15:58:43.639818] <  2> Pertinax0_2_9 ---> bestmove g1f1
+[TRACE ] [15:58:43.639834] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:43.639848] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:43.639863] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:43.639875] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:43.661740] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:43.661789] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:43.661809] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:43.661884] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:43.661901] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:43.677369] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:43.677426] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:43.677464] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 e4f2 g2h1 g4c4 f1g1 f2g4 a3b1 c4e4 h2f2 e4c4 b1d2 c4d4 e1g2 d4c4 g1f1
+[TRACE ] [15:58:43.677509] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:43.677543] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:43.692899] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:43.692971] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:43.692992] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:43.693010] <  2> Pertinax0_2_8 <--- go wtime 59033 btime 49452 winc 500 binc 500
+[Engine] [15:58:43.693375] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:43.693412] <  2> Pertinax0_2_8 ---> info depth 1 score cp -900 nodes 43 nps 4300 hashfull 51 pv 
+[Engine] [15:58:43.693662] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 11 / 40
+[Engine] [15:58:43.693697] <  2> Pertinax0_2_8 ---> info depth 2 score cp 1308 nodes 113 nps 11300 hashfull 51 pv g4f2 f1e1 
+[Engine] [15:58:43.804835] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 258 / 5
+[Engine] [15:58:43.804896] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 48159 nps 433864 hashfull 52 pv c4b4 c3b4 g4h2 
+[Engine] [15:58:43.812927] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 552 / 1386
+[Engine] [15:58:43.812982] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1308 nodes 3509 nps 438625 hashfull 52 pv c4b4 f1e1 g4f2 e1f1 
+[Engine] [15:58:44.342152] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 3011 / 1719
+[Engine] [15:58:44.342204] <  2> Pertinax0_2_8 ---> info depth 5 score cp 403 nodes 243896 nps 461051 hashfull 54 pv c4d4 c3d4 g7g5 d4h8 h5g6 
+[Engine] [15:58:44.342227] <  2> Pertinax0_2_8 ---> bestmove c4d4
+[TRACE ] [15:58:44.342244] <  2> fastchess --- Engine Pertinax0_2_8 is done thinking
+[TRACE ] [15:58:44.342258] <  2> fastchess --- Check if engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:44.342272] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:44.342285] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:44.362755] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:44.362801] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:44.362826] <  2> fastchess --- Engine Pertinax0_2_8 is in a ready state
+[TRACE ] [15:58:44.362904] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:44.362922] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:44.378395] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:44.378435] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[Engine] [15:58:44.378456] <  2> Pertinax0_2_9 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 e4f2 g2h1 g4c4 f1g1 f2g4 a3b1 c4e4 h2f2 e4c4 b1d2 c4d4 e1g2 d4c4 g1f1 c4d4
+[TRACE ] [15:58:44.378483] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:44.378500] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:44.393789] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:44.393834] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:44.393867] <  2> fastchess --- Engine Pertinax0_2_9 is thinking
+[Engine] [15:58:44.393898] <  2> Pertinax0_2_9 <--- go wtime 59033 btime 49303 winc 500 binc 500
+[Engine] [15:58:44.394223] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:44.394252] <  2> Pertinax0_2_9 ---> info depth 1 score cp 916 nodes 27 nps 2700 hashfull 29 pv f1e1 
+[Engine] [15:58:44.396640] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 26 / 1
+[Engine] [15:58:44.396677] <  2> Pertinax0_2_9 ---> info depth 2 score cp 0 nodes 1047 nps 523500 hashfull 29 pv c3d4 g4h2 
+[Engine] [15:58:44.398325] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 28 / 52
+[Engine] [15:58:44.398353] <  2> Pertinax0_2_9 ---> info depth 3 score cp 1319 nodes 709 nps 709000 hashfull 29 pv f1e1 g4f2 e1f1 
+[Engine] [15:58:44.674320] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 842 / 69
+[Engine] [15:58:44.674376] <  2> Pertinax0_2_9 ---> info depth 4 score cp 190 nodes 122529 nps 445560 hashfull 30 pv c3d4 g4e3 g2e3 h5f3 
+[Engine] [15:58:44.745164] <  2> Pertinax0_2_9 ---> TT Hits / Cutoffs= 1124 / 964
+[Engine] [15:58:44.745244] <  2> Pertinax0_2_9 ---> info depth 5 score cp 1725 nodes 33477 nps 478242 hashfull 30 pv f1e1 g4f2 a2a3 f8a3 c3a1 
+[Engine] [15:58:44.745273] <  2> Pertinax0_2_9 ---> bestmove f1e1
+[TRACE ] [15:58:44.745290] <  2> fastchess --- Engine Pertinax0_2_9 is done thinking
+[TRACE ] [15:58:44.745304] <  2> fastchess --- Check if engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:44.745319] <  2> fastchess --- Pinging engine Pertinax0_2_9
+[Engine] [15:58:44.745331] <  2> Pertinax0_2_9 <--- isready
+[Engine] [15:58:44.786359] <  2> Pertinax0_2_9 ---> readyok
+[TRACE ] [15:58:44.786427] <  2> fastchess --- Engine Pertinax0_2_9 is responsive
+[TRACE ] [15:58:44.786448] <  2> fastchess --- Engine Pertinax0_2_9 is in a ready state
+[TRACE ] [15:58:44.786524] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:44.786542] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:44.801984] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:44.802049] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[Engine] [15:58:44.802090] <  2> Pertinax0_2_8 <--- position startpos moves g1f3 d7d5 g2g3 c7c6 f1g2 g8f6 d2d3 c8g4 h2h3 g4h5 b2b3 e7e6 c1b2 d8a5 d1d2 a5d2 e1f1 f6e4 a2a4 d2e3 b2c3 e3f4 b1a3 f4g4 a1a2 e4c5 c3d4 g4f4 f3e1 f4e4 f2f3 e4g4 h1h2 c5e4 d4c3 e4c5 c3d4 c5e4 d4c3 e4f2 g2h1 g4c4 f1g1 f2g4 a3b1 c4e4 h2f2 e4c4 b1d2 c4d4 e1g2 d4c4 g1f1 c4d4 f1e1
+[TRACE ] [15:58:44.802129] <  2> fastchess --- Pinging engine Pertinax0_2_8
+[Engine] [15:58:44.802146] <  2> Pertinax0_2_8 <--- isready
+[Engine] [15:58:44.817556] <  2> Pertinax0_2_8 ---> readyok
+[TRACE ] [15:58:44.817627] <  2> fastchess --- Engine Pertinax0_2_8 is responsive
+[TRACE ] [15:58:44.817644] <  2> fastchess --- Engine Pertinax0_2_8 is thinking
+[Engine] [15:58:44.817659] <  2> Pertinax0_2_8 <--- go wtime 59182 btime 49303 winc 500 binc 500
+[Engine] [15:58:44.817982] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 1 / 0
+[Engine] [15:58:44.818013] <  2> Pertinax0_2_8 ---> info depth 1 score cp -902 nodes 43 nps 4300 hashfull 54 pv d4e3 
+[Engine] [15:58:44.818249] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 12 / 41
+[Engine] [15:58:44.818281] <  2> Pertinax0_2_8 ---> info depth 2 score cp 1308 nodes 112 nps 11200 hashfull 54 pv d4f2 e1d1 
+[Engine] [15:58:44.920031] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 246 / 5
+[Engine] [15:58:44.920086] <  2> Pertinax0_2_8 ---> info depth 3 score cp 0 nodes 46195 nps 457376 hashfull 54 pv d4e3 g2e3 g4h2 
+[Engine] [15:58:44.927963] <  2> Pertinax0_2_8 ---> TT Hits / Cutoffs= 621 / 1357
+[Engine] [15:58:44.928027] <  2> Pertinax0_2_8 ---> info depth 4 score cp 1412 nodes 3423 nps 489000 hashfull 54 pv d4f2 e1d1 f2e2 d1c1 

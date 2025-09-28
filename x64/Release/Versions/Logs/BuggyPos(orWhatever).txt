@@ -1,1 +1,1 @@
-position startpos moves e2e4 e7e5 g1f3 f7f5 f3e5 d8f6 d2d4 d7d6 e5c4 f5e4 b1c3 f6g6 d4d5 g8f6 c1e3 f8e7 d1f3 g6g4 h2h4 a7a5 a1d1 g4f5 b2b4 a8a6 f1e2 a6b6 h1f1 b6b5 f1g1 b5c5 g1f1 f5d5 c3d5 c5c4 e2c4 e8g8 d5e7 d6d5 e7g8 king captured, Move index 0
+position startpos moves d2d4 d7d6 c2c4 e7e5 d4d5 f7f5 e2e4 f5e4 b1c3 g8f6 g1e2 c8f5 e2g3 f5g6 c1g5 b8d7 d1f3 f6h5 e1d2 d8f6 a1c1 f6f5 d2e1 e4e3 h1g1 e5e4 a2a3 f5h3 g1h1 h3g4 h1g1 g4h3 g1h1 e4f3 c1c2 g6c2 c3e2 h3e6 e2c1 e3f2 e1d2 h5g3 f1d3 e6d5 h1e1

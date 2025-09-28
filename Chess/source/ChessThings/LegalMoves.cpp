@@ -180,7 +180,15 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 		for (auto& CheckBoardSquare : GuessXrayCheck)
 		{
 			if (CheckBoardSquare == 65) { break; }
-			CheckTargetSquares[CheckBoardSquare] = BoardSquarePos;
+			if (CheckTargetSquares[CheckBoardSquare] == NULL_OPTION)[[likely]]
+			{
+				CheckTargetSquares[CheckBoardSquare] = BoardSquarePos;
+			}
+			else
+			{
+				DoubleCheckBoardSquare = BoardSquarePos;
+			}
+			
 		}
 	}
 	//possible pin, logic for finding and saving is the same as above, DO NOT LET CHECKS IN HERE
@@ -353,7 +361,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 #ifdef _DEBUG
 	if (BoardSquarePos < 8 or BoardSquarePos > 55)
 	{
-		ASSERT(false);//this should be made an assert
+		ASSERT(false);
 	}
 #endif
 	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
@@ -721,7 +729,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 		if (Piece.TargetSquares == 0) { continue; }
 		if ((Piece.PieceType == WHITE_PAWN or Piece.PieceType == BLACK_PAWN) and ((Piece.Promotion.Promotion & PromotionMask) != 0))[[unlikely]]
 		{
-			m_NumOfLegalMoves += std::popcount((uint8_t)(Piece.Promotion.Promotion & PromotionMask)) * 4;
+			m_NumOfLegalMoves += std::popcount(static_cast<uint64_t>(Piece.TargetSquares)) * 4;
 		}
 		else
 		{

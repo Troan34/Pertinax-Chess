@@ -114,7 +114,7 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 		}
 	}
 
-	//make a variable size array, for SEGFAULT or STACK OVERFLOW check here first
+	//make a variable length array, for SEGFAULT or STACK OVERFLOW check here first
 	GuessStruct* GuessedOrder = static_cast<GuessStruct*>(alloca((LegalMoves.m_NumOfLegalMoves + (InsertTTMove ? 1 : 0)) * sizeof(GuessStruct)));
 	OrderMoves(LegalMoves, BoardSquare, GuessedOrder, InsertTTMove ? FoundTT.second : TTEntry(), depth);
 
@@ -123,7 +123,7 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 		GuessStruct Guess = GuessedOrder[MoveIndex];
 
 		Move Move_(Guess.BoardSquare, Guess.Move, Guess.PromotionType);
-		if (Move_.IsNull()) { continue; }//this usually happens because of the first element being
+		if (Move_.IsNull()) { continue; }//this usually happens because of the first element being null
 		MakeMove(LegalMoves, m_Hash, Move_, BoardSquare, previousBoardSquare, CanCastle);
 
 		auto Evaluation = NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, &PVLine);
@@ -268,17 +268,17 @@ void Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<u
 		uint64_t Moves_Copy = piece.TargetSquares;
 		while(true)
 		{
-			if (!bit::pop_lsb(Moves_Copy, move) or Index > MAX_INDEX) { break; }
+			if (Moves_Copy == 0 or !bit::pop_lsb(Moves_Copy, move) or Index > MAX_INDEX)[[likely]] { break; }
 			int32_t GuessedEval = 0;
 			bool IsWhite = Board::IsPieceColorWhite(fun_BoardSquare[count]);
 			if (fun_BoardSquare[move] != NONE)
 			{
-				GuessedEval += (2 * Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[move])) - 0.2*Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[count]);
+				GuessedEval += (2 * Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[move])) - (0.2f)*Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[count]);
 			}
 
 			if (LegalMoves.OppositeAttackedSquares[move])
 			{
-				GuessedEval -= (2/3)*Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[count]);
+				GuessedEval -= (0.6f)*Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[count]);
 			}
 
 			//Is Pv move
@@ -302,12 +302,15 @@ void Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<u
 					if (IsWhite)
 					{
 						GuessedEval += Evaluator::ConvertPieceTypeToMatValue(i + 18);
+						GuessedOrder[Index] = GuessStruct(count, move, i + 18, GuessedEval);
+						GuessedEval -= Evaluator::ConvertPieceTypeToMatValue(i + 18);
 					}
 					else
 					{
 						GuessedEval += Evaluator::ConvertPieceTypeToMatValue(i + 10);
+						GuessedOrder[Index] = GuessStruct(count, move, i + 10, GuessedEval);
+						GuessedEval -= Evaluator::ConvertPieceTypeToMatValue(i + 10);
 					}
-					GuessedOrder[Index] = GuessStruct(count, move, (IsWhite ? i + 18 : i + 10), GuessedEval);//ADDED here
 					Index++;
 				}
 			}
