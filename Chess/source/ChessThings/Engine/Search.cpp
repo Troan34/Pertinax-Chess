@@ -63,12 +63,10 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 	{
 		Evaluator evaluator(LegalMoves);
 		evaluator.SetParameters(BoardSquare, previousBoardSquare, CanCastle, MoveNum);
-		BestEvaluation = max(BestEvaluation, evaluator.Evaluate());//to change with a quiescent fun
-		alpha = max(alpha, BestEvaluation);
+		BestEvaluation = evaluator.Evaluate();//to change with a quiescent fun
 		previousPVLine->NumOfMoves = 0;
 		return BestEvaluation;
 	}
-
 
 	Move BestMove;
 	Move CutOffMove;
@@ -81,44 +79,25 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 
 	//Probe TT and manage its bound
 	auto FoundTT = TT.TTprobe(m_Hash.Hash);
-	bool InsertTTMove = false;
 
 	if (FoundTT.first)
 	{
 		TThits++;
-		if (FoundTT.second.Depth >= depth)
+		if (FoundTT.second.Depth >= depth and LegalMoves.IsMoveLegal(FoundTT.second.BestMove))
 		{
-			if (LegalMoves.IsMoveLegal(FoundTT.second.BestMove))
+			if (depth == m_depth)//this is to protect against an empty pv line
 			{
-				auto Bound = TranspositionTable::GetBound(FoundTT.second.AgeBound);
-				switch (Bound)
-				{
-					case (EXACT):
-					{
-						return {FoundTT.second.Evaluation};
-						break;
-					}
-					case (LOWER_BOUND):
-					{
-						alpha = max(alpha, FoundTT.second.Evaluation);
-						break;
-					}
-					case (UPPER_BOUND):
-					{
-						beta = min(beta, FoundTT.second.Evaluation);
-						break;
-					}
-				}
-				InsertTTMove = true;
+				m_PreviousPV->moves[0] = FoundTT.second.BestMove;
 			}
+			return FoundTT.second.Evaluation;
 		}
 	}
 
 	//make a variable length array, for SEGFAULT or STACK OVERFLOW check here first
-	GuessStruct* GuessedOrder = static_cast<GuessStruct*>(alloca((LegalMoves.m_NumOfLegalMoves + (InsertTTMove ? 1 : 0)) * sizeof(GuessStruct)));
-	OrderMoves(LegalMoves, BoardSquare, GuessedOrder, InsertTTMove ? FoundTT.second : TTEntry(), depth);
+	GuessStruct* GuessedOrder = static_cast<GuessStruct*>(alloca(LegalMoves.m_NumOfLegalMoves * sizeof(GuessStruct)));
+	OrderMoves(LegalMoves, BoardSquare, GuessedOrder, depth);
 
-	for (uint8_t MoveIndex = 0; MoveIndex < (LegalMoves.m_NumOfLegalMoves + ((InsertTTMove) ? 1 : 0)); MoveIndex++)
+	for (uint8_t MoveIndex = 0; MoveIndex < LegalMoves.m_NumOfLegalMoves; MoveIndex++)
 	{
 		GuessStruct Guess = GuessedOrder[MoveIndex];
 
@@ -248,18 +227,13 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash
 }
 
 //sorted best to worst
-void Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& fun_BoardSquare, GuessStruct* GuessedOrder, TTEntry TTMove, uint8_t depth)
+void Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& fun_BoardSquare, GuessStruct* GuessedOrder, uint8_t depth)
 {
-	const int32_t MAX_INDEX = LegalMoves.m_NumOfLegalMoves - ((TTMove.IsNull()) ? 1 : 0);//IF IGNORED -> SEGFAULT;
+	const int32_t MAX_INDEX = LegalMoves.m_NumOfLegalMoves;//IF IGNORED -> SEGFAULT;
 	uint32_t Index = 0;
 	uint8_t count = 0;
 	//bool flag = true; use when implementing go search
 
-	if (!TTMove.IsNull())//there is a ttmove
-	{
-		GuessedOrder[0] = GuessStruct(TTMove.BestMove.s_BoardSquare, TTMove.BestMove.s_Move, TTMove.BestMove.s_PromotionType, TTMove.Evaluation);
-		Index++;
-	}
 
 	for (MOVE_BIT piece : LegalMoves.moves)
 	{
@@ -325,7 +299,7 @@ void Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<u
 		count++;
 	}
 
-	std::sort(GuessedOrder + !TTMove.IsNull(), GuessedOrder + LegalMoves.m_NumOfLegalMoves,
+	std::sort(GuessedOrder, GuessedOrder + LegalMoves.m_NumOfLegalMoves,
 		[](const auto& a, const auto& b) {
 			return a.GuessedEval > b.GuessedEval;
 		});

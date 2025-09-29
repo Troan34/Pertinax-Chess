@@ -15,17 +15,20 @@ private:
 	static constexpr int16_t M_QUEEN_MATERIAL_VALUE = 900;
 	static constexpr int16_t M_KING_MATERIAL_VALUE = 15000;
 
-	
-
 	const GenerateLegalMoves& m_LegalMoves;
 	std::array<uint8_t, 64> m_BoardSquare; // Change reference to value
 	std::array<uint8_t, 64> m_PreviousBoardSquare; // Change reference to value
 	canCastle m_CanCastle; // Change reference to value
 	int32_t m_Evaluation = 0;
 	int32_t m_MoveNum;
-
+	
+	//self describing
 	int32_t BoardMatValue();
+
 	int32_t MobilityEval();
+
+	//This does the PST additions
+	int32_t PieceSquareEval();
 public:
 	static constexpr int16_t ConvertPieceTypeToMatValue(const uint8_t& PieceType)
 	{
