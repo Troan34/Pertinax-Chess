@@ -21,6 +21,7 @@ private:
 	canCastle m_CanCastle; // Change reference to value
 	int32_t m_Evaluation = 0;
 	int32_t m_MoveNum;
+	uint8_t NumOfPieces = 0;
 	
 	//self describing
 	int32_t BoardMatValue();
@@ -28,7 +29,7 @@ private:
 	int32_t MobilityEval();
 
 	//This does the PST additions
-	int32_t PieceSquareEval();
+	int32_t PieceSquareEval() const;
 public:
 	static constexpr int16_t ConvertPieceTypeToMatValue(const uint8_t& PieceType)
 	{
