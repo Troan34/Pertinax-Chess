@@ -97,6 +97,8 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 	GuessStruct* GuessedOrder = static_cast<GuessStruct*>(alloca(LegalMoves.m_NumOfLegalMoves * sizeof(GuessStruct)));
 	OrderMoves(LegalMoves, BoardSquare, GuessedOrder, depth);
 
+	int32_t SmallWindowBeta = beta;
+	int32_t Evaluation;
 	for (uint8_t MoveIndex = 0; MoveIndex < LegalMoves.m_NumOfLegalMoves; MoveIndex++)
 	{
 		GuessStruct Guess = GuessedOrder[MoveIndex];
@@ -105,7 +107,12 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 		if (Move_.IsNull()) { continue; }//this usually happens because of the first element being null
 		MakeMove(LegalMoves, m_Hash, Move_, BoardSquare, previousBoardSquare, CanCastle);
 
-		auto Evaluation = NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, &PVLine);
+		Evaluation = -NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -SmallWindowBeta, -alpha, &PVLine);
+
+		if ((Evaluation > alpha) and (Evaluation < beta) and (MoveIndex > 0))
+		{
+			Evaluation = -NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, &PVLine);
+		}
 
 		if (Evaluation > BestEvaluation)
 		{
@@ -119,15 +126,16 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 				std::copy(PVLine.moves.begin(), PVLine.moves.begin() + PVLine.NumOfMoves, previousPVLine->moves.begin() + 1);
 				previousPVLine->NumOfMoves = PVLine.NumOfMoves + 1;
 			}
+			if (Evaluation > beta)
+			{
+				if (Move_ == previousPVLine->moves[previousPVLine->NumOfMoves - depth + 1]) { FollowPV = false; }
+				Cutoffs++;
+				m_Hash.Hash = cHash;//make sure we give the tt the right hash
+				goto after_search;
+			}
 		}
-		if (Evaluation > beta)
-		{
-			if(Move_ == m_PreviousPV->moves[m_PreviousPV->NumOfMoves - depth + 1]){ FollowPV = false; }
-			Cutoffs++;
-			m_Hash.Hash = cHash;//make sure we give the tt the right hash
-			goto after_search;
-		}
-
+		
+		SmallWindowBeta = alpha + 1;//widen window
 
 		//undo move
 		BoardSquare = previousBoardSquare;

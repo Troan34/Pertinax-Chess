@@ -253,7 +253,7 @@ std::string Board::Move2ALG(Move move)
 	ALG += row;
 	if (move.s_PromotionType != 65)
 	{
-		ALG += PieceType2letter(GetPieceType2Uncolored(move.s_PromotionType) + 9);//This is some traduction gibberish for UCI
+		ALG += PieceType2letter(move.s_PromotionType);//This is some traduction gibberish for UCI
 	}
 
 	return ALG;
