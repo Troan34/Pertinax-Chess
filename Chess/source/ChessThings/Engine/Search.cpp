@@ -240,7 +240,6 @@ void Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<u
 	const int32_t MAX_INDEX = LegalMoves.m_NumOfLegalMoves;//IF IGNORED -> SEGFAULT;
 	uint32_t Index = 0;
 	uint8_t count = 0;
-	//bool flag = true; use when implementing go search
 
 
 	for (MOVE_BIT piece : LegalMoves.moves)
