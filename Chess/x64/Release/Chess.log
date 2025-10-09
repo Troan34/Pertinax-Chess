@@ -1,15 +1,19 @@
 ﻿  Search.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(25,84): warning C4244: 'argument': conversion from 'const uint16_t' to 'uint8_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(248,13): warning C4018: '>': signed/unsigned mismatch
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(253,68): warning C4018: '>': signed/unsigned mismatch
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(258,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(263,26): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(326,13): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(331,68): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(336,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(341,26): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(404,13): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(409,68): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(417,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(422,27): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(243,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
   (compiling source file 'source/ChessThings/Engine/Search.cpp')
   
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  6 of 4206 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  7 of 4229 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     22 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

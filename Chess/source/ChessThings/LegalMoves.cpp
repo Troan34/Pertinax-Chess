@@ -656,8 +656,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 				count++;
 				continue;
 			}
-
-			auto MovesCopy = Piece.TargetSquares;
+			
 			//if in check and count is under abs pin, unable to move
 			if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 65 and NumberOfChecks == 1)
 			{
@@ -667,6 +666,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 			}
 			else 
 			{
+				auto MovesCopy = Piece.TargetSquares;
 				uint8_t Move = 0;
 				while (true)
 				{
@@ -810,6 +810,24 @@ bool GenerateLegalMoves::IsMoveLegal(const Move& CheckedMove) const
 		return true;
 	}
 	return false;
+}
+
+uint32_t GenerateLegalMoves::GetNumOfTacticalMoves() const
+{
+	uint32_t NumOfTacticalMoves = 0;
+	for (const MOVE_BIT& Piece : moves)
+	{
+		auto MovesCopy = Piece.TargetSquares;
+		uint8_t Move = 0;
+		while (true)
+		{
+			if (!bit::pop_lsb(MovesCopy, Move)) { break; }
+			
+			if ((Piece.TargetSquares[Move] and m_BoardSquare[Move] != 0) or ((Piece.Promotion.Promotion & PromotionMask) != 0))
+				NumOfTacticalMoves++;
+		}
+	}
+	return NumOfTacticalMoves;
 }
 
 uint64_t ComputeRookAttacks(uint8_t BoardSquare, uint16_t Blocker)

@@ -223,6 +223,7 @@ struct PromotionByte
 		Promotion |= BoardSquare << 3;
 
 	}
+
 };
 
 struct MOVE
@@ -312,5 +313,6 @@ public:
 	void RemoveIllegalMoves();
 	static void SetDoNotEnPassant(bool SetToThis);
 	bool IsMoveLegal(const Move& CheckedMove) const;
+	uint32_t GetNumOfTacticalMoves() const;
 };
 

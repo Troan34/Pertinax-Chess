@@ -61,9 +61,7 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 
 	if (depth == 0)
 	{
-		Evaluator evaluator(LegalMoves);
-		evaluator.SetParameters(BoardSquare, previousBoardSquare, CanCastle, MoveNum);
-		BestEvaluation = evaluator.Evaluate();//to change with a quiescent fun
+		BestEvaluation = QuietSearch(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, alpha, beta);//to change with a quiescent fun
 		previousPVLine->NumOfMoves = 0;
 		return BestEvaluation;
 	}
@@ -234,6 +232,87 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash
 
 }
 
+void Search::QMakeMove(const GenerateLegalMoves& LegalMoves, Move Move_, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle)
+{
+
+	fun_previousBoardSquare = fun_BoardSquare;
+	Board::WillCanCastleChange(fun_BoardSquare[Move_.s_BoardSquare], Move_.s_BoardSquare, Move_.s_Move, Castle);
+	fun_BoardSquare[Move_.s_Move] = fun_BoardSquare[Move_.s_BoardSquare];
+
+	//castling
+	if (fun_BoardSquare[Move_.s_BoardSquare] == WHITE_KING or fun_BoardSquare[Move_.s_BoardSquare] == BLACK_KING)
+	{
+		if (Move_.s_BoardSquare - Move_.s_Move == -2)
+		{
+			if (Move_.s_BoardSquare == 4)
+			{
+				fun_BoardSquare[5] = WHITE_ROOK;
+				fun_BoardSquare[7] = 0;
+			}
+			else
+			{
+				fun_BoardSquare[61] = BLACK_ROOK;
+				fun_BoardSquare[63] = 0;
+			}
+		}
+		if (Move_.s_BoardSquare - Move_.s_Move == 2)
+		{
+			if (Move_.s_BoardSquare == 4)
+			{
+				fun_BoardSquare[3] = WHITE_ROOK;
+				fun_BoardSquare[0] = 0;
+			}
+			else
+			{
+				fun_BoardSquare[59] = BLACK_ROOK;
+				fun_BoardSquare[56] = 0;
+			}
+		}
+
+	}
+
+
+	//promoting and en passant
+	if (Move_.s_PromotionType != NULL_OPTION)
+	{
+		fun_BoardSquare[Move_.s_Move] = Move_.s_PromotionType;
+	}
+	else//optimization
+	{
+		//White en passant
+		if (fun_BoardSquare[Move_.s_BoardSquare] == WHITE_PAWN)
+		{
+			if (fun_previousBoardSquare[Move_.s_Move] == 0)
+			{
+				if (Move_.s_BoardSquare - Move_.s_Move == -7 or Move_.s_BoardSquare - Move_.s_Move == -9)
+				{
+					fun_BoardSquare[Move_.s_Move - 8] = 0;
+				}
+			}
+		}
+		//Black en passant
+		if (fun_BoardSquare[Move_.s_BoardSquare] == BLACK_PAWN)
+		{
+			if (fun_previousBoardSquare[Move_.s_Move] == 0)
+			{
+				if (Move_.s_BoardSquare - Move_.s_Move == 7 or Move_.s_BoardSquare - Move_.s_Move == 9)
+				{
+					fun_BoardSquare[Move_.s_Move + 8] = 0;
+				}
+			}
+		}
+	}
+
+	fun_BoardSquare[Move_.s_BoardSquare] = 0;
+
+	GenerateLegalMoves::SetDoNotEnPassant(false);
+	if (abs(Move_.s_BoardSquare - Move_.s_Move) == 16 and LegalMoves.WhichBoardSquaresAreAbsPinned[Move_.s_Move] != 65)
+	{
+		GenerateLegalMoves::SetDoNotEnPassant(true);
+	}
+
+}
+
 //sorted best to worst
 void Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& fun_BoardSquare, GuessStruct* GuessedOrder, uint8_t depth)
 {
@@ -311,5 +390,140 @@ void Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<u
 			return a.GuessedEval > b.GuessedEval;
 		});
 
+}
+
+void Search::QOrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& fun_BoardSquare, GuessStruct* GuessedOrder, uint32_t NumOfTacticalMoves)
+{
+	const int32_t MAX_INDEX = NumOfTacticalMoves;//IF IGNORED -> SEGFAULT;
+	uint32_t Index = 0;
+	uint8_t count = 0;
+
+
+	for (MOVE_BIT piece : LegalMoves.moves)
+	{
+		if (Index > MAX_INDEX) { break; }
+		uint8_t move = 0;
+		uint64_t Moves_Copy = piece.TargetSquares;
+		while (true)
+		{
+			if (Moves_Copy == 0 or !bit::pop_lsb(Moves_Copy, move) or Index > MAX_INDEX) [[likely]] { break; }
+			//if not a tactical move
+			if (!((piece.TargetSquares[move] and m_BoardSquare[move] != 0) or (piece.Promotion.Promotion & PromotionMask))) { break; }
+
+			int32_t GuessedEval = 0;
+			bool IsWhite = Board::IsPieceColorWhite(fun_BoardSquare[count]);
+			if (fun_BoardSquare[move] != NONE)
+			{
+				GuessedEval += (2 * Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[move])) - (0.2f) * Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[count]);
+			}
+
+			if (LegalMoves.OppositeAttackedSquares[move])
+			{
+				GuessedEval -= (0.6f) * Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[count]);
+			}
+
+
+			if (piece.Promotion.Promotion != 0 and (piece.Promotion.Promotion & PromotionMask) != 0)
+			{
+				if (IsWhite)
+				{
+					piece.Promotion.ResetPromotionSide(move - count - 7, count);
+				}
+				else
+				{
+					piece.Promotion.ResetPromotionSide(move - count + 9, count);
+				}
+				for (uint8_t i = 0; i < 4; ++i)
+				{
+					if (IsWhite)
+					{
+						GuessedEval += Evaluator::ConvertPieceTypeToMatValue(i + 18);
+						GuessedOrder[Index] = GuessStruct(count, move, i + 18, GuessedEval);
+						GuessedEval -= Evaluator::ConvertPieceTypeToMatValue(i + 18);
+					}
+					else
+					{
+						GuessedEval += Evaluator::ConvertPieceTypeToMatValue(i + 10);
+						GuessedOrder[Index] = GuessStruct(count, move, i + 10, GuessedEval);
+						GuessedEval -= Evaluator::ConvertPieceTypeToMatValue(i + 10);
+					}
+					Index++;
+				}
+			}
+			else
+			{
+				GuessedOrder[Index] = GuessStruct(count, move, 65, GuessedEval);//AND here
+				Index++;
+			}
+
+
+		}
+		count++;
+	}
+
+	std::sort(GuessedOrder, GuessedOrder + NumOfTacticalMoves,
+		[](const auto& a, const auto& b) {
+			return a.GuessedEval > b.GuessedEval;
+		});
+
+}
+
+int32_t Search::QuietSearch(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, int32_t alpha, int32_t beta)
+{
+	NodesVisited++;
+	GenerateLegalMoves LegalMoves(BoardSquare, &previousBoardSquare, CanCastle, (MoveNum % 2 != 0) ? false : true, MoveNum, false);
+	uint32_t NumOfTacticalMoves = LegalMoves.GetNumOfTacticalMoves();
+	Evaluator evaluator(LegalMoves);
+	evaluator.SetParameters(BoardSquare, previousBoardSquare, CanCastle, MoveNum);
+	int32_t Eval = evaluator.Evaluate();//to change with a quiescent fun
+
+	if (NumOfTacticalMoves == 0)
+	{
+		return Eval;
+	}
+
+	int32_t BestEval = Eval;
+	if (BestEval >= beta)
+	{
+		return BestEval;
+	}
+	if (BestEval > alpha)
+	{
+		alpha = BestEval;
+	}
+
+	auto const cPreviousBoardSquare = previousBoardSquare;
+	auto const cCanCastle = CanCastle;
+	auto const cMoveNum = MoveNum;
+
+	
+	GuessStruct* GuessedOrder = static_cast<GuessStruct*>(alloca(NumOfTacticalMoves * sizeof(GuessStruct)));
+	QOrderMoves(LegalMoves, BoardSquare, GuessedOrder, NumOfTacticalMoves);
+
+	for (uint8_t MoveIndex = 0; MoveIndex < NumOfTacticalMoves; MoveIndex++)
+	{
+		GuessStruct Guess = GuessedOrder[MoveIndex];
+
+		Move Move_(Guess.BoardSquare, Guess.Move, Guess.PromotionType);
+		if (Move_.IsNull()) { continue; }//this usually happens because of the first element being null
+		QMakeMove(LegalMoves, Move_, BoardSquare, previousBoardSquare, CanCastle);
+
+		Eval = -QuietSearch(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, -beta, -alpha);
+
+		if (Eval >= beta)
+			return Eval;
+		if (Eval > BestEval)
+			BestEval = Eval;
+		if (Eval > alpha)
+			alpha = Eval;
+
+		//undo move
+		BoardSquare = previousBoardSquare;
+		previousBoardSquare = cPreviousBoardSquare;
+		CanCastle = cCanCastle;
+		MoveNum = cMoveNum;
+	}
+
+	return BestEval;
 }
 

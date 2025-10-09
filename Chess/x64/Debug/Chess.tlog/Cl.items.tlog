@@ -1,4 +1,5 @@
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp;C:\Users\roanb\source\repos\Pertinax-Chess\Chess\x64\Debug\IterativeD.obj
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\MoveOrdering.cpp;C:\Users\roanb\source\repos\Pertinax-Chess\Chess\x64\Debug\MoveOrdering.obj
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp;C:\Users\roanb\source\repos\Pertinax-Chess\Chess\x64\Debug\Search.obj
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Transposition\TT.cpp;C:\Users\roanb\source\repos\Pertinax-Chess\Chess\x64\Debug\TT.obj
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\UCI\UCI.cpp;C:\Users\roanb\source\repos\Pertinax-Chess\Chess\x64\Debug\UCI.obj
