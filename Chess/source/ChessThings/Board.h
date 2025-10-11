@@ -239,9 +239,9 @@ public:
 	static uint8_t ALG2BoardSquareConverter(const std::string& ALG);
 	static Move LongALG2Move(const std::string& ALG);
 	static std::string Move2ALG(Move move);
-	static inline uint8_t GetPieceType2Uncolored(const uint8_t& PieceType);
+	static constexpr uint8_t GetPieceType2Uncolored(uint8_t PieceType);
 	static CastlingAbility canCastle2CastlingAbility(const canCastle& Castle);
-	static inline bool IsPieceColorWhite(const uint8_t& BoardSquareValue);
+	static constexpr bool IsPieceColorWhite(uint8_t BoardSquareValue);
 	static char PieceType2letter(const uint8_t& PieceType);
 	static void WillCanCastleChange(const uint8_t& PieceTypeThatMoved, const uint8_t& BoardSquareItMovedFrom, const uint8_t& BoardSquareItMovedTo, canCastle& Castle);
 	static bool WillCanCastleChange(const uint8_t& PieceTypeThatMoved, const uint8_t& BoardSquareItMovedFrom, const uint8_t& BoardSquareItMovedTo);
@@ -355,7 +355,10 @@ namespace bit//bit management
 		BitManager& operator=(const BitManager& a) = delete;
 	};
 
-	//this class might be made strange, but it's like this to achieve a kind of bit array (and to replace the array of bools without refactoring the code)
+	/// <summary>
+	/// Simulates a chess board using a 64bit number,
+	/// Member functions help this class to integrate in the existing codebase, such as the operator[] accessing
+	/// </summary>
 	class BitBoard64 {
 		uint64_t Bits = 0;
 	public:

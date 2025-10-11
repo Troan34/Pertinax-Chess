@@ -259,7 +259,7 @@ std::string Board::Move2ALG(Move move)
 	return ALG;
 }
 
-uint8_t inline Board::GetPieceType2Uncolored(const uint8_t& PieceType)
+uint8_t constexpr Board::GetPieceType2Uncolored(uint8_t PieceType)
 {
 	if (PieceType > 16)
 		return(PieceType - 16);
@@ -281,7 +281,7 @@ CastlingAbility Board::canCastle2CastlingAbility(const canCastle& Castle)
 	return CastlingAbility;
 }
 
-bool inline Board::IsPieceColorWhite(const uint8_t& BoardSquareValue)
+bool constexpr Board::IsPieceColorWhite(uint8_t BoardSquareValue)
 {
 	if (BoardSquareValue == 0)
 		ASSERT(false);
@@ -737,6 +737,7 @@ namespace bit {
 		return (Board::IsPieceColorWhite(PieceType) ? ColorPositions[0] : ColorPositions[1]) & PiecePositions[Board::GetPieceType2Uncolored(PieceType) - 1];//peak unreadability
 	}
 
+
 	BitPosition::BitPosition(const std::array<uint8_t, 64>& OldBoardSquare)
 	{
 		for (uint8_t BoardSquarePos = 0; BoardSquarePos <= MAX_SQUARE; BoardSquarePos++)
@@ -749,7 +750,6 @@ namespace bit {
 		}
 	}
 
-	
 
 }
 

@@ -64,10 +64,6 @@ RenderChessPieces::RenderChessPieces(GLFWwindow* window)
 {
 
 }
-RenderChessPieces::~RenderChessPieces()
-{
-
-}
 
 static void cursorPositionCallBack(GLFWwindow* window, double xPosition, double yPosition)
 {

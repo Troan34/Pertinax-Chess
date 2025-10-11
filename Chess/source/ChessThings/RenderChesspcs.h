@@ -42,7 +42,6 @@ private:
 	GLFWwindow* window;
 public:
 	RenderChessPieces(GLFWwindow* window);
-	~RenderChessPieces();
 
 	std::array<std::array<VertexStructure, 4Ui64>,135> CreateObjects();
 	std::array<VertexStructure, 540> MemcopyObjects(std::array<std::array<VertexStructure, 4Ui64>,135>& quads);

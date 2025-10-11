@@ -38,7 +38,6 @@ public:
 
 	Search(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint8_t& depth, const uint16_t& MoveNum,
 		std::vector<Move>& SearchMoves, const size_t& HashSize);
-	~Search();
 	int32_t GetBestMoveWithEval(pv_line& PV);
 	uint64_t GetNodesVisited() const;
 	uint16_t GetTTFullness() const;

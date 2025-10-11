@@ -36,10 +36,6 @@ GenerateLegalMoves::GenerateLegalMoves(const std::array<uint8_t, 64>& BoardSquar
 
 }
 
-GenerateLegalMoves::~GenerateLegalMoves()
-{
-
-}
 
 void GenerateLegalMoves::GenerateMoves()
 {
@@ -829,6 +825,33 @@ uint32_t GenerateLegalMoves::GetNumOfTacticalMoves() const
 	}
 	return NumOfTacticalMoves;
 }
+
+
+/// <summary>
+	/// Returns the bitboard of attackers
+	/// </summary>
+	/// <param name="SquarePos">Square that is being attacked</param>
+	/// <returns></returns>
+[[nodiscard]] bit::BitBoard64 GenerateLegalMoves::AttacksTo(uint8_t SquarePos) const
+{
+	if (!AttackedSquares[SquarePos]) { return bit::BitBoard64{}; }
+
+	bit::BitBoard64 Attackers{};
+
+	for (uint8_t Square = 0; Square <= MAX_SQUARE; Square++)
+	{
+		if (moves[Square].TargetSquares[SquarePos])
+		{
+			Attackers[Square] = true;
+		}
+	}
+
+	return Attackers;
+}
+
+
+//^^^^^^ GenerateLegalMoves ^^^^^^^
+
 
 uint64_t ComputeRookAttacks(uint8_t BoardSquare, uint16_t Blocker)
 {

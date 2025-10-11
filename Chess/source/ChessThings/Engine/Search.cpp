@@ -8,10 +8,6 @@ Search::Search(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint
 	TT.ChangeHashSize(HashSize);
 }
 
-Search::~Search()
-{
-}
-
 int32_t Search::GetBestMoveWithEval(pv_line& PV)
 {
 	//auto start = std::chrono::high_resolution_clock::now();

@@ -293,7 +293,6 @@ public:
 	* The king's BoardSquarePos is included
 	*/
 	std::array<uint8_t, 64> CheckTargetSquares;
-
 	
 
 	uint32_t m_NumOfLegalMoves = 0;
@@ -303,7 +302,6 @@ public:
 
 	GenerateLegalMoves(const bit::BitPosition& BoardSquare, const bit::BitPosition* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
 	GenerateLegalMoves(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
-	~GenerateLegalMoves();
 	void GenerateMoves();
 	void MagicSliderMoveGen(const uint8_t BoardSquarePos);
 	void KnightMoveGen(const uint8_t BoardSquarePos);
@@ -314,5 +312,6 @@ public:
 	static void SetDoNotEnPassant(bool SetToThis);
 	bool IsMoveLegal(const Move& CheckedMove) const;
 	uint32_t GetNumOfTacticalMoves() const;
+	[[nodiscard]] bit::BitBoard64 AttacksTo(uint8_t SquarePos) const;
 };
 
