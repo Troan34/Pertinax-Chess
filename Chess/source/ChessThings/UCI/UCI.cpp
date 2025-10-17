@@ -193,7 +193,7 @@ void UCI::Go()
 {
 	IsReady.store(false);
 
-	IterativeDeepening ID(*Vars_p.BoardSquare, *Vars_p.previousBoardSquare, *Vars_p.CanCastle, *Vars_p.MoveNum, *Vars_p.SearchMoves, *Vars_p.HashSize, *Vars_p.timer, *Vars_p.depth, !((*Vars_p.MoveNum) % 2), &stop);
+	IterativeDeepening ID(Position{ *Vars_p.BoardSquare, *Vars_p.previousBoardSquare, *Vars_p.CanCastle, *(uint16_t*)(Vars_p.MoveNum) }, *Vars_p.SearchMoves, *Vars_p.HashSize, *Vars_p.timer, *Vars_p.depth, !((*Vars_p.MoveNum) % 2), &stop);
 	std::string Bestmove = Board::Move2ALG(ID.GetBestMove(true));
 
 	while (Outputting.load()) { Sleep(1); }
@@ -211,7 +211,7 @@ uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 {
 	uint32_t NumOfMoves = 0;
 
-	GenerateLegalMoves LegalMoves(BoardSquare, &perftPreviousBoardSquare, CanCastle, isNextMoveForWhite, PerftMoveNum, false);
+	GenerateLegalMoves LegalMoves(Position{ BoardSquare, perftPreviousBoardSquare, CanCastle, static_cast<uint16_t>(PerftMoveNum) }, false);
 
 	const auto ConstBoardSquare = BoardSquare;
 	const auto ConstPreviousBoardSquare = perftPreviousBoardSquare;

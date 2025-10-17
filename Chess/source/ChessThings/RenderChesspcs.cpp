@@ -2,7 +2,6 @@
 
 static float RememberTexID;
 static bool wasStatic_BoardSquareCreated = false;
-static bool wasStatic_previousBoardsquareCreated = false;
 static bool ComputeMagic = false;
 //(mostly) Drop fun vars
 static int BoardSquareBeingSelected = -1;
@@ -27,7 +26,7 @@ static bool UCImode = false;
 static unsigned int MoveNum = 0;
 static canCastle CanCastle;
 static std::array<uint8_t, 64Ui64> static_BoardSquare;
-static std::array<uint8_t, 64Ui64> previousBoardsquare;
+static std::array<uint8_t, 64Ui64> previousBoardsquare{};
 static bool StartEngine = false;
 static bool GUI = false;
 static bool PreviousGuiOption = true;
@@ -245,13 +244,8 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 		float xxDifference = 0.0f;
 		float yyDifference = 0.0f;
 		static_BoardSquare[BoardSquareBeingSelected] = GetPieceTypefromTexID(RememberTexID);
-		std::array<uint8_t, 64Ui64>* p_prevBoardSquare;
-		if (wasStatic_previousBoardsquareCreated)
-			p_prevBoardSquare = &previousBoardsquare;
-		else
-			p_prevBoardSquare = nullptr;
 
-		GenerateLegalMoves LegalMoves(static_BoardSquare, p_prevBoardSquare, CanCastle, isNextMoveForWhite, MoveNum, false);
+		GenerateLegalMoves LegalMoves(Position{static_BoardSquare, previousBoardsquare, CanCastle, static_cast<uint16_t>(MoveNum)}, false);
 		for (uint8_t j = 0; j <= MAX_SQUARE; j++)
 		{
 			if (LegalMoves.moves[BoardSquareBeingSelected].TargetSquares[j] == false) { continue; }
@@ -275,9 +269,9 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 	if (WaitingForEnemyMove and EngineOn and !WaitingForUserPromotion)
 	{
 		bool stop = false;
-		IterativeDeepening ID(static_BoardSquare, previousBoardsquare, CanCastle, MoveNum, SearchMoves, HashSize, timer, EngineDepth, true, &stop);
+		IterativeDeepening ID(Position{ static_BoardSquare, previousBoardsquare, CanCastle, static_cast<uint16_t>(MoveNum) }, SearchMoves, HashSize, timer, EngineDepth, true, & stop);
 		Move BestMove = ID.GetBestMove(false);
-		GenerateLegalMoves LegalMoves(static_BoardSquare, &previousBoardsquare, CanCastle, isNextMoveForWhite, MoveNum, false);
+		GenerateLegalMoves LegalMoves(Position{ static_BoardSquare, previousBoardsquare, CanCastle, static_cast<uint16_t>(MoveNum) }, false);
 		MakeMove(LegalMoves, BestMove, static_BoardSquare, previousBoardsquare, CanCastle);
 		WaitingForEnemyMove = false;
 		MoveNum++;
@@ -344,7 +338,6 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 								PieceTexID = RememberTexID;
 								if (i != BoardSquareBeingSelected + 1)
 								{
-									wasStatic_previousBoardsquareCreated = true;
 									MoveNum++;
 								}
 								AttackedSquare = i - 1;
@@ -802,7 +795,6 @@ void RenderChessPieces::SetPrevBoardSquare_FEN_EP(const uint32_t& f_BoardSquare)
 	if (f_BoardSquare == 65)
 		return;
 	uint32_t f_previousBoardSquare = 0;
-	wasStatic_previousBoardsquareCreated = true;
 	if(f_BoardSquare < 32)
 		f_previousBoardSquare = f_BoardSquare - 16;
 	else

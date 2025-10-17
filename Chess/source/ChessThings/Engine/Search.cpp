@@ -2,23 +2,24 @@
 static TranspositionTable TT;
 static bool FollowPV = true;
 
-Search::Search(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint8_t& depth, const uint16_t& MoveNum, std::vector<Move>& SearchMoves, const size_t& HashSize)
-	:m_BoardSquare(BoardSquare), m_PreviousBoardSquare(PreviousBoardSquare), m_CanCastle(CanCastle), m_depth(depth), m_MoveNum(MoveNum), m_SearchMoves(SearchMoves), HashSize(HashSize)
+Search::Search(const Position& ChessPosition, const uint8_t depth, std::vector<Move>& SearchMoves, const size_t& HashSize)
+	:m_ChessPosition(ChessPosition), m_depth(depth), m_SearchMoves(SearchMoves), HashSize(HashSize)
 {
 	TT.ChangeHashSize(HashSize);
 }
+
 
 int32_t Search::GetBestMoveWithEval(pv_line& PV)
 {
 	//auto start = std::chrono::high_resolution_clock::now();
 
-	GenerateLegalMoves LegalMoves(m_BoardSquare, &m_PreviousBoardSquare, m_CanCastle, (m_MoveNum % 2 != 0) ? false : true, m_MoveNum, false);
-	ZobristHashing m_Hash(LegalMoves, m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum);
+	GenerateLegalMoves LegalMoves(m_ChessPosition, false);
+	ZobristHashing m_Hash(LegalMoves, m_ChessPosition);
 
 	m_PreviousPV = &PV;
 
 	FollowPV = true;
-	int32_t Eval = NegaMax(m_Hash, m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, m_MoveNum, m_depth, -INT32_MAX, INT32_MAX, m_PreviousPV);
+	int32_t Eval = NegaMax(m_Hash, m_ChessPosition, m_depth, -INT32_MAX, INT32_MAX, m_PreviousPV);
 	std::println("TT Hits / Cutoffs= {} / {}", TThits, Cutoffs);
 	//auto stop = std::chrono::high_resolution_clock::now();
 	//auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
@@ -42,14 +43,14 @@ void Search::ClearTT()
 	TT.ClearTT();
 }
 
-int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta, pv_line* previousPVLine)
+int32_t Search::NegaMax(ZobristHashing& m_Hash, Position ChessPosition, uint8_t depth, int32_t alpha, int32_t beta, pv_line* previousPVLine)
 {
 	TT.ResizeTT();
 	TT.AgeIncrementOnNewSearch();
 	int BestEvaluation = -INT32_MAX;
 	NodesVisited++;
 
-	GenerateLegalMoves LegalMoves(BoardSquare, &previousBoardSquare, CanCastle, (MoveNum % 2 != 0) ? false : true, MoveNum, false);
+	GenerateLegalMoves LegalMoves(ChessPosition, false);
 	if (LegalMoves.isItCheckmate == true) [[unlikely]]
 	{
 		return -INT32_MAX;
@@ -57,7 +58,10 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 
 	if (depth == 0)
 	{
-		BestEvaluation = -QuietSearch(BoardSquare, previousBoardSquare, CanCastle, MoveNum, -beta, -alpha);//to change with a quiescent fun
+		Evaluator evaluator(LegalMoves);
+		evaluator.SetParameters(ChessPosition);
+		BestEvaluation = evaluator.Evaluate();//to change with a quiescent fun
+		//BestEvaluation = -QuietSearch(ChessPosition, -beta, -alpha);
 		previousPVLine->NumOfMoves = 0;
 		return BestEvaluation;
 	}
@@ -66,9 +70,7 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 	Move CutOffMove;
 	pv_line PVLine;
 
-	auto const cPreviousBoardSquare = previousBoardSquare;
-	auto const cCanCastle = CanCastle;
-	auto const cMoveNum = MoveNum;
+	auto const cChessPosition = ChessPosition;
 	auto const cHash = m_Hash.Hash;
 
 	//Probe TT and manage its bound
@@ -89,7 +91,7 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 
 	//make a variable length array, for SEGFAULT or STACK OVERFLOW check here first
 	GuessStruct* GuessedOrder = static_cast<GuessStruct*>(alloca(LegalMoves.m_NumOfLegalMoves * sizeof(GuessStruct)));
-	OrderMoves(LegalMoves, BoardSquare, GuessedOrder, depth);
+	OrderMoves(LegalMoves, ChessPosition.BoardSquare, GuessedOrder, depth);
 
 	int32_t SmallWindowBeta = beta;
 	int32_t Evaluation;
@@ -99,13 +101,18 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 
 		Move Move_(Guess.BoardSquare, Guess.Move, Guess.PromotionType);
 		if (Move_.IsNull()) { continue; }//this usually happens because of the first element being null
-		MakeMove(LegalMoves, m_Hash, Move_, BoardSquare, previousBoardSquare, CanCastle);
+		MakeMove(LegalMoves, m_Hash, Move_, ChessPosition);
 
-		Evaluation = -NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -SmallWindowBeta, -alpha, &PVLine);
+		ChessPosition.MoveNum++;
+		Evaluation = -NegaMax(m_Hash, ChessPosition, depth - 1, -SmallWindowBeta, -alpha, &PVLine);
+
+		//undo move
+		ChessPosition = cChessPosition;
+		m_Hash.Hash = cHash;
 
 		if ((Evaluation > alpha) and (Evaluation < beta) and (MoveIndex > 0))
 		{
-			Evaluation = -NegaMax(m_Hash, BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, depth - 1, -beta, -alpha, &PVLine);
+			Evaluation = -NegaMax(m_Hash, ChessPosition, depth - 1, -beta, -alpha, &PVLine);
 		}
 
 		if (Evaluation > BestEvaluation)
@@ -131,10 +138,7 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 		SmallWindowBeta = alpha + 1;//widen window
 
 		//undo move
-		BoardSquare = previousBoardSquare;
-		previousBoardSquare = cPreviousBoardSquare;
-		CanCastle = cCanCastle;
-		MoveNum = cMoveNum;
+		ChessPosition = cChessPosition;
 		m_Hash.Hash = cHash;
 	}
 
@@ -145,41 +149,41 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> Boar
 	return BestEvaluation;
 }
 
-void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash, Move Move_, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle)
+void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash, const Move Move_, Position& ChessPosition)
 {
-	Hash.UpdateHash(Move_, fun_BoardSquare[Move_.s_BoardSquare]);
+	Hash.UpdateHash(Move_, ChessPosition.BoardSquare[Move_.s_BoardSquare]);
 
-	fun_previousBoardSquare = fun_BoardSquare;
-	Board::WillCanCastleChange(fun_BoardSquare[Move_.s_BoardSquare], Move_.s_BoardSquare, Move_.s_Move, Castle);
-	fun_BoardSquare[Move_.s_Move] = fun_BoardSquare[Move_.s_BoardSquare];
+	ChessPosition.PrevBoardSquare = ChessPosition.BoardSquare;
+	Board::WillCanCastleChange(ChessPosition.BoardSquare[Move_.s_BoardSquare], Move_.s_BoardSquare, Move_.s_Move, ChessPosition.CanCastle);
+	ChessPosition.BoardSquare[Move_.s_Move] = ChessPosition.BoardSquare[Move_.s_BoardSquare];
 
 	//castling
-	if (fun_BoardSquare[Move_.s_BoardSquare] == WHITE_KING or fun_BoardSquare[Move_.s_BoardSquare] == BLACK_KING)
+	if (ChessPosition.BoardSquare[Move_.s_BoardSquare] == WHITE_KING or ChessPosition.BoardSquare[Move_.s_BoardSquare] == BLACK_KING)
 	{
 		if (Move_.s_BoardSquare - Move_.s_Move == -2)
 		{
 			if (Move_.s_BoardSquare == 4)
 			{
-				fun_BoardSquare[5] = WHITE_ROOK;
-				fun_BoardSquare[7] = 0;
+				ChessPosition.BoardSquare[5] = WHITE_ROOK;
+				ChessPosition.BoardSquare[7] = 0;
 			}
 			else
 			{
-				fun_BoardSquare[61] = BLACK_ROOK;
-				fun_BoardSquare[63] = 0;
+				ChessPosition.BoardSquare[61] = BLACK_ROOK;
+				ChessPosition.BoardSquare[63] = 0;
 			}
 		}
 		if (Move_.s_BoardSquare - Move_.s_Move == 2)
 		{
 			if (Move_.s_BoardSquare == 4)
 			{
-				fun_BoardSquare[3] = WHITE_ROOK;
-				fun_BoardSquare[0] = 0;
+				ChessPosition.BoardSquare[3] = WHITE_ROOK;
+				ChessPosition.BoardSquare[0] = 0;
 			}
 			else
 			{
-				fun_BoardSquare[59] = BLACK_ROOK;
-				fun_BoardSquare[56] = 0;
+				ChessPosition.BoardSquare[59] = BLACK_ROOK;
+				ChessPosition.BoardSquare[56] = 0;
 			}
 		}
 
@@ -189,35 +193,35 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash
 	//promoting and en passant
 	if (Move_.s_PromotionType != NULL_OPTION)
 	{
-		fun_BoardSquare[Move_.s_Move] = Move_.s_PromotionType;
+		ChessPosition.BoardSquare[Move_.s_Move] = Move_.s_PromotionType;
 	}
 	else//optimization
 	{
 		//White en passant
-		if (fun_BoardSquare[Move_.s_BoardSquare] == WHITE_PAWN)
+		if (ChessPosition.BoardSquare[Move_.s_BoardSquare] == WHITE_PAWN)
 		{
-			if (fun_previousBoardSquare[Move_.s_Move] == 0)
+			if (ChessPosition.PrevBoardSquare[Move_.s_Move] == 0)
 			{
 				if (Move_.s_BoardSquare - Move_.s_Move == -7 or Move_.s_BoardSquare - Move_.s_Move == -9)
 				{
-					fun_BoardSquare[Move_.s_Move - 8] = 0;
+					ChessPosition.BoardSquare[Move_.s_Move - 8] = 0;
 				}
 			}
 		}
 		//Black en passant
-		if (fun_BoardSquare[Move_.s_BoardSquare] == BLACK_PAWN)
+		if (ChessPosition.BoardSquare[Move_.s_BoardSquare] == BLACK_PAWN)
 		{
-			if (fun_previousBoardSquare[Move_.s_Move] == 0)
+			if (ChessPosition.PrevBoardSquare[Move_.s_Move] == 0)
 			{
 				if (Move_.s_BoardSquare - Move_.s_Move == 7 or Move_.s_BoardSquare - Move_.s_Move == 9)
 				{
-					fun_BoardSquare[Move_.s_Move + 8] = 0;
+					ChessPosition.BoardSquare[Move_.s_Move + 8] = 0;
 				}
 			}
 		}
 	}
 
-	fun_BoardSquare[Move_.s_BoardSquare] = 0;
+	ChessPosition.BoardSquare[Move_.s_BoardSquare] = 0;
 
 	GenerateLegalMoves::SetDoNotEnPassant(false);
 	if (abs(Move_.s_BoardSquare - Move_.s_Move) == 16 and LegalMoves.WhichBoardSquaresAreAbsPinned[Move_.s_Move] != 65)
@@ -227,40 +231,40 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash
 
 }
 
-void Search::QMakeMove(const GenerateLegalMoves& LegalMoves, Move Move_, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle)
+void Search::QMakeMove(const GenerateLegalMoves& LegalMoves, const Move Move_, Position& ChessPosition)
 {
 
-	fun_previousBoardSquare = fun_BoardSquare;
-	Board::WillCanCastleChange(fun_BoardSquare[Move_.s_BoardSquare], Move_.s_BoardSquare, Move_.s_Move, Castle);
-	fun_BoardSquare[Move_.s_Move] = fun_BoardSquare[Move_.s_BoardSquare];
+	ChessPosition.PrevBoardSquare = ChessPosition.BoardSquare;
+	Board::WillCanCastleChange(ChessPosition.BoardSquare[Move_.s_BoardSquare], Move_.s_BoardSquare, Move_.s_Move, ChessPosition.CanCastle);
+	ChessPosition.BoardSquare[Move_.s_Move] = ChessPosition.BoardSquare[Move_.s_BoardSquare];
 
 	//castling
-	if (fun_BoardSquare[Move_.s_BoardSquare] == WHITE_KING or fun_BoardSquare[Move_.s_BoardSquare] == BLACK_KING)
+	if (ChessPosition.BoardSquare[Move_.s_BoardSquare] == WHITE_KING or ChessPosition.BoardSquare[Move_.s_BoardSquare] == BLACK_KING)
 	{
 		if (Move_.s_BoardSquare - Move_.s_Move == -2)
 		{
 			if (Move_.s_BoardSquare == 4)
 			{
-				fun_BoardSquare[5] = WHITE_ROOK;
-				fun_BoardSquare[7] = 0;
+				ChessPosition.BoardSquare[5] = WHITE_ROOK;
+				ChessPosition.BoardSquare[7] = 0;
 			}
 			else
 			{
-				fun_BoardSquare[61] = BLACK_ROOK;
-				fun_BoardSquare[63] = 0;
+				ChessPosition.BoardSquare[61] = BLACK_ROOK;
+				ChessPosition.BoardSquare[63] = 0;
 			}
 		}
 		if (Move_.s_BoardSquare - Move_.s_Move == 2)
 		{
 			if (Move_.s_BoardSquare == 4)
 			{
-				fun_BoardSquare[3] = WHITE_ROOK;
-				fun_BoardSquare[0] = 0;
+				ChessPosition.BoardSquare[3] = WHITE_ROOK;
+				ChessPosition.BoardSquare[0] = 0;
 			}
 			else
 			{
-				fun_BoardSquare[59] = BLACK_ROOK;
-				fun_BoardSquare[56] = 0;
+				ChessPosition.BoardSquare[59] = BLACK_ROOK;
+				ChessPosition.BoardSquare[56] = 0;
 			}
 		}
 
@@ -270,35 +274,35 @@ void Search::QMakeMove(const GenerateLegalMoves& LegalMoves, Move Move_, std::ar
 	//promoting and en passant
 	if (Move_.s_PromotionType != NULL_OPTION)
 	{
-		fun_BoardSquare[Move_.s_Move] = Move_.s_PromotionType;
+		ChessPosition.BoardSquare[Move_.s_Move] = Move_.s_PromotionType;
 	}
 	else//optimization
 	{
 		//White en passant
-		if (fun_BoardSquare[Move_.s_BoardSquare] == WHITE_PAWN)
+		if (ChessPosition.BoardSquare[Move_.s_BoardSquare] == WHITE_PAWN)
 		{
-			if (fun_previousBoardSquare[Move_.s_Move] == 0)
+			if (ChessPosition.PrevBoardSquare[Move_.s_Move] == 0)
 			{
 				if (Move_.s_BoardSquare - Move_.s_Move == -7 or Move_.s_BoardSquare - Move_.s_Move == -9)
 				{
-					fun_BoardSquare[Move_.s_Move - 8] = 0;
+					ChessPosition.BoardSquare[Move_.s_Move - 8] = 0;
 				}
 			}
 		}
 		//Black en passant
-		if (fun_BoardSquare[Move_.s_BoardSquare] == BLACK_PAWN)
+		if (ChessPosition.BoardSquare[Move_.s_BoardSquare] == BLACK_PAWN)
 		{
-			if (fun_previousBoardSquare[Move_.s_Move] == 0)
+			if (ChessPosition.PrevBoardSquare[Move_.s_Move] == 0)
 			{
 				if (Move_.s_BoardSquare - Move_.s_Move == 7 or Move_.s_BoardSquare - Move_.s_Move == 9)
 				{
-					fun_BoardSquare[Move_.s_Move + 8] = 0;
+					ChessPosition.BoardSquare[Move_.s_Move + 8] = 0;
 				}
 			}
 		}
 	}
 
-	fun_BoardSquare[Move_.s_BoardSquare] = 0;
+	ChessPosition.BoardSquare[Move_.s_BoardSquare] = 0;
 
 	GenerateLegalMoves::SetDoNotEnPassant(false);
 	if (abs(Move_.s_BoardSquare - Move_.s_Move) == 16 and LegalMoves.WhichBoardSquaresAreAbsPinned[Move_.s_Move] != 65)
@@ -466,13 +470,13 @@ void Search::QOrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<
 
 }
 
-int32_t Search::QuietSearch(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, int32_t alpha, int32_t beta)
+int32_t Search::QuietSearch(Position ChessPosition, int32_t alpha, int32_t beta)
 {
 	NodesVisited++;
-	GenerateLegalMoves LegalMoves(BoardSquare, &previousBoardSquare, CanCastle, (MoveNum % 2 != 0) ? false : true, MoveNum, false);
+	GenerateLegalMoves LegalMoves(ChessPosition, false);
 	uint32_t NumOfTacticalMoves = LegalMoves.GetNumOfTacticalMoves();
 	Evaluator evaluator(LegalMoves);
-	evaluator.SetParameters(BoardSquare, previousBoardSquare, CanCastle, MoveNum);
+	evaluator.SetParameters(ChessPosition);
 	int32_t Eval = evaluator.Evaluate();//to change with a quiescent fun
 
 	if (NumOfTacticalMoves == 0)
@@ -490,13 +494,11 @@ int32_t Search::QuietSearch(std::array<uint8_t, 64Ui64> BoardSquare, std::array<
 		alpha = BestEval;
 	}
 
-	auto const cPreviousBoardSquare = previousBoardSquare;
-	auto const cCanCastle = CanCastle;
-	auto const cMoveNum = MoveNum;
+	auto const cChessPosition = ChessPosition;
 
 	
 	GuessStruct* GuessedOrder = static_cast<GuessStruct*>(alloca(NumOfTacticalMoves * sizeof(GuessStruct)));
-	QOrderMoves(LegalMoves, BoardSquare, GuessedOrder, NumOfTacticalMoves);
+	QOrderMoves(LegalMoves, ChessPosition.BoardSquare, GuessedOrder, NumOfTacticalMoves);
 
 	for (uint8_t MoveIndex = 0; MoveIndex < NumOfTacticalMoves; MoveIndex++)
 	{
@@ -504,9 +506,10 @@ int32_t Search::QuietSearch(std::array<uint8_t, 64Ui64> BoardSquare, std::array<
 
 		Move Move_(Guess.BoardSquare, Guess.Move, Guess.PromotionType);
 		if (Move_.IsNull()) { continue; }//this usually happens because of the first element being null
-		QMakeMove(LegalMoves, Move_, BoardSquare, previousBoardSquare, CanCastle);
+		QMakeMove(LegalMoves, Move_, ChessPosition);
 
-		Eval = -QuietSearch(BoardSquare, previousBoardSquare, CanCastle, MoveNum + 1, -beta, -alpha);
+		ChessPosition.MoveNum--;
+		Eval = -QuietSearch(ChessPosition, -beta, -alpha);
 
 		if (Eval >= beta)
 			return Eval;
@@ -516,12 +519,16 @@ int32_t Search::QuietSearch(std::array<uint8_t, 64Ui64> BoardSquare, std::array<
 			alpha = Eval;
 
 		//undo move
-		BoardSquare = previousBoardSquare;
-		previousBoardSquare = cPreviousBoardSquare;
-		CanCastle = cCanCastle;
-		MoveNum = cMoveNum;
+		ChessPosition = cChessPosition;
 	}
 
 	return BestEval;
+}
+
+//Swap algorithm SEE
+int32_t Search::SEE(const Position& ChessPosition, Move Move)
+{
+	GenerateLegalMoves PseudoLegalMoves(ChessPosition, true);
+	return 0;
 }
 

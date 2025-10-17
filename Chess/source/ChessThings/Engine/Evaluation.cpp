@@ -147,17 +147,13 @@ Evaluator::Evaluator(const GenerateLegalMoves& LegalMoves)
 
 }
 
-void Evaluator::SetParameters(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint8_t& MoveNum)
+void Evaluator::SetParameters(const Position& f_ChessPosition)
 {
-	m_BoardSquare = BoardSquare;
-	m_PreviousBoardSquare = PreviousBoardSquare;
-	m_CanCastle = CanCastle;
-	m_MoveNum = MoveNum;
-	m_Evaluation = 0;
+	ChessPosition = f_ChessPosition;
 	
 	for (uint8_t i = 0; i < MAX_SQUARE; i++)
 	{
-		NumOfPieces += (bool)m_BoardSquare[i];
+		NumOfPieces += (bool)ChessPosition.BoardSquare[i];
 	}
 }
 
@@ -167,14 +163,14 @@ int Evaluator::Evaluate()
 	m_Evaluation = BoardMatValue() + MobilityEval() + PieceSquareEval();
 
 	//m_Evaluation += m_LegalMoves.m_NumOfLegalMoves * 1 * m_SideToMove;
-	return m_Evaluation * ((m_MoveNum % 2 == 0) ? 1 : -1);
+	return m_Evaluation * ((WHITE_TURN(ChessPosition.MoveNum)) ? 1 : -1);
 }
 
 int32_t Evaluator::BoardMatValue()
 {
 	int32_t MatEval = 0;
 	
-	for (const auto& Piece : m_BoardSquare)
+	for (const auto& Piece : ChessPosition.BoardSquare)
 	{
 		if (Piece == 0)
 			continue;
@@ -196,9 +192,9 @@ int32_t Evaluator::MobilityEval()
 	int32_t MobilityEval = 0;
 	for (uint8_t i = 0; i != 64; ++i)
 	{
-		if (m_BoardSquare[i] == 0)
+		if (ChessPosition.BoardSquare[i] == 0)
 			continue;
-		if (Board::IsPieceColorWhite(m_BoardSquare[i]))
+		if (Board::IsPieceColorWhite(ChessPosition.BoardSquare[i]))
 		{
 			MobilityEval += m_LegalMoves.m_NumOfLegalMoves * 0.1;
 		}
@@ -216,7 +212,7 @@ int32_t Evaluator::PieceSquareEval() const
 	float LateWeight;
 	for (uint8_t Square = 0; Square <= MAX_SQUARE; Square++)
 	{
-		switch (m_BoardSquare[Square])
+		switch (ChessPosition.BoardSquare[Square])
 		{
 		case NONE:
 			break;

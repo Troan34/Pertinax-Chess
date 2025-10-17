@@ -11,12 +11,12 @@
 namespace fs = std::filesystem;
 
 constexpr int OffsetForDirections[8] = { 8, -8, -1, 1, 7, -7, 9, -9 };
-constexpr enum offDIRECTIONS
+enum offDIRECTIONS
 {
 	offN,offS,offW,offE,offNW,offSE,offNE,offSW
 };
 
-constexpr enum DIRECTIONS
+enum DIRECTIONS
 {
 	N = 8, S = -8, W = -1, E = 1, NW = 7, SE = -9, NE = 9, SW = -7
 };
@@ -244,12 +244,7 @@ struct MOVE_BIT
 
 class GenerateLegalMoves
 {
-private:
-
-	bit::BitPosition m_BoardSquare;
-
-	canCastle CanCastle;
-	
+private:	
 	
 	bool isNextMoveForWhite;
 
@@ -297,11 +292,12 @@ public:
 
 	uint32_t m_NumOfLegalMoves = 0;
 	unsigned int MoveNum;
+	bit::Position ChessPosition;
 	std::array<bool, 8> EnPassantFiles{false};
 	bool isItCheckmate = true;
 
-	GenerateLegalMoves(const bit::BitPosition& BoardSquare, const bit::BitPosition* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
-	GenerateLegalMoves(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves);
+	GenerateLegalMoves(const bit::Position& Position, bool PseudoLegalFlag);
+	GenerateLegalMoves(const Position& Position, bool PseudoLegalFlag);
 	void GenerateMoves();
 	void MagicSliderMoveGen(const uint8_t BoardSquarePos);
 	void KnightMoveGen(const uint8_t BoardSquarePos);

@@ -10,11 +10,8 @@
 
 class Search {
 private:
-	const std::array<uint8_t, 64> m_BoardSquare;
-	const std::array<uint8_t, 64> m_PreviousBoardSquare;
-	const canCastle m_CanCastle;
+	const Position m_ChessPosition;
 	const uint8_t m_depth;
-	const uint16_t m_MoveNum;
 	const std::vector<Move> m_SearchMoves; //Moves selected by go
 	size_t HashSize;
 	pv_line* m_PreviousPV;
@@ -23,21 +20,23 @@ private:
 	uint64_t Cutoffs = 0;
 	uint64_t TThits = 0;
 
-	int32_t NegaMax(ZobristHashing& m_Hash, std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle,uint8_t MoveNum, uint8_t depth, int32_t alpha, int32_t beta, pv_line* PVLine);
+	int32_t NegaMax(ZobristHashing& m_Hash, Position ChessPosition, uint8_t depth, int32_t alpha, int32_t beta, pv_line* PVLine);
 
 	//the double definitions are for the quiet versions
-	void MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash, Move Move_, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle);
-	void QMakeMove(const GenerateLegalMoves& LegalMoves, Move Move_, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle);
+	void MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash, const Move Move_, Position& ChessPosition);
+	void QMakeMove(const GenerateLegalMoves& LegalMoves, const Move Move_, Position& ChessPosition);
 	//218 is the maximum amount of legal moves for a position
 	void OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& fun_BoardSquare, GuessStruct* GuessedOrder, uint8_t depth);
 	void QOrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& fun_BoardSquare, GuessStruct* GuessedOrder, uint32_t NumOfTacticalMoves);
 
-	int32_t QuietSearch(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, uint8_t MoveNum, int32_t alpha, int32_t beta);
+	int32_t QuietSearch(Position ChessPosition, int32_t alpha, int32_t beta);
+
+	int32_t SEE(const Position& ChessPosition, Move Move);
+	int32_t SEE(const bit::Position& ChessPosition, Move Move);
 
 public:
 
-	Search(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint8_t& depth, const uint16_t& MoveNum,
-		std::vector<Move>& SearchMoves, const size_t& HashSize);
+	Search(const Position& ChessPosition, const uint8_t depth, std::vector<Move>& SearchMoves, const size_t& HashSize);
 	int32_t GetBestMoveWithEval(pv_line& PV);
 	uint64_t GetNodesVisited() const;
 	uint16_t GetTTFullness() const;

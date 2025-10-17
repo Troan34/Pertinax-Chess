@@ -1,35 +1,31 @@
 #include "LegalMoves.h"
-static bit::BitPosition m_previousBoardSquare;
 static std::array<MOVE_BIT, 64> OppositeMoves;
 static bool DoNotEnPassant; //for weird RemoveIllegalMoves things
 
 
-GenerateLegalMoves::GenerateLegalMoves(const bit::BitPosition& BoardSquare, const bit::BitPosition* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
-	:m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum), isNextMoveForWhite(isNextMoveForWhite)
+GenerateLegalMoves::GenerateLegalMoves(const bit::Position& Position, bool PseudoLegalFlag)
 {
+	ChessPosition = Position;
 
-	if (previousBoardSquare != nullptr)
-		m_previousBoardSquare = *previousBoardSquare;
-
+	isNextMoveForWhite = WHITE_TURN(Position.MoveNum);
 
 	GenerateMoves();
-	if (!isForOppositeMoves)
+	if (!PseudoLegalFlag)
 	{
 		RemoveIllegalMoves();
 	}
 
 }
 
-GenerateLegalMoves::GenerateLegalMoves(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>* previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, unsigned int MoveNum, bool isForOppositeMoves)
-	:m_BoardSquare(BoardSquare), CanCastle(CanCastle), MoveNum(MoveNum), isNextMoveForWhite(isNextMoveForWhite)
+GenerateLegalMoves::GenerateLegalMoves(const Position& Position, bool PseudoLegalFlag)
 {
+	//converts from array to bitboard
+	ChessPosition = {Position.BoardSquare, Position.PrevBoardSquare, Position.CanCastle, Position.MoveNum};
 
-	if (previousBoardSquare != nullptr)
-		m_previousBoardSquare = *previousBoardSquare;
-
+	isNextMoveForWhite = WHITE_TURN(Position.MoveNum);
 
 	GenerateMoves();
-	if (!isForOppositeMoves)
+	if (!PseudoLegalFlag)
 	{
 		RemoveIllegalMoves();
 	}
@@ -46,7 +42,7 @@ void GenerateLegalMoves::GenerateMoves()
 	uint8_t BoardSquarePos = 0;
 	for (; BoardSquarePos <= MAX_SQUARE; BoardSquarePos++)
 	{ 
-		uint8_t i = m_BoardSquare[BoardSquarePos];
+		uint8_t i = ChessPosition.BoardSquare[BoardSquarePos];
 		if (((i == BLACK_BISHOP or i == BLACK_ROOK or i == BLACK_QUEEN) and !isNextMoveForWhite) or ((i == WHITE_BISHOP or i == WHITE_ROOK or i == WHITE_QUEEN) and isNextMoveForWhite))
 		{
 			MagicSliderMoveGen(BoardSquarePos);
@@ -71,14 +67,14 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 	//NOTE: to simplify only the queen section is documented
 
 	//vv Declare Frequent use variables vv
-	uint8_t PieceTypeUncolored = Board::GetPieceType2Uncolored(m_BoardSquare[BoardSquarePos]);
-	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
+	uint8_t PieceTypeUncolored = Board::GetPieceType2Uncolored(ChessPosition.BoardSquare[BoardSquarePos]);
+	uint8_t PieceType = ChessPosition.BoardSquare[BoardSquarePos];
 	bool IsWhite = Board::IsPieceColorWhite(PieceType);
 	uint8_t OpponentKingType = IsWhite ? BLACK_KING : WHITE_KING;
 	uint8_t BishopShift = BISHOP_SHIFTS[BoardSquarePos];
 	uint8_t RookShift = ROOK_SHIFTS[BoardSquarePos];
-	
-	bit::BitBoard64 blockers = m_BoardSquare.ColorPositions[0] | m_BoardSquare.ColorPositions[1];
+
+	bit::BitBoard64 blockers = ChessPosition.BoardSquare.ColorPositions[0] | ChessPosition.BoardSquare.ColorPositions[1];
 	bit::BitBoard64 Attacks(0);
 
 	if ((PieceTypeUncolored == ROOK))
@@ -89,8 +85,8 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 
 		AttackedSquares |= Attacks;
 
-		if (IsWhite) { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[0]); }
-		else { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[1]); }
+		if (IsWhite) { Attacks ^= (Attacks & ChessPosition.BoardSquare.ColorPositions[0]); }
+		else { Attacks ^= (Attacks & ChessPosition.BoardSquare.ColorPositions[1]); }
 	}
 	else if ((PieceTypeUncolored == BISHOP))
 	{
@@ -100,12 +96,12 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 
 		AttackedSquares |= Attacks;
 
-		if (IsWhite) { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[0]); }
-		else { Attacks ^= (Attacks & m_BoardSquare.ColorPositions[1]); }
+		if (IsWhite) { Attacks ^= (Attacks & ChessPosition.BoardSquare.ColorPositions[0]); }
+		else { Attacks ^= (Attacks & ChessPosition.BoardSquare.ColorPositions[1]); }
 	}
 	else if ((PieceTypeUncolored == QUEEN))
 	{
-		
+
 		//Get Indeces from the mult-right shift
 		uint16_t RookAttackIndex = mult_rightShift(blockers.ReadBits() & ROOK_MASKS[BoardSquarePos], ROOK_MAGICS[BoardSquarePos], RookShift);
 		uint16_t BishopAttackIndex = mult_rightShift(blockers.ReadBits() & BISHOP_MASKS[BoardSquarePos], BISHOP_MAGICS[BoardSquarePos], BishopShift);
@@ -118,20 +114,20 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 		//removes attacks to own pieces
 		if (IsWhite)
 		{
-			RookAttack ^= RookAttack & m_BoardSquare.ColorPositions[0];
-			BishopAttack ^= BishopAttack & m_BoardSquare.ColorPositions[0];
+			RookAttack ^= RookAttack & ChessPosition.BoardSquare.ColorPositions[0];
+			BishopAttack ^= BishopAttack & ChessPosition.BoardSquare.ColorPositions[0];
 		}
 		else
 		{
-			RookAttack ^= RookAttack & m_BoardSquare.ColorPositions[1];
-			BishopAttack ^= BishopAttack & m_BoardSquare.ColorPositions[1];
+			RookAttack ^= RookAttack & ChessPosition.BoardSquare.ColorPositions[1];
+			BishopAttack ^= BishopAttack & ChessPosition.BoardSquare.ColorPositions[1];
 		}
 
 		Attacks = RookAttack | BishopAttack;
 	}
 
 	//found check
-	if ((Attacks & m_BoardSquare.find(OpponentKingType)) != 0)
+	if ((Attacks & ChessPosition.BoardSquare.find(OpponentKingType)) != 0)
 	{
 		//These are here to not have nested control flow
 		uint8_t MaxDir;
@@ -158,7 +154,7 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 			for (uint8_t Scalar = 1; Scalar <= NumOfSquaresUntilEdge[BoardSquarePos][Direction]; Scalar++)
 			{
 				GuessXrayCheck[Scalar - 1] = BoardSquarePos + (Scalar * OffsetForDirections[Direction]);
-				if (m_BoardSquare[BoardSquarePos + (Scalar * OffsetForDirections[Direction])] == OpponentKingType)
+				if (ChessPosition.BoardSquare[BoardSquarePos + (Scalar * OffsetForDirections[Direction])] == OpponentKingType)
 				{
 					Scalar += 1;
 					//finish the loop, fill SquaresBehindCheckedKing
@@ -176,7 +172,7 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 		for (auto& CheckBoardSquare : GuessXrayCheck)
 		{
 			if (CheckBoardSquare == 65) { break; }
-			if (CheckTargetSquares[CheckBoardSquare] == NULL_OPTION)[[likely]]
+			if (CheckTargetSquares[CheckBoardSquare] == NULL_OPTION) [[likely]]
 			{
 				CheckTargetSquares[CheckBoardSquare] = BoardSquarePos;
 			}
@@ -184,11 +180,11 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 			{
 				DoubleCheckBoardSquare = BoardSquarePos;
 			}
-			
+
 		}
 	}
 	//possible pin, logic for finding and saving is the same as above, DO NOT LET CHECKS IN HERE
-	else if (((ROOK_LEGAL_MASKS[BoardSquarePos] | BISHOP_LEGAL_MASKS[BoardSquarePos]) & m_BoardSquare.find(OpponentKingType)) != 0)
+	else if (((ROOK_LEGAL_MASKS[BoardSquarePos] | BISHOP_LEGAL_MASKS[BoardSquarePos]) & ChessPosition.BoardSquare.find(OpponentKingType)) != 0)
 	{
 		//These are here to not have nested control flow
 		uint8_t MaxDir;
@@ -221,11 +217,11 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 					break;
 				}
 
-				if (m_BoardSquare[BoardSquarePos + (Scalar * OffsetForDirections[Direction])] == OpponentKingType)
+				if (ChessPosition.BoardSquare[BoardSquarePos + (Scalar * OffsetForDirections[Direction])] == OpponentKingType)
 				{
 					goto OutsidePinLoop;
 				}
-				else if (m_BoardSquare[BoardSquarePos + (Scalar * OffsetForDirections[Direction])] != 0)
+				else if (ChessPosition.BoardSquare[BoardSquarePos + (Scalar * OffsetForDirections[Direction])] != 0)
 				{
 					PiecesEncoutered++;
 				}
@@ -249,7 +245,7 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 //Knight
 void GenerateLegalMoves::KnightMoveGen(const uint8_t BoardSquarePos)
 {
-	if ((m_BoardSquare[BoardSquarePos] == WHITE_KNIGHT and isNextMoveForWhite) or (m_BoardSquare[BoardSquarePos] == BLACK_KNIGHT and !isNextMoveForWhite))
+	if ((ChessPosition.BoardSquare[BoardSquarePos] == WHITE_KNIGHT and isNextMoveForWhite) or (ChessPosition.BoardSquare[BoardSquarePos] == BLACK_KNIGHT and !isNextMoveForWhite))
 	{
 		const std::array<uint8_t, 8> OffsetsForKnight = CreateOffesetsForKnight(BoardSquarePos);
 		for (const uint8_t& i : OffsetsForKnight)
@@ -259,11 +255,11 @@ void GenerateLegalMoves::KnightMoveGen(const uint8_t BoardSquarePos)
 
 			AttackedSquares[i] = true;
 			//i know that if only the first condition is met then c++ won't check the other one, if it does i'm blaming c++ and i WILL be calling it stupid
-			if ((m_BoardSquare[i]) == 0 or (Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos]) != Board::IsPieceColorWhite(m_BoardSquare[i])))
+			if ((ChessPosition.BoardSquare[i]) == 0 or (Board::IsPieceColorWhite(ChessPosition.BoardSquare[BoardSquarePos]) != Board::IsPieceColorWhite(ChessPosition.BoardSquare[i])))
 			{
-				moves[BoardSquarePos].PieceType = m_BoardSquare[BoardSquarePos];
+				moves[BoardSquarePos].PieceType = ChessPosition.BoardSquare[BoardSquarePos];
 				moves[BoardSquarePos].TargetSquares.push_back(i);
-				if (m_BoardSquare[i] == BLACK_KING and isNextMoveForWhite or m_BoardSquare[i] == WHITE_KING and !isNextMoveForWhite)
+				if (ChessPosition.BoardSquare[i] == BLACK_KING and isNextMoveForWhite or ChessPosition.BoardSquare[i] == WHITE_KING and !isNextMoveForWhite)
 				{
 					if (CheckTargetSquares[i] != 65)
 						DoubleCheckBoardSquare = BoardSquarePos;
@@ -271,7 +267,7 @@ void GenerateLegalMoves::KnightMoveGen(const uint8_t BoardSquarePos)
 						CheckTargetSquares[i] = BoardSquarePos;
 				}
 			}
-			
+
 		}
 	}
 }
@@ -344,7 +340,7 @@ std::array<uint8_t, 8>& GenerateLegalMoves::CreateOffesetsForKnight(const uint8_
 			}
 		}
 	}
-	for (;count < 8; count++)
+	for (; count < 8; count++)
 	{
 		OffsetsForKnight[count] = 65;
 	}
@@ -360,7 +356,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 		ASSERT(false);
 	}
 #endif
-	uint8_t PieceType = m_BoardSquare[BoardSquarePos];
+	uint8_t PieceType = ChessPosition.BoardSquare[BoardSquarePos];
 	if (PieceType == WHITE_PAWN and isNextMoveForWhite)//White pawn
 	{
 		for (const int& Offset : OffsetForWhitePawn)
@@ -369,10 +365,10 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 				continue;
 
 			uint8_t BoardPosPlusOffset = BoardSquarePos + Offset;
-			uint8_t PieceTypeAtOffset = m_BoardSquare[BoardPosPlusOffset];
+			uint8_t PieceTypeAtOffset = ChessPosition.BoardSquare[BoardPosPlusOffset];
 
 
-			if (NumOfSquaresUntilEdge[BoardSquarePos][WhitePawnDirections[Offset-7]] != 0)
+			if (NumOfSquaresUntilEdge[BoardSquarePos][WhitePawnDirections[Offset - 7]] != 0)
 			{
 
 				if (PieceTypeAtOffset != 0 and Offset != 8)
@@ -401,7 +397,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 				}
 				else if (Offset == 8 and PieceTypeAtOffset == 0)
 				{
-					if (BoardSquarePos < 16 and BoardSquarePos >= 8 and m_BoardSquare[BoardSquarePos + 16] == 0)
+					if (BoardSquarePos < 16 and BoardSquarePos >= 8 and ChessPosition.BoardSquare[BoardSquarePos + 16] == 0)
 					{
 						moves[BoardSquarePos].PieceType = PieceType;
 						moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + 16);
@@ -419,9 +415,9 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 					AttackedSquares[BoardPosPlusOffset] = true;
 				}
 
-				
+
 				//en passant
-				if (BoardSquarePos <= 39 and BoardSquarePos >= 32 and Offset != 8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + Offset + 8] == BLACK_PAWN) and (m_BoardSquare[BoardSquarePos + Offset - 8] == BLACK_PAWN) and !(m_previousBoardSquare[BoardSquarePos + Offset - 8] == BLACK_PAWN) and m_BoardSquare[BoardSquarePos + Offset + 8] == 0)
+				if (BoardSquarePos <= 39 and BoardSquarePos >= 32 and Offset != 8 and PieceTypeAtOffset == 0 and !ChessPosition.PrevBoardSquare.empty() and (ChessPosition.PrevBoardSquare[BoardSquarePos + Offset + 8] == BLACK_PAWN) and (ChessPosition.BoardSquare[BoardSquarePos + Offset - 8] == BLACK_PAWN) and !(ChessPosition.PrevBoardSquare[BoardSquarePos + Offset - 8] == BLACK_PAWN) and ChessPosition.BoardSquare[BoardSquarePos + Offset + 8] == 0)
 				{
 					if (!DoNotEnPassant)
 					{
@@ -441,12 +437,10 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 				continue;
 
 			uint8_t BoardPosPlusOffset = BoardSquarePos + Offset;
-			uint8_t PieceTypeAtOffset = m_BoardSquare[BoardPosPlusOffset];
-
-			
+			uint8_t PieceTypeAtOffset = ChessPosition.BoardSquare[BoardPosPlusOffset];
 
 
-			if (NumOfSquaresUntilEdge[BoardSquarePos][BlackPawnDirections[Offset+9]] != 0)
+			if (NumOfSquaresUntilEdge[BoardSquarePos][BlackPawnDirections[Offset + 9]] != 0)
 			{
 				if (PieceTypeAtOffset != 0 and Offset != -8)
 				{
@@ -474,7 +468,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 				}
 				else if (Offset == -8 and PieceTypeAtOffset == 0)
 				{
-					if (BoardSquarePos <= 55 and BoardSquarePos >= 48 and m_BoardSquare[BoardSquarePos - 16] == 0)
+					if (BoardSquarePos <= 55 and BoardSquarePos >= 48 and ChessPosition.BoardSquare[BoardSquarePos - 16] == 0)
 					{
 						moves[BoardSquarePos].PieceType = PieceType;
 						moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos - 16);
@@ -492,7 +486,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 					AttackedSquares[BoardPosPlusOffset] = true;
 				}
 				//en passant
-				if (BoardSquarePos <= 31 and BoardSquarePos >= 24 and Offset != -8 and PieceTypeAtOffset == 0 and !m_previousBoardSquare.empty() and (m_previousBoardSquare[BoardSquarePos + Offset - 8]) == WHITE_PAWN and (m_BoardSquare[BoardSquarePos + Offset + 8]) == WHITE_PAWN and !(m_previousBoardSquare[BoardSquarePos + Offset + 8] == WHITE_PAWN) and m_BoardSquare[BoardSquarePos + Offset - 8] == 0)
+				if (BoardSquarePos <= 31 and BoardSquarePos >= 24 and Offset != -8 and PieceTypeAtOffset == 0 and !ChessPosition.PrevBoardSquare.empty() and (ChessPosition.PrevBoardSquare[BoardSquarePos + Offset - 8]) == WHITE_PAWN and (ChessPosition.BoardSquare[BoardSquarePos + Offset + 8]) == WHITE_PAWN and !(ChessPosition.PrevBoardSquare[BoardSquarePos + Offset + 8] == WHITE_PAWN) and ChessPosition.BoardSquare[BoardSquarePos + Offset - 8] == 0)
 				{
 					if (!DoNotEnPassant)
 					{
@@ -509,46 +503,46 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 //King
 void GenerateLegalMoves::KingMoveGen(const uint8_t BoardSquarePos)
 {
-	if ((m_BoardSquare[BoardSquarePos] == WHITE_KING and isNextMoveForWhite) or (m_BoardSquare[BoardSquarePos] == BLACK_KING and !isNextMoveForWhite))
+	if ((ChessPosition.BoardSquare[BoardSquarePos] == WHITE_KING and isNextMoveForWhite) or (ChessPosition.BoardSquare[BoardSquarePos] == BLACK_KING and !isNextMoveForWhite))
 	{
-		uint8_t PieceType = m_BoardSquare[BoardSquarePos];
+		uint8_t PieceType = ChessPosition.BoardSquare[BoardSquarePos];
 
 		for (uint8_t direction = 0; direction < 8; direction++)
 		{
 			if (NumOfSquaresUntilEdge[BoardSquarePos][direction] > 0)
 			{
 				AttackedSquares[BoardSquarePos + OffsetForDirections[direction]] = true;
-				if (m_BoardSquare[BoardSquarePos + OffsetForDirections[direction]] == 0)
+				if (ChessPosition.BoardSquare[BoardSquarePos + OffsetForDirections[direction]] == 0)
 				{
 					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + OffsetForDirections[direction]);
 					continue;
 				}
-				if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(m_BoardSquare[BoardSquarePos + OffsetForDirections[direction]]))
+				if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(ChessPosition.BoardSquare[BoardSquarePos + OffsetForDirections[direction]]))
 				{
 					moves[BoardSquarePos].PieceType = PieceType;
 					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + OffsetForDirections[direction]);
 				}
 			}
 		}
-		if (PieceType == WHITE_KING and !CanCastle.HasWhiteKingMoved)//castling
+		if (PieceType == WHITE_KING and !ChessPosition.CanCastle.HasWhiteKingMoved)//castling
 		{
-			if (!CanCastle.HasWhiteLongRookMoved and m_BoardSquare[1] == 0 and m_BoardSquare[2] == 0 and m_BoardSquare[3] == 0)
+			if (!ChessPosition.CanCastle.HasWhiteLongRookMoved and ChessPosition.BoardSquare[1] == 0 and ChessPosition.BoardSquare[2] == 0 and ChessPosition.BoardSquare[3] == 0)
 			{
 				moves[4].TargetSquares.push_back(2);
 			}
-			if (!CanCastle.HasWhiteShortRookMoved and m_BoardSquare[5] == 0 and m_BoardSquare[6] == 0)
+			if (!ChessPosition.CanCastle.HasWhiteShortRookMoved and ChessPosition.BoardSquare[5] == 0 and ChessPosition.BoardSquare[6] == 0)
 			{
 				moves[4].TargetSquares.push_back(6);
 			}
 		}
-		if (PieceType == BLACK_KING and !CanCastle.HasBlackKingMoved)//castling
+		if (PieceType == BLACK_KING and !ChessPosition.CanCastle.HasBlackKingMoved)//castling
 		{
-			if (!CanCastle.HasBlackLongRookMoved and m_BoardSquare[57] == 0 and m_BoardSquare[58] == 0 and m_BoardSquare[59] == 0)
+			if (!ChessPosition.CanCastle.HasBlackLongRookMoved and ChessPosition.BoardSquare[57] == 0 and ChessPosition.BoardSquare[58] == 0 and ChessPosition.BoardSquare[59] == 0)
 			{
 				moves[60].TargetSquares.push_back(58);
 			}
-			if (!CanCastle.HasBlackShortRookMoved and m_BoardSquare[61] == 0 and m_BoardSquare[62] == 0)
+			if (!ChessPosition.CanCastle.HasBlackShortRookMoved and ChessPosition.BoardSquare[61] == 0 and ChessPosition.BoardSquare[62] == 0)
 			{
 				moves[60].TargetSquares.push_back(62);
 			}
@@ -557,18 +551,17 @@ void GenerateLegalMoves::KingMoveGen(const uint8_t BoardSquarePos)
 }
 
 void GenerateLegalMoves::RemoveIllegalMoves()
-{	
+{
 	uint8_t IndexOfPieceChecking;
 	uint8_t BoardSquareOfKingToMove = 0;
 
 	//find out where the King is
-	bit::FindBit(m_BoardSquare.find(isNextMoveForWhite ? WHITE_KING : BLACK_KING), BoardSquareOfKingToMove);
-	
-	auto p_prevBoardSquare = &m_previousBoardSquare;
-	if (MoveNum == 0)
-		p_prevBoardSquare = nullptr;
+	bit::FindBit(ChessPosition.BoardSquare.find(isNextMoveForWhite ? WHITE_KING : BLACK_KING), BoardSquareOfKingToMove);
 
-	GenerateLegalMoves OppositeMoves(m_BoardSquare,p_prevBoardSquare, CanCastle, !isNextMoveForWhite, MoveNum, true);
+	ChessPosition.MoveNum++;
+	GenerateLegalMoves OppositeMoves(ChessPosition, true);
+	ChessPosition.MoveNum--;
+
 	OppositeAttackedSquares = OppositeMoves.AttackedSquares;
 
 	//fill IndexOfPieceChecking
@@ -605,7 +598,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 		{
 			for (MOVE_BIT& Piece : moves)
 			{
-				if (Piece.PieceType != m_BoardSquare[BoardSquareOfKingToMove])
+				if (Piece.PieceType != ChessPosition.BoardSquare[BoardSquareOfKingToMove])
 				{
 					Piece.TargetSquares.clear();
 				}
@@ -652,7 +645,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 				count++;
 				continue;
 			}
-			
+
 			//if in check and count is under abs pin, unable to move
 			if (OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 65 and NumberOfChecks == 1)
 			{
@@ -660,18 +653,18 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 				count++;
 				continue;
 			}
-			else 
+			else
 			{
 				auto MovesCopy = Piece.TargetSquares;
 				uint8_t Move = 0;
 				while (true)
 				{
 					if (!bit::pop_lsb(MovesCopy, Move)) { break; }
-					
+
 					//for those things that happen with pawns
 					if (Piece.PieceType == BLACK_PAWN or Piece.PieceType == WHITE_PAWN)
 					{
-						if (DoNotEnPassant and m_BoardSquare[Move] == 0 and (abs(count - Move) == NW or abs(count - Move) == NE))
+						if (DoNotEnPassant and ChessPosition.BoardSquare[Move] == 0 and (abs(count - Move) == NW or abs(count - Move) == NE))
 						{
 							Piece.TargetSquares[Move] = false;
 							continue;
@@ -681,7 +674,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 					if ((OppositeMoves.WhichBoardSquaresAreAbsPinned[count] != 65 and NumberOfChecks == 0) or NumberOfChecks == 1)
 					{
 						//if move is an en passant add +-8 to move
-						if ((Piece.PieceType == BLACK_PAWN or Piece.PieceType == WHITE_PAWN) and (abs(count - Move) == NW or abs(count - Move) == NE) and m_BoardSquare[Move] == 0)
+						if ((Piece.PieceType == BLACK_PAWN or Piece.PieceType == WHITE_PAWN) and (abs(count - Move) == NW or abs(count - Move) == NE) and ChessPosition.BoardSquare[Move] == 0)
 						{
 							Piece.PieceType == WHITE_PAWN ? Move -= 8 : Move += 8;
 						}
@@ -723,7 +716,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 	for (MOVE_BIT& Piece : moves)
 	{
 		if (Piece.TargetSquares == 0) { continue; }
-		if ((Piece.PieceType == WHITE_PAWN or Piece.PieceType == BLACK_PAWN) and ((Piece.Promotion.Promotion & PromotionMask) != 0))[[unlikely]]
+		if ((Piece.PieceType == WHITE_PAWN or Piece.PieceType == BLACK_PAWN) and ((Piece.Promotion.Promotion & PromotionMask) != 0)) [[unlikely]]
 		{
 			m_NumOfLegalMoves += std::popcount(static_cast<uint64_t>(Piece.TargetSquares)) * 4;
 		}
@@ -732,7 +725,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 			m_NumOfLegalMoves += Piece.TargetSquares.popcnt();
 		}
 	}
-	
+
 	if (isItCheckmate == true and NumberOfChecks == 0)//stalemate
 	{
 		isItCheckmate = false;
@@ -742,7 +735,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 //fun for LegalMoves, checks if castling is permitted
 void GenerateLegalMoves::CanKingCastle_LMoves(const GenerateLegalMoves& OppositeMoves, bool& isItCheckmate, const uint8_t& BoardSquareOfKingToMove, const uint8_t KingMove)
 {
-	if (Board::IsPieceColorWhite(m_BoardSquare[BoardSquareOfKingToMove]))
+	if (Board::IsPieceColorWhite(ChessPosition.BoardSquare[BoardSquareOfKingToMove]))
 	{
 		if (BoardSquareOfKingToMove - KingMove == 2)
 		{
@@ -818,8 +811,8 @@ uint32_t GenerateLegalMoves::GetNumOfTacticalMoves() const
 		while (true)
 		{
 			if (!bit::pop_lsb(MovesCopy, Move)) { break; }
-			
-			if ((Piece.TargetSquares[Move] and m_BoardSquare[Move] != 0) or ((Piece.Promotion.Promotion & PromotionMask) != 0))
+
+			if ((Piece.TargetSquares[Move] and ChessPosition.BoardSquare[Move] != 0) or ((Piece.Promotion.Promotion & PromotionMask) != 0))
 				NumOfTacticalMoves++;
 		}
 	}

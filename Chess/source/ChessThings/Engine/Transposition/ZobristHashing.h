@@ -18,7 +18,7 @@ private:
 public:
     uint64_t Hash = 0; // current hash
 
-    ZobristHashing(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint32_t& MoveNum);
+    ZobristHashing(const GenerateLegalMoves& LegalMoves, const Position& ChessPosition);
     void UpdateHash(Move Move_, const uint8_t& PieceType);
 
 };  

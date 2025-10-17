@@ -9,10 +9,7 @@ class IterativeDeepening
 private:
 
 	Timer Time;
-	std::array<uint8_t, 64> m_BoardSquare;
-	std::array<uint8_t, 64> m_PreviousBoardSquare;
-	canCastle m_CanCastle;
-	uint16_t m_MoveNum;
+	Position ChessPosition;
 	std::vector<Move> m_SearchMoves;
 	size_t HashSize;
 	int16_t m_MaxDepth;
@@ -34,8 +31,7 @@ private:
 
 public:
 
-	IterativeDeepening(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint16_t& MoveNum,
-		std::vector<Move>& SearchMoves, const size_t& HashSize, Timer& Time, int16_t MaxDepth, bool WhiteTurn, bool* Stop);
+	IterativeDeepening(const Position& ChessPosition, std::vector<Move>& SearchMoves, const size_t& HashSize, Timer& Time, int16_t MaxDepth, bool WhiteTurn, bool* Stop);
 
 	Move GetBestMove(bool RanWithGo);
 	std::vector<Move> GetPV();

@@ -20,7 +20,7 @@
 #include "tests/TestTexture2D.h"
 #include "ChessThings/Board.h"
 
-//#define VSync 1;
+#define VSync 1;
 
 
 int main(void)

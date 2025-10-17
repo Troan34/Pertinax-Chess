@@ -16,11 +16,8 @@ private:
 	static constexpr int16_t M_KING_MATERIAL_VALUE = 15000;
 
 	const GenerateLegalMoves& m_LegalMoves;
-	std::array<uint8_t, 64> m_BoardSquare; // Change reference to value
-	std::array<uint8_t, 64> m_PreviousBoardSquare; // Change reference to value
-	canCastle m_CanCastle; // Change reference to value
+	Position ChessPosition;
 	int32_t m_Evaluation = 0;
-	int32_t m_MoveNum;
 	uint8_t NumOfPieces = 0;
 	
 	//self describing
@@ -63,6 +60,6 @@ public:
 	}
 
 	Evaluator(const GenerateLegalMoves& LegalMoves);
-	void SetParameters(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint8_t& MoveNum);
+	void SetParameters(const Position& ChessPosition);
 	int Evaluate();
 };

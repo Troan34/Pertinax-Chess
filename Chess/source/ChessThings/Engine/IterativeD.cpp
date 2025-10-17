@@ -68,8 +68,8 @@ void IterativeDeepening::PrintInfo(UCIInfoes Info)
 		<< " pv " << Board::GetPrintableFromArrayOfMoves(Info.PV->moves) << std::endl;
 }
 
-IterativeDeepening::IterativeDeepening(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint16_t& MoveNum, std::vector<Move>& SearchMoves, const size_t& HashSize, Timer& Time, int16_t MaxDepth, bool WhiteTurn, bool* stop)
-	:Time(Time),m_BoardSquare(BoardSquare), m_PreviousBoardSquare(PreviousBoardSquare), m_CanCastle(CanCastle), m_MoveNum(MoveNum), m_SearchMoves(SearchMoves), HashSize(HashSize), m_MaxDepth(MaxDepth), WhiteTurn(WhiteTurn), stop(stop)
+IterativeDeepening::IterativeDeepening(const Position& ChessPosition, std::vector<Move>& SearchMoves, const size_t& HashSize, Timer& Time, int16_t MaxDepth, bool WhiteTurn, bool* Stop)
+	:Time(Time), ChessPosition(ChessPosition), m_SearchMoves(SearchMoves), HashSize(HashSize), m_MaxDepth(MaxDepth), WhiteTurn(WhiteTurn), stop(Stop)
 {
 }
 
@@ -94,7 +94,7 @@ Move IterativeDeepening::GetBestMove(bool RanWithGo)
 		auto LocalStart = std::chrono::high_resolution_clock::now();
 
 		Depth++;
-		Search search(m_BoardSquare, m_PreviousBoardSquare, m_CanCastle, Depth, m_MoveNum, m_SearchMoves, HashSize);
+		Search search(ChessPosition, Depth, m_SearchMoves, HashSize);
 		BestEval = search.GetBestMoveWithEval(CurrentPV);
 
 		BestMove = CurrentPV.moves[0];

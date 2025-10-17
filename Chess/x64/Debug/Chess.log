@@ -1,5 +1,4 @@
 ﻿  Search.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(25,84): warning C4244: 'argument': conversion from 'const uint16_t' to 'uint8_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(325,13): warning C4018: '>': signed/unsigned mismatch
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(330,68): warning C4018: '>': signed/unsigned mismatch
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(335,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
@@ -8,8 +7,8 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Searc
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(411,68): warning C4018: '>': signed/unsigned mismatch
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(419,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(424,27): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(244,21): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(const uint8_t &)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(252,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
   (compiling source file 'source/ChessThings/Engine/Search.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.h(63,1): warning C4715: 'Evaluator::ConvertPieceTypeToMatValue': not all control paths return a value
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.h(60,1): warning C4715: 'Evaluator::ConvertPieceTypeToMatValue': not all control paths return a value
   Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Debug\Chess.exe

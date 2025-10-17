@@ -8,10 +8,10 @@ static bool Initialized = false;
 static uint8_t WhichFileHadEnPassant = 8; //8 for none
 
 
-ZobristHashing::ZobristHashing(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, const canCastle& CanCastle, const uint32_t& MoveNum)
-	:m_BoardSquare(&BoardSquare), m_LegalMoves(&LegalMoves), m_PreviousBoardSquare(&PreviousBoardSquare), m_CastleAbility(Board::canCastle2CastlingAbility(CanCastle))
+ZobristHashing::ZobristHashing(const GenerateLegalMoves& LegalMoves, const Position& ChessPosition)
+	:m_BoardSquare(&ChessPosition.BoardSquare), m_LegalMoves(&LegalMoves), m_PreviousBoardSquare(&ChessPosition.PrevBoardSquare), m_CastleAbility(Board::canCastle2CastlingAbility(ChessPosition.CanCastle))
 {
-	m_SideToMove = MoveNum % 2 == 0; // true for white, false for black
+	m_SideToMove = WHITE_TURN(ChessPosition.MoveNum); // true for white, false for black
 	if (!Initialized)
 		InitializeKeys();
 

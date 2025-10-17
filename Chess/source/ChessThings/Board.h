@@ -17,7 +17,7 @@
 #define WHITE_TURN(x) ((x % 2) == 0)
 #endif
 
-constexpr enum SQUARES
+enum SQUARES
 {
 	a1, a2, a3, a4, a5, a6, a7, a8,
 	b1, b2, b3, b4, b5, b6, b7, b8,
@@ -215,6 +215,14 @@ struct SearchResult
 		Eval = f_Eval;
 		PV = Pv;
 	}
+};
+
+struct Position
+{
+	std::array<uint8_t, 64> BoardSquare;
+	std::array<uint8_t, 64> PrevBoardSquare;
+	canCastle CanCastle;
+	uint16_t MoveNum;
 };
 
 class Board
@@ -522,5 +530,12 @@ namespace bit//bit management
 
 	};
 
+	struct Position
+	{
+		bit::BitPosition BoardSquare;
+		bit::BitPosition PrevBoardSquare;
+		canCastle CanCastle;
+		uint16_t MoveNum;
+	};
 }
 
