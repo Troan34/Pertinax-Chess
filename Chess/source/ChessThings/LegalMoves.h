@@ -21,6 +21,7 @@ enum DIRECTIONS
 	N = 8, S = -8, W = -1, E = 1, NW = 7, SE = -9, NE = 9, SW = -7
 };
 
+
 //These are the masks for the Promotion var, 0bSSSSSPPP | S = Square, P = PromotionSide
 constexpr uint8_t LeftPromotionMask = 0b00000100;
 constexpr uint8_t CenterPromotionMask = 0b00000010;
@@ -301,7 +302,6 @@ public:
 	void GenerateMoves();
 	void MagicSliderMoveGen(const uint8_t BoardSquarePos);
 	void KnightMoveGen(const uint8_t BoardSquarePos);
-	std::array<uint8_t, 8>& CreateOffesetsForKnight(const uint8_t BoardSquarePos);
 	void PawnMoveGen(const uint8_t BoardSquarePos);
 	void KingMoveGen(const uint8_t BoardSquarePos);
 	void RemoveIllegalMoves();

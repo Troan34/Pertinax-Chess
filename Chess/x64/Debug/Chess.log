@@ -1,14 +1,98 @@
-﻿  Search.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(325,13): warning C4018: '>': signed/unsigned mismatch
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(330,68): warning C4018: '>': signed/unsigned mismatch
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(335,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(340,26): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(406,13): warning C4018: '>': signed/unsigned mismatch
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(411,68): warning C4018: '>': signed/unsigned mismatch
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(419,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(424,27): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(252,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
+﻿  Evaluation.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(34,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(35,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(36,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(37,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(38,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(39,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(40,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(41,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(50,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(51,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(52,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(53,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(199,51): warning C4244: '+=': conversion from 'double' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(203,51): warning C4244: '-=': conversion from 'double' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(252,48): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(253,46): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(258,48): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(259,46): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(277,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+  Search.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(34,2): warning C4309: 'initializing': truncation of constant value
   (compiling source file 'source/ChessThings/Engine/Search.cpp')
   
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(35,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(36,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(37,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(38,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(39,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(40,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(41,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(50,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(51,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(52,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(53,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(327,13): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(332,68): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(337,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(342,26): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(408,13): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(413,68): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(421,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(426,27): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(277,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+  Generating Code...
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.h(60,1): warning C4715: 'Evaluator::ConvertPieceTypeToMatValue': not all control paths return a value
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.h(60,1): warning C4715: 'Evaluator::ConvertPieceTypeToMatValue': not all control paths return a value
   Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Debug\Chess.exe

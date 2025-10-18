@@ -39,7 +39,7 @@ void UCI::RunCommand()
 
 		if (Command.find(HASH_COMMAND, 15) != std::string::npos)
 		{
-			*Vars_p.HashSize = stoi(Command.substr(Command.find(HASH_COMMAND, 15) + 5)) * 1000000;
+			*Vars_p.HashSize = stoi(Command.substr(Command.find(HASH_COMMAND, 14) + 5)) * 1000000;
 		}
 
 		if (Command.find(GUI_COMMAND) != std::string::npos)
@@ -207,7 +207,7 @@ void UCI::Go()
 	IsReady.store(true);
 }
 
-uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> perftPreviousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int& PerftMoveNum)
+uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> perftPreviousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int PerftMoveNum)
 {
 	uint32_t NumOfMoves = 0;
 
@@ -300,12 +300,12 @@ uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 				if (DivideFunON)
 				{
 					uint32_t DivideFunNum = 0;
-					DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+					DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum + 1);
 					NumOfMoves += DivideFunNum;
 					std::cout << +count << " " << +move << ": " << DivideFunNum << '\n';
 				}
 				else
-					NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+					NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum + 1);
 
 				BoardSquare = ConstBoardSquare;
 				perftPreviousBoardSquare = ConstPreviousBoardSquare;

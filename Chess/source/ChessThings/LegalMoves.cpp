@@ -1,6 +1,90 @@
 #include "LegalMoves.h"
+static constexpr std::array<bit::BitBoard64, 64> CreateOffesetsForKnight()
+{
+	std::array<bit::BitBoard64, 64> OffsetsForKnight;
+	uint8_t count = 0;
+	for (uint8_t BoardSquarePos = 0; BoardSquarePos <= MAX_SQUARE; BoardSquarePos++)
+	{
+		count = 0;
+		for (uint8_t i = 0; i <= 4; i++)
+		{
+			if (NumOfSquaresUntilEdge[BoardSquarePos][i] >= 1)
+			{
+				if (i == 0 and BoardSquarePos <= 47)
+				{
+					if (NumOfSquaresUntilEdge[BoardSquarePos + 16][2] >= 1)
+					{
+						OffsetsForKnight[BoardSquarePos][count] = (BoardSquarePos + 15);
+						count++;
+					}
+					if (NumOfSquaresUntilEdge[BoardSquarePos + 16][3] >= 1)
+					{
+						OffsetsForKnight[BoardSquarePos][count] = (BoardSquarePos + 17);
+						count++;
+					}
+				}
+				else if (i == 1 and BoardSquarePos >= 16)
+				{
+					if (NumOfSquaresUntilEdge[BoardSquarePos - 16][2] >= 1)
+					{
+						OffsetsForKnight[BoardSquarePos][count] = (BoardSquarePos - 17);
+						count++;
+					}
+					if (NumOfSquaresUntilEdge[BoardSquarePos - 16][3] >= 1)
+					{
+						OffsetsForKnight[BoardSquarePos][count] = (BoardSquarePos - 15);
+						count++;
+					}
+				}
+				if (NumOfSquaresUntilEdge[BoardSquarePos][2] >= 2)
+				{
+					if (i == 2 and BoardSquarePos >= 2)
+					{
+						if (NumOfSquaresUntilEdge[BoardSquarePos - 2][0] >= 1)
+						{
+							OffsetsForKnight[BoardSquarePos][count] = (BoardSquarePos + 6);
+							count++;
+						}
+						if (NumOfSquaresUntilEdge[BoardSquarePos - 2][1] >= 1)
+						{
+							OffsetsForKnight[BoardSquarePos][count] = (BoardSquarePos - 10);
+							count++;
+						}
+					}
+				}
+				if (NumOfSquaresUntilEdge[BoardSquarePos][3] >= 2)
+				{
+					if (i == 3 and BoardSquarePos <= 61)
+					{
+						if (NumOfSquaresUntilEdge[BoardSquarePos + 2][0] >= 1)
+						{
+							OffsetsForKnight[BoardSquarePos][count] = (BoardSquarePos + 10);
+							count++;
+						}
+						if (NumOfSquaresUntilEdge[BoardSquarePos + 2][1] >= 1)
+						{
+							OffsetsForKnight[BoardSquarePos][count] = (BoardSquarePos - 6);
+							count++;
+						}
+					}
+				}
+			}
+		}
+		for (; count < 8; count++)
+		{
+			OffsetsForKnight[BoardSquarePos][count] = 65;
+		}
+	}
+	return OffsetsForKnight;
+}
+
+//static constexpr std::array<std::array<uint8_t, 8>, 64> CreateOffesetsForPawn()
+
+
 static std::array<MOVE_BIT, 64> OppositeMoves;
 static bool DoNotEnPassant; //for weird RemoveIllegalMoves things
+static constexpr std::array<bit::BitBoard64, 64> KnightTable{ CreateOffesetsForKnight() };
+//static constexpr std::array<bit::BitBoard64, 64> PawnTable{ CreateOffesetsForPawn() };
 
 
 GenerateLegalMoves::GenerateLegalMoves(const bit::Position& Position, bool PseudoLegalFlag)
@@ -247,104 +331,24 @@ void GenerateLegalMoves::KnightMoveGen(const uint8_t BoardSquarePos)
 {
 	if ((ChessPosition.BoardSquare[BoardSquarePos] == WHITE_KNIGHT and isNextMoveForWhite) or (ChessPosition.BoardSquare[BoardSquarePos] == BLACK_KNIGHT and !isNextMoveForWhite))
 	{
-		const std::array<uint8_t, 8> OffsetsForKnight = CreateOffesetsForKnight(BoardSquarePos);
-		for (const uint8_t& i : OffsetsForKnight)
+		//avoiding branches by using !isNextMoveForWhite as index
+		auto Attacks = KnightTable[BoardSquarePos] & ~ChessPosition.BoardSquare.ColorPositions[!isNextMoveForWhite];
+
+		moves[BoardSquarePos].PieceType = ChessPosition.BoardSquare[BoardSquarePos];
+		moves[BoardSquarePos].TargetSquares = Attacks;
+
+		AttackedSquares |= Attacks;
+
+		//Because we know we are only attacking enemy pieces we don't need to make extra operations
+		if ((Attacks & ChessPosition.BoardSquare.PiecePositions[KING - 1]) != 0)
 		{
-			if (i == 65)
-				break;
-
-			AttackedSquares[i] = true;
-			//i know that if only the first condition is met then c++ won't check the other one, if it does i'm blaming c++ and i WILL be calling it stupid
-			if ((ChessPosition.BoardSquare[i]) == 0 or (Board::IsPieceColorWhite(ChessPosition.BoardSquare[BoardSquarePos]) != Board::IsPieceColorWhite(ChessPosition.BoardSquare[i])))
-			{
-				moves[BoardSquarePos].PieceType = ChessPosition.BoardSquare[BoardSquarePos];
-				moves[BoardSquarePos].TargetSquares.push_back(i);
-				if (ChessPosition.BoardSquare[i] == BLACK_KING and isNextMoveForWhite or ChessPosition.BoardSquare[i] == WHITE_KING and !isNextMoveForWhite)
-				{
-					if (CheckTargetSquares[i] != 65)
-						DoubleCheckBoardSquare = BoardSquarePos;
-					else
-						CheckTargetSquares[i] = BoardSquarePos;
-				}
-			}
-
+			if (CheckTargetSquares[std::countr_zero(ChessPosition.BoardSquare.PiecePositions[KING - 1].ReadBits())] != 65)
+				DoubleCheckBoardSquare = BoardSquarePos;
+			else
+				CheckTargetSquares[std::countr_zero(ChessPosition.BoardSquare.PiecePositions[KING - 1].ReadBits())] = BoardSquarePos;
 		}
-	}
-}
 
-std::array<uint8_t, 8>& GenerateLegalMoves::CreateOffesetsForKnight(const uint8_t BoardSquarePos)
-{
-	std::array<uint8_t, 8> OffsetsForKnight;
-	uint8_t count = 0;
-	for (uint8_t i = 0; i <= 4; i++)
-	{
-		if (NumOfSquaresUntilEdge[BoardSquarePos][i] >= 1)
-		{
-			if (i == 0 and BoardSquarePos <= 47)
-			{
-				if (NumOfSquaresUntilEdge[BoardSquarePos + 16][2] >= 1)
-				{
-					OffsetsForKnight[count] = (BoardSquarePos + 15);
-					count++;
-				}
-				if (NumOfSquaresUntilEdge[BoardSquarePos + 16][3] >= 1)
-				{
-					OffsetsForKnight[count] = (BoardSquarePos + 17);
-					count++;
-				}
-			}
-			else if (i == 1 and BoardSquarePos >= 16)
-			{
-				if (NumOfSquaresUntilEdge[BoardSquarePos - 16][2] >= 1)
-				{
-					OffsetsForKnight[count] = (BoardSquarePos - 17);
-					count++;
-				}
-				if (NumOfSquaresUntilEdge[BoardSquarePos - 16][3] >= 1)
-				{
-					OffsetsForKnight[count] = (BoardSquarePos - 15);
-					count++;
-				}
-			}
-			if (NumOfSquaresUntilEdge[BoardSquarePos][2] >= 2)
-			{
-				if (i == 2 and BoardSquarePos >= 2)
-				{
-					if (NumOfSquaresUntilEdge[BoardSquarePos - 2][0] >= 1)
-					{
-						OffsetsForKnight[count] = (BoardSquarePos + 6);
-						count++;
-					}
-					if (NumOfSquaresUntilEdge[BoardSquarePos - 2][1] >= 1)
-					{
-						OffsetsForKnight[count] = (BoardSquarePos - 10);
-						count++;
-					}
-				}
-			}
-			if (NumOfSquaresUntilEdge[BoardSquarePos][3] >= 2)
-			{
-				if (i == 3 and BoardSquarePos <= 61)
-				{
-					if (NumOfSquaresUntilEdge[BoardSquarePos + 2][0] >= 1)
-					{
-						OffsetsForKnight[count] = (BoardSquarePos + 10);
-						count++;
-					}
-					if (NumOfSquaresUntilEdge[BoardSquarePos + 2][1] >= 1)
-					{
-						OffsetsForKnight[count] = (BoardSquarePos - 6);
-						count++;
-					}
-				}
-			}
-		}
 	}
-	for (; count < 8; count++)
-	{
-		OffsetsForKnight[count] = 65;
-	}
-	return OffsetsForKnight;
 }
 
 //PAWN
