@@ -1,89 +1,9 @@
 #include "LegalMoves.h"
-static constexpr std::array<bit::BitBoard64, 64> CreateOffesetsForKnight()
-{
-	std::array<bit::BitBoard64, 64> OffsetsForKnight;
-	uint8_t count = 0;
-	for (uint8_t BoardSquarePos = 0; BoardSquarePos <= MAX_SQUARE; BoardSquarePos++)
-	{
-		count = 0;
-		for (uint8_t i = 0; i <= 4; i++)
-		{
-			if (NumOfSquaresUntilEdge[BoardSquarePos][i] >= 1)
-			{
-				if (i == 0 and BoardSquarePos <= 47)
-				{
-					if (NumOfSquaresUntilEdge[BoardSquarePos + 16][2] >= 1)
-					{
-						OffsetsForKnight[BoardSquarePos][count] = (BoardSquarePos + 15);
-						count++;
-					}
-					if (NumOfSquaresUntilEdge[BoardSquarePos + 16][3] >= 1)
-					{
-						OffsetsForKnight[BoardSquarePos][count] = (BoardSquarePos + 17);
-						count++;
-					}
-				}
-				else if (i == 1 and BoardSquarePos >= 16)
-				{
-					if (NumOfSquaresUntilEdge[BoardSquarePos - 16][2] >= 1)
-					{
-						OffsetsForKnight[BoardSquarePos][count] = (BoardSquarePos - 17);
-						count++;
-					}
-					if (NumOfSquaresUntilEdge[BoardSquarePos - 16][3] >= 1)
-					{
-						OffsetsForKnight[BoardSquarePos][count] = (BoardSquarePos - 15);
-						count++;
-					}
-				}
-				if (NumOfSquaresUntilEdge[BoardSquarePos][2] >= 2)
-				{
-					if (i == 2 and BoardSquarePos >= 2)
-					{
-						if (NumOfSquaresUntilEdge[BoardSquarePos - 2][0] >= 1)
-						{
-							OffsetsForKnight[BoardSquarePos][count] = (BoardSquarePos + 6);
-							count++;
-						}
-						if (NumOfSquaresUntilEdge[BoardSquarePos - 2][1] >= 1)
-						{
-							OffsetsForKnight[BoardSquarePos][count] = (BoardSquarePos - 10);
-							count++;
-						}
-					}
-				}
-				if (NumOfSquaresUntilEdge[BoardSquarePos][3] >= 2)
-				{
-					if (i == 3 and BoardSquarePos <= 61)
-					{
-						if (NumOfSquaresUntilEdge[BoardSquarePos + 2][0] >= 1)
-						{
-							OffsetsForKnight[BoardSquarePos][count] = (BoardSquarePos + 10);
-							count++;
-						}
-						if (NumOfSquaresUntilEdge[BoardSquarePos + 2][1] >= 1)
-						{
-							OffsetsForKnight[BoardSquarePos][count] = (BoardSquarePos - 6);
-							count++;
-						}
-					}
-				}
-			}
-		}
-		for (; count < 8; count++)
-		{
-			OffsetsForKnight[BoardSquarePos][count] = 65;
-		}
-	}
-	return OffsetsForKnight;
-}
 
 //static constexpr std::array<std::array<uint8_t, 8>, 64> CreateOffesetsForPawn()
 
-
 static std::array<MOVE_BIT, 64> OppositeMoves;
 static bool DoNotEnPassant; //for weird RemoveIllegalMoves things
-static constexpr std::array<bit::BitBoard64, 64> KnightTable{ CreateOffesetsForKnight() };
 //static constexpr std::array<bit::BitBoard64, 64> PawnTable{ CreateOffesetsForPawn() };
 
 

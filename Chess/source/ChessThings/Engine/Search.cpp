@@ -106,6 +106,7 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, Position ChessPosition, uint8_t 
 		ChessPosition.MoveNum++;
 		Evaluation = -NegaMax(m_Hash, ChessPosition, depth - 1, -SmallWindowBeta, -alpha, &PVLine);
 		ChessPosition.MoveNum--;
+
 		//undo move
 		ChessPosition = cChessPosition;
 		m_Hash.Hash = cHash;

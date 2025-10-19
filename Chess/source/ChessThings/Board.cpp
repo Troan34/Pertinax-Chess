@@ -629,7 +629,7 @@ Move::Move()
 namespace bit {
 	
 
-	inline BitManager& BitManager::operator=(bool value)
+	constexpr BitManager& BitManager::operator=(bool value)
 	{
 		if (value) {
 			m_Data |= (1ULL << m_Index);

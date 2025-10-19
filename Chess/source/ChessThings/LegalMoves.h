@@ -18,7 +18,8 @@ enum offDIRECTIONS
 
 enum DIRECTIONS
 {
-	N = 8, S = -8, W = -1, E = 1, NW = 7, SE = -9, NE = 9, SW = -7
+	N = 8, S = -8, W = -1, E = 1, NW = 7, SE = -9, NE = 9, SW = -7,
+	NNE = 17, ENE = 10, NNW = 15, WNW = 6, WSW = -10, SSW = -17, SSE = -15, ESE = -6
 };
 
 
@@ -29,7 +30,6 @@ constexpr uint8_t RightPromotionMask = 0b00000001;
 constexpr uint8_t PromotionMask = 0b00000111;
 constexpr uint8_t PromotionTypeMask = 0b11111000;
 
-//precompute NumOfSquaresUntilEdge
 constexpr std::array<std::array<uint8_t, 8>, 64> fillNumOfSquaresUntilEdge()
 {
 	std::array<std::array<uint8_t, 8>, 64> l_NumOfSquaresUntilEdge{};
@@ -59,7 +59,26 @@ constexpr std::array<std::array<uint8_t, 8>, 64> fillNumOfSquaresUntilEdge()
 	return l_NumOfSquaresUntilEdge;
 }
 
-static constexpr std::array<std::array<uint8_t, 8>, 64>NumOfSquaresUntilEdge = fillNumOfSquaresUntilEdge();
+constexpr std::array<std::array<uint8_t, 8>, 64>NumOfSquaresUntilEdge{ fillNumOfSquaresUntilEdge() };
+
+constexpr std::array<bit::BitBoard64, 64> CreateOffesetsForKnight()
+{
+	std::array<bit::BitBoard64, 64> OffsetsForKnight{};
+	for (uint8_t BoardSquarePos = 0; BoardSquarePos <= MAX_SQUARE; BoardSquarePos++)
+	{
+		if (NumOfSquaresUntilEdge[BoardSquarePos][offE] >= 2 and NumOfSquaresUntilEdge[BoardSquarePos][offN] >= 1) { OffsetsForKnight[BoardSquarePos][BoardSquarePos + ENE]; }
+		if (NumOfSquaresUntilEdge[BoardSquarePos][offE] >= 1 and NumOfSquaresUntilEdge[BoardSquarePos][offN] >= 2) { OffsetsForKnight[BoardSquarePos][BoardSquarePos + NNE]; }
+		if (NumOfSquaresUntilEdge[BoardSquarePos][offW] >= 2 and NumOfSquaresUntilEdge[BoardSquarePos][offN] >= 1) { OffsetsForKnight[BoardSquarePos][BoardSquarePos + WNW]; }
+		if (NumOfSquaresUntilEdge[BoardSquarePos][offW] >= 1 and NumOfSquaresUntilEdge[BoardSquarePos][offN] >= 2) { OffsetsForKnight[BoardSquarePos][BoardSquarePos + NNW]; }
+		if (NumOfSquaresUntilEdge[BoardSquarePos][offE] >= 2 and NumOfSquaresUntilEdge[BoardSquarePos][offS] >= 1) { OffsetsForKnight[BoardSquarePos][BoardSquarePos + ESE]; }
+		if (NumOfSquaresUntilEdge[BoardSquarePos][offE] >= 1 and NumOfSquaresUntilEdge[BoardSquarePos][offS] >= 2) { OffsetsForKnight[BoardSquarePos][BoardSquarePos + SSE]; }
+		if (NumOfSquaresUntilEdge[BoardSquarePos][offW] >= 2 and NumOfSquaresUntilEdge[BoardSquarePos][offS] >= 1) { OffsetsForKnight[BoardSquarePos][BoardSquarePos + WSW]; }
+		if (NumOfSquaresUntilEdge[BoardSquarePos][offW] >= 1 and NumOfSquaresUntilEdge[BoardSquarePos][offS] >= 2) { OffsetsForKnight[BoardSquarePos][BoardSquarePos + SSW]; }
+	}
+	return OffsetsForKnight;
+}
+
+constexpr std::array<bit::BitBoard64, 64> KnightTable = CreateOffesetsForKnight();
 
 //precompute Rook and Bishop masks
 constexpr std::array<uint64_t, 64> ComputeRookMasks(bool IncludeBorder)
@@ -240,8 +259,6 @@ struct MOVE_BIT
 	PromotionByte Promotion;
 	uint8_t PieceType = 0;
 };
-
-
 
 class GenerateLegalMoves
 {

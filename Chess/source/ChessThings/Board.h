@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <Windows.h>
 #include <algorithm>
+#include <type_traits>
 
 #ifndef WHITE_TURN
 #define WHITE_TURN(x) ((x % 2) == 0)
@@ -366,7 +367,7 @@ namespace bit//bit management
 		ASSERT(Index < 64);
 		size_t Mask = (1ULL << Index) - 1;
 		Bits = Mask ^ (Bits | Mask);
- 		return std::countr_zero(Bits);
+		return std::countr_zero(Bits);
 	}
 
 	class BitManager
@@ -375,13 +376,13 @@ namespace bit//bit management
 		uint64_t& m_Data;
 		uint8_t m_Index;
 	public:
-		BitManager(uint64_t& Data, uint8_t Index) : m_Data(Data), m_Index(Index) {}
+		constexpr BitManager(uint64_t& Data, uint8_t Index) : m_Data(Data), m_Index(Index) {}
 
 		//assignment operator
-		inline BitManager& operator=(bool value);
+		constexpr BitManager& operator=(bool value);
 
 		//read-only member
-		inline operator bool() const {
+		constexpr operator bool() const {
 			return (m_Data >> m_Index) & 0b1;
 		}
 
@@ -396,118 +397,112 @@ namespace bit//bit management
 		uint64_t Bits = 0;
 	public:
 		//set a bit, logic uses the BitManager operator=
-		BitManager operator[](uint8_t Index)
+		constexpr BitManager operator[](uint8_t Index)
 		{
-#ifdef _DEBUG
 			if (Index > 63)
 			{
 				throw std::out_of_range("Indexed bit out of range");
 			}
-#endif
 			return BitManager(Bits, Index);
 		}
 
-		BitBoard64(uint64_t bits) : Bits(bits) {}
-		BitBoard64() {}
+		constexpr BitBoard64(uint64_t bits) : Bits(bits) {}
+		constexpr BitBoard64() {}
 
 		//get bit at index
-		bool inline operator[](uint8_t Index) const
+		constexpr bool operator[](uint8_t Index) const
 		{
-#ifdef _DEBUG
 			if (Index > 63)
 			{
 				throw std::out_of_range("Indexed bit out of range");
 			}
-#endif
 			return (Bits >> Index) & 0b1;
 		}
 
-		inline void fill(bool Value) noexcept
+		constexpr void fill(bool Value) noexcept
 		{
 			if (Value) { Bits = UINT64_MAX; }
 			else { Bits = 0; }
 		}
 
 		//Sets the bit in the parameter as true
-		void inline SetToTrue(uint8_t Index)
+		constexpr void inline SetToTrue(uint8_t Index)
 		{
-#ifdef _DEBUG
 			if (Index > 63)
 			{
 				throw std::out_of_range("Indexed bit out of range");
 			}
-#endif
 			Bits |= 1ULL << Index;
 		}
 
 		//this should be replaced with SetToTrue
-		inline void push_back(uint8_t Index) { SetToTrue(Index); }
+		constexpr void push_back(uint8_t Index) { SetToTrue(Index); }
 
-		inline void clear() noexcept
+		constexpr void clear() noexcept
 		{
-			fill(false);
+			Bits = 0;
 		}
 
-		inline uint8_t popcnt() const noexcept
+		constexpr uint8_t popcnt() const noexcept
 		{
 			return std::popcount(Bits);
 		}
 
-		inline bool empty() const noexcept
+		constexpr bool empty() const noexcept
 		{
 			return (popcnt() == 0);
 		}
 
-		inline uint64_t ReadBits() const
+		constexpr uint64_t ReadBits() const
 		{
 			return Bits;
 		}
 
 		//vv Bitwise op vv
 
-		inline BitBoard64 operator|(BitBoard64 Operand) const
+		constexpr BitBoard64 operator|(BitBoard64 Operand) const
 		{
 			return Bits | Operand.Bits;
 		}
-		inline BitBoard64 operator&(BitBoard64 Operand) const
+		constexpr BitBoard64 operator&(BitBoard64 Operand) const
 		{
 			return Bits & Operand.Bits;
 		}
-		inline BitBoard64 operator^(BitBoard64 Operand) const
+		constexpr BitBoard64 operator^(BitBoard64 Operand) const
 		{
 			return Bits ^ Operand.Bits;
 		}
 
-		inline BitBoard64& operator|=(BitBoard64 Operand)
+		constexpr BitBoard64& operator|=(BitBoard64 Operand)
 		{
 			Bits |= Operand.Bits;
 			return *this;
 		}
-		inline BitBoard64& operator&=(BitBoard64 Operand)
+		constexpr BitBoard64& operator&=(BitBoard64 Operand)
 		{
 			Bits &= Operand.Bits;
 			return *this;
 		}
-		inline BitBoard64& operator^=(BitBoard64 Operand)
+		constexpr BitBoard64& operator^=(BitBoard64 Operand)
 		{
 			Bits ^= Operand.Bits;
 			return *this;
 		}
 
-		inline BitBoard64 operator|(uint64_t Operand) const
+		constexpr BitBoard64 operator|(uint64_t Operand) const
 		{
 			return Bits | Operand;
 		}
-		inline BitBoard64 operator&(uint64_t Operand) const
+		constexpr BitBoard64 operator&(uint64_t Operand) const
 		{
 			return Bits & Operand;
 		}
-		inline BitBoard64 operator^(uint64_t Operand) const
+		constexpr BitBoard64 operator^(uint64_t Operand) const
 		{
 			return Bits ^ Operand;
 		}
-		inline operator uint64_t() const { return Bits; }
-		inline operator uint64_t&() { return Bits; }
+		constexpr operator uint64_t() const { return Bits; }
+		constexpr operator uint64_t&() { return Bits; }
 	};
 
 	class BitPosManager
