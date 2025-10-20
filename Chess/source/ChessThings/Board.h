@@ -20,14 +20,14 @@
 
 enum SQUARES
 {
-	a1, a2, a3, a4, a5, a6, a7, a8,
-	b1, b2, b3, b4, b5, b6, b7, b8,
-	c1, c2, c3, c4, c5, c6, c7, c8,
-	d1, d2, d3, d4, d5, d6, d7, d8,
-	e1, e2, e3, e4, e5, e6, e7, e8,
-	f1, f2, f3, f4, f5, f6, f7, f8,
-	g1, g2, g3, g4, g5, g6, g7, g8,
-	h1, h2, h3, h4, h5, h6, h7, h8
+	a1, b1, c1, d1, e1, f1, g1, h1,
+	a2, b2, c2, d2, e2, f2, g2, h2,
+	a3, b3, c3, d3, e3, f3, g3, h3,
+	a4, b4, c4, d4, e4, f4, g4, h4,
+	a5, b5, c5, d5, e5, f5, g5, h5,
+	a6, b6, c6, d6, e6, f6, g6, h6,
+	a7, b7, c7, d7, e7, f7, g7, h7,
+	a8, b8, c8, d8, e8, f8, g8, h8
 };
 
 enum BOARD_FILE
@@ -52,6 +52,11 @@ enum BOARD_RANK
 	RANK_6 = 0x0000FF0000000000,
 	RANK_7 = 0x00FF000000000000,
 	RANK_8 = 0xFF00000000000000,
+};
+
+enum CastlingIndices
+{
+	WhiteShort, WhiteLong, BlackShort, BlackLong
 };
 
 constexpr uint8_t MAX_SQUARE = 63;
@@ -125,16 +130,16 @@ struct CastlingAbility
 	{
 		switch (index)
 		{
-		case 0:
+		case CastlingIndices::WhiteShort:
 			return WhiteShort;
 			break;
-		case 1:
+		case CastlingIndices::WhiteLong:
 			return WhiteLong;
 			break;
-		case 2:
+		case CastlingIndices::BlackShort:
 			return BlackShort;
 			break;
-		case 3:
+		case CastlingIndices::BlackLong:
 			return BlackLong;
 			break;
 		default:
@@ -277,10 +282,10 @@ public:
 	static CastlingAbility canCastle2CastlingAbility(const canCastle& Castle);
 	static constexpr bool IsPieceColorWhite(uint8_t BoardSquareValue);
 	static char PieceType2letter(const uint8_t& PieceType);
-	static void WillCanCastleChange(const uint8_t& PieceTypeThatMoved, const uint8_t& BoardSquareItMovedFrom, const uint8_t& BoardSquareItMovedTo, canCastle& Castle);
-	static bool WillCanCastleChange(const uint8_t& PieceTypeThatMoved, const uint8_t& BoardSquareItMovedFrom, const uint8_t& BoardSquareItMovedTo);
-	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t EnpassantIndex, canCastle Castle);
-	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, std::array<uint8_t, 64>& previousBoardSquare, canCastle& Castle);
+	static void WillCanCastleChange(const uint8_t BoardSquareItMovedFrom, CastlingAbility& Castle);
+	static bool WillCanCastleChange(const uint8_t& PieceTypeThatMoved, const uint8_t BoardSquareItMovedFrom, const uint8_t BoardSquareItMovedTo);
+	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t EnpassantIndex, CastlingAbility Castle);
+	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, std::array<uint8_t, 64>& previousBoardSquare, CastlingAbility& Castle);
 	static std::array<uint8_t, 64> PrevBoardSquareFromEP(const std::array<uint8_t, 64>& BoardSquare, uint8_t EPBoardsquare);
 	static std::string GetPrintableFromArrayOfMoves(const std::array<Move, MAX_PV_LENGTH>& Moves);
 	static uint8_t PieceType2Compact(uint8_t PieceType);

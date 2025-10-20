@@ -333,43 +333,37 @@ char Board::PieceType2letter(const uint8_t& PieceType)
 	}
 }
 
-void Board::WillCanCastleChange(const uint8_t& PieceType, const uint8_t& BoardSquareNumItMovedFrom, const uint8_t& BoardSquareItMovedTo, canCastle& Castle)
+void Board::WillCanCastleChange(const uint8_t BoardSquareNumItMovedFrom, CastlingAbility& Castle)
 {
-	if (BoardSquareNumItMovedFrom == 4 and PieceType == WHITE_KING)
+	switch (BoardSquareNumItMovedFrom)
 	{
-		Castle.HasWhiteKingMoved = true;
-		if (BoardSquareItMovedTo == 6)
-		{
-			Castle.HasWhiteShortRookMoved = true;
-		}
-		else if (BoardSquareItMovedTo == 2)
-		{
-			Castle.HasWhiteLongRookMoved = true;
-		}
+	case e1:
+		Castle.WhiteLong = false;
+		Castle.WhiteShort = false;
+		break;
+	case a1:
+		Castle.WhiteLong = false;
+		break;
+	case h1:
+		Castle.WhiteShort = false;
+		break;
+	case e8:
+		Castle.BlackLong = false;
+		Castle.BlackShort = false;
+		break;
+	case a8:
+		Castle.BlackLong = false;
+		break;
+	case h8:
+		Castle.BlackShort = false;
+		break;
+	default:
+		__debugbreak();
 	}
-	else if (PieceType == BLACK_KING and BoardSquareNumItMovedFrom == 60)
-	{
-		Castle.HasBlackKingMoved = true;
-		if (BoardSquareItMovedTo == 62)
-		{
-			Castle.HasBlackShortRookMoved = true;
-		}
-		else if (BoardSquareItMovedTo == 58)
-		{
-			Castle.HasBlackLongRookMoved = true;
-		}
-	}
-	else if (PieceType == WHITE_ROOK and BoardSquareNumItMovedFrom == 0 or BoardSquareItMovedTo == 0)
-		Castle.HasWhiteLongRookMoved = true;
-	else if (PieceType == WHITE_ROOK and BoardSquareNumItMovedFrom == 7 or BoardSquareItMovedTo == 7)
-		Castle.HasWhiteShortRookMoved = true;
-	else if (PieceType == BLACK_ROOK and BoardSquareNumItMovedFrom == 63 or BoardSquareItMovedTo == 63)
-		Castle.HasBlackShortRookMoved = true;
-	else if (PieceType == BLACK_ROOK and BoardSquareNumItMovedFrom == 56 or BoardSquareItMovedTo == 56)
-		Castle.HasBlackLongRookMoved = true;
+	
 }
 
-bool Board::WillCanCastleChange(const uint8_t& PieceType, const uint8_t& BoardSquareNumItMovedFrom, const uint8_t& BoardSquareItMovedTo)
+bool Board::WillCanCastleChange(const uint8_t& PieceType, const uint8_t BoardSquareNumItMovedFrom, const uint8_t BoardSquareItMovedTo)
 {
 	if (BoardSquareNumItMovedFrom == 4 and PieceType == WHITE_KING)
 	{
@@ -391,7 +385,7 @@ bool Board::WillCanCastleChange(const uint8_t& PieceType, const uint8_t& BoardSq
 	return false;
 }
 
-void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t EnpassantIndex, canCastle Castle)
+void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t EnpassantIndex, CastlingAbility Castle)
 {
 	Board::WillCanCastleChange(BoardSquare[move.s_BoardSquare], move.s_BoardSquare, move.s_Move, Castle);
 	BoardSquare[move.s_Move] = BoardSquare[move.s_BoardSquare];
@@ -478,10 +472,10 @@ void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t En
 	*/
 }
 
-void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, std::array<uint8_t, 64>& previousBoardSquare, canCastle& Castle)
+void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, std::array<uint8_t, 64>& previousBoardSquare, CastlingAbility& Castle)
 {
 	previousBoardSquare = BoardSquare;
-	Board::WillCanCastleChange(BoardSquare[move.s_BoardSquare], move.s_BoardSquare, move.s_Move, Castle);
+	Board::WillCanCastleChange(move.s_BoardSquare, Castle);
 	BoardSquare[move.s_Move] = BoardSquare[move.s_BoardSquare];
 
 	uint8_t PieceTypeToPromoteTo = 65;
