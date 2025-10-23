@@ -113,12 +113,6 @@ static uint64_t Random64Bit()
 	return dist(rng);
 }
 
-struct canCastle
-{
-	bool HasWhiteLongRookMoved = false, HasWhiteShortRookMoved = false, HasBlackLongRookMoved = false, HasBlackShortRookMoved = false, HasWhiteKingMoved = false, HasBlackKingMoved = false;
-
-};
-
 struct CastlingAbility
 {
 	bool WhiteShort = false;
@@ -252,7 +246,7 @@ struct Position
 {
 	std::array<uint8_t, 64> BoardSquare;
 	std::array<uint8_t, 64> PrevBoardSquare;
-	canCastle CanCastle;
+	CastlingAbility CanCastle;
 	uint16_t MoveNum;
 };
 
@@ -273,13 +267,12 @@ public:
 	std::array<uint8_t, 64> GetPositionFromFEN();
 	static std::array<uint8_t, 64> GetPositionFromFEN(const std::string& FenString);
 	uint32_t MoveNum();
-	canCastle GetCanCastle();
+	CastlingAbility GetCanCastle();
 	uint8_t GetPawnMoveSquare();
 	static uint8_t ALG2BoardSquareConverter(const std::string& ALG);
 	static Move LongALG2Move(const std::string& ALG);
 	static std::string Move2ALG(Move move);
 	static constexpr uint8_t GetPieceType2Uncolored(uint8_t PieceType);
-	static CastlingAbility canCastle2CastlingAbility(const canCastle& Castle);
 	static constexpr bool IsPieceColorWhite(uint8_t BoardSquareValue);
 	static char PieceType2letter(const uint8_t& PieceType);
 	static void WillCanCastleChange(const uint8_t BoardSquareItMovedFrom, CastlingAbility& Castle);
@@ -559,7 +552,7 @@ namespace bit//bit management
 	{
 		bit::BitPosition BoardSquare;
 		bit::BitPosition PrevBoardSquare;
-		canCastle CanCastle;
+		CastlingAbility CanCastle;
 		uint16_t MoveNum;
 	};
 }

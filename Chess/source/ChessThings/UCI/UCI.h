@@ -39,7 +39,7 @@ struct UciVars_p
 	std::array<uint8_t, 64Ui64>* BoardSquare;
 	std::array<uint8_t, 64Ui64>* previousBoardSquare;//also used to 'simulate' an e.p. opportunity
 	uint32_t* MoveNum;
-	canCastle* CanCastle;
+	CastlingAbility* CanCastle;
 	std::vector<Move>* SearchMoves;
 	Timer* timer;
 	size_t* HashSize;
@@ -63,5 +63,5 @@ private:
 public:
 
 	UCI(UciVars_p Vars);
-	static uint32_t Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int PerftMoveNum);
+	static uint32_t Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, CastlingAbility CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int PerftMoveNum);
 };

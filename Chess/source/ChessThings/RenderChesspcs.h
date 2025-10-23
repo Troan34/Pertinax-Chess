@@ -53,11 +53,11 @@ public:
 	void SetStaticBoardSquare(const std::array<uint8_t, 64>& BoardSquare);
 	void GetMouseInput();
 
-	static void MakeMove(const GenerateLegalMoves& LegalMoves,Move move, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle);
+	static void MakeMove(const GenerateLegalMoves& LegalMoves,Move move, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, CastlingAbility& Castle);
 	void CreatePerft(uint8_t PerftDepth);
 	
 	void SetMoveNum(const uint32_t& Movenum);
-	void SetCanCastle(const canCastle& f_canCastle);
+	void SetCanCastle(const CastlingAbility& f_canCastle);
 	void SetPrevBoardSquare_FEN_EP(const uint32_t& f_BoardSquare);
 
 

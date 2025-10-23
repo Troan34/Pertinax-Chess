@@ -78,7 +78,7 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evalu
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(253,46): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(258,48): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(259,46): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(278,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(276,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
   (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
   
   IterativeD.cpp
@@ -166,15 +166,15 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(53,2
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(54,2): warning C4309: 'initializing': truncation of constant value
   (compiling source file 'source/ChessThings/Engine/Search.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(328,13): warning C4018: '>': signed/unsigned mismatch
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(333,68): warning C4018: '>': signed/unsigned mismatch
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(338,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(343,26): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(409,13): warning C4018: '>': signed/unsigned mismatch
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(414,68): warning C4018: '>': signed/unsigned mismatch
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(422,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(427,27): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(278,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(327,13): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(332,68): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(337,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(342,26): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(408,13): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(413,68): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(421,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(426,27): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(276,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
   (compiling source file 'source/ChessThings/Engine/Search.cpp')
   
   TT.cpp
@@ -299,10 +299,10 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.c
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(853,38): warning C4838:         ]
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(853,38): warning C4309: 'initializing': truncation of constant value
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(889,31): warning C4244: 'return': conversion from 'uint64_t' to 'uint16_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(276,27): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(uint8_t)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(275,27): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(uint8_t)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(278,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(276,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
   RenderChesspcs.cpp
@@ -342,7 +342,7 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(53,2
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(54,2): warning C4309: 'initializing': truncation of constant value
   (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(278,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(276,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
   (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
   
   UCI.cpp
@@ -383,7 +383,7 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(54,2
   (compiling source file 'source/ChessThings/UCI/UCI.cpp')
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\UCI\UCI.cpp(136,73): warning C4267: '=': conversion from 'size_t' to 'uint8_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(278,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(276,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
   (compiling source file 'source/ChessThings/UCI/UCI.cpp')
   
   Main.cpp
@@ -478,11 +478,11 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.3520
           see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,nullptr,unsigned __int64,0>(nullptr &&,unsigned __int64 &&)' being compiled
   
   Generating Code...
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(143,1): warning C4715: 'CastlingAbility::at': not all control paths return a value
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(142,1): warning C4715: 'CastlingAbility::at': not all control paths return a value
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.h(60,1): warning C4715: 'Evaluator::ConvertPieceTypeToMatValue': not all control paths return a value
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(162,1): warning C4715: 'IterativeDeepening::GetPV': not all control paths return a value
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.h(60,1): warning C4715: 'Evaluator::ConvertPieceTypeToMatValue': not all control paths return a value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(334,1): warning C4715: 'Board::PieceType2letter': not all control paths return a value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(621,1): warning C4715: 'Board::PieceType2Compact': not all control paths return a value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(270,1): warning C4715: 'Board::GetPieceType2Uncolored': not all control paths return a value
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(293,1): warning C4715: 'Board::PieceType2letter': not all control paths return a value
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(572,1): warning C4715: 'Board::PieceType2Compact': not all control paths return a value
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(240,1): warning C4715: 'Board::GetPieceType2Uncolored': not all control paths return a value
   Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Debug\Chess.exe

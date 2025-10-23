@@ -207,7 +207,7 @@ void UCI::Go()
 	IsReady.store(true);
 }
 
-uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> perftPreviousBoardSquare, canCastle CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int PerftMoveNum)
+uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> perftPreviousBoardSquare, CastlingAbility CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int PerftMoveNum)
 {
 	uint32_t NumOfMoves = 0;
 
@@ -215,7 +215,7 @@ uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 
 	const auto ConstBoardSquare = BoardSquare;
 	const auto ConstPreviousBoardSquare = perftPreviousBoardSquare;
-	const canCastle ConstCanCastle = CanCastle;
+	const CastlingAbility ConstCanCastle = CanCastle;
 	uint8_t count = 0;
 
 

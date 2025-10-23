@@ -156,7 +156,7 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash
 	Hash.UpdateHash(Move_, ChessPosition.BoardSquare[Move_.s_BoardSquare]);
 
 	ChessPosition.PrevBoardSquare = ChessPosition.BoardSquare;
-	Board::WillCanCastleChange(ChessPosition.BoardSquare[Move_.s_BoardSquare], Move_.s_BoardSquare, Move_.s_Move, ChessPosition.CanCastle);
+	Board::WillCanCastleChange(Move_.s_BoardSquare, ChessPosition.CanCastle);
 	ChessPosition.BoardSquare[Move_.s_Move] = ChessPosition.BoardSquare[Move_.s_BoardSquare];
 
 	//castling
@@ -237,7 +237,7 @@ void Search::QMakeMove(const GenerateLegalMoves& LegalMoves, const Move Move_, P
 {
 
 	ChessPosition.PrevBoardSquare = ChessPosition.BoardSquare;
-	Board::WillCanCastleChange(ChessPosition.BoardSquare[Move_.s_BoardSquare], Move_.s_BoardSquare, Move_.s_Move, ChessPosition.CanCastle);
+	Board::WillCanCastleChange(Move_.s_BoardSquare,ChessPosition.CanCastle);
 	ChessPosition.BoardSquare[Move_.s_Move] = ChessPosition.BoardSquare[Move_.s_BoardSquare];
 
 	//castling

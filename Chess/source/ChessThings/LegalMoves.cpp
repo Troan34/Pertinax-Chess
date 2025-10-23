@@ -449,24 +449,24 @@ void GenerateLegalMoves::KingMoveGen(const uint8_t BoardSquarePos)
 				}
 			}
 		}
-		if (PieceType == WHITE_KING and !ChessPosition.CanCastle.HasWhiteKingMoved)//castling
+		if (PieceType == WHITE_KING)//castling
 		{
-			if (!ChessPosition.CanCastle.HasWhiteLongRookMoved and ChessPosition.BoardSquare[1] == 0 and ChessPosition.BoardSquare[2] == 0 and ChessPosition.BoardSquare[3] == 0)
+			if (ChessPosition.CanCastle.WhiteLong and ChessPosition.BoardSquare[1] == 0 and ChessPosition.BoardSquare[2] == 0 and ChessPosition.BoardSquare[3] == 0)
 			{
 				moves[4].TargetSquares.push_back(2);
 			}
-			if (!ChessPosition.CanCastle.HasWhiteShortRookMoved and ChessPosition.BoardSquare[5] == 0 and ChessPosition.BoardSquare[6] == 0)
+			if (ChessPosition.CanCastle.WhiteShort and ChessPosition.BoardSquare[5] == 0 and ChessPosition.BoardSquare[6] == 0)
 			{
 				moves[4].TargetSquares.push_back(6);
 			}
 		}
-		if (PieceType == BLACK_KING and !ChessPosition.CanCastle.HasBlackKingMoved)//castling
+		if (PieceType == BLACK_KING)//castling
 		{
-			if (!ChessPosition.CanCastle.HasBlackLongRookMoved and ChessPosition.BoardSquare[57] == 0 and ChessPosition.BoardSquare[58] == 0 and ChessPosition.BoardSquare[59] == 0)
+			if (ChessPosition.CanCastle.BlackLong and ChessPosition.BoardSquare[57] == 0 and ChessPosition.BoardSquare[58] == 0 and ChessPosition.BoardSquare[59] == 0)
 			{
 				moves[60].TargetSquares.push_back(58);
 			}
-			if (!ChessPosition.CanCastle.HasBlackShortRookMoved and ChessPosition.BoardSquare[61] == 0 and ChessPosition.BoardSquare[62] == 0)
+			if (ChessPosition.CanCastle.BlackShort and ChessPosition.BoardSquare[61] == 0 and ChessPosition.BoardSquare[62] == 0)
 			{
 				moves[60].TargetSquares.push_back(62);
 			}

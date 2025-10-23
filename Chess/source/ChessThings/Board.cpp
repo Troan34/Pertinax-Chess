@@ -94,68 +94,38 @@ uint32_t Board::MoveNum()
 }
 
 //get castling abilities
-canCastle Board::GetCanCastle()
+CastlingAbility Board::GetCanCastle()
 {
-	canCastle CanCastle{};
-	const std::string CastlingAbility = FEN.substr(++IndexOfCastling, IndexOfEnPassant - IndexOfCastling - 1);
+	CastlingAbility CanCastle{};
+	const std::string CastlingString = FEN.substr(++IndexOfCastling, IndexOfEnPassant - IndexOfCastling - 1);
 	bool K = 0;
 	bool k = 0;
 	bool Q = 0;
 	bool q = 0;
-	for (char castleCharacter : CastlingAbility)
+	for (char castleCharacter : CastlingString)
 	{
-		if (castleCharacter == '-')
+		switch (castleCharacter)
+		{
+		case('K'):
+			CanCastle.WhiteShort = true;
 			break;
-
-		if (castleCharacter == 'K')
-		{
-			K = true;
-			continue;
-		}
-		else if (castleCharacter == 'k')
-		{
-			k = true;
-			continue;
-		}
-		else if (castleCharacter == 'Q')
-		{
-			Q = true;
-			continue;
-		}
-		else if (castleCharacter == 'q')
-		{
-			q = true;
-			continue;
+		case('k'):
+			CanCastle.BlackShort = true;
+			break;
+		case('Q'):
+			CanCastle.WhiteLong = true;
+			break;
+		case('q'):
+			CanCastle.BlackLong = true;
+			break;
+		case('-'):
+			break;
+		default:
+			std::cerr << "Castling for position/fen decoding is not standard. Wrong char\n";
+			__debugbreak();
 		}
 	}
 
-	if (K or Q)
-	{
-		if (!K and Q)
-			CanCastle.HasWhiteShortRookMoved = true;
-		else if (!Q and K)
-			CanCastle.HasWhiteLongRookMoved = true;
-	}
-	else
-	{
-		CanCastle.HasWhiteKingMoved = true;
-		CanCastle.HasWhiteLongRookMoved = true;
-		CanCastle.HasWhiteShortRookMoved = true;
-	}
-
-	if (k or q)
-	{
-		if (!k and q)
-			CanCastle.HasBlackShortRookMoved = true;
-		else if (!q and k)
-			CanCastle.HasBlackLongRookMoved = true;
-	}
-	else
-	{
-		CanCastle.HasBlackKingMoved = true;
-		CanCastle.HasBlackLongRookMoved = true;
-		CanCastle.HasBlackShortRookMoved = true;
-	}
 	return CanCastle;
 }
 
@@ -269,17 +239,6 @@ uint8_t constexpr Board::GetPieceType2Uncolored(uint8_t PieceType)
 		ASSERT(false);
 }
 
-CastlingAbility Board::canCastle2CastlingAbility(const canCastle& Castle)
-{
-	CastlingAbility CastlingAbility;
-
-	CastlingAbility.WhiteLong = !Castle.HasWhiteLongRookMoved and !Castle.HasWhiteKingMoved;
-	CastlingAbility.WhiteShort = !Castle.HasWhiteShortRookMoved and !Castle.HasWhiteKingMoved;
-	CastlingAbility.BlackLong = !Castle.HasBlackLongRookMoved and !Castle.HasBlackKingMoved;
-	CastlingAbility.BlackShort = !Castle.HasBlackShortRookMoved and !Castle.HasBlackKingMoved;
-
-	return CastlingAbility;
-}
 
 bool constexpr Board::IsPieceColorWhite(uint8_t BoardSquareValue)
 {
@@ -357,8 +316,6 @@ void Board::WillCanCastleChange(const uint8_t BoardSquareNumItMovedFrom, Castlin
 	case h8:
 		Castle.BlackShort = false;
 		break;
-	default:
-		__debugbreak();
 	}
 	
 }
@@ -387,7 +344,7 @@ bool Board::WillCanCastleChange(const uint8_t& PieceType, const uint8_t BoardSqu
 
 void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t EnpassantIndex, CastlingAbility Castle)
 {
-	Board::WillCanCastleChange(BoardSquare[move.s_BoardSquare], move.s_BoardSquare, move.s_Move, Castle);
+	Board::WillCanCastleChange(move.s_BoardSquare, Castle);
 	BoardSquare[move.s_Move] = BoardSquare[move.s_BoardSquare];
 
 	uint8_t PieceTypeToPromoteTo = 65;

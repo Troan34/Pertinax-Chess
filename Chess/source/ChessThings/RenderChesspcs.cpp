@@ -24,7 +24,7 @@ static bool UCImode = false;
 
 //Vars shared with UCI
 static unsigned int MoveNum = 0;
-static canCastle CanCastle;
+static CastlingAbility CanCastle;
 static std::array<uint8_t, 64Ui64> static_BoardSquare;
 static std::array<uint8_t, 64Ui64> previousBoardsquare{};
 static bool StartEngine = false;
@@ -184,7 +184,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 		else if (Command == "uci") //UCI mode
 		{
 			std::cout <<
-				"id name Pertinax Chess 0.2.14\n" <<
+				"id name Pertinax Chess 0.2.15\n" <<
 				"id author R.Bukaci (github.com/Troan34)\n\n" <<
 				"option name type spin Depth default " << static_cast<int>(EngineDepth) << " min 2 max 255\n" <<
 				"option name type button EngineOn default On\n" <<
@@ -401,7 +401,7 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 										}
 									}
 								}
-								Board::WillCanCastleChange(previousBoardsquare[BoardSquareBeingSelected], BoardSquareBeingSelected, AttackedSquare, CanCastle);
+								Board::WillCanCastleChange(AttackedSquare, CanCastle);
 
 								//promoting
 								if (AttackedSquare >= 56 and GetPieceTypefromTexID(RememberTexID) == WHITE_PAWN or AttackedSquare <= 7 and GetPieceTypefromTexID(RememberTexID) == BLACK_PAWN )
@@ -666,10 +666,10 @@ void RenderChessPieces::SetStaticBoardSquare(const std::array<uint8_t, 64>& Boar
 	}
 }
 
-void RenderChessPieces::MakeMove(const GenerateLegalMoves& LegalMoves, Move move, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, canCastle& Castle)
+void RenderChessPieces::MakeMove(const GenerateLegalMoves& LegalMoves, Move move, std::array<uint8_t, 64>& fun_BoardSquare, std::array<uint8_t, 64>& fun_previousBoardSquare, CastlingAbility& Castle)
 {
 	fun_previousBoardSquare = fun_BoardSquare;
-	Board::WillCanCastleChange(fun_BoardSquare[move.s_BoardSquare], move.s_BoardSquare, move.s_Move, Castle);
+	Board::WillCanCastleChange(move.s_BoardSquare, Castle);
 	fun_BoardSquare[move.s_Move] = fun_BoardSquare[move.s_BoardSquare];
 
 	uint8_t PieceTypeToPromoteTo = 65;
@@ -761,7 +761,7 @@ void RenderChessPieces::MakeMove(const GenerateLegalMoves& LegalMoves, Move move
 void RenderChessPieces::CreatePerft(uint8_t PerftDepth)
 {
 	//std::cout << "Worker at start CPU: " << GetCurrentProcessorNumber() << std::endl;
-	canCastle perftCastle = CanCastle;
+	CastlingAbility perftCastle = CanCastle;
 	auto perftBoardsquare = static_BoardSquare;
 	auto perftPreviousBoardsquare = previousBoardsquare;
 	auto Movenum = MoveNum;
@@ -785,7 +785,7 @@ void RenderChessPieces::SetMoveNum(const uint32_t& Movenum)
 	MoveNum = Movenum;
 }
 
-void RenderChessPieces::SetCanCastle(const canCastle& f_canCastle)
+void RenderChessPieces::SetCanCastle(const CastlingAbility& f_canCastle)
 {
 	CanCastle = f_canCastle;
 }

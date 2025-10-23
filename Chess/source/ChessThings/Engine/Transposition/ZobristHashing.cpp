@@ -9,7 +9,7 @@ static uint8_t WhichFileHadEnPassant = 8; //8 for none
 
 
 ZobristHashing::ZobristHashing(const GenerateLegalMoves& LegalMoves, const Position& ChessPosition)
-	:m_BoardSquare(&ChessPosition.BoardSquare), m_LegalMoves(&LegalMoves), m_PreviousBoardSquare(&ChessPosition.PrevBoardSquare), m_CastleAbility(Board::canCastle2CastlingAbility(ChessPosition.CanCastle))
+	:m_BoardSquare(&ChessPosition.BoardSquare), m_LegalMoves(&LegalMoves), m_PreviousBoardSquare(&ChessPosition.PrevBoardSquare), m_CastleAbility(ChessPosition.CanCastle)
 {
 	m_SideToMove = WHITE_TURN(ChessPosition.MoveNum); // true for white, false for black
 	if (!Initialized)
