@@ -15,7 +15,7 @@
 #include <type_traits>
 
 #ifndef WHITE_TURN
-#define WHITE_TURN(x) ((x % 2) == 0)
+#define WHITE_TURN(x) (!(x % 2))
 #endif
 
 enum SQUARES

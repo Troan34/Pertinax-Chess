@@ -83,32 +83,30 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 
 	if ((PieceTypeUncolored == ROOK))
 	{
-		auto Key = mult_rightShift(blockers.ReadBits() & ROOK_MASKS[BoardSquarePos], ROOK_MAGICS[BoardSquarePos], RookShift);
+		auto Key = mult_right_shift(blockers.ReadBits() & ROOK_MASKS[BoardSquarePos], ROOK_MAGICS[BoardSquarePos], RookShift);
 
 		Attacks = ROOK_ATTACKS[BoardSquarePos][Key];
 
 		AttackedSquares |= Attacks;
 
-		if (IsWhite) { Attacks ^= (Attacks & ChessPosition.BoardSquare.ColorPositions[0]); }
-		else { Attacks ^= (Attacks & ChessPosition.BoardSquare.ColorPositions[1]); }
+		Attacks ^= (Attacks & ChessPosition.BoardSquare.ColorPositions[!IsWhite]);
 	}
 	else if ((PieceTypeUncolored == BISHOP))
 	{
-		uint16_t BishopAttackIndex = mult_rightShift(blockers.ReadBits() & BISHOP_MASKS[BoardSquarePos], BISHOP_MAGICS[BoardSquarePos], BishopShift);
+		uint16_t BishopAttackIndex = mult_right_shift(blockers.ReadBits() & BISHOP_MASKS[BoardSquarePos], BISHOP_MAGICS[BoardSquarePos], BishopShift);
 
 		Attacks = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
 
 		AttackedSquares |= Attacks;
 
-		if (IsWhite) { Attacks ^= (Attacks & ChessPosition.BoardSquare.ColorPositions[0]); }
-		else { Attacks ^= (Attacks & ChessPosition.BoardSquare.ColorPositions[1]); }
+		Attacks ^= (Attacks & ChessPosition.BoardSquare.ColorPositions[!IsWhite]);
 	}
 	else if ((PieceTypeUncolored == QUEEN))
 	{
 
 		//Get Indeces from the mult-right shift
-		uint16_t RookAttackIndex = mult_rightShift(blockers.ReadBits() & ROOK_MASKS[BoardSquarePos], ROOK_MAGICS[BoardSquarePos], RookShift);
-		uint16_t BishopAttackIndex = mult_rightShift(blockers.ReadBits() & BISHOP_MASKS[BoardSquarePos], BISHOP_MAGICS[BoardSquarePos], BishopShift);
+		uint16_t RookAttackIndex = mult_right_shift(blockers.ReadBits() & ROOK_MASKS[BoardSquarePos], ROOK_MAGICS[BoardSquarePos], RookShift);
+		uint16_t BishopAttackIndex = mult_right_shift(blockers.ReadBits() & BISHOP_MASKS[BoardSquarePos], BISHOP_MAGICS[BoardSquarePos], BishopShift);
 
 		bit::BitBoard64 RookAttack = ROOK_ATTACKS[BoardSquarePos][RookAttackIndex];
 		bit::BitBoard64 BishopAttack = BISHOP_ATTACKS[BoardSquarePos][BishopAttackIndex];
@@ -116,16 +114,8 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 		AttackedSquares |= (RookAttack | BishopAttack);
 
 		//removes attacks to own pieces
-		if (IsWhite)
-		{
-			RookAttack ^= RookAttack & ChessPosition.BoardSquare.ColorPositions[0];
-			BishopAttack ^= BishopAttack & ChessPosition.BoardSquare.ColorPositions[0];
-		}
-		else
-		{
-			RookAttack ^= RookAttack & ChessPosition.BoardSquare.ColorPositions[1];
-			BishopAttack ^= BishopAttack & ChessPosition.BoardSquare.ColorPositions[1];
-		}
+		RookAttack ^= RookAttack & ChessPosition.BoardSquare.ColorPositions[!IsWhite];
+		BishopAttack ^= BishopAttack & ChessPosition.BoardSquare.ColorPositions[!IsWhite];
 
 		Attacks = RookAttack | BishopAttack;
 	}
@@ -744,24 +734,30 @@ uint32_t GenerateLegalMoves::GetNumOfTacticalMoves() const
 }
 
 
-/// <summary>
-	/// Returns the bitboard of attackers
-	/// </summary>
-	/// <param name="SquarePos">Square that is being attacked</param>
-	/// <returns></returns>
-[[nodiscard]] bit::BitBoard64 GenerateLegalMoves::AttacksTo(uint8_t SquarePos) const
+[[nodiscard]] bit::BitBoard64 AttacksTo(const bit::Position& ChessPosition, uint8_t SquarePos)
 {
-	if (!AttackedSquares[SquarePos]) { return bit::BitBoard64{}; }
+	auto IsWhite = WHITE_TURN(ChessPosition.MoveNum);
 
-	bit::BitBoard64 Attackers{};
+	bit::BitBoard64 Attackers;
 
-	for (uint8_t Square = 0; Square <= MAX_SQUARE; Square++)
-	{
-		if (moves[Square].TargetSquares[SquarePos])
-		{
-			Attackers[Square] = true;
-		}
-	}
+	//In this section we "fake" being a queen, so we check who is attacking us by "attacking them"
+	uint64_t Blockers = (ChessPosition.BoardSquare.ColorPositions[0] | ChessPosition.BoardSquare.ColorPositions[1]) & (ROOK_MASKS[SquarePos] | BISHOP_MASKS[SquarePos]);
+	auto RookKey = mult_right_shift(Blockers, ROOK_MAGICS[SquarePos], ROOK_SHIFTS[SquarePos]);
+	auto BishopKey = mult_right_shift(Blockers, BISHOP_MAGICS[SquarePos], BISHOP_SHIFTS[SquarePos]);
+
+	bit::BitBoard64 RookAttack = ROOK_ATTACKS[SquarePos][RookKey];
+	bit::BitBoard64 BishopAttack = BISHOP_ATTACKS[SquarePos][BishopKey];
+
+	Attackers = RookAttack | BishopAttack;
+
+	//In this section we fake being a knight
+	Attackers |= KnightTable[SquarePos];
+
+	//In this section we fake being a pawn
+
+
+
+	Attackers &= ChessPosition.BoardSquare.ColorPositions[IsWhite];//Remove anything that isn't an opposite piece
 
 	return Attackers;
 }
@@ -821,7 +817,7 @@ void MagicRookFinder(uint8_t BoardSquare)
 		Failed = false;
 		for (uint16_t Blocker = 0; Blocker < (1ULL << shift); Blocker++)
 		{
-			auto Key = mult_rightShift(expand_bits_to_mask(Blocker, ROOK_MASKS[BoardSquare]), MagicNum, shift);
+			auto Key = mult_right_shift(expand_bits_to_mask(Blocker, ROOK_MASKS[BoardSquare]), MagicNum, shift);
 			if (SeenKeys[Key] != UINT16_MAX)//collision
 			{
 				Failed = true;
@@ -836,7 +832,7 @@ void MagicRookFinder(uint8_t BoardSquare)
 		{
 			for (uint16_t Blocker = 0; Blocker < (1ULL << shift); Blocker++)
 			{
-				auto Key = mult_rightShift(expand_bits_to_mask(Blocker, ROOK_MASKS[BoardSquare]), MagicNum, shift);
+				auto Key = mult_right_shift(expand_bits_to_mask(Blocker, ROOK_MASKS[BoardSquare]), MagicNum, shift);
 				ROOK_ATTACKS[BoardSquare][Key] = ComputeRookAttacks(BoardSquare, Blocker) & ROOK_LEGAL_MASKS[BoardSquare];
 			}
 			ROOK_MAGICS[BoardSquare] = MagicNum;
@@ -859,7 +855,7 @@ void MagicBishopFinder(uint8_t BoardSquare)
 		Failed = false;
 		for (uint16_t Blocker = 0; Blocker < (1ULL << shift); Blocker++)
 		{
-			auto Key = mult_rightShift(expand_bits_to_mask(Blocker, BISHOP_MASKS[BoardSquare]), MagicNum, shift);
+			auto Key = mult_right_shift(expand_bits_to_mask(Blocker, BISHOP_MASKS[BoardSquare]), MagicNum, shift);
 			if (SeenKeys[Key] != UINT16_MAX)//collision
 			{
 				Failed = true;
@@ -874,7 +870,7 @@ void MagicBishopFinder(uint8_t BoardSquare)
 		{
 			for (uint16_t Blocker = 0; Blocker < (1ULL << shift); Blocker++)
 			{
-				auto Key = mult_rightShift(expand_bits_to_mask(Blocker, BISHOP_MASKS[BoardSquare]), MagicNum, shift);
+				auto Key = mult_right_shift(expand_bits_to_mask(Blocker, BISHOP_MASKS[BoardSquare]), MagicNum, shift);
 				BISHOP_ATTACKS[BoardSquare][Key] = ComputeBishopAttacks(BoardSquare, Blocker) & BISHOP_LEGAL_MASKS[BoardSquare];
 			}
 			BISHOP_MAGICS[BoardSquare] = MagicNum;
@@ -884,7 +880,7 @@ void MagicBishopFinder(uint8_t BoardSquare)
 
 }
 
-uint16_t mult_rightShift(uint64_t BlockerBits, uint64_t Magic, uint8_t RelevantBitNum)
+inline uint16_t mult_right_shift(uint64_t BlockerBits, uint64_t Magic, uint8_t RelevantBitNum)
 {
 	return (BlockerBits * Magic) >> (64 - RelevantBitNum);
 }

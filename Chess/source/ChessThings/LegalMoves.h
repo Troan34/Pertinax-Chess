@@ -188,7 +188,21 @@ uint64_t ComputeBishopAttacks(uint8_t BoardSquare, uint16_t Blocker);
 void MagicRookFinder(uint8_t BoardSquare);
 void MagicBishopFinder(uint8_t BoardSquare);
 
-uint16_t mult_rightShift(uint64_t BlockerBits, uint64_t Magic, uint8_t RelevantBitNum);
+/// <summary>
+/// function used to produce the key that accesses into the attacks table
+/// </summary>
+/// <param name="BlockerBits">BitBoard(but u64) of the position, containing ALL pieces</param>
+/// <param name="Magic">The magic number of the piece</param>
+/// <param name="RelevantBitNum">How many bits we consider</param>
+/// <returns>The key</returns>
+inline uint16_t mult_right_shift(uint64_t BlockerBits, uint64_t Magic, uint8_t RelevantBitNum);
+
+/// <summary>
+/// Returns the bitboard of attackers
+/// </summary>
+/// <param name="SquarePos">Square that is being attacked</param>
+/// <returns></returns>
+[[nodiscard]] bit::BitBoard64 AttacksTo(const bit::Position& ChessPosition, uint8_t SquarePos);
 
 //plain magic bitboard
 static std::array<std::array<uint64_t, 4096>, 64> ROOK_ATTACKS{};
@@ -325,6 +339,6 @@ public:
 	static void SetDoNotEnPassant(bool SetToThis);
 	bool IsMoveLegal(const Move& CheckedMove) const;
 	uint32_t GetNumOfTacticalMoves() const;
-	[[nodiscard]] bit::BitBoard64 AttacksTo(uint8_t SquarePos) const;
+	
 };
 
