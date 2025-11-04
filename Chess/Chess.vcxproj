@@ -199,6 +199,8 @@
   <ItemGroup>
     <ClInclude Include="source\ChessThings\Engine\IterativeD.h" />
     <ClInclude Include="source\ChessThings\Engine\MoveOrdering.h" />
+    <ClInclude Include="source\ChessThings\Engine\Precomputes\BishopAttacks.h" />
+    <ClInclude Include="source\ChessThings\Engine\Precomputes\RookAttacks.h" />
     <ClInclude Include="source\ChessThings\Engine\Transposition\TT.h" />
     <ClInclude Include="source\ChessThings\UCI\UCI.h" />
     <ClInclude Include="source\ChessThings\Board.h" />

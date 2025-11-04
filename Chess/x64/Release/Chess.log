@@ -1,4 +1,183 @@
-﻿  LegalMoves.cpp
+﻿  Evaluation.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(35,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(36,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(37,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(38,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(39,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(40,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(41,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(42,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(51,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(52,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(53,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(54,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(199,51): warning C4244: '+=': conversion from 'double' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(203,51): warning C4244: '-=': conversion from 'double' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(252,48): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(253,46): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(258,48): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(259,46): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(276,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
+  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
+  
+  IterativeD.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(35,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(36,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(37,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(38,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(39,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(40,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(41,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(42,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(51,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(52,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(53,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(54,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(122,36): warning C4244: '=': conversion from 'float' to 'uint64_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,117): warning C4244: 'argument': conversion from '_Rep' to 'double', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,117): warning C4244:         with
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,117): warning C4244:         [
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,117): warning C4244:             _Rep=__int64
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,117): warning C4244:         ]
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,91): warning C4244: 'argument': conversion from '_Rep' to 'double', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,91): warning C4244:         with
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,91): warning C4244:         [
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,91): warning C4244:             _Rep=__int64
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\IterativeD.cpp(135,91): warning C4244:         ]
+  Search.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(35,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(36,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(37,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(38,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(39,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(40,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(41,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(42,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(51,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(52,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(53,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(54,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(327,13): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(332,68): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(337,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(342,26): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(408,13): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(413,68): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(421,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(426,27): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(276,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
+  (compiling source file 'source/ChessThings/Engine/Search.cpp')
+  
+  ZobristHashing.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(35,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(36,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(37,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(38,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(39,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(40,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(41,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(42,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(51,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(52,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(53,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(54,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/Engine/Transposition/ZobristHashing.cpp')
+  
+  LegalMoves.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(35,2): warning C4309: 'initializing': truncation of constant value
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
@@ -35,24 +214,190 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(53,2
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(54,2): warning C4309: 'initializing': truncation of constant value
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(841,38): warning C4838: conversion from 'unsigned __int64' to '_Ty' requires a narrowing conversion
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(841,38): warning C4838:         with
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(841,38): warning C4838:         [
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(841,38): warning C4838:             _Ty=uint16_t
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(841,38): warning C4838:         ]
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(841,38): warning C4309: 'initializing': truncation of constant value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(877,31): warning C4244: 'return': conversion from 'uint64_t' to 'uint16_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(982,31): warning C4244: 'return': conversion from 'uint64_t' to 'uint16_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(275,27): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(uint8_t)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(276,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
+  RenderChesspcs.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(35,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(36,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(37,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(38,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(39,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(40,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(41,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(42,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(51,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(52,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(53,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(54,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(276,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
+  (compiling source file 'source/ChessThings/RenderChesspcs.cpp')
+  
+  UCI.cpp
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(35,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(36,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(37,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(38,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(39,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(40,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(41,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(42,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(51,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(52,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(53,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(54,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\UCI\UCI.cpp(136,73): warning C4267: '=': conversion from 'size_t' to 'uint8_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(276,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
+  (compiling source file 'source/ChessThings/UCI/UCI.cpp')
+  
+  Main.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
+  (compiling source file 'source/Main.cpp')
+      C:\Users\roanb\source\repos\Pertinax-Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,11):
+      see previous definition of 'APIENTRY'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(35,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/Main.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(36,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/Main.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(37,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/Main.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(38,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/Main.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(39,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/Main.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(40,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/Main.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(41,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/Main.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(42,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/Main.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(51,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/Main.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(52,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/Main.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(53,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/Main.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(54,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/Main.cpp')
+  
+  TestTexture2D.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+      C:\Users\roanb\source\repos\Pertinax-Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,11):
+      see previous definition of 'APIENTRY'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(35,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(36,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(37,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(38,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(39,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(40,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(41,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(42,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(51,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(52,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(53,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(54,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3630,56): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3630,56):
+      the template instantiation context (the oldest one first) is
+          C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\tests\TestTexture2D.cpp(30,25):
+          see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,nullptr,unsigned __int64,0>(nullptr &&,unsigned __int64 &&)' being compiled
+  
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  6 of 4200 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  6 of 3958 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    26 functions had inline decision re-evaluated but remain unchanged
+    21 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\vc120.pdb'; linking object as if no debug info
   Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Chess.exe

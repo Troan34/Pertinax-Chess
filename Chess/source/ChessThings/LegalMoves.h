@@ -7,6 +7,8 @@
 #include <unordered_set>
 #include <fstream>
 #include <filesystem>
+#include "ChessThings/Engine/Precomputes/BishopAttacks.h"
+#include "ChessThings/Engine/Precomputes/RookAttacks.h"
 
 namespace fs = std::filesystem;
 
@@ -137,23 +139,29 @@ constexpr std::array<uint64_t, 64> ComputeBishopMasks(bool IncludeBorder)
 	return BishopMasks;
 }
 
-static std::array<uint64_t, 64> ROOK_MAGICS;
-static std::array<uint64_t, 64> BISHOP_MAGICS;
 static constexpr std::array<uint64_t, 64> ROOK_MASKS = ComputeRookMasks(false);
 static constexpr std::array<uint64_t, 64> BISHOP_MASKS = ComputeBishopMasks(false);
 
 static constexpr std::array<uint8_t, 64> ROOK_SHIFTS = {
-  12, 11, 11, 11, 11, 11, 11, 12, 11, 10, 10, 10, 10, 10, 10, 11,
-  11, 10, 10, 10, 10, 10, 10, 11, 11, 10, 10, 10, 10, 10, 10, 11,
-  11, 10, 10, 10, 10, 10, 10, 11, 11, 10, 10, 10, 10, 10, 10, 11,
-  11, 10, 10, 10, 10, 10, 10, 11, 12, 11, 11, 11, 11, 11, 11, 12
+  12, 11, 11, 11, 11, 11, 11, 12,
+  11, 10, 10, 10, 10, 10, 10, 11,
+  11, 10, 10, 10, 10, 10, 10, 11,
+  11, 10, 10, 10, 10, 10, 10, 11,
+  11, 10, 10, 10, 10, 10, 10, 11,
+  11, 10, 10, 10, 10, 10, 10, 11,
+  11, 10, 10, 10, 10, 10, 10, 11,
+  12, 11, 11, 11, 11, 11, 11, 12
 };
 
 static constexpr std::array<uint8_t, 64> BISHOP_SHIFTS = {
-  6, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 5, 5, 5, 5,
-  5, 5, 7, 7, 7, 7, 5, 5, 5, 5, 7, 9, 9, 7, 5, 5,
-  5, 5, 7, 9, 9, 7, 5, 5, 5, 5, 7, 7, 7, 7, 5, 5,
-  5, 5, 5, 5, 5, 5, 5, 5, 6, 5, 5, 5, 5, 5, 5, 6
+  6, 5, 5, 5, 5, 5, 5, 6,
+  5, 5, 5, 5, 5, 5, 5, 5,
+  5, 5, 7, 7, 7, 7, 5, 5,
+  5, 5, 7, 9, 9, 7, 5, 5,
+  5, 5, 7, 9, 9, 7, 5, 5,
+  5, 5, 7, 7, 7, 7, 5, 5,
+  5, 5, 5, 5, 5, 5, 5, 5,
+  6, 5, 5, 5, 5, 5, 5, 6
 };
 
 //these just include the last board square instead of ignoring it
@@ -178,6 +186,11 @@ constexpr uint64_t expand_bits_to_mask(uint64_t bits, uint64_t mask) {
 	return result;
 }
 
+#ifndef ROOKS_HAVE_BEEN_PRECOMPUTED
+#ifndef BISHOPS_HAVE_BEEN_PRECOMPUTED
+///<summary>Computes ATTACKS IF NOT found in disk, then saves it to disk</summary>
+void ComputeHeavy();
+
 /// <summary>Computes every attack for the rook, MAKE SURE IT IS NEVER CALLED AT RUNTIME</summary>
 uint64_t ComputeRookAttacks(uint8_t BoardSquare, uint16_t Blocker);
 
@@ -185,9 +198,10 @@ uint64_t ComputeRookAttacks(uint8_t BoardSquare, uint16_t Blocker);
 /// <returns>Value corresponding to BISHOP_ATTACKS</returns>
 uint64_t ComputeBishopAttacks(uint8_t BoardSquare, uint16_t Blocker);
 
-void MagicRookFinder(uint8_t BoardSquare);
-void MagicBishopFinder(uint8_t BoardSquare);
-
+void MagicRookFinder(uint8_t BoardSquare, std::vector<uint64_t>& RookAttack);
+void MagicBishopFinder(uint8_t BoardSquare, std::vector<uint64_t>& BishopAttack);
+#endif
+#endif
 /// <summary>
 /// function used to produce the key that accesses into the attacks table
 /// </summary>
@@ -204,13 +218,6 @@ inline uint16_t mult_right_shift(uint64_t BlockerBits, uint64_t Magic, uint8_t R
 /// <returns></returns>
 [[nodiscard]] bit::BitBoard64 AttacksTo(const bit::Position& ChessPosition, uint8_t SquarePos);
 
-//plain magic bitboard
-static std::array<std::array<uint64_t, 4096>, 64> ROOK_ATTACKS{};
-//plain magic bitboard
-static std::array<std::array<uint64_t, 512>, 64> BISHOP_ATTACKS{};
-
-///<summary>Computes ATTACKS IF NOT found in disk, then saves it to disk</summary>
-void ComputeHeavy();
 
 struct PromotionByte
 {

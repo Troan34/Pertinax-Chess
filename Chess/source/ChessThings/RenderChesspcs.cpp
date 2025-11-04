@@ -102,7 +102,11 @@ static std::thread CommandThread(GetCommand);
 /*********MAIN FUNCTION*********does quad calculations, calls command thread, drag and drop...**************/
 std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObjects()
 {
+#ifndef ROOKS_HAVE_BEEN_PRECOMPUTED
+#ifndef BISHOPS_HAVE_BEEN_PRECOMPUTED
 	ComputeHeavy();
+#endif
+#endif
 
 	//Console Commands and threads
 	if (!IsGetCommandRunning and !UCImode)
