@@ -1,0 +1,22 @@
+Pertinax 0.1: 		BitBoards
+
+Pertinax 0.2.1: 	Magics fixed, alloc based optimizations
+Pertinax 0.2.2: 	Move ordering adjusted
+Pertinax 0.2.3: 	Debug sess, fixed Zobrist and make move
+Pertinax 0.2.4: 	Debug sess, fixed generator code
+Pertinax 0.2.5: 	Debug sess, fixed (more) generator code
+Pertinax 0.2.6: 	Perfected alpha-beta logic, made the whole pv thing way more effiecient and on the stack
+Pertinax 0.2.7: 	Fixed Transposition table caching | Search.cpp:146; The beta cutoff.
+
+Pertinax 0.2.8: 	Bug fix. Perft 5
+Pertinax 0.2.9: 	Bug fixes.
+Pertinax 0.2.10:	Bug fixes.
+Pertinax 0.2.11:	TT usage fixed, started adding pst to the eval function
+Pertinax 0.2.12:	Added PST to eval.
+Pertinax 0.2.13:	Search was broken, was missing a minus. Fixed uci output.
+
+Pertinax 0.2.14.1:	Added quiescient search, need to add sse and delta pruning. Is something like -500 elo vs 0.2.13
+Pertinax 0.2.14.2:	Removed (temporarily) quiesce, bug fixes
+Pertinax 0.2.15:	Refactored canCastle to CastlingAbility, slight performance increase
+
+Pertinax 0.2.16:	Made the magic bitboards fancy

@@ -1,0 +1,105 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6262",
+          "message": {
+            "text": "Function uses '35036' bytes of stack.  Consider moving some data to heap."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/stb_image/stb_image.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/stb_image/stb_image.h"
+                },
+                "region": {
+                  "startLine": 7070,
+                  "startColumn": 14
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "stbi__load_gif_main",
+                  "decoratedName": "?stbi__load_gif_main@@YAPEAXPEAUstbi__context@@PEAPEAHPEAH222H@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6262",
+          "message": {
+            "text": "Function uses '34980' bytes of stack.  Consider moving some data to heap."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/stb_image/stb_image.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/stb_image/stb_image.h"
+                },
+                "region": {
+                  "startLine": 7157,
+                  "startColumn": 14
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "stbi__gif_load",
+                  "decoratedName": "?stbi__gif_load@@YAPEAXPEAUstbi__context@@PEAH11HPEAUstbi__result_info@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35216.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/stb_image/stb_image.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "de6c824362323b304ace73a27a265a3f9bfb34eae653ce0b70149f8ff4d07022"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/stb_image/stb_image.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "38b00e7be31dab8d995c51f5580102de77b59056ab9e46c7d223a747e4ac20b0"
+          }
+        }
+      ]
+    }
+  ]
+}

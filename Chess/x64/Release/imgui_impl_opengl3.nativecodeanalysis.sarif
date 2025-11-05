@@ -1,0 +1,165 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'sscanf'."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/imgui/imgui_impl_opengl3.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui_impl_opengl3_loader.h"
+                },
+                "region": {
+                  "startLine": 801,
+                  "startColumn": 13,
+                  "endLine": 801,
+                  "endColumn": 65
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "parse_version",
+                  "decoratedName": "parse_version",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'sscanf'."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/imgui/imgui_impl_opengl3.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui_impl_opengl3.cpp"
+                },
+                "region": {
+                  "startLine": 310,
+                  "startColumn": 9,
+                  "endLine": 310,
+                  "endColumn": 50
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "ImGui_ImplOpenGL3_Init",
+                  "decoratedName": "?ImGui_ImplOpenGL3_Init@@YA_NPEBD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "Return value ignored: 'sscanf'."
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/imgui/imgui_impl_opengl3.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui_impl_opengl3.cpp"
+                },
+                "region": {
+                  "startLine": 767,
+                  "startColumn": 5,
+                  "endLine": 767,
+                  "endColumn": 51
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "ImGui_ImplOpenGL3_CreateDeviceObjects",
+                  "decoratedName": "?ImGui_ImplOpenGL3_CreateDeviceObjects@@YA_NXZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35216.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/imgui/imgui_impl_opengl3.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "dbce591853c4bc88c80007ddb45f47156a3b7f74efa9bc10a3300acbde73f9b4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui_impl_opengl3_loader.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "ecf8d76caa4324e2099b410b7ae1c7f8735c6b4d7f1347c877469bd32cc6aaf4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/imgui/imgui.h"
+          },
+          "hashes": {
+            "sha-256": "5796d33825c75cf4eb29a7bb22b63e3068e8ff2e1ae4f2903c143c5193eeff30"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/imgui/imconfig.h"
+          },
+          "hashes": {
+            "sha-256": "ab7cab963a542ac9dda100e7189e1f18b28f45aa696b8ba6bd931ac932863d30"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/imgui/imgui_impl_opengl3.h"
+          },
+          "hashes": {
+            "sha-256": "332e65d19d1da61530966a1f1d5e8b0af4bf1b28110149fa3d102fd9e0b29739"
+          }
+        }
+      ]
+    }
+  ]
+}

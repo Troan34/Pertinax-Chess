@@ -1,0 +1,51 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35216.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/imgui/imgui_demo.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "431e6b074f186c05739393bdd9678f39663812b146cb4803113b10b9bee06d0e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/imgui/imgui.h"
+          },
+          "hashes": {
+            "sha-256": "5796d33825c75cf4eb29a7bb22b63e3068e8ff2e1ae4f2903c143c5193eeff30"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/imgui/imconfig.h"
+          },
+          "hashes": {
+            "sha-256": "ab7cab963a542ac9dda100e7189e1f18b28f45aa696b8ba6bd931ac932863d30"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\</FILEPATH>
+      <FILENAME>Board.h</FILENAME>
+      <LINE>210</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Timer::BIncrement' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Timer::{ctor}</FUNCTION>
+    <DECORATED>??0Timer@@QEAA@XZ</DECORATED>
+    <FUNCLINE>210</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Timer::BIncrement</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\</FILEPATH>
+      <FILENAME>Board.h</FILENAME>
+      <LINE>210</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Timer::WTime' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Timer::{ctor}</FUNCTION>
+    <DECORATED>??0Timer@@QEAA@XZ</DECORATED>
+    <FUNCLINE>210</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Timer::WTime</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\</FILEPATH>
+      <FILENAME>Board.h</FILENAME>
+      <LINE>210</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Timer::WIncrement' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Timer::{ctor}</FUNCTION>
+    <DECORATED>??0Timer@@QEAA@XZ</DECORATED>
+    <FUNCLINE>210</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Timer::WIncrement</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\</FILEPATH>
+      <FILENAME>Board.h</FILENAME>
+      <LINE>210</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Timer::BTime' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Timer::{ctor}</FUNCTION>
+    <DECORATED>??0Timer@@QEAA@XZ</DECORATED>
+    <FUNCLINE>210</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Timer::BTime</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\</FILEPATH>
+      <FILENAME>IterativeD.cpp</FILENAME>
+      <LINE>71</LINE>
+      <COLUMN>20</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'IterativeDeepening::NumOfNodesSearched' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>IterativeDeepening::{ctor}</FUNCTION>
+    <DECORATED>??0IterativeDeepening@@QEAA@AEBUPosition@@AEAV?$vector@UMove@@V?$allocator@UMove@@@std@@@std@@AEB_KAEAUTimer@@F_NPEA_N@Z</DECORATED>
+    <FUNCLINE>71</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>IterativeDeepening::NumOfNodesSearched</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\</FILEPATH>
+      <FILENAME>Board.h</FILENAME>
+      <LINE>227</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'UCIInfoes::PV' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>UCIInfoes::{ctor}</FUNCTION>
+    <DECORATED>??0UCIInfoes@@QEAA@XZ</DECORATED>
+    <FUNCLINE>227</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>UCIInfoes::PV</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

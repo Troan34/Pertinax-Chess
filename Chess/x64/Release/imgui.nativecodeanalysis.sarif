@@ -1,0 +1,447 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C28182",
+          "message": {
+            "text": "Dereferencing NULL pointer. 'window->RootWindowForNav' contains the same NULL value as 'parent_window' did. "
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/imgui/imgui.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                },
+                "region": {
+                  "startLine": 6606,
+                  "startColumn": 12,
+                  "endLine": 6606,
+                  "endColumn": 51
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "ImGui::UpdateWindowParentAndRootLinks",
+                  "decoratedName": "?UpdateWindowParentAndRootLinks@ImGui@@YAXPEAUImGuiWindow@@H0@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 6598,
+                            "startColumn": 26
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 6599,
+                            "startColumn": 24
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 6600,
+                            "startColumn": 65
+                          }
+                        },
+                        "message": {
+                          "text": "'parent_window' may be NULL (Skip this branch)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 6602,
+                            "startColumn": 23
+                          }
+                        },
+                        "message": {
+                          "text": "Skip this branch, (assume '<branch condition>' is false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 6604,
+                            "startColumn": 60
+                          }
+                        },
+                        "message": {
+                          "text": "Skip this branch, (assume '<branch condition>' is false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 6606,
+                            "startColumn": 49
+                          }
+                        },
+                        "message": {
+                          "text": "Skip this loop, (assume '<branch condition>' is false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 6609,
+                            "startColumn": 34
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 6606,
+                            "startColumn": 49
+                          }
+                        },
+                        "message": {
+                          "text": "Enter this loop, (assume '<branch condition>')"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 6606,
+                            "startColumn": 49
+                          }
+                        },
+                        "message": {
+                          "text": "'parent_window' is dereferenced, but may still be NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "Dereferencing NULL pointer 'window'. "
+          },
+          "analysisTarget": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/imgui/imgui.cpp"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                },
+                "region": {
+                  "startLine": 12394,
+                  "startColumn": 13,
+                  "endLine": 12394,
+                  "endColumn": 120
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "ImGui::NavCalcPreferredRefPos",
+                  "decoratedName": "?NavCalcPreferredRefPos@ImGui@@YA?AUImVec2@@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 12371,
+                            "startColumn": 19
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 12372,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 12373,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 12376,
+                            "startColumn": 71
+                          }
+                        },
+                        "message": {
+                          "text": "'window' may be NULL (Skip this branch)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 12387,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 12388,
+                            "startColumn": 13
+                          }
+                        },
+                        "message": {
+                          "text": "Enter this branch, (assume 'activated_shortcut')"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 12389,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 12394,
+                            "startColumn": 53
+                          }
+                        },
+                        "message": {
+                          "text": "Skip this branch, (assume '<branch condition>' is false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ]
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/roanb/source/repos/Pertinax-Chess/Chess/source/vendor/imgui/imgui.cpp"
+                          },
+                          "region": {
+                            "startLine": 12394,
+                            "startColumn": 53
+                          }
+                        },
+                        "message": {
+                          "text": "'window' is dereferenced, but may still be NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "MSVC Code Analysis",
+          "version": "14.44.35216.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/imgui/imgui.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "0de23774f729aca440136137ab1d729c07de87be4807c1f7a4b9ad2b3a13b2b9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/imgui/imgui.h"
+          },
+          "hashes": {
+            "sha-256": "5796d33825c75cf4eb29a7bb22b63e3068e8ff2e1ae4f2903c143c5193eeff30"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/imgui/imconfig.h"
+          },
+          "hashes": {
+            "sha-256": "ab7cab963a542ac9dda100e7189e1f18b28f45aa696b8ba6bd931ac932863d30"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/roanb/source/repos/pertinax-chess/chess/source/vendor/imgui/imgui_internal.h"
+          },
+          "hashes": {
+            "sha-256": "443ede683e26b8b77a8043343a1e6c87a1a6caa4f5d36765dff145d7ed3abca7"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\</FILEPATH>
+      <FILENAME>Board.h</FILENAME>
+      <LINE>210</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Timer::BIncrement' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Timer::{ctor}</FUNCTION>
+    <DECORATED>??0Timer@@QEAA@XZ</DECORATED>
+    <FUNCLINE>210</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Timer::BIncrement</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\</FILEPATH>
+      <FILENAME>Board.h</FILENAME>
+      <LINE>210</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Timer::WTime' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Timer::{ctor}</FUNCTION>
+    <DECORATED>??0Timer@@QEAA@XZ</DECORATED>
+    <FUNCLINE>210</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Timer::WTime</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\</FILEPATH>
+      <FILENAME>Board.h</FILENAME>
+      <LINE>210</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Timer::BTime' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Timer::{ctor}</FUNCTION>
+    <DECORATED>??0Timer@@QEAA@XZ</DECORATED>
+    <FUNCLINE>210</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Timer::BTime</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\</FILEPATH>
+      <FILENAME>Board.h</FILENAME>
+      <LINE>210</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Timer::WIncrement' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Timer::{ctor}</FUNCTION>
+    <DECORATED>??0Timer@@QEAA@XZ</DECORATED>
+    <FUNCLINE>210</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Timer::WIncrement</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\</FILEPATH>
+      <FILENAME>Search.cpp</FILENAME>
+      <LINE>5</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Search::m_PreviousPV' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Search::{ctor}</FUNCTION>
+    <DECORATED>??0Search@@QEAA@AEBUPosition@@EAEAV?$vector@UMove@@V?$allocator@UMove@@@std@@@std@@AEB_K@Z</DECORATED>
+    <FUNCLINE>5</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Search::m_PreviousPV</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\</FILEPATH>
+      <FILENAME>Search.cpp</FILENAME>
+      <LINE>93</LINE>
+      <COLUMN>61</COLUMN>
+    </SFA>
+    <DEFECTCODE>6255</DEFECTCODE>
+    <DESCRIPTION>`_alloca` indicates failure by raising a stack overflow exception.  Consider using _malloca instead.</DESCRIPTION>
+    <FUNCTION>Search::NegaMax</FUNCTION>
+    <DECORATED>?NegaMax@Search@@AEAAHAEAVZobristHashing@@UPosition@@EHHPEAUpv_line@@@Z</DECORATED>
+    <FUNCLINE>46</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\</FILEPATH>
+      <FILENAME>Search.cpp</FILENAME>
+      <LINE>500</LINE>
+      <COLUMN>61</COLUMN>
+    </SFA>
+    <DEFECTCODE>6255</DEFECTCODE>
+    <DESCRIPTION>`_alloca` indicates failure by raising a stack overflow exception.  Consider using _malloca instead.</DESCRIPTION>
+    <FUNCTION>Search::QuietSearch</FUNCTION>
+    <DECORATED>?QuietSearch@Search@@AEAAHUPosition@@HH@Z</DECORATED>
+    <FUNCLINE>473</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>
