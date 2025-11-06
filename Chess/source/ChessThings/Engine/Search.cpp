@@ -105,19 +105,17 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, Position ChessPosition, uint8_t 
 
 		ChessPosition.MoveNum++;
 		Evaluation = -NegaMax(m_Hash, ChessPosition, depth - 1, -SmallWindowBeta, -alpha, &PVLine);
-
-		//undo move
-		ChessPosition = cChessPosition;
-		m_Hash.Hash = cHash;
+		ChessPosition.MoveNum--;
 
 		if ((Evaluation > alpha) and (Evaluation < beta) and (MoveIndex > 0))
 		{
 			ChessPosition.MoveNum++;
 			Evaluation = -NegaMax(m_Hash, ChessPosition, depth - 1, -beta, -alpha, &PVLine);
-			//undo move
-			ChessPosition = cChessPosition;
-			m_Hash.Hash = cHash;
 		}
+
+		//undo move
+		ChessPosition = cChessPosition;
+		m_Hash.Hash = cHash;
 
 		if (Evaluation > BestEvaluation)
 		{

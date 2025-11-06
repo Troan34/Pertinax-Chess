@@ -20,3 +20,4 @@ Pertinax 0.2.14.2:	Removed (temporarily) quiesce, bug fixes
 Pertinax 0.2.15:	Refactored canCastle to CastlingAbility, slight performance increase
 
 Pertinax 0.2.16:	Made the magic bitboards fancy
+Pertinax 0.2.16.2:	Bug fix.
