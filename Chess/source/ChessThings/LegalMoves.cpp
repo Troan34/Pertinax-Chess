@@ -47,21 +47,35 @@ void GenerateLegalMoves::GenerateMoves()
 	for (; BoardSquarePos <= MAX_SQUARE; BoardSquarePos++)
 	{ 
 		uint8_t i = ChessPosition.BoardSquare[BoardSquarePos];
-		if (((i == BLACK_BISHOP or i == BLACK_ROOK or i == BLACK_QUEEN) and !isNextMoveForWhite) or ((i == WHITE_BISHOP or i == WHITE_ROOK or i == WHITE_QUEEN) and isNextMoveForWhite))
+		if (i == 0 or (Board::IsPieceColorWhite(i) != isNextMoveForWhite))[[likely]]
 		{
+			continue;
+		}
+
+		switch (i)
+		{
+		case WHITE_BISHOP:
+		case WHITE_ROOK:
+		case WHITE_QUEEN:
+		case BLACK_BISHOP:
+		case BLACK_ROOK:
+		case BLACK_QUEEN:
 			MagicSliderMoveGen(BoardSquarePos);
-		}
-		else if (i == WHITE_PAWN or i == BLACK_PAWN)
-		{
+			break;
+		case WHITE_PAWN:
+		case BLACK_PAWN:
 			PawnMoveGen(BoardSquarePos);
-		}
-		else if (i == WHITE_KNIGHT or i == BLACK_KNIGHT)
-		{
-			KnightMoveGen(BoardSquarePos);
-		}
-		else if (i == WHITE_KING or i == BLACK_KING)[[unlikely]]
-		{
+			break;
+		case WHITE_KING:
+		case BLACK_KING:
 			KingMoveGen(BoardSquarePos);
+			break;
+		case WHITE_KNIGHT:
+		case BLACK_KNIGHT:
+			KnightMoveGen(BoardSquarePos);
+			break;
+		default:
+			break;
 		}
 	}
 }
@@ -81,7 +95,9 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 	bit::BitBoard64 blockers = ChessPosition.BoardSquare.ColorPositions[0] | ChessPosition.BoardSquare.ColorPositions[1];
 	bit::BitBoard64 Attacks(0);
 
-	if ((PieceTypeUncolored == ROOK))
+	switch (PieceTypeUncolored)
+	{
+	case(ROOK):
 	{
 		auto Key = mult_right_shift(blockers.ReadBits() & ROOK_MASKS[BoardSquarePos], ROOK_MAGICS[BoardSquarePos], RookShift);
 
@@ -90,8 +106,10 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 		AttackedSquares |= Attacks;
 
 		Attacks ^= (Attacks & ChessPosition.BoardSquare.ColorPositions[!IsWhite]);
+
+		break;
 	}
-	else if ((PieceTypeUncolored == BISHOP))
+	case (BISHOP):
 	{
 		uint16_t BishopAttackIndex = mult_right_shift(blockers.ReadBits() & BISHOP_MASKS[BoardSquarePos], BISHOP_MAGICS[BoardSquarePos], BishopShift);
 
@@ -100,8 +118,10 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 		AttackedSquares |= Attacks;
 
 		Attacks ^= (Attacks & ChessPosition.BoardSquare.ColorPositions[!IsWhite]);
+
+		break;
 	}
-	else if ((PieceTypeUncolored == QUEEN))
+	case(QUEEN):
 	{
 
 		//Get Indeces from the mult-right shift
@@ -118,6 +138,12 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 		BishopAttack ^= BishopAttack & ChessPosition.BoardSquare.ColorPositions[!IsWhite];
 
 		Attacks = RookAttack | BishopAttack;
+
+		break;
+	}
+	default:
+		__debugbreak();
+		break;
 	}
 
 	//found check
@@ -239,25 +265,21 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 //Knight
 void GenerateLegalMoves::KnightMoveGen(const uint8_t BoardSquarePos)
 {
-	if ((ChessPosition.BoardSquare[BoardSquarePos] == WHITE_KNIGHT and isNextMoveForWhite) or (ChessPosition.BoardSquare[BoardSquarePos] == BLACK_KNIGHT and !isNextMoveForWhite))
+	//avoiding branches by using !isNextMoveForWhite as index
+	auto Attacks = KnightTable[BoardSquarePos] & ~ChessPosition.BoardSquare.ColorPositions[!isNextMoveForWhite];
+
+	moves[BoardSquarePos].PieceType = ChessPosition.BoardSquare[BoardSquarePos];
+	moves[BoardSquarePos].TargetSquares = Attacks;
+
+	AttackedSquares |= Attacks;
+
+	//Because we know we are only attacking enemy pieces we don't need to make extra operations
+	if ((Attacks & ChessPosition.BoardSquare.PiecePositions[KING - 1]) != 0)
 	{
-		//avoiding branches by using !isNextMoveForWhite as index
-		auto Attacks = KnightTable[BoardSquarePos] & ~ChessPosition.BoardSquare.ColorPositions[!isNextMoveForWhite];
-
-		moves[BoardSquarePos].PieceType = ChessPosition.BoardSquare[BoardSquarePos];
-		moves[BoardSquarePos].TargetSquares = Attacks;
-
-		AttackedSquares |= Attacks;
-
-		//Because we know we are only attacking enemy pieces we don't need to make extra operations
-		if ((Attacks & ChessPosition.BoardSquare.PiecePositions[KING - 1]) != 0)
-		{
-			if (CheckTargetSquares[std::countr_zero(ChessPosition.BoardSquare.PiecePositions[KING - 1].ReadBits())] != 65)
-				DoubleCheckBoardSquare = BoardSquarePos;
-			else
-				CheckTargetSquares[std::countr_zero(ChessPosition.BoardSquare.PiecePositions[KING - 1].ReadBits())] = BoardSquarePos;
-		}
-
+		if (CheckTargetSquares[std::countr_zero(ChessPosition.BoardSquare.PiecePositions[KING - 1].ReadBits())] != 65)
+			DoubleCheckBoardSquare = BoardSquarePos;
+		else
+			CheckTargetSquares[std::countr_zero(ChessPosition.BoardSquare.PiecePositions[KING - 1].ReadBits())] = BoardSquarePos;
 	}
 }
 
@@ -271,7 +293,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 	}
 #endif
 	uint8_t PieceType = ChessPosition.BoardSquare[BoardSquarePos];
-	if (PieceType == WHITE_PAWN and isNextMoveForWhite)//White pawn
+	if (PieceType == WHITE_PAWN)//White pawn
 	{
 		for (const int& Offset : OffsetForWhitePawn)
 		{
@@ -343,7 +365,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 			}
 		}
 	}
-	else if (PieceType == BLACK_PAWN and !isNextMoveForWhite)//Black pawn
+	else if (PieceType == BLACK_PAWN)//Black pawn
 	{
 		for (const int& Offset : OffsetForBlackPawn)
 		{
@@ -417,49 +439,46 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 //King
 void GenerateLegalMoves::KingMoveGen(const uint8_t BoardSquarePos)
 {
-	if ((ChessPosition.BoardSquare[BoardSquarePos] == WHITE_KING and isNextMoveForWhite) or (ChessPosition.BoardSquare[BoardSquarePos] == BLACK_KING and !isNextMoveForWhite))
-	{
-		uint8_t PieceType = ChessPosition.BoardSquare[BoardSquarePos];
+	uint8_t PieceType = ChessPosition.BoardSquare[BoardSquarePos];
 
-		for (uint8_t direction = 0; direction < 8; direction++)
+	for (uint8_t direction = 0; direction < 8; direction++)
+	{
+		if (NumOfSquaresUntilEdge[BoardSquarePos][direction] > 0)
 		{
-			if (NumOfSquaresUntilEdge[BoardSquarePos][direction] > 0)
+			AttackedSquares[BoardSquarePos + OffsetForDirections[direction]] = true;
+			if (ChessPosition.BoardSquare[BoardSquarePos + OffsetForDirections[direction]] == 0)
 			{
-				AttackedSquares[BoardSquarePos + OffsetForDirections[direction]] = true;
-				if (ChessPosition.BoardSquare[BoardSquarePos + OffsetForDirections[direction]] == 0)
-				{
-					moves[BoardSquarePos].PieceType = PieceType;
-					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + OffsetForDirections[direction]);
-					continue;
-				}
-				if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(ChessPosition.BoardSquare[BoardSquarePos + OffsetForDirections[direction]]))
-				{
-					moves[BoardSquarePos].PieceType = PieceType;
-					moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + OffsetForDirections[direction]);
-				}
+				moves[BoardSquarePos].PieceType = PieceType;
+				moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + OffsetForDirections[direction]);
+				continue;
+			}
+			if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(ChessPosition.BoardSquare[BoardSquarePos + OffsetForDirections[direction]]))
+			{
+				moves[BoardSquarePos].PieceType = PieceType;
+				moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + OffsetForDirections[direction]);
 			}
 		}
-		if (PieceType == WHITE_KING)//castling
+	}
+	if (PieceType == WHITE_KING)//castling
+	{
+		if (ChessPosition.CanCastle.WhiteLong and ChessPosition.BoardSquare[1] == 0 and ChessPosition.BoardSquare[2] == 0 and ChessPosition.BoardSquare[3] == 0)
 		{
-			if (ChessPosition.CanCastle.WhiteLong and ChessPosition.BoardSquare[1] == 0 and ChessPosition.BoardSquare[2] == 0 and ChessPosition.BoardSquare[3] == 0)
-			{
-				moves[4].TargetSquares.push_back(2);
-			}
-			if (ChessPosition.CanCastle.WhiteShort and ChessPosition.BoardSquare[5] == 0 and ChessPosition.BoardSquare[6] == 0)
-			{
-				moves[4].TargetSquares.push_back(6);
-			}
+			moves[4].TargetSquares.push_back(2);
 		}
-		if (PieceType == BLACK_KING)//castling
+		if (ChessPosition.CanCastle.WhiteShort and ChessPosition.BoardSquare[5] == 0 and ChessPosition.BoardSquare[6] == 0)
 		{
-			if (ChessPosition.CanCastle.BlackLong and ChessPosition.BoardSquare[57] == 0 and ChessPosition.BoardSquare[58] == 0 and ChessPosition.BoardSquare[59] == 0)
-			{
-				moves[60].TargetSquares.push_back(58);
-			}
-			if (ChessPosition.CanCastle.BlackShort and ChessPosition.BoardSquare[61] == 0 and ChessPosition.BoardSquare[62] == 0)
-			{
-				moves[60].TargetSquares.push_back(62);
-			}
+			moves[4].TargetSquares.push_back(6);
+		}
+	}
+	else//castling
+	{
+		if (ChessPosition.CanCastle.BlackLong and ChessPosition.BoardSquare[57] == 0 and ChessPosition.BoardSquare[58] == 0 and ChessPosition.BoardSquare[59] == 0)
+		{
+			moves[60].TargetSquares.push_back(58);
+		}
+		if (ChessPosition.CanCastle.BlackShort and ChessPosition.BoardSquare[61] == 0 and ChessPosition.BoardSquare[62] == 0)
+		{
+			moves[60].TargetSquares.push_back(62);
 		}
 	}
 }

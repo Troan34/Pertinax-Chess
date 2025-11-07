@@ -68,14 +68,22 @@ constexpr std::array<bit::BitBoard64, 64> CreateOffesetsForKnight()
 	std::array<bit::BitBoard64, 64> OffsetsForKnight{};
 	for (uint8_t BoardSquarePos = 0; BoardSquarePos <= MAX_SQUARE; BoardSquarePos++)
 	{
-		if (NumOfSquaresUntilEdge[BoardSquarePos][offE] >= 2 and NumOfSquaresUntilEdge[BoardSquarePos][offN] >= 1) { OffsetsForKnight[BoardSquarePos][BoardSquarePos + ENE]; }
-		if (NumOfSquaresUntilEdge[BoardSquarePos][offE] >= 1 and NumOfSquaresUntilEdge[BoardSquarePos][offN] >= 2) { OffsetsForKnight[BoardSquarePos][BoardSquarePos + NNE]; }
-		if (NumOfSquaresUntilEdge[BoardSquarePos][offW] >= 2 and NumOfSquaresUntilEdge[BoardSquarePos][offN] >= 1) { OffsetsForKnight[BoardSquarePos][BoardSquarePos + WNW]; }
-		if (NumOfSquaresUntilEdge[BoardSquarePos][offW] >= 1 and NumOfSquaresUntilEdge[BoardSquarePos][offN] >= 2) { OffsetsForKnight[BoardSquarePos][BoardSquarePos + NNW]; }
-		if (NumOfSquaresUntilEdge[BoardSquarePos][offE] >= 2 and NumOfSquaresUntilEdge[BoardSquarePos][offS] >= 1) { OffsetsForKnight[BoardSquarePos][BoardSquarePos + ESE]; }
-		if (NumOfSquaresUntilEdge[BoardSquarePos][offE] >= 1 and NumOfSquaresUntilEdge[BoardSquarePos][offS] >= 2) { OffsetsForKnight[BoardSquarePos][BoardSquarePos + SSE]; }
-		if (NumOfSquaresUntilEdge[BoardSquarePos][offW] >= 2 and NumOfSquaresUntilEdge[BoardSquarePos][offS] >= 1) { OffsetsForKnight[BoardSquarePos][BoardSquarePos + WSW]; }
-		if (NumOfSquaresUntilEdge[BoardSquarePos][offW] >= 1 and NumOfSquaresUntilEdge[BoardSquarePos][offS] >= 2) { OffsetsForKnight[BoardSquarePos][BoardSquarePos + SSW]; }
+		if (NumOfSquaresUntilEdge[BoardSquarePos][offE] >= 2 and NumOfSquaresUntilEdge[BoardSquarePos][offN] >= 1)
+		{ OffsetsForKnight[BoardSquarePos].SetToTrue(BoardSquarePos + ENE); }
+		if (NumOfSquaresUntilEdge[BoardSquarePos][offE] >= 1 and NumOfSquaresUntilEdge[BoardSquarePos][offN] >= 2)
+		{ OffsetsForKnight[BoardSquarePos].SetToTrue(BoardSquarePos + NNE); }
+		if (NumOfSquaresUntilEdge[BoardSquarePos][offW] >= 2 and NumOfSquaresUntilEdge[BoardSquarePos][offN] >= 1)
+		{ OffsetsForKnight[BoardSquarePos].SetToTrue(BoardSquarePos + WNW); }
+		if (NumOfSquaresUntilEdge[BoardSquarePos][offW] >= 1 and NumOfSquaresUntilEdge[BoardSquarePos][offN] >= 2)
+		{ OffsetsForKnight[BoardSquarePos].SetToTrue(BoardSquarePos + NNW); }
+		if (NumOfSquaresUntilEdge[BoardSquarePos][offE] >= 2 and NumOfSquaresUntilEdge[BoardSquarePos][offS] >= 1)
+		{ OffsetsForKnight[BoardSquarePos].SetToTrue(BoardSquarePos + ESE); }
+		if (NumOfSquaresUntilEdge[BoardSquarePos][offE] >= 1 and NumOfSquaresUntilEdge[BoardSquarePos][offS] >= 2)
+		{ OffsetsForKnight[BoardSquarePos].SetToTrue(BoardSquarePos + SSE); }
+		if (NumOfSquaresUntilEdge[BoardSquarePos][offW] >= 2 and NumOfSquaresUntilEdge[BoardSquarePos][offS] >= 1)
+		{ OffsetsForKnight[BoardSquarePos].SetToTrue(BoardSquarePos + WSW); }
+		if (NumOfSquaresUntilEdge[BoardSquarePos][offW] >= 1 and NumOfSquaresUntilEdge[BoardSquarePos][offS] >= 2)
+		{ OffsetsForKnight[BoardSquarePos].SetToTrue(BoardSquarePos + SSW); }
 	}
 	return OffsetsForKnight;
 }
