@@ -266,12 +266,14 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 void GenerateLegalMoves::KnightMoveGen(const uint8_t BoardSquarePos)
 {
 	//avoiding branches by using !isNextMoveForWhite as index
-	auto Attacks = KnightTable[BoardSquarePos] & ~ChessPosition.BoardSquare.ColorPositions[!isNextMoveForWhite];
+	auto Attacks = KnightTable[BoardSquarePos];
+
+	AttackedSquares |= Attacks;
+
+	Attacks ^= (Attacks & ChessPosition.BoardSquare.ColorPositions[!isNextMoveForWhite]);
 
 	moves[BoardSquarePos].PieceType = ChessPosition.BoardSquare[BoardSquarePos];
 	moves[BoardSquarePos].TargetSquares = Attacks;
-
-	AttackedSquares |= Attacks;
 
 	//Because we know we are only attacking enemy pieces we don't need to make extra operations
 	if ((Attacks & ChessPosition.BoardSquare.PiecePositions[KING - 1]) != 0)
@@ -485,7 +487,6 @@ void GenerateLegalMoves::KingMoveGen(const uint8_t BoardSquarePos)
 
 void GenerateLegalMoves::RemoveIllegalMoves()
 {
-	uint8_t IndexOfPieceChecking;
 	uint8_t BoardSquareOfKingToMove = 0;
 
 	//find out where the King is
@@ -500,19 +501,20 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 	//fill IndexOfPieceChecking
 	uint8_t count = 0;
 	uint8_t CheckingSquare = NULL_OPTION;
+	uint8_t CheckingSquare2 = NULL_OPTION;
 	size_t NumberOfChecks = 0;
  	for (const uint8_t& Square : OppositeMoves.CheckTargetSquares)
 	{
 		if (Square != NULL_OPTION)
 		{
-			if (CheckingSquare == Square)
+			if (CheckingSquare == NULL_OPTION)
 			{
-				continue;
-			}
-			else
-			{
-				IndexOfPieceChecking = Square;
 				CheckingSquare = Square;
+				NumberOfChecks++;
+			}
+			else if (CheckingSquare != Square)
+			{
+				CheckingSquare2 = Square;
 				NumberOfChecks++;
 			}
 		}
@@ -615,7 +617,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 						if (NumberOfChecks == 1)
 						{
 							//checks if Move neither captures piece nor doesn't block check
-							if (Move != IndexOfPieceChecking and OppositeMoves.CheckTargetSquares[Move] != IndexOfPieceChecking)
+							if (Move != CheckingSquare and OppositeMoves.CheckTargetSquares[Move] != CheckingSquare)
 							{
 								Piece.TargetSquares[Move] = false;
 								continue;

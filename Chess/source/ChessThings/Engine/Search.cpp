@@ -105,11 +105,9 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, Position ChessPosition, uint8_t 
 
 		ChessPosition.MoveNum++;
 		Evaluation = -NegaMax(m_Hash, ChessPosition, depth - 1, -SmallWindowBeta, -alpha, &PVLine);
-		ChessPosition.MoveNum--;
 
 		if ((Evaluation > alpha) and (Evaluation < beta) and (MoveIndex > 0))
 		{
-			ChessPosition.MoveNum++;
 			Evaluation = -NegaMax(m_Hash, ChessPosition, depth - 1, -beta, -alpha, &PVLine);
 		}
 
@@ -144,7 +142,10 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, Position ChessPosition, uint8_t 
 
 	after_search:
 	//Make a TT entry
-	TT.AddEntry(BestMove, BestEvaluation, depth, m_Hash.Hash, alpha, beta);
+	if (!BestMove.IsNull())//this happens on mates, where the "if (Evaluation > BestEvaluation)" block hasn't been entered
+	{
+		TT.AddEntry(BestMove, BestEvaluation, depth, m_Hash.Hash, alpha, beta);
+	}
 
 	return BestEvaluation;
 }

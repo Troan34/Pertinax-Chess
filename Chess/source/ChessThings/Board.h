@@ -441,7 +441,7 @@ namespace bit//bit management
 			Bits = 0;
 		}
 
-		constexpr uint8_t popcnt() const noexcept
+		constexpr inline uint8_t popcnt() const noexcept
 		{
 			return std::popcount(Bits);
 		}

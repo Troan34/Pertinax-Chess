@@ -1,3 +1,1 @@
-Warning; Illegal PV move - move d5c6 from Pertinax0_2_13
-Info; info depth 4 score cp 1254 nodes 2640 nps 220000 hashfull 13 pv c4d5 e8f8 d5c6
-position startpos moves d2d4 g8f6 g1f3 e7e6 c2c4 b7b6 b1c3 c8b7 a2a3 f6e4 c3e4 b7e4 f3d2 e4b7 e2e4 d8f6 d2f3 f6h6 c1h6 g7g5 h6f8 b7d5
+position fen 2Rn4/4NP2/p2p4/5Pk1/B7/KpB2P2/7p/1N1q4 w - - 0 1 moves c3a1 h2h1q c8c2 b3c2 a3b3 c2b1q
