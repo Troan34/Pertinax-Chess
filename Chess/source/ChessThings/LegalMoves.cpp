@@ -12,6 +12,7 @@ GenerateLegalMoves::GenerateLegalMoves(const bit::Position& Position, bool Pseud
 	ChessPosition = Position;
 
 	isNextMoveForWhite = WHITE_TURN(Position.MoveNum);
+	ZeroIfWhite = !isNextMoveForWhite;
 
 	GenerateMoves();
 	if (!PseudoLegalFlag)
@@ -27,6 +28,7 @@ GenerateLegalMoves::GenerateLegalMoves(const Position& Position, bool PseudoLega
 	ChessPosition = {Position.BoardSquare, Position.PrevBoardSquare, Position.CanCastle, Position.MoveNum};
 
 	isNextMoveForWhite = WHITE_TURN(Position.MoveNum);
+	ZeroIfWhite = !isNextMoveForWhite;
 
 	GenerateMoves();
 	if (!PseudoLegalFlag)
@@ -265,12 +267,12 @@ void GenerateLegalMoves::MagicSliderMoveGen(const uint8_t BoardSquarePos)
 //Knight
 void GenerateLegalMoves::KnightMoveGen(const uint8_t BoardSquarePos)
 {
-	//avoiding branches by using !isNextMoveForWhite as index
+	//avoiding branches by using ZeroIfWhite as index
 	auto Attacks = KnightTable[BoardSquarePos];
 
 	AttackedSquares |= Attacks;
 
-	Attacks ^= (Attacks & ChessPosition.BoardSquare.ColorPositions[!isNextMoveForWhite]);
+	Attacks ^= (Attacks & ChessPosition.BoardSquare.ColorPositions[ZeroIfWhite]);
 
 	moves[BoardSquarePos].PieceType = ChessPosition.BoardSquare[BoardSquarePos];
 	moves[BoardSquarePos].TargetSquares = Attacks;
@@ -295,147 +297,58 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 	}
 #endif
 	uint8_t PieceType = ChessPosition.BoardSquare[BoardSquarePos];
-	if (PieceType == WHITE_PAWN)//White pawn
+
+	bit::BitBoard64 NoAttacks = ChessPosition.BoardSquare.ColorPositions[ZeroIfWhite];
+
+	bit::BitBoard64 PawnAttacks = PAWN_CAPTURES[ZeroIfWhite][BoardSquarePos];
+
+
+	if (BoardSquarePos + ForwardAttacks[ZeroIfWhite] >= a8 or BoardSquarePos + ForwardAttacks[ZeroIfWhite] <= h1)
 	{
-		for (const int& Offset : OffsetForWhitePawn)
+		moves[BoardSquarePos].Promotion.SetPromotionSide(1, BoardSquarePos);
+	}
+	else if((BoardSquarePos >= a2 and BoardSquarePos <= h2) or (BoardSquarePos >= a7 and BoardSquarePos <= h7))
+	{
+		PawnAttacks[BoardSquarePos + ForwardAttacks[ZeroIfWhite]] = true;
+		PawnAttacks[BoardSquarePos + (ForwardAttacks[ZeroIfWhite] * 2)] = true;//we are in the 2nd or the 7th, so we are able to do double push
+	}
+	else
+	{
+		PawnAttacks[BoardSquarePos + ForwardAttacks[ZeroIfWhite]] = true;
+	}
+
+
+	if ((BoardSquarePos <= 39 and BoardSquarePos >= 32) or (BoardSquarePos <= 31 and BoardSquarePos >= 24))//en passant
+	{
+		if (ChessPosition.EnPassant.ReadEp((BoardSquarePos % 8) - 1)) //left check
 		{
-			if ((BoardSquarePos == 48 and Offset == 7) or (BoardSquarePos == 55 and Offset == 9))
-				continue;
-
-			uint8_t BoardPosPlusOffset = BoardSquarePos + Offset;
-			uint8_t PieceTypeAtOffset = ChessPosition.BoardSquare[BoardPosPlusOffset];
-
-
-			if (NumOfSquaresUntilEdge[BoardSquarePos][WhitePawnDirections[Offset - 7]] != 0)
-			{
-
-				if (PieceTypeAtOffset != 0 and Offset != 8)
-				{
-					AttackedSquares[BoardPosPlusOffset] = true;
-					if (!Board::IsPieceColorWhite(PieceTypeAtOffset))
-					{
-						moves[BoardSquarePos].PieceType = PieceType;
-						moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
-
-						//promotion
-						if (BoardPosPlusOffset >= 56)
-						{
-							moves[BoardSquarePos].Promotion.SetPromotionSide(Offset - 7, BoardSquarePos);
-						}
-					}
-					if (PieceTypeAtOffset == BLACK_KING)
-					{
-						if (CheckTargetSquares[BoardPosPlusOffset] != 65)
-							DoubleCheckBoardSquare = BoardSquarePos;
-						else
-							CheckTargetSquares[BoardPosPlusOffset] = BoardSquarePos;
-					}
-
-
-				}
-				else if (Offset == 8 and PieceTypeAtOffset == 0)
-				{
-					if (BoardSquarePos < 16 and BoardSquarePos >= 8 and ChessPosition.BoardSquare[BoardSquarePos + 16] == 0)
-					{
-						moves[BoardSquarePos].PieceType = PieceType;
-						moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + 16);
-					}
-					moves[BoardSquarePos].PieceType = PieceType;
-					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
-
-					//promotion
-					if (BoardPosPlusOffset >= 56)
-						moves[BoardSquarePos].Promotion.SetPromotionSide(1, BoardSquarePos);
-				}
-				else if (PieceTypeAtOffset == 0 and Offset != 8)
-				{
-					moves[BoardSquarePos].PieceType = PieceType;
-					AttackedSquares[BoardPosPlusOffset] = true;
-				}
-
-
-				//en passant
-				if (BoardSquarePos <= 39 and BoardSquarePos >= 32 and Offset != 8 and PieceTypeAtOffset == 0 and !ChessPosition.PrevBoardSquare.empty() and (ChessPosition.PrevBoardSquare[BoardSquarePos + Offset + 8] == BLACK_PAWN) and (ChessPosition.BoardSquare[BoardSquarePos + Offset - 8] == BLACK_PAWN) and !(ChessPosition.PrevBoardSquare[BoardSquarePos + Offset - 8] == BLACK_PAWN) and ChessPosition.BoardSquare[BoardSquarePos + Offset + 8] == 0)
-				{
-					if (!DoNotEnPassant)
-					{
-						moves[BoardSquarePos].PieceType = PieceType;
-						moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
-						EnPassantFiles[(BoardSquarePos + Offset) % 8] = true;
-					}
-				}
-			}
+			moves[BoardSquarePos].PieceType = PieceType;
+			moves[BoardSquarePos].TargetSquares.push_back(isNextMoveForWhite ? 7 : -7);
+			EnPassantFiles[(BoardSquarePos % 8) - 1] = true;
+		}
+		else if (ChessPosition.EnPassant.ReadEp((BoardSquarePos % 8) + 1)) //right check
+		{
+			moves[BoardSquarePos].PieceType = PieceType;
+			moves[BoardSquarePos].TargetSquares.push_back(isNextMoveForWhite ? 9 : -9);
+			EnPassantFiles[(BoardSquarePos % 8) + 1] = true;
 		}
 	}
-	else if (PieceType == BLACK_PAWN)//Black pawn
+
+	//this is the bitboard of the king's position, if under attack
+	auto KingSquare = PawnAttacks.ReadBits()
+		& ChessPosition.BoardSquare.ColorPositions[isNextMoveForWhite] /*isNextMoveForWhite is the negation of zero if true*/
+		& ChessPosition.BoardSquare.PiecePositions[5];
+	//set Check
+	if (KingSquare != 0)
 	{
-		for (const int& Offset : OffsetForBlackPawn)
-		{
-			if ((BoardSquarePos == 8 and Offset == -9) or (BoardSquarePos == 15 and Offset == -7))
-				continue;
-
-			uint8_t BoardPosPlusOffset = BoardSquarePos + Offset;
-			uint8_t PieceTypeAtOffset = ChessPosition.BoardSquare[BoardPosPlusOffset];
-
-
-			if (NumOfSquaresUntilEdge[BoardSquarePos][BlackPawnDirections[Offset + 9]] != 0)
-			{
-				if (PieceTypeAtOffset != 0 and Offset != -8)
-				{
-					AttackedSquares[BoardPosPlusOffset] = true;
-					if (Board::IsPieceColorWhite(PieceTypeAtOffset))
-					{
-						moves[BoardSquarePos].PieceType = PieceType;
-						moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
-
-						//promotion
-						if (BoardPosPlusOffset <= 7)
-						{
-							moves[BoardSquarePos].Promotion.SetPromotionSide(Offset + 9, BoardSquarePos);
-						}
-					}
-					if (PieceTypeAtOffset == WHITE_KING)
-					{
-						if (CheckTargetSquares[BoardPosPlusOffset] != 65)
-							DoubleCheckBoardSquare = BoardSquarePos;
-						else
-							CheckTargetSquares[BoardPosPlusOffset] = BoardSquarePos;
-					}
-
-
-				}
-				else if (Offset == -8 and PieceTypeAtOffset == 0)
-				{
-					if (BoardSquarePos <= 55 and BoardSquarePos >= 48 and ChessPosition.BoardSquare[BoardSquarePos - 16] == 0)
-					{
-						moves[BoardSquarePos].PieceType = PieceType;
-						moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos - 16);
-					}
-					moves[BoardSquarePos].PieceType = PieceType;
-					moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
-
-					//promotion
-					if (BoardPosPlusOffset <= 7)
-						moves[BoardSquarePos].Promotion.SetPromotionSide(1, BoardSquarePos);
-				}
-				else if (PieceTypeAtOffset == 0 and Offset != -8)
-				{
-					moves[BoardSquarePos].PieceType = PieceType;
-					AttackedSquares[BoardPosPlusOffset] = true;
-				}
-				//en passant
-				if (BoardSquarePos <= 31 and BoardSquarePos >= 24 and Offset != -8 and PieceTypeAtOffset == 0 and !ChessPosition.PrevBoardSquare.empty() and (ChessPosition.PrevBoardSquare[BoardSquarePos + Offset - 8]) == WHITE_PAWN and (ChessPosition.BoardSquare[BoardSquarePos + Offset + 8]) == WHITE_PAWN and !(ChessPosition.PrevBoardSquare[BoardSquarePos + Offset + 8] == WHITE_PAWN) and ChessPosition.BoardSquare[BoardSquarePos + Offset - 8] == 0)
-				{
-					if (!DoNotEnPassant)
-					{
-						moves[BoardSquarePos].PieceType = PieceType;
-						moves[BoardSquarePos].TargetSquares.push_back(BoardPosPlusOffset);
-						EnPassantFiles[(BoardSquarePos + Offset) % 8] = true;
-					}
-				}
-			}
-		}
+		if (CheckTargetSquares[std::countr_zero(KingSquare)] != 65)
+			DoubleCheckBoardSquare = BoardSquarePos;
+		else
+			CheckTargetSquares[std::countr_zero(KingSquare)] = BoardSquarePos;
 	}
+
+
+
 }
 
 //King
@@ -575,7 +488,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 		count = 0;
 		for (MOVE_BIT& Piece : moves)
 		{//this Piece.PieceType == 0 might be risky, but only if piece has moves and Piecetype = 0 is either no piece or no moves for the piece
-			if (Piece.PieceType == WHITE_KING or Piece.PieceType == BLACK_KING or Piece.PieceType == 0)
+			if (Piece.PieceType == WHITE_KING or Piece.PieceType == BLACK_KING or Piece.TargetSquares.popcnt() == 0)
 			{
 				count++;
 				continue;

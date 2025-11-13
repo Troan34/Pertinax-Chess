@@ -176,6 +176,31 @@ static constexpr std::array<uint8_t, 64> BISHOP_SHIFTS = {
 static constexpr std::array<uint64_t, 64> ROOK_LEGAL_MASKS = ComputeRookMasks(true);
 static constexpr std::array<uint64_t, 64> BISHOP_LEGAL_MASKS = ComputeBishopMasks(true);
 
+consteval std::array<std::array<uint64_t, 64>, 2> ComputePawnAttacks()
+{
+	std::array<std::array<uint64_t, 64>, 2> PawnAttacks{};//0th is white, 1st is black
+	//highly inefficient but i don't care, it's consteval
+	for (uint8_t ColorIndex = 0; ColorIndex < 2; ColorIndex++)
+	{
+		std::array<int8_t, 2> Directions = { 7, 9 };
+		for (uint8_t Square = 0; Square < MAX_SQUARE; Square++)
+		{
+			for (uint8_t Dir = 0; Dir < 2; Dir++)
+			{
+				if (NumOfSquaresUntilEdge[Square][NW] > 0)
+				{
+					PawnAttacks[ColorIndex][Square] |= 1ULL << (Square + Dir);
+				}
+			}
+		}
+		Directions = { -9, -7 };
+	}
+	return PawnAttacks;
+}
+
+static constexpr std::array<int8_t, 2> ForwardAttacks{ 8, -8 };
+constexpr std::array<std::array<uint64_t, 64>, 2> PAWN_CAPTURES = ComputePawnAttacks();//0th white, does NOT include 'forward' attacks
+
 /// <summary>Expands a compact bitboard representation into a full bitboard.</summary>
 /// <param name="bits">Compact blockers (technically the limit is 2^12, the fun may be used beyond it's limits)</param>
 /// <param name="mask">The mask on which the bits will be expanded</param>
@@ -210,6 +235,7 @@ void MagicRookFinder(uint8_t BoardSquare, std::vector<uint64_t>& RookAttack);
 void MagicBishopFinder(uint8_t BoardSquare, std::vector<uint64_t>& BishopAttack);
 #endif
 #endif
+
 /// <summary>
 /// function used to produce the key that accesses into the attacks table
 /// </summary>
@@ -294,6 +320,7 @@ class GenerateLegalMoves
 private:	
 	
 	bool isNextMoveForWhite;
+	bool ZeroIfWhite;
 
 	static constexpr uint8_t WhitePawnDirections[3] = { 4,0,6 };
 	static constexpr uint8_t BlackPawnDirections[3] = { 7,1,5 };

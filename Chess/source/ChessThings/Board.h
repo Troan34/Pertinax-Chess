@@ -548,12 +548,30 @@ namespace bit//bit management
 
 	};
 
+	class EP
+	{
+	private:
+		uint8_t EnPassant = 0;
+
+	public:
+
+		inline void SetEP(uint8_t File)
+		{
+			EnPassant |= (1ULL << File);
+		}
+
+		inline void Reset() { EnPassant = 0; }
+
+		inline bool ReadEp(uint8_t File) const { return EnPassant & (0x10 >> File); }
+	};
+
 	struct Position
 	{
 		bit::BitPosition BoardSquare;
-		bit::BitPosition PrevBoardSquare;
 		CastlingAbility CanCastle;
 		uint16_t MoveNum;
+		EP EnPassant;
 	};
+
 }
 
