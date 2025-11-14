@@ -154,7 +154,6 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash
 {
 	Hash.UpdateHash(Move_, ChessPosition.BoardSquare[Move_.s_BoardSquare]);
 
-	ChessPosition.PrevBoardSquare = ChessPosition.BoardSquare;
 	Board::WillCanCastleChange(Move_.s_BoardSquare, ChessPosition.CanCastle);
 	ChessPosition.BoardSquare[Move_.s_Move] = ChessPosition.BoardSquare[Move_.s_BoardSquare];
 
@@ -198,28 +197,23 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash
 	}
 	else//optimization
 	{
-		//White en passant
-		if (ChessPosition.BoardSquare[Move_.s_BoardSquare] == WHITE_PAWN)
+		if ((Move_.s_Move % 8) == ChessPosition.EnPassant.EPIndex() and ChessPosition.BoardSquare[Move_.s_Move] == 0)
 		{
-			if (ChessPosition.PrevBoardSquare[Move_.s_Move] == 0)
+			if (ChessPosition.BoardSquare[Move_.s_BoardSquare] == WHITE_PAWN)
 			{
-				if (Move_.s_BoardSquare - Move_.s_Move == -7 or Move_.s_BoardSquare - Move_.s_Move == -9)
-				{
-					ChessPosition.BoardSquare[Move_.s_Move - 8] = 0;
-				}
+				ChessPosition.BoardSquare[Move_.s_Move + S] = 0;
+			}
+			else
+			{
+				ChessPosition.BoardSquare[Move_.s_Move + N] = 0;
 			}
 		}
-		//Black en passant
-		if (ChessPosition.BoardSquare[Move_.s_BoardSquare] == BLACK_PAWN)
-		{
-			if (ChessPosition.PrevBoardSquare[Move_.s_Move] == 0)
-			{
-				if (Move_.s_BoardSquare - Move_.s_Move == 7 or Move_.s_BoardSquare - Move_.s_Move == 9)
-				{
-					ChessPosition.BoardSquare[Move_.s_Move + 8] = 0;
-				}
-			}
-		}
+	}
+
+	ChessPosition.EnPassant.Reset();
+	if (abs(Move_.s_BoardSquare - Move_.s_Move) == 16 and Board::GetPieceType2Uncolored(ChessPosition.BoardSquare[Move_.s_BoardSquare]))//double push
+	{
+		ChessPosition.EnPassant.SetEP(Move_.s_BoardSquare % 8);
 	}
 
 	ChessPosition.BoardSquare[Move_.s_BoardSquare] = 0;
@@ -235,7 +229,6 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash
 void Search::QMakeMove(const GenerateLegalMoves& LegalMoves, const Move Move_, Position& ChessPosition)
 {
 
-	ChessPosition.PrevBoardSquare = ChessPosition.BoardSquare;
 	Board::WillCanCastleChange(Move_.s_BoardSquare,ChessPosition.CanCastle);
 	ChessPosition.BoardSquare[Move_.s_Move] = ChessPosition.BoardSquare[Move_.s_BoardSquare];
 
@@ -279,28 +272,23 @@ void Search::QMakeMove(const GenerateLegalMoves& LegalMoves, const Move Move_, P
 	}
 	else//optimization
 	{
-		//White en passant
-		if (ChessPosition.BoardSquare[Move_.s_BoardSquare] == WHITE_PAWN)
+		if ((Move_.s_Move % 8) == ChessPosition.EnPassant.EPIndex() and ChessPosition.BoardSquare[Move_.s_Move] == 0)
 		{
-			if (ChessPosition.PrevBoardSquare[Move_.s_Move] == 0)
+			if (ChessPosition.BoardSquare[Move_.s_BoardSquare] == WHITE_PAWN)
 			{
-				if (Move_.s_BoardSquare - Move_.s_Move == -7 or Move_.s_BoardSquare - Move_.s_Move == -9)
-				{
-					ChessPosition.BoardSquare[Move_.s_Move - 8] = 0;
-				}
+				ChessPosition.BoardSquare[Move_.s_Move + S] = 0;
+			}
+			else
+			{
+				ChessPosition.BoardSquare[Move_.s_Move + N] = 0;
 			}
 		}
-		//Black en passant
-		if (ChessPosition.BoardSquare[Move_.s_BoardSquare] == BLACK_PAWN)
-		{
-			if (ChessPosition.PrevBoardSquare[Move_.s_Move] == 0)
-			{
-				if (Move_.s_BoardSquare - Move_.s_Move == 7 or Move_.s_BoardSquare - Move_.s_Move == 9)
-				{
-					ChessPosition.BoardSquare[Move_.s_Move + 8] = 0;
-				}
-			}
-		}
+	}
+
+	ChessPosition.EnPassant.Reset();
+	if (abs(Move_.s_BoardSquare - Move_.s_Move) == 16 and Board::GetPieceType2Uncolored(ChessPosition.BoardSquare[Move_.s_BoardSquare]))//double push
+	{
+		ChessPosition.EnPassant.SetEP(Move_.s_BoardSquare % 8);
 	}
 
 	ChessPosition.BoardSquare[Move_.s_BoardSquare] = 0;

@@ -245,7 +245,7 @@ struct SearchResult
 struct Position
 {
 	std::array<uint8_t, 64> BoardSquare;
-	std::array<uint8_t, 64> PrevBoardSquare;
+	bit::EP EnPassant;
 	CastlingAbility CanCastle;
 	uint16_t MoveNum;
 };
@@ -272,7 +272,7 @@ public:
 	static uint8_t ALG2BoardSquareConverter(const std::string& ALG);
 	static Move LongALG2Move(const std::string& ALG);
 	static std::string Move2ALG(Move move);
-	static constexpr uint8_t GetPieceType2Uncolored(uint8_t PieceType);
+	static constexpr inline uint8_t GetPieceType2Uncolored(uint8_t PieceType);
 	static constexpr bool IsPieceColorWhite(uint8_t BoardSquareValue);
 	static char PieceType2letter(const uint8_t& PieceType);
 	static void WillCanCastleChange(const uint8_t BoardSquareItMovedFrom, CastlingAbility& Castle);
@@ -282,6 +282,7 @@ public:
 	static std::array<uint8_t, 64> PrevBoardSquareFromEP(const std::array<uint8_t, 64>& BoardSquare, uint8_t EPBoardsquare);
 	static std::string GetPrintableFromArrayOfMoves(const std::array<Move, MAX_PV_LENGTH>& Moves);
 	static uint8_t PieceType2Compact(uint8_t PieceType);
+	static bit::EP constexpr PrevPosition2EP(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, bool ZeroIfWhite);
 };
 
 template<typename T> inline std::vector<T> GetVecTail(const std::vector<T>& Vec)
@@ -563,6 +564,19 @@ namespace bit//bit management
 		inline void Reset() { EnPassant = 0; }
 
 		inline bool ReadEp(uint8_t File) const { return EnPassant & (0x10 >> File); }
+
+		//returns NULL_OPTION if EP is empty
+		inline uint8_t EPIndex() const
+		{
+			if (EnPassant == 0)[[likely]]
+			{
+				return NULL_OPTION;
+			}
+			else
+			{
+				return std::countl_zero(EnPassant);
+			}
+		}
 	};
 
 	struct Position

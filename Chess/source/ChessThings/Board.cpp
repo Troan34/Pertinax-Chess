@@ -229,14 +229,12 @@ std::string Board::Move2ALG(Move move)
 	return ALG;
 }
 
-uint8_t constexpr Board::GetPieceType2Uncolored(uint8_t PieceType)
+uint8_t constexpr inline Board::GetPieceType2Uncolored(uint8_t PieceType)
 {
-	if (PieceType > 16)
-		return(PieceType - 16);
-	else if (PieceType > 8)
-		return(PieceType - 8);
-	else
+	return PieceType & 0b00000111;
+#ifdef _DEBUG
 		ASSERT(false);
+#endif
 }
 
 
@@ -568,6 +566,25 @@ uint8_t Board::PieceType2Compact(uint8_t PieceType)
 	else
 	{
 		ASSERT(false);
+	}
+}
+
+bit::EP constexpr Board::PrevPosition2EP(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, bool ZeroIfWhite)
+{
+	bit::BitPosition BitBoardSquare(BoardSquare);
+	bit::BitPosition BitPrevBoardSquare(PreviousBoardSquare);
+
+	auto Pawns = BitBoardSquare.ColorPositions[ZeroIfWhite] & BitBoardSquare.PiecePositions[PAWN - 1];
+	auto PrevPawns = BitPrevBoardSquare.ColorPositions[ZeroIfWhite] & BitPrevBoardSquare.PiecePositions[PAWN - 1];
+
+	auto StartRank = RANK_2 << (ZeroIfWhite * 40);
+	auto DoubleForwardRank = RANK_4 << (ZeroIfWhite * 8);
+	
+	//TODO: maybe rewrite, think more about how we could know when there is and en passant file and relative bugs
+	if (((Pawns.ReadBits() & StartRank) != (PrevPawns.ReadBits() & StartRank))
+		and ((Pawns.ReadBits() & DoubleForwardRank) != (PrevPawns.ReadBits() & DoubleForwardRank)))
+	{
+
 	}
 }
 

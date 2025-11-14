@@ -25,7 +25,7 @@ GenerateLegalMoves::GenerateLegalMoves(const bit::Position& Position, bool Pseud
 GenerateLegalMoves::GenerateLegalMoves(const Position& Position, bool PseudoLegalFlag)
 {
 	//converts from array to bitboard
-	ChessPosition = {Position.BoardSquare, Position.PrevBoardSquare, Position.CanCastle, Position.MoveNum};
+	ChessPosition = {Position.BoardSquare, Position.CanCastle, Position.MoveNum, Position.EnPassant };
 
 	isNextMoveForWhite = WHITE_TURN(Position.MoveNum);
 	ZeroIfWhite = !isNextMoveForWhite;
@@ -346,7 +346,6 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 		else
 			CheckTargetSquares[std::countr_zero(KingSquare)] = BoardSquarePos;
 	}
-
 
 
 }
