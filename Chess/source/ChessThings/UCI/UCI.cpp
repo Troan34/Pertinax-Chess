@@ -93,7 +93,7 @@ void UCI::RunCommand()
 			*Vars_p.CanCastle = board.GetCanCastle();
 			if (board.GetPawnMoveSquare() != 65)
 			{
-				*Vars_p.previousBoardSquare = Board::PrevBoardSquareFromEP(*Vars_p.BoardSquare, board.GetPawnMoveSquare());
+				Vars_p.EnPassant->SetEP(board.GetPawnMoveSquare() % 8 );
 			}
 
 		}
@@ -108,7 +108,7 @@ void UCI::RunCommand()
 					break;
 				Move move = Board::LongALG2Move(Command.substr(Index + 1, Command.find(' ', Index + 1) - Index - 1));
 				Index = Command.find(' ', Index + 1);//will overflow when it reaches the end
-				Board::MakeMove(move, *Vars_p.BoardSquare, *Vars_p.previousBoardSquare, *Vars_p.CanCastle);
+				Board::MakeMove(move, *Vars_p.BoardSquare, Vars_p.EnPassant->EPIndex(), *Vars_p.CanCastle);
 				*Vars_p.MoveNum += 1;
 			}
 		}
@@ -193,7 +193,7 @@ void UCI::Go()
 {
 	IsReady.store(false);
 
-	IterativeDeepening ID(Position{ *Vars_p.BoardSquare, *Vars_p.previousBoardSquare, *Vars_p.CanCastle, *(uint16_t*)(Vars_p.MoveNum) }, *Vars_p.SearchMoves, *Vars_p.HashSize, *Vars_p.timer, *Vars_p.depth, !((*Vars_p.MoveNum) % 2), &stop);
+	IterativeDeepening ID(Position{ *Vars_p.BoardSquare, *Vars_p.EnPassant, *Vars_p.CanCastle, *(uint16_t*)(Vars_p.MoveNum) }, *Vars_p.SearchMoves, *Vars_p.HashSize, *Vars_p.timer, *Vars_p.depth, !((*Vars_p.MoveNum) % 2), &stop);
 	std::string Bestmove = Board::Move2ALG(ID.GetBestMove(true));
 
 	while (Outputting.load()) { Sleep(1); }
@@ -207,14 +207,14 @@ void UCI::Go()
 	IsReady.store(true);
 }
 
-uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> perftPreviousBoardSquare, CastlingAbility CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int PerftMoveNum)
+uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, bit::EP EnPassant, CastlingAbility CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int PerftMoveNum)
 {
 	uint32_t NumOfMoves = 0;
 
-	GenerateLegalMoves LegalMoves(Position{ BoardSquare, perftPreviousBoardSquare, CanCastle, static_cast<uint16_t>(PerftMoveNum) }, false);
+	GenerateLegalMoves LegalMoves(Position{ BoardSquare, EnPassant, CanCastle, static_cast<uint16_t>(PerftMoveNum) }, false);
 
 	const auto ConstBoardSquare = BoardSquare;
-	const auto ConstPreviousBoardSquare = perftPreviousBoardSquare;
+	const auto ConstEnPassant = EnPassant;
 	const CastlingAbility ConstCanCastle = CanCastle;
 	uint8_t count = 0;
 
@@ -253,11 +253,11 @@ uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 						else
 							Move_.s_PromotionType = i + 10;
 
-						Board::MakeMove(Move_, BoardSquare, perftPreviousBoardSquare, CanCastle);
+						Board::MakeMove(Move_, BoardSquare, EnPassant.EPIndex(), CanCastle);
 						if (DivideFunON)
 						{
 							uint32_t DivideFunNum = 0;
-							DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+							DivideFunNum += Perft(BoardSquare, EnPassant, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
 							NumOfMoves += DivideFunNum;
 							if (IsWhite)
 								std::cout << +count << " " << +move << ": " << DivideFunNum << " to " << Board::PieceType2letter(i + 18) << '\n';
@@ -265,16 +265,16 @@ uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 								std::cout << +count << " " << +move << ": " << DivideFunNum << " to " << Board::PieceType2letter(i + 10) << '\n';
 						}
 						else
-							NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+							NumOfMoves += Perft(BoardSquare, EnPassant, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
 
-						BoardSquare = perftPreviousBoardSquare;
+						BoardSquare = ConstBoardSquare;
 					}
 				}
 
 				if (depth != 1)
 				{
 					BoardSquare = ConstBoardSquare;
-					perftPreviousBoardSquare = ConstPreviousBoardSquare;
+					EnPassant = ConstEnPassant;
 					CanCastle = ConstCanCastle;
 				}
 
@@ -296,19 +296,19 @@ uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t,
 			{
 				Move Move_(count, move);
 
-				Board::MakeMove(Move_, BoardSquare, perftPreviousBoardSquare, CanCastle);
+				Board::MakeMove(Move_, BoardSquare, EnPassant.EPIndex(), CanCastle);
 				if (DivideFunON)
 				{
 					uint32_t DivideFunNum = 0;
-					DivideFunNum += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum + 1);
+					DivideFunNum += Perft(BoardSquare, EnPassant, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum + 1);
 					NumOfMoves += DivideFunNum;
 					std::cout << +count << " " << +move << ": " << DivideFunNum << '\n';
 				}
 				else
-					NumOfMoves += Perft(BoardSquare, perftPreviousBoardSquare, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum + 1);
+					NumOfMoves += Perft(BoardSquare, EnPassant, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum + 1);
 
 				BoardSquare = ConstBoardSquare;
-				perftPreviousBoardSquare = ConstPreviousBoardSquare;
+				EnPassant = ConstEnPassant;
 				CanCastle = ConstCanCastle;
 			}
 		}

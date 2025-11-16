@@ -521,6 +521,7 @@ void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, std::array
 	*/
 }
 
+
 std::array<uint8_t, 64> Board::PrevBoardSquareFromEP(const std::array<uint8_t, 64>& BoardSquare, uint8_t EPBoardsquare)
 {
 	ASSERT(!(EPBoardsquare == 65));
@@ -569,10 +570,11 @@ uint8_t Board::PieceType2Compact(uint8_t PieceType)
 	}
 }
 
-bit::EP constexpr Board::PrevPosition2EP(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, bool ZeroIfWhite)
+bit::EP constexpr bit::EP::PrevPosition2EP(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, bool ZeroIfWhite)
 {
 	bit::BitPosition BitBoardSquare(BoardSquare);
 	bit::BitPosition BitPrevBoardSquare(PreviousBoardSquare);
+	bit::EP EnPassant;
 
 	auto Pawns = BitBoardSquare.ColorPositions[ZeroIfWhite] & BitBoardSquare.PiecePositions[PAWN - 1];
 	auto PrevPawns = BitPrevBoardSquare.ColorPositions[ZeroIfWhite] & BitPrevBoardSquare.PiecePositions[PAWN - 1];
@@ -580,11 +582,14 @@ bit::EP constexpr Board::PrevPosition2EP(const std::array<uint8_t, 64>& BoardSqu
 	auto StartRank = RANK_2 << (ZeroIfWhite * 40);
 	auto DoubleForwardRank = RANK_4 << (ZeroIfWhite * 8);
 	
-	//TODO: maybe rewrite, think more about how we could know when there is and en passant file and relative bugs
 	if (((Pawns.ReadBits() & StartRank) != (PrevPawns.ReadBits() & StartRank))
 		and ((Pawns.ReadBits() & DoubleForwardRank) != (PrevPawns.ReadBits() & DoubleForwardRank)))
 	{
-
+		if (std::countl_zero((Pawns.ReadBits() & StartRank) ^ (PrevPawns.ReadBits() & StartRank)) ==
+			std::countl_zero((Pawns.ReadBits() & DoubleForwardRank) ^ (PrevPawns.ReadBits() & DoubleForwardRank)))
+		{
+			EnPassant.SetEP(std::countl_zero((Pawns.ReadBits() & StartRank) ^ (PrevPawns.ReadBits() & StartRank)));
+		}
 	}
 }
 

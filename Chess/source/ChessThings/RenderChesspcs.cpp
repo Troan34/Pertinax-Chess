@@ -46,7 +46,7 @@ static void RunUCI()//this is a workaround
 	Vars_p.EngineOn = &EngineOn;
 	Vars_p.BoardSquare = &static_BoardSquare;
 	Vars_p.MoveNum = &MoveNum;
-	Vars_p.previousBoardSquare = &previousBoardsquare;
+	Vars_p.EnPassant = &Board::PrevPosition2EP(static_BoardSquare, previousBoardsquare, ZERO_IF_WHITE_TURN(MoveNum));
 	Vars_p.CanCastle = &CanCastle;
 	Vars_p.SearchMoves = &SearchMoves;
 	Vars_p.timer = &timer;
@@ -249,7 +249,8 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 		float yyDifference = 0.0f;
 		static_BoardSquare[BoardSquareBeingSelected] = GetPieceTypefromTexID(RememberTexID);
 
-		GenerateLegalMoves LegalMoves(Position{static_BoardSquare, previousBoardsquare, CanCastle, static_cast<uint16_t>(MoveNum)}, false);
+		GenerateLegalMoves LegalMoves(Position(static_BoardSquare, bit::EP::PrevPosition2EP(static_BoardSquare, previousBoardsquare, ZERO_IF_WHITE_TURN(MoveNum)), CanCastle, static_cast<uint16_t>(MoveNum)), false);
+
 		for (uint8_t j = 0; j <= MAX_SQUARE; j++)
 		{
 			if (LegalMoves.moves[BoardSquareBeingSelected].TargetSquares[j] == false) { continue; }
@@ -273,9 +274,9 @@ std::array<std::array<VertexStructure, 4Ui64>, 135> RenderChessPieces::CreateObj
 	if (WaitingForEnemyMove and EngineOn and !WaitingForUserPromotion)
 	{
 		bool stop = false;
-		IterativeDeepening ID(Position{ static_BoardSquare, previousBoardsquare, CanCastle, static_cast<uint16_t>(MoveNum) }, SearchMoves, HashSize, timer, EngineDepth, true, & stop);
+		IterativeDeepening ID(Position( static_BoardSquare, bit::EP::PrevPosition2EP(static_BoardSquare, previousBoardsquare, ZERO_IF_WHITE_TURN(MoveNum)), CanCastle, static_cast<uint16_t>(MoveNum) ), SearchMoves, HashSize, timer, EngineDepth, true, & stop);
 		Move BestMove = ID.GetBestMove(false);
-		GenerateLegalMoves LegalMoves(Position{ static_BoardSquare, previousBoardsquare, CanCastle, static_cast<uint16_t>(MoveNum) }, false);
+		GenerateLegalMoves LegalMoves(Position( static_BoardSquare, bit::EP::PrevPosition2EP(static_BoardSquare, previousBoardsquare, ZERO_IF_WHITE_TURN(MoveNum)), CanCastle, static_cast<uint16_t>(MoveNum) ), false);
 		MakeMove(LegalMoves, BestMove, static_BoardSquare, previousBoardsquare, CanCastle);
 		WaitingForEnemyMove = false;
 		MoveNum++;

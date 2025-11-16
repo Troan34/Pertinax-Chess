@@ -18,6 +18,10 @@
 #define WHITE_TURN(x) (!(x % 2))
 #endif
 
+#ifndef ZERO_IF_WHITE_TURN
+#define ZERO_IF_WHITE_TURN(x) (x % 2)
+#endif
+
 enum SQUARES
 {
 	a1, b1, c1, d1, e1, f1, g1, h1,
@@ -242,14 +246,6 @@ struct SearchResult
 	}
 };
 
-struct Position
-{
-	std::array<uint8_t, 64> BoardSquare;
-	bit::EP EnPassant;
-	CastlingAbility CanCastle;
-	uint16_t MoveNum;
-};
-
 class Board
 {
 private:
@@ -282,7 +278,7 @@ public:
 	static std::array<uint8_t, 64> PrevBoardSquareFromEP(const std::array<uint8_t, 64>& BoardSquare, uint8_t EPBoardsquare);
 	static std::string GetPrintableFromArrayOfMoves(const std::array<Move, MAX_PV_LENGTH>& Moves);
 	static uint8_t PieceType2Compact(uint8_t PieceType);
-	static bit::EP constexpr PrevPosition2EP(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, bool ZeroIfWhite);
+	
 };
 
 template<typename T> inline std::vector<T> GetVecTail(const std::vector<T>& Vec)
@@ -452,7 +448,7 @@ namespace bit//bit management
 			return (popcnt() == 0);
 		}
 
-		constexpr uint64_t ReadBits() const
+		constexpr inline uint64_t ReadBits() const
 		{
 			return Bits;
 		}
@@ -577,6 +573,8 @@ namespace bit//bit management
 				return std::countl_zero(EnPassant);
 			}
 		}
+
+		static bit::EP constexpr PrevPosition2EP(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, bool ZeroIfWhite);
 	};
 
 	struct Position
@@ -584,8 +582,17 @@ namespace bit//bit management
 		bit::BitPosition BoardSquare;
 		CastlingAbility CanCastle;
 		uint16_t MoveNum;
-		EP EnPassant;
+		bit::EP EnPassant;
 	};
 
 }
 
+struct Position
+{
+	std::array<uint8_t, 64> BoardSquare;
+	bit::EP EnPassant;
+	CastlingAbility CanCastle;
+	uint16_t MoveNum;
+	Position(){}
+	Position(std::array<uint8_t, 64> boardSquare, bit::EP enPassant, CastlingAbility canCastle, uint16_t moveNum) : BoardSquare(boardSquare), EnPassant(enPassant), CanCastle(canCastle), MoveNum(moveNum) {}
+};

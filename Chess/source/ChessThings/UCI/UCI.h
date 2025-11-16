@@ -37,7 +37,7 @@ struct UciVars_p
 	bool* EngineOn;
 	bool* GUI;
 	std::array<uint8_t, 64Ui64>* BoardSquare;
-	std::array<uint8_t, 64Ui64>* previousBoardSquare;//also used to 'simulate' an e.p. opportunity
+	bit::EP* EnPassant;
 	uint32_t* MoveNum;
 	CastlingAbility* CanCastle;
 	std::vector<Move>* SearchMoves;
@@ -63,5 +63,5 @@ private:
 public:
 
 	UCI(UciVars_p Vars);
-	static uint32_t Perft(std::array<uint8_t, 64Ui64> BoardSquare, std::array<uint8_t, 64> previousBoardSquare, CastlingAbility CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int PerftMoveNum);
+	static uint32_t Perft(std::array<uint8_t, 64Ui64> BoardSquare, bit::EP EnPassant, CastlingAbility CanCastle, bool isNextMoveForWhite, uint8_t depth, bool DivideFunON, unsigned int PerftMoveNum);
 };
