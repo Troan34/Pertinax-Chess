@@ -9,7 +9,7 @@ static uint8_t WhichFileHadEnPassant = 8; //8 for none
 
 
 ZobristHashing::ZobristHashing(const GenerateLegalMoves& LegalMoves, const Position& ChessPosition)
-	:m_BoardSquare(&ChessPosition.BoardSquare), m_LegalMoves(&LegalMoves), m_PreviousBoardSquare(&ChessPosition.PrevBoardSquare), m_CastleAbility(ChessPosition.CanCastle)
+	:m_BoardSquare(&ChessPosition.BoardSquare), m_LegalMoves(&LegalMoves), m_EnPassant(ChessPosition.EnPassant), m_CastleAbility(ChessPosition.CanCastle)
 {
 	m_SideToMove = WHITE_TURN(ChessPosition.MoveNum); // true for white, false for black
 	if (!Initialized)
@@ -164,7 +164,7 @@ void ZobristHashing::UpdateHash(Move Move_, const uint8_t& PieceType)
 	//white en passant
 	if (PieceType == WHITE_PAWN)
 	{
-		if (m_PreviousBoardSquare->at(Move_.s_Move) == 0)
+		if (FILE_FROM_SQUARE(Move_.s_Move) == m_EnPassant.EPIndex())
 		{
 			if (Move_.s_BoardSquare - Move_.s_Move == -7 or Move_.s_BoardSquare - Move_.s_Move == -9)
 			{
@@ -175,7 +175,7 @@ void ZobristHashing::UpdateHash(Move Move_, const uint8_t& PieceType)
 	//Black en passant
 	if (PieceType == BLACK_PAWN)
 	{
-		if (m_PreviousBoardSquare->at(Move_.s_Move) == 0)
+		if (FILE_FROM_SQUARE(Move_.s_Move) == m_EnPassant.EPIndex())
 		{
 			if (Move_.s_BoardSquare - Move_.s_Move == 7 or Move_.s_BoardSquare - Move_.s_Move == 9)
 			{

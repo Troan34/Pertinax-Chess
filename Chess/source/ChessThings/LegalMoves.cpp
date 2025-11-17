@@ -300,7 +300,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 
 	bit::BitBoard64 NoAttacks = ChessPosition.BoardSquare.ColorPositions[ZeroIfWhite];
 
-	bit::BitBoard64 PawnAttacks = PAWN_CAPTURES[ZeroIfWhite][BoardSquarePos];
+	moves[BoardSquarePos].TargetSquares = PAWN_CAPTURES[ZeroIfWhite][BoardSquarePos];
 
 
 	if (BoardSquarePos + ForwardAttacks[ZeroIfWhite] >= a8 or BoardSquarePos + ForwardAttacks[ZeroIfWhite] <= h1)
@@ -309,12 +309,12 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 	}
 	else if((BoardSquarePos >= a2 and BoardSquarePos <= h2) or (BoardSquarePos >= a7 and BoardSquarePos <= h7))
 	{
-		PawnAttacks[BoardSquarePos + ForwardAttacks[ZeroIfWhite]] = true;
-		PawnAttacks[BoardSquarePos + (ForwardAttacks[ZeroIfWhite] * 2)] = true;//we are in the 2nd or the 7th, so we are able to do double push
+		moves[BoardSquarePos].TargetSquares[BoardSquarePos + ForwardAttacks[ZeroIfWhite]] = true;
+		moves[BoardSquarePos].TargetSquares[BoardSquarePos + (ForwardAttacks[ZeroIfWhite] * 2)] = true;//we are in the 2nd or the 7th, so we are able to do double push
 	}
 	else
 	{
-		PawnAttacks[BoardSquarePos + ForwardAttacks[ZeroIfWhite]] = true;
+		moves[BoardSquarePos].TargetSquares[BoardSquarePos + ForwardAttacks[ZeroIfWhite]] = true;
 	}
 
 
@@ -335,7 +335,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 	}
 
 	//this is the bitboard of the king's position, if under attack
-	auto KingSquare = PawnAttacks.ReadBits()
+	auto KingSquare = moves[BoardSquarePos].TargetSquares.ReadBits()
 		& ChessPosition.BoardSquare.ColorPositions[isNextMoveForWhite] /*isNextMoveForWhite is the negation of zero if true*/
 		& ChessPosition.BoardSquare.PiecePositions[5];
 	//set Check

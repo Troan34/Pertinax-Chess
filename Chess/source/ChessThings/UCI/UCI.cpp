@@ -154,7 +154,7 @@ void UCI::RunCommand()
 				std::cout << "Wrong syntax: depth wasn't a digit\n" << std::endl;
 			}
 			uint8_t depthNum = std::stoi(depth);
-			auto result = Perft(*Vars_p.BoardSquare, *Vars_p.previousBoardSquare, *Vars_p.CanCastle, WHITE_TURN(*Vars_p.MoveNum), depthNum, true, *Vars_p.MoveNum);
+			auto result = Perft(*Vars_p.BoardSquare, *Vars_p.EnPassant, *Vars_p.CanCastle, WHITE_TURN(*Vars_p.MoveNum), depthNum, true, *Vars_p.MoveNum);
 			std::cout << "\nNodes searched: " << result << "\n\n";
 			RunGo = false;
 		}

@@ -27,6 +27,7 @@ static unsigned int MoveNum = 0;
 static CastlingAbility CanCastle;
 static std::array<uint8_t, 64Ui64> static_BoardSquare;
 static std::array<uint8_t, 64Ui64> previousBoardsquare{};
+static bit::EP EnPassant;
 static bool StartEngine = false;
 static bool GUI = false;
 static bool PreviousGuiOption = true;
@@ -46,7 +47,7 @@ static void RunUCI()//this is a workaround
 	Vars_p.EngineOn = &EngineOn;
 	Vars_p.BoardSquare = &static_BoardSquare;
 	Vars_p.MoveNum = &MoveNum;
-	Vars_p.EnPassant = &Board::PrevPosition2EP(static_BoardSquare, previousBoardsquare, ZERO_IF_WHITE_TURN(MoveNum));
+	Vars_p.EnPassant = &EnPassant;
 	Vars_p.CanCastle = &CanCastle;
 	Vars_p.SearchMoves = &SearchMoves;
 	Vars_p.timer = &timer;
@@ -770,13 +771,14 @@ void RenderChessPieces::CreatePerft(uint8_t PerftDepth)
 	auto perftBoardsquare = static_BoardSquare;
 	auto perftPreviousBoardsquare = previousBoardsquare;
 	auto Movenum = MoveNum;
+	auto perftEP = EnPassant;
 
 	bool isNextMoveForWhite = true;
 	if (Movenum % 2 != 0)
 		isNextMoveForWhite = false;
 
 	auto start = std::chrono::high_resolution_clock::now();
-	uint32_t result = UCI::Perft(perftBoardsquare, perftPreviousBoardsquare, perftCastle, isNextMoveForWhite, PerftDepth, true, Movenum);
+	uint32_t result = UCI::Perft(perftBoardsquare, perftEP, perftCastle, isNextMoveForWhite, PerftDepth, true, Movenum);
 	std::cout << "Nodes searched: " << result << '\n';
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
@@ -809,4 +811,5 @@ void RenderChessPieces::SetPrevBoardSquare_FEN_EP(const uint32_t& f_BoardSquare)
 	BS_copy[f_BoardSquare] = 0;
 	BS_copy[f_previousBoardSquare] = f_PieceType;
 	previousBoardsquare = BS_copy;
+	EnPassant = bit::EP::PrevPosition2EP(BS_copy, previousBoardsquare, ZERO_IF_WHITE_TURN(MoveNum));
 }

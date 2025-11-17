@@ -570,7 +570,7 @@ uint8_t Board::PieceType2Compact(uint8_t PieceType)
 	}
 }
 
-bit::EP constexpr bit::EP::PrevPosition2EP(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, bool ZeroIfWhite)
+bit::EP bit::EP::PrevPosition2EP(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, bool ZeroIfWhite)
 {
 	bit::BitPosition BitBoardSquare(BoardSquare);
 	bit::BitPosition BitPrevBoardSquare(PreviousBoardSquare);
@@ -591,6 +591,8 @@ bit::EP constexpr bit::EP::PrevPosition2EP(const std::array<uint8_t, 64>& BoardS
 			EnPassant.SetEP(std::countl_zero((Pawns.ReadBits() & StartRank) ^ (PrevPawns.ReadBits() & StartRank)));
 		}
 	}
+
+	return EnPassant;
 }
 
 //^^^ Board DEFINITIONS ^^^//

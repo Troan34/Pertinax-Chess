@@ -22,6 +22,10 @@
 #define ZERO_IF_WHITE_TURN(x) (x % 2)
 #endif
 
+#ifndef FILE_FROM_SQUARE
+#define FILE_FROM_SQUARE(x) (x % 8)
+#endif
+
 enum SQUARES
 {
 	a1, b1, c1, d1, e1, f1, g1, h1,
@@ -574,7 +578,7 @@ namespace bit//bit management
 			}
 		}
 
-		static bit::EP constexpr PrevPosition2EP(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, bool ZeroIfWhite);
+		static bit::EP PrevPosition2EP(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, bool ZeroIfWhite);
 	};
 
 	struct Position

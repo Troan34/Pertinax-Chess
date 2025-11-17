@@ -8,7 +8,7 @@ class ZobristHashing
 private:
    const GenerateLegalMoves* m_LegalMoves;
    const std::array<uint8_t, 64>* m_BoardSquare;
-   const std::array<uint8_t, 64>* m_PreviousBoardSquare;
+   const bit::EP m_EnPassant;
    const CastlingAbility m_CastleAbility;
    bool m_SideToMove = false; // true for white, false for black
 
