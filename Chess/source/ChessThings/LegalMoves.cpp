@@ -323,13 +323,13 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 		if (ChessPosition.EnPassant.ReadEp((BoardSquarePos % 8) - 1)) //left check
 		{
 			moves[BoardSquarePos].PieceType = PieceType;
-			moves[BoardSquarePos].TargetSquares.push_back(isNextMoveForWhite ? 7 : -7);
+			moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + isNextMoveForWhite ? 7 : -7);
 			EnPassantFiles[(BoardSquarePos % 8) - 1] = true;
 		}
 		else if (ChessPosition.EnPassant.ReadEp((BoardSquarePos % 8) + 1)) //right check
 		{
 			moves[BoardSquarePos].PieceType = PieceType;
-			moves[BoardSquarePos].TargetSquares.push_back(isNextMoveForWhite ? 9 : -9);
+			moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + isNextMoveForWhite ? 9 : -9);
 			EnPassantFiles[(BoardSquarePos % 8) + 1] = true;
 		}
 	}
@@ -347,7 +347,12 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 			CheckTargetSquares[std::countr_zero(KingSquare)] = BoardSquarePos;
 	}
 
+	AttackedSquares |= moves[BoardSquarePos].TargetSquares;
 
+	NoAttacks = ~NoAttacks;
+
+	moves[BoardSquarePos].TargetSquares &= NoAttacks;
+	
 }
 
 //King

@@ -176,30 +176,44 @@ static constexpr std::array<uint8_t, 64> BISHOP_SHIFTS = {
 static constexpr std::array<uint64_t, 64> ROOK_LEGAL_MASKS = ComputeRookMasks(true);
 static constexpr std::array<uint64_t, 64> BISHOP_LEGAL_MASKS = ComputeBishopMasks(true);
 
-consteval std::array<std::array<uint64_t, 64>, 2> ComputePawnAttacks()
+constexpr std::array<std::array<uint64_t, 64>, 2> ComputePawnAttacks()
 {
 	std::array<std::array<uint64_t, 64>, 2> PawnAttacks{};//0th is white, 1st is black
-	//highly inefficient but i don't care, it's consteval
-	for (uint8_t ColorIndex = 0; ColorIndex < 2; ColorIndex++)
+	PawnAttacks[0].fill(0);
+	PawnAttacks[1].fill(0);
+
+	//highly inefficient but i don't care, it's constexpr
+	for (uint8_t Square = 0; Square <= MAX_SQUARE; Square++)
 	{
-		std::array<int8_t, 2> Directions = { 7, 9 };
-		for (uint8_t Square = 0; Square < MAX_SQUARE; Square++)
+		if (NumOfSquaresUntilEdge[Square][offNW] > 0)
 		{
-			for (uint8_t Dir = 0; Dir < 2; Dir++)
-			{
-				if (NumOfSquaresUntilEdge[Square][NW] > 0)
-				{
-					PawnAttacks[ColorIndex][Square] |= 1ULL << (Square + Dir);
-				}
-			}
+			PawnAttacks[0][Square] |= 1ULL << (Square + 7);
 		}
-		Directions = { -9, -7 };
+		
+		if (NumOfSquaresUntilEdge[Square][offNE] > 0)
+		{
+			PawnAttacks[0][Square] |= 1ULL << (Square + 9);
+		}
 	}
+
+	for (uint8_t Square = 0; Square <= MAX_SQUARE; Square++)
+	{
+		if (NumOfSquaresUntilEdge[Square][offSW] > 0)
+		{
+			PawnAttacks[1][Square] |= 1ULL << (Square - 7);
+		}
+		
+		if (NumOfSquaresUntilEdge[Square][offSE] > 0)
+		{
+			PawnAttacks[1][Square] |= 1ULL << (Square - 9);
+		}
+	}
+
 	return PawnAttacks;
 }
 
 static constexpr std::array<int8_t, 2> ForwardAttacks{ 8, -8 };
-constexpr std::array<std::array<uint64_t, 64>, 2> PAWN_CAPTURES = ComputePawnAttacks();//0th white, does NOT include 'forward' attacks
+static std::array<std::array<uint64_t, 64>, 2> PAWN_CAPTURES{ ComputePawnAttacks() };//0th white, does NOT include 'forward' attacks
 
 /// <summary>Expands a compact bitboard representation into a full bitboard.</summary>
 /// <param name="bits">Compact blockers (technically the limit is 2^12, the fun may be used beyond it's limits)</param>

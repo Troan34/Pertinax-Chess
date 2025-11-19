@@ -35,7 +35,7 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(61,2
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(62,2): warning C4309: 'initializing': truncation of constant value
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(915,31): warning C4244: 'return': conversion from 'uint64_t' to 'uint16_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(920,31): warning C4244: 'return': conversion from 'uint64_t' to 'uint16_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(275,34): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(uint8_t)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
