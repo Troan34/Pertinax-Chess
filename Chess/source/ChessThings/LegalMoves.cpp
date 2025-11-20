@@ -298,10 +298,9 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 #endif
 	uint8_t PieceType = ChessPosition.BoardSquare[BoardSquarePos];
 
-	bit::BitBoard64 NoAttacks = ChessPosition.BoardSquare.ColorPositions[ZeroIfWhite];
+	moves[BoardSquarePos].PieceType = PieceType;
 
-	moves[BoardSquarePos].TargetSquares = PAWN_CAPTURES[ZeroIfWhite][BoardSquarePos];
-
+	AttackedSquares = AttackedSquares | PAWN_CAPTURES[ZeroIfWhite][BoardSquarePos];
 
 	if (BoardSquarePos + ForwardAttacks[ZeroIfWhite] >= a8 or BoardSquarePos + ForwardAttacks[ZeroIfWhite] <= h1)
 	{
@@ -317,19 +316,22 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 		moves[BoardSquarePos].TargetSquares[BoardSquarePos + ForwardAttacks[ZeroIfWhite]] = true;
 	}
 
+	moves[BoardSquarePos].TargetSquares = moves[BoardSquarePos].TargetSquares & ~(ChessPosition.BoardSquare.ColorPositions[0] & ChessPosition.BoardSquare.ColorPositions[1]);
+
+	bit::BitBoard64 NoAttacks = ~ChessPosition.BoardSquare.ColorPositions[!ZeroIfWhite];
+
+	moves[BoardSquarePos].TargetSquares = moves[BoardSquarePos].TargetSquares | (PAWN_CAPTURES[ZeroIfWhite][BoardSquarePos] & ~NoAttacks);
 
 	if ((BoardSquarePos <= 39 and BoardSquarePos >= 32) or (BoardSquarePos <= 31 and BoardSquarePos >= 24))//en passant
 	{
 		if (ChessPosition.EnPassant.ReadEp((BoardSquarePos % 8) - 1)) //left check
 		{
-			moves[BoardSquarePos].PieceType = PieceType;
-			moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + isNextMoveForWhite ? 7 : -7);
+			moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (isNextMoveForWhite ? 7 : -7));
 			EnPassantFiles[(BoardSquarePos % 8) - 1] = true;
 		}
 		else if (ChessPosition.EnPassant.ReadEp((BoardSquarePos % 8) + 1)) //right check
 		{
-			moves[BoardSquarePos].PieceType = PieceType;
-			moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + isNextMoveForWhite ? 9 : -9);
+			moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (isNextMoveForWhite ? 9 : -9));
 			EnPassantFiles[(BoardSquarePos % 8) + 1] = true;
 		}
 	}
@@ -346,12 +348,6 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 		else
 			CheckTargetSquares[std::countr_zero(KingSquare)] = BoardSquarePos;
 	}
-
-	AttackedSquares |= moves[BoardSquarePos].TargetSquares;
-
-	NoAttacks = ~NoAttacks;
-
-	moves[BoardSquarePos].TargetSquares &= NoAttacks;
 	
 }
 
