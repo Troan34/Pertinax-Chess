@@ -200,12 +200,12 @@ constexpr std::array<std::array<uint64_t, 64>, 2> ComputePawnAttacks()
 	{
 		if (NumOfSquaresUntilEdge[Square][offSW] > 0)
 		{
-			PawnAttacks[1][Square] |= 1ULL << (Square - 7);
+			PawnAttacks[1][Square] |= 1ULL << (Square - 9);
 		}
 		
 		if (NumOfSquaresUntilEdge[Square][offSE] > 0)
 		{
-			PawnAttacks[1][Square] |= 1ULL << (Square - 9);
+			PawnAttacks[1][Square] |= 1ULL << (Square - 7);
 		}
 	}
 
@@ -213,7 +213,7 @@ constexpr std::array<std::array<uint64_t, 64>, 2> ComputePawnAttacks()
 }
 
 static constexpr std::array<int8_t, 2> ForwardAttacks{ 8, -8 };
-static std::array<std::array<uint64_t, 64>, 2> PAWN_CAPTURES{ ComputePawnAttacks() };//0th white, does NOT include 'forward' attacks
+static constexpr std::array<std::array<uint64_t, 64>, 2> PAWN_CAPTURES{ ComputePawnAttacks() };//0th white, does NOT include 'forward' attacks
 
 /// <summary>Expands a compact bitboard representation into a full bitboard.</summary>
 /// <param name="bits">Compact blockers (technically the limit is 2^12, the fun may be used beyond it's limits)</param>

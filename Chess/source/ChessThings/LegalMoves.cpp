@@ -316,7 +316,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 		moves[BoardSquarePos].TargetSquares[BoardSquarePos + ForwardAttacks[ZeroIfWhite]] = true;
 	}
 
-	moves[BoardSquarePos].TargetSquares = moves[BoardSquarePos].TargetSquares & ~(ChessPosition.BoardSquare.ColorPositions[0] & ChessPosition.BoardSquare.ColorPositions[1]);
+	moves[BoardSquarePos].TargetSquares = moves[BoardSquarePos].TargetSquares & ~(ChessPosition.BoardSquare.ColorPositions[0] | ChessPosition.BoardSquare.ColorPositions[1]);
 
 	bit::BitBoard64 NoAttacks = ~ChessPosition.BoardSquare.ColorPositions[!ZeroIfWhite];
 
