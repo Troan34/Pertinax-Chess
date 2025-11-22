@@ -212,8 +212,28 @@ constexpr std::array<std::array<uint64_t, 64>, 2> ComputePawnAttacks()
 	return PawnAttacks;
 }
 
+constexpr std::array<bit::BitBoard64, 64> ComputeKingAttacks()
+{
+	std::array<bit::BitBoard64, 64> Attacks{ 0 };
+
+	for (uint8_t Square = 0; Square <= MAX_SQUARE; Square++)
+	{
+		for (uint8_t direction = 0; direction < 8; direction++)
+		{
+			if (NumOfSquaresUntilEdge[Square][direction] > 0)
+			{
+				Attacks[Square].SetToTrue(Square + OffsetForDirections[direction]);
+			}
+		}
+	}
+
+	return Attacks;
+}
+
+
 static constexpr std::array<int8_t, 2> ForwardAttacks{ 8, -8 };
 static constexpr std::array<std::array<uint64_t, 64>, 2> PAWN_CAPTURES{ ComputePawnAttacks() };//0th white, does NOT include 'forward' attacks
+static constexpr std::array<bit::BitBoard64, 64> KING_ATTACKS{ ComputeKingAttacks() };
 
 /// <summary>Expands a compact bitboard representation into a full bitboard.</summary>
 /// <param name="bits">Compact blockers (technically the limit is 2^12, the fun may be used beyond it's limits)</param>

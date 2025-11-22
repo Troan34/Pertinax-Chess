@@ -306,7 +306,8 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 	{
 		moves[BoardSquarePos].Promotion.SetPromotionSide(1, BoardSquarePos);
 	}
-	else if((BoardSquarePos >= a2 and BoardSquarePos <= h2) or (BoardSquarePos >= a7 and BoardSquarePos <= h7))
+	else if(((isNextMoveForWhite and BoardSquarePos >= a2 and BoardSquarePos <= h2) or (!isNextMoveForWhite and BoardSquarePos >= a7 and BoardSquarePos <= h7))
+		and (ChessPosition.BoardSquare[BoardSquarePos + ForwardAttacks[ZeroIfWhite]] == 0))
 	{
 		moves[BoardSquarePos].TargetSquares[BoardSquarePos + ForwardAttacks[ZeroIfWhite]] = true;
 		moves[BoardSquarePos].TargetSquares[BoardSquarePos + (ForwardAttacks[ZeroIfWhite] * 2)] = true;//we are in the 2nd or the 7th, so we are able to do double push
@@ -356,24 +357,10 @@ void GenerateLegalMoves::KingMoveGen(const uint8_t BoardSquarePos)
 {
 	uint8_t PieceType = ChessPosition.BoardSquare[BoardSquarePos];
 
-	for (uint8_t direction = 0; direction < 8; direction++)
-	{
-		if (NumOfSquaresUntilEdge[BoardSquarePos][direction] > 0)
-		{
-			AttackedSquares[BoardSquarePos + OffsetForDirections[direction]] = true;
-			if (ChessPosition.BoardSquare[BoardSquarePos + OffsetForDirections[direction]] == 0)
-			{
-				moves[BoardSquarePos].PieceType = PieceType;
-				moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + OffsetForDirections[direction]);
-				continue;
-			}
-			if (Board::IsPieceColorWhite(PieceType) != Board::IsPieceColorWhite(ChessPosition.BoardSquare[BoardSquarePos + OffsetForDirections[direction]]))
-			{
-				moves[BoardSquarePos].PieceType = PieceType;
-				moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + OffsetForDirections[direction]);
-			}
-		}
-	}
+	moves[BoardSquarePos].PieceType = PieceType;
+
+	moves[BoardSquarePos].TargetSquares = KING_ATTACKS[BoardSquarePos] & ~ChessPosition.BoardSquare.ColorPositions[ZeroIfWhite];
+
 	if (PieceType == WHITE_KING)//castling
 	{
 		if (ChessPosition.CanCastle.WhiteLong and ChessPosition.BoardSquare[1] == 0 and ChessPosition.BoardSquare[2] == 0 and ChessPosition.BoardSquare[3] == 0)

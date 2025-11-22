@@ -217,7 +217,7 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(61,2
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(62,2): warning C4309: 'initializing': truncation of constant value
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(916,31): warning C4244: 'return': conversion from 'uint64_t' to 'uint16_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(903,31): warning C4244: 'return': conversion from 'uint64_t' to 'uint16_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(275,34): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(uint8_t)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
@@ -398,9 +398,9 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.3520
   
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  8 of 3973 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    26 functions had inline decision re-evaluated but remain unchanged
+  131 of 3973 functions ( 3.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    61 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\vc120.pdb'; linking object as if no debug info
   Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Release\Chess.exe
