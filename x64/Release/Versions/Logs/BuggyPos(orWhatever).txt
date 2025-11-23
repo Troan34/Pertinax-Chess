@@ -1,1 +1,1 @@
-position fen 2Rn4/4NP2/p2p4/5Pk1/B7/KpB2P2/7p/1N1q4 w - - 0 1 moves c3a1 h2h1q c8c2 b3c2 a3b3 c2b1q
+position startpos moves a2a4 a7a6 a4a5 b7b5

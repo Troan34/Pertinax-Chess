@@ -26,6 +26,10 @@
 #define FILE_FROM_SQUARE(x) (x % 8)
 #endif
 
+#ifndef CHESS_VERSION
+#define CHESS_VERSION "0.2.18"
+#endif
+
 enum SQUARES
 {
 	a1, b1, c1, d1, e1, f1, g1, h1,

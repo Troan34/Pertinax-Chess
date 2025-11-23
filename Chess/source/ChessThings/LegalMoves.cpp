@@ -361,6 +361,8 @@ void GenerateLegalMoves::KingMoveGen(const uint8_t BoardSquarePos)
 
 	moves[BoardSquarePos].TargetSquares = KING_ATTACKS[BoardSquarePos] & ~ChessPosition.BoardSquare.ColorPositions[ZeroIfWhite];
 
+	AttackedSquares |= KING_ATTACKS[BoardSquarePos];
+
 	if (PieceType == WHITE_KING)//castling
 	{
 		if (ChessPosition.CanCastle.WhiteLong and ChessPosition.BoardSquare[1] == 0 and ChessPosition.BoardSquare[2] == 0 and ChessPosition.BoardSquare[3] == 0)
