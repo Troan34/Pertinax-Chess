@@ -291,47 +291,11 @@ struct PromotionByte
 {
 	uint8_t Promotion = 0;
 
-	void SetPromotionSide(uint8_t Side, uint8_t BoardSquare)
-	{
-		switch (Side)
-		{
-		case 0:
-			Promotion |= LeftPromotionMask;
-			break;
-		case 1:
-			Promotion |= CenterPromotionMask;
-			break;
-		case 2:
-			Promotion |= RightPromotionMask;
-			break;
-		default:
-			ASSERT(false);
-		}
-		Promotion |= BoardSquare << 3;
-	}
+	void SetPromotionSide(uint8_t Side, uint8_t BoardSquare);
 
-	void ResetPromotionSide(uint8_t Side, uint8_t BoardSquare)
-	{
-		switch (Side)
-		{
-		case 0:
-			Promotion |= LeftPromotionMask;
-			Promotion ^= LeftPromotionMask;
-			break;
-		case 1:
-			Promotion |= CenterPromotionMask;
-			Promotion ^= CenterPromotionMask;
-			break;
-		case 2:
-			Promotion |= RightPromotionMask;
-			Promotion ^= RightPromotionMask;
-			break;
-		default:
-			ASSERT(false);
-		}
-		Promotion |= BoardSquare << 3;
+	void ResetPromotionSide(uint8_t Side, uint8_t BoardSquare);
 
-	}
+	void SetPromotionByBits(uint8_t ThreeBits, uint8_t BoardSquare);
 
 };
 

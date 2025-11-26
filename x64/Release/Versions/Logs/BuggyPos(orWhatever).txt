@@ -1,1 +1,2 @@
 position startpos moves a2a4 a7a6 a4a5 b7b5
+position startpos moves g1h3 e7e6 c2c3 e6e5 d1b3 d7d6 b3b5 (e5f4?)

@@ -2,7 +2,7 @@
 	|
 	|_Perft it.
 
-Stop engine from repeating same moves (three-fold repetition)
+✅Stop engine from repeating same moves (three-fold repetition)
 
 ✅Check if we're doing the pv search correctly.
 

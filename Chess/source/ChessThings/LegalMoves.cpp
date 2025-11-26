@@ -302,11 +302,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 
 	AttackedSquares = AttackedSquares | PAWN_CAPTURES[ZeroIfWhite][BoardSquarePos];
 
-	if (BoardSquarePos + ForwardAttacks[ZeroIfWhite] >= a8 or BoardSquarePos + ForwardAttacks[ZeroIfWhite] <= h1)
-	{
-		moves[BoardSquarePos].Promotion.SetPromotionSide(1, BoardSquarePos);
-	}
-	else if(((isNextMoveForWhite and BoardSquarePos >= a2 and BoardSquarePos <= h2) or (!isNextMoveForWhite and BoardSquarePos >= a7 and BoardSquarePos <= h7))
+	if(((isNextMoveForWhite and BoardSquarePos >= a2 and BoardSquarePos <= h2) or (!isNextMoveForWhite and BoardSquarePos >= a7 and BoardSquarePos <= h7))
 		and (ChessPosition.BoardSquare[BoardSquarePos + ForwardAttacks[ZeroIfWhite]] == 0))
 	{
 		moves[BoardSquarePos].TargetSquares[BoardSquarePos + ForwardAttacks[ZeroIfWhite]] = true;
@@ -319,9 +315,18 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 
 	moves[BoardSquarePos].TargetSquares = moves[BoardSquarePos].TargetSquares & ~(ChessPosition.BoardSquare.ColorPositions[0] | ChessPosition.BoardSquare.ColorPositions[1]);
 
-	bit::BitBoard64 NoAttacks = ~ChessPosition.BoardSquare.ColorPositions[!ZeroIfWhite];
+	bit::BitBoard64 Capturable = ChessPosition.BoardSquare.ColorPositions[isNextMoveForWhite];
 
-	moves[BoardSquarePos].TargetSquares = moves[BoardSquarePos].TargetSquares | (PAWN_CAPTURES[ZeroIfWhite][BoardSquarePos] & ~NoAttacks);
+	moves[BoardSquarePos].TargetSquares = moves[BoardSquarePos].TargetSquares | (PAWN_CAPTURES[ZeroIfWhite][BoardSquarePos] & Capturable);
+
+	if (BoardSquarePos >= a7 and isNextMoveForWhite)
+	{
+		moves[BoardSquarePos].Promotion.SetPromotionByBits(moves[BoardSquarePos].TargetSquares.ReadBits() >> std::countr_zero(moves[BoardSquarePos].TargetSquares.ReadBits()), BoardSquarePos);//we slam the pawn attacks at the bottom
+	}
+	else if (BoardSquarePos <= h2 and !isNextMoveForWhite)
+	{
+		moves[BoardSquarePos].Promotion.SetPromotionByBits(moves[BoardSquarePos].TargetSquares.ReadBits() >> std::countr_zero(moves[BoardSquarePos].TargetSquares.ReadBits()), BoardSquarePos);
+	}
 
 	if ((BoardSquarePos <= 39 and BoardSquarePos >= 32) or (BoardSquarePos <= 31 and BoardSquarePos >= 24))//en passant
 	{
@@ -657,6 +662,8 @@ uint32_t GenerateLegalMoves::GetNumOfTacticalMoves() const
 }
 
 
+//^^^^^^ GenerateLegalMoves ^^^^^^^
+
 [[nodiscard]] bit::BitBoard64 AttacksTo(const bit::Position& ChessPosition, uint8_t SquarePos)
 {
 	auto IsWhite = WHITE_TURN(ChessPosition.MoveNum);
@@ -685,8 +692,56 @@ uint32_t GenerateLegalMoves::GetNumOfTacticalMoves() const
 	return Attackers;
 }
 
+void PromotionByte::SetPromotionSide(uint8_t Side, uint8_t BoardSquare)
+{
+	switch (Side)
+	{
+	case 0:
+		Promotion |= LeftPromotionMask;
+		break;
+	case 1:
+		Promotion |= CenterPromotionMask;
+		break;
+	case 2:
+		Promotion |= RightPromotionMask;
+		break;
+	default:
+		ASSERT(false);
+	}
+	Promotion |= BoardSquare << 3;
+}
 
-//^^^^^^ GenerateLegalMoves ^^^^^^^
+void PromotionByte::ResetPromotionSide(uint8_t Side, uint8_t BoardSquare)
+{
+	switch (Side)
+	{
+	case 0:
+		Promotion |= LeftPromotionMask;
+		Promotion ^= LeftPromotionMask;
+		break;
+	case 1:
+		Promotion |= CenterPromotionMask;
+		Promotion ^= CenterPromotionMask;
+		break;
+	case 2:
+		Promotion |= RightPromotionMask;
+		Promotion ^= RightPromotionMask;
+		break;
+	default:
+		ASSERT(false);
+	}
+	Promotion |= BoardSquare << 3;
+
+}
+
+void PromotionByte::SetPromotionByBits(uint8_t ThreeBits, uint8_t BoardSquare)
+{
+	Promotion |= BoardSquare << 3;
+#ifdef _DEBUG
+	ASSERT(ThreeBits < 8)
+#endif
+	Promotion |= ThreeBits;
+}
 
 #ifndef ROOKS_HAVE_BEEN_PRECOMPUTED
 #ifndef BISHOPS_HAVE_BEEN_PRECOMPUTED

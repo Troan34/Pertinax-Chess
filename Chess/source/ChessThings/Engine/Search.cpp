@@ -211,7 +211,7 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash
 	}
 
 	ChessPosition.EnPassant.Reset();
-	if (abs(Move_.s_BoardSquare - Move_.s_Move) == 16 and Board::GetPieceType2Uncolored(ChessPosition.BoardSquare[Move_.s_BoardSquare]))//double push
+	if (abs(Move_.s_BoardSquare - Move_.s_Move) == 16 and Board::GetPieceType2Uncolored(ChessPosition.BoardSquare[Move_.s_BoardSquare]) == PAWN)//double push
 	{
 		ChessPosition.EnPassant.SetEP(Move_.s_BoardSquare % 8);
 	}
