@@ -27,7 +27,7 @@
 #endif
 
 #ifndef CHESS_VERSION
-#define CHESS_VERSION "0.2.18"
+#define CHESS_VERSION "0.3"
 #endif
 
 enum SQUARES
@@ -281,7 +281,7 @@ public:
 	static char PieceType2letter(const uint8_t& PieceType);
 	static void WillCanCastleChange(const uint8_t BoardSquareItMovedFrom, CastlingAbility& Castle);
 	static bool WillCanCastleChange(const uint8_t& PieceTypeThatMoved, const uint8_t BoardSquareItMovedFrom, const uint8_t BoardSquareItMovedTo);
-	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t EnpassantIndex, CastlingAbility Castle);
+	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t EnpassantIndex, CastlingAbility& Castle);
 	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, std::array<uint8_t, 64>& previousBoardSquare, CastlingAbility& Castle);
 	static std::array<uint8_t, 64> PrevBoardSquareFromEP(const std::array<uint8_t, 64>& BoardSquare, uint8_t EPBoardsquare);
 	static std::string GetPrintableFromArrayOfMoves(const std::array<Move, MAX_PV_LENGTH>& Moves);

@@ -416,13 +416,20 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 		{
 			if (CheckingSquare == NULL_OPTION)
 			{
-				CheckingSquare = Square;
-				NumberOfChecks++;
+				if(CheckingSquare != Square)
+				{
+					CheckingSquare = Square;
+					NumberOfChecks++;
+				}
+				
 			}
 			else if (CheckingSquare != Square)
 			{
-				CheckingSquare2 = Square;
-				NumberOfChecks++;
+				if (CheckingSquare2 != Square)
+				{
+					CheckingSquare2 = Square;
+					NumberOfChecks++;
+				}
 			}
 		}
 	}
@@ -443,6 +450,7 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 				if (Piece.PieceType != ChessPosition.BoardSquare[BoardSquareOfKingToMove])
 				{
 					Piece.TargetSquares.clear();
+					Piece.Promotion.Promotion = 0;
 				}
 			}
 		}
@@ -518,12 +526,12 @@ void GenerateLegalMoves::RemoveIllegalMoves()
 						//if move is an en passant add +-8 to move
 						if ((Piece.PieceType == BLACK_PAWN or Piece.PieceType == WHITE_PAWN) and (abs(count - Move) == NW or abs(count - Move) == NE) and ChessPosition.BoardSquare[Move] == 0)
 						{
-							Piece.PieceType == WHITE_PAWN ? Move -= 8 : Move += 8;
+							(Piece.PieceType == WHITE_PAWN) ? Move -= 8 : Move += 8;
 						}
 
 						if (NumberOfChecks == 1)
 						{
-							//checks if Move neither captures piece nor doesn't block check
+							//checks if Move neither captures piece nor blocks check
 							if (Move != CheckingSquare and OppositeMoves.CheckTargetSquares[Move] != CheckingSquare)
 							{
 								Piece.TargetSquares[Move] = false;

@@ -189,6 +189,52 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash
 
 	}
 
+	switch (Move_.s_BoardSquare)
+	{
+	case a1:
+		ChessPosition.CanCastle.WhiteLong = false;
+		break;
+	case h1:
+		ChessPosition.CanCastle.WhiteShort = false;
+		break;
+	case e1:
+		ChessPosition.CanCastle.WhiteLong = false;
+		ChessPosition.CanCastle.WhiteShort = false;
+		break;
+	case a8:
+		ChessPosition.CanCastle.BlackLong = false;
+		break;
+	case h8:
+		ChessPosition.CanCastle.BlackShort = false;
+		break;
+	case e8:
+		ChessPosition.CanCastle.BlackLong = false;
+		ChessPosition.CanCastle.BlackShort = false;
+		break;
+	}
+	switch (Move_.s_Move)
+	{
+	case a1:
+		ChessPosition.CanCastle.WhiteLong = false;
+		break;
+	case h1:
+		ChessPosition.CanCastle.WhiteShort = false;
+		break;
+	case e1:
+		ChessPosition.CanCastle.WhiteLong = false;
+		ChessPosition.CanCastle.WhiteShort = false;
+		break;
+	case a8:
+		ChessPosition.CanCastle.BlackLong = false;
+		break;
+	case h8:
+		ChessPosition.CanCastle.BlackShort = false;
+		break;
+	case e8:
+		ChessPosition.CanCastle.BlackLong = false;
+		ChessPosition.CanCastle.BlackShort = false;
+		break;
+	}
 
 	//promoting and en passant
 	if (Move_.s_PromotionType != NULL_OPTION)

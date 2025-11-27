@@ -257,7 +257,7 @@ uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, bit::EP EnPassant, 
 						if (DivideFunON)
 						{
 							uint32_t DivideFunNum = 0;
-							DivideFunNum += Perft(BoardSquare, EnPassant, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+							DivideFunNum += Perft(BoardSquare, EnPassant, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum + 1);
 							NumOfMoves += DivideFunNum;
 							if (IsWhite)
 								std::cout << +count << " " << +move << ": " << DivideFunNum << " to " << Board::PieceType2letter(i + 18) << '\n';
@@ -265,7 +265,7 @@ uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, bit::EP EnPassant, 
 								std::cout << +count << " " << +move << ": " << DivideFunNum << " to " << Board::PieceType2letter(i + 10) << '\n';
 						}
 						else
-							NumOfMoves += Perft(BoardSquare, EnPassant, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum);
+							NumOfMoves += Perft(BoardSquare, EnPassant, CanCastle, !isNextMoveForWhite, depth - 1, false, PerftMoveNum + 1);
 
 						BoardSquare = ConstBoardSquare;
 					}

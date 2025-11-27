@@ -223,7 +223,7 @@ std::string Board::Move2ALG(Move move)
 	ALG += row;
 	if (move.s_PromotionType != 65)
 	{
-		ALG += PieceType2letter(move.s_PromotionType);//This is some traduction gibberish for UCI
+		ALG += PieceType2letter(Board::GetPieceType2Uncolored(move.s_PromotionType) + 8);//This is some traduction gibberish for UCI
 	}
 
 	return ALG;
@@ -340,7 +340,7 @@ bool Board::WillCanCastleChange(const uint8_t& PieceType, const uint8_t BoardSqu
 	return false;
 }
 
-void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t EnpassantIndex, CastlingAbility Castle)
+void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t EnpassantIndex, CastlingAbility& Castle)
 {
 	Board::WillCanCastleChange(move.s_BoardSquare, Castle);
 	BoardSquare[move.s_Move] = BoardSquare[move.s_BoardSquare];
@@ -389,6 +389,53 @@ void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t En
 			}
 		}
 
+	}
+
+	switch (move.s_BoardSquare)
+	{
+	case a1:
+		Castle.WhiteLong = false;
+		break;
+	case h1:
+		Castle.WhiteShort = false;
+		break;
+	case e1:
+		Castle.WhiteLong = false;
+		Castle.WhiteShort = false;
+		break;
+	case a8:
+		Castle.BlackLong = false;
+		break;
+	case h8:
+		Castle.BlackShort = false;
+		break;
+	case e8:
+		Castle.BlackLong = false;
+		Castle.BlackShort = false;
+		break;
+	}
+	switch (move.s_Move)
+	{
+	case a1:
+		Castle.WhiteLong = false;
+		break;
+	case h1:
+		Castle.WhiteShort = false;
+		break;
+	case e1:
+		Castle.WhiteLong = false;
+		Castle.WhiteShort = false;
+		break;
+	case a8:
+		Castle.BlackLong = false;
+		break;
+	case h8:
+		Castle.BlackShort = false;
+		break;
+	case e8:
+		Castle.BlackLong = false;
+		Castle.BlackShort = false;
+		break;
 	}
 
 	//promoting and en passant
