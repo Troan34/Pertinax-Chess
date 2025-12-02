@@ -672,6 +672,12 @@ uint32_t GenerateLegalMoves::GetNumOfTacticalMoves() const
 
 //^^^^^^ GenerateLegalMoves ^^^^^^^
 
+/// <summary>
+/// Find all pieces that are attacking a given square, does not take in consideration legality
+/// </summary>
+/// <param name="ChessPosition">The current position</param>
+/// <param name="SquarePos">The attacked square</param>
+/// <returns>A bitboard with the pieces attacking us</returns>
 [[nodiscard]] bit::BitBoard64 AttacksTo(const bit::Position& ChessPosition, uint8_t SquarePos)
 {
 	auto IsWhite = WHITE_TURN(ChessPosition.MoveNum);
@@ -688,14 +694,11 @@ uint32_t GenerateLegalMoves::GetNumOfTacticalMoves() const
 
 	Attackers = RookAttack | BishopAttack;
 
-	//In this section we fake being a knight
+	//In this section we fake being different pieces to see who is attacking us
 	Attackers |= KnightTable[SquarePos];
+	Attackers |= static_cast<bit::BitBoard64>(PAWN_CAPTURES[IsWhite][SquarePos]);
 
-	//In this section we fake being a pawn
-
-
-
-	Attackers &= ChessPosition.BoardSquare.ColorPositions[IsWhite];//Remove anything that isn't an opposite piece
+	Attackers &= ChessPosition.BoardSquare.ColorPositions[IsWhite] | ~(ChessPosition.BoardSquare.ColorPositions[0] & ChessPosition.BoardSquare.ColorPositions[1]);//Remove anything that isn't an opposite piece or empty square
 
 	return Attackers;
 }

@@ -6,4 +6,4 @@ x64/Release/Chess.pdb
 *.ipch
 *.ipch
 dumps
-x64/Release/Versions/Logs
+/x64/Release/Versions/Logs

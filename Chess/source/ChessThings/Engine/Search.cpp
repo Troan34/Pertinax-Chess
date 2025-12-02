@@ -51,7 +51,7 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, Position ChessPosition, uint8_t 
 	NodesVisited++;
 
 	GenerateLegalMoves LegalMoves(ChessPosition, false);
-	if (LegalMoves.isItCheckmate == true) [[unlikely]]
+	if (LegalMoves.isItCheckmate == true)
 	{
 		return -INT32_MAX;
 	}

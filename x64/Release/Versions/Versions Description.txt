@@ -24,4 +24,4 @@ Pertinax 0.2.16.2:	Bug fix. (+300 elo)
 Pertinax 0.2.17:	Bug fix with the knights table being empty (Hasn't gone well, crashes way more)
 Pertinax 0.2.17.2:	Bug fixes, fixed 0.2.17 bug and a few others. (+AShitLoadOf elo on 0.2.17, +300 elo on 0.2.16.2)
 
-Pertinax 0.3:		Tabled move generation for all pieces, bug fixes. (+> 50 elo, to be tested throughly)
+Pertinax 0.3:		Tabled move generation for all pieces, bug fixes. (+70/100 elo/nElo, to be tested throughly)
