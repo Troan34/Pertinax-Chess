@@ -617,11 +617,11 @@ uint8_t Board::PieceType2Compact(uint8_t PieceType)
 	}
 }
 
-bit::EP bit::EP::PrevPosition2EP(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, bool ZeroIfWhite)
+EP EP::PrevPosition2EP(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, bool ZeroIfWhite)
 {
 	bit::BitPosition BitBoardSquare(BoardSquare);
 	bit::BitPosition BitPrevBoardSquare(PreviousBoardSquare);
-	bit::EP EnPassant;
+	EP EnPassant;
 
 	auto Pawns = BitBoardSquare.ColorPositions[ZeroIfWhite] & BitBoardSquare.PiecePositions[PAWN - 1];
 	auto PrevPawns = BitPrevBoardSquare.ColorPositions[ZeroIfWhite] & BitPrevBoardSquare.PiecePositions[PAWN - 1];
@@ -681,7 +681,7 @@ namespace bit {
 			a[m_Index] = false;//removes any piece that occupied the slot
 		}
 
-		m_Positions[Board::GetPieceType2Uncolored(PieceType)][m_Index] = true;
+		m_Positions[Board::GetPieceType2Uncolored(PieceType) - 1][m_Index] = true;
 
 		return *this;
 	}
@@ -773,6 +773,18 @@ namespace bit {
 	}
 
 
+	Position::Position()
+	{
+		MoveNum = 0;
+	}
+
+	Position::Position(::Position OldPosition)
+		: BoardSquare(bit::BitPosition(OldPosition.BoardSquare)),
+		CanCastle(OldPosition.CanCastle),
+		MoveNum(OldPosition.MoveNum),
+		EnPassant(OldPosition.EnPassant)
+	{
+	}
 }
 
 

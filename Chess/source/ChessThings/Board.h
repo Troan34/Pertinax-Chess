@@ -27,7 +27,7 @@
 #endif
 
 #ifndef CHESS_VERSION
-#define CHESS_VERSION "0.3"
+#define CHESS_VERSION "0.3.1"
 #endif
 
 enum SQUARES
@@ -328,6 +328,48 @@ inline bool IsStringANum(std::string& String)
 	return true;
 }
 
+class EP
+{
+private:
+	uint8_t EnPassant = 0;
+
+public:
+
+	inline void SetEP(uint8_t File)
+	{
+		EnPassant |= (1ULL << File);
+	}
+
+	inline void Reset() { EnPassant = 0; }
+
+	inline bool ReadEp(uint8_t File) const { return EnPassant & (0x10 >> File); }
+
+	//returns NULL_OPTION if EP is empty
+	inline uint8_t EPIndex() const
+	{
+		if (EnPassant == 0) [[likely]]
+		{
+			return NULL_OPTION;
+		}
+		else
+		{
+			return std::countl_zero(EnPassant);
+		}
+	}
+
+	static EP PrevPosition2EP(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, bool ZeroIfWhite);
+};
+
+struct Position
+{
+	std::array<uint8_t, 64> BoardSquare;
+	EP EnPassant;
+	CastlingAbility CanCastle;
+	uint16_t MoveNum;
+	Position() {}
+	Position(std::array<uint8_t, 64> boardSquare, EP enPassant, CastlingAbility canCastle, uint16_t moveNum) : BoardSquare(boardSquare), EnPassant(enPassant), CanCastle(canCastle), MoveNum(moveNum) {}
+};
+
 namespace bit//bit management
 {
 
@@ -553,54 +595,20 @@ namespace bit//bit management
 
 	};
 
-	class EP
-	{
-	private:
-		uint8_t EnPassant = 0;
-
-	public:
-
-		inline void SetEP(uint8_t File)
-		{
-			EnPassant |= (1ULL << File);
-		}
-
-		inline void Reset() { EnPassant = 0; }
-
-		inline bool ReadEp(uint8_t File) const { return EnPassant & (0x10 >> File); }
-
-		//returns NULL_OPTION if EP is empty
-		inline uint8_t EPIndex() const
-		{
-			if (EnPassant == 0)[[likely]]
-			{
-				return NULL_OPTION;
-			}
-			else
-			{
-				return std::countl_zero(EnPassant);
-			}
-		}
-
-		static bit::EP PrevPosition2EP(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, bool ZeroIfWhite);
-	};
+	
 
 	struct Position
 	{
+		Position();
+		Position(::Position OldPosition);
+		Position(bit::BitPosition BoardSquare_, CastlingAbility CanCastle_, uint16_t MoveNum_, EP EnPassant_)
+			: BoardSquare(BoardSquare_), CanCastle(CanCastle_), MoveNum(MoveNum_), EnPassant(EnPassant_) {}
+
 		bit::BitPosition BoardSquare;
 		CastlingAbility CanCastle;
 		uint16_t MoveNum;
-		bit::EP EnPassant;
+		EP EnPassant;
 	};
 
 }
 
-struct Position
-{
-	std::array<uint8_t, 64> BoardSquare;
-	bit::EP EnPassant;
-	CastlingAbility CanCastle;
-	uint16_t MoveNum;
-	Position(){}
-	Position(std::array<uint8_t, 64> boardSquare, bit::EP enPassant, CastlingAbility canCastle, uint16_t moveNum) : BoardSquare(boardSquare), EnPassant(enPassant), CanCastle(canCastle), MoveNum(moveNum) {}
-};

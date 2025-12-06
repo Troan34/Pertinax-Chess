@@ -58,7 +58,7 @@ void TranspositionTable::AddEntry(Move BestMove, int32_t Eval, uint8_t Depth, ui
 	//std::println("Storing TT entry: \nHash={}\nDepth={}\nEval={}\nBound={}\nMove={}", Hash, Depth + '0', Eval, GetBound(Entry.AgeBound) + '0', Board::Move2ALG(BestMove));
 }
 
-void TranspositionTable::AgeIncrementOnNewSearch() { CurrentAge += AGE_DELTA; }
+void TranspositionTable::AgeIncrementOnNewDepth() { CurrentAge += AGE_DELTA; }
 
 size_t TranspositionTable::GetTTSize() const
 {

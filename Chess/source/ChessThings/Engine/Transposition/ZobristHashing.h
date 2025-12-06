@@ -7,8 +7,8 @@ class ZobristHashing
 {  
 private:
    const GenerateLegalMoves* m_LegalMoves;
-   const std::array<uint8_t, 64>* m_BoardSquare;
-   const bit::EP m_EnPassant;
+   const bit::BitPosition* m_BoardSquare;
+   const EP m_EnPassant;
    const CastlingAbility m_CastleAbility;
    bool m_SideToMove = false; // true for white, false for black
 
@@ -18,7 +18,7 @@ private:
 public:
     uint64_t Hash = 0; // current hash
 
-    ZobristHashing(const GenerateLegalMoves& LegalMoves, const Position& ChessPosition);
+    ZobristHashing(const GenerateLegalMoves& LegalMoves, const bit::Position& ChessPosition);
     void UpdateHash(Move Move_, const uint8_t& PieceType);
 
 };  

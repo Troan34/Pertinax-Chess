@@ -10,7 +10,7 @@
 
 class Search {
 private:
-	const Position m_ChessPosition;
+	const bit::Position m_ChessPosition;
 	const uint8_t m_depth;
 	const std::vector<Move> m_SearchMoves; //Moves selected by go
 	size_t HashSize;
@@ -20,13 +20,13 @@ private:
 	uint64_t Cutoffs = 0;
 	uint64_t TThits = 0;
 
-	int32_t NegaMax(ZobristHashing& m_Hash, Position ChessPosition, uint8_t depth, int32_t alpha, int32_t beta, pv_line* PVLine);
+	int32_t NegaMax(ZobristHashing& m_Hash, bit::Position ChessPosition, uint8_t depth, int32_t alpha, int32_t beta, pv_line* PVLine);
 
 	//the double definitions are for the quiet versions
-	void MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash, const Move Move_, Position& ChessPosition);
+	void MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash, const Move Move_, bit::Position& ChessPosition);
 	void QMakeMove(const GenerateLegalMoves& LegalMoves, const Move Move_, Position& ChessPosition);
 	//218 is the maximum amount of legal moves for a position
-	void OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& fun_BoardSquare, GuessStruct* GuessedOrder, uint8_t depth);
+	void OrderMoves(const GenerateLegalMoves& LegalMoves, const bit::BitPosition& fun_BoardSquare, GuessStruct* GuessedOrder, uint8_t depth);
 	void QOrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& fun_BoardSquare, GuessStruct* GuessedOrder, uint32_t NumOfTacticalMoves);
 
 	int32_t QuietSearch(Position ChessPosition, int32_t alpha, int32_t beta);

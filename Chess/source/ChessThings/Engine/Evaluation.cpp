@@ -1,5 +1,5 @@
 #include "Evaluation.h"
-//Michniewski's tables (let's not reinvent the wheel)
+//Michniewski's tables
 static constexpr std::array<int8_t, 64> WHITE_PAWN_PST = {
 	0,  0,  0,  0,  0,  0,  0,  0,
 	50, 50, 50, 50, 50, 50, 50, 50,
@@ -147,14 +147,11 @@ Evaluator::Evaluator(const GenerateLegalMoves& LegalMoves)
 
 }
 
-void Evaluator::SetParameters(const Position& f_ChessPosition)
+void Evaluator::SetParameters(const bit::Position& f_ChessPosition)
 {
 	ChessPosition = f_ChessPosition;
 	
-	for (uint8_t i = 0; i < MAX_SQUARE; i++)
-	{
-		NumOfPieces += (bool)ChessPosition.BoardSquare[i];
-	}
+	NumOfPieces += ChessPosition.BoardSquare.popcnt();
 }
 
 
@@ -169,19 +166,14 @@ int Evaluator::Evaluate()
 int32_t Evaluator::BoardMatValue()
 {
 	int32_t MatEval = 0;
-	
-	for (const auto& Piece : ChessPosition.BoardSquare)
+
+	for (uint8_t PieceType = PAWN; PieceType <= KING; PieceType++)
 	{
-		if (Piece == 0)
-			continue;
-		if (Board::IsPieceColorWhite(Piece))
-		{
-			MatEval += ConvertPieceTypeToMatValue(Piece);
-		}
-		else
-		{
-			MatEval -= ConvertPieceTypeToMatValue(Piece);
-		}
+		MatEval += (ConvertPieceTypeToMatValue(PieceType) *
+			(ChessPosition.BoardSquare.ColorPositions[0] | ChessPosition.BoardSquare.PiecePositions[PieceType - 1]).popcnt());
+
+		MatEval -= (ConvertPieceTypeToMatValue(PieceType) *
+			(ChessPosition.BoardSquare.ColorPositions[1] | ChessPosition.BoardSquare.PiecePositions[PieceType - 1]).popcnt());
 	}
 
 	return MatEval;
@@ -190,80 +182,63 @@ int32_t Evaluator::BoardMatValue()
 int32_t Evaluator::MobilityEval()
 {
 	int32_t MobilityEval = 0;
-	for (uint8_t i = 0; i != 64; ++i)
-	{
-		if (ChessPosition.BoardSquare[i] == 0)
-			continue;
-		if (Board::IsPieceColorWhite(ChessPosition.BoardSquare[i]))
-		{
-			MobilityEval += m_LegalMoves.m_NumOfLegalMoves * 0.1;
-		}
-		else
-		{
-			MobilityEval -= m_LegalMoves.m_NumOfLegalMoves * 0.1;
-		}
-	}
-	return MobilityEval;
+
+	MobilityEval += (m_LegalMoves.AttackedSquares & (~ChessPosition.BoardSquare.ColorPositions[0])).popcnt();
+	MobilityEval += (m_LegalMoves.OppositeAttackedSquares & (~ChessPosition.BoardSquare.ColorPositions[1])).popcnt();
+
+	return MobilityEval * 0.1f;
 }
 
 int32_t Evaluator::PieceSquareEval() const
 {
-	int32_t Evaluation = 0;
-	float LateWeight;
-	for (uint8_t Square = 0; Square <= MAX_SQUARE; Square++)
-	{
-		switch (ChessPosition.BoardSquare[Square])
-		{
-		case NONE:
-			break;
-		case WHITE_PAWN:
-			Evaluation += WHITE_PAWN_PST[Square];
-			break;
-		case BLACK_PAWN:
-			Evaluation -= BLACK_PAWN_PST[Square];
-			break;
-		case WHITE_BISHOP:
-			Evaluation += WHITE_BISHOP_PST[Square];
-			break;
-		case BLACK_BISHOP:
-			Evaluation -= BLACK_BISHOP_PST[Square];
-			break;
-		case WHITE_ROOK:
-			Evaluation += WHITE_ROOK_PST[Square];
-			break;
-		case BLACK_ROOK:
-			Evaluation -= BLACK_ROOK_PST[Square];
-			break;
-		case WHITE_KNIGHT:
-			Evaluation += WHITE_KNIGHT_PST[Square];
-			break;
-		case BLACK_KNIGHT:
-			Evaluation -= BLACK_KNIGHT_PST[Square];
-			break;
-		case WHITE_QUEEN:
-			Evaluation += WHITE_QUEEN_PST[Square];
-			break;
-		case BLACK_QUEEN:
-			Evaluation -= BLACK_QUEEN_PST[Square];
-			break;
-		case WHITE_KING:
-		{
-			LateWeight = 1.f - (NumOfPieces/36.f);
-			Evaluation += WHITE_KING_MIDDLE_PST[Square] * (1.f - LateWeight);
-			Evaluation += WHITE_KING_LATE_PST[Square] * LateWeight;
-			break;
-		}
-		case BLACK_KING:
-			LateWeight = 1.f - (NumOfPieces / 36.f);
-			Evaluation -= BLACK_KING_MIDDLE_PST[Square] * (1.f - LateWeight);
-			Evaluation -= BLACK_KING_LATE_PST[Square] * LateWeight;
-			break;
-		default:
-			__debugbreak();//something is fucked up
-			break;
-		}
-	}
+    int32_t Evaluation = 0;
 
-	return Evaluation;
+    float LateWeight = 1.f - (NumOfPieces / 36.f);
+
+    bit::BitBoard64 bits = 0;
+    uint8_t Index = 0;
+
+
+    // Pawns
+    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[PAWN - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[0];
+    while (bit::pop_lsb(bits, Index)) { Evaluation += WHITE_PAWN_PST[Index]; }
+    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[PAWN - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[1];
+    while (bit::pop_lsb(bits, Index)) { Evaluation -= BLACK_PAWN_PST[Index]; }
+
+    // Bishops
+    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[BISHOP - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[0];
+    while (bit::pop_lsb(bits, Index)) { Evaluation += WHITE_BISHOP_PST[Index]; }
+    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[BISHOP - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[1];
+    while (bit::pop_lsb(bits, Index)) { Evaluation -= BLACK_BISHOP_PST[Index]; }
+
+    // Rooks
+    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[ROOK - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[0];
+    while (bit::pop_lsb(bits, Index)) { Evaluation += WHITE_ROOK_PST[Index]; }
+    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[ROOK - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[1];
+    while (bit::pop_lsb(bits, Index)) { Evaluation -= BLACK_ROOK_PST[Index]; }
+
+    // Knights
+    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[KNIGHT - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[0];
+    while (bit::pop_lsb(bits, Index)) { Evaluation += WHITE_KNIGHT_PST[Index]; }
+    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[KNIGHT - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[1];
+    while (bit::pop_lsb(bits, Index)) { Evaluation -= BLACK_KNIGHT_PST[Index]; }
+
+    // Queens
+    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[QUEEN - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[0];
+    while (bit::pop_lsb(bits, Index)) { Evaluation += WHITE_QUEEN_PST[Index]; }
+    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[QUEEN - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[1];
+    while (bit::pop_lsb(bits, Index)) { Evaluation -= BLACK_QUEEN_PST[Index]; }
+
+    // Kings
+    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[KING - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[0];
+    while (bit::pop_lsb(bits, Index)) {
+        Evaluation += static_cast<int>(WHITE_KING_MIDDLE_PST[Index] * (1.f - LateWeight) + WHITE_KING_LATE_PST[Index] * LateWeight);
+    }
+    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[KING - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[1];
+    while (bit::pop_lsb(bits, Index)) {
+        Evaluation -= static_cast<int>(BLACK_KING_MIDDLE_PST[Index] * (1.f - LateWeight) + BLACK_KING_LATE_PST[Index] * LateWeight);
+    }
+
+    return Evaluation;
 }
 

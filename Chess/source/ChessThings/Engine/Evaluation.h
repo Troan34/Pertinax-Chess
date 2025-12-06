@@ -16,7 +16,7 @@ private:
 	static constexpr int16_t M_KING_MATERIAL_VALUE = 15000;
 
 	const GenerateLegalMoves& m_LegalMoves;
-	Position ChessPosition;
+	bit::Position ChessPosition;
 	int32_t m_Evaluation = 0;
 	uint8_t NumOfPieces = 0;
 	
@@ -60,6 +60,6 @@ public:
 	}
 
 	Evaluator(const GenerateLegalMoves& LegalMoves);
-	void SetParameters(const Position& ChessPosition);
+	void SetParameters(const bit::Position& ChessPosition);
 	int Evaluate();
 };

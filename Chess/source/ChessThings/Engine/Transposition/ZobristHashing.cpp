@@ -8,7 +8,7 @@ static bool Initialized = false;
 static uint8_t WhichFileHadEnPassant = 8; //8 for none
 
 
-ZobristHashing::ZobristHashing(const GenerateLegalMoves& LegalMoves, const Position& ChessPosition)
+ZobristHashing::ZobristHashing(const GenerateLegalMoves& LegalMoves, const bit::Position& ChessPosition)
 	:m_BoardSquare(&ChessPosition.BoardSquare), m_LegalMoves(&LegalMoves), m_EnPassant(ChessPosition.EnPassant), m_CastleAbility(ChessPosition.CanCastle)
 {
 	m_SideToMove = WHITE_TURN(ChessPosition.MoveNum); // true for white, false for black
@@ -48,8 +48,8 @@ void ZobristHashing::CreateInitialHash()
 
     for (uint8_t i = 0; i < 64; ++i)
     {
-        uint8_t piece = Board::PieceType2Compact(m_BoardSquare->at(i));
-        if (m_BoardSquare->at(i) != 0)
+        uint8_t piece = Board::PieceType2Compact((*m_BoardSquare)[i]);
+        if ((*m_BoardSquare)[i] != 0)
         {
             Hash ^= ZobristPieces[piece][i]; // XOR the hash with the piece's hash
         }

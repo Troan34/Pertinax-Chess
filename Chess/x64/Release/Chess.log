@@ -72,15 +72,7 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(65,2
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(66,2): warning C4309: 'initializing': truncation of constant value
   (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(199,51): warning C4244: '+=': conversion from 'double' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(203,51): warning C4244: '-=': conversion from 'double' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(252,48): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(253,46): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(258,48): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(259,46): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(280,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
-  (compiling source file 'source/ChessThings/Engine/Evaluation.cpp')
-  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Evaluation.cpp(189,22): warning C4244: 'return': conversion from 'float' to 'int32_t', possible loss of data
   IterativeD.cpp
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(47,2): warning C4309: 'initializing': truncation of constant value
   (compiling source file 'source/ChessThings/Engine/IterativeD.cpp')
@@ -166,14 +158,14 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(65,2
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(66,2): warning C4309: 'initializing': truncation of constant value
   (compiling source file 'source/ChessThings/Engine/Search.cpp')
   
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(360,13): warning C4018: '>': signed/unsigned mismatch
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(365,68): warning C4018: '>': signed/unsigned mismatch
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(370,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(375,26): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(441,13): warning C4018: '>': signed/unsigned mismatch
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(446,68): warning C4018: '>': signed/unsigned mismatch
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(454,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(459,27): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(362,13): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(367,68): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(372,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(377,26): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(443,13): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(448,68): warning C4018: '>': signed/unsigned mismatch
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(456,87): warning C4244: '+=': conversion from 'float' to 'int32_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Engine\Search.cpp(461,27): warning C4244: '-=': conversion from 'float' to 'int32_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(279,34): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(uint8_t)'
   (compiling source file 'source/ChessThings/Engine/Search.cpp')
   
@@ -297,7 +289,7 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(66,2
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(324,101): warning C4244: 'argument': conversion from 'uint64_t' to 'uint8_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(328,101): warning C4244: 'argument': conversion from 'uint64_t' to 'uint8_t', possible loss of data
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(968,31): warning C4244: 'return': conversion from 'uint64_t' to 'uint16_t', possible loss of data
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\LegalMoves.cpp(971,31): warning C4244: 'return': conversion from 'uint64_t' to 'uint16_t', possible loss of data
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(279,34): warning C4506: no definition for inline function 'uint8_t Board::GetPieceType2Uncolored(uint8_t)'
   (compiling source file 'source/ChessThings/LegalMoves.cpp')
   
@@ -385,8 +377,6 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\UCI\UCI.cpp(
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(280,24): warning C4506: no definition for inline function 'bool Board::IsPieceColorWhite(uint8_t)'
   (compiling source file 'source/ChessThings/UCI/UCI.cpp')
   
-  CreateQuadDynamic.cpp
-  IndexBuffer.cpp
   Main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
   (compiling source file 'source/Main.cpp')
@@ -428,19 +418,6 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(65,2
   
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(66,2): warning C4309: 'initializing': truncation of constant value
   (compiling source file 'source/Main.cpp')
-  
-  Renderer.cpp
-  Shader.cpp
-  Texture.cpp
-  VertexArray.cpp
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\VertexArray.cpp(25,3): warning C4312: 'type cast': conversion from 'unsigned int' to 'const void *' of greater size
-  VertexBuffer.cpp
-  Test.cpp
-  TestClearColor.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
-  (compiling source file 'source/tests/TestClearColor.cpp')
-      C:\Users\roanb\source\repos\Pertinax-Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,11):
-      see previous definition of 'APIENTRY'
   
   TestTexture2D.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
@@ -491,19 +468,9 @@ C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\
           C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\tests\TestTexture2D.cpp(30,25):
           see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,nullptr,unsigned __int64,0>(nullptr &&,unsigned __int64 &&)' being compiled
   
-  Compiling...
-  glm.cpp
-  imgui.cpp
-  imgui_demo.cpp
-  imgui_draw.cpp
-  imgui_impl_glfw.cpp
-  imgui_impl_opengl3.cpp
-  imgui_tables.cpp
-  imgui_widgets.cpp
-  stb_image.cpp
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  5 of 3995 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  6 of 4008 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     20 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

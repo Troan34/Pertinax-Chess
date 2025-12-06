@@ -20,10 +20,12 @@ int32_t Search::GetBestMoveWithEval(pv_line& PV)
 
 	FollowPV = true;
 	int32_t Eval = NegaMax(m_Hash, m_ChessPosition, m_depth, -INT32_MAX, INT32_MAX, m_PreviousPV);
+
+
 	std::println("TT Hits / Cutoffs= {} / {}", TThits, Cutoffs);
 	//auto stop = std::chrono::high_resolution_clock::now();
 	//auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-	TT.AgeIncrementOnNewSearch();
+	TT.AgeIncrementOnNewDepth();
 
 	return Eval;
 }
@@ -43,15 +45,15 @@ void Search::ClearTT()
 	TT.ClearTT();
 }
 
-int32_t Search::NegaMax(ZobristHashing& m_Hash, Position ChessPosition, uint8_t depth, int32_t alpha, int32_t beta, pv_line* previousPVLine)
+int32_t Search::NegaMax(ZobristHashing& m_Hash, bit::Position ChessPosition, uint8_t depth, int32_t alpha, int32_t beta, pv_line* previousPVLine)
 {
 	TT.ResizeTT();
-	TT.AgeIncrementOnNewSearch();
+	TT.AgeIncrementOnNewDepth();
 	int BestEvaluation = -INT32_MAX;
 	NodesVisited++;
 
 	GenerateLegalMoves LegalMoves(ChessPosition, false);
-	if (LegalMoves.isItCheckmate == true)
+	if (LegalMoves.isItCheckmate)
 	{
 		return -INT32_MAX;
 	}
@@ -150,12 +152,12 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, Position ChessPosition, uint8_t 
 	return BestEvaluation;
 }
 
-void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash, const Move Move_, Position& ChessPosition)
+void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash, const Move Move_, bit::Position& ChessPosition)
 {
 	Hash.UpdateHash(Move_, ChessPosition.BoardSquare[Move_.s_BoardSquare]);
 
 	Board::WillCanCastleChange(Move_.s_BoardSquare, ChessPosition.CanCastle);
-	ChessPosition.BoardSquare[Move_.s_Move] = ChessPosition.BoardSquare[Move_.s_BoardSquare];
+	ChessPosition.BoardSquare[Move_.s_Move] = static_cast<uint8_t>(ChessPosition.BoardSquare[Move_.s_BoardSquare]);
 
 	//castling
 	if (ChessPosition.BoardSquare[Move_.s_BoardSquare] == WHITE_KING or ChessPosition.BoardSquare[Move_.s_BoardSquare] == BLACK_KING)
@@ -348,7 +350,7 @@ void Search::QMakeMove(const GenerateLegalMoves& LegalMoves, const Move Move_, P
 }
 
 //sorted best to worst
-void Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const std::array<uint8_t, 64>& fun_BoardSquare, GuessStruct* GuessedOrder, uint8_t depth)
+void Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const bit::BitPosition& fun_BoardSquare, GuessStruct* GuessedOrder, uint8_t depth)
 {
 	const int32_t MAX_INDEX = LegalMoves.m_NumOfLegalMoves;//IF IGNORED -> SEGFAULT;
 	uint32_t Index = 0;
