@@ -139,7 +139,6 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, bit::Position ChessPosition, uin
 		
 		SmallWindowBeta = alpha + 1;//widen window
 
-		
 	}
 
 	after_search:
@@ -149,6 +148,7 @@ int32_t Search::NegaMax(ZobristHashing& m_Hash, bit::Position ChessPosition, uin
 		TT.AddEntry(BestMove, BestEvaluation, depth, m_Hash.Hash, alpha, beta);
 	}
 
+	TT.AgeDecrementOnNewDepth();
 	return BestEvaluation;
 }
 
@@ -191,59 +191,14 @@ void Search::MakeMove(const GenerateLegalMoves& LegalMoves, ZobristHashing& Hash
 
 	}
 
-	switch (Move_.s_BoardSquare)
-	{
-	case a1:
-		ChessPosition.CanCastle.WhiteLong = false;
-		break;
-	case h1:
-		ChessPosition.CanCastle.WhiteShort = false;
-		break;
-	case e1:
-		ChessPosition.CanCastle.WhiteLong = false;
-		ChessPosition.CanCastle.WhiteShort = false;
-		break;
-	case a8:
-		ChessPosition.CanCastle.BlackLong = false;
-		break;
-	case h8:
-		ChessPosition.CanCastle.BlackShort = false;
-		break;
-	case e8:
-		ChessPosition.CanCastle.BlackLong = false;
-		ChessPosition.CanCastle.BlackShort = false;
-		break;
-	}
-	switch (Move_.s_Move)
-	{
-	case a1:
-		ChessPosition.CanCastle.WhiteLong = false;
-		break;
-	case h1:
-		ChessPosition.CanCastle.WhiteShort = false;
-		break;
-	case e1:
-		ChessPosition.CanCastle.WhiteLong = false;
-		ChessPosition.CanCastle.WhiteShort = false;
-		break;
-	case a8:
-		ChessPosition.CanCastle.BlackLong = false;
-		break;
-	case h8:
-		ChessPosition.CanCastle.BlackShort = false;
-		break;
-	case e8:
-		ChessPosition.CanCastle.BlackLong = false;
-		ChessPosition.CanCastle.BlackShort = false;
-		break;
-	}
+	ChessPosition.CanCastle.UpdateCastle(Move_);
 
 	//promoting and en passant
 	if (Move_.s_PromotionType != NULL_OPTION)
 	{
 		ChessPosition.BoardSquare[Move_.s_Move] = Move_.s_PromotionType;
 	}
-	else//optimization
+	else
 	{
 		if ((Move_.s_Move % 8) == ChessPosition.EnPassant.EPIndex() and ChessPosition.BoardSquare[Move_.s_Move] == 0)
 		{
@@ -374,7 +329,7 @@ void Search::OrderMoves(const GenerateLegalMoves& LegalMoves, const bit::BitPosi
 
 			if (LegalMoves.OppositeAttackedSquares[move])
 			{
-				GuessedEval -= (0.6f)*Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[count]);
+				GuessedEval -= (0.8f)*Evaluator::ConvertPieceTypeToMatValue(fun_BoardSquare[count]);
 			}
 
 			if (depth <= m_PreviousPV->NumOfMoves)

@@ -27,7 +27,7 @@
 #endif
 
 #ifndef CHESS_VERSION
-#define CHESS_VERSION "0.3.1"
+#define CHESS_VERSION "0.3.3"
 #endif
 
 enum SQUARES
@@ -70,6 +70,25 @@ enum CastlingIndices
 {
 	WhiteShort, WhiteLong, BlackShort, BlackLong
 };
+
+enum offDIRECTIONS
+{
+	offN, offS, offW, offE, offNW, offSE, offNE, offSW
+};
+
+enum DIRECTIONS
+{
+	N = 8, S = -8, W = -1, E = 1, NW = 7, SE = -9, NE = 9, SW = -7,
+	NNE = 17, ENE = 10, NNW = 15, WNW = 6, WSW = -10, SSW = -17, SSE = -15, ESE = -6
+};
+
+
+//These are the masks for the Promotion var, 0bSSSSSPPP | S = Square, P = PromotionSide
+constexpr uint8_t LeftPromotionMask = 0b00000100;
+constexpr uint8_t CenterPromotionMask = 0b00000010;
+constexpr uint8_t RightPromotionMask = 0b00000001;
+constexpr uint8_t PromotionMask = 0b00000111;
+constexpr uint8_t PromotionTypeMask = 0b11111000;
 
 constexpr uint8_t MAX_SQUARE = 63;
 
@@ -125,34 +144,7 @@ static uint64_t Random64Bit()
 	return dist(rng);
 }
 
-struct CastlingAbility
-{
-	bool WhiteShort = false;
-	bool WhiteLong = false;
-	bool BlackShort = false;
-	bool BlackLong = false;
 
-	bool at(uint8_t index) const
-	{
-		switch (index)
-		{
-		case CastlingIndices::WhiteShort:
-			return WhiteShort;
-			break;
-		case CastlingIndices::WhiteLong:
-			return WhiteLong;
-			break;
-		case CastlingIndices::BlackShort:
-			return BlackShort;
-			break;
-		case CastlingIndices::BlackLong:
-			return BlackLong;
-			break;
-		default:
-			ASSERT(false);
-		}
-	}
-};
 
 struct GuessStruct
 {
@@ -208,6 +200,42 @@ struct Move
 	}
 };
 
+struct CastlingAbility
+{
+	bool WhiteShort = false;
+	bool WhiteLong = false;
+	bool BlackShort = false;
+	bool BlackLong = false;
+
+	bool at(uint8_t index) const
+	{
+		switch (index)
+		{
+		case CastlingIndices::WhiteShort:
+			return WhiteShort;
+			break;
+		case CastlingIndices::WhiteLong:
+			return WhiteLong;
+			break;
+		case CastlingIndices::BlackShort:
+			return BlackShort;
+			break;
+		case CastlingIndices::BlackLong:
+			return BlackLong;
+			break;
+		default:
+			ASSERT(false);
+		}
+	}
+
+
+	/// <summary>
+	/// Update the castling based on the move
+	/// </summary>
+	/// <returns>True if a castling has been modified</returns>
+	bool UpdateCastle(const Move& move);
+};
+
 struct Timer
 {
 	std::chrono::milliseconds WTime;
@@ -254,6 +282,48 @@ struct SearchResult
 	}
 };
 
+class EP
+{
+private:
+	uint8_t EnPassant = 0;
+
+public:
+
+	inline void SetEP(uint8_t File)
+	{
+		EnPassant |= (1ULL << File);
+	}
+
+	inline void Reset() { EnPassant = 0; }
+
+	inline bool ReadEp(uint8_t File) const { return EnPassant & (0b1 << File); }
+
+	//returns NULL_OPTION if EP is empty
+	inline uint8_t EPIndex() const
+	{
+		if (EnPassant == 0) [[likely]]
+		{
+			return NULL_OPTION;
+		}
+		else
+		{
+			return std::countr_zero(EnPassant);
+		}
+	}
+
+	static EP PrevPosition2EP(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, bool ZeroIfWhite);
+};
+
+struct Position
+{
+	std::array<uint8_t, 64> BoardSquare;
+	EP EnPassant;
+	CastlingAbility CanCastle;
+	uint16_t MoveNum;
+	Position() {}
+	Position(std::array<uint8_t, 64> boardSquare, EP enPassant, CastlingAbility canCastle, uint16_t moveNum) : BoardSquare(boardSquare), EnPassant(enPassant), CanCastle(canCastle), MoveNum(moveNum) {}
+};
+
 class Board
 {
 private:
@@ -281,7 +351,7 @@ public:
 	static char PieceType2letter(const uint8_t& PieceType);
 	static void WillCanCastleChange(const uint8_t BoardSquareItMovedFrom, CastlingAbility& Castle);
 	static bool WillCanCastleChange(const uint8_t& PieceTypeThatMoved, const uint8_t BoardSquareItMovedFrom, const uint8_t BoardSquareItMovedTo);
-	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t EnpassantIndex, CastlingAbility& Castle);
+	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, EP& EnPassant, CastlingAbility& Castle);
 	static void MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, std::array<uint8_t, 64>& previousBoardSquare, CastlingAbility& Castle);
 	static std::array<uint8_t, 64> PrevBoardSquareFromEP(const std::array<uint8_t, 64>& BoardSquare, uint8_t EPBoardsquare);
 	static std::string GetPrintableFromArrayOfMoves(const std::array<Move, MAX_PV_LENGTH>& Moves);
@@ -328,48 +398,6 @@ inline bool IsStringANum(std::string& String)
 	return true;
 }
 
-class EP
-{
-private:
-	uint8_t EnPassant = 0;
-
-public:
-
-	inline void SetEP(uint8_t File)
-	{
-		EnPassant |= (1ULL << File);
-	}
-
-	inline void Reset() { EnPassant = 0; }
-
-	inline bool ReadEp(uint8_t File) const { return EnPassant & (0x10 >> File); }
-
-	//returns NULL_OPTION if EP is empty
-	inline uint8_t EPIndex() const
-	{
-		if (EnPassant == 0) [[likely]]
-		{
-			return NULL_OPTION;
-		}
-		else
-		{
-			return std::countl_zero(EnPassant);
-		}
-	}
-
-	static EP PrevPosition2EP(const std::array<uint8_t, 64>& BoardSquare, const std::array<uint8_t, 64>& PreviousBoardSquare, bool ZeroIfWhite);
-};
-
-struct Position
-{
-	std::array<uint8_t, 64> BoardSquare;
-	EP EnPassant;
-	CastlingAbility CanCastle;
-	uint16_t MoveNum;
-	Position() {}
-	Position(std::array<uint8_t, 64> boardSquare, EP enPassant, CastlingAbility canCastle, uint16_t moveNum) : BoardSquare(boardSquare), EnPassant(enPassant), CanCastle(canCastle), MoveNum(moveNum) {}
-};
-
 namespace bit//bit management
 {
 
@@ -388,7 +416,7 @@ namespace bit//bit management
 	/// <summary>
 	/// Just finds lsb, TO BE USED WITH A MASK WITH popcnt == 0, WILL ASSERT
 	/// </summary>
-	/// <param name="Mask">bitboard the set bit will be seached</param>
+	/// <param name="Mask">bitboard the set bit will be searched</param>
 	/// <param name="Index">bit index will be written to this</param>
 	/// <returns>false if Mask is empty</returns>
 	constexpr inline bool FindBit(const uint64_t& Mask, uint8_t& Index)
@@ -594,8 +622,6 @@ namespace bit//bit management
 		BitBoard64 find(uint8_t PieceType);
 
 	};
-
-	
 
 	struct Position
 	{

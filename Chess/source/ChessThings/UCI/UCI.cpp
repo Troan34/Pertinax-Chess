@@ -108,7 +108,7 @@ void UCI::RunCommand()
 					break;
 				Move move = Board::LongALG2Move(Command.substr(Index + 1, Command.find(' ', Index + 1) - Index - 1));
 				Index = Command.find(' ', Index + 1);//will overflow when it reaches the end
-				Board::MakeMove(move, *Vars_p.BoardSquare, Vars_p.EnPassant->EPIndex(), *Vars_p.CanCastle);
+				Board::MakeMove(move, *Vars_p.BoardSquare, *Vars_p.EnPassant, *Vars_p.CanCastle);
 				*Vars_p.MoveNum += 1;
 			}
 		}
@@ -253,7 +253,7 @@ uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, EP EnPassant, Castl
 						else
 							Move_.s_PromotionType = i + 10;
 
-						Board::MakeMove(Move_, BoardSquare, EnPassant.EPIndex(), CanCastle);
+						Board::MakeMove(Move_, BoardSquare, EnPassant, CanCastle);
 						if (DivideFunON)
 						{
 							uint32_t DivideFunNum = 0;
@@ -296,7 +296,7 @@ uint32_t UCI::Perft(std::array<uint8_t, 64Ui64> BoardSquare, EP EnPassant, Castl
 			{
 				Move Move_(count, move);
 
-				Board::MakeMove(Move_, BoardSquare, EnPassant.EPIndex(), CanCastle);
+				Board::MakeMove(Move_, BoardSquare, EnPassant, CanCastle);
 				if (DivideFunON)
 				{
 					uint32_t DivideFunNum = 0;

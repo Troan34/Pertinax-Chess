@@ -1,11 +1,5 @@
-✅Make engine legal(again).
-	|
-	|_Perft it.
-
-✅Stop engine from repeating same moves (three-fold repetition)
-
-✅Check if we're doing the pv search correctly.
-
 Make an UnMake function and check if helps, then make Search call by reference.
 
 Add SSE and delta pruning to quiesce.
+
+Stop engine from finding illegal pv moves

@@ -5,5 +5,7 @@ x64/Release/Chess.pdb
 /.vs/Chess/v17/ipch
 *.ipch
 *.ipch
+*.txt
 dumps
 /x64/Release/Versions/Logs
+x64/Release/Versions/Logs/Log1.txt

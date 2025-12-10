@@ -340,7 +340,65 @@ bool Board::WillCanCastleChange(const uint8_t& PieceType, const uint8_t BoardSqu
 	return false;
 }
 
-void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t EnpassantIndex, CastlingAbility& Castle)
+bool CastlingAbility::UpdateCastle(const Move& move)
+{
+	bool CastleChanged = true;
+	switch (move.s_BoardSquare)
+	{
+	case a1:
+		WhiteLong = false;
+		break;
+	case h1:
+		WhiteShort = false;
+		break;
+	case e1:
+		WhiteLong = false;
+		WhiteShort = false;
+		break;
+	case a8:
+		BlackLong = false;
+		break;
+	case h8:
+		BlackShort = false;
+		break;
+	case e8:
+		BlackLong = false;
+		BlackShort = false;
+		break;
+	default:
+		CastleChanged = false;
+	}
+
+	switch (move.s_Move)
+	{
+	case a1:
+		WhiteLong = false;
+		break;
+	case h1:
+		WhiteShort = false;
+		break;
+	case e1:
+		WhiteLong = false;
+		WhiteShort = false;
+		break;
+	case a8:
+		BlackLong = false;
+		break;
+	case h8:
+		BlackShort = false;
+		break;
+	case e8:
+		BlackLong = false;
+		BlackShort = false;
+		break;
+	default:
+		CastleChanged = false;
+	}
+
+	return CastleChanged;
+}
+
+void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, EP& EnPassant, CastlingAbility& Castle)
 {
 	Board::WillCanCastleChange(move.s_BoardSquare, Castle);
 	BoardSquare[move.s_Move] = BoardSquare[move.s_BoardSquare];
@@ -391,76 +449,32 @@ void Board::MakeMove(Move move, std::array<uint8_t, 64>& BoardSquare, uint8_t En
 
 	}
 
-	switch (move.s_BoardSquare)
-	{
-	case a1:
-		Castle.WhiteLong = false;
-		break;
-	case h1:
-		Castle.WhiteShort = false;
-		break;
-	case e1:
-		Castle.WhiteLong = false;
-		Castle.WhiteShort = false;
-		break;
-	case a8:
-		Castle.BlackLong = false;
-		break;
-	case h8:
-		Castle.BlackShort = false;
-		break;
-	case e8:
-		Castle.BlackLong = false;
-		Castle.BlackShort = false;
-		break;
-	}
-	switch (move.s_Move)
-	{
-	case a1:
-		Castle.WhiteLong = false;
-		break;
-	case h1:
-		Castle.WhiteShort = false;
-		break;
-	case e1:
-		Castle.WhiteLong = false;
-		Castle.WhiteShort = false;
-		break;
-	case a8:
-		Castle.BlackLong = false;
-		break;
-	case h8:
-		Castle.BlackShort = false;
-		break;
-	case e8:
-		Castle.BlackLong = false;
-		Castle.BlackShort = false;
-		break;
-	}
+	Castle.UpdateCastle(move);
 
 	//promoting and en passant
 	if (PieceTypeToPromoteTo != 65)
 	{
 		BoardSquare[move.s_Move] = PieceTypeToPromoteTo;
 	}
-	else//optimization
+	else
 	{
-		//White en passant
-		if (BoardSquare[move.s_BoardSquare] == WHITE_PAWN)
+		if ((move.s_Move % 8) == EnPassant.EPIndex() and BoardSquare[move.s_Move] == 0)
 		{
-			if (move.s_BoardSquare == EnpassantIndex)
+			if (BoardSquare[move.s_BoardSquare] == WHITE_PAWN)
 			{
-				BoardSquare[move.s_Move - 8] = 0;
+				BoardSquare[move.s_Move + S] = 0;
+			}
+			else
+			{
+				BoardSquare[move.s_Move + N] = 0;
 			}
 		}
-		//Black en passant
-		if (BoardSquare[move.s_BoardSquare] == BLACK_PAWN)
-		{
-			if (move.s_BoardSquare == EnpassantIndex)
-			{
-				BoardSquare[move.s_Move + 8] = 0;
-			}
-		}
+	}
+
+	EnPassant.Reset();
+	if (abs(move.s_BoardSquare - move.s_Move) == 16 and Board::GetPieceType2Uncolored(BoardSquare[move.s_BoardSquare]) == PAWN)//double push
+	{
+		EnPassant.SetEP(move.s_BoardSquare % 8);
 	}
 
 	BoardSquare[move.s_BoardSquare] = 0;

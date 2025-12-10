@@ -13,24 +13,7 @@
 namespace fs = std::filesystem;
 
 constexpr int OffsetForDirections[8] = { 8, -8, -1, 1, 7, -7, 9, -9 };
-enum offDIRECTIONS
-{
-	offN,offS,offW,offE,offNW,offSE,offNE,offSW
-};
 
-enum DIRECTIONS
-{
-	N = 8, S = -8, W = -1, E = 1, NW = 7, SE = -9, NE = 9, SW = -7,
-	NNE = 17, ENE = 10, NNW = 15, WNW = 6, WSW = -10, SSW = -17, SSE = -15, ESE = -6
-};
-
-
-//These are the masks for the Promotion var, 0bSSSSSPPP | S = Square, P = PromotionSide
-constexpr uint8_t LeftPromotionMask = 0b00000100;
-constexpr uint8_t CenterPromotionMask = 0b00000010;
-constexpr uint8_t RightPromotionMask = 0b00000001;
-constexpr uint8_t PromotionMask = 0b00000111;
-constexpr uint8_t PromotionTypeMask = 0b11111000;
 
 constexpr std::array<std::array<uint8_t, 8>, 64> fillNumOfSquaresUntilEdge()
 {

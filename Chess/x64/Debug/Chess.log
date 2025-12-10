@@ -35,6 +35,56 @@ C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(65,2
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(66,2): warning C4309: 'initializing': truncation of constant value
   (compiling source file 'source/ChessThings/Board.cpp')
   
+  TestTexture2D.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+      C:\Users\roanb\source\repos\Pertinax-Chess\Dependencies\GLFW\include\GLFW\glfw3.h(123,11):
+      see previous definition of 'APIENTRY'
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(47,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(48,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(49,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(50,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(51,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(52,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(53,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(54,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(63,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(64,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(65,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.h(66,2): warning C4309: 'initializing': truncation of constant value
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+  
+C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\memory(3659,56): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+  (compiling source file 'source/tests/TestTexture2D.cpp')
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\memory(3659,56):
+      the template instantiation context (the oldest one first) is
+          C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\tests\TestTexture2D.cpp(30,25):
+          see reference to function template instantiation 'std::unique_ptr<VertexBuffer,std::default_delete<VertexBuffer>> std::make_unique<VertexBuffer,nullptr,unsigned __int64,0>(nullptr &&,unsigned __int64 &&)' being compiled
+  
+  Generating Code...
 C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(291,1): warning C4715: 'Board::PieceType2letter': not all control paths return a value
-C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(618,1): warning C4715: 'Board::PieceType2Compact': not all control paths return a value
+C:\Users\roanb\source\repos\Pertinax-Chess\Chess\source\ChessThings\Board.cpp(632,1): warning C4715: 'Board::PieceType2Compact': not all control paths return a value
   Chess.vcxproj -> C:\Users\roanb\source\repos\Pertinax-Chess\x64\Debug\Chess.exe

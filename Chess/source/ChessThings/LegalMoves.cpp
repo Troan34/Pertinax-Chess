@@ -319,6 +319,7 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 
 	moves[BoardSquarePos].TargetSquares = moves[BoardSquarePos].TargetSquares | (PAWN_CAPTURES[ZeroIfWhite][BoardSquarePos] & Capturable);
 
+	//promotion
 	if (BoardSquarePos >= a7 and isNextMoveForWhite)
 	{
 		moves[BoardSquarePos].Promotion.SetPromotionByBits(moves[BoardSquarePos].TargetSquares.ReadBits() >> std::countr_zero(moves[BoardSquarePos].TargetSquares.ReadBits()), BoardSquarePos);//we slam the pawn attacks at the bottom
@@ -328,23 +329,24 @@ void GenerateLegalMoves::PawnMoveGen(const uint8_t BoardSquarePos)
 		moves[BoardSquarePos].Promotion.SetPromotionByBits(moves[BoardSquarePos].TargetSquares.ReadBits() >> std::countr_zero(moves[BoardSquarePos].TargetSquares.ReadBits()), BoardSquarePos);
 	}
 
+	//en passant
 	if ((BoardSquarePos <= 39 and BoardSquarePos >= 32) or (BoardSquarePos <= 31 and BoardSquarePos >= 24))//en passant
 	{
 		if (ChessPosition.EnPassant.ReadEp((BoardSquarePos % 8) - 1)) //left check
 		{
-			moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (isNextMoveForWhite ? 7 : -7));
+			moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (isNextMoveForWhite ? NW : SW));
 			EnPassantFiles[(BoardSquarePos % 8) - 1] = true;
 		}
 		else if (ChessPosition.EnPassant.ReadEp((BoardSquarePos % 8) + 1)) //right check
 		{
-			moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (isNextMoveForWhite ? 9 : -9));
+			moves[BoardSquarePos].TargetSquares.push_back(BoardSquarePos + (isNextMoveForWhite ? NE : SE));
 			EnPassantFiles[(BoardSquarePos % 8) + 1] = true;
 		}
 	}
 
 	//this is the bitboard of the king's position, if under attack
 	auto KingSquare = moves[BoardSquarePos].TargetSquares.ReadBits()
-		& ChessPosition.BoardSquare.ColorPositions[isNextMoveForWhite] /*isNextMoveForWhite is the negation of zero if true*/
+		& ChessPosition.BoardSquare.ColorPositions[isNextMoveForWhite] /*isNextMoveForWhite is the negation of ZeroIfTrue*/
 		& ChessPosition.BoardSquare.PiecePositions[5];
 	//set Check
 	if (KingSquare != 0)

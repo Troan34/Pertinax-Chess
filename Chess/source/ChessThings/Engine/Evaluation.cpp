@@ -151,7 +151,7 @@ void Evaluator::SetParameters(const bit::Position& f_ChessPosition)
 {
 	ChessPosition = f_ChessPosition;
 	
-	NumOfPieces += ChessPosition.BoardSquare.popcnt();
+	NumOfPieces = ChessPosition.BoardSquare.popcnt();
 }
 
 
@@ -183,60 +183,60 @@ int32_t Evaluator::MobilityEval()
 {
 	int32_t MobilityEval = 0;
 
-	MobilityEval += (m_LegalMoves.AttackedSquares & (~ChessPosition.BoardSquare.ColorPositions[0])).popcnt();
-	MobilityEval += (m_LegalMoves.OppositeAttackedSquares & (~ChessPosition.BoardSquare.ColorPositions[1])).popcnt();
+	MobilityEval += floor((m_LegalMoves.AttackedSquares & (~ChessPosition.BoardSquare.ColorPositions[0])).popcnt() * 0.1f);
+	MobilityEval -= floor((m_LegalMoves.OppositeAttackedSquares & (~ChessPosition.BoardSquare.ColorPositions[1])).popcnt() * 0.1f);
 
-	return MobilityEval * 0.1f;
+	return MobilityEval;
 }
 
 int32_t Evaluator::PieceSquareEval() const
 {
     int32_t Evaluation = 0;
 
-    float LateWeight = 1.f - (NumOfPieces / 36.f);
+    float LateWeight = 1.f - (NumOfPieces / 32.f);
 
     bit::BitBoard64 bits = 0;
     uint8_t Index = 0;
 
 
     // Pawns
-    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[PAWN - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[0];
+    bits = ChessPosition.BoardSquare.PiecePositions[PAWN - 1] & ChessPosition.BoardSquare.ColorPositions[0];
     while (bit::pop_lsb(bits, Index)) { Evaluation += WHITE_PAWN_PST[Index]; }
-    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[PAWN - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[1];
+    bits = ChessPosition.BoardSquare.PiecePositions[PAWN - 1] & ChessPosition.BoardSquare.ColorPositions[1];
     while (bit::pop_lsb(bits, Index)) { Evaluation -= BLACK_PAWN_PST[Index]; }
 
     // Bishops
-    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[BISHOP - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[0];
+    bits = ChessPosition.BoardSquare.PiecePositions[BISHOP - 1] & ChessPosition.BoardSquare.ColorPositions[0];
     while (bit::pop_lsb(bits, Index)) { Evaluation += WHITE_BISHOP_PST[Index]; }
-    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[BISHOP - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[1];
+    bits = ChessPosition.BoardSquare.PiecePositions[BISHOP - 1] & ChessPosition.BoardSquare.ColorPositions[1];
     while (bit::pop_lsb(bits, Index)) { Evaluation -= BLACK_BISHOP_PST[Index]; }
 
     // Rooks
-    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[ROOK - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[0];
+    bits = ChessPosition.BoardSquare.PiecePositions[ROOK - 1] & ChessPosition.BoardSquare.ColorPositions[0];
     while (bit::pop_lsb(bits, Index)) { Evaluation += WHITE_ROOK_PST[Index]; }
-    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[ROOK - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[1];
+    bits = ChessPosition.BoardSquare.PiecePositions[ROOK - 1] & ChessPosition.BoardSquare.ColorPositions[1];
     while (bit::pop_lsb(bits, Index)) { Evaluation -= BLACK_ROOK_PST[Index]; }
 
     // Knights
-    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[KNIGHT - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[0];
+    bits = ChessPosition.BoardSquare.PiecePositions[KNIGHT - 1] & ChessPosition.BoardSquare.ColorPositions[0];
     while (bit::pop_lsb(bits, Index)) { Evaluation += WHITE_KNIGHT_PST[Index]; }
-    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[KNIGHT - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[1];
+    bits = ChessPosition.BoardSquare.PiecePositions[KNIGHT - 1] & ChessPosition.BoardSquare.ColorPositions[1];
     while (bit::pop_lsb(bits, Index)) { Evaluation -= BLACK_KNIGHT_PST[Index]; }
 
     // Queens
-    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[QUEEN - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[0];
+    bits = ChessPosition.BoardSquare.PiecePositions[QUEEN - 1] & ChessPosition.BoardSquare.ColorPositions[0];
     while (bit::pop_lsb(bits, Index)) { Evaluation += WHITE_QUEEN_PST[Index]; }
-    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[QUEEN - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[1];
+    bits = ChessPosition.BoardSquare.PiecePositions[QUEEN - 1] & ChessPosition.BoardSquare.ColorPositions[1];
     while (bit::pop_lsb(bits, Index)) { Evaluation -= BLACK_QUEEN_PST[Index]; }
 
     // Kings
-    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[KING - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[0];
+    bits = ChessPosition.BoardSquare.PiecePositions[KING - 1] & ChessPosition.BoardSquare.ColorPositions[0];
     while (bit::pop_lsb(bits, Index)) {
-        Evaluation += static_cast<int>(WHITE_KING_MIDDLE_PST[Index] * (1.f - LateWeight) + WHITE_KING_LATE_PST[Index] * LateWeight);
+        Evaluation += static_cast<int>((WHITE_KING_MIDDLE_PST[Index] * (1.f - LateWeight)) + (WHITE_KING_LATE_PST[Index] * LateWeight));
     }
-    bits = (uint64_t)ChessPosition.BoardSquare.PiecePositions[KING - 1] & (uint64_t)ChessPosition.BoardSquare.ColorPositions[1];
+    bits = ChessPosition.BoardSquare.PiecePositions[KING - 1] & ChessPosition.BoardSquare.ColorPositions[1];
     while (bit::pop_lsb(bits, Index)) {
-        Evaluation -= static_cast<int>(BLACK_KING_MIDDLE_PST[Index] * (1.f - LateWeight) + BLACK_KING_LATE_PST[Index] * LateWeight);
+        Evaluation -= static_cast<int>((BLACK_KING_MIDDLE_PST[Index] * (1.f - LateWeight)) + (BLACK_KING_LATE_PST[Index] * LateWeight));
     }
 
     return Evaluation;
